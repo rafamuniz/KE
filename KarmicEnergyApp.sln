@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{E54872AF-FF69-4B53-818B-9008D8CA2206}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{C8AD3574-EC63-4BCB-A3E3-0F46B5D5757F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Views\Web\Web.csproj", "{1DA52A87-280E-42A5-895B-9D7694942A42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\KarmicEnergy.Core\Core.csproj", "{F4765A8A-4D17-4E1B-9116-F736E42A2EBB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DA52A87-280E-42A5-895B-9D7694942A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DA52A87-280E-42A5-895B-9D7694942A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DA52A87-280E-42A5-895B-9D7694942A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DA52A87-280E-42A5-895B-9D7694942A42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4765A8A-4D17-4E1B-9116-F736E42A2EBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4765A8A-4D17-4E1B-9116-F736E42A2EBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4765A8A-4D17-4E1B-9116-F736E42A2EBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4765A8A-4D17-4E1B-9116-F736E42A2EBB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1DA52A87-280E-42A5-895B-9D7694942A42} = {E54872AF-FF69-4B53-818B-9008D8CA2206}
+		{F4765A8A-4D17-4E1B-9116-F736E42A2EBB} = {C8AD3574-EC63-4BCB-A3E3-0F46B5D5757F}
+	EndGlobalSection
+EndGlobal

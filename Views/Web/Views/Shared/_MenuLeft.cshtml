@@ -4,55 +4,58 @@
     @if (this.HasRoles("Admin"))
     {
         <li class="treeview">
-            <a href="/Customer/Index">
-                <img src="images/customers.png" alt="customers" title="customers">
+            <a href="/Customer">
+                <img src="/images/customers.png" alt="customers" title="customers">
                 <p>CUSTOMERS</p>
             </a>
         </li>
     }
 
-    @if (this.HasRoles("Operator"))
+    @if (this.HasRoles("Customer"))
     {
         <li class="treeview">
-            <a href="#">
-                <img src="images/sites.png" alt="customers" title="customers">
-                <p>SITES</p>
+            <a href="/Customer/User">
+                <img src="/images/users.png" alt="users" title="users">
+                <p>USERS</p>
             </a>
         </li>
     }
 
-    <li class="treeview">
-        <a href="#">
-            <img src="images/users.png" alt="customers" title="customers">
-            <p>USERS</p>
-        </a>
-    </li>
+    @if (this.HasRoles("Customer"))
+    {
+        <li class="treeview">
+            <a href="/Customer/Site">
+                <img src="/images/sites.png" alt="sites" title="sites">
+                <p>SITES</p>
+            </a>
+        </li>
 
-    <li class="treeview">
-        <a href="#">
-            <img src="images/fast_track.png" alt="customers" title="customers">
-            <p>FAST TRACKER</p>
-        </a>
-    </li>
+        <li class="treeview">
+            <a href="#">
+                <img src="/images/fast_track.png" alt="fast_track" title="fast_track">
+                <p>FAST TRACKER</p>
+            </a>
+        </li>
 
-    <li class="treeview">
-        <a href="#">
-            <img src="images/my_tank.png" alt="customers" title="customers">
-            <p>MY TANK</p>
-        </a>
-    </li>
+        <li class="treeview">
+            <a href="#">
+                <img src="/images/my_tank.png" alt="tanks" title="tanks">
+                <p>MY TANK</p>
+            </a>
+        </li>
 
-    <li class="treeview">
-        <a href="#">
-            <img src="images/my_tank_report.png" alt="customers" title="customers">
-            <p>MY TANK REPORT</p>
-        </a>
-    </li>
+        <li class="treeview">
+            <a href="#">
+                <img src="/images/my_tank_report.png" alt="tank_report" title="tank_report">
+                <p>MY TANK REPORT</p>
+            </a>
+        </li>
 
-    <li class="treeview">
-        <a href="#">
-            <img src="images/loga_sample.png" alt="customers" title="customers">
-            <p>LOG A SAMPLE</p>
-        </a>
-    </li>
+        <li class="treeview">
+            <a href="#">
+                <img src="/images/loga_sample.png" alt="logs" title="logs">
+                <p>LOG A SAMPLE</p>
+            </a>
+        </li>
+    }
 </ul>

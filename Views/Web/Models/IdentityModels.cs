@@ -53,7 +53,10 @@ namespace KarmicEnergy.Web.Models
             IList<IdentityRole> roles = new List<IdentityRole>()
             {
                 new IdentityRole("Admin"),
-                new IdentityRole("Customer")
+                new IdentityRole("Operator"),
+                new IdentityRole("Customer"),
+                new IdentityRole("CustomerAdmin"),
+                new IdentityRole("CustomerOperator")
             };
 
             foreach (var r in roles)
@@ -68,7 +71,7 @@ namespace KarmicEnergy.Web.Models
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var user = new ApplicationUser() { UserName = "karmicenergy@ke.com", Email = "karmicenergy@ke.com" };
             string password = "KarmicEnergy10$";
-            
+
             var adminresult = userManager.Create(user, password);
 
             //Add User Admin to Role Admin

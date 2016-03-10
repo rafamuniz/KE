@@ -3,6 +3,12 @@ using Microsoft.Owin.Security;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
+using KarmicEnergy.Core.Persistence;
+using System;
+using System.Data.Entity.Validation;
+using KarmicEnergy.Web.Areas.Customer.Models;
+using System.Collections.Generic;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace KarmicEnergy.Web.Controllers
 {
@@ -10,6 +16,7 @@ namespace KarmicEnergy.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private KEUnitOfWork _KEUnitOfWork;
 
         public BaseController()
         {
@@ -45,11 +52,41 @@ namespace KarmicEnergy.Web.Controllers
             }
         }
 
+        protected KEUnitOfWork KEUnitOfWork
+        {
+            get
+            {
+                return _KEUnitOfWork ?? HttpContext.GetOwinContext().Get<KEUnitOfWork>();
+            }
+            set
+            {
+                _KEUnitOfWork = value;
+            }
+        }
+
         protected IAuthenticationManager AuthenticationManager
         {
             get
             {
                 return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+
+        protected Guid CustomerId
+        {
+            get
+            {
+                var userId = HttpContext.User.Identity.GetUserId();
+
+                if (UserManager.IsInRole(userId, "Customer"))
+                {
+                    return Guid.Parse(userId);
+                }
+                else
+                {
+                    var customerUser = KEUnitOfWork.CustomerUserRepository.Get(Guid.Parse(userId));
+                    return customerUser.CustomerId;
+                }
             }
         }
 
@@ -59,6 +96,27 @@ namespace KarmicEnergy.Web.Controllers
             {
                 ModelState.AddModelError("", error);
             }
+        }
+
+        protected void AddErrors(Exception ex)
+        {
+            ModelState.AddModelError("", ex.Message);
+        }
+
+        protected void AddErrors(DbEntityValidationException dbex)
+        {
+            foreach (var error in dbex.EntityValidationErrors)
+            {
+                foreach (var valError in error.ValidationErrors)
+                {
+                    ModelState.AddModelError("", valError.ErrorMessage);
+                }
+            }
+        }
+
+        protected void AddErrors(String message)
+        {
+            ModelState.AddModelError("", message);
         }
 
         protected ActionResult RedirectToLocal(string returnUrl)
@@ -88,6 +146,17 @@ namespace KarmicEnergy.Web.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        protected void LoadCustomerRoles()
+        {
+            List<Role> roles = new List<Role>()
+            {
+            new Role() { Id = "CustomerAdmin", Name = "Admin" },
+            new Role() { Id = "CustomerOperator", Name = "Operator" }
+            };
+
+            ViewBag.Roles = roles;
         }
 
     }

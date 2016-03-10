@@ -10,7 +10,7 @@ namespace KarmicEnergy.Web
         {
             #region Scripts
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.min.js"));
+                        "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate.min.js",
@@ -30,9 +30,13 @@ namespace KarmicEnergy.Web
 
             bundles.Add(new ScriptBundle("~/bundles/slimscroll").Include(
                       "~/Scripts/jquery.slimscroll.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/grid").Include(
+                      "~/Scripts/gridmvc.min.js"));
             #endregion Scripts
 
             #region Style
+
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                      "~/Content/bootstrap.min.css"));
 
@@ -42,6 +46,9 @@ namespace KarmicEnergy.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/fonts.css",      
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/grid").Include(
+                  "~/Content/Gridmvc.css"));
 
             #endregion Style
 

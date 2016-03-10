@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karmic Energy - @ViewBag.Title</title>
+    <title>
+        Karmic Energy - @ViewBag.Title
+    </title>
     @Styles.Render("~/Content/bootstrap")
     @Styles.Render("~/Content/font-awesome")
     @Styles.Render("~/Content/css")
@@ -23,11 +25,11 @@
                 <!-- Logo -->
                 <a href="/Home" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <div class="logo-mini"><img src="images/logo_mni.png" alt="logo" title="Logo"></div>
+                    <div class="logo-mini"><img src="/images/logo_mni.png" alt="logo" title="Logo"></div>
                     @*<span class="logo-mini"><b>E</b>IM</span>*@
 
                     @*logo for regular state and mobile devices*@
-                    <div class="logo-lg"><img src="images/logo.png" alt="logo" title="Logo"></div>
+                    <div class="logo-lg"><img src="/images/logo.png" alt="logo" title="Logo"></div>
                     @*<span class="logo-lg"><b>ERP</b>IM</span>*@
                 </a>
             </div>
@@ -37,7 +39,7 @@
             </div>
         </header>
 
-        <section id="main-content">
+        <section id="main-content" class="content-row">
             <aside class="main-sidebar">
                 <section class="sidebar">
                     @Html.Partial("_MenuLeft")
@@ -47,11 +49,15 @@
             <div class="content-wrapper">
                 <section class="content">
                     <div class="row">
+                        <div class="col-sm-12">
+                            <div class="section-head text-sm-center">
+                                <h1>@ViewBag.Title</h1>
+                            </div>
+                        </div>
                         @RenderBody()
                     </div>
                 </section>
             </div>
-            <div class="clearfix"></div>
         </section>
         <footer></footer>
     </div>

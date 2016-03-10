@@ -9,7 +9,31 @@ body {
     background: #000;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
 #body-internal {
+}
+
+#body-content {
+    margin: 50px 30px;
+}
+
+.section-head {
+    background: #82c341;
+    padding: 10px 0;
+}
+
+    .section-head h1, .section-head h2 {
+        font-size: 20px;
+        font-family: 'open_sansbold';
+        color: #FFF;
+    }
+
+
+.text-sm-center {
+    text-align: center !important;
 }
 
 #body-login {
@@ -41,15 +65,18 @@ p {
     margin: 0px 40px 0px 40px;
 }
 
+.content-row {
+}
+
 .content-login {
     width: 100%;
     margin-top: 100px;
 }
 
-
 .content-wrapper,
 .right-side {
     min-height: 100%;
+    height: 100%;
     background-color: #ecf0f5;
     z-index: 800;
     margin-left: 210px;
@@ -242,7 +269,7 @@ header {
     font-size: 20px;
     line-height: 50px;
     text-align: center;
-    width: 210px;
+    width: 195px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 300;
     overflow: hidden;
@@ -455,9 +482,9 @@ header {
  */
 .main-sidebar,
 .left-side {
-    /*position: absolute;*/
-    top: 0;
-    left: 0;
+    position: absolute;
+    /*top: 0;
+    left: 0;*/
     /*padding-top: 50px;*/
     min-height: 100%;
     width: 210px;
@@ -671,7 +698,7 @@ header {
 
         .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > span {
             top: 0;
-            margin-left: -3px;
+            margin-left: 50px;
             padding: 12px 5px 12px 20px;
             background-color: inherit;
         }
@@ -1021,3 +1048,33 @@ header {
     height: 500px;
 }
 /* CONTENT CENTER */
+
+label {
+    margin: 0;
+    padding-top: 8px;
+    font-size: 14px;
+    color: #4d4d4f;
+}
+
+
+.btn-primary {
+    background-color: #1C2B39;
+    border-color: #293745;
+}
+
+    .btn-primary:hover {
+        background-color: #0D161E;
+        border-color: #293745;
+    }
+
+.btn {
+    background: #00ADBD;
+    color: #FFF;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+    .btn:hover {
+        background: #0D161E;
+        color: #00adbd;
+    }

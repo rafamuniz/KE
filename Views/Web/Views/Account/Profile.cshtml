@@ -1,0 +1,17 @@
+﻿@using KarmicEnergy.Web.ViewModels.Account
+
+@model ProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+@using (Html.BeginForm("Profile", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

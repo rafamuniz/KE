@@ -4,14 +4,14 @@
     @if (this.HasRoles("Admin"))
     {
         <li class="treeview">
-            <a href="/Customer">
+            <a href="/Admin/Customer">
                 <img src="/images/customers.png" alt="customers" title="customers">
                 <p>CUSTOMERS</p>
             </a>
         </li>
     }
 
-    @if (this.HasRoles("Customer"))
+    @if (this.HasRoles("Customer", "CustomerAdmin"))
     {
         <li class="treeview">
             <a href="/Customer/User">
@@ -21,7 +21,7 @@
         </li>
     }
 
-    @if (this.HasRoles("Customer"))
+    @if (this.HasRoles("Customer", "CustomerAdmin", "CustomerOperator"))
     {
         <li class="treeview">
             <a href="/Customer/Site">
@@ -40,7 +40,7 @@
         <li class="treeview">
             <a href="#">
                 <img src="/images/my_tank.png" alt="tanks" title="tanks">
-                <p>MY TANK</p>
+                <p>TANK</p>
             </a>
         </li>
 

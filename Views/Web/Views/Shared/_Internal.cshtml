@@ -18,26 +18,47 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-    <div class="wrapper-internal">
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
         <header class="main-header">
-            <div class="logo">
-                <!-- Logo -->
-                <a href="/Home" class="logo">
-                    <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <div class="logo-mini"><img src="/images/logo_mni.png" alt="logo" title="Logo"></div>
-                    @*<span class="logo-mini"><b>E</b>IM</span>*@
+            <!-- Logo -->
+            <a href="/Home" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                @*<img src="^/images/logo_mini.png" alt="logo" title="Logo" />*@
+                @*<span class="logo-mini"><b>A</b>LT</span>*@
 
-                    @*logo for regular state and mobile devices*@
-                    <div class="logo-lg"><img src="/images/logo.png" alt="logo" title="Logo"></div>
-                    @*<span class="logo-lg"><b>ERP</b>IM</span>*@
-                </a>
-            </div>
+                <!-- logo for regular state and mobile devices -->
+                <img src="~/images/logo.png" alt="logo" title="Logo" />
+                @*<span class="logo-lg"><b>Admin</b>LTE</span>*@
+            </a>
 
-            <div class="top-header">
-                @Html.Partial("_LoginPartial")
-            </div>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <div class="col-lg-1 toggle-button">
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                </div>
+
+                <div class="col-lg-6 my-tanks">
+                    <p>WATER MINDER TANK INVENTORY OVERVIEW</p>
+                    <a href="/Customer/Tank/Dashboard" class="btn">MY TANKS</a>
+                </div>
+
+                <div class="col-lg-5 my-login">
+                    @Html.Partial("_MenuTop")
+                </div>
+            </nav>
         </header>
+
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                @Html.Partial("_MenuLeft")
+            </section>
+        </aside>
 
         <section id="main-content" class="content-row">
             <aside class="main-sidebar">
@@ -47,14 +68,19 @@
             </aside>
 
             <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-head center-block">
+                            <h1>@ViewBag.Title</h1>
+                        </div>
+                    </div>
+                </div>
+
                 <section class="content">
                     <div class="row">
-                        <div class="col-sm-12">
-                            <div class="section-head text-sm-center">
-                                <h1>@ViewBag.Title</h1>
-                            </div>
+                        <div id="body-content">
+                            @RenderBody()
                         </div>
-                        @RenderBody()
                     </div>
                 </section>
             </div>

@@ -15,18 +15,30 @@ namespace KarmicEnergy.Core.Entities
 
         [Column("Name", TypeName = "NVARCHAR")]
         [StringLength(128)]
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public String Name { get; set; }
 
         [Column("IPAddress", TypeName = "NVARCHAR")]
         [StringLength(64)]
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public String IPAddress { get; set; }
 
-        [Column("CustomerId", TypeName = "UNIQUEIDENTIFIER")]
-        [Required]
-        public Guid CustomerId { get; set; }
+        [Column("Status", TypeName = "CHAR")]
+        [StringLength(1)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public String Status { get; set; } = "A";
 
         #endregion Property
+
+        #region Customer
+
+        [Column("CustomerId", TypeName = "UNIQUEIDENTIFIER")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public Guid CustomerId { get; set; }
+
+        [ForeignKey("CustomerId")]
+        public virtual Customer Customer { get; set; }
+
+        #endregion Customer
     }
 }

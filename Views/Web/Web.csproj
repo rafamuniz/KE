@@ -194,13 +194,19 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Customer\Controllers\TankController.cs" />
     <Compile Include="Areas\Customer\Controllers\SiteController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
-    <Compile Include="Areas\Customer\Models\Role.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\CustomerRole.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Site\CreateViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Site\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Site\UpdateViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Areas\Customer\Controllers\UserController.cs" />
-    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -212,13 +218,15 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\Account\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\User\CreateViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\User\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\User\UpdateViewModel.cs" />
-    <Compile Include="ViewModels\Customer\UpdateViewModel.cs" />
-    <Compile Include="ViewModels\Customer\CreateViewModel.cs" />
-    <Compile Include="ViewModels\Customer\ListViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Customer\UpdateViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Customer\CreateViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Customer\ListViewModel.cs" />
+    <Compile Include="ViewModels\Account\ProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -228,6 +236,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\Site - Copy.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts.css" />
@@ -326,6 +335,15 @@
     <Content Include="Grid.mvc.readme" />
     <Content Include="Areas\Customer\Views\web.config" />
     <Content Include="Areas\Customer\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Customer\Views\Site\Create.cshtml" />
+    <Content Include="Areas\Customer\Views\Site\Edit.cshtml" />
+    <Content Include="Areas\Customer\Views\Site\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\Create.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\Edit.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\Dashboard.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.slimscroll.js" />
     <Content Include="Scripts\jquery.slimscroll.min.js" />
@@ -376,19 +394,21 @@
     <Content Include="Views\Shared\_LoginMaster.cshtml" />
     <Content Include="Views\Shared\_MenuLeft.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
-    <Content Include="Views\Customer\Index.cshtml" />
-    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Create.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
-    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Edit.cshtml" />
     <Content Include="Areas\Customer\Views\User\Index.cshtml" />
     <Content Include="Areas\Customer\Views\User\Create.cshtml" />
     <Content Include="Areas\Customer\Views\User\Edit.cshtml" />
+    <Content Include="Views\Shared\_MenuTop.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Customer\ViewModels\Site\" />
-    <Folder Include="Areas\Customer\Views\Site\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

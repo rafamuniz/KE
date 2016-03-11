@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using KarmicEnergy.Web.ViewModels.Account;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Linq;

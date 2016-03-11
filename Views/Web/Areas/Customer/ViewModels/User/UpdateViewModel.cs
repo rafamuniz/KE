@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace KarmicEnergy.Web.ViewModels.User
+namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
 {
     public class EditViewModel
     {

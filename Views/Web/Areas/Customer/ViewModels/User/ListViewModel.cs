@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using KarmicEnergy.Core.Entities;
-using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
-namespace KarmicEnergy.Web.ViewModels.User
+namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
 {
     public class ListViewModel
     {
@@ -22,7 +19,7 @@ namespace KarmicEnergy.Web.ViewModels.User
 
         #region Map
 
-        public static List<ListViewModel> Map(List<CustomerUser> entities)
+        public static List<ListViewModel> Map(List<Core.Entities.CustomerUser> entities)
         {
             List<ListViewModel> vms = new List<ListViewModel>();
 
@@ -34,10 +31,10 @@ namespace KarmicEnergy.Web.ViewModels.User
             return vms;
         }
 
-        public static ListViewModel Map(CustomerUser entity)
+        public static ListViewModel Map(Core.Entities.CustomerUser entity)
         {
-            Mapper.CreateMap<CustomerUser, ListViewModel>();
-            return Mapper.Map<CustomerUser, ListViewModel>(entity);
+            Mapper.CreateMap<Core.Entities.CustomerUser, ListViewModel>();
+            return Mapper.Map<Core.Entities.CustomerUser, ListViewModel>(entity);
         }
 
         #endregion Map

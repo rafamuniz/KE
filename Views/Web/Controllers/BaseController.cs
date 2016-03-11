@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using KarmicEnergy.Core.Persistence;
+using KarmicEnergy.Web.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity.Owin;
-using KarmicEnergy.Core.Persistence;
-using System;
-using System.Data.Entity.Validation;
-using KarmicEnergy.Web.Areas.Customer.Models;
-using System.Collections.Generic;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace KarmicEnergy.Web.Controllers
 {
@@ -50,6 +49,11 @@ namespace KarmicEnergy.Web.Controllers
             {
                 _userManager = value;
             }
+        }
+
+        protected String UserId
+        {
+            get { return HttpContext.User.Identity.GetUserId(); }
         }
 
         protected KEUnitOfWork KEUnitOfWork
@@ -148,15 +152,28 @@ namespace KarmicEnergy.Web.Controllers
             base.Dispose(disposing);
         }
 
-        protected void LoadCustomerRoles()
+        protected List<CustomerRole> LoadCustomerRoles()
         {
-            List<Role> roles = new List<Role>()
+            List<CustomerRole> roles = new List<CustomerRole>()
             {
-            new Role() { Id = "CustomerAdmin", Name = "Admin" },
-            new Role() { Id = "CustomerOperator", Name = "Operator" }
+                new CustomerRole() { Id = "CustomerAdmin", Name = "Admin" },
+                new CustomerRole() { Id = "CustomerOperator", Name = "Operator" }
             };
 
             ViewBag.Roles = roles;
+            return roles;
+        }
+
+        protected List<Status> LoadStatuses()
+        {
+            List<Status> statuses = new List<Status>()
+            {
+                new Status() { Id = "A", Name = "Active" },
+                new Status() { Id = "I", Name = "Inactive" }
+            };
+
+            ViewBag.Statuses = statuses;
+            return statuses;
         }
 
     }

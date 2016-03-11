@@ -118,6 +118,60 @@ namespace KarmicEnergy.Web.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
+        #region Profile
+        //
+        // GET: /Account/Profile
+        [Authorize]
+        public ActionResult Profile()
+        {
+            return View();
+        }
+
+        #endregion Profile
+
+        #region Change Password
+        //
+        // GET: /Account/ChangePassword
+        [Authorize]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/ChangePassword
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            var result = await UserManager.ChangePasswordAsync(UserId, viewModel.OldPassword, viewModel.NewPassword);
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByIdAsync(UserId);
+
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+
+                return RedirectToAction("ChangePassword", new { Message = ManageController.ManageMessageId.ChangePasswordSuccess });
+            }
+
+            AddErrors(result);
+
+            // If we got this far, something failed, redisplay form
+            return View(viewModel);
+        }
+
+        #endregion Change Password
+
+        #region Forgot Password
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
@@ -161,6 +215,8 @@ namespace KarmicEnergy.Web.Controllers
         {
             return View();
         }
+
+        #endregion Forgot Password
 
         //
         // GET: /Account/ResetPassword

@@ -1,7 +1,7 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Web.Controllers;
 using KarmicEnergy.Web.Models;
-using KarmicEnergy.Web.ViewModels.User;
+using KarmicEnergy.Web.Areas.Customer.ViewModels.User;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -16,7 +16,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public async Task<ActionResult> Index()
         {
-            List<CustomerUser> entities = KEUnitOfWork.CustomerUserRepository.GetAll().ToList();
+            List<CustomerUser> entities = KEUnitOfWork.CustomerUserRepository.GetsByCustomerId(CustomerId).ToList();
             var viewModels = ListViewModel.Map(entities);
 
             foreach (var vm in viewModels)
@@ -141,7 +141,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                return RedirectToAction("Index", "Customer");
+                return RedirectToAction("Index", "User", new { area = "Customer" });
             }
 
             AddErrors(result);
@@ -179,7 +179,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                return RedirectToAction("Index", "Customer");
+                return RedirectToAction("Index", "User", new { area = "Customer" });
             }
 
             AddErrors(result);

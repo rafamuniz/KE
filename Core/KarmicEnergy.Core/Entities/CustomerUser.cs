@@ -12,15 +12,15 @@ namespace KarmicEnergy.Core.Entities
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
         public Guid Id { get; set; }
 
-        [Column("Name", TypeName = "NVARCHAR")]
-        [StringLength(128)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{2} cannot be null or empty")]
-        public String Name { get; set; }
+        //[Column("Name", TypeName = "NVARCHAR")]
+        //[StringLength(128)]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "{2} cannot be null or empty")]
+        //public String Name { get; set; }
 
-        [Column("Email", TypeName = "NVARCHAR")]
-        [StringLength(256)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{2} cannot be null or empty")]
-        public String Email { get; set; }
+        //[Column("Email", TypeName = "NVARCHAR")]
+        //[StringLength(256)]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "{2} cannot be null or empty")]
+        //public String Email { get; set; }
 
         #endregion Property
 

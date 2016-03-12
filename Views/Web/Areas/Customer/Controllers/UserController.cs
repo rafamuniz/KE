@@ -60,9 +60,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                     if (result.Succeeded)
                     {
-                        CustomerUser customerUser = new CustomerUser() { Id = Guid.Parse(user.Id), Name = viewModel.Name, Email = viewModel.Email, CustomerId = CustomerId };
-                        KEUnitOfWork.CustomerUserRepository.Add(customerUser);
-                        KEUnitOfWork.Complete();
+                        //CustomerUser customerUser = new CustomerUser() { Id = Guid.Parse(user.Id), Name = viewModel.Name, Email = viewModel.Email, CustomerId = CustomerId };
+                        //KEUnitOfWork.CustomerUserRepository.Add(customerUser);
+                        //KEUnitOfWork.Complete();
 
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
@@ -113,27 +113,27 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public async Task<ActionResult> Edit(EditViewModel viewModel)
         {
-            var customerUser = KEUnitOfWork.CustomerUserRepository.Get(viewModel.Id);
+            var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
+            //var customerUser = KEUnitOfWork.CustomerUserRepository.Get(viewModel.Id);
 
-            if (customerUser == null)
+            if (user == null)
             {
                 LoadCustomerRoles();
-                AddErrors("Customer does not exist");
+                AddErrors("User does not exist");
                 return View("Index");
             }
 
-            customerUser.Name = viewModel.Name;
-            customerUser.Email = viewModel.Email;
+            //customerUser.Name = viewModel.Name;
+            //customerUser.Email = viewModel.Email;
 
-            KEUnitOfWork.CustomerUserRepository.Update(customerUser);
-
-            var user = await UserManager.FindByIdAsync(customerUser.Id.ToString());
+            //KEUnitOfWork.CustomerUserRepository.Update(customerUser);
+                        
             user.Email = viewModel.Email;
             var result = await UserManager.UpdateAsync(user);
 
             if (result.Succeeded)
             {
-                KEUnitOfWork.Complete();
+                //KEUnitOfWork.Complete();
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link

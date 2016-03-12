@@ -3,26 +3,29 @@ using KarmicEnergy.Web.ViewModels.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Web.Models;
+using Munizoft.Extensions;
 
 namespace KarmicEnergy.Web.Controllers
 {
     [Authorize]
     public class AccountController : BaseController
     {
+        #region Constructor
         public AccountController()
         {
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+            : base(userManager, signInManager)
         {
-            this.UserManager = userManager;
-            this.SignInManager = signInManager;
+
         }
+        #endregion Constructor
 
         //
         // GET: /Account/VerifyCode
@@ -124,7 +127,79 @@ namespace KarmicEnergy.Web.Controllers
         [Authorize]
         public ActionResult Profile()
         {
-            return View();
+            //// Role Customer
+            //if (UserManager.IsInRole(UserId, "Customer"))
+            //{
+            //    var customer = KEUnitOfWork.CustomerRepository.Get(Guid.Parse(UserId));
+            //    name = customer.Name;
+            //    email = customer.Email;
+            //}
+            //else // Role Customer User
+            //{
+            //    var customerUser = KEUnitOfWork.CustomerUserRepository.Get(Guid.Parse(UserId));
+            //    name = customerUser.Name;
+            //    email = customerUser.Email;
+            //}
+            var user = AppUser;
+            ProfileViewModel viewModel = new ProfileViewModel()
+            {
+                Name = user.Name,
+                Email = user.Email,
+                Photo = user.Photo
+            };
+
+            return View(viewModel);
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Profile(ProfileViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            var user = await UserManager.FindByIdAsync(UserId);
+            if (user == null)
+            {
+                AddErrors("Profile does not exist");
+                return View(viewModel);
+            }
+
+            user.Photo = viewModel.PhotoFile.ToByte();
+            user.Email = viewModel.Email;
+            var result = await UserManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                //// Role Customer
+                //if (UserManager.IsInRole(UserId, "Customer"))
+                //{
+                //    var customer = KEUnitOfWork.CustomerRepository.Get(Guid.Parse(UserId));
+                //    customer.Email = viewModel.Email;
+                //    customer.Name = viewModel.Name;
+                //    KEUnitOfWork.CustomerRepository.Add(customer);
+                //}
+                //else // Role Customer User
+                //{
+                //    var customerUser = KEUnitOfWork.CustomerUserRepository.Get(Guid.Parse(UserId));
+                //    customerUser.Email = viewModel.Email;
+                //    customerUser.Name = viewModel.Name;
+                //    KEUnitOfWork.CustomerUserRepository.Update(customerUser);
+                //}
+
+                //KEUnitOfWork.Complete();
+
+                return View(viewModel);
+            }
+
+            AddErrors(result);
+
+            return View(viewModel);
         }
 
         #endregion Profile
@@ -171,94 +246,6 @@ namespace KarmicEnergy.Web.Controllers
 
         #endregion Change Password
 
-        #region Forgot Password
-        //
-        // GET: /Account/ForgotPassword
-        [AllowAnonymous]
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/ForgotPassword
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
-                }
-
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        //
-        // GET: /Account/ForgotPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ForgotPasswordConfirmation()
-        {
-            return View();
-        }
-
-        #endregion Forgot Password
-
-        //
-        // GET: /Account/ResetPassword
-        [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
-        {
-            return code == null ? View("Error") : View();
-        }
-
-        //
-        // POST: /Account/ResetPassword
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            var user = await UserManager.FindByNameAsync(model.Email);
-            if (user == null)
-            {
-                // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-            AddErrors(result);
-            return View();
-        }
-
-        //
-        // GET: /Account/ResetPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ResetPasswordConfirmation()
-        {
-            return View();
-        }
 
         //
         // POST: /Account/ExternalLogin

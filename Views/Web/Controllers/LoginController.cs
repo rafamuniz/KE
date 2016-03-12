@@ -15,10 +15,11 @@ namespace KarmicEnergy.Web.Controllers
         }
 
         public LoginController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+            : base(userManager, signInManager)
         {
-            this.UserManager = userManager;
-            this.SignInManager = signInManager;
+
         }
+
         #endregion Constructor
 
         [AllowAnonymous]
@@ -53,7 +54,7 @@ namespace KarmicEnergy.Web.Controllers
                 default:
                     ModelState.AddModelError("", "Invalid email or password");
                     return View("Index", model);
-            }            
+            }
         }
     }
 }

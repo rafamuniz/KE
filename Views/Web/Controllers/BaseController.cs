@@ -1,6 +1,7 @@
 ﻿using KarmicEnergy.Core.Persistence;
 using KarmicEnergy.Web.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
@@ -15,15 +16,23 @@ namespace KarmicEnergy.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManager;
         private KEUnitOfWork _KEUnitOfWork;
 
         public BaseController()
+            : this(null, null, null)
         {
         }
 
         public BaseController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+            : this(userManager, null, signInManager)
+        {
+        }
+
+        public BaseController(ApplicationUserManager userManager, ApplicationRoleManager roleManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
+            RoleManager = roleManager;
             SignInManager = signInManager;
         }
 
@@ -33,10 +42,7 @@ namespace KarmicEnergy.Web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            set
-            {
-                _signInManager = value;
-            }
+            private set { _signInManager = value; }
         }
 
         protected ApplicationUserManager UserManager
@@ -45,15 +51,26 @@ namespace KarmicEnergy.Web.Controllers
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
-            set
+            private set { _userManager = value; }
+        }
+
+        protected ApplicationRoleManager RoleManager
+        {
+            get
             {
-                _userManager = value;
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>(); ;
             }
+            private set { _roleManager = value; }
         }
 
         protected String UserId
         {
             get { return HttpContext.User.Identity.GetUserId(); }
+        }
+
+        protected ApplicationUser AppUser
+        {
+            get { return UserManager.FindById(UserId); }
         }
 
         protected KEUnitOfWork KEUnitOfWork

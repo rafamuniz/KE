@@ -8,48 +8,50 @@
     ViewBag.Title = "Login";
 }
 
-<div class="login-logo">
-    <img src="~/images/login_logo.png">
-</div><!-- /.login-logo -->
-
 <div class="login-box">
-    @using (Html.BeginForm("Login", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "formLogin", @class = "form-horizontal", role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        @*@Html.Partial("_Error")*@
+    <div class="login-logo">
+        <a href="http://www.karmicenergy.com">
+            <img src="~/images/login_logo.png">
+        </a>
+    </div>
 
-    if (ViewData.ModelState.Keys.Any(k => ViewData.ModelState[k].Errors.Count() > 0))
-    {
-        <div class="alert alert-danger">
-            <button class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            @Html.ValidationSummary(false, "Errors: ", new { @class = "text-danger" })
-        </div>
-    }
+    <div class="login-box-body">
+        @using (Html.BeginForm("Login", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "formLogin", @class = "form-horizontal", role = "form" }))
+            {
+            @Html.AntiForgeryToken()
+            @Html.Partial("_Error")
 
-    <div class="row">
-        <div class="col-lg-4 col-lg-offset-4">
-            <div class="form-group">
-                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "email-input", placeholder = AttributeExtension.GetDisplayAttributeNameValue<LoginViewModel>(m => m.Email) } })
+            <div class="has-feedback">
+                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "input-login", id = "Email", name = "Email", placeholder = AttributeExtension.GetDisplayAttributeNameValue<LoginViewModel>(m => m.Email) } })
                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
             </div>
-        </div>
-    </div>
 
-    <div class="row" >
-        <div class="col-lg-4 col-lg-offset-4">
-            <div class="form-group">
-                @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "password-input", placeholder = AttributeExtension.GetDisplayAttributeNameValue<LoginViewModel>(m => m.Password) } })
+            <div class="has-feedback">
+                @Html.PasswordFor(m => m.Password, new { @class = "input-login", placeholder = AttributeExtension.GetDisplayAttributeNameValue<LoginViewModel>(m => m.Password) })
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
             </div>
-        </div>
-    </div>
 
-        <div class="row" style="width: 106%">
-            <div class="col-lg-4 col-lg-offset-4">
-                <div class="form-group">
-                    <input type="submit" class="login-button" value="LOGIN">
-                </div>
-            </div><!-- /.col -->
+            <div class="has-feedback">
+                <button type="submit" class="btn-login">Login</button>
+            </div>
+        }
+        <div class="pull-right">
+            <a id="ForgotPassword" name="ForgotPassword">I forgot my password</a>
         </div>
-    }
-</div><!-- /.login-box-body -->
+    </div><!-- /.login-box-body -->
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $('#Email').change(function () {
+            var email = $('#Email').val();
+
+            if (email != "") {
+                var value = "/ForgotPassword?u=" + email;
+                $('#ForgotPassword').attr('href', value);
+            }
+        });
+    </script>
+}

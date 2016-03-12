@@ -4,7 +4,11 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
+using SendGrid;
 using System;
+using System.Configuration;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -12,10 +16,55 @@ namespace KarmicEnergy.Web
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            await configSendGridasync((EmailMessage)message);
+        }
+
+        public async Task SendAsync(EmailMessage message)
+        {
+            // Plug in your email service here to send an email.
+            await configSendGridasync(message);
+        }
+
+        private async Task configSendGridasync(EmailMessage message)
+        {
+            var sendGridMessage = new SendGridMessage();
+
+            sendGridMessage.AddTo(message.Destination);
+            sendGridMessage.From = new MailAddress(ConfigurationManager.AppSettings["EmailService:From"], "Karmic Energy - Support");
+            sendGridMessage.Subject = message.Subject;
+            sendGridMessage.Text = message.Body;
+            sendGridMessage.Html = message.Body;
+            sendGridMessage.EnableTemplateEngine(message.TemplateId);
+
+            String apiKey = ConfigurationManager.AppSettings["EmailService:APIKey"];
+
+            var credentials = new NetworkCredential(ConfigurationManager.AppSettings["EmailService:Account"],
+                                                    ConfigurationManager.AppSettings["EmailService:Password"]);
+
+            // Create a Web transport for sending email.
+            var transportWeb = new SendGrid.Web(credentials);
+            //var transportWeb = new SendGrid.Web(apiKey);
+
+            try
+            {
+                // Send the email.
+                if (transportWeb != null)
+                {
+                    await transportWeb.DeliverAsync(sendGridMessage);
+                }
+                else
+                {
+                    //Trace.TraceError("Failed to create Web transport.");
+                    await Task.FromResult(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 
@@ -36,7 +85,7 @@ namespace KarmicEnergy.Web
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
@@ -80,11 +129,25 @@ namespace KarmicEnergy.Web
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
 
             return manager;
+        }
+    }
+
+    public class ApplicationRoleManager : RoleManager<IdentityRole>
+    {
+        public ApplicationRoleManager(IRoleStore<IdentityRole, string> store)
+            : base(store)
+        {
+        }
+
+        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+        {
+            var roleStore = new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>());
+            return new ApplicationRoleManager(roleStore);
         }
     }
 

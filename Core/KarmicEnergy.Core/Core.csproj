@@ -62,57 +62,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201603100932238_Initial.cs" />
-    <Compile Include="Migrations\201603100932238_Initial.Designer.cs">
-      <DependentUpon>201603100932238_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603101240338_Initial1.cs" />
-    <Compile Include="Migrations\201603101240338_Initial1.Designer.cs">
-      <DependentUpon>201603101240338_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603101407379_Initial2.cs" />
-    <Compile Include="Migrations\201603101407379_Initial2.Designer.cs">
-      <DependentUpon>201603101407379_Initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603101502574_Initial3.cs" />
-    <Compile Include="Migrations\201603101502574_Initial3.Designer.cs">
-      <DependentUpon>201603101502574_Initial3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603101522304_Initial4.cs" />
-    <Compile Include="Migrations\201603101522304_Initial4.Designer.cs">
-      <DependentUpon>201603101522304_Initial4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603110917201_Initial5.cs" />
-    <Compile Include="Migrations\201603110917201_Initial5.Designer.cs">
-      <DependentUpon>201603110917201_Initial5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603110920236_Initial6.cs" />
-    <Compile Include="Migrations\201603110920236_Initial6.Designer.cs">
-      <DependentUpon>201603110920236_Initial6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603110921510_Initial7.cs" />
-    <Compile Include="Migrations\201603110921510_Initial7.Designer.cs">
-      <DependentUpon>201603110921510_Initial7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603111345065_Initial8.cs" />
-    <Compile Include="Migrations\201603111345065_Initial8.Designer.cs">
-      <DependentUpon>201603111345065_Initial8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603111345375_Initial9.cs" />
-    <Compile Include="Migrations\201603111345375_Initial9.Designer.cs">
-      <DependentUpon>201603111345375_Initial9.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603111346021_Initial10.cs" />
-    <Compile Include="Migrations\201603111346021_Initial10.Designer.cs">
-      <DependentUpon>201603111346021_Initial10.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603111347465_Initial11.cs" />
-    <Compile Include="Migrations\201603111347465_Initial11.Designer.cs">
-      <DependentUpon>201603111347465_Initial11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603121423127_Initial12.cs" />
-    <Compile Include="Migrations\201603121423127_Initial12.Designer.cs">
-      <DependentUpon>201603121423127_Initial12.cs</DependentUpon>
+    <Compile Include="Migrations\201603160438350_Initial.cs" />
+    <Compile Include="Migrations\201603160438350_Initial.Designer.cs">
+      <DependentUpon>201603160438350_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
@@ -127,49 +79,13 @@
     <Compile Include="Repositories\CustomerRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603100932238_Initial.resx">
-      <DependentUpon>201603100932238_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603101240338_Initial1.resx">
-      <DependentUpon>201603101240338_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603101407379_Initial2.resx">
-      <DependentUpon>201603101407379_Initial2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603101502574_Initial3.resx">
-      <DependentUpon>201603101502574_Initial3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603101522304_Initial4.resx">
-      <DependentUpon>201603101522304_Initial4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603110917201_Initial5.resx">
-      <DependentUpon>201603110917201_Initial5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603110920236_Initial6.resx">
-      <DependentUpon>201603110920236_Initial6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603110921510_Initial7.resx">
-      <DependentUpon>201603110921510_Initial7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603111345065_Initial8.resx">
-      <DependentUpon>201603111345065_Initial8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603111345375_Initial9.resx">
-      <DependentUpon>201603111345375_Initial9.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603111346021_Initial10.resx">
-      <DependentUpon>201603111346021_Initial10.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603111347465_Initial11.resx">
-      <DependentUpon>201603111347465_Initial11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603121423127_Initial12.resx">
-      <DependentUpon>201603121423127_Initial12.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201603160438350_Initial.resx">
+      <DependentUpon>201603160438350_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

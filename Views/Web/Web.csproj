@@ -217,17 +217,9 @@
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
     <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
-    <Compile Include="Migrations\201603070420058_InitialCreate.cs" />
-    <Compile Include="Migrations\201603070420058_InitialCreate.Designer.cs">
-      <DependentUpon>201603070420058_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603121421573_Initial.cs" />
-    <Compile Include="Migrations\201603121421573_Initial.Designer.cs">
-      <DependentUpon>201603121421573_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603121430592_Initial1.cs" />
-    <Compile Include="Migrations\201603121430592_Initial1.Designer.cs">
-      <DependentUpon>201603121430592_Initial1.cs</DependentUpon>
+    <Compile Include="Migrations\201603160510438_Initial.cs" />
+    <Compile Include="Migrations\201603160510438_Initial.Designer.cs">
+      <DependentUpon>201603160510438_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmailMessage.cs" />
@@ -384,6 +376,7 @@
     <Content Include="Areas\Customer\Views\Tank\Edit.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\Index.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\Dashboard.cshtml" />
+    <None Include="Properties\PublishProfiles\Prod.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.slimscroll.js" />
     <Content Include="Scripts\jquery.slimscroll.min.js" />
@@ -469,14 +462,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603070420058_InitialCreate.resx">
-      <DependentUpon>201603070420058_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603121421573_Initial.resx">
-      <DependentUpon>201603121421573_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603121430592_Initial1.resx">
-      <DependentUpon>201603121430592_Initial1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603160510438_Initial.resx">
+      <DependentUpon>201603160510438_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

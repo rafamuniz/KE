@@ -34,14 +34,14 @@ namespace KarmicEnergy.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, String ReturnUrl)
+        public async Task<ActionResult> Login(LoginViewModel viewModel, String ReturnUrl)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View("Index", viewModel);
             }
 
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(viewModel.Email, viewModel.Password, viewModel.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -49,11 +49,11 @@ namespace KarmicEnergy.Web.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = ReturnUrl, RememberMe = model.RememberMe });
+                    return RedirectToAction("SendCode", new { ReturnUrl = ReturnUrl, RememberMe = viewModel.RememberMe });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid email or password");
-                    return View("Index", model);
+                    return View("Index", viewModel);
             }
         }
     }

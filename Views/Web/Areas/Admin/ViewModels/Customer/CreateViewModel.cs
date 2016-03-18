@@ -5,6 +5,8 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Customer
 {
     public class CreateViewModel
     {
+        #region Property
+        [Required]
         [Display(Name = "Name")]
         public String Name { get; set; }
 
@@ -12,6 +14,10 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Customer
         [Display(Name = "Email")]
         [EmailAddress]
         public String Email { get; set; }
+
+        [Display(Name = "UserName")]
+        [Required]
+        public String UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -24,5 +30,6 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Customer
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public String PasswordConfirm { get; set; }
+        #endregion Property
     }
 }

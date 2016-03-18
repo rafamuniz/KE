@@ -367,7 +367,7 @@ p {
 
 .content-header {
     position: relative;
-    padding: 15px 15px 0 15px;
+    /*padding: 15px 15px 0 15px;*/
 }
 
     .content-header > h1 {
@@ -536,6 +536,7 @@ p {
         -ms-transform: translate(0, 0);
         -o-transform: translate(0, 0);
         transform: translate(0, 0);
+        padding-top: 260px;
     }
 }
 
@@ -5706,6 +5707,7 @@ label {
     background: #82C341;
     padding: 10px 0;
     text-align: center;
+    text-transform: uppercase;
 }
 
     .section-head h1, .section-head h2 {
@@ -5813,6 +5815,26 @@ bottom-buttons a {
     font-size: 18px;
     text-align: center;
     color: #5f6b75;
+}
+
+.user-photo {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-size: 32px 35px;
+    background-position: center center;
+    vertical-align: middle;
+    line-height: 32px;
+    box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+    margin-left: 5px;
+}
+
+.user-name {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 32px;
+    padding-left: 3px;
 }
 
 .user_image_background {

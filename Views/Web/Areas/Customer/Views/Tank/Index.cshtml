@@ -1,4 +1,4 @@
-﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Site
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
 @using Munizoft.Extensions
 @using Munizoft.MVC.Helpers
 @using GridMvc.Html
@@ -7,7 +7,7 @@
 
 @{
     Layout = "~/Views/Shared/_Internal.cshtml";
-    ViewBag.Title = "SITE";
+    ViewBag.Title = "TANK";
 }
 
 @Styles.Render("~/Content/grid")
@@ -16,7 +16,7 @@
 
     <div id="body-content">
         <div class="pull-right">
-            @Html.NoEncodeActionLink("<span>CREATE</span>", "Add new Site", "Create", "Site", routeValues: new { area = "Customer" }, htmlAttributes: new { @class = "btn" })
+            @Html.NoEncodeActionLink("<span>CREATE</span>", "Add new Tank", "Create", "Tank", routeValues: new { area = "Customer" }, htmlAttributes: new { @class = "btn" })
         </div>
     </div>
 

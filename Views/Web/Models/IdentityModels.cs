@@ -15,7 +15,7 @@ namespace KarmicEnergy.Web.Models
     {
         [Column("Name", TypeName = "NVARCHAR")]
         [StringLength(128)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{2} cannot be null or empty")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public String Name { get; set; }
 
         [Column("Photo", TypeName = "VARBINARY")]
@@ -88,7 +88,8 @@ namespace KarmicEnergy.Web.Models
             }
 
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            var user = new ApplicationUser() { UserName = "karmicenergy@ke.com", Email = "karmicenergy@ke.com" };
+            var user = new ApplicationUser() { UserName = "karmicenergy@ke.com", Email = "karmicenergy@ke.com", Name = "Karmic Energy" };
+            //var user = new ApplicationUser() { UserName = "karmicenergy@ke.com", Email = "karmicenergy@ke.com" };
             string password = "KarmicEnergy10$";
 
             var adminresult = userManager.Create(user, password);

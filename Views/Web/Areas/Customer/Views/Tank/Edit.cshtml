@@ -1,14 +1,14 @@
-﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.User
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
 @using Munizoft.Extensions
 
 @model EditViewModel
 
 @{
     Layout = "~/Views/Shared/_Internal.cshtml";
-    ViewBag.Title = "USER - EDIT";
+    ViewBag.Title = "Tank - Edit";
 }
 <div id="body-content">
-    @using (Html.BeginForm("Edit", "User", new { area = "Customer" }, FormMethod.Post, new { id = "formEditUser", @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("Edit", "Tank", new { area = "Customer" }, FormMethod.Post, new { id = "formEditUser", @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
         @Html.Partial("_Error")

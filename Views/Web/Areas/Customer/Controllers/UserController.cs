@@ -13,6 +13,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 {
     public class UserController : BaseController
     {
+        #region Index
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public async Task<ActionResult> Index()
         {
@@ -22,13 +23,20 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             foreach (var vm in viewModels)
             {
                 var id = vm.Id.ToString();
-                var role = await UserManager.GetRolesAsync(id);
-                vm.Role = role.SingleOrDefault();
+                var user = await UserManager.FindByIdAsync(id);
+                vm.Name = user.Name;
+                vm.UserName = user.UserName;
+                vm.Email = user.Email;
+
+                var roles = await UserManager.GetRolesAsync(id);
+                vm.Role = roles.Single();
             }
 
             return View(viewModels);
         }
+        #endregion Index
 
+        #region Create
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Create()
         {
@@ -51,7 +59,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             try
             {
-                var user = new ApplicationUser { UserName = viewModel.Email, Email = viewModel.Email };
+                var user = new ApplicationUser { UserName = viewModel.Email, Email = viewModel.Email, Name = viewModel.Name };
                 var result = await UserManager.CreateAsync(user, viewModel.Password);
 
                 if (result.Succeeded)
@@ -60,9 +68,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                     if (result.Succeeded)
                     {
-                        //CustomerUser customerUser = new CustomerUser() { Id = Guid.Parse(user.Id), Name = viewModel.Name, Email = viewModel.Email, CustomerId = CustomerId };
-                        //KEUnitOfWork.CustomerUserRepository.Add(customerUser);
-                        //KEUnitOfWork.Complete();
+                        CustomerUser customerUser = new CustomerUser() { Id = Guid.Parse(user.Id), CustomerId = CustomerId };
+                        KEUnitOfWork.CustomerUserRepository.Add(customerUser);
+                        KEUnitOfWork.Complete();
 
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
@@ -88,10 +96,13 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             LoadCustomerRoles();
             return View(viewModel);
         }
+        #endregion Create
 
+        #region Edit
         [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Edit(Guid id)
+        public async Task<ActionResult> Edit(Guid id)
         {
+            LoadCustomerRoles();
             var customerUser = KEUnitOfWork.CustomerUserRepository.Get(id);
 
             if (customerUser == null)
@@ -100,8 +111,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 return View("Index");
             }
 
-            LoadCustomerRoles();
             EditViewModel viewModel = EditViewModel.Map(customerUser);
+            var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
+            viewModel.Name = user.Name;
+            viewModel.Email = user.Email;
+            var roles = await UserManager.GetRolesAsync(viewModel.Id.ToString());
+            viewModel.Role = roles.Single();
 
             return View(viewModel);
         }
@@ -114,7 +129,6 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public async Task<ActionResult> Edit(EditViewModel viewModel)
         {
             var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
-            //var customerUser = KEUnitOfWork.CustomerUserRepository.Get(viewModel.Id);
 
             if (user == null)
             {
@@ -123,32 +137,38 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 return View("Index");
             }
 
-            //customerUser.Name = viewModel.Name;
-            //customerUser.Email = viewModel.Email;
-
-            //KEUnitOfWork.CustomerUserRepository.Update(customerUser);
-                        
+            user.Name = viewModel.Name;
             user.Email = viewModel.Email;
             var result = await UserManager.UpdateAsync(user);
 
             if (result.Succeeded)
             {
-                //KEUnitOfWork.Complete();
+                var roles = await UserManager.GetRolesAsync(user.Id);
+                result = await UserManager.RemoveFromRolesAsync(user.Id, roles.ToArray());
 
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                if (result.Succeeded)
+                {
+                    result = await UserManager.AddToRoleAsync(user.Id, viewModel.Role);
 
-                return RedirectToAction("Index", "User", new { area = "Customer" });
+                    if (result.Succeeded)
+                    {
+                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                        return RedirectToAction("Index", "User", new { area = "Customer" });
+                    }
+                }
             }
 
             AddErrors(result);
-
-            return View("Index");
+            return View();
         }
+        #endregion Edit
 
+        #region Delete
         //
         // GET: /User/Delete
         [HttpGet]
@@ -186,5 +206,45 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             return View("Index");
         }
+        #endregion Delete
+
+        #region Change Password
+
+        [Authorize(Roles = "Customer, CustomerAdmin")]
+        public ActionResult ChangePassword(Guid id)
+        {
+            ChangePasswordViewModel viewModel = new ChangePasswordViewModel() { Id = id };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Customer, CustomerAdmin")]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            try
+            {
+                String resetToken = await UserManager.GeneratePasswordResetTokenAsync(viewModel.Id.ToString());
+                var result = await UserManager.ResetPasswordAsync(viewModel.Id.ToString(), resetToken, viewModel.Password);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "User", new { area = "Customer" });
+                }
+            }
+            catch (Exception ex)
+            {
+                AddErrors(ex);
+            }
+
+            return View(viewModel);
+        }
+
+        #endregion Change Password
     }
 }

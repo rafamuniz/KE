@@ -12,14 +12,17 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 {
     public class CustomerController : BaseController
     {
+        #region Index
         [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
-            List<Core.Entities.Customer> entities = KEUnitOfWork.CustomerRepository.GetAll().ToList();
-            var viewModels = ListViewModel.Map(entities);
+            List<ApplicationUser> users = GetUsersInRole("Customer");
+            var viewModels = ListViewModel.Map(users);
             return View(viewModels);
         }
+        #endregion Index
 
+        #region Create
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
@@ -40,7 +43,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 
             try
             {
-                var user = new ApplicationUser { UserName = viewModel.Email, Email = viewModel.Email };
+                var user = new ApplicationUser { UserName = viewModel.UserName, Email = viewModel.Email, Name = viewModel.Name };
                 var result = await UserManager.CreateAsync(user, viewModel.Password);
 
                 if (result.Succeeded)
@@ -59,7 +62,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                         // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                         // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                        return RedirectToAction("Index", "Customer");
+                        return RedirectToAction("Index", "Customer", new { area = "Admin" });
                     }
                 }
 
@@ -77,18 +80,23 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
             return View(viewModel);
         }
 
+        #endregion Create
+
+        #region Edit
+
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit(Guid id)
+        public async Task<ActionResult> Edit(Guid id)
         {
+            var user = await UserManager.FindByIdAsync(id.ToString());
             var customer = KEUnitOfWork.CustomerRepository.Get(id);
 
-            if (customer == null)
+            if (customer == null || user == null)
             {
                 AddErrors("Customer does not exist");
-                return Index();
+                return View();
             }
 
-            EditViewModel viewModel = EditViewModel.Map(customer);
+            EditViewModel viewModel = EditViewModel.Map(user);
 
             return View(viewModel);
         }
@@ -105,7 +113,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
             if (user == null)
             {
                 AddErrors("Customer does not exist");
-                return Index();
+                return View();
             }
 
             user.Email = viewModel.Email;
@@ -124,9 +132,11 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 
             AddErrors(result);
 
-            return Index();
+            return View();
         }
+        #endregion Edit
 
+        #region Delete
         //
         // GET: /Customer/Delete
         [HttpGet]
@@ -134,16 +144,15 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         public async Task<ActionResult> Delete(Guid id)
         {
             var customer = KEUnitOfWork.CustomerRepository.Get(id);
+            var user = await UserManager.FindByIdAsync(id.ToString());
 
-            if (customer == null)
+            if (customer == null || user == null)
             {
                 AddErrors("Customer does not exist");
-                return Index();
+                return View();
             }
 
             KEUnitOfWork.CustomerRepository.Remove(customer);
-
-            var user = UserManager.FindByIdAsync(id.ToString()).Result;
             var result = await UserManager.DeleteAsync(user);
 
             if (result.Succeeded)
@@ -161,7 +170,47 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 
             AddErrors(result);
 
-            return Index();
+            return View();
         }
+        #endregion Delete
+
+        #region Change Password
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult ChangePassword(Guid id)
+        {
+            ChangePasswordViewModel viewModel = new ChangePasswordViewModel() { Id = id };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            try
+            {
+                String resetToken = await UserManager.GeneratePasswordResetTokenAsync(viewModel.Id.ToString());
+                var result = await UserManager.ResetPasswordAsync(viewModel.Id.ToString(), resetToken, viewModel.Password);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Customer", new { area = "Admin" });
+                }
+            }
+            catch (Exception ex)
+            {
+                AddErrors(ex);
+            }
+
+            return View(viewModel);
+        }
+
+        #endregion Change Password
     }
 }

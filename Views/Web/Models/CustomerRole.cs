@@ -5,9 +5,7 @@ using System.Web;
 
 namespace KarmicEnergy.Web.Models
 {
-    public class CustomerRole
+    public class CustomerRole : Role
     {
-        public String Id { get; set; }
-        public String Name { get; set; }
     }
 }

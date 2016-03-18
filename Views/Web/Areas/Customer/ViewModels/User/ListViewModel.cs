@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using KarmicEnergy.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,40 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
 
         public String Name { get; set; }
 
+        public String UserName { get; set; }
+
         public String Email { get; set; }
 
-        public String Role { get; set; }
+        private String role;
+        public String Role
+        {
+            get
+            {
+                if (role == "CustomerAdmin")
+                    return "Admin";
+                else if (role == "CustomerOperator")
+                    return "Operator";
+                else
+                    return String.Empty;
+            }
+            set { role = value; }
+        }
+
         #endregion Property
 
         #region Map
+
+        public static List<ListViewModel> Map(List<ApplicationUser> entities)
+        {
+            List<ListViewModel> vms = new List<ListViewModel>();
+
+            if (entities != null && entities.Any())
+            {
+                entities.ForEach(c => vms.Add(ListViewModel.Map(c)));
+            }
+
+            return vms;
+        }
 
         public static List<ListViewModel> Map(List<Core.Entities.CustomerUser> entities)
         {
@@ -29,6 +58,12 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
             }
 
             return vms;
+        }
+
+        public static ListViewModel Map(ApplicationUser entity)
+        {
+            Mapper.CreateMap<ApplicationUser, ListViewModel>();
+            return Mapper.Map<ApplicationUser, ListViewModel>(entity);
         }
 
         public static ListViewModel Map(Core.Entities.CustomerUser entity)

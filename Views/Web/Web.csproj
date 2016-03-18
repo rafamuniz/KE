@@ -73,7 +73,8 @@
     <Reference Include="Munizoft.MVC.Extensions">
       <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.MVC.Extensions\bin\Debug\Munizoft.MVC.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Munizoft.MVC.Helpers">
+    <Reference Include="Munizoft.MVC.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.MVC.Helpers\bin\Debug\Munizoft.MVC.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="Munizoft.Util">
@@ -210,24 +211,39 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Customer\ChangePasswordViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\User\CreateViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\User\ChangePasswordViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\User\ListViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\User\EditViewModel.cs" />
     <Compile Include="Areas\Customer\Controllers\TankController.cs" />
     <Compile Include="Areas\Customer\Controllers\SiteController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\CreateViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\DashboardViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\EditViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\User\ChangePasswordViewModel.cs" />
     <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
-    <Compile Include="Migrations\201603160510438_Initial.cs" />
-    <Compile Include="Migrations\201603160510438_Initial.Designer.cs">
-      <DependentUpon>201603160510438_Initial.cs</DependentUpon>
+    <Compile Include="Extensions\ImageSelectExtensions.cs" />
+    <Compile Include="Migrations\201603161204326_Initial.cs" />
+    <Compile Include="Migrations\201603161204326_Initial.Designer.cs">
+      <DependentUpon>201603161204326_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\AdminRole.cs" />
+    <Compile Include="Models\ImageSelectListItem.cs" />
     <Compile Include="Models\EmailMessage.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\CustomerRole.cs" />
     <Compile Include="Areas\Customer\ViewModels\Site\CreateViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Site\ListViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Site\UpdateViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Site\EditViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Areas\Customer\Controllers\UserController.cs" />
@@ -247,8 +263,8 @@
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\User\CreateViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\User\ListViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\User\UpdateViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModels\Customer\UpdateViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\User\EditViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Customer\EditViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Customer\CreateViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Customer\ListViewModel.cs" />
     <Compile Include="ViewModels\Account\ProfileViewModel.cs" />
@@ -376,8 +392,16 @@
     <Content Include="Areas\Customer\Views\Tank\Edit.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\Index.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\Dashboard.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\User\ChangePassword.cshtml" />
+    <Content Include="Areas\Customer\Views\User\ChangePassword.cshtml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.dd.js" />
+    <Content Include="Scripts\jquery.dd.min.js" />
     <Content Include="Scripts\jquery.slimscroll.js" />
     <Content Include="Scripts\jquery.slimscroll.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -442,6 +466,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -462,8 +487,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603160510438_Initial.resx">
-      <DependentUpon>201603160510438_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603161204326_Initial.resx">
+      <DependentUpon>201603161204326_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

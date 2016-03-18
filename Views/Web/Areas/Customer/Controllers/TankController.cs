@@ -1,11 +1,8 @@
-﻿using KarmicEnergy.Core.Entities;
+﻿using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank;
 using KarmicEnergy.Web.Controllers;
-using KarmicEnergy.Web.Models;
-using KarmicEnergy.Web.Areas.Customer.ViewModels.Site;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -13,25 +10,29 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 {
     public class TankController : BaseController
     {
+        #region Index
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Index()
         {
-            List<Site> entities = KEUnitOfWork.SiteRepository.GetsByCustomerId(CustomerId).ToList();
-            var viewModels = ListViewModel.Map(entities);
-            return View(viewModels);
+            return View(new List<ListViewModel>());
         }
+        #endregion Index
 
+        #region Dashoard
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Dashboard()
         {
-            List<Site> entities = KEUnitOfWork.SiteRepository.GetsByCustomerId(CustomerId).ToList();
-            var viewModels = ListViewModel.Map(entities);
-            return View(viewModels);
+            return View();
         }
+        #endregion Dashoard
+
+        #region Create
 
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Create()
         {
+            LoadSites();
+            LoadTankModels();
             LoadStatuses();
             return View();
         }
@@ -45,15 +46,17 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             if (!ModelState.IsValid)
             {
+                LoadSites();
+                LoadTankModels();
                 LoadStatuses();
                 return View(viewModel);
             }
 
             try
             {
-                Site site = new Site() { Name = viewModel.Name, IPAddress = viewModel.IPAddress, CustomerId = CustomerId, Status = viewModel.Status };
-                KEUnitOfWork.SiteRepository.Add(site);
-                KEUnitOfWork.Complete();
+                //Site site = new Site() { Name = viewModel.Name, IPAddress = viewModel.IPAddress, CustomerId = CustomerId, Status = viewModel.Status };
+                //KEUnitOfWork.SiteRepository.Add(site);
+                //KEUnitOfWork.Complete();
 
                 return RedirectToAction("Index", "Site");
             }
@@ -66,19 +69,25 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 AddErrors(ex.Message);
             }
 
+            LoadSites();
+            LoadTankModels();
             LoadStatuses();
             return View(viewModel);
         }
+        #endregion Create
 
+        #region Edit
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Edit(Guid id)
         {
-            var site = KEUnitOfWork.SiteRepository.Get(id);
+            var tank = KEUnitOfWork.TankRepository.Get(id);
 
-            if (site == null)
+            if (tank == null)
             {
+                LoadSites();
+                LoadTankModels();
                 LoadStatuses();
-                AddErrors("Site does not exist");
+                AddErrors("Tank does not exist");
                 return View("Index");
             }
 
@@ -92,42 +101,48 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public async Task<ActionResult> Edit(EditViewModel viewModel)
         {
-            var site = KEUnitOfWork.SiteRepository.Get(viewModel.Id);
+            var tank = KEUnitOfWork.TankRepository.Get(viewModel.Id);
 
-            if (site == null)
+            if (tank == null)
             {
+                LoadSites();
+                LoadTankModels();
                 LoadStatuses();
-                AddErrors("Site does not exist");
+                AddErrors("Tank does not exist");
                 return View("Index");
             }
 
-            site.Name = viewModel.Name;
-            site.IPAddress = viewModel.IPAddress;
+            //site.Name = viewModel.Name;
+            //site.IPAddress = viewModel.IPAddress;
 
-            KEUnitOfWork.SiteRepository.Update(site);
+            KEUnitOfWork.TankRepository.Update(tank);
             KEUnitOfWork.Complete();
 
-            return RedirectToAction("Index", "Site");
+            return RedirectToAction("Index", "Tank");
         }
+        #endregion Edit
 
+        #region Delete
         //
         // GET: /User/Delete
         [HttpGet]
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public async Task<ActionResult> Delete(Guid id)
         {
-            var site = KEUnitOfWork.SiteRepository.Get(id);
+            var tank = KEUnitOfWork.TankRepository.Get(id);
 
-            if (site == null)
+            if (tank == null)
             {
-                AddErrors("Site does not exist");
+                AddErrors("Tank does not exist");
                 return View("Index");
             }
 
-            KEUnitOfWork.SiteRepository.Remove(site);
+            KEUnitOfWork.TankRepository.Remove(tank);
             KEUnitOfWork.Complete();
 
-            return RedirectToAction("Index", "Site");
+            return RedirectToAction("Index", "Tank");
         }
+
+        #endregion Delete
     }
 }

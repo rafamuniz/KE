@@ -13,7 +13,7 @@ namespace KarmicEnergy.Core.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201603160438350_Initial"; }
+            get { return "201603181231470_Initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using KarmicEnergy.Web.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -22,6 +23,12 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Customer
         {
             Mapper.CreateMap<Core.Entities.Customer, EditViewModel>();
             return Mapper.Map<Core.Entities.Customer, EditViewModel>(entity);
+        }
+
+        public static EditViewModel Map(ApplicationUser entity)
+        {
+            Mapper.CreateMap<ApplicationUser, EditViewModel>();
+            return Mapper.Map<ApplicationUser, EditViewModel>(entity);
         }
 
         #endregion Map

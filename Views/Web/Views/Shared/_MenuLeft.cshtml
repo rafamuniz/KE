@@ -9,6 +9,13 @@
                 <p>CUSTOMERS</p>
             </a>
         </li>
+
+        <li class="treeview">
+            <a href="/Admin/User">
+                <img src="/images/users.png" alt="users" title="users">
+                <p>USERS</p>
+            </a>
+        </li>
     }
 
     @if (this.HasRoles("Customer", "CustomerAdmin"))
@@ -38,7 +45,7 @@
         </li>
 
         <li class="treeview">
-            <a href="#">
+            <a href="/Customer/Tank">
                 <img src="/images/my_tank.png" alt="tanks" title="tanks">
                 <p>TANK</p>
             </a>

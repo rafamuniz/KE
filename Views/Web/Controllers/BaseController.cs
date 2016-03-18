@@ -5,10 +5,12 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Web;
 using System.Web.Mvc;
+using KarmicEnergy.Core.Entities;
 
 namespace KarmicEnergy.Web.Controllers
 {
@@ -169,6 +171,18 @@ namespace KarmicEnergy.Web.Controllers
             base.Dispose(disposing);
         }
 
+        protected List<AdminRole> LoadAdminRoles()
+        {
+            List<AdminRole> roles = new List<AdminRole>()
+            {
+                new AdminRole() { Id = "Admin", Name = "Admin" },
+                new AdminRole() { Id = "Operator", Name = "Operator" }
+            };
+
+            ViewBag.AdminRoles = roles;
+            return roles;
+        }
+
         protected List<CustomerRole> LoadCustomerRoles()
         {
             List<CustomerRole> roles = new List<CustomerRole>()
@@ -177,7 +191,7 @@ namespace KarmicEnergy.Web.Controllers
                 new CustomerRole() { Id = "CustomerOperator", Name = "Operator" }
             };
 
-            ViewBag.Roles = roles;
+            ViewBag.CustomerRoles = roles;
             return roles;
         }
 
@@ -193,5 +207,42 @@ namespace KarmicEnergy.Web.Controllers
             return statuses;
         }
 
+        protected List<TankModel> LoadTankModels()
+        {
+            List<TankModel> tankModels = KEUnitOfWork.TankModelRepository.GetAll().ToList();
+            ViewBag.TankModels = tankModels;
+            return tankModels;
+        }
+
+        protected List<Site> LoadSites()
+        {
+            List<Site> sites = KEUnitOfWork.SiteRepository.GetAll().ToList();
+            ViewBag.Sites = sites;
+            return sites;
+        }
+
+        public List<ApplicationUser> GetUsersInRoles(params String[] roleNames)
+        {
+            List<String> roleIds = new List<String>();
+            var roles = RoleManager.Roles.Where(r => roleNames.Any(n => n == r.Name)).ToList();
+            roles.ForEach(r => roleIds.Add(r.Id));
+            var usersInRole = UserManager.Users.Where(u => u.Roles.Any(r => roleIds.Contains(r.RoleId))).ToList();
+            return usersInRole;
+        }
+
+        public List<ApplicationUser> GetUsersInRole(String roleName)
+        {
+            var role = RoleManager.FindByName(roleName);
+            var usersInRole = UserManager.Users.Where(u => u.Roles.Select(r => r.RoleId).Contains(role.Id)).ToList();
+            return usersInRole;
+        }
+
+        //public List<ApplicationUser> GetUsersInRole(string roleName)
+        //{
+        //    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+        //    var role = roleManager.FindByName(roleName).Users.First();
+        //    var usersInRole = Users.Where(u => u.Roles.Select(r => r.RoleId).Contains(role.RoleId)).ToList();
+        //    return usersInRole;
+        //}
     }
 }

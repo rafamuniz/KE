@@ -9,6 +9,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
     public class CreateViewModel
     {
         [Display(Name = "Name")]
+        [Required]
         public String Name { get; set; }
 
         [Required]

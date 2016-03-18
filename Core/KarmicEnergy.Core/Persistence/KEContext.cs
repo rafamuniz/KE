@@ -23,6 +23,8 @@ namespace KarmicEnergy.Core.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<TankModel>().Property(x => x.Image).HasColumnType("VARBINARY(MAX)");
+
             //modelBuilder.HasDefaultSchema("security");
 
             //modelBuilder.Entity<UserEntity>()
@@ -40,6 +42,9 @@ namespace KarmicEnergy.Core.Persistence
         internal IDbSet<Customer> Customers { get; set; }
         internal IDbSet<CustomerUser> CustomerUsers { get; set; }
         internal IDbSet<Site> Sites { get; set; }
+        internal IDbSet<Tank> Tanks { get; set; }
+        internal IDbSet<TankModel> TankModels { get; set; }
+        internal IDbSet<Country> Countries { get; set; }
         #endregion DbSet
     }
 }

@@ -1,9 +1,9 @@
-﻿using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank;
+﻿using KarmicEnergy.Core.Entities;
+using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank;
 using KarmicEnergy.Web.Controllers;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.Validation;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace KarmicEnergy.Web.Areas.Customer.Controllers
@@ -14,7 +14,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Index()
         {
-            return View(new List<ListViewModel>());
+            var tanks = KEUnitOfWork.TankRepository.GetAll().ToList();
+            var viewModels = ListViewModel.Map(tanks);
+            return View(viewModels);
         }
         #endregion Index
 
@@ -32,9 +34,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult Create()
         {
             LoadSites();
-            LoadTankModels();
+            var tankModels = LoadTankModels();
+            CreateViewModel viewModel = new CreateViewModel() { TankModels = tankModels };
             LoadStatuses();
-            return View();
+            return View(viewModel);
         }
 
         //
@@ -42,7 +45,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, CustomerAdmin")]
-        public async Task<ActionResult> Create(CreateViewModel viewModel)
+        public ActionResult Create(CreateViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -54,11 +57,11 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             try
             {
-                //Site site = new Site() { Name = viewModel.Name, IPAddress = viewModel.IPAddress, CustomerId = CustomerId, Status = viewModel.Status };
-                //KEUnitOfWork.SiteRepository.Add(site);
-                //KEUnitOfWork.Complete();
+                Tank tank = new Tank() { Name = viewModel.Name, SiteId = viewModel.SiteId, TankModelId = viewModel.TankModelId, Description = viewModel.Description, Status = viewModel.Status };
+                KEUnitOfWork.TankRepository.Add(tank);
+                KEUnitOfWork.Complete();
 
-                return RedirectToAction("Index", "Site");
+                return RedirectToAction("Index", "Tank");
             }
             catch (DbEntityValidationException dbex)
             {
@@ -99,7 +102,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, CustomerAdmin")]
-        public async Task<ActionResult> Edit(EditViewModel viewModel)
+        public ActionResult Edit(EditViewModel viewModel)
         {
             var tank = KEUnitOfWork.TankRepository.Get(viewModel.Id);
 
@@ -127,7 +130,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         // GET: /User/Delete
         [HttpGet]
         [Authorize(Roles = "Customer, CustomerAdmin")]
-        public async Task<ActionResult> Delete(Guid id)
+        public ActionResult Delete(Guid id)
         {
             var tank = KEUnitOfWork.TankRepository.Get(id);
 

@@ -11,6 +11,8 @@ using System.Data.Entity.Validation;
 using System.Web;
 using System.Web.Mvc;
 using KarmicEnergy.Core.Entities;
+using Munizoft.MVC.Helpers.Models;
+using AutoMapper;
 
 namespace KarmicEnergy.Web.Controllers
 {
@@ -207,11 +209,25 @@ namespace KarmicEnergy.Web.Controllers
             return statuses;
         }
 
-        protected List<TankModel> LoadTankModels()
+        protected IList<ImageSelectListItem> LoadTankModels()
         {
-            List<TankModel> tankModels = KEUnitOfWork.TankModelRepository.GetAll().ToList();
-            ViewBag.TankModels = tankModels;
-            return tankModels;
+            IList<TankModel> tankModels = KEUnitOfWork.TankModelRepository.GetAll().ToList();
+            IList<ImageSelectListItem> imagesSelect = new List<ImageSelectListItem>();
+
+            foreach (var tm in tankModels)
+            {
+                ImageSelectListItem item = new ImageSelectListItem();
+                item.Text = tm.Name;
+                item.Value = tm.Id.ToString();
+                item.ImageFileName = tm.ImageFilename;
+                imagesSelect.Add(item);
+            }
+
+            ////IEnumerable<Country> countryList = new MockCountryRepository().GetAllCountries();
+
+            //IEnumerable<ImageSelectListItem> itens = Mapper.Map<IEnumerable<TankModel>, IEnumerable<ImageSelectListItem>>(tankModels);
+            ViewBag.TankModels = imagesSelect;
+            return imagesSelect;
         }
 
         protected List<Site> LoadSites()

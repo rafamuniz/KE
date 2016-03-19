@@ -33,6 +33,17 @@ namespace KarmicEnergy.Web
 
             bundles.Add(new ScriptBundle("~/bundles/grid").Include(
                       "~/Scripts/gridmvc.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery-mask").Include(
+                    "~/Scripts/jquery/jquery.mask.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/inputmask").Include(
+                    "~/Scripts/jquery.inputmask/inputmask.js",
+                    "~/Scripts/jquery.inputmask/jquery.inputmask.js",
+                    "~/Scripts/jquery.inputmask/inputmask.extensions.js",
+                    "~/Scripts/jquery.inputmask/inputmask.date.extensions.js",
+                    //and other extensions you want to include
+                    "~/Scripts/jquery.inputmask/inputmask.numeric.extensions.js"));
             #endregion Scripts
 
             #region Style

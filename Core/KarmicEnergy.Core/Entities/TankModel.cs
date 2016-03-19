@@ -18,9 +18,14 @@ namespace KarmicEnergy.Core.Entities
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public String Name { get; set; }
 
+        [Column("ImageFileName", TypeName = "NVARCHAR")]
+        [StringLength(256)]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public String ImageFilename { get; set; }
+
         [Column("Image", TypeName = "VARBINARY")]
         [MaxLength]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public Byte[] Image { get; set; }
 
         [Column("Status", TypeName = "CHAR")]

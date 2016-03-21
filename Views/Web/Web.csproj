@@ -223,9 +223,13 @@
     <Compile Include="Areas\Admin\ViewModels\User\ChangePasswordViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\User\ListViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\User\EditViewModel.cs" />
+    <Compile Include="Areas\Customer\Controllers\SensorController.cs" />
     <Compile Include="Areas\Customer\Controllers\TankController.cs" />
     <Compile Include="Areas\Customer\Controllers\SiteController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Sensor\CreateViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Sensor\EditViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Sensor\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\CreateViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\DashboardViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\ListViewModel.cs" />
@@ -348,8 +352,6 @@
     <Content Include="images\tank-gauge.png" />
     <Content Include="images\tank-temp.png" />
     <Content Include="images\tank-volume.png" />
-    <Content Include="images\tank_models\barrel.png" />
-    <Content Include="images\tank_models\tank.png" />
     <Content Include="images\tank_white.png" />
     <Content Include="images\users.png" />
     <Content Include="images\water-flow.gif" />
@@ -407,6 +409,9 @@
     <Content Include="Areas\Admin\Views\TankModel\Create.cshtml" />
     <Content Include="Areas\Admin\Views\TankModel\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\TankModel\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Sensor\Create.cshtml" />
+    <Content Include="Areas\Customer\Views\Sensor\Edit.cshtml" />
+    <Content Include="Areas\Customer\Views\Sensor\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.dd.js" />
@@ -485,6 +490,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Helpers\" />
+    <Folder Include="images\tank_models\delete\" />
+    <Folder Include="images\users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace KarmicEnergy.Web.Areas.Admin.ViewModels.TankModel
 {
@@ -15,9 +16,11 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.TankModel
         [Required]
         public String Status { get; set; }
 
-        [Display(Name = "Image")]
-        [Required]
-        public Byte[] Image { get; set; }
+        //[Display(Name = "Image")]
+        //[Required]
+        //public Byte[] Image { get; set; }
+
+        public HttpPostedFileBase Image { get; set; }
 
         #endregion Property
     }

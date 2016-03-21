@@ -1,5 +1,5 @@
 ﻿using KarmicEnergy.Core.Entities;
-using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank;
+using KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor;
 using KarmicEnergy.Web.Controllers;
 using System;
 using System.Data.Entity.Validation;
@@ -8,36 +8,26 @@ using System.Web.Mvc;
 
 namespace KarmicEnergy.Web.Areas.Customer.Controllers
 {
-    public class TankController : BaseController
+    public class SensorController : BaseController
     {
         #region Index
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Index()
         {
-            var tanks = KEUnitOfWork.TankRepository.GetsByCustomerId(CustomerId).ToList();
-            var viewModels = ListViewModel.Map(tanks);
+            var sensors = KEUnitOfWork.SensorRepository.GetsByCustomerId(CustomerId).ToList();
+            var viewModels = ListViewModel.Map(sensors);
             return View(viewModels);
         }
         #endregion Index
-
-        #region Dashoard
-        [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Dashboard()
-        {
-            return View();
-        }
-        #endregion Dashoard
 
         #region Create
 
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Create()
         {
-            LoadSites();
-            var tankModels = LoadTankModels();
-            CreateViewModel viewModel = new CreateViewModel() { TankModels = tankModels };
             LoadStatuses();
-            return View(viewModel);
+            LoadTanks(CustomerId);
+            return View();
         }
 
         //
@@ -49,19 +39,18 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             if (!ModelState.IsValid)
             {
-                LoadSites();
-                LoadTankModels();
+                LoadTanks(CustomerId);
                 LoadStatuses();
                 return View(viewModel);
             }
 
             try
             {
-                Tank tank = new Tank() { Name = viewModel.Name, SiteId = viewModel.SiteId, TankModelId = viewModel.TankModelId, Description = viewModel.Description, Status = viewModel.Status };
-                KEUnitOfWork.TankRepository.Add(tank);
+                Sensor sensor = new Sensor() { Name = viewModel.Name, TankId = viewModel.TankId, Status = viewModel.Status };
+                KEUnitOfWork.SensorRepository.Add(sensor);
                 KEUnitOfWork.Complete();
 
-                return RedirectToAction("Index", "Tank");
+                return RedirectToAction("Index", "Sensor");
             }
             catch (DbEntityValidationException dbex)
             {
@@ -72,8 +61,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 AddErrors(ex.Message);
             }
 
-            LoadSites();
-            LoadTankModels();
+            LoadTanks(CustomerId);
             LoadStatuses();
             return View(viewModel);
         }
@@ -83,20 +71,17 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Edit(Guid id)
         {
-            var tank = KEUnitOfWork.TankRepository.Get(id);
+            var sensor = KEUnitOfWork.SensorRepository.Get(id);
 
-            if (tank == null)
+            if (sensor == null)
             {
-                AddErrors("Tank does not exist");
+                LoadTanks(CustomerId);
+                LoadStatuses();
+                AddErrors("Sensor does not exist");
                 return View("Index");
             }
 
-            LoadStatuses();
-            LoadSites();
-            var tankModels = LoadTankModels();
-            EditViewModel viewModel = EditViewModel.Map(tank);
-            viewModel.TankModels = tankModels;
-            return View(viewModel);
+            return View();
         }
 
         //
@@ -106,27 +91,23 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Edit(EditViewModel viewModel)
         {
-            var tank = KEUnitOfWork.TankRepository.Get(viewModel.Id);
+            var sensor = KEUnitOfWork.SensorRepository.Get(viewModel.Id);
 
-            if (tank == null)
+            if (sensor == null)
             {
-                LoadSites();
-                LoadTankModels();
+                LoadTanks(CustomerId);
                 LoadStatuses();
                 AddErrors("Tank does not exist");
                 return View("Index");
             }
 
-            tank.Name = viewModel.Name;
-            tank.Description = viewModel.Description;
-            tank.Status = viewModel.Status;
-            tank.SiteId = viewModel.SiteId;
-            tank.TankModelId = viewModel.TankModelId;
+            //site.Name = viewModel.Name;
+            //site.IPAddress = viewModel.IPAddress;
 
-            KEUnitOfWork.TankRepository.Update(tank);
+            KEUnitOfWork.SensorRepository.Update(sensor);
             KEUnitOfWork.Complete();
 
-            return RedirectToAction("Index", "Tank");
+            return RedirectToAction("Index", "Sensor");
         }
         #endregion Edit
 
@@ -137,18 +118,18 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Delete(Guid id)
         {
-            var tank = KEUnitOfWork.TankRepository.Get(id);
+            var sensor = KEUnitOfWork.SensorRepository.Get(id);
 
-            if (tank == null)
+            if (sensor == null)
             {
-                AddErrors("Tank does not exist");
+                AddErrors("Sensor does not exist");
                 return View("Index");
             }
 
-            KEUnitOfWork.TankRepository.Remove(tank);
+            KEUnitOfWork.SensorRepository.Remove(sensor);
             KEUnitOfWork.Complete();
 
-            return RedirectToAction("Index", "Tank");
+            return RedirectToAction("Index", "Sensor");
         }
 
         #endregion Delete

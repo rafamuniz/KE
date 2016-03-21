@@ -60,18 +60,15 @@
   <ItemGroup>
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\Sensor.cs" />
     <Compile Include="Entities\TankModel.cs" />
     <Compile Include="Entities\Tank.cs" />
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201603181231470_Initial.cs" />
-    <Compile Include="Migrations\201603181231470_Initial.Designer.cs">
-      <DependentUpon>201603181231470_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603191052014_Initial1.cs" />
-    <Compile Include="Migrations\201603191052014_Initial1.Designer.cs">
-      <DependentUpon>201603191052014_Initial1.cs</DependentUpon>
+    <Compile Include="Migrations\201603211940577_Initial.cs" />
+    <Compile Include="Migrations\201603211940577_Initial.Designer.cs">
+      <DependentUpon>201603211940577_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
@@ -81,8 +78,10 @@
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\ICountryRepository.cs" />
     <Compile Include="Repositories\ITankModelRepository.cs" />
+    <Compile Include="Repositories\ISensorRepository.cs" />
     <Compile Include="Repositories\ITankRepository.cs" />
     <Compile Include="Repositories\TankModelRepository.cs" />
+    <Compile Include="Repositories\SensorRepository.cs" />
     <Compile Include="Repositories\TankRepository.cs" />
     <Compile Include="Repositories\SiteRepository.cs" />
     <Compile Include="Repositories\CustomerUserRepository.cs" />
@@ -96,11 +95,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603181231470_Initial.resx">
-      <DependentUpon>201603181231470_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603191052014_Initial1.resx">
-      <DependentUpon>201603191052014_Initial1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603211940577_Initial.resx">
+      <DependentUpon>201603211940577_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

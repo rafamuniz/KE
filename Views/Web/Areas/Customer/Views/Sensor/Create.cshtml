@@ -1,0 +1,51 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
+@using Munizoft.Extensions
+@using Munizoft.MVC.Helpers
+
+@model CreateViewModel
+
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Sensor - Create";
+}
+
+@using (Html.BeginForm("Create", "Sensor", new { area = "Customer" }, FormMethod.Post, new { id = "formCreateTank", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Partial("_Error")
+
+    <div class="col-md-1">
+        @Html.LabelFor(m => m.TankId, new { @class = "control-label" })
+    </div>
+    <div class="col-md-11 form-group">
+        @Html.DropDownListFor(m => m.TankId, new SelectList(ViewBag.Tanks, "Id", "Name"), "-- Please select a Tank --", new { @class = "form-control selectpicker", @id = "ddlSite", style = "width: 300px;" })
+        @Html.ValidationMessageFor(m => m.TankId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-md-1">
+        @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+    </div>
+    <div class="col-md-11 form-group">
+        @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;" } })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-md-1">
+        @Html.LabelFor(m => m.Status, new { @class = "control-label" })
+    </div>
+    <div class="col-md-11 form-group">
+        @Html.DropDownListFor(model => model.Status, new SelectList(ViewBag.Statuses, "Id", "Name"), "-- Please select a Status--", new { @class = "form-control selectpicker", style = "width: 250px;", id = "ddlStatus" })
+        @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-md-12 form-group text-center">
+        <input type="submit" class="btn btn-default" value="SAVE">
+        <a class="btn" href="/Customer/Sensor/">Cancel</a>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

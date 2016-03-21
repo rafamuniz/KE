@@ -44,6 +44,7 @@ namespace KarmicEnergy.Core.Persistence
         internal IDbSet<Site> Sites { get; set; }
         internal IDbSet<Tank> Tanks { get; set; }
         internal IDbSet<TankModel> TankModels { get; set; }
+        internal IDbSet<Sensor> Sensors { get; set; }
         internal IDbSet<Country> Countries { get; set; }
         #endregion DbSet
     }

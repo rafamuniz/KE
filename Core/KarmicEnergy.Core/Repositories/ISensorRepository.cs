@@ -6,8 +6,8 @@ using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public interface ITankRepository : IRepository<Tank, KEContext>
+    public interface ISensorRepository : IRepository<Sensor, KEContext>
     {
-        List<Tank> GetsByCustomerId(Guid customerId);
+        List<Sensor> GetsByCustomerId(Guid customerId);
     }
 }

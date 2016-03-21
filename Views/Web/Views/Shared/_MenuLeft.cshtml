@@ -18,6 +18,16 @@
         </li>
     }
 
+    @if (this.HasRoles("Admin", "Operator"))
+    {
+        <li class="treeview">
+            <a href="/Admin/TankModel">
+                <img src="/images/my_tank.png" alt="tank_models" title="tank_models">
+                <p>TANK MODEL</p>
+            </a>
+        </li>
+    }
+
     @if (this.HasRoles("Customer", "CustomerAdmin"))
     {
         <li class="treeview">

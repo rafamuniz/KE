@@ -7,19 +7,19 @@ using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public class TankRepository : Repository<Tank, KEContext>, ITankRepository
+    public class SensorRepository : Repository<Sensor, KEContext>, ISensorRepository
     {
         #region Constructor
-        public TankRepository(KEContext context)
+        public SensorRepository(KEContext context)
             : base(context)
         {
 
         }
-        #endregion Constructor        
-
-        public List<Tank> GetsByCustomerId(Guid customerId)
+        #endregion Constructor       
+        
+        public List<Sensor> GetsByCustomerId(Guid customerId)
         {
-            return base.Find(x => x.Site.CustomerId == customerId).ToList();
+            return base.Find(x => x.Tank.Site.CustomerId == customerId).ToList();
         }
     }
 }

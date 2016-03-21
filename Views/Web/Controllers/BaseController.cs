@@ -128,6 +128,11 @@ namespace KarmicEnergy.Web.Controllers
             ModelState.AddModelError("", ex.Message);
         }
 
+        protected void AddErrors(String key, String message)
+        {
+            ModelState.AddModelError(key, message);
+        }
+
         protected void AddErrors(DbEntityValidationException dbex)
         {
             foreach (var error in dbex.EntityValidationErrors)
@@ -223,9 +228,6 @@ namespace KarmicEnergy.Web.Controllers
                 imagesSelect.Add(item);
             }
 
-            ////IEnumerable<Country> countryList = new MockCountryRepository().GetAllCountries();
-
-            //IEnumerable<ImageSelectListItem> itens = Mapper.Map<IEnumerable<TankModel>, IEnumerable<ImageSelectListItem>>(tankModels);
             ViewBag.TankModels = imagesSelect;
             return imagesSelect;
         }
@@ -235,6 +237,13 @@ namespace KarmicEnergy.Web.Controllers
             List<Site> sites = KEUnitOfWork.SiteRepository.GetAll().ToList();
             ViewBag.Sites = sites;
             return sites;
+        }
+
+        protected List<Tank> LoadTanks(Guid customerId)
+        {
+            List<Tank> tanks = KEUnitOfWork.TankRepository.GetsByCustomerId(customerId);
+            ViewBag.Tanks = tanks;
+            return tanks;
         }
 
         public List<ApplicationUser> GetUsersInRoles(params String[] roleNames)

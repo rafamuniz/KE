@@ -60,6 +60,9 @@
   <ItemGroup>
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\SensorAlarm.cs" />
+    <Compile Include="Entities\SensorType.cs" />
+    <Compile Include="Entities\SensorData.cs" />
     <Compile Include="Entities\Sensor.cs" />
     <Compile Include="Entities\TankModel.cs" />
     <Compile Include="Entities\Tank.cs" />
@@ -75,11 +78,17 @@
     <Compile Include="Persistence\KEContext.cs" />
     <Compile Include="Persistence\KEUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ISensorDataRepository.cs" />
+    <Compile Include="Repositories\SensorDataRepository.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\ICountryRepository.cs" />
+    <Compile Include="Repositories\ISensorAlarmRepository.cs" />
+    <Compile Include="Repositories\ISensorTypeRepository.cs" />
     <Compile Include="Repositories\ITankModelRepository.cs" />
     <Compile Include="Repositories\ISensorRepository.cs" />
     <Compile Include="Repositories\ITankRepository.cs" />
+    <Compile Include="Repositories\SensorAlarmRepository.cs" />
+    <Compile Include="Repositories\SensorTypeRepository.cs" />
     <Compile Include="Repositories\TankModelRepository.cs" />
     <Compile Include="Repositories\SensorRepository.cs" />
     <Compile Include="Repositories\TankRepository.cs" />

@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KarmicEnergy.Core.Entities
 {
-    [Table("Sensors", Schema = "dbo")]
-    public class Sensor : BaseEntity
+    [Table("SensorAlarms", Schema = "dbo")]
+    public class SensorAlarm : BaseEntity
     {
         #region Property
 
@@ -25,26 +25,15 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Property
 
-        #region SensorType
+        #region Sensor
 
-        [Column("SensorTypeId", TypeName = "SMALLINT")]
+        [Column("SensorId", TypeName = "UNIQUEIDENTIFIER")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        public Int16 SensorTypeId { get; set; }
+        public Guid SensorId { get; set; }
 
-        [ForeignKey("SensorTypeId")]
-        public virtual SensorType SensorType { get; set; }
+        [ForeignKey("SensorId")]
+        public virtual Sensor Sensor { get; set; }
 
-        #endregion SensorType
-
-        #region Tank
-
-        [Column("TankId", TypeName = "UNIQUEIDENTIFIER")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        public Guid TankId { get; set; }
-
-        [ForeignKey("TankId")]
-        public virtual Tank Tank { get; set; }
-
-        #endregion TankModel
+        #endregion Sensor    
     }
 }

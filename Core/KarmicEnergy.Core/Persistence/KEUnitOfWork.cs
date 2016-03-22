@@ -13,6 +13,11 @@ namespace KarmicEnergy.Core.Persistence
         private ITankRepository _TankRepository;       
         private ITankModelRepository _TankModelRepository;
         private ISensorRepository _SensorRepository;
+        private ISensorTypeRepository _SensorTypeRepository;
+
+        private ISensorDataRepository _SensorDataRepository;
+
+        private ISensorAlarmRepository _SensorAlarmRepository;
 
         private ICountryRepository _CountryRepository;
         #endregion Fields
@@ -66,6 +71,21 @@ namespace KarmicEnergy.Core.Persistence
         public ISensorRepository SensorRepository
         {
             get { return _SensorRepository ?? (_SensorRepository = new SensorRepository(_context)); }
+        }
+
+        public ISensorTypeRepository SensorTypeRepository
+        {
+            get { return _SensorTypeRepository ?? (_SensorTypeRepository = new SensorTypeRepository(_context)); }
+        }
+
+        public ISensorAlarmRepository SensorAlarmRepository
+        {
+            get { return _SensorAlarmRepository ?? (_SensorAlarmRepository = new SensorAlarmRepository(_context)); }
+        }
+
+        public ISensorDataRepository SensorDataRepository
+        {
+            get { return _SensorDataRepository ?? (_SensorDataRepository = new SensorDataRepository(_context)); }
         }
 
         public ICountryRepository CountryRepository

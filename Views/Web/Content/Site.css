@@ -5735,6 +5735,13 @@ label {
         background: #f2f2f2;
     }
 
+    #body-content textarea {
+        width: 80%;
+        border: 0;
+        border-radius: 4px;
+        background: #F2F2F2;
+    }
+
 /*************/
 /* CONTROLS  */
 /*************/
@@ -6153,3 +6160,98 @@ div.uploader {
     background-position: 0 0;
 }
 /*******************************/
+
+/**********************/
+/* TANK DASHBOARD     */
+/**********************/
+.tank {
+    padding-right: 1px !important;
+    margin-bottom: 5px;
+}
+
+.frac-fa, .barrel-four {
+    padding-left: 5px !important;
+    margin-bottom: 5px;
+}
+
+.tank .graph-title h3 {
+    font-family: 'open_sansbold';
+    font-size: 18px;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.barrel-one .graph-title h3 {
+    background: #92d649;
+}
+
+.frac-fa .graph-title h3 {
+    background: #00bac7;
+}
+
+.pond-one .graph-title h3 {
+    background: #fcc513;
+}
+
+.barrel-four .graph-title h3 {
+    background: #92d649;
+}
+
+.graph-details {
+    display: table;
+    width: 100%;
+}
+
+    .graph-details .detail-box {
+        display: table-cell;
+        vertical-align: middle;
+        background: #81bd41;
+        color: #FFFFFF;
+        font-size: 13px;
+        text-align: center;
+        border-right: 1px solid #fff;
+    }
+
+.border-none {
+    border-right: 0px solid !important;
+}
+
+.frac-fa .graph-details .detail-box {
+    background: #00a2ae;
+}
+
+.pond-one .graph-details .detail-box {
+    background: #ffb213;
+}
+
+.graph-details .detail-box p > span {
+    font-family: 'open_sansregular';
+    font-size: 25px;
+    line-height: 26px;
+}
+
+.graph-details .detail-box.detail-volume p > span {
+    font-family: 'open_sansbold';
+}
+
+.graph-details .detail-box.detail-volume {
+    color: #fff;
+}
+
+.graph-details .detail-box .graph-date p {
+    font-family: 'open_sansbold';
+    font-size: 14px;
+}
+
+.graph-draw {
+    background: #ffffff;
+    text-align: center;
+    border-bottom: 5px;
+}
+
+    .graph-draw div > img {
+        max-width: 278px;
+        padding: 10px 0px 0px 0px;
+    }

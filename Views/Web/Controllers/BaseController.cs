@@ -239,6 +239,13 @@ namespace KarmicEnergy.Web.Controllers
             return sites;
         }
 
+        protected List<Site> LoadSites(Guid customerId)
+        {
+            List<Site> sites = KEUnitOfWork.SiteRepository.GetsByCustomerId(customerId);
+            ViewBag.Sites = sites;
+            return sites;
+        }
+
         protected List<Tank> LoadTanks(Guid customerId)
         {
             List<Tank> tanks = KEUnitOfWork.TankRepository.GetsByCustomerId(customerId);

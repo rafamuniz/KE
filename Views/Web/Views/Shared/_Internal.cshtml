@@ -80,7 +80,9 @@
 
                 <section class="content">
                     <div class="row">
-                        @RenderBody()
+                        <div id="body-content">
+                            @RenderBody()
+                        </div>
                     </div>
                 </section>
             </div>
@@ -92,7 +94,9 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/slimscroll")
+    @Scripts.Render("~/bundles/notify")
     @Scripts.Render("~/bundles/app")
+    @Scripts.Render("~/bundles/app/utils")
     @RenderSection("scripts", required: false)
 </body>
 </html>

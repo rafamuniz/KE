@@ -22,10 +22,22 @@ namespace KarmicEnergy.Core.Entities
         [MaxLength]
         public String Description { get; set; }
 
+        [Column("WaterVolumeCapacity", TypeName = "DECIMAL")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public Decimal WaterVolumeCapacity { get; set; }
+
         [Column("Status", TypeName = "CHAR")]
         [StringLength(1)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public String Status { get; set; } = "A";
+
+        [Column("Latitude", TypeName = "NVARCHAR")]
+        [StringLength(64)]
+        public String Latitude { get; set; }
+
+        [Column("Longitude", TypeName = "NVARCHAR")]
+        [StringLength(64)]
+        public String Longitude { get; set; }
 
         #endregion Property
 

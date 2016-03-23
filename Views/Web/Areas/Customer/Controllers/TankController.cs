@@ -24,7 +24,14 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Dashboard()
         {
+            ViewBag.CustomerId = CustomerId;
             return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult GetTankHTML()
+        {
+            return PartialView("_TankData");
         }
         #endregion Dashoard
 
@@ -33,7 +40,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Create()
         {
-            LoadSites();
+            LoadSites(CustomerId);
             var tankModels = LoadTankModels();
             CreateViewModel viewModel = new CreateViewModel() { TankModels = tankModels };
             LoadStatuses();
@@ -49,7 +56,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             if (!ModelState.IsValid)
             {
-                LoadSites();
+                LoadSites(CustomerId);
                 LoadTankModels();
                 LoadStatuses();
                 return View(viewModel);
@@ -57,7 +64,15 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             try
             {
-                Tank tank = new Tank() { Name = viewModel.Name, SiteId = viewModel.SiteId, TankModelId = viewModel.TankModelId, Description = viewModel.Description, Status = viewModel.Status };
+                //Tank tank = new Tank()
+                //{
+                //    Name = viewModel.Name,
+                //    SiteId = viewModel.SiteId,
+                //    TankModelId = viewModel.TankModelId,
+                //    Description = viewModel.Description,
+                //    Status = viewModel.Status
+                //};
+                var tank = viewModel.Map();
                 KEUnitOfWork.TankRepository.Add(tank);
                 KEUnitOfWork.Complete();
 
@@ -72,7 +87,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 AddErrors(ex.Message);
             }
 
-            LoadSites();
+            LoadSites(CustomerId);
             LoadTankModels();
             LoadStatuses();
             return View(viewModel);
@@ -92,7 +107,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             LoadStatuses();
-            LoadSites();
+            LoadSites(CustomerId);
             var tankModels = LoadTankModels();
             EditViewModel viewModel = EditViewModel.Map(tank);
             viewModel.TankModels = tankModels;
@@ -110,7 +125,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             if (tank == null)
             {
-                LoadSites();
+                LoadSites(CustomerId);
                 LoadTankModels();
                 LoadStatuses();
                 AddErrors("Tank does not exist");

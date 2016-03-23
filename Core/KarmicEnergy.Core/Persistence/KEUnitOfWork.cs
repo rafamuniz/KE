@@ -18,6 +18,7 @@ namespace KarmicEnergy.Core.Persistence
         private ISensorDataRepository _SensorDataRepository;
 
         private ISensorAlarmRepository _SensorAlarmRepository;
+        private IAlarmRepository _AlarmRepository;
 
         private ICountryRepository _CountryRepository;
         #endregion Fields
@@ -81,6 +82,11 @@ namespace KarmicEnergy.Core.Persistence
         public ISensorAlarmRepository SensorAlarmRepository
         {
             get { return _SensorAlarmRepository ?? (_SensorAlarmRepository = new SensorAlarmRepository(_context)); }
+        }
+
+        public IAlarmRepository AlarmRepository
+        {
+            get { return _AlarmRepository ?? (_AlarmRepository = new AlarmRepository(_context)); }
         }
 
         public ISensorDataRepository SensorDataRepository

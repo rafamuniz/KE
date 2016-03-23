@@ -48,7 +48,8 @@ namespace KarmicEnergy.Core.Persistence
         internal IDbSet<SensorType> SensorTypes { get; set; }
         internal IDbSet<SensorData> SensorData { get; set; }
 
-        internal IDbSet<SensorAlarm> Alarms { get; set; }
+        internal IDbSet<SensorAlarm> SensorAlarms { get; set; }
+        internal IDbSet<Alarm> Alarms { get; set; }
 
         internal IDbSet<Country> Countries { get; set; }
         #endregion DbSet

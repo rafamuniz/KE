@@ -1,0 +1,168 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
+@using Munizoft.Extensions
+@using Munizoft.MVC.Helpers
+@using GridMvc.Html
+
+@model List<ListViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Tank - Dashboard";
+}
+
+@Styles.Render("~/Content/grid")
+
+<article class="right-content">
+    <div class="row">
+        <div class="col-lg-6 col-sm-12 col-xs-12 barrel-one">
+            <div class="graph-title">
+                <h3>Barrel 1.0</h3>
+            </div>
+            <div class="graph-details">
+                <div class="detail-box detail-volume">
+                    <p>Volume</p>
+                    <p><span class="value">82</span></p>
+                    <p>Gallons</p>
+                </div>
+                <div class="detail-box">
+                    <p>Amb Temp</p>
+                    <p><span class="value">55</span></p>
+                </div>
+                <div class="detail-box">
+                    <p>Water Temp</p>
+                    <p><span class="value">57</span></p>
+                </div>
+                <div class="detail-box">
+                    <p>Alarms</p>
+                    <p><span class="value">0</span></p>
+                </div>
+                <div class="detail-box border-none">
+                    <p>Last Measurement</p>
+                    <div class="graph-date">
+                        <p>4/21/2015</p>
+                        <p>8:44:00 am</p>
+                    </div>
+                </div>
+            </div>
+            <div class="graph-draw">
+                <div class="col-sm-6"><img src="images/barrel_one.png"></div>
+                <div class="col-sm-6"><img src="images/barrel_one_chart.png"></div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-12 col-xs-12 frac-fa">
+            <div class="graph-title">
+                <h3>FracFA01</h3>
+            </div>
+            <div class="graph-details">
+                <div class="detail-box detail-volume">
+                    <p>Volume</p>
+                    <p><span class="value">82</span></p>
+                    <p>Gallons</p>
+                </div>
+                <div class="detail-box">
+                    <p>Amb Temp</p>
+                    <p><span class="value">55</span></p>
+                </div>
+                <div class="detail-box">
+                    <p>Water Temp</p>
+                    <p><span class="value">57</span></p>
+                </div>
+                <div class="detail-box">
+                    <p>Alarms</p>
+                    <p><span class="value">0</span></p>
+                </div>
+                <div class="detail-box border-none">
+                    <p>Last Measurement</p>
+                    <div class="graph-date">
+                        <p>4/21/2015</p>
+                        <p>8:44:00 am</p>
+                    </div>
+                </div>
+            </div>
+            <div class="graph-draw">
+                <div class="col-sm-6"><img src="images/FracFA_one.png"></div>
+                <div class="col-sm-6"><img src="images/FracFA_one_chart.png"></div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-sm-12 col-xs-12 pond-one">
+            <div class="graph-title">
+                <h3>Pond 1</h3>
+            </div>
+            <div class="graph-details">
+                <div class="detail-box detail-volume">
+                    <p>Volume</p>
+                    <p><span class="value">82</span></p>
+                    <p>Gallons</p>
+                </div>
+                <div class="detail-box">
+                    <p>Amb Temp</p>
+                    <p><span class="value">55</span></p>
+                </div>
+                <div class="detail-box">
+                    <p>Water Temp</p>
+                    <p><span class="value">57</span></p>
+                </div>
+                <div class="detail-box">
+                    <p>Alarms</p>
+                    <p><span class="value">0</span></p>
+                </div>
+                <div class="detail-box border-none">
+                    <p>Last Measurement</p>
+                    <div class="graph-date">
+                        <p>4/21/2015</p>
+                        <p>8:44:00 am</p>
+                    </div>
+                </div>
+            </div>
+            <div class="graph-draw">
+                <div class="col-sm-6"><img src="images/pond (2).png"></div>
+                <div class="col-sm-6"><img src="images/pond_chart (2).png"></div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-12 col-xs-12 barrel-four">
+            <div class="graph-title">
+                <h3>Barrel 4</h3>
+            </div>
+            <div class="graph-details">
+                <div class="detail-box detail-volume">
+                    <p>Volume</p>
+                    <p><span class="value">82</span></p>
+                    <p>Gallons</p>
+                </div>
+                <div class="detail-box">
+                    <p>Amb Temp</p>
+                    <p><span class="value">55</span></p>
+                </div>
+                <div class="detail-box">
+                    <p>Water Temp</p>
+                    <p><span class="value">57</span></p>
+                </div>
+                <div class="detail-box">
+                    <p>Alarms</p>
+                    <p><span class="value">0</span></p>
+                </div>
+                <div class="detail-box border-none">
+                    <p>Last Measurement</p>
+                    <div class="graph-date">
+                        <p>4/21/2015</p>
+                        <p>8:44:00 am</p>
+                    </div>
+                </div>
+            </div>
+            <div class="graph-draw">
+                <div class="col-sm-6"><img src="images/barrel_two.png"></div>
+                <div class="col-sm-6"><img src="images/barrel_two_chart.png"></div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</article>
+
+@section Scripts {
+
+}

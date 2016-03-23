@@ -28,8 +28,14 @@ namespace KarmicEnergy.Web
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                       "~/Scripts/app.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/app/utils").Include(
+                     "~/Scripts/app/utils.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/slimscroll").Include(
                       "~/Scripts/jquery.slimscroll.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/sparkline").Include(
+                     "~/Scripts/jquery.sparkline.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/grid").Include(
                       "~/Scripts/gridmvc.min.js"));
@@ -44,6 +50,9 @@ namespace KarmicEnergy.Web
                     "~/Scripts/jquery.inputmask/inputmask.date.extensions.js",
                     //and other extensions you want to include
                     "~/Scripts/jquery.inputmask/inputmask.numeric.extensions.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/notify").Include(
+                    "~/Scripts/bootstrap-notify.min.js"));
             #endregion Scripts
 
             #region Style
@@ -55,7 +64,7 @@ namespace KarmicEnergy.Web
                      "~/Content/font-awesome.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/fonts.css",      
+                      "~/Content/fonts.css",
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/grid").Include(

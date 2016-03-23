@@ -214,22 +214,29 @@ namespace KarmicEnergy.Web.Controllers
             return statuses;
         }
 
-        protected IList<ImageSelectListItem> LoadTankModels()
+        //protected IList<ImageSelectListItem> LoadTankModels()
+        //{
+        //    IList<TankModel> tankModels = KEUnitOfWork.TankModelRepository.GetAll().ToList();
+        //    IList<ImageSelectListItem> imagesSelect = new List<ImageSelectListItem>();
+
+        //    foreach (var tm in tankModels)
+        //    {
+        //        ImageSelectListItem item = new ImageSelectListItem();
+        //        item.Text = tm.Name;
+        //        item.Value = tm.Id.ToString();
+        //        item.ImageFileName = tm.ImageFilename;
+        //        imagesSelect.Add(item);
+        //    }
+
+        //    ViewBag.TankModels = imagesSelect;
+        //    return imagesSelect;
+        //}
+
+        protected List<TankModel> LoadTankModels()
         {
-            IList<TankModel> tankModels = KEUnitOfWork.TankModelRepository.GetAll().ToList();
-            IList<ImageSelectListItem> imagesSelect = new List<ImageSelectListItem>();
-
-            foreach (var tm in tankModels)
-            {
-                ImageSelectListItem item = new ImageSelectListItem();
-                item.Text = tm.Name;
-                item.Value = tm.Id.ToString();
-                item.ImageFileName = tm.ImageFilename;
-                imagesSelect.Add(item);
-            }
-
-            ViewBag.TankModels = imagesSelect;
-            return imagesSelect;
+            List<TankModel> tankModels = KEUnitOfWork.TankModelRepository.GetAll().ToList();
+            ViewBag.TankModels = tankModels;
+            return tankModels;
         }
 
         protected List<Site> LoadSites()

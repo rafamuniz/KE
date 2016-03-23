@@ -41,10 +41,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult Create()
         {
             LoadSites(CustomerId);
-            var tankModels = LoadTankModels();
-            CreateViewModel viewModel = new CreateViewModel() { TankModels = tankModels };
+            LoadTankModels();
+            //var tankModels = LoadTankModels();
+            //CreateViewModel viewModel = new CreateViewModel() { TankModels = tankModels };
             LoadStatuses();
-            return View(viewModel);
+            //return View(viewModel);
+            return View();
         }
 
         //
@@ -108,9 +110,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             LoadStatuses();
             LoadSites(CustomerId);
-            var tankModels = LoadTankModels();
+            LoadTankModels();
             EditViewModel viewModel = EditViewModel.Map(tank);
-            viewModel.TankModels = tankModels;
             return View(viewModel);
         }
 

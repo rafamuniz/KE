@@ -23,6 +23,14 @@
     </div>
 
     <div class="col-md-1">
+        @Html.LabelFor(m => m.SensorTypeId, new { @class = "control-label" })
+    </div>
+    <div class="col-md-11 form-group">
+        @Html.DropDownListFor(m => m.SensorTypeId, new SelectList(ViewBag.SensorTypes, "Id", "Name"), "-- Please select a Sensor Type --", new { @class = "form-control selectpicker", @id = "ddlSite", style = "width: 300px;" })
+        @Html.ValidationMessageFor(m => m.SensorTypeId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-md-1">
         @Html.LabelFor(m => m.Name, new { @class = "control-label" })
     </div>
     <div class="col-md-11 form-group">

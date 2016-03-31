@@ -26,32 +26,37 @@ namespace KarmicEnergy.Core.Persistence
             modelBuilder.Entity<TankModel>().Property(x => x.Image).HasColumnType("VARBINARY(MAX)");
 
             //modelBuilder.HasDefaultSchema("security");
+            CreateManyToMany(modelBuilder);
+        }
 
-            //modelBuilder.Entity<UserEntity>()
-            //  .HasMany<RoleEntity>(x => x.Roles)
-            //  .WithMany(c => c.Users)
+        private void CreateManyToMany(DbModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Sensor>()
+            //  .HasMany<Item>(x => x.Items)
+            //  .WithMany(s => s.Sensors)
             //  .Map(cs =>
             //  {
-            //      cs.MapLeftKey("UserId");
-            //      cs.MapRightKey("RoleId");
-            //      cs.ToTable("UserRoles");
+            //      cs.MapLeftKey("SensorId");
+            //      cs.MapRightKey("ItemId");
+            //      cs.ToTable("SensorItems");
             //  });
         }
 
         #region DbSet
-        internal IDbSet<Customer> Customers { get; set; }
-        internal IDbSet<CustomerUser> CustomerUsers { get; set; }
-        internal IDbSet<Site> Sites { get; set; }
-        internal IDbSet<Tank> Tanks { get; set; }
-        internal IDbSet<TankModel> TankModels { get; set; }
-        internal IDbSet<Sensor> Sensors { get; set; }
-        internal IDbSet<SensorType> SensorTypes { get; set; }
-        internal IDbSet<SensorData> SensorData { get; set; }
-
-        internal IDbSet<SensorAlarm> SensorAlarms { get; set; }
-        internal IDbSet<Alarm> Alarms { get; set; }
-
-        internal IDbSet<Country> Countries { get; set; }
+        public IDbSet<Customer> Customers { get; set; }
+        public IDbSet<CustomerUser> CustomerUsers { get; set; }
+        public IDbSet<Site> Sites { get; set; }
+        public IDbSet<Tank> Tanks { get; set; }
+        public IDbSet<TankModel> TankModels { get; set; }
+        public IDbSet<Sensor> Sensors { get; set; }
+        public IDbSet<SensorItem> SensorItems { get; set; }
+        public IDbSet<Item> Items { get; set; }
+        public IDbSet<SensorType> SensorTypes { get; set; }
+        public IDbSet<SensorItemEvent> SensorItemEvents { get; set; }
+        public IDbSet<SensorItemAlarm> SensorItemAlarms { get; set; }
+        public IDbSet<Severity> Severities { get; set; }
+        public IDbSet<Alarm> Alarms { get; set; }
+        public IDbSet<Country> Countries { get; set; }
         #endregion DbSet
     }
 }

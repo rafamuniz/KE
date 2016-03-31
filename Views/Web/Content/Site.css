@@ -6169,46 +6169,42 @@ div.uploader {
     margin-bottom: 5px;
 }
 
-.frac-fa, .barrel-four {
+    /*.frac-fa, .barrel-four {
     padding-left: 5px !important;
     margin-bottom: 5px;
+}*/
+
+    .tank .graph-title h3 {
+        font-family: 'open_sansbold';
+        font-size: 18px;
+        color: #fff;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+.green-box .graph-title h3 {
+    background: #92D649;
 }
 
-.tank .graph-title h3 {
-    font-family: 'open_sansbold';
-    font-size: 18px;
-    color: #fff;
-    width: 100%;
-    text-align: center;
-    padding: 10px 0;
+.blue-box .graph-title h3 {
+    background: #00BAC7;
 }
 
-.barrel-one .graph-title h3 {
-    background: #92d649;
+.orange-box .graph-title h3 {
+    background: #FCC513;
 }
 
-.frac-fa .graph-title h3 {
-    background: #00bac7;
-}
-
-.pond-one .graph-title h3 {
-    background: #fcc513;
-}
-
-.barrel-four .graph-title h3 {
-    background: #92d649;
-}
-
-.graph-details {
+.tank .graph-details {
     display: table;
     width: 100%;
 }
 
-    .graph-details .detail-box {
+    .tank .graph-details .detail-box {
         display: table-cell;
         vertical-align: middle;
         background: #81bd41;
-        color: #FFFFFF;
+        color: #FFF;
         font-size: 13px;
         text-align: center;
         border-right: 1px solid #fff;
@@ -6255,3 +6251,119 @@ div.uploader {
         max-width: 278px;
         padding: 10px 0px 0px 0px;
     }
+
+/********************/
+/* TANK WATER GAUGE */
+/********************/
+.gauge-image {
+    min-height: 40px;
+    background: #00A2AE;
+}
+
+    .gauge-image > h3, .gauge-alarm h3.heading {
+        font-size: 20px;
+        font-family: 'open_sansbold';
+        color: #FFF;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+.guage-table {
+    display: table;
+    width: 100%;
+}
+
+    .guage-table .gauge-cell {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        position: relative;
+    }
+
+.gauge-cell .arrow {
+    position: absolute;
+    z-index: 1;
+    top: 55px;
+    left: 50%;
+    margin-left: -11px;
+}
+
+.guage-table .gauge-cell:first-child {
+    background: #00bac7;
+}
+
+.guage-table .gauge-cell .guage-value {
+    padding: 15px 0;
+    text-align: center;
+    color: #fff;
+}
+
+    .guage-table .gauge-cell .guage-value p {
+        font-size: 12px;
+        color: #fff;
+        text-align: center;
+        font-family: "open_sansregular";
+        padding: 0 13px;
+    }
+
+.gauge-cell .guage-value h3 {
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    font-family: "open_sansbold";
+}
+
+.alarm-box {
+    margin: 5px 0;
+    padding: 8px;
+    background: #F2F2F2;
+    min-height: 300px;
+    max-width: 100%;
+}
+
+.tank-volume-box {
+    margin: 5px 0;
+    padding: 8px;
+    background: #F2F2F2;
+    min-height: 300px;
+    max-width: 100%;
+}
+
+.temp-volt-box {
+    max-width: 100%;
+}
+
+.tank-temperature-box {
+    margin: 5px 0;
+    padding: 8px;
+    background: #F2F2F2;
+    min-height: 300px;
+    min-width: 200px;
+    max-width: 45%;
+}
+
+.sensor-voltage-box {
+    margin: 5px 0;
+    padding: 8px;
+    background: #F2F2F2;
+    min-height: 300px;
+    min-width: 200px;
+    max-width: 55%;
+}
+
+.gauge-title {
+    min-height: 40px;
+    background: #00A2AE;
+}
+
+    .gauge-title h3 {
+        font-size: 20px;
+        font-family: inherit;
+        color: #FFF;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+.graph {
+    margin-top: 10px;
+}

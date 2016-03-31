@@ -172,4 +172,14 @@ Date.prototype.toShortTime = function () {
     return this.get12Hour() + ":" + this.getMinutes() + " " + this.getAMPM();
 };
 
+Date.prototype.addHours = function (h) {
+    this.setTime(this.getTime() + (h * 60 * 60 * 1000));
+    return this;
+}
+
+Date.prototype.subtractHours = function (h) {
+    this.setTime(this.getTime() - (h * 60 * 60 * 1000));
+    return this;
+}
+
 /* DATE & TIME */

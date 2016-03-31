@@ -12,15 +12,18 @@ namespace KarmicEnergy.Core.Persistence
         private ISiteRepository _SiteRepository;
         private ITankRepository _TankRepository;       
         private ITankModelRepository _TankModelRepository;
+
         private ISensorRepository _SensorRepository;
+        private ISensorItemRepository _SensorItemRepository;
         private ISensorTypeRepository _SensorTypeRepository;
 
-        private ISensorDataRepository _SensorDataRepository;
+        private ISensorItemEventRepository _SensorItemEventRepository;
 
-        private ISensorAlarmRepository _SensorAlarmRepository;
+        private ISensorItemAlarmRepository _SensorItemAlarmRepository;
         private IAlarmRepository _AlarmRepository;
 
         private ICountryRepository _CountryRepository;
+        private ISeverityRepository _SeverityRepository;
         #endregion Fields
 
         #region Constructor
@@ -74,14 +77,19 @@ namespace KarmicEnergy.Core.Persistence
             get { return _SensorRepository ?? (_SensorRepository = new SensorRepository(_context)); }
         }
 
+        public ISensorItemRepository SensorItemRepository
+        {
+            get { return _SensorItemRepository ?? (_SensorItemRepository = new SensorItemRepository(_context)); }
+        }
+
         public ISensorTypeRepository SensorTypeRepository
         {
             get { return _SensorTypeRepository ?? (_SensorTypeRepository = new SensorTypeRepository(_context)); }
         }
 
-        public ISensorAlarmRepository SensorAlarmRepository
+        public ISensorItemAlarmRepository SensorItemAlarmRepository
         {
-            get { return _SensorAlarmRepository ?? (_SensorAlarmRepository = new SensorAlarmRepository(_context)); }
+            get { return _SensorItemAlarmRepository ?? (_SensorItemAlarmRepository = new SensorItemAlarmRepository(_context)); }
         }
 
         public IAlarmRepository AlarmRepository
@@ -89,9 +97,14 @@ namespace KarmicEnergy.Core.Persistence
             get { return _AlarmRepository ?? (_AlarmRepository = new AlarmRepository(_context)); }
         }
 
-        public ISensorDataRepository SensorDataRepository
+        public ISensorItemEventRepository SensorItemEventRepository
         {
-            get { return _SensorDataRepository ?? (_SensorDataRepository = new SensorDataRepository(_context)); }
+            get { return _SensorItemEventRepository ?? (_SensorItemEventRepository = new SensorItemEventRepository(_context)); }
+        }
+        
+        public ISeverityRepository SeverityRepository
+        {
+            get { return _SeverityRepository ?? (_SeverityRepository = new SeverityRepository(_context)); }
         }
 
         public ICountryRepository CountryRepository

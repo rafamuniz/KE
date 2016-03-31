@@ -17,13 +17,13 @@ namespace KarmicEnergy.Core.Entities
 
         #region SensorAlarm
 
-        [Column("SensorAlarmId", TypeName = "UNIQUEIDENTIFIER")]
+        [Column("SensorItemAlarmId", TypeName = "UNIQUEIDENTIFIER")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        public Guid SensorAlarmId { get; set; }
+        public Guid SensorItemAlarmId { get; set; }
 
-        [ForeignKey("SensorAlarmId")]
-        public virtual SensorAlarm SensorAlarm { get; set; }
+        [ForeignKey("SensorItemAlarmId")]
+        public virtual SensorItemAlarm SensorItemAlarm { get; set; }
 
-        #endregion SensorAlarm    
+        #endregion SensorAlarm 
     }
 }

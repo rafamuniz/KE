@@ -14,9 +14,17 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Index()
         {
-            var sensors = KEUnitOfWork.SensorRepository.GetsByCustomerId(CustomerId).ToList();
+            var sensors = KEUnitOfWork.SensorRepository.GetsByCustomerId(CustomerId);
             var viewModels = ListViewModel.Map(sensors);
-            return View(viewModels);
+            return View(viewModels);            
+        }
+
+        [Authorize(Roles = "Customer, CustomerAdmin")]
+        public ActionResult Tank(Guid tankId)
+        {
+            var sensors = KEUnitOfWork.SensorRepository.GetsByTankIdAndCustomerId(CustomerId, TankId);
+            var viewModels = ListViewModel.Map(sensors);
+            return View("Index", viewModels);
         }
         #endregion Index
 
@@ -27,6 +35,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             LoadStatuses();
             LoadTanks(CustomerId);
+            LoadSensorTypes();
             return View();
         }
 
@@ -40,13 +49,21 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             if (!ModelState.IsValid)
             {
                 LoadTanks(CustomerId);
+                LoadSensorTypes();
                 LoadStatuses();
                 return View(viewModel);
             }
 
             try
             {
-                Sensor sensor = new Sensor() { Name = viewModel.Name, TankId = viewModel.TankId, Status = viewModel.Status };
+                Sensor sensor = new Sensor()
+                {
+                    Name = viewModel.Name,
+                    TankId = viewModel.TankId,
+                    SensorTypeId = viewModel.SensorTypeId,
+                    Status = viewModel.Status
+                };
+
                 KEUnitOfWork.SensorRepository.Add(sensor);
                 KEUnitOfWork.Complete();
 
@@ -61,6 +78,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 AddErrors(ex.Message);
             }
 
+            LoadSensorTypes();
             LoadTanks(CustomerId);
             LoadStatuses();
             return View(viewModel);
@@ -76,6 +94,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             if (sensor == null)
             {
                 LoadTanks(CustomerId);
+                LoadSensorTypes();
                 LoadStatuses();
                 AddErrors("Sensor does not exist");
                 return View("Index");
@@ -97,12 +116,15 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             {
                 LoadTanks(CustomerId);
                 LoadStatuses();
+                LoadSensorTypes();
                 AddErrors("Tank does not exist");
                 return View("Index");
             }
 
-            //site.Name = viewModel.Name;
-            //site.IPAddress = viewModel.IPAddress;
+            sensor.Name = viewModel.Name;
+            sensor.SensorTypeId = viewModel.SensorTypeId;
+            sensor.TankId = viewModel.TankId;
+            sensor.Status = viewModel.Status;
 
             KEUnitOfWork.SensorRepository.Update(sensor);
             KEUnitOfWork.Complete();

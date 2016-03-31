@@ -62,43 +62,39 @@
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Alarm.cs" />
-    <Compile Include="Entities\SensorAlarm.cs" />
+    <Compile Include="Entities\SensorItem.cs" />
+    <Compile Include="Entities\SensorItemAlarm.cs" />
+    <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\Severity.cs" />
     <Compile Include="Entities\SensorType.cs" />
-    <Compile Include="Entities\SensorData.cs" />
+    <Compile Include="Entities\SensorItemEvent.cs" />
     <Compile Include="Entities\Sensor.cs" />
     <Compile Include="Entities\TankModel.cs" />
     <Compile Include="Entities\Tank.cs" />
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201603211940577_Initial.cs" />
-    <Compile Include="Migrations\201603211940577_Initial.Designer.cs">
-      <DependentUpon>201603211940577_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603221850398_Initial1.cs" />
-    <Compile Include="Migrations\201603221850398_Initial1.Designer.cs">
-      <DependentUpon>201603221850398_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603221924281_Initial2.cs" />
-    <Compile Include="Migrations\201603221924281_Initial2.Designer.cs">
-      <DependentUpon>201603221924281_Initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603231451264_Initial3.cs" />
-    <Compile Include="Migrations\201603231451264_Initial3.Designer.cs">
-      <DependentUpon>201603231451264_Initial3.cs</DependentUpon>
+    <Compile Include="Migrations\201603310340108_Initial.cs" />
+    <Compile Include="Migrations\201603310340108_Initial.Designer.cs">
+      <DependentUpon>201603310340108_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\TankModel.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
     <Compile Include="Persistence\KEContext.cs" />
     <Compile Include="Persistence\KEUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ISensorItemRepository.cs" />
+    <Compile Include="Repositories\ISeverityRepository.cs" />
+    <Compile Include="Repositories\SensorItemRepository.cs" />
+    <Compile Include="Repositories\SeverityRepository.cs" />
     <Compile Include="Repositories\IAlarmRepository.cs" />
-    <Compile Include="Repositories\ISensorDataRepository.cs" />
+    <Compile Include="Repositories\ISensorItemEventRepository.cs" />
     <Compile Include="Repositories\AlarmRepository.cs" />
     <Compile Include="Repositories\SensorDataRepository.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\ICountryRepository.cs" />
-    <Compile Include="Repositories\ISensorAlarmRepository.cs" />
+    <Compile Include="Repositories\ISensorItemAlarmRepository.cs" />
     <Compile Include="Repositories\ISensorTypeRepository.cs" />
     <Compile Include="Repositories\ITankModelRepository.cs" />
     <Compile Include="Repositories\ISensorRepository.cs" />
@@ -120,17 +116,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603211940577_Initial.resx">
-      <DependentUpon>201603211940577_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603221850398_Initial1.resx">
-      <DependentUpon>201603221850398_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603221924281_Initial2.resx">
-      <DependentUpon>201603221924281_Initial2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603231451264_Initial3.resx">
-      <DependentUpon>201603231451264_Initial3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603310340108_Initial.resx">
+      <DependentUpon>201603310340108_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

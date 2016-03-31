@@ -115,6 +115,20 @@ namespace KarmicEnergy.Web.Controllers
             }
         }
 
+        protected Guid TankId
+        {
+            get
+            {
+                Guid tankId = default(Guid);
+
+                if (Request.QueryString.AllKeys.Contains("tankId"))
+                    if (Guid.TryParse(Request.QueryString["tankId"], out tankId))
+                        return tankId;
+
+                return tankId;
+            }
+        }
+
         protected void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -258,6 +272,20 @@ namespace KarmicEnergy.Web.Controllers
             List<Tank> tanks = KEUnitOfWork.TankRepository.GetsByCustomerId(customerId);
             ViewBag.Tanks = tanks;
             return tanks;
+        }
+
+        protected List<Tank> LoadTanks(Guid customerId, Guid siteId)
+        {
+            List<Tank> tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(customerId, siteId);
+            ViewBag.Tanks = tanks;
+            return tanks;
+        }
+
+        protected List<SensorType> LoadSensorTypes()
+        {
+            List<SensorType> sensorTypes = KEUnitOfWork.SensorTypeRepository.GetAll().ToList();
+            ViewBag.SensorTypes = sensorTypes;
+            return sensorTypes;
         }
 
         public List<ApplicationUser> GetUsersInRoles(params String[] roleNames)

@@ -9,14 +9,14 @@
     Layout = "~/Views/Shared/_Internal.cshtml";
     ViewBag.Title = "Tank - Dashboard";
 }
-
-@Html.Hidden("hfCustomerId", ViewBag.CustomerId)
+<input type="hidden" id="hfCustomerId" value="@ViewBag.CustomerId" />
 
 <div id="tank-dashboard">
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/sparkline")
+    <script src="~/Scripts/app/tank-dashboard.js"></script>
     <script type="text/javascript">
         $(function () {
             showLoading();

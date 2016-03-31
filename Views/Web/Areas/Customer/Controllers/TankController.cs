@@ -21,7 +21,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #endregion Index
 
         #region Dashoard
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
         public ActionResult Dashboard()
         {
             ViewBag.CustomerId = CustomerId;
@@ -34,6 +34,23 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return PartialView("_TankData");
         }
         #endregion Dashoard
+
+        #region FastTracker
+        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        public ActionResult FastTracker()
+        {
+            LoadSites(CustomerId);
+            return View();
+        }
+
+        //[Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        //public ActionResult FastTracker(Guid id)
+        //{
+        //    var tank = KEUnitOfWork.TankRepository.Get(id);
+        //    FastTrackerViewModel viewModel = FastTrackerViewModel.Map(tank);
+        //    return View(viewModel);
+        //}
+        #endregion FastTracker
 
         #region Create
 
@@ -168,5 +185,36 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         #endregion Delete
+
+        #region Fills
+
+        public ActionResult FillTank(Guid siteId)
+        {
+            var tanks = LoadTanks(CustomerId, siteId);
+            return Json(tanks, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetTankInfo(Guid tankId)
+        {
+            var tankInfo = KEUnitOfWork.SensorItemEventRepository.GetTankWithWaterVolumeLastData(tankId);
+            return Json(tankInfo, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetTankWaterVolume(Guid tankId)
+        {
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetTankTemperature(Guid tankId)
+        {
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetTankSensorVoltage(Guid tankId)
+        {
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }        
+        
+        #endregion Fills
     }
 }

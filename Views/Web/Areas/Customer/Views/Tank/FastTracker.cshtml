@@ -1,0 +1,174 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
+@using Munizoft.Extensions
+@using Munizoft.MVC.Helpers
+@using GridMvc.Html
+
+@model FastTrackerViewModel
+
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Tank - Fast Tracker";
+}
+
+<div class="row" style="margin-bottom: 20px;">
+    <div class="form-group">
+        <div class="col-md-6">
+            @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite", @onchange = "FillTank()" })
+        </div>
+        <div class="col-md-6">
+            @Html.DropDownListFor(m => m.TankId, new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Name"), "-- Please select a Tank --", new { @class = "form-control selectpicker", @id = "ddlTank", @onchange = "getData()" })
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div id="divTank" class="col-sm-6">
+        <div id="tankName" class="gauge-image">
+            <h3></h3>
+        </div>
+        <div class="guage-table">
+            <div class="gauge-cell">
+                <div id="tankWaterVolumePerc" class="guage-value">
+                    <h3>0 %</h3>
+                    <p>Full</p>
+                </div>
+                <div id="tankWaterVolume" class="guage-value">
+                    <p>Total volume</p>
+                    <h3>0</h3>
+                    <p>gallons</p>
+                </div>
+                <div id="tankWaterLastMeasurement" class="guage-value">
+                    <p>12:00:00 am</p>
+                    <p>1/1/2000</p>
+                </div>
+            </div>
+            <div class="gauge-cell" style="background: #FFF;">
+                <img src="~/images/water-flow.gif">
+                <img src="~/images/arrow-copy.png" class="arrow">
+            </div>
+        </div>
+    </div>
+
+    <div id="alarms" class="col-sm-6 alarm-box">
+        <div class="gauge-title">
+            <h3>Alarms</h3>
+        </div>
+        <div class="gauge-alarm-bg">
+            <div class="alarm-table">
+                <table>
+                    <tbody>
+                        @*<tr class="tab-head">
+                                <td width="40">Description</td>
+                                <td width="20">Type</td>
+                                <td width="20">Limit</td>
+                                <td width="40">Email</td>
+                                <td width="20">Delete</td>
+                            </tr>
+                            <tr>
+                                <td width="40"><p>FracFA01 test 1</p></td>
+                                <td width="20">Low</td>
+                                <td width="20">5000</td>
+                                <td width="40">fadarnell@gmail.com</td>
+                                <td width="20"><img src="images/close.png"></td>
+                            </tr>
+                            <tr>
+                                <td width="40"><p>FracFA01 test 1</p></td>
+                                <td width="20">Low</td>
+                                <td width="20">5000</td>
+                                <td width="40">fadarnell@gmail.com</td>
+                                <td width="20"><img src="images/close.png"></td>
+                            </tr>*@
+                    </tbody>
+                </table>
+            </div>
+            <h3 class="add-modify">Add / Modify an Alarm</h3>
+            <div class="modify-buttons">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <input type="text" id="txtDescription" class="form-control" />
+                    </div>
+                    <div class="col-sm-2">
+                        <select id="ddlSeverity" class="form-control selectpicker">
+                            <option value="1" selected>Low</option>
+                            <option value="2">Medium</option>
+                            <option value="3">High</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" id="txtLimit" class="form-control" />
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" id="txtEmail" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="save-button">
+                <button type="button" class="btn btn-secondary" onclick="addSensorAlarm()">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="tankVolume" class="tank-volume-box" style="margin-top: 20px;">
+    <div class="col-sm-12">
+        <div class="gauge-title">
+            <h3>Tank Volume</h3>
+        </div>
+    </div>
+
+    <div style="margin-top: 10px;">
+        <div class="col-sm-10">
+            <div class="tank-volume-sec">
+                <div class="tank-volume">
+                    <img src="~/images/tank-volume.png">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="radio-buttons">
+                <div class="radio">
+                    <label><input type="radio" name="optradio">Real Time</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="optradio">Hourly (7d)</label>
+                </div>
+                <div class="radio disabled">
+                    <label><input type="radio" name="optradio">Daily (45d)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="temp-volt-box" style="margin-top: 20px;">
+    <div id="tankTemperature" class="col-sm-6 tank-temperature-box">
+        <div class="gauge-title">
+            <h3>Tank Temp</h3>
+        </div>
+        <div id="temperature_graph" class="graph" style="margin-top: 10px;">
+            <img src="~/images/tank-temp.png">
+        </div>
+    </div>
+
+    <div id="tankVoltage" class="col-sm-6 sensor-voltage-box" style="margin-left: 20px;">
+        <div class="gauge-title">
+            <h3>Sensor Voltage</h3>
+        </div>
+        <div id="voltage-graph" class="graph" style="margin-top: 10px;">
+            .
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="~/Scripts/flot/jquery.flot.min.js"></script>
+    <script src="~/Scripts/app/tank-fasttracker.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            initView();
+        });
+    </script>
+}

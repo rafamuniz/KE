@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,9 +10,9 @@ namespace KarmicEnergy.Core.Entities
     {
         #region Property
 
-        [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
+        [Key, Column("Id", Order = 1, TypeName = "BIGINT")]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public Int64 Id { get; set; }
 
         [Column("Name", TypeName = "NVARCHAR")]
         [StringLength(128)]
@@ -45,6 +46,12 @@ namespace KarmicEnergy.Core.Entities
         [ForeignKey("TankId")]
         public virtual Tank Tank { get; set; }
 
-        #endregion TankModel
+        #endregion Tank
+        
+        //#region SensorItems        
+
+        //public virtual IList<SensorItem> SensorItems { get; set; }
+
+        //#endregion SensorItems
     }
 }

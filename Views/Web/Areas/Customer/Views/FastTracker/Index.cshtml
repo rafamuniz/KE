@@ -1,0 +1,34 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
+@using Munizoft.Extensions
+@using Munizoft.MVC.Helpers
+@using GridMvc.Html
+
+@model ListViewModel
+
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Fast Tracker";
+}
+
+<div class="row" style="margin-bottom: 20px;">
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite", @onchange = "selectedSite()" })
+        </div>
+    </div>
+</div>
+
+<div id="tanks">
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="~/Scripts/flot/jquery.flot.min.js"></script>
+    <script src="~/Scripts/app/fasttracker.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            initView();
+        });
+    </script>
+}

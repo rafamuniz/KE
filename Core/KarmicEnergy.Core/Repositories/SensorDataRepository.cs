@@ -22,7 +22,7 @@ namespace KarmicEnergy.Core.Repositories
             try
             {
                 //return Context.SensorData.Last(x => x.Sensor.Tank.Id == tankId && x.WaterVolume != null);
-                return base.Find(x => x.SensorItem.Sensor.TankId == tankId).Last();
+                return base.Find(x => x.SensorItem.Sensor.TankId == tankId && x.SensorItem.Item.Id == (int)ItemEnum.WaterVolume).Last();
             }
             catch (Exception ex)
             {

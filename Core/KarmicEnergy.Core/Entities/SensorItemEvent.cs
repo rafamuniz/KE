@@ -19,7 +19,7 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Property
 
-        #region Sensor
+        #region Sensor Item
 
         [Column("SensorItemId", TypeName = "UNIQUEIDENTIFIER")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
@@ -28,6 +28,6 @@ namespace KarmicEnergy.Core.Entities
         [ForeignKey("SensorItemId")]
         public virtual SensorItem SensorItem { get; set; }
 
-        #endregion Sensor
+        #endregion Sensor Item
     }
 }

@@ -15,15 +15,15 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Property
 
-        #region SensorAlarm
+        #region Trigger
 
-        [Column("SensorItemAlarmId", TypeName = "UNIQUEIDENTIFIER")]
+        [Column("TriggerId", TypeName = "UNIQUEIDENTIFIER")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        public Guid SensorItemAlarmId { get; set; }
+        public Guid TriggerId { get; set; }
 
-        [ForeignKey("SensorItemAlarmId")]
-        public virtual SensorItemAlarm SensorItemAlarm { get; set; }
+        [ForeignKey("TriggerId")]
+        public virtual Trigger Trigger { get; set; }
 
-        #endregion SensorAlarm 
+        #endregion Trigger 
     }
 }

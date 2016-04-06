@@ -10,7 +10,7 @@ namespace KarmicEnergy.Core.Persistence
         private ICustomerRepository _CustomerRepository;
         private ICustomerUserRepository _CustomerUserRepository;
         private ISiteRepository _SiteRepository;
-        private ITankRepository _TankRepository;       
+        private ITankRepository _TankRepository;
         private ITankModelRepository _TankModelRepository;
 
         private ISensorRepository _SensorRepository;
@@ -19,7 +19,7 @@ namespace KarmicEnergy.Core.Persistence
 
         private ISensorItemEventRepository _SensorItemEventRepository;
 
-        private ISensorItemAlarmRepository _SensorItemAlarmRepository;
+        private ITriggerRepository _TriggerRepository;
         private IAlarmRepository _AlarmRepository;
 
         private ICountryRepository _CountryRepository;
@@ -87,9 +87,9 @@ namespace KarmicEnergy.Core.Persistence
             get { return _SensorTypeRepository ?? (_SensorTypeRepository = new SensorTypeRepository(_context)); }
         }
 
-        public ISensorItemAlarmRepository SensorItemAlarmRepository
+        public ITriggerRepository TriggerRepository
         {
-            get { return _SensorItemAlarmRepository ?? (_SensorItemAlarmRepository = new SensorItemAlarmRepository(_context)); }
+            get { return _TriggerRepository ?? (_TriggerRepository = new TriggerRepository(_context)); }
         }
 
         public IAlarmRepository AlarmRepository
@@ -101,7 +101,7 @@ namespace KarmicEnergy.Core.Persistence
         {
             get { return _SensorItemEventRepository ?? (_SensorItemEventRepository = new SensorItemEventRepository(_context)); }
         }
-        
+
         public ISeverityRepository SeverityRepository
         {
             get { return _SeverityRepository ?? (_SeverityRepository = new SeverityRepository(_context)); }

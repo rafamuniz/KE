@@ -53,7 +53,7 @@ namespace KarmicEnergy.Core.Persistence
         public IDbSet<Item> Items { get; set; }
         public IDbSet<SensorType> SensorTypes { get; set; }
         public IDbSet<SensorItemEvent> SensorItemEvents { get; set; }
-        public IDbSet<SensorItemAlarm> SensorItemAlarms { get; set; }
+        public IDbSet<Trigger> Triggers { get; set; }
         public IDbSet<Severity> Severities { get; set; }
         public IDbSet<Alarm> Alarms { get; set; }
         public IDbSet<Country> Countries { get; set; }

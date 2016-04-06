@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public interface ISensorItemAlarmRepository : IRepository<SensorItemAlarm, KEContext>
+    public interface ITriggerRepository : IRepository<Trigger, KEContext>
     {
     }
 }

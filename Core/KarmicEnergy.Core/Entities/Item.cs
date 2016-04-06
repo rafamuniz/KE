@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KarmicEnergy.Core.Entities
 {
-    [Table("Item", Schema = "dbo")]
+    [Table("Items", Schema = "dbo")]
     public class Item : BaseEntity
     {
         #region Property
@@ -37,6 +37,7 @@ namespace KarmicEnergy.Core.Entities
         {
             List<Item> entities = new List<Item>()
             {
+                new Item() { Id = (int)ItemEnum.Range, Code = "RG", Name = "Range" },
                 new Item() { Id = (int)ItemEnum.WaterVolume, Code = "WV", Name = "Water Volume" },
                 new Item() { Id = (int)ItemEnum.WaterTemperature, Code = "WT", Name = "Water Temperature" },
                 new Item() { Id = (int)ItemEnum.WeatherTemperature, Code= "WV", Name = "Weather Temperature" },
@@ -50,16 +51,19 @@ namespace KarmicEnergy.Core.Entities
 
     public enum ItemEnum : int
     {
+        [Description("Range")]
+        Range = 1,
+
         [Description("Water Volume")]
-        WaterVolume = 1,
+        WaterVolume = 2,
 
         [Description("Water Temperature")]
-        WaterTemperature = 2,
+        WaterTemperature = 3,
 
         [Description("Weather Temperature")]
-        WeatherTemperature = 3,
+        WeatherTemperature = 4,
 
         [Description("Volts")]
-        Volts = 4
+        Volts = 5
     }
 }

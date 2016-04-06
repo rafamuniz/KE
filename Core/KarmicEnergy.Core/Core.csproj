@@ -63,8 +63,9 @@
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Alarm.cs" />
     <Compile Include="Entities\SensorItem.cs" />
-    <Compile Include="Entities\SensorItemAlarm.cs" />
+    <Compile Include="Entities\Trigger.cs" />
     <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\Status.cs" />
     <Compile Include="Entities\Severity.cs" />
     <Compile Include="Entities\SensorType.cs" />
     <Compile Include="Entities\SensorItemEvent.cs" />
@@ -78,27 +79,39 @@
     <Compile Include="Migrations\201603310340108_Initial.Designer.cs">
       <DependentUpon>201603310340108_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604020144283_Initial1.cs" />
+    <Compile Include="Migrations\201604020144283_Initial1.Designer.cs">
+      <DependentUpon>201604020144283_Initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604020213530_Initial2.cs" />
+    <Compile Include="Migrations\201604020213530_Initial2.Designer.cs">
+      <DependentUpon>201604020213530_Initial2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604060214196_Initial3.cs" />
+    <Compile Include="Migrations\201604060214196_Initial3.Designer.cs">
+      <DependentUpon>201604060214196_Initial3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
     <Compile Include="Persistence\KEContext.cs" />
     <Compile Include="Persistence\KEUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ISensorItemRepository.cs" />
-    <Compile Include="Repositories\ISeverityRepository.cs" />
+    <Compile Include="Repositories\Interface\ISensorItemRepository.cs" />
+    <Compile Include="Repositories\Interface\ISeverityRepository.cs" />
     <Compile Include="Repositories\SensorItemRepository.cs" />
     <Compile Include="Repositories\SeverityRepository.cs" />
-    <Compile Include="Repositories\IAlarmRepository.cs" />
-    <Compile Include="Repositories\ISensorItemEventRepository.cs" />
+    <Compile Include="Repositories\Interface\IAlarmRepository.cs" />
+    <Compile Include="Repositories\Interface\ISensorItemEventRepository.cs" />
     <Compile Include="Repositories\AlarmRepository.cs" />
     <Compile Include="Repositories\SensorDataRepository.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
-    <Compile Include="Repositories\ICountryRepository.cs" />
-    <Compile Include="Repositories\ISensorItemAlarmRepository.cs" />
-    <Compile Include="Repositories\ISensorTypeRepository.cs" />
-    <Compile Include="Repositories\ITankModelRepository.cs" />
-    <Compile Include="Repositories\ISensorRepository.cs" />
-    <Compile Include="Repositories\ITankRepository.cs" />
+    <Compile Include="Repositories\Interface\ICountryRepository.cs" />
+    <Compile Include="Repositories\Interface\ITriggerRepository.cs" />
+    <Compile Include="Repositories\Interface\ISensorTypeRepository.cs" />
+    <Compile Include="Repositories\Interface\ITankModelRepository.cs" />
+    <Compile Include="Repositories\Interface\ISensorRepository.cs" />
+    <Compile Include="Repositories\Interface\ITankRepository.cs" />
     <Compile Include="Repositories\SensorAlarmRepository.cs" />
     <Compile Include="Repositories\SensorTypeRepository.cs" />
     <Compile Include="Repositories\TankModelRepository.cs" />
@@ -106,9 +119,9 @@
     <Compile Include="Repositories\TankRepository.cs" />
     <Compile Include="Repositories\SiteRepository.cs" />
     <Compile Include="Repositories\CustomerUserRepository.cs" />
-    <Compile Include="Repositories\ISiteRepository.cs" />
-    <Compile Include="Repositories\ICustomerUserRepository.cs" />
-    <Compile Include="Repositories\ICustomerRepository.cs" />
+    <Compile Include="Repositories\Interface\ISiteRepository.cs" />
+    <Compile Include="Repositories\Interface\ICustomerUserRepository.cs" />
+    <Compile Include="Repositories\Interface\ICustomerRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +131,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201603310340108_Initial.resx">
       <DependentUpon>201603310340108_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604020144283_Initial1.resx">
+      <DependentUpon>201604020144283_Initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604020213530_Initial2.resx">
+      <DependentUpon>201604020213530_Initial2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604060214196_Initial3.resx">
+      <DependentUpon>201604060214196_Initial3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

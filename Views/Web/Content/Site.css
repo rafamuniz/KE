@@ -6367,3 +6367,57 @@ div.uploader {
 .graph {
     margin-top: 10px;
 }
+
+.tracker-number, .tracker-image, .tracker-text, .tracker-graph {
+    display: table-cell;
+    text-align: center;
+    padding: 10px 20px;
+    vertical-align: middle;
+}
+
+.tracker-table {
+    display: table;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.tracker-number {
+    color: #FFF;
+}
+
+.tracker-text {
+    background: #e1e1e1;
+}
+
+    .tracker-text h2 {
+        font-size: 24px;
+        font-family: 'open_sansbold';
+    }
+
+    .tracker-text .gals p {
+        font-size: 22px;
+        font-family: 'open_sansregular';
+    }
+
+.tracker-image {
+    background: #fff;
+    font-size: 14px;
+    width: 250px;
+    text-align: center;
+}
+
+.tracker-graph {
+    background: #efefef;
+}
+
+.green {
+    background: #81BD41;
+}
+
+.blue {
+    background: #00A2AE;
+}
+
+.orange {
+    background: #FFB213;
+}

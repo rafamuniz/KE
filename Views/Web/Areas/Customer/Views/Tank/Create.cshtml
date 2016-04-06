@@ -14,85 +14,90 @@
     @Html.AntiForgeryToken()
     @Html.Partial("_Error")
 
-    <div class="form-group">
-        <div class="col-md-2">
-            @Html.LabelFor(m => m.SiteId, new { @class = "control-label" })
-        </div>
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite", style = "width: 300px;" })
-            @Html.ValidationMessageFor(m => m.SiteId, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.SiteId, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite", style = "width: 300px;" })
+                    @Html.ValidationMessageFor(m => m.SiteId, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        <div class="col-md-2">
-            @Html.LabelFor(m => m.TankModelId, new { @class = "control-label" })
-        </div>
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.TankModelId, new SelectList(ViewBag.TankModels, "Id", "Name"), "-- Please select a Tank Model --", new { @class = "form-control selectpicker", @id = "ddlSite", style = "width: 300px;" })
-            @*@Html.ImageDropDownListFor(m => m.TankModelId, "../../images/tank_models/", Model.TankModels, new { id = "ddlTankModel" })*@
-            @Html.ValidationMessageFor(m => m.TankModelId, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.TankModelId, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.TankModelId, new SelectList(ViewBag.TankModels, "Id", "Name"), "-- Please select a Tank Model --", new { @class = "form-control selectpicker", @id = "ddlSite", style = "width: 300px;" })
+                    @*@Html.ImageDropDownListFor(m => m.TankModelId, "../../images/tank_models/", Model.TankModels, new { id = "ddlTankModel" })*@
+                    @Html.ValidationMessageFor(m => m.TankModelId, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        <div class="col-md-2">
-            @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-        </div>
-        <div class="col-md-10">
-            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;" } })
-            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;" } })
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        <div class="col-md-2">
-            @Html.LabelFor(m => m.Description, new { @class = "control-label" })
-        </div>
-        <div class="col-md-10">
-            @Html.TextAreaFor(m => m.Description, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;" } })
-            @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(m => m.Description, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;" } })
+                    @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        <div class="col-md-2">
-            @Html.LabelFor(m => m.WaterVolumeCapacity, new { @class = "control-label" })
-        </div>
-        <div class="col-md-10">
-            @Html.EditorFor(m => m.WaterVolumeCapacity, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;" } })
-            @Html.ValidationMessageFor(m => m.WaterVolumeCapacity, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.WaterVolumeCapacity, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.WaterVolumeCapacity, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;" } })
+                    @Html.ValidationMessageFor(m => m.WaterVolumeCapacity, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        <div class="col-md-2">
-            @Html.LabelFor(m => m.Latitude, new { @class = "control-label" })
-        </div>
-        <div class="col-md-10">
-            @Html.EditorFor(m => m.Latitude, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;" } })
-            @Html.ValidationMessageFor(m => m.Latitude, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.Latitude, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.Latitude, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;" } })
+                    @Html.ValidationMessageFor(m => m.Latitude, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        <div class="col-md-2">
-            @Html.LabelFor(m => m.Longitude, new { @class = "control-label" })
-        </div>
-        <div class="col-md-10">
-            @Html.EditorFor(m => m.Longitude, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;" } })
-            @Html.ValidationMessageFor(m => m.Longitude, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.Longitude, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.Longitude, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;" } })
+                    @Html.ValidationMessageFor(m => m.Longitude, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        <div class="col-md-2">
-            @Html.LabelFor(m => m.Status, new { @class = "control-label" })
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.Status, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Status, new SelectList(ViewBag.Statuses, "Id", "Name", "A"), "-- Please select a Status--", new { @class = "form-control selectpicker", style = "width: 250px;", id = "ddlStatus" })
+                    @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Status, new SelectList(ViewBag.Statuses, "Id", "Name"), "-- Please select a Status--", new { @class = "form-control selectpicker", style = "width: 250px;", id = "ddlStatus" })
-            @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
-        </div>
+        <div class="col-sm-6"></div>
     </div>
 
     <div class="col-md-12 form-group text-center">

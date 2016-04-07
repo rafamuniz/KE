@@ -160,30 +160,38 @@ function FillTank() {
 function selectedSite() {
     var siteId = $('#ddlSite').val();
 
-    $.ajax({
-        url: '/Customer/FastTracker/GetsTankBySiteId',
-        type: "GET",
-        dataType: "JSON",
-        data: { SiteId: siteId },
-        success: function (tanks) {
-            var html = "";
+    if (siteId != "") {
+        $.ajax({
+            url: '/Customer/FastTracker/GetsTankBySiteId',
+            type: "GET",
+            dataType: "JSON",
+            data: { SiteId: siteId },
+            success: function (tanks) {
+                $.get('/Customer/FastTracker/GetTankHTML', function (html) {
+                    $.each(tanks, function (i, tank) {
+                        var html_tank = html;
 
-            $.get('/Customer/FastTracker/GetTankHTML', function (data) {
-                html = data;
+                        var dateString = tank.EventDate.substr(6);
+                        var currentDate = new Date(parseInt(dateString));
+                        var month = currentDate.getMonth() + 1;
+                        var day = currentDate.getDate();
+                        var year = currentDate.getFullYear();
+                        var date = day + "/" + month + "/" + year;
+                        
+                        var html_tank = ReplaceAll(html_tank, "{{Count}}", i + 1);
+                        var html_tank = ReplaceAll(html_tank, "{{ImageTankModel}}", "~/images/tank_models/" + tank.UrlImageTankModel);
+                        var html_tank = ReplaceAll(html_tank, "{{MeasurementTime}}", date);
+                        var html_tank = ReplaceAll(html_tank, "{{MeasurementDate}}", tank.EventDate);
+                        var html_tank = ReplaceAll(html_tank, "{{WaterVolumePerc}}", tank.WaterVolumePerc);
+                        var html_tank = ReplaceAll(html_tank, "{{WaterVolume}}", tank.WaterVolume);
 
-                $.each(tanks, function (i, tank) {
-                    var html_tank = html;
-
-                    var html_tank = ReplaceAll(html_tank, "{{Count}}", i + 1);
-                    var html_tank = ReplaceAll(html_tank, "{{ImageTankModel}}", "~/images/tank_models/" + tank.UrlImageTankModel);
-                    var html_tank = ReplaceAll(html_tank, "{{MeasurementTime}}", tank.CollectedDate);
-                    var html_tank = ReplaceAll(html_tank, "{{MeasurementDate}}", tank.CollectedDate);
-                    var html_tank = ReplaceAll(html_tank, "{{WaterVolumePerc}}", tank.WaterVolumePerc);
-                    var html_tank = ReplaceAll(html_tank, "{{WaterVolume}}", tank.WaterVolume);
-
-                    $('#tanks').append(html_tank);
+                        $('#tanks').append(html_tank);
+                    });
                 });
-            });
-        }
-    });
+            },
+            error: function (jqXHR, exception) {
+                notifiyError("Error - Get Tanks");
+            }
+        });
+    }
 }

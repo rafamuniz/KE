@@ -32,6 +32,14 @@
     </div>
 
     <div class="col-md-1">
+        @Html.LabelFor(m => m.Reference, new { @class = "control-label" })
+    </div>
+    <div class="col-md-11 form-group">
+        @Html.EditorFor(m => m.Reference, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;" } })
+        @Html.ValidationMessageFor(m => m.Reference, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-md-1">
         @Html.LabelFor(m => m.Status, new { @class = "control-label" })
     </div>
     <div class="col-md-11 form-group">

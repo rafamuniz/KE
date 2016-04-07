@@ -18,8 +18,14 @@ namespace KarmicEnergy.Core.Migrations
         {
             try
             {
+                Severity.Load()
+                    .ForEach(e => context.Severities.AddOrUpdate(x => x.Id, e));
+
                 SensorType.Load()
                     .ForEach(e => context.SensorTypes.AddOrUpdate(x => x.Id, e));
+
+                Geometry.Load()
+                    .ForEach(e => context.Geometries.AddOrUpdate(x => x.Id, e));
 
                 TankModel.Load()
                     .ForEach(e => context.TankModels.AddOrUpdate(x => x.Id, e));

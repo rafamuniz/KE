@@ -56,6 +56,9 @@ namespace KarmicEnergy.Web
 
             bundles.Add(new ScriptBundle("~/bundles/notify").Include(
                     "~/Scripts/bootstrap-notify.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/highcharts")
+                .IncludeDirectory("~/Scripts/highcharts", "*.js", true));
             #endregion Scripts
 
             #region Style

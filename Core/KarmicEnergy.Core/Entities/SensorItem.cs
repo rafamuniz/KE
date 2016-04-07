@@ -24,9 +24,9 @@ namespace KarmicEnergy.Core.Entities
 
         #region Sensor
 
-        [Column("SensorId", TypeName = "BIGINT")]
+        [Column("SensorId", TypeName = "UNIQUEIDENTIFIER")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        public Int64 SensorId { get; set; }
+        public Guid SensorId { get; set; }
 
         [ForeignKey("SensorId")]
         public virtual Sensor Sensor { get; set; }

@@ -24,7 +24,7 @@ namespace KarmicEnergy.Core.Repositories
 
         public List<Tank> GetsByCustomerIdAndSiteId(Guid customerId, Guid siteId)
         {
-            return base.Find(x => x.Site.CustomerId == customerId && x.SiteId == siteId).ToList();
+            return base.Find(x => x.Site.CustomerId == customerId && x.SiteId == siteId && x.Status == "A").ToList();
         }
 
         public List<Models.TankModel> GetsWithLastMeasurement(Guid customerId)

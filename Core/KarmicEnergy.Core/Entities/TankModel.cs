@@ -33,22 +33,42 @@ namespace KarmicEnergy.Core.Entities
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public String Status { get; set; } = "A";
 
-        [Column("Height", TypeName = "BIT")]
-        public Boolean Height { get; set; }
+        [Column("Height", TypeName = "DECIMAL")]
+        public Decimal? Height { get; set; }
 
-        [Column("Width", TypeName = "BIT")]
-        public Boolean Width { get; set; }
+        [Column("Width", TypeName = "DECIMAL")]
+        public Decimal? Width { get; set; }
 
-        [Column("Length", TypeName = "BIT")]
-        public Boolean Length { get; set; }
+        [Column("Length", TypeName = "DECIMAL")]
+        public Decimal? Length { get; set; }
 
-        [Column("FaceLength", TypeName = "BIT")]
-        public Boolean FaceLength { get; set; }
+        [Column("FaceLength", TypeName = "DECIMAL")]
+        public Decimal? FaceLength { get; set; }
 
-        [Column("BottomWidth", TypeName = "BIT")]
-        public Boolean BottomWidth { get; set; }
+        [Column("BottomWidth", TypeName = "DECIMAL")]
+        public Decimal? BottomWidth { get; set; }
 
-        #endregion Property       
+        [Column("Dim1", TypeName = "DECIMAL")]
+        public Decimal? Dim1 { get; set; }
+
+        [Column("Dim2Value", TypeName = "DECIMAL")]
+        public Decimal? Dim2 { get; set; }
+
+        [Column("Dim3Value", TypeName = "DECIMAL")]
+        public Decimal? Dim3 { get; set; }
+
+        #endregion Property      
+
+        #region Geometry
+
+        [Column("GeometryId", TypeName = "SMALLINT")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public Int16 GeometryId { get; set; }
+
+        [ForeignKey("GeometryId")]
+        public virtual Geometry Geometry { get; set; }
+
+        #endregion Geometry  
 
         #region Load
 
@@ -56,14 +76,14 @@ namespace KarmicEnergy.Core.Entities
         {
             List<TankModel> entities = new List<TankModel>()
             {
-                new TankModel() { Id = (int)TankModelEnum.StandardTanker, Name = "Standard Tanker", Height = false, Width = false, BottomWidth = false, FaceLength = false, Length = false, ImageFilename = "1.png" },
-                new TankModel() { Id = (int)TankModelEnum.VerticalRoundTank, Name = "Vertical Round Tank", Height = false, Width = false, BottomWidth = false, FaceLength = false, Length = false, ImageFilename = "2.png" },
-                new TankModel() { Id = (int)TankModelEnum.HorizontalRoundTank,  Name = "Horizontal Round Tank", Height = false, Width = false, BottomWidth = false, FaceLength = false, Length = false, ImageFilename = "3.png" },
-                new TankModel() { Id = (int)TankModelEnum.VerticalStadium,  Name = "Vertical Stadium", Height = false, Width = false, BottomWidth = false, FaceLength = false, Length = false, ImageFilename = "4.png" },
-                new TankModel() { Id = (int)TankModelEnum.HorizontalStaduim,  Name = "Horizontal Staduim", Height = false, Width = false, BottomWidth = false, FaceLength = false, Length = false, ImageFilename = "5.png" },
-                new TankModel() { Id = (int)TankModelEnum.CubeHorizontal, Name = "Cube Horizontal", Height = false, Width = false, BottomWidth = false, FaceLength = false, Length = false, ImageFilename = "6.png" },
-                new TankModel() { Id = (int)TankModelEnum.FracTank21K, Name = "Frac Tank 21K", Height = false, Width = false, BottomWidth = false, FaceLength = false, Length = false, ImageFilename = "7.png" },
-                new TankModel() { Id = (int)TankModelEnum.FracPond48000bbl, Name = "Frac Pond 48000bbl", Height = false, Width = false, BottomWidth = false, FaceLength = false, Length = false, ImageFilename = "8.png" }
+                new TankModel() { Id = (int)TankModelEnum.StandardTanker, Name = "Standard Tanker", GeometryId = (Int16)GeometryEnum.EllipticalHorizontal, Height = 100, Width = 100, Length = 100, ImageFilename = "1.png" },
+                new TankModel() { Id = (int)TankModelEnum.VerticalRoundTank, Name = "Vertical Round Tank", GeometryId = (Int16)GeometryEnum.CylinderVertical, Height = 100, Width = 100, Length = 100, ImageFilename = "2.png" },
+                new TankModel() { Id = (int)TankModelEnum.HorizontalRoundTank, Name = "Horizontal Round Tank", GeometryId = (Int16)GeometryEnum.CylinderHorizontal, Height = 100, Width = 100, Length = 100, ImageFilename = "3.png" },
+                new TankModel() { Id = (int)TankModelEnum.VerticalStadium, Name = "Vertical Stadium", GeometryId = (Int16)GeometryEnum.StadiumVertical, Height = 100, Width = 100, Length = 100, ImageFilename = "4.png" },
+                new TankModel() { Id = (int)TankModelEnum.HorizontalStadium, Name = "Horizontal Stadium", GeometryId = (Int16)GeometryEnum.StadiumHorizontal, Height = 100, Width = 100, Length = 100, ImageFilename = "5.png" },
+                new TankModel() { Id = (int)TankModelEnum.CubeHorizontal, Name = "Cube Horizontal", GeometryId = (Int16)GeometryEnum.CubeHorizontal, Height = 100, Width = 100, Length = 100, ImageFilename = "6.png" },
+                new TankModel() { Id = (int)TankModelEnum.FracTank21K, Name = "Frac Tank 21K", GeometryId = (Int16)GeometryEnum.CubeHorizontal, Height = 100, Width = 100, Length = 100, ImageFilename = "7.png" },
+                new TankModel() { Id = (int)TankModelEnum.FracPond48000bbl, Name = "Frac Pond 48000bbl", GeometryId = (Int16)GeometryEnum.CylinderVertical, Height = 100, Width = 100, Length = 100, ImageFilename = "8.png" }
             };
 
             return entities;
@@ -86,7 +106,7 @@ namespace KarmicEnergy.Core.Entities
         VerticalStadium = 4,
 
         [Description("Horizontal Staduim")]
-        HorizontalStaduim = 5,
+        HorizontalStadium = 5,
 
         [Description("Cube Horizontal")]
         CubeHorizontal = 6,

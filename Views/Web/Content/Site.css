@@ -5722,21 +5722,15 @@ label {
 
     #body-content label {
         margin: 0;
+        width: 100%;
         padding-top: 8px;
         font-size: 14px;
-        color: #4d4d4f;
+        color: #4D4D4F;
         font-family: 'open_sansregular';
     }
 
-    #body-content input[type="text"], input[type='password'], input[type='email'] {
+    #body-content input[type="text"], input[type='password'], input[type='email'], textarea {
         width: 100%;
-        border: 0;
-        border-radius: 4px;
-        background: #f2f2f2;
-    }
-
-    #body-content textarea {
-        width: 80%;
         border: 0;
         border-radius: 4px;
         background: #F2F2F2;
@@ -6161,6 +6155,30 @@ div.uploader {
 }
 /*******************************/
 
+/*******/
+/* BOX */
+/*******/
+.box-sub {
+    margin: 5px 0;
+    padding: 8px;
+    background: #F2F2F2;
+    min-height: 300px;
+    max-width: 100%;
+}
+
+    .box-sub .title {
+        min-height: 40px;
+        background: #82C341;
+        padding: 10px 0;
+    }
+
+        .box-sub .title h2 {
+            text-align: center !important;
+            font-size: 20px;
+            font-family: 'open_sansbold';
+            color: #FFF;
+        }
+
 /**********************/
 /* TANK DASHBOARD     */
 /**********************/
@@ -6251,6 +6269,7 @@ div.uploader {
         max-width: 278px;
         padding: 10px 0px 0px 0px;
     }
+
 
 /********************/
 /* TANK WATER GAUGE */
@@ -6368,47 +6387,85 @@ div.uploader {
     margin-top: 10px;
 }
 
-.tracker-number, .tracker-image, .tracker-text, .tracker-graph {
-    display: table-cell;
-    text-align: center;
-    padding: 10px 20px;
-    vertical-align: middle;
-}
+/*****************/
+/* FAST TRACKER */
+/*****************/
 
 .tracker-table {
     display: table;
     width: 100%;
     margin-bottom: 5px;
+    height: 240px;
+}
+
+.tracker-number, .tracker-image, .tracker-text, .tracker-graph {
+    text-align: center;
+    padding: 10px 20px;
+    vertical-align: middle;
+    /*/*display: table-cell;*/
 }
 
 .tracker-number {
     color: #FFF;
+    height: 240px;
 }
 
-.tracker-text {
-    background: #e1e1e1;
-}
-
-    .tracker-text h2 {
-        font-size: 24px;
-        font-family: 'open_sansbold';
-    }
-
-    .tracker-text .gals p {
-        font-size: 22px;
-        font-family: 'open_sansregular';
+    .tracker-number h3 {
+        font-size: 1.75rem;
+        text-align: center;
+        top: 50%;
+        left: 40%;
+        position: absolute;
     }
 
 .tracker-image {
-    background: #fff;
-    font-size: 14px;
-    width: 250px;
-    text-align: center;
+    background-color: #FFF;
+    height: 240px;
 }
 
-.tracker-graph {
-    background: #efefef;
+    .tracker-image img {
+    }
+
+    .tracker-image p {
+        color: #000;
+        font-size: 14px;
+        text-align: center;
+    }
+
+.tracker-text {
+    background: #E1E1E1;
+    height: 240px;
 }
+
+    .tracker-text div {
+        top: 35%;
+        left: 5%;
+        position: absolute;
+    }
+
+    .tracker-text h2 {
+        color: #000;
+        font-size: 24px;
+        font-family: 'open_sansbold';
+        text-align: center;
+    }
+
+    .tracker-text .gals {
+    }
+
+        .tracker-text .gals p {
+            color: #000;
+            font-size: 22px;
+            font-family: 'open_sansregular';
+        }
+
+.tracker-graph {
+    background: #EFEFEF;
+    height: 240px;
+}
+
+    .tracker-graph div {
+    }
 
 .green {
     background: #81BD41;
@@ -6421,3 +6478,14 @@ div.uploader {
 .orange {
     background: #FFB213;
 }
+
+/*********/
+/* TANK */
+/********/
+.divImageTankModel {
+}
+
+    .divImageTankModel img {
+        width: 100%;
+        height: 100%;
+    }

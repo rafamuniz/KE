@@ -10,14 +10,19 @@ namespace KarmicEnergy.Core.Entities
     {
         #region Property
 
-        [Key, Column("Id", Order = 1, TypeName = "BIGINT")]
+        [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public Int64 Id { get; set; }
+        public Guid Id { get; set; }
 
         [Column("Name", TypeName = "NVARCHAR")]
         [StringLength(128)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public String Name { get; set; }
+
+        [Column("Reference", TypeName = "NVARCHAR")]
+        [StringLength(8)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public String Reference { get; set; }
 
         [Column("Status", TypeName = "CHAR")]
         [StringLength(1)]
@@ -47,11 +52,18 @@ namespace KarmicEnergy.Core.Entities
         public virtual Tank Tank { get; set; }
 
         #endregion Tank
-        
-        //#region SensorItems        
 
-        //public virtual IList<SensorItem> SensorItems { get; set; }
+        #region SensorItems        
 
-        //#endregion SensorItems
+        public virtual IList<SensorItem> SensorItems { get; set; }
+
+        #endregion SensorItems
+
+        public Boolean HasSensorItem()
+        {
+            if (SensorItems.Count > 0)
+                return true;
+            return false;
+        }
     }
 }

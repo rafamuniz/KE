@@ -8,12 +8,23 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
 {
     public class TankWithWaterVolume
     {
+        public TankWithWaterVolume()
+        {
+            WaterVolumeInfos = new List<WaterVolumeInfo>();
+        }
+
         #region Property
 
+        public Guid SiteId { get; set; }
+
         public Guid TankId { get; set; }
+
+        
         public String TankName { get; set; }
 
         public String UrlImageTankModel { get; set; }
+
+        public Guid SensorItemId { get; set; }
 
         public Decimal WaterVolumeCapacity { get; set; }
         public Decimal WaterVolume { get; set; }
@@ -21,10 +32,16 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
         {
             get
             {
-                return (WaterVolume / WaterVolumeCapacity) * 100;
+                if (WaterVolumeCapacity != 0)
+                {
+                    return (WaterVolume / WaterVolumeCapacity) * 100;
+                }
+                return 0;
             }
         }
-        public DateTime CollectedDate { get; set; }
+        public DateTime EventDate { get; set; }
+
+        public List<WaterVolumeInfo> WaterVolumeInfos { get; set; }
 
         #endregion Property        
     }

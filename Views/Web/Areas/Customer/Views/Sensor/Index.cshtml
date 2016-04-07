@@ -21,6 +21,9 @@
     columns.Add(c => c.Name).Titled("Name")
          .Filterable(true);
 
+    columns.Add(c => c.Reference).Titled("Reference")
+     .Filterable(true);
+
     columns.Add(c => c.Status).Titled("Status")
      .Filterable(true);
 

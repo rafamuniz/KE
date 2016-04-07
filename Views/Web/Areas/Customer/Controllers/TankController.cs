@@ -186,6 +186,16 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #endregion Delete
 
+        #region Partial View
+
+        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        public ActionResult GetTankModelPartial()
+        {
+            return PartialView("_TankModel");
+        }
+
+        #endregion Partial View
+
         #region Fills
 
         public ActionResult FillTank(Guid siteId)
@@ -198,6 +208,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             var tankInfo = KEUnitOfWork.SensorItemEventRepository.GetTankWithWaterVolumeLastData(tankId);
             return Json(tankInfo, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetTankModel(String tankModelId)
+        {
+            var tankModel = KEUnitOfWork.TankModelRepository.Get(Int32.Parse(tankModelId));
+            return Json(tankModel, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetTankWaterVolume(Guid tankId)
@@ -213,8 +229,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult GetTankSensorVoltage(Guid tankId)
         {
             return Json(null, JsonRequestBehavior.AllowGet);
-        }        
-        
+        }
+
         #endregion Fills
     }
 }

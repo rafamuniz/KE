@@ -8,10 +8,16 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
 {
     public class ListViewModel
     {
+        public ListViewModel()
+        {
+            Tanks = new List<TankWithWaterVolume>();
+        }
+
         #region Property
 
         public Guid SiteId { get; set; }
                 
+        public List<TankWithWaterVolume> Tanks { get; set; }
         #endregion Property
 
         #region Map

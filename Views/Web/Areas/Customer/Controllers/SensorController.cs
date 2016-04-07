@@ -16,7 +16,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             var sensors = KEUnitOfWork.SensorRepository.GetsByCustomerId(CustomerId);
             var viewModels = ListViewModel.Map(sensors);
-            return View(viewModels);            
+            return View(viewModels);
         }
 
         [Authorize(Roles = "Customer, CustomerAdmin")]
@@ -61,7 +61,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     Name = viewModel.Name,
                     TankId = viewModel.TankId,
                     SensorTypeId = viewModel.SensorTypeId,
-                    Status = viewModel.Status
+                    Status = viewModel.Status,
+                    Reference = viewModel.Reference
                 };
 
                 KEUnitOfWork.SensorRepository.Add(sensor);

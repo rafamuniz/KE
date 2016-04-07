@@ -17,6 +17,10 @@ namespace KarmicEnergy.Core.Entities
         [StringLength(256)]
         public String Value { get; set; } = String.Empty;
 
+        [Column("EventDate", TypeName = "DATETIME")]
+        [Required]
+        public DateTime EventDate { get; set; } = DateTime.UtcNow;
+
         #endregion Property
 
         #region Sensor Item

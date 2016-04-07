@@ -54,8 +54,11 @@ namespace KarmicEnergy.Web
                     //and other extensions you want to include
                     "~/Scripts/jquery.inputmask/inputmask.numeric.extensions.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                    "~/Scripts/moment.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/notify").Include(
-                    "~/Scripts/bootstrap-notify.min.js"));
+              "~/Scripts/bootstrap-notify.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/highcharts")
                 .IncludeDirectory("~/Scripts/highcharts", "*.js", true));

@@ -60,11 +60,11 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                         if (waterInfos.Any())
                         {
-                            tankWithWaterVolume.WaterVolumeInfos = new List<WaterVolumeInfo>();
+                            tankWithWaterVolume.WaterVolumeInfos = new List<WaterVolumeGraphViewModel>();
 
                             foreach (var wi in waterInfos)
                             {
-                                WaterVolumeInfo wvi = new WaterVolumeInfo()
+                                WaterVolumeGraphViewModel wvi = new WaterVolumeGraphViewModel()
                                 {
                                     EventDate = wi.EventDate,
                                     WaterVolume = Decimal.Parse(wi.Value)
@@ -113,11 +113,11 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                     if (waterInfos.Any())
                     {
-                        tankWithWaterVolume.WaterVolumeInfos = new List<WaterVolumeInfo>();
+                        tankWithWaterVolume.WaterVolumeInfos = new List<WaterVolumeGraphViewModel>();
 
                         foreach (var wi in waterInfos)
                         {
-                            WaterVolumeInfo wvi = new WaterVolumeInfo()
+                            WaterVolumeGraphViewModel wvi = new WaterVolumeGraphViewModel()
                             {
                                 EventDate = wi.EventDate,
                                 WaterVolume = Decimal.Parse(wi.Value)
@@ -137,27 +137,34 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return View("Index", viewModel);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult GetWaterInfo(Guid tankId)
         {
+            TankViewModel viewModel = null;
             var waterInfos = KEUnitOfWork.SensorItemEventRepository.GetTankWithWaterVolume(tankId, 5);
-            List<WaterVolumeInfo> waterVolumeInfos = new List<WaterVolumeInfo>();
+            List<WaterVolumeGraphViewModel> waterVolumeInfos = new List<WaterVolumeGraphViewModel>();
 
             if (waterInfos.Any())
             {
+                viewModel = new TankViewModel();
+
                 foreach (var wi in waterInfos)
                 {
-                    WaterVolumeInfo wvi = new WaterVolumeInfo()
+                    viewModel.TankId = wi.SensorItem.Sensor.Tank.Id;
+                    viewModel.TankName = wi.SensorItem.Sensor.Tank.Name;
+                    viewModel.WaterVolumeCapacity = wi.SensorItem.Sensor.Tank.WaterVolumeCapacity;
+
+                    WaterVolumeGraphViewModel wvi = new WaterVolumeGraphViewModel()
                     {
                         EventDate = wi.EventDate,
                         WaterVolume = Decimal.Parse(wi.Value)
                     };
 
-                    waterVolumeInfos.Add(wvi);
+                    viewModel.WaterVolumeData.Add(wvi);
                 }
             }
 
-            return Json(waterInfos, JsonRequestBehavior.AllowGet);
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]

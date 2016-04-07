@@ -243,7 +243,8 @@
     <Compile Include="Areas\Customer\Controllers\TankController.cs" />
     <Compile Include="Areas\Customer\Controllers\SiteController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
-    <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeInfo.cs" />
+    <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeGraphViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankWithWaterVolume.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\CreateViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\EditViewModel.cs" />
@@ -1348,6 +1349,10 @@
     <Content Include="Scripts\jquery\jquery.mask.js" />
     <Content Include="Scripts\jquery\jquery.mask.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\munizoft\date_time.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />

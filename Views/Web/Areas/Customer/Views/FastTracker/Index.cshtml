@@ -1,7 +1,6 @@
 ﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
 @using Munizoft.Extensions
 @using Munizoft.MVC.Helpers
-@using GridMvc.Html
 
 @model ListViewModel
 
@@ -9,11 +8,13 @@
     Layout = "~/Views/Shared/_Internal.cshtml";
     ViewBag.Title = "Fast Tracker";
 }
-
+<script src="~/Scripts/jquery-2.2.1.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
-
+<script src="~/Scripts/app/utils.js"></script>
 <script src="~/Scripts/highcharts/highcharts.js"></script>
 <script src="~/Scripts/highcharts/highcharts-3d.js"></script>
+<script src="~/Scripts/app/fasttracker.js"></script>
+@Scripts.Render("~/bundles/moment")
 
 <div class="row" style="margin-bottom: 20px;">
     <div class="form-group">
@@ -29,22 +30,23 @@
 <div id="tanks">
     @{
         Int32 count = 1;
-        List<String> colors = new List<string>() { "green", "blue", "orange" };
-        String lastColorUsed = "orange";
     }
 
     @if (Model != null && Model.Tanks != null && Model.Tanks.Any())
     {
         foreach (var tank in Model.Tanks)
         {
-            Random rnd = new Random();
-            int index = rnd.Next(colors.Count);
-            var color = colors[index];
+            List<String> colors = new List<string>() { "green", "blue", "orange" };
+            var colorss = colors.AsEnumerable().PickRandom<String>();
+            //Random rnd = new Random();
+            //int index = rnd.Next(colors.Count);
+            //var color = colors[index];
+            var color = colors.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
 
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 tracker-table">
 
-                    <div class="col-sm-1 col-md-2 col-xs-3 col-lg-1 tracker-number @color">
+                    <div class="col-sm-1 col-md-2 col-xs-1 col-lg-1 tracker-number @color">
                         <h3>@count</h3>
                     </div>
 
@@ -59,86 +61,17 @@
                     <div class="col-sm-2 col-md-3 col-xs-4 col-lg-2 tracker-text">
                         <div class="gals">
                             <h2>@tank.WaterVolumePerc.ToString("P2")</h2>
-                            <h2>@tank.WaterVolumeCapacity</h2>
+                            <h2>@tank.WaterVolume</h2>
                             <p>gals</p>
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-md-5 col-xs-4 col-lg-7 tracker-graph">
+                    <div class="col-sm-6 col-md-5 col-xs-7 col-lg-7 tracker-graph">
                         @if (tank.WaterVolumeInfos.Any())
                         {
                             <div id="graph-@tank.TankId"></div>
                             <script type="text/javascript">
-                                $.ajax({
-                                    url: getUrlBase() + "/Customer/FastTracker/GetWaterInfo/",
-                                    type: "POST",
-                                    dataType: "json",
-                                    cache: false,
-                                    contentType: 'application/json; charset=utf-8',
-                                    //data: { tankId: '@tank.TankId' },
-                                    data: JSON.stringify('tankId:@tank.TankId'),
-                                    success: function (data) {
-
-                                        $('#graph-@tank.TankId').highcharts({
-                                            chart: {
-                                                zoomType: 'x'
-                                            },
-                                            title: {
-                                                text: 'Water'
-                                            },
-                                            subtitle: {
-                                                text: document.ontouchstart === undefined ?
-                                                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
-                                            },
-                                            xAxis: {
-                                                type: 'time'
-                                            },
-                                            yAxis: {
-                                                title: {
-                                                    text: 'Exchange rate'
-                                                }
-                                            },
-                                            legend: {
-                                                enabled: false
-                                            },
-                                            plotOptions: {
-                                                area: {
-                                                    fillColor: {
-                                                        linearGradient: {
-                                                            x1: 0,
-                                                            y1: 0,
-                                                            x2: 0,
-                                                            y2: 1
-                                                        },
-                                                        stops: [
-                                                            [0, Highcharts.getOptions().colors[0]],
-                                                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                                                        ]
-                                                    },
-                                                    marker: {
-                                                        radius: 2
-                                                    },
-                                                    lineWidth: 1,
-                                                    states: {
-                                                        hover: {
-                                                            lineWidth: 1
-                                                        }
-                                                    },
-                                                    threshold: null
-                                                }
-                                            },
-
-                                            series: [{
-                                                type: 'area',
-                                                name: 'USD to EUR',
-                                                data: data
-                                            }]
-                                        });
-                                    },
-                                    error: function (jqXHR, exception) {
-                                        notifiyError("Error - Add Alarm");
-                                    }
-                                });
+                                generateGraph('@tank.TankId');
                             </script>
                         }
                         else
@@ -155,9 +88,6 @@
 </div>
 
 @section Scripts {
-
-    <script src="~/Scripts/app/fasttracker.js"></script>
-
     <script type="text/javascript">
         $(function () {
             $('#ddlSite').on('change', function (event) {

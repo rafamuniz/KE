@@ -27,61 +27,7 @@ namespace KarmicEnergy.Core.Entities
 
         [Column("WaterVolumeCapacity", TypeName = "DECIMAL")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        public Decimal WaterVolumeCapacity
-        {
-            get
-            {
-                switch (TankModelId)
-                {
-                    // set @cubicunits = @length * @width * @height
-                    case (Int32)TankModelEnum.CubeHorizontal:
-                        return Length * Width * Height;
-
-                    case (Int32)TankModelEnum.HorizontalRoundTank:
-                        return Length * Width * Height;
-
-                    case (Int32)TankModelEnum.VerticalRoundTank:
-                        return Length * Width * Height;
-
-                    // set @area1 = @height * @dim4
-                    // set @area2 = PI() * power((@height / 2), 2)
-                    // set @cubicunits = (@area1 + @area2) * @length
-                    case (Int32)TankModelEnum.HorizontalStadium:
-                        var areaHS1 = Height * Dim1;
-                        var areaHS2 = Math.PI * Math.Pow((Double)(Height / 2), 2);
-                        var cubicHS = (areaHS1 + (Decimal)areaHS2) * Length;
-                        return cubicHS;
-
-                    // set @area1 = @length * @width
-                    // set @area2 = PI() * power((@width / 2), 2)
-                    // set @cubicunits = (@area1 + @area2) * @height
-                    case (Int32)TankModelEnum.VerticalStadium:
-                        var areaVS1 = Length * Width;
-                        var areaVS2 = Math.PI * Math.Pow((double)(Width / 2), 2);
-                        var cubicVS = (areaVS1 + (Decimal)areaVS2) * Height;
-                        return cubicVS;
-
-                    // set @area = PI() * (@height / 2) * (@width / 2)
-                    // set @cubicunits = @area * @length
-                    case (Int32)TankModelEnum.StandardTanker:
-                        var areaST = Math.PI * Math.Pow((double)(Height / 2), (Double)(Width / 2));
-                        var cubicST = (Decimal)areaST * Length;
-                        return cubicST;
-
-                    case (Int32)TankModelEnum.FracPond48000bbl:
-                        return 48000;
-
-                    case (Int32)TankModelEnum.FracTank21K:
-                        return 21000;
-
-                    default:
-                        return default(Decimal);
-
-                }
-            }
-
-            set { _WaterVolumeCapacity = value; }
-        }
+        public Decimal WaterVolumeCapacity { get; set; }
 
         [Column("Status", TypeName = "CHAR")]
         [StringLength(1)]

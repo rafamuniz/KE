@@ -89,6 +89,57 @@ namespace KarmicEnergy.Core.Entities
             return entities;
         }
         #endregion Load 
+
+        public Decimal CalculateWaterCapacity()
+        {
+            switch (this.Id)
+            {
+                // set @cubicunits = @length * @width * @height
+                case (Int32)TankModelEnum.CubeHorizontal:
+                    return this.Length.Value * this.Width.Value * this.Height.Value;
+
+                case (Int32)TankModelEnum.HorizontalRoundTank:
+                    return Length.Value * Width.Value * Height.Value;
+
+                case (Int32)TankModelEnum.VerticalRoundTank:
+                    return Length.Value * Width.Value * Height.Value;
+
+                // set @area1 = @height * @dim4
+                // set @area2 = PI() * power((@height / 2), 2)
+                // set @cubicunits = (@area1 + @area2) * @length
+                case (Int32)TankModelEnum.HorizontalStadium:
+                    var areaHS1 = Height * Dim1;
+                    var areaHS2 = Math.PI * Math.Pow((Double)(Height / 2), 2);
+                    var cubicHS = (areaHS1 + (Decimal)areaHS2) * Length;
+                    return cubicHS.Value;
+
+                // set @area1 = @length * @width
+                // set @area2 = PI() * power((@width / 2), 2)
+                // set @cubicunits = (@area1 + @area2) * @height
+                case (Int32)TankModelEnum.VerticalStadium:
+                    var areaVS1 = Length * Width;
+                    var areaVS2 = Math.PI * Math.Pow((double)(Width / 2), 2);
+                    var cubicVS = (areaVS1 + (Decimal)areaVS2) * Height;
+                    return cubicVS.Value;
+
+                // set @area = PI() * (@height / 2) * (@width / 2)
+                // set @cubicunits = @area * @length
+                case (Int32)TankModelEnum.StandardTanker:
+                    var areaST = Math.PI * Math.Pow((double)(Height / 2), (Double)(Width / 2));
+                    var cubicST = (Decimal)areaST * Length;
+                    return cubicST.Value;
+
+                case (Int32)TankModelEnum.FracPond48000bbl:
+                    return 48000;
+
+                case (Int32)TankModelEnum.FracTank21K:
+                    return 21000;
+
+                default:
+                    return default(Decimal);
+
+            }
+        }
     }
 
     public enum TankModelEnum : int

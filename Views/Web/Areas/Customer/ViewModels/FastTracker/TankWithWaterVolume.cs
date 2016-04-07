@@ -10,7 +10,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
     {
         public TankWithWaterVolume()
         {
-            WaterVolumeInfos = new List<WaterVolumeInfo>();
+            WaterVolumeInfos = new List<WaterVolumeGraphViewModel>();
         }
 
         #region Property
@@ -34,14 +34,14 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
             {
                 if (WaterVolumeCapacity != 0)
                 {
-                    return (WaterVolume / WaterVolumeCapacity) * 100;
+                    return (WaterVolume / WaterVolumeCapacity);
                 }
                 return 0;
             }
         }
         public DateTime EventDate { get; set; }
 
-        public List<WaterVolumeInfo> WaterVolumeInfos { get; set; }
+        public List<WaterVolumeGraphViewModel> WaterVolumeInfos { get; set; }
 
         #endregion Property        
     }

@@ -39,36 +39,6 @@ function getData() {
     hideLoading();
 }
 
-function initView() {
-    //var voltage_y = [];
-    //var voltage_x = [];
-
-    //for (var i = 0; i < 5; i++) {
-    //    voltage_x.push([new Date().subtractHours(i), Math.sin(i)]);
-    //}
-
-    //for (var i = 0; i < 6000; i += 2000) {
-    //    voltage_y.push([i, Math.sin(i)]);
-    //}
-
-    ////var volts = [[(new Date()).getTime(), 2000], [(new Date()).getTime(), 4000]];
-    ////$.plot("#voltage-graph", [voltage_y, volts]);
-
-    ////$.plot($("#voltage-graph"), []);
-
-    //$.plot($("#voltage-graph"), [{ data: voltage_y, lines: { show: true }, label: "Volts" },
-    //    { data: voltage_x, lines: { show: true }, label: "" }],
-    //    { yaxis: { label: "mV" } },
-    //    {
-    //        xaxis:
-    //           {
-    //               mode: "time",
-    //               timeformat: "%M:%S"
-    //           }
-    //    });
-
-}
-
 function getTankInfo(tankId) {
     $.ajax({
         url: '/Customer/Tank/GetTankInfo',
@@ -177,7 +147,7 @@ function selectedSite() {
                         var day = currentDate.getDate();
                         var year = currentDate.getFullYear();
                         var date = day + "/" + month + "/" + year;
-                        
+
                         var html_tank = ReplaceAll(html_tank, "{{Count}}", i + 1);
                         var html_tank = ReplaceAll(html_tank, "{{ImageTankModel}}", "~/images/tank_models/" + tank.UrlImageTankModel);
                         var html_tank = ReplaceAll(html_tank, "{{MeasurementTime}}", date);
@@ -195,3 +165,137 @@ function selectedSite() {
         });
     }
 }
+
+function generateGraph(tankId) {
+    $.ajax({
+        url: getUrlBase() + "/Customer/FastTracker/GetWaterInfo/",
+        type: "GET",
+        dataType: "JSON",
+        data: { TankId: tankId },
+        success: function (data) {
+            var chartData = [];
+            var dataX = [];
+            var dataY = [];
+            var minX = null;
+            var maxX = null;
+            var minY = 0;
+            var maxY = data.WaterVolumeCapacity;
+
+            $.each(data.WaterVolumeData, function (i, d) {
+                //var water = {
+                //    value: d.WaterVolume
+                //};
+
+                var momentDate = moment.utc(d.EventDate);
+                var eventDate = momentDate.format('MM/DD/YYYY hh:mm A');
+                //moment.utc(moment(d.EventDate));
+                //.format('MM/DD/YYYY hh:mm A')).toDate();
+
+                var dates = {
+                    value: eventDate
+                };
+
+                var point = [];
+                point.push(eventDate);
+                point.push(d.WaterVolume);
+                chartData.push(point);
+
+                //dataY.push(water);
+                dataX.push(dates);
+            });
+
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'graph-' + data.TankId,
+                    zoomType: 'x',
+                    height: '220'//,
+                    //width: '100%'
+                },
+                title: {
+                    text: 'Water'
+                },
+                loading: {
+                    hideDuration: 100,
+                    labelStyle: { "fontWeight": "bold", "position": "relative", "top": "45%" },
+                    showDuration: 0
+                },
+                //subtitle: {
+                //    text: document.ontouchstart === undefined ?
+                //            'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+                //},
+                xAxis: {
+                    type: 'time',
+                    dateTimeLabelFormats: {
+                        millisecond: '%H:%M:%S.%L',
+                        second: '%H:%M:%S',
+                        minute: '%H:%M',
+                        hour: '%H:%M',
+                        day: '%e. %b',
+                        week: '%e. %b',
+                        month: '%b \'%y',
+                        year: '%Y'
+                    },
+                    min: minX,
+                    max: maxX,
+                    categories: dataX,
+                    labels: {
+                        formatter: function () {
+                            return Highcharts.dateFormat('%a %d %b', this.value);
+                        }
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Water'
+                    },
+                    min: minY,
+                    max: maxY,
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    area: {
+                        fillColor: {
+                            linearGradient: {
+                                x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1
+                            },
+                            stops: [
+                                [0, Highcharts.getOptions().colors[0]],
+                                [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                            ]
+                        },
+                        marker: {
+                            radius: 2
+                        },
+                        lineWidth: 1,
+                        states: {
+                            hover: {
+                                lineWidth: 1
+                            }
+                        },
+                        threshold: null
+                    }
+                },
+                series: [{
+                    type: 'column',
+                    //type: 'area',
+                    name: '',
+                    data: chartData//,
+                    //yAxis: {
+                    //    min: 0,
+                    //    max: data.WaterVolumeCapacity
+                    //}
+                }]
+            });
+        },
+        error: function (jqXHR, exception) {
+            notifiyError("Error - Generate Graph");
+        }
+    });
+};
+
+

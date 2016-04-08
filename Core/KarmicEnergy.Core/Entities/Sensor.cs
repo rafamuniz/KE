@@ -29,6 +29,10 @@ namespace KarmicEnergy.Core.Entities
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public String Status { get; set; } = "A";
 
+        [Column("SpotGPS", TypeName = "NVARCHAR")]
+        [StringLength(128)]
+        public String SpotGPS { get; set; }
+
         #endregion Property
 
         #region SensorType

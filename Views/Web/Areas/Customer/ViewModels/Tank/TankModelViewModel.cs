@@ -14,28 +14,37 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
         #region Property
 
         [Display(Name = "Width")]
-        public Decimal Width { get; set; }
+        public Decimal? Width { get; set; }
 
         [Display(Name = "Height")]
-        public Decimal Height { get; set; }
+        public Decimal? Height { get; set; }
 
         [Display(Name = "Length")]
-        public Decimal Length { get; set; }
+        public Decimal? Length { get; set; }
 
-        [Display(Name = "Min Distance")]
-        public Decimal MinDistance { get; set; }
+        [Display(Name = "Face Length")]
+        public Decimal? FaceLength { get; set; }
 
-        [Display(Name = "Max Distance")]
-        public Decimal MaxDistance { get; set; }
-        
+        [Display(Name = "Bottom Width")]
+        public Decimal? BottomWidth { get; set; }
+
+        [Display(Name = "Minimum Distance")]
+        public Decimal? MinimumDistance { get; set; }
+
+        [Display(Name = "Maximum Distance")]
+        public Decimal? MaximumDistance { get; set; }
+
+        [Display(Name = "Water Volume Capacity")]
+        public Decimal? WaterVolumeCapacity { get; set; }
+
         #endregion Property
 
         #region Map
 
-        public Core.Entities.Tank Map()
+        public Core.Entities.TankModel Map()
         {
-            Mapper.CreateMap<TankModelViewModel, Core.Entities.Tank>();
-            return Mapper.Map<TankModelViewModel, Core.Entities.Tank>(this);
+            Mapper.CreateMap<TankModelViewModel, Core.Entities.TankModel>();
+            return Mapper.Map<TankModelViewModel, Core.Entities.TankModel>(this);
         }
 
         #endregion Map

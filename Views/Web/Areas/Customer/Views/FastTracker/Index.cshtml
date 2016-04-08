@@ -8,6 +8,7 @@
     Layout = "~/Views/Shared/_Internal.cshtml";
     ViewBag.Title = "Fast Tracker";
 }
+
 <script src="~/Scripts/jquery-2.2.1.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
 <script src="~/Scripts/app/utils.js"></script>
@@ -37,10 +38,6 @@
         foreach (var tank in Model.Tanks)
         {
             List<String> colors = new List<string>() { "green", "blue", "orange" };
-            var colorss = colors.AsEnumerable().PickRandom<String>();
-            //Random rnd = new Random();
-            //int index = rnd.Next(colors.Count);
-            //var color = colors[index];
             var color = colors.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
 
             <div class="row">

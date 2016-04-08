@@ -92,6 +92,22 @@
     <Compile Include="Migrations\201604061758039_Initial3.Designer.cs">
       <DependentUpon>201604061758039_Initial3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604081425427_Initial4.cs" />
+    <Compile Include="Migrations\201604081425427_Initial4.Designer.cs">
+      <DependentUpon>201604081425427_Initial4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604081439106_Initial5.cs" />
+    <Compile Include="Migrations\201604081439106_Initial5.Designer.cs">
+      <DependentUpon>201604081439106_Initial5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604081442271_Initial6.cs" />
+    <Compile Include="Migrations\201604081442271_Initial6.Designer.cs">
+      <DependentUpon>201604081442271_Initial6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604081449005_Initial7.cs" />
+    <Compile Include="Migrations\201604081449005_Initial7.Designer.cs">
+      <DependentUpon>201604081449005_Initial7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
@@ -141,6 +157,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604061758039_Initial3.resx">
       <DependentUpon>201604061758039_Initial3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604081425427_Initial4.resx">
+      <DependentUpon>201604081425427_Initial4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604081439106_Initial5.resx">
+      <DependentUpon>201604081439106_Initial5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604081442271_Initial6.resx">
+      <DependentUpon>201604081442271_Initial6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604081449005_Initial7.resx">
+      <DependentUpon>201604081449005_Initial7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

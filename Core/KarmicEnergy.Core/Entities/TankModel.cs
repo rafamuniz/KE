@@ -48,14 +48,18 @@ namespace KarmicEnergy.Core.Entities
         [Column("BottomWidth", TypeName = "DECIMAL")]
         public Decimal? BottomWidth { get; set; }
 
-        [Column("Dim1", TypeName = "DECIMAL")]
-        public Decimal? Dim1 { get; set; }
+        [Column("DimensionValue1", TypeName = "DECIMAL")]
+        public Decimal? DimensionValue1 { get; set; }
 
-        [Column("Dim2Value", TypeName = "DECIMAL")]
-        public Decimal? Dim2 { get; set; }
+        [Column("DimensionValue2", TypeName = "DECIMAL")]
+        public Decimal? DimensionValue2 { get; set; }
 
-        [Column("Dim3Value", TypeName = "DECIMAL")]
-        public Decimal? Dim3 { get; set; }
+        [Column("DimensionValue3", TypeName = "DECIMAL")]
+        public Decimal? DimensionValue3 { get; set; }
+
+        [Column("WaterVolumeCapacity", TypeName = "DECIMAL")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public Decimal WaterVolumeCapacity { get; set; }
 
         #endregion Property      
 
@@ -76,70 +80,19 @@ namespace KarmicEnergy.Core.Entities
         {
             List<TankModel> entities = new List<TankModel>()
             {
-                new TankModel() { Id = (int)TankModelEnum.StandardTanker, Name = "Standard Tanker", GeometryId = (Int16)GeometryEnum.EllipticalHorizontal, Height = 100, Width = 100, Length = 100, ImageFilename = "1.png" },
-                new TankModel() { Id = (int)TankModelEnum.VerticalRoundTank, Name = "Vertical Round Tank", GeometryId = (Int16)GeometryEnum.CylinderVertical, Height = 100, Width = 100, Length = 100, ImageFilename = "2.png" },
-                new TankModel() { Id = (int)TankModelEnum.HorizontalRoundTank, Name = "Horizontal Round Tank", GeometryId = (Int16)GeometryEnum.CylinderHorizontal, Height = 100, Width = 100, Length = 100, ImageFilename = "3.png" },
-                new TankModel() { Id = (int)TankModelEnum.VerticalStadium, Name = "Vertical Stadium", GeometryId = (Int16)GeometryEnum.StadiumVertical, Height = 100, Width = 100, Length = 100, ImageFilename = "4.png" },
-                new TankModel() { Id = (int)TankModelEnum.HorizontalStadium, Name = "Horizontal Stadium", GeometryId = (Int16)GeometryEnum.StadiumHorizontal, Height = 100, Width = 100, Length = 100, ImageFilename = "5.png" },
-                new TankModel() { Id = (int)TankModelEnum.CubeHorizontal, Name = "Cube Horizontal", GeometryId = (Int16)GeometryEnum.CubeHorizontal, Height = 100, Width = 100, Length = 100, ImageFilename = "6.png" },
-                new TankModel() { Id = (int)TankModelEnum.FracTank21K, Name = "Frac Tank 21K", GeometryId = (Int16)GeometryEnum.CubeHorizontal, Height = 100, Width = 100, Length = 100, ImageFilename = "7.png" },
-                new TankModel() { Id = (int)TankModelEnum.FracPond48000bbl, Name = "Frac Pond 48000bbl", GeometryId = (Int16)GeometryEnum.CylinderVertical, Height = 100, Width = 100, Length = 100, ImageFilename = "8.png" }
+                new TankModel() { Id = (int)TankModelEnum.StandardTanker, Name = "Standard Tanker", GeometryId = (Int16)GeometryEnum.EllipticalHorizontal, Height = 96, Width = 144, Length = 480, ImageFilename = "1.png", WaterVolumeCapacity = 0 },
+                new TankModel() { Id = (int)TankModelEnum.VerticalRoundTank, Name = "Vertical Round Tank", GeometryId = (Int16)GeometryEnum.CylinderVertical, Height = 12, Width = 8, ImageFilename = "2.png", WaterVolumeCapacity = 0 },
+                new TankModel() { Id = (int)TankModelEnum.HorizontalRoundTank, Name = "Horizontal Round Tank", GeometryId = (Int16)GeometryEnum.CylinderHorizontal, Height = 12, Width = 8, ImageFilename = "3.png", WaterVolumeCapacity = 0 },
+                new TankModel() { Id = (int)TankModelEnum.VerticalStadium, Name = "Vertical Stadium", GeometryId = (Int16)GeometryEnum.StadiumVertical, Height = 10, Width = 10, FaceLength = 10, ImageFilename = "4.png", WaterVolumeCapacity = 0 },
+                new TankModel() { Id = (int)TankModelEnum.HorizontalStadium, Name = "Horizontal Stadium", GeometryId = (Int16)GeometryEnum.StadiumHorizontal, Height = 10, Length = 10, BottomWidth = 10, ImageFilename = "5.png", WaterVolumeCapacity = 0 },
+                new TankModel() { Id = (int)TankModelEnum.CubeHorizontal, Name = "Cube Horizontal", GeometryId = (Int16)GeometryEnum.CubeHorizontal, Height = 10, Width = 144, Length = 480, ImageFilename = "6.png", WaterVolumeCapacity = 0 },
+                new TankModel() { Id = (int)TankModelEnum.FracTank21K, Name = "Frac Tank 21K", GeometryId = (Int16)GeometryEnum.CubeHorizontal, Height = 120, Width = 92, Length = 500, ImageFilename = "7.png", WaterVolumeCapacity = 21000 },
+                new TankModel() { Id = (int)TankModelEnum.FracPond48000bbl, Name = "Frac Pond 48000bbl", GeometryId = (Int16)GeometryEnum.CylinderVertical, Height = 144, Width = 1800, ImageFilename = "8.png", WaterVolumeCapacity = 48000 }
             };
 
             return entities;
         }
-        #endregion Load 
-
-        public Decimal CalculateWaterCapacity()
-        {
-            switch (this.Id)
-            {
-                // set @cubicunits = @length * @width * @height
-                case (Int32)TankModelEnum.CubeHorizontal:
-                    return this.Length.Value * this.Width.Value * this.Height.Value;
-
-                case (Int32)TankModelEnum.HorizontalRoundTank:
-                    return Length.Value * Width.Value * Height.Value;
-
-                case (Int32)TankModelEnum.VerticalRoundTank:
-                    return Length.Value * Width.Value * Height.Value;
-
-                // set @area1 = @height * @dim4
-                // set @area2 = PI() * power((@height / 2), 2)
-                // set @cubicunits = (@area1 + @area2) * @length
-                case (Int32)TankModelEnum.HorizontalStadium:
-                    var areaHS1 = Height * Dim1;
-                    var areaHS2 = Math.PI * Math.Pow((Double)(Height / 2), 2);
-                    var cubicHS = (areaHS1 + (Decimal)areaHS2) * Length;
-                    return cubicHS.Value;
-
-                // set @area1 = @length * @width
-                // set @area2 = PI() * power((@width / 2), 2)
-                // set @cubicunits = (@area1 + @area2) * @height
-                case (Int32)TankModelEnum.VerticalStadium:
-                    var areaVS1 = Length * Width;
-                    var areaVS2 = Math.PI * Math.Pow((double)(Width / 2), 2);
-                    var cubicVS = (areaVS1 + (Decimal)areaVS2) * Height;
-                    return cubicVS.Value;
-
-                // set @area = PI() * (@height / 2) * (@width / 2)
-                // set @cubicunits = @area * @length
-                case (Int32)TankModelEnum.StandardTanker:
-                    var areaST = Math.PI * Math.Pow((double)(Height / 2), (Double)(Width / 2));
-                    var cubicST = (Decimal)areaST * Length;
-                    return cubicST.Value;
-
-                case (Int32)TankModelEnum.FracPond48000bbl:
-                    return 48000;
-
-                case (Int32)TankModelEnum.FracTank21K:
-                    return 21000;
-
-                default:
-                    return default(Decimal);
-
-            }
-        }
+        #endregion Load      
     }
 
     public enum TankModelEnum : int

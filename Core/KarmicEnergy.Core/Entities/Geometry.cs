@@ -34,21 +34,21 @@ namespace KarmicEnergy.Core.Entities
         [Column("HasBottomWidth", TypeName = "BIT")]
         public Boolean HasBottomWidth { get; set; } = false;
 
-        [Column("HasDim1", TypeName = "BIT")]
+        [Column("HasDimension1", TypeName = "BIT")]
         public Boolean HasDimension1 { get; set; } = false;
 
         [Column("DimensionTitle1", TypeName = "NVARCHAR")]
         [StringLength(32)]
         public String DimensionTitle1 { get; set; }
 
-        [Column("HasDim2", TypeName = "BIT")]
+        [Column("HasDimension2", TypeName = "BIT")]
         public Boolean HasDimension2 { get; set; } = false;
 
         [Column("DimensionTitle2", TypeName = "NVARCHAR")]
         [StringLength(32)]
         public String DimensionTitle2 { get; set; }
 
-        [Column("HasDim3", TypeName = "BIT")]
+        [Column("HasDimension3", TypeName = "BIT")]
         public Boolean HasDimension3 { get; set; } = false;
 
         [Column("DimensionTitle3", TypeName = "NVARCHAR")]

@@ -90,14 +90,27 @@ function populateDropdown(select, data) {
 }
 
 (function ($) {
-    $.fn.invisible = function () {
+    $.fn.hide = function () {
         return this.each(function () {
             $(this).css("visibility", "hidden");
         });
     };
-    $.fn.visible = function () {
+
+    $.fn.show = function () {
         return this.each(function () {
             $(this).css("visibility", "visible");
+        });
+    };
+
+    $.fn.invisible = function () {
+        return this.each(function () {
+            $(this).css("display", "none");
+        });
+    };
+
+    $.fn.visible = function () {
+        return this.each(function () {
+            $(this).css("display", "");
         });
     };
 }(jQuery));

@@ -28,13 +28,26 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
         [Display(Name = "Bottom Width")]
         public Decimal? BottomWidth { get; set; }
 
+        public String DimensionTitle1 { get; set; }
+
+        [Display(Name = "Dimension 1")]
+        public Decimal? Dimension1 { get; set; }
+
+        [Display(Name = "Dimension 2")]
+        public Decimal? Dimension2 { get; set; }
+
+        [Display(Name = "Dimension 3")]
+        public Decimal? Dimension3 { get; set; }
+
         [Display(Name = "Minimum Distance")]
+        [Required]
         public Decimal? MinimumDistance { get; set; }
 
         [Display(Name = "Maximum Distance")]
+        [Required]
         public Decimal? MaximumDistance { get; set; }
 
-        [Display(Name = "Water Volume Capacity")]
+        [Display(Name = "Water Volume Capacity", ShortName = "WVC")]
         public Decimal? WaterVolumeCapacity { get; set; }
 
         #endregion Property

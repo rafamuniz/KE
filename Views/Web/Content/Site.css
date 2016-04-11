@@ -5831,6 +5831,17 @@ bottom-buttons a {
     margin-left: 5px;
 }
 
+.checkboxlist {
+}
+
+    .checkboxlist label {
+        width: auto !important;
+        margin-left: 5px !important;
+    }
+
+    .checkboxlist input[type=checkbox] {
+    }
+
 .user-name {
     display: inline-block;
     vertical-align: middle;
@@ -6167,6 +6178,7 @@ div.uploader {
 }
 
     .box-sub .title {
+        margin-bottom: 20px;
         min-height: 40px;
         background: #82C341;
         padding: 10px 0;
@@ -6178,6 +6190,10 @@ div.uploader {
             font-family: 'open_sansbold';
             color: #FFF;
         }
+
+    .box-sub input[type="text"], input[type='password'], input[type='email'], textarea {
+        background-color: #FFF !important;
+    }
 
 /**********************/
 /* TANK DASHBOARD     */
@@ -6483,9 +6499,10 @@ div.uploader {
 /* TANK */
 /********/
 .divImageTankModel {
+    text-align: center;
 }
 
     .divImageTankModel img {
-        width: 100%;
-        height: 100%;
+        width: 200px;
+        height: 200px;
     }

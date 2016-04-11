@@ -82,6 +82,10 @@
     <Reference Include="Munizoft.Util">
       <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Util\bin\Debug\Munizoft.Util.dll</HintPath>
     </Reference>
+    <Reference Include="MvcCheckBoxList, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvcCheckBoxList.1.4.5\lib\net45\MvcCheckBoxList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -246,6 +250,8 @@
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeGraphViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankWithWaterVolume.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Sensor\ItemViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Sensor\SpotGPSViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\CreateViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\EditViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\ListViewModel.cs" />
@@ -407,7 +413,6 @@
     <Content Include="images\tank-gauge.png" />
     <Content Include="images\tank-temp.png" />
     <Content Include="images\tank-volume.png" />
-    <Content Include="images\tank_models\2.1.png" />
     <Content Include="images\tank_models\2.png" />
     <Content Include="images\tank_models\3.png" />
     <Content Include="images\tank_models\4.png" />
@@ -416,6 +421,15 @@
     <Content Include="images\tank_models\7.png" />
     <Content Include="images\tank_models\8.png" />
     <Content Include="images\tank_models\1.png" />
+    <Content Include="images\tank_models\delete\1.png" />
+    <Content Include="images\tank_models\delete\2.1.png" />
+    <Content Include="images\tank_models\delete\3.png" />
+    <Content Include="images\tank_models\delete\4.png" />
+    <Content Include="images\tank_models\delete\5.png" />
+    <Content Include="images\tank_models\delete\6.png" />
+    <Content Include="images\tank_models\delete\7.png" />
+    <Content Include="images\tank_models\delete\8.png" />
+    <Content Include="images\tank_models\delete\CylVert.png" />
     <Content Include="images\tank_white.png" />
     <Content Include="images\users.png" />
     <Content Include="images\water-flow.gif" />
@@ -451,6 +465,8 @@
     <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\d3\d3.js" />
+    <Content Include="Scripts\d3\d3.min.js" />
     <Content Include="Scripts\flot\excanvas.js" />
     <Content Include="Scripts\flot\excanvas.min.js" />
     <Content Include="Scripts\flot\jquery.colorhelpers.js" />
@@ -1312,7 +1328,7 @@
     <Content Include="Areas\Customer\Views\FastTracker\FastTracker.cshtml" />
     <Content Include="Areas\Customer\Views\FastTracker\Index.cshtml" />
     <Content Include="Areas\Customer\Views\FastTracker\_Tank.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\_TankSpotGPS.cshtml" />
+    <Content Include="Areas\Customer\Views\Sensor\_TankSpotGPS.cshtml" />
     <None Include="Areas\Customer\Views\Tank\_TankModel.cshtml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />
     <Content Include="Scripts\errors.json" />
@@ -1327,6 +1343,7 @@
     <Content Include="Scripts\angular\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular\angular-aria.min.js.map" />
     <Content Include="Scripts\angular\angular-animate.min.js.map" />
+    <Content Include="Scripts\d3\LICENSE" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
@@ -1360,7 +1377,9 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1415,7 +1434,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Helpers\" />
     <Folder Include="images\geometries\" />
-    <Folder Include="images\tank_models\delete\" />
     <Folder Include="images\users\" />
     <Folder Include="Scripts\Controllers\" />
   </ItemGroup>

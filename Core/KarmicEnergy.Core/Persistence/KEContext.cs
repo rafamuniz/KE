@@ -24,7 +24,9 @@ namespace KarmicEnergy.Core.Persistence
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<TankModel>().Property(x => x.Image).HasColumnType("VARBINARY(MAX)");
-
+            modelBuilder.Entity<CustomerSetting>().Property(x => x.Value).HasColumnType("NVARCHAR(MAX)");
+            modelBuilder.Entity<CustomerUserSetting>().Property(x => x.Value).HasColumnType("NVARCHAR(MAX)");
+            
             //modelBuilder.HasDefaultSchema("security");
             CreateManyToMany(modelBuilder);
         }
@@ -44,7 +46,11 @@ namespace KarmicEnergy.Core.Persistence
 
         #region DbSet
         public IDbSet<Customer> Customers { get; set; }
-        public IDbSet<CustomerUser> CustomerUsers { get; set; }
+        public IDbSet<CustomerSetting> CustomerSettings { get; set; }
+
+        public IDbSet<CustomerUser> CustomerUsers { get; set; }                
+        public IDbSet<CustomerUserSetting> CustomerUserSettings { get; set; }
+
         public IDbSet<Site> Sites { get; set; }
         public IDbSet<Tank> Tanks { get; set; }
         public IDbSet<TankModel> TankModels { get; set; }

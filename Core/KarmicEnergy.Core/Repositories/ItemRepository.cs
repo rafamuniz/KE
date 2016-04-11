@@ -7,10 +7,10 @@ using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public class SensorItemRepository : Repository<SensorItem, KEContext>, ISensorItemRepository
+    public class ItemRepository : Repository<Item, KEContext>, IItemRepository
     {
         #region Constructor
-        public SensorItemRepository(KEContext context)
+        public ItemRepository(KEContext context)
             : base(context)
         {
 

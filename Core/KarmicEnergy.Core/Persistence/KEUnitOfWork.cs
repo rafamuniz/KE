@@ -19,6 +19,8 @@ namespace KarmicEnergy.Core.Persistence
 
         private ISensorItemEventRepository _SensorItemEventRepository;
 
+        private IItemRepository _ItemRepository;
+
         private ITriggerRepository _TriggerRepository;
         private IAlarmRepository _AlarmRepository;
 
@@ -80,6 +82,11 @@ namespace KarmicEnergy.Core.Persistence
         public ISensorItemRepository SensorItemRepository
         {
             get { return _SensorItemRepository ?? (_SensorItemRepository = new SensorItemRepository(_context)); }
+        }
+
+        public IItemRepository ItemRepository
+        {
+            get { return _ItemRepository ?? (_ItemRepository = new ItemRepository(_context)); }
         }
 
         public ISensorTypeRepository SensorTypeRepository

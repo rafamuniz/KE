@@ -35,23 +35,6 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
         #endregion Dashoard
 
-        #region FastTracker
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
-        public ActionResult FastTracker()
-        {
-            LoadSites(CustomerId);
-            return View();
-        }
-
-        //[Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
-        //public ActionResult FastTracker(Guid id)
-        //{
-        //    var tank = KEUnitOfWork.TankRepository.Get(id);
-        //    FastTrackerViewModel viewModel = FastTrackerViewModel.Map(tank);
-        //    return View(viewModel);
-        //}
-        #endregion FastTracker
-
         #region Create
 
         [Authorize(Roles = "Customer, CustomerAdmin")]
@@ -59,11 +42,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             LoadSites(CustomerId);
             LoadTankModels();
-            //var tankModels = LoadTankModels();
-            //CreateViewModel viewModel = new CreateViewModel() { TankModels = tankModels };
             LoadStatuses();
-            //return View(viewModel);
-            return View();
+            CreateViewModel viewModel = new CreateViewModel();
+            return View(viewModel);
         }
 
         //
@@ -83,15 +64,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             try
             {
-                //Tank tank = new Tank()
-                //{
-                //    Name = viewModel.Name,
-                //    SiteId = viewModel.SiteId,
-                //    TankModelId = viewModel.TankModelId,
-                //    Description = viewModel.Description,
-                //    Status = viewModel.Status
-                //};
                 var tank = viewModel.Map();
+                var tankModel = viewModel.TankModelViewModel.Map();
+                tank.WaterVolumeCapacity = tank.CalculateWaterCapacity();
+
                 KEUnitOfWork.TankRepository.Add(tank);
                 KEUnitOfWork.Complete();
 

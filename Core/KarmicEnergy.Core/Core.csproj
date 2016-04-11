@@ -58,6 +58,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\CustomerUserSetting.cs" />
+    <Compile Include="Entities\CustomerSetting.cs" />
     <Compile Include="Entities\Geometry.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Address.cs" />
@@ -76,37 +78,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201604061704406_Initial.cs" />
-    <Compile Include="Migrations\201604061704406_Initial.Designer.cs">
-      <DependentUpon>201604061704406_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604061705312_Initial1.cs" />
-    <Compile Include="Migrations\201604061705312_Initial1.Designer.cs">
-      <DependentUpon>201604061705312_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604061706233_Initial2.cs" />
-    <Compile Include="Migrations\201604061706233_Initial2.Designer.cs">
-      <DependentUpon>201604061706233_Initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604061758039_Initial3.cs" />
-    <Compile Include="Migrations\201604061758039_Initial3.Designer.cs">
-      <DependentUpon>201604061758039_Initial3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604081425427_Initial4.cs" />
-    <Compile Include="Migrations\201604081425427_Initial4.Designer.cs">
-      <DependentUpon>201604081425427_Initial4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604081439106_Initial5.cs" />
-    <Compile Include="Migrations\201604081439106_Initial5.Designer.cs">
-      <DependentUpon>201604081439106_Initial5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604081442271_Initial6.cs" />
-    <Compile Include="Migrations\201604081442271_Initial6.Designer.cs">
-      <DependentUpon>201604081442271_Initial6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604081449005_Initial7.cs" />
-    <Compile Include="Migrations\201604081449005_Initial7.Designer.cs">
-      <DependentUpon>201604081449005_Initial7.cs</DependentUpon>
+    <Compile Include="Migrations\201604110415022_Initial.cs" />
+    <Compile Include="Migrations\201604110415022_Initial.Designer.cs">
+      <DependentUpon>201604110415022_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
@@ -114,8 +88,14 @@
     <Compile Include="Persistence\KEContext.cs" />
     <Compile Include="Persistence\KEUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CustomerUserSettingRepository.cs" />
+    <Compile Include="Repositories\CustomerSettingRepository.cs" />
+    <Compile Include="Repositories\Interface\ICustomerUserSettingRepository.cs" />
+    <Compile Include="Repositories\Interface\ICustomerSettingRepository.cs" />
+    <Compile Include="Repositories\Interface\IItemRepository.cs" />
     <Compile Include="Repositories\Interface\ISensorItemRepository.cs" />
     <Compile Include="Repositories\Interface\ISeverityRepository.cs" />
+    <Compile Include="Repositories\ItemRepository.cs" />
     <Compile Include="Repositories\SensorItemRepository.cs" />
     <Compile Include="Repositories\SeverityRepository.cs" />
     <Compile Include="Repositories\Interface\IAlarmRepository.cs" />
@@ -146,29 +126,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604061704406_Initial.resx">
-      <DependentUpon>201604061704406_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604061705312_Initial1.resx">
-      <DependentUpon>201604061705312_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604061706233_Initial2.resx">
-      <DependentUpon>201604061706233_Initial2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604061758039_Initial3.resx">
-      <DependentUpon>201604061758039_Initial3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604081425427_Initial4.resx">
-      <DependentUpon>201604081425427_Initial4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604081439106_Initial5.resx">
-      <DependentUpon>201604081439106_Initial5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604081442271_Initial6.resx">
-      <DependentUpon>201604081442271_Initial6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604081449005_Initial7.resx">
-      <DependentUpon>201604081449005_Initial7.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604110415022_Initial.resx">
+      <DependentUpon>201604110415022_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

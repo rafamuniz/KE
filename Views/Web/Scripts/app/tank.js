@@ -11,6 +11,8 @@ function showTankModel() {
             success: function (tankModel) {
                 if (tankModel != null) {
 
+                    $('#divtankModel').visible();
+
                     $('#imgTankModel').attr('src', getUrlBase() + '/images/tank_models/' + tankModel.ImageFilename);
                     $('#imgTankModel').removeAttr('style');
 
@@ -22,7 +24,7 @@ function showTankModel() {
                     }
 
                     if (tankModel.Geometry.HasWidth) {
-                        $('#Width').val(tankModel.Width);
+                        $('#width').val(tankModel.Width);
                     }
                     else {
                         $('#divWidth').invisible();
@@ -35,18 +37,53 @@ function showTankModel() {
                         $('#divLength').invisible();
                     }
 
-                    if (tankModel.Geometry.HasMinimalDistance) {
-                        $('#minDistance').val(tankModel.MinDistance);
+                    if (tankModel.Geometry.HasFaceLength) {
+                        $('#faceLength').val(tankModel.FaceLength);
                     }
                     else {
-                        $('#divMinDistance').invisible();
+                        $('#divFaceLength').invisible();
+                    }
+
+                    if (tankModel.Geometry.HasBottomWidth) {
+                        $('#bottomWidth').val(tankModel.BottomWidth);
+                    }
+                    else {
+                        $('#divBottomWidth').invisible();
+                    }
+
+                    if (tankModel.Geometry.HasDimension1) {
+                        $('#dimension1').val(tankModel.Dimension1);
+                    }
+                    else {
+                        $('#divDimension1').invisible();
+                    }
+
+                    if (tankModel.Geometry.HasDimension2) {
+                        $('#dimension2').val(tankModel.Dimension2);
+                    }
+                    else {
+                        $('#divDimension2').invisible();
+                    }
+
+                    if (tankModel.Geometry.HasDimension3) {
+                        $('#dimension3').val(tankModel.Dimension3);
+                    }
+                    else {
+                        $('#divDimension3').invisible();
+                    }
+
+                    if (tankModel.Geometry.HasMinimumDistance) {
+                        $('#minimumDistance').val(tankModel.MinimumDistance);
+                    }
+                    else {
+                        $('#divMinimumDistance').invisible();
                     }
 
                     if (tankModel.Geometry.HasMaximunDistance) {
-                        $('#maxDistance').val(tankModel.MaxDistance);
+                        $('#maximumDistance').val(tankModel.MaximumDistance);
                     }
                     else {
-                        $('#divMaxDistance').invisible();
+                        $('#divMaximumDistance').invisible();
                     }
                 }
             },
@@ -54,5 +91,8 @@ function showTankModel() {
                 console.log('Error - Get Tank Model' + exception);
             }
         });
+    }
+    else {
+        $('#divtankModel').invisible();
     }
 };

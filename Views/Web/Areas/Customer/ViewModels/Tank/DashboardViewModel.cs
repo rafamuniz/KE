@@ -8,29 +8,22 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
 {
     public class DashboardViewModel
     {
+        #region Constructor
+
+        public DashboardViewModel()
+        {
+            Tanks = new List<DashboardTankViewModel>();
+        }
+
+        #endregion Constructor
+
         #region Property
-        
-        public Guid Id { get; set; }
-
-        [Display(Name = "Name")]
-        public String Name { get; set; }
-
-        [Display(Name = "Description")]
-        [MaxLength]
-        [DataType(DataType.MultilineText)]
-        public String Description { get; set; }
-
-        [Display(Name = "Status")]
-        [Required]
-        public String Status { get; set; }
 
         [Display(Name = "SiteId")]
         [Required]
         public Guid SiteId { get; set; }
 
-        [Display(Name = "TankModelId")]
-        [Required]
-        public Int32 TankModelId { get; set; }
+        public List<DashboardTankViewModel> Tanks { get; set; }
 
         #endregion Property
 

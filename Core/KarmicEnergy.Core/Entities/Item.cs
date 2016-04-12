@@ -41,7 +41,8 @@ namespace KarmicEnergy.Core.Entities
                 new Item() { Id = (int)ItemEnum.WaterVolume, Code = "WV", Name = "Water Volume" },
                 new Item() { Id = (int)ItemEnum.WaterTemperature, Code = "WT", Name = "Water Temperature" },
                 new Item() { Id = (int)ItemEnum.WeatherTemperature, Code= "WV", Name = "Weather Temperature" },
-                new Item() { Id = (int)ItemEnum.Volts, Code= "V", Name = "Volts" }
+                new Item() { Id = (int)ItemEnum.Voltage, Code= "V", Name = "Voltage" },
+                new Item() { Id = (int)ItemEnum.PH, Code= "PH", Name = "PH" }
             };
 
             return entities;
@@ -63,7 +64,10 @@ namespace KarmicEnergy.Core.Entities
         [Description("Weather Temperature")]
         WeatherTemperature = 4,
 
-        [Description("Volts")]
-        Volts = 5
+        [Description("Voltage")]
+        Voltage = 5,
+
+        [Description("PH")]
+        PH = 6
     }
 }

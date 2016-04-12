@@ -20,7 +20,7 @@
 <div class="row" style="margin-bottom: 20px;">
     <div class="form-group">
         <div class="col-md-12">
-            @using (Html.BeginForm("SelectedSite", "FastTracker", new { }, FormMethod.Post, new { }))
+            @using (Html.BeginForm("Site", "FastTracker", new { }, FormMethod.Post, new { }))
             {
                 @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
             }
@@ -87,10 +87,14 @@
 @section Scripts {
     <script type="text/javascript">
         $(function () {
+            showLoading();
+
             $('#ddlSite').on('change', function (event) {
                 var form = $(event.target).parents('form');
                 form.submit();
             });
+
+            hideLoading();
         });
     </script>
 }

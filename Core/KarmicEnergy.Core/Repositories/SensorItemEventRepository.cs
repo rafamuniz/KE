@@ -17,6 +17,19 @@ namespace KarmicEnergy.Core.Repositories
         }
         #endregion Constructor       
 
+        public SensorItemEvent GetLastEventByTankIdAndItem(Guid tankId, ItemEnum item)
+        {
+            try
+            {
+                var lastEvent = Context.SensorItemEvents.Where(x => x.SensorItem.Sensor.Tank.Id == tankId && x.SensorItem.ItemId == (int)item).OrderByDescending(d => d.EventDate).AsEnumerable().Last();                
+                return lastEvent;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public SensorItemEvent GetTankWithWaterVolumeLastData(Guid tankId)
         {
             try

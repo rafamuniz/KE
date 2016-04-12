@@ -3,15 +3,54 @@
 @using Munizoft.MVC.Helpers
 @using GridMvc.Html
 
-@model List<ListViewModel>
+@model DashboardViewModel
 
 @{
     Layout = "~/Views/Shared/_Internal.cshtml";
     ViewBag.Title = "Tank - Dashboard";
 }
-<input type="hidden" id="hfCustomerId" value="@ViewBag.CustomerId" />
 
-<div id="tank-dashboard">
+<div class="row" style="margin-bottom: 20px;">
+    <div class="form-group">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Site", "Tank", new { }, FormMethod.Post, new { }))
+            {
+                @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
+            }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div id="tank-dashboard">
+        @{
+            Int32 count = 0;
+        }
+
+        @if (Model != null && Model.Tanks != null && Model.Tanks.Any())
+        {
+            foreach (var tank in Model.Tanks)
+            {
+                List<String> colors = new List<string>() { "green", "blue", "orange" };
+                tank.Color = colors.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+
+                @*if (count % 2 == 0)
+                    {
+                        <div class="row">
+                            }*@
+
+                <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6">
+                    @Html.Partial("_TankData", tank)
+                </div>
+
+                @*@if (count % 2 == 0)
+                    {
+                        </div>
+                    @}*@
+
+                count++;
+            }
+        }
+    </div>
 </div>
 
 @section Scripts {
@@ -20,7 +59,13 @@
     <script type="text/javascript">
         $(function () {
             showLoading();
-            getTanks();
+
+            $('#ddlSite').on('change', function (event) {
+                var form = $(event.target).parents('form');
+                form.submit();
+            });
+
+            //getTanks();
             hideLoading();
         });
     </script>

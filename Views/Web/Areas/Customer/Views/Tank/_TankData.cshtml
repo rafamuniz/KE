@@ -1,32 +1,36 @@
-﻿<div class="tank">
-    <div class="graph-title">
-        <h3>{NAME}</h3>
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
+
+@model DashboardTankViewModel
+
+<div class="tank-dashboard">
+    <div class="title @Model.Color-light">
+        <h3>@Model.TankName</h3>
     </div>
-    <div class="graph-details">
-        <div class="detail-box detail-volume">
+    <div class="details @Model.Color">
+        <div class="detail-box detail-watervolume" title="@Model.WaterVolumeLastMeasurement.ToString("MM/dd/yyyy hh:mm:ss tt")">
             <p>Volume</p>
-            <p><span class="value">{VOLUME}</span></p>
+            <p><span class="value">@Model.WaterVolume</span></p>
             <p>Gallons</p>
         </div>
-        <div class="detail-box">
+        <div class="detail-box detail-ambienttemperature" title="@Model.AmbientTemperatureLastMeasurement.ToString("MM/dd/yyyy hh:mm:ss tt")">
             <p>Amb Temp</p>
-            <p><span class="value">{AMB_TEMP}</span></p>
+            <p><span class="value">@Model.AmbientTemperature</span></p>
         </div>
-        <div class="detail-box">
+        <div class="detail-box detail-watertemperature" title="@Model.WaterTemperatureLastMeasurement.ToString("MM/dd/yyyy hh:mm:ss tt")">
             <p>Water Temp</p>
-            <p><span class="value">{WATER_TEMP}</span></p>
+            <p><span class="value">@Model.WaterTemperature</span></p>
         </div>
-        <div class="detail-box">
+        <div class="detail-box detail-alarm">
             <p>Alarms</p>
-            <p><span class="value">{NUM_ALARMS}</span></p>
+            <p><span class="value">@Model.Alarms</span></p>
         </div>
-        <div class="detail-box border-none">
-            <p>Last Measurement</p>
-            <div class="graph-date">
-                <p>{LAST_MEASUREMENT_DATE}</p>
-                <p>{LAST_MEASUREMENT_TIME}</p>
-            </div>
-        </div>
+        @*<div class="detail-box border-none">
+                <p>Last Measurement</p>
+                <div class="graph-date">
+                    <p>{LAST_MEASUREMENT_DATE}</p>
+                    <p>{LAST_MEASUREMENT_TIME}</p>
+                </div>
+            </div>*@
     </div>
     <div class="graph-draw">
         <div id="tank-image" class="col-sm-6"></div>

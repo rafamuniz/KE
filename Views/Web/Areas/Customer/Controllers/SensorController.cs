@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
+using Munizoft.Extensions;
 
 namespace KarmicEnergy.Web.Areas.Customer.Controllers
 {
@@ -134,27 +135,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             EditViewModel viewModel = new EditViewModel();
             viewModel = EditViewModel.Map(sensor);
 
-            var items = LoadItems();
-            viewModel.AvailableItems = ItemViewModel.Map(items);
-
-            if (sensor.SensorItems.Any())
-            {
-                viewModel.SelectedItems = new List<ItemViewModel>();
-
-                foreach (var item in sensor.SensorItems)
-                {
-                    foreach (var avalItem in viewModel.AvailableItems)
-                    {
-                        if (item.ItemId == avalItem.Id)
-                            avalItem.IsSelected = true;
-                    }
-
-                }
-            }
-
-            LoadStatuses();
-            LoadTanks(CustomerId);
-            LoadSensorTypes();
+            LoadDefault(viewModel, sensor);
 
             return View(viewModel);
         }
@@ -166,43 +147,70 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Edit(EditViewModel viewModel)
         {
+            Sensor sensor = null;
+
             try
             {
+                sensor = KEUnitOfWork.SensorRepository.Get(viewModel.Id);
+
                 if (!ModelState.IsValid)
                 {
-                    LoadTanks(CustomerId);
-                    LoadStatuses();
-                    LoadSensorTypes();
-                    var itemsVal = LoadItems();
-                    viewModel.AvailableItems = ItemViewModel.Map(itemsVal);
-
+                    LoadDefault(viewModel, sensor);
                     AddErrors("Tank does not exist");
                     return View(viewModel);
                 }
 
-                Sensor sensor = KEUnitOfWork.SensorRepository.Get(viewModel.Id);
-
-                sensor = new Sensor()
-                {
-                    Name = viewModel.Name,
-                    TankId = viewModel.TankId,
-                    SensorTypeId = viewModel.SensorTypeId,
-                    Status = viewModel.Status,
-                    Reference = viewModel.Reference
-                };
+                sensor.Name = viewModel.Name;
+                sensor.TankId = viewModel.TankId;
+                sensor.SensorTypeId = viewModel.SensorTypeId;
+                sensor.Status = viewModel.Status;
+                sensor.Reference = viewModel.Reference;
 
                 if (viewModel.Items.Any())
                 {
-                    sensor.SensorItems = new List<SensorItem>();
-
                     foreach (var item in viewModel.Items)
                     {
-                        SensorItem sensorItem = new SensorItem()
-                        {
-                            ItemId = Int32.Parse(item)
-                        };
+                        var sensorItem = sensor.SensorItems.Where(x => x.ItemId == Int32.Parse(item)).SingleOrDefault();
 
-                        sensor.SensorItems.Add(sensorItem);
+                        // Add
+                        if (sensorItem == null)
+                        {
+                            Int32 itemId = Int32.Parse(item);
+
+                            var i = KEUnitOfWork.ItemRepository.Get(itemId);
+
+                            sensorItem = new SensorItem()
+                            {
+                                ItemId = itemId,
+                                Item = i
+                            };
+
+                            sensor.SensorItems.Add(sensorItem);
+                        }
+                    }
+                }
+
+                if (sensor.SensorItems.Any())
+                {
+                    List<SensorItem> itemsRemove = new List<SensorItem>();
+
+                    foreach (var sensorItem in sensor.SensorItems)
+                    {
+                        var item = viewModel.Items.Where(x => Int32.Parse(x) == sensorItem.ItemId).SingleOrDefault();
+
+                        // Remove
+                        if (item == null)
+                        {
+                            itemsRemove.Add(sensorItem);
+                        }
+                    }
+
+                    if (itemsRemove.Any())
+                    {
+                        foreach (var ir in itemsRemove)
+                        {
+                            sensor.SensorItems.Remove(ir);
+                        }
                     }
                 }
 
@@ -220,12 +228,36 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 AddErrors(ex.Message);
             }
 
-            LoadTanks(CustomerId);
-            LoadStatuses();
-            LoadSensorTypes();
+            LoadDefault(viewModel, sensor);
+
+            return View(viewModel);
+        }
+
+        private void LoadDefault(EditViewModel viewModel, Sensor sensor)
+        {
             var items = LoadItems();
             viewModel.AvailableItems = ItemViewModel.Map(items);
-            return View(viewModel);
+
+            if (sensor.SensorItems.Any())
+            {
+                List<ItemViewModel> selectedItems = new List<ItemViewModel>();
+
+                foreach (var item in sensor.SensorItems)
+                {
+                    foreach (var avalItem in viewModel.AvailableItems)
+                    {
+                        if (item.ItemId == avalItem.Id)
+                        {
+                            avalItem.IsSelected = true;
+                            viewModel.SelectedItems.Add(avalItem);
+                        }
+                    }
+                }
+            }
+
+            LoadStatuses();
+            LoadTanks(CustomerId);
+            LoadSensorTypes();
         }
 
         #endregion Edit

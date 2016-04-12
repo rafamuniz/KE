@@ -1,0 +1,36 @@
+﻿<div class="tank">
+    <div class="graph-title">
+        <h3>{NAME}</h3>
+    </div>
+    <div class="graph-details">
+        <div class="detail-box detail-volume">
+            <p>Volume</p>
+            <p><span class="value">{VOLUME}</span></p>
+            <p>Gallons</p>
+        </div>
+        <div class="detail-box">
+            <p>Amb Temp</p>
+            <p><span class="value">{AMB_TEMP}</span></p>
+        </div>
+        <div class="detail-box">
+            <p>Water Temp</p>
+            <p><span class="value">{WATER_TEMP}</span></p>
+        </div>
+        <div class="detail-box">
+            <p>Alarms</p>
+            <p><span class="value">{NUM_ALARMS}</span></p>
+        </div>
+        <div class="detail-box border-none">
+            <p>Last Measurement</p>
+            <div class="graph-date">
+                <p>{LAST_MEASUREMENT_DATE}</p>
+                <p>{LAST_MEASUREMENT_TIME}</p>
+            </div>
+        </div>
+    </div>
+    <div class="graph-draw">
+        <div id="tank-image" class="col-sm-6"></div>
+        <div id="chart" class="col-sm-6"></div>
+        <div class="clearfix"></div>
+    </div>
+</div>

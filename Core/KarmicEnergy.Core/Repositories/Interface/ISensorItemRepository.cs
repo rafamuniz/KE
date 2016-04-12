@@ -8,6 +8,6 @@ namespace KarmicEnergy.Core.Repositories
 {
     public interface ISensorItemRepository : IRepository<SensorItem, KEContext>
     {
-
+        Boolean HasSensorItem(Guid tankId, ItemEnum item);
     }
 }

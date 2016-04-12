@@ -6195,97 +6195,30 @@ div.uploader {
         background-color: #FFF !important;
     }
 
-/**********************/
-/* TANK DASHBOARD     */
-/**********************/
-.tank {
-    padding-right: 1px !important;
-    margin-bottom: 5px;
+
+.green {
+    background: #81BD41;
 }
 
-    /*.frac-fa, .barrel-four {
-    padding-left: 5px !important;
-    margin-bottom: 5px;
-}*/
-
-    .tank .graph-title h3 {
-        font-family: 'open_sansbold';
-        font-size: 18px;
-        color: #fff;
-        width: 100%;
-        text-align: center;
-        padding: 10px 0;
-    }
-
-.green-box .graph-title h3 {
-    background: #92D649;
+.blue {
+    background: #00A2AE;
 }
 
-.blue-box .graph-title h3 {
+.orange {
+    background: #FFB213;
+}
+
+.green-light {
+    background: #92d649;
+}
+
+.blue-light {
     background: #00BAC7;
 }
 
-.orange-box .graph-title h3 {
+.orange-light {
     background: #FCC513;
 }
-
-.tank .graph-details {
-    display: table;
-    width: 100%;
-}
-
-    .tank .graph-details .detail-box {
-        display: table-cell;
-        vertical-align: middle;
-        background: #81bd41;
-        color: #FFF;
-        font-size: 13px;
-        text-align: center;
-        border-right: 1px solid #fff;
-    }
-
-.border-none {
-    border-right: 0px solid !important;
-}
-
-.frac-fa .graph-details .detail-box {
-    background: #00a2ae;
-}
-
-.pond-one .graph-details .detail-box {
-    background: #ffb213;
-}
-
-.graph-details .detail-box p > span {
-    font-family: 'open_sansregular';
-    font-size: 25px;
-    line-height: 26px;
-}
-
-.graph-details .detail-box.detail-volume p > span {
-    font-family: 'open_sansbold';
-}
-
-.graph-details .detail-box.detail-volume {
-    color: #fff;
-}
-
-.graph-details .detail-box .graph-date p {
-    font-family: 'open_sansbold';
-    font-size: 14px;
-}
-
-.graph-draw {
-    background: #ffffff;
-    text-align: center;
-    border-bottom: 5px;
-}
-
-    .graph-draw div > img {
-        max-width: 278px;
-        padding: 10px 0px 0px 0px;
-    }
-
 
 /********************/
 /* TANK WATER GAUGE */
@@ -6483,18 +6416,6 @@ div.uploader {
     .tracker-graph div {
     }
 
-.green {
-    background: #81BD41;
-}
-
-.blue {
-    background: #00A2AE;
-}
-
-.orange {
-    background: #FFB213;
-}
-
 /*********/
 /* TANK */
 /********/
@@ -6506,3 +6427,88 @@ div.uploader {
         width: 200px;
         height: 200px;
     }
+
+
+/**********************/
+/* TANK DASHBOARD     */
+/**********************/
+.tank-dashboard {
+    padding-right: 1px !important;
+    margin-bottom: 5px;
+}
+
+    /*.frac-fa, .barrel-four {
+    padding-left: 5px !important;
+    margin-bottom: 5px;
+}*/
+    .tank-dashboard .title {
+    }
+
+        .tank-dashboard .title h3 {
+            font-family: 'open_sansbold';
+            font-size: 18px;
+            color: #fff;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+    .tank-dashboard .details {
+        display: table;
+        width: 100%;
+    }
+
+        .tank-dashboard .details .detail-box {
+            display: table-cell;
+            vertical-align: middle;
+            color: #FFF;
+            font-size: 13px;
+            text-align: center;
+        }
+
+            .tank-dashboard .details .detail-box p > span {
+                font-family: 'open_sansbold';
+                color: #FFF;
+                font-size: 25px;
+                line-height: 26px;
+            }
+
+.detail-watervolume {
+    border-right: 1px solid #FFF;
+}
+
+    .detail-watervolume p > span {
+    }
+
+.detail-ambienttemperature {
+    border-right: 1px solid #FFF;
+}
+
+    .detail-ambienttemperature p > span {
+        /*font-family: 'open_sansbold';
+    color: #FFF;*/
+    }
+
+.detail-watertemperature {
+    border-right: 1px solid #FFF;
+}
+
+    .detail-watertemperature p > span {
+    }
+
+.detail-alarm {
+}
+
+    .detail-alarm p > span {
+    }
+
+/*.graph-draw {
+    background: #ffffff;
+    text-align: center;
+    border-bottom: 5px;
+}
+
+    .graph-draw div > img {
+        max-width: 278px;
+        padding: 10px 0px 0px 0px;
+    }*/

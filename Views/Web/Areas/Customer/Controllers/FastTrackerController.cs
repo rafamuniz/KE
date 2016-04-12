@@ -83,7 +83,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [HttpPost]
-        public ActionResult SelectedSite(ListViewModel viewModel)
+        public ActionResult Site(ListViewModel viewModel)
         {
             IList<TankWithWaterVolume> tankWithWaterVolumes = null;
             var tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(CustomerId, viewModel.SiteId);

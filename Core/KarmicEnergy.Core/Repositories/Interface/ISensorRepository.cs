@@ -8,6 +8,7 @@ namespace KarmicEnergy.Core.Repositories
 {
     public interface ISensorRepository : IRepository<Sensor, KEContext>
     {
+        Boolean HasSensor(Guid tankId);
         List<Sensor> GetsByCustomerId(Guid customerId);
         List<Sensor> GetsByTankId(Guid tankId);
         List<Sensor> GetsByTankIdAndCustomerId(Guid customerId, Guid tankId);

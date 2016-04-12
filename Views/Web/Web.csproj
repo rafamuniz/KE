@@ -256,6 +256,7 @@
     <Compile Include="Areas\Customer\ViewModels\Sensor\EditViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\DashboardTankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TankModelViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\CreateViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\FastTrackerViewModel.cs" />

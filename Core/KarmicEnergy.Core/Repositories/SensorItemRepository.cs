@@ -15,6 +15,11 @@ namespace KarmicEnergy.Core.Repositories
         {
 
         }
-        #endregion Constructor              
+        #endregion Constructor 
+
+        public Boolean HasSensorItem(Guid tankId, ItemEnum item)
+        {
+            return base.Find(x => x.Sensor.TankId == tankId && x.ItemId == (Int32)item).Any();
+        }
     }
 }

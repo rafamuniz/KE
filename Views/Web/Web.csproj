@@ -256,6 +256,7 @@
     <Compile Include="Areas\Customer\ViewModels\Sensor\EditViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\GaugeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\DashboardTankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TankModelViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\CreateViewModel.cs" />
@@ -460,6 +461,7 @@
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\app\fasttracker.js" />
+    <Content Include="Scripts\app\tank-gauge.js" />
     <Content Include="Scripts\app\tank.js" />
     <Content Include="Scripts\app\utils.js" />
     <Content Include="Scripts\bootstrap-notify.js" />
@@ -1326,10 +1328,10 @@
     <Content Include="Areas\Customer\Views\Sensor\Edit.cshtml" />
     <Content Include="Areas\Customer\Views\Sensor\Index.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\_TankData.cshtml" />
-    <Content Include="Areas\Customer\Views\FastTracker\FastTracker.cshtml" />
     <Content Include="Areas\Customer\Views\FastTracker\Index.cshtml" />
     <Content Include="Areas\Customer\Views\FastTracker\_Tank.cshtml" />
     <Content Include="Areas\Customer\Views\Sensor\_TankSpotGPS.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\Gauge.cshtml" />
     <None Include="Areas\Customer\Views\Tank\_TankModel.cshtml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />
     <Content Include="Scripts\errors.json" />

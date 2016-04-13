@@ -6180,7 +6180,6 @@ div.uploader {
     .box-sub .title {
         margin-bottom: 20px;
         min-height: 40px;
-        background: #82C341;
         padding: 10px 0;
     }
 
@@ -6202,6 +6201,10 @@ div.uploader {
 
 .blue {
     background: #00A2AE;
+}
+
+.blue-box {
+    background: #82C341;
 }
 
 .orange {
@@ -6433,8 +6436,7 @@ div.uploader {
 /* TANK DASHBOARD     */
 /**********************/
 .tank-dashboard {
-    padding-right: 1px !important;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
     /*.frac-fa, .barrel-four {
@@ -6502,13 +6504,80 @@ div.uploader {
     .detail-alarm p > span {
     }
 
-/*.graph-draw {
-    background: #ffffff;
+#graph-draw {
+    background: #FFF;
     text-align: center;
     border-bottom: 5px;
 }
 
-    .graph-draw div > img {
+    #graph-draw .tank-image {
+    }
+
+        #graph-draw .tank-image img {
+            width: 200px;
+            height: 200px;
+        }
+
+    /*.graph-draw div > img {
         max-width: 278px;
         padding: 10px 0px 0px 0px;
     }*/
+
+    #graph-draw .waterVolumePercentage {
+        height: 50px;
+        text-align: left;
+    }
+
+        #graph-draw .waterVolumePercentage span {
+            color: #00BAC7;
+            font-family: 'open_sansbold';
+            font-size: 25px;
+            margin-left: 30px;
+        }
+
+        #graph-draw .waterVolumePercentage p {
+            color: #00BAC7;
+            font-family: 'open_sansregular';
+            font-size: 15px;
+            margin-left: 30px;
+        }
+
+    #graph-draw .chart {
+    }
+
+.balloon-water-remaining {
+    background-color: #1C2B39;
+    color: #FFF;
+    width: auto;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    display: inline-block;
+    position: relative;
+    padding: 15px;
+}
+
+    .balloon-water-remaining:before {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 100%;
+        top: 50%;
+        margin-top: -10px;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-right: 10px solid #1C2B39;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid transparent;
+    }
+
+    .balloon-water-remaining span {
+        font-family: 'open_sansbold';
+        font-size: 15px;
+    }
+
+    .balloon-water-remaining p {
+        font-family: 'open_sansregular';
+        font-size: 10px;
+    }

@@ -10,44 +10,45 @@
     ViewBag.Title = "Tank - Dashboard";
 }
 
-<div class="row" style="margin-bottom: 20px;">
-    <div class="form-group">
-        <div class="col-md-12">
-            @using (Html.BeginForm("Site", "Tank", new { }, FormMethod.Post, new { }))
+<div class="col-lg-12">
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="form-group">
+            <div class="col-md-12">
+                @using (Html.BeginForm("Site", "Tank", new { }, FormMethod.Post, new { }))
             {
-                @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
-            }
+                    @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
+                }
+            </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div id="tank-dashboard">
+
+    <div id="tanks" class="row">
         @{
-            Int32 count = 0;
+            Int32 counter = 0;
         }
 
         @if (Model != null && Model.Tanks != null && Model.Tanks.Any())
-        {
-            foreach (var tank in Model.Tanks)
             {
-                List<String> colors = new List<string>() { "green", "blue", "orange" };
-                tank.Color = colors.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+                foreach (var tank in Model.Tanks)
+                {
+                    List<String> colors = new List<string>() { "green", "blue", "orange" };
+                    tank.Color = colors.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
 
-                @*if (count % 2 == 0)
+                    if (@counter % 2 == 0)
                     {
-                        <div class="row">
-                            }*@
+                    @Html.Raw("<div class='row'>")
+                }
 
                 <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6">
-                    @Html.Partial("_TankData", tank)
+                    @Html.Partial("_TankData", @tank)
                 </div>
 
-                @*@if (count % 2 == 0)
-                    {
-                        </div>
-                    @}*@
+                if (counter % 2 == 1)
+                {
+                    @Html.Raw("</div>")
+                }
 
-                count++;
+                counter++;
             }
         }
     </div>

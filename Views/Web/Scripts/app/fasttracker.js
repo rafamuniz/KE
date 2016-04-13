@@ -296,6 +296,4 @@ function generateGraph(tankId) {
             notifiyError("Error - Generate Graph");
         }
     });
-};
-
-
+}

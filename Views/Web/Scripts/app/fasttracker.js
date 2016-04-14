@@ -166,81 +166,59 @@ function selectedSite() {
     }
 }
 
-function generateGraph(tankId) {
+function generateWaterVolumeGraph(tankId) {
     $.ajax({
-        url: getUrlBase() + "/Customer/FastTracker/GetWaterInfo/",
+        url: getUrlBase() + "/Customer/FastTracker/GetsWaterVolume",
         type: "GET",
         dataType: "JSON",
         data: { TankId: tankId },
         success: function (data) {
-            var chartData = [];
             var dataX = [];
             var dataY = [];
-            var minX = null;
-            var maxX = null;
             var minY = 0;
             var maxY = data.WaterVolumeCapacity;
 
-            $.each(data.WaterVolumeData, function (i, d) {
-                //var water = {
-                //    value: d.WaterVolume
-                //};
-
+            $.each(data.WaterVolumes, function (i, d) {
                 var momentDate = moment.utc(d.EventDate);
-                var eventDate = momentDate.format('MM/DD/YYYY hh:mm A');
-                //moment.utc(moment(d.EventDate));
-                //.format('MM/DD/YYYY hh:mm A')).toDate();
-
-                var dates = {
-                    value: eventDate
-                };
-
-                var point = [];
-                point.push(eventDate);
-                point.push(d.WaterVolume);
-                chartData.push(point);
-
-                //dataY.push(water);
-                dataX.push(dates);
+                dataX.push(momentDate);
+                dataY.push(d.WaterVolume);
             });
 
             var chart = new Highcharts.Chart({
                 chart: {
-                    renderTo: 'graph-' + data.TankId,
+                    renderTo: 'graph-' + tankId,
                     zoomType: 'x',
-                    height: '220'//,
-                    //width: '100%'
+                    height: '220'
                 },
                 title: {
-                    text: 'Water'
+                    text: 'Water Volume'
+                },
+                tooltip: {
+                    useHTML: true,
+                    formatter: function () {
+                        return Highcharts.dateFormat('%m/%d/%Y ', this.x) + '<BR>' +
+                               Highcharts.dateFormat('%H:%M:%S', this.x) + '<BR>' +
+                               'WV: ' + this.y;
+                    }
                 },
                 loading: {
                     hideDuration: 100,
                     labelStyle: { "fontWeight": "bold", "position": "relative", "top": "45%" },
                     showDuration: 0
                 },
-                //subtitle: {
-                //    text: document.ontouchstart === undefined ?
-                //            'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
-                //},
+                credits: {
+                    enabled: false
+                },
                 xAxis: {
-                    type: 'time',
-                    dateTimeLabelFormats: {
-                        millisecond: '%H:%M:%S.%L',
-                        second: '%H:%M:%S',
-                        minute: '%H:%M',
-                        hour: '%H:%M',
-                        day: '%e. %b',
-                        week: '%e. %b',
-                        month: '%b \'%y',
-                        year: '%Y'
-                    },
-                    min: minX,
-                    max: maxX,
+                    type: 'datetime',             
                     categories: dataX,
                     labels: {
+                        useHTML: true,
+                        align: "center",
+                        enabled: true,
                         formatter: function () {
-                            return Highcharts.dateFormat('%a %d %b', this.value);
+                            return Highcharts.dateFormat('%m/%d/%Y ', this.value) + '<BR>' +
+                                   Highcharts.dateFormat('%H:%M:%S', this.value);
                         }
                     }
                 },
@@ -254,41 +232,9 @@ function generateGraph(tankId) {
                 legend: {
                     enabled: false
                 },
-                plotOptions: {
-                    area: {
-                        fillColor: {
-                            linearGradient: {
-                                x1: 0,
-                                y1: 0,
-                                x2: 0,
-                                y2: 1
-                            },
-                            stops: [
-                                [0, Highcharts.getOptions().colors[0]],
-                                [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                            ]
-                        },
-                        marker: {
-                            radius: 2
-                        },
-                        lineWidth: 1,
-                        states: {
-                            hover: {
-                                lineWidth: 1
-                            }
-                        },
-                        threshold: null
-                    }
-                },
                 series: [{
-                    type: 'column',
-                    //type: 'area',
-                    name: '',
-                    data: chartData//,
-                    //yAxis: {
-                    //    min: 0,
-                    //    max: data.WaterVolumeCapacity
-                    //}
+                    type: 'area',
+                    data: dataY
                 }]
             });
         },
@@ -296,4 +242,136 @@ function generateGraph(tankId) {
             notifiyError("Error - Generate Graph");
         }
     });
+
+
+
+    //$.ajax({
+    //    url: getUrlBase() + "/Customer/FastTracker/GetWaterInfo/",
+    //    type: "GET",
+    //    dataType: "JSON",
+    //    data: { TankId: tankId },
+    //    success: function (data) {
+    //        var chartData = [];
+    //        var dataX = [];
+    //        var dataY = [];
+    //        var minX = null;
+    //        var maxX = null;
+    //        var minY = 0;
+    //        var maxY = data.WaterVolumeCapacity;
+
+    //        $.each(data.WaterVolumeData, function (i, d) {
+    //            //var water = {
+    //            //    value: d.WaterVolume
+    //            //};
+
+    //            var momentDate = moment.utc(d.EventDate);
+    //            var eventDate = momentDate.format('MM/DD/YYYY hh:mm A');
+    //            //moment.utc(moment(d.EventDate));
+    //            //.format('MM/DD/YYYY hh:mm A')).toDate();
+
+    //            var dates = {
+    //                value: eventDate
+    //            };
+
+    //            var point = [];
+    //            point.push(eventDate);
+    //            point.push(d.WaterVolume);
+    //            chartData.push(point);
+
+    //            //dataY.push(water);
+    //            dataX.push(dates);
+    //        });
+
+    //        var chart = new Highcharts.Chart({
+    //            chart: {
+    //                renderTo: 'graph-' + data.TankId,
+    //                zoomType: 'x',
+    //                height: '220'//,
+    //                //width: '100%'
+    //            },
+    //            title: {
+    //                text: 'Water'
+    //            },
+    //            loading: {
+    //                hideDuration: 100,
+    //                labelStyle: { "fontWeight": "bold", "position": "relative", "top": "45%" },
+    //                showDuration: 0
+    //            },
+    //            //subtitle: {
+    //            //    text: document.ontouchstart === undefined ?
+    //            //            'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+    //            //},
+    //            xAxis: {
+    //                type: 'time',
+    //                dateTimeLabelFormats: {
+    //                    millisecond: '%H:%M:%S.%L',
+    //                    second: '%H:%M:%S',
+    //                    minute: '%H:%M',
+    //                    hour: '%H:%M',
+    //                    day: '%e. %b',
+    //                    week: '%e. %b',
+    //                    month: '%b \'%y',
+    //                    year: '%Y'
+    //                },
+    //                min: minX,
+    //                max: maxX,
+    //                categories: dataX,
+    //                labels: {
+    //                    formatter: function () {
+    //                        return Highcharts.dateFormat('%a %d %b', this.value);
+    //                    }
+    //                }
+    //            },
+    //            yAxis: {
+    //                title: {
+    //                    text: 'Water'
+    //                },
+    //                min: minY,
+    //                max: maxY,
+    //            },
+    //            legend: {
+    //                enabled: false
+    //            },
+    //            plotOptions: {
+    //                area: {
+    //                    fillColor: {
+    //                        linearGradient: {
+    //                            x1: 0,
+    //                            y1: 0,
+    //                            x2: 0,
+    //                            y2: 1
+    //                        },
+    //                        stops: [
+    //                            [0, Highcharts.getOptions().colors[0]],
+    //                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+    //                        ]
+    //                    },
+    //                    marker: {
+    //                        radius: 2
+    //                    },
+    //                    lineWidth: 1,
+    //                    states: {
+    //                        hover: {
+    //                            lineWidth: 1
+    //                        }
+    //                    },
+    //                    threshold: null
+    //                }
+    //            },
+    //            series: [{
+    //                type: 'column',
+    //                //type: 'area',
+    //                name: '',
+    //                data: chartData//,
+    //                //yAxis: {
+    //                //    min: 0,
+    //                //    max: data.WaterVolumeCapacity
+    //                //}
+    //            }]
+    //        });
+    //    },
+    //    error: function (jqXHR, exception) {
+    //        notifiyError("Error - Generate Graph");
+    //    }
+    //});
 }

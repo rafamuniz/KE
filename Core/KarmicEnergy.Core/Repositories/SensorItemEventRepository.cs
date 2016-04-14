@@ -23,12 +23,12 @@ namespace KarmicEnergy.Core.Repositories
             if (!lastEvent.Any())
                 return null;
 
-            return lastEvent.AsEnumerable().Last();
+            return lastEvent.AsEnumerable().FirstOrDefault();
         }
 
-        public List<SensorItemEvent> GetTankWithWaterVolume(Guid tankId, Int32 quantity)
+        public List<SensorItemEvent> GetsByTankIdAndByItem(Guid tankId, ItemEnum item, Int32 quantity)
         {
-            var events = Context.SensorItemEvents.Where(x => x.SensorItem.Sensor.Tank.Id == tankId && x.SensorItem.ItemId == (int)ItemEnum.WaterVolume && x.Value != null).OrderByDescending(d => d.EventDate).Take(quantity);
+            var events = Context.SensorItemEvents.Where(x => x.SensorItem.Sensor.Tank.Id == tankId && x.SensorItem.ItemId == (Int32)item && x.Value != null).OrderBy(d => d.EventDate).Take(quantity);
             return events.ToList();
         }
     }

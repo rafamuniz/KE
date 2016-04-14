@@ -9,6 +9,6 @@ namespace KarmicEnergy.Core.Repositories
     public interface ISensorItemEventRepository : IRepository<SensorItemEvent, KEContext>
     {
         SensorItemEvent GetLastEventByTankIdAndItem(Guid tankId, ItemEnum item);
-        List<SensorItemEvent> GetTankWithWaterVolume(Guid tankId, Int32 quantity);
+        List<SensorItemEvent> GetsByTankIdAndByItem(Guid tankId, ItemEnum item, Int32 quantity);        
     }
 }

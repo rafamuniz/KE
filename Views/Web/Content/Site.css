@@ -6508,6 +6508,7 @@ div.uploader {
     background: #FFF;
     text-align: center;
     border-bottom: 5px;
+    padding-top: 20px;
 }
 
     #graph-draw .tank-image {
@@ -6517,11 +6518,6 @@ div.uploader {
             width: 200px;
             height: 200px;
         }
-
-    /*.graph-draw div > img {
-        max-width: 278px;
-        padding: 10px 0px 0px 0px;
-    }*/
 
     #graph-draw .waterVolumePercentage {
         height: 50px;

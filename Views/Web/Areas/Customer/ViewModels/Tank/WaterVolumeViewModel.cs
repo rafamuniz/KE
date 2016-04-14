@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
+namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
 {
-    public class WaterVolumeGraphViewModel
+    public class WaterVolumeViewModel
     {
         #region Property
-
-        public Decimal WaterVolumeCapacity { get; set; }
+        
         public Decimal WaterVolume { get; set; }
         public DateTime EventDate { get; set; }
               

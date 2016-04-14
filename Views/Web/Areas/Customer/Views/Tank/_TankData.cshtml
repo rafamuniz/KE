@@ -2,11 +2,12 @@
 
 @model DashboardTankViewModel
 
-<a href='@Url.Action("Gauge", "Tank", new { TankId = Model.TankId, Area="Customer" })'>
+<a data-tankname='@Model.TankName' href='@Url.Action("Gauge", "Tank", new { TankId = Model.TankId, Area="Customer" })'>
     <div class="tank-dashboard">
         <div class="title @Model.Color-light">
             <h3>@Model.TankName</h3>
         </div>
+
         <div class="details @Model.Color">
             @{
                 String waterVolumeLastMeasurement = @Model.WaterVolumeLastMeasurement.HasValue ? @Model.WaterVolumeLastMeasurement.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : String.Empty;
@@ -24,7 +25,7 @@
 
             <div class="detail-box detail-ambienttemperature" title="@ambientTemperatureLastMeasurement">
                 <p>Amb Temp</p>
-                <p><span>@Model.AmbientTemperature</span></p>
+                <p><span>@Model.AmbientTemperature &#8457;</span></p>
             </div>
 
             @{
@@ -33,27 +34,16 @@
 
             <div class="detail-box detail-watertemperature" title="@waterTemperatureLastMeasurement">
                 <p>Water Temp</p>
-                <p><span>@Model.WaterTemperature</span></p>
+                <p><span>@Model.WaterTemperature &#8457;</span></p>
             </div>
 
             <div class="detail-box detail-alarm">
                 <p>Alarms</p>
                 <p><span>@Model.Alarms</span></p>
             </div>
-
-            @*<div class="detail-box border-none">
-                    <p>Last Measurement</p>
-                    <div class="graph-date">
-                        <p>{LAST_MEASUREMENT_DATE}</p>
-                        <p>{LAST_MEASUREMENT_TIME}</p>
-                    </div>
-                </div>*@
         </div>
-        <div id="graph-draw" class="graph-draw">
-            <div class="waterVolumePercentage">
-                <span>@Model.WaterVolumePercentage.Value.ToString("P2")</span>
-                <p>Full</p>
-            </div>
+
+        <div id="graph-draw">
             <div class="row">
                 <div class="col-sm-5 col-md-5 tank-image">
                     <div class="col-lg-5">
@@ -67,7 +57,13 @@
                     <p>Remaining</p>
                 </div>
 
-                <div class="col-sm-5 col-md-5 chart">
+                <div class="col-sm-5 col-md-5 waterVolumePercentage">
+                    <span>@Model.WaterVolumePercentage.Value.ToString("P2")</span>
+                    <p>Full</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 chart">
                     <div id="graph-@Model.TankId"></div>
                     <script type="text/javascript">
                         generateWaterVolumeGraph('@Model.TankId');

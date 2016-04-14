@@ -15,6 +15,15 @@ namespace KarmicEnergy.Core.Repositories
         {
 
         }
-        #endregion Constructor               
+        #endregion Constructor    
+
+        //public List<Alarm> GetsByTankId(Guid tankId)
+        //{
+        //    var lastEvent = Context.Alarms.Where(x => x.SensorItem.Sensor.Tank.Id == tankId && x.SensorItem.ItemId == (int)item).OrderByDescending(d => d.EventDate);
+        //    if (!lastEvent.Any())
+        //        return null;
+
+        //    return lastEvent.AsEnumerable().Last();
+        //}
     }
 }

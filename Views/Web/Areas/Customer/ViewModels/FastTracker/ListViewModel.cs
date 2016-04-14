@@ -18,6 +18,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
         public Guid SiteId { get; set; }
                 
         public List<TankWithWaterVolume> Tanks { get; set; }
+
         #endregion Property
 
         #region Map

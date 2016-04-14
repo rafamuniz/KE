@@ -1,34 +1,77 @@
-﻿
-function getTanks() {
-    var customerId = $('#hfCustomerId').val();
-
+﻿function generateWaterVolumeGraph(tankId) {
     $.ajax({
-        url: getUrlBase() + "api/v1/json/customer/tank/gets/" + customerId,
+        url: getUrlBase() + "/Customer/Tank/GetsWaterVolume/",
         type: "GET",
-        dataType: "json",
+        dataType: "JSON",
+        data: { TankId: tankId },
         success: function (data) {
-            var tanks = data;
+            var dataX = [];
+            var dataY = [];
+            var minY = 0;
+            var maxY = data.WaterVolumeCapacity;
 
-            $.ajax({
-                async: false,
-                type: 'GET',
-                url: getUrlBase() + "/Customer/Tank/GetTankHTML",
-                success: function (data) {
-                    if (tanks.length > 0) {
-                        var html = data;
-                        $.each(tanks, function (index, value) {
-                            var html_tank = "<div class='col-lg-6 col-sm-12 col-xs-12'>" + html;
-                            var html_tank = ReplaceAll(html_tank, "{NAME}", value.Name);
-                            var html_tank = ReplaceAll(html_tank, "{VOLUME}", value.WaterVolumeCapacity);
-                            html_tank += "</div>";
-                            $('#tank-dashboard').append(html_tank);
-                        });
+            $.each(data.WaterVolumes, function (i, d) {
+                var momentDate = moment.utc(d.EventDate);
+                dataX.push(momentDate);
+                dataY.push(d.WaterVolume);
+            });
+
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'graph-' + tankId,
+                    zoomType: 'x',
+                    height: '220'
+                },
+                title: {
+                    text: 'Water Volume'
+                },
+                tooltip: {
+                    useHTML: true,
+                    formatter: function () {
+                        return Highcharts.dateFormat('%m/%d/%Y ', this.x) + '<BR>' +
+                               Highcharts.dateFormat('%H:%M:%S', this.x) + '<BR>' +
+                               'WV: ' + this.y;
                     }
-                }
+                },
+                loading: {
+                    hideDuration: 100,
+                    labelStyle: { "fontWeight": "bold", "position": "relative", "top": "45%" },
+                    showDuration: 0
+                },
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    type: 'datetime',
+                    categories: dataX,
+                    labels: {
+                        useHTML: true,
+                        align: "center",
+                        enabled: true,
+                        formatter: function () {
+                            return Highcharts.dateFormat('%m/%d/%Y ', this.value) + '<BR>' +
+                                   Highcharts.dateFormat('%H:%M:%S', this.value);
+                        }
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Water'
+                    },
+                    min: minY,
+                    max: maxY,
+                },
+                legend: {
+                    enabled: false
+                },
+                series: [{
+                    type: 'column',
+                    data: dataY
+                }]
             });
         },
         error: function (jqXHR, exception) {
-            console.log('Error - Get Tanks');
+            notifiyError("Error - Generate Graph");
         }
     });
-};
+}

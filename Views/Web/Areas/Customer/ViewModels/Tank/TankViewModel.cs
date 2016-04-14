@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
+namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
 {
     public class TankViewModel
     {
         public TankViewModel()
         {
             WaterVolumes = new List<WaterVolumeViewModel>();
+            Voltages = new List<EventViewModel>();
         }
 
         #region Property
@@ -23,12 +24,10 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
 
         public String UrlImageTankModel { get; set; }
 
-        public Guid SensorId { get; set; }
-        public Guid SensorItemId { get; set; }
-
         public Decimal WaterVolumeCapacity { get; set; }
 
         public List<WaterVolumeViewModel> WaterVolumes { get; set; }
+        public List<EventViewModel> Voltages { get; set; }
 
         #endregion Property        
     }

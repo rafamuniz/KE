@@ -148,7 +148,6 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #endregion Delete
 
-
         #region Dashboard
 
         [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
@@ -157,12 +156,6 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             LoadSites(CustomerId);
             return View();
         }
-
-        //[AllowAnonymous]
-        //public ActionResult GetTankHTML()
-        //{
-        //    return PartialView("_TankData");
-        //}
 
         [HttpPost]
         [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
@@ -220,6 +213,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                             }
 
                             // Alarms
+                            vm.Alarms = 0;
                             //var alarms = KEUnitOfWork.AlarmRepository.GetAll(tank.Id, ItemEnum.WaterTemperature);
 
                             viewModel.Tanks.Add(vm);
@@ -230,6 +224,39 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             LoadSites(CustomerId);
             return View("Dashboard", viewModel);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        public ActionResult GetsWaterVolume(Guid tankId)
+        {
+            TankViewModel viewModel = new TankViewModel();
+
+            if (KEUnitOfWork.SensorRepository.HasSensor(tankId) &&
+                KEUnitOfWork.SensorItemRepository.HasSensorItem(tankId, ItemEnum.WaterVolume))
+            {
+                var waterInfos = KEUnitOfWork.SensorItemEventRepository.GetsByTankIdAndByItem(tankId, ItemEnum.WaterVolume, 5);
+
+                if (waterInfos.Any())
+                {
+                    foreach (var wi in waterInfos)
+                    {
+                        viewModel.TankId = wi.SensorItem.Sensor.Tank.Id;
+                        viewModel.TankName = wi.SensorItem.Sensor.Tank.Name;
+                        viewModel.WaterVolumeCapacity = wi.SensorItem.Sensor.Tank.WaterVolumeCapacity;
+
+                        WaterVolumeViewModel wvi = new WaterVolumeViewModel()
+                        {
+                            EventDate = wi.EventDate,
+                            WaterVolume = Decimal.Parse(wi.Value)
+                        };
+
+                        viewModel.WaterVolumes.Add(wvi);
+                    }
+                }
+            }
+
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
 
         #endregion Dashboard
@@ -260,6 +287,86 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             return View(viewModel);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        public ActionResult GetsVoltage(Guid tankId)
+        {
+            VoltageViewModel viewModel = new VoltageViewModel();
+
+            if (KEUnitOfWork.SensorRepository.HasSensor(tankId) &&
+                KEUnitOfWork.SensorItemRepository.HasSensorItem(tankId, ItemEnum.Voltage))
+            {
+                var voltages = KEUnitOfWork.SensorItemEventRepository.GetsByTankIdAndByItem(tankId, ItemEnum.Voltage, 5);
+
+                if (voltages.Any())
+                {
+                    foreach (var volt in voltages)
+                    {
+                        EventViewModel evm = new EventViewModel()
+                        {
+                            EventDate = volt.EventDate,
+                            Value = volt.Value
+                        };
+
+                        viewModel.Voltages.Add(evm);
+                    }
+                }
+            }
+
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        public ActionResult GetsWaterAndWeatherTemperature(Guid tankId)
+        {
+            TemperatureViewModel viewModel = new TemperatureViewModel();
+
+            if (KEUnitOfWork.SensorRepository.HasSensor(tankId))
+            {
+                if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tankId, ItemEnum.WaterTemperature))
+                {
+                    var waterTemperatures = KEUnitOfWork.SensorItemEventRepository.GetsByTankIdAndByItem(tankId, ItemEnum.WaterTemperature, 5);
+
+                    if (waterTemperatures.Any())
+                    {
+                        foreach (var wt in waterTemperatures)
+                        {
+                            EventViewModel evm = new EventViewModel()
+                            {
+                                EventDate = wt.EventDate,
+                                Value = wt.Value
+                            };
+
+                            viewModel.WaterTempertatures.Add(evm);
+                        }
+                    }
+                }
+
+                // Weather Temperature
+                if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tankId, ItemEnum.WeatherTemperature))
+                {
+                    var weatherTemperatures = KEUnitOfWork.SensorItemEventRepository.GetsByTankIdAndByItem(tankId, ItemEnum.WeatherTemperature, 5);
+
+                    if (weatherTemperatures.Any())
+                    {
+                        foreach (var wt in weatherTemperatures)
+                        {
+                            EventViewModel evm = new EventViewModel()
+                            {
+                                EventDate = wt.EventDate,
+                                Value = wt.Value
+                            };
+
+                            viewModel.WeatherTempertatures.Add(evm);
+                        }
+                    }
+                }
+            }
+
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
 
         #endregion Gauge

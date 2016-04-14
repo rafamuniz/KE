@@ -1,45 +1,41 @@
 ﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
 @using Munizoft.Extensions
 @using Munizoft.MVC.Helpers
-@using GridMvc.Html
 
-@model FastTrackerViewModel
+@model GaugeViewModel
 
 @{
     Layout = "~/Views/Shared/_Internal.cshtml";
-    ViewBag.Title = "Tank - Fast Tracker";
+    ViewBag.Title = "Tank - Gauge";
 }
 
-<div class="row" style="margin-bottom: 20px;">
-    <div class="form-group">
-        <div class="col-md-6">
-            @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite", @onchange = "FillTank()" })
-        </div>
-        <div class="col-md-6">
-            @Html.DropDownListFor(m => m.TankId, new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Name"), "-- Please select a Tank --", new { @class = "form-control selectpicker", @id = "ddlTank", @onchange = "getData()" })
-        </div>
-    </div>
-</div>
+<script src="~/Scripts/jquery-2.2.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+<script src="~/Scripts/app/utils.js"></script>
+<script src="~/Scripts/highcharts/highcharts.js"></script>
+<script src="~/Scripts/highcharts/highcharts-3d.js"></script>
+<script src="~/Scripts/app/tank-gauge.js"></script>
+@Scripts.Render("~/bundles/moment")
 
 <div class="row">
     <div id="divTank" class="col-sm-6">
         <div id="tankName" class="gauge-image">
-            <h3></h3>
+            <h3>@Model.TankName</h3>
         </div>
         <div class="guage-table">
             <div class="gauge-cell">
                 <div id="tankWaterVolumePerc" class="guage-value">
-                    <h3>0 %</h3>
+                    <h3>@Model.WaterVolumePercentage.Value.ToString("P2")</h3>
                     <p>Full</p>
                 </div>
                 <div id="tankWaterVolume" class="guage-value">
                     <p>Total volume</p>
-                    <h3>0</h3>
+                    <h3>@Model.WaterVolumeCapacity</h3>
                     <p>gallons</p>
                 </div>
                 <div id="tankWaterLastMeasurement" class="guage-value">
-                    <p>12:00:00 am</p>
-                    <p>1/1/2000</p>
+                    <p>@Model.WaterVolumeLastMeasurement.Value.ToString("hh:mm:ss tt") </p>
+                    <p>@Model.WaterVolumeLastMeasurement.Value.ToString("MM/dd/yyyy") </p>
                 </div>
             </div>
             <div class="gauge-cell" style="background: #FFF;">
@@ -81,30 +77,30 @@
                     </tbody>
                 </table>
             </div>
-            <h3 class="add-modify">Add / Modify an Alarm</h3>
-            <div class="modify-buttons">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <input type="text" id="txtDescription" class="form-control" />
-                    </div>
-                    <div class="col-sm-2">
-                        <select id="ddlSeverity" class="form-control selectpicker">
-                            <option value="1" selected>Low</option>
-                            <option value="2">Medium</option>
-                            <option value="3">High</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="text" id="txtLimit" class="form-control" />
-                    </div>
-                    <div class="col-sm-5">
-                        <input type="text" id="txtEmail" class="form-control" />
+            @*<h3 class="add-modify">Add / Modify an Alarm</h3>
+                <div class="modify-buttons">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <input type="text" id="txtDescription" class="form-control" />
+                        </div>
+                        <div class="col-sm-2">
+                            <select id="ddlSeverity" class="form-control selectpicker">
+                                <option value="1" selected>Low</option>
+                                <option value="2">Medium</option>
+                                <option value="3">High</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtLimit" class="form-control" />
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" id="txtEmail" class="form-control" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="save-button">
-                <button type="button" class="btn btn-secondary" onclick="addSensorAlarm()">Add</button>
-            </div>
+                <div class="save-button">
+                    <button type="button" class="btn btn-secondary" onclick="addSensorAlarm()">Add</button>
+                </div>*@
         </div>
     </div>
 </div>
@@ -119,8 +115,8 @@
     <div style="margin-top: 10px;">
         <div class="col-sm-10">
             <div class="tank-volume-sec">
-                <div class="tank-volume">
-                    <img src="~/images/tank-volume.png">
+                <div id="tankVolumeGraph" class="tank-volume">
+                    @*<img src="~/images/tank-volume.png">*@
                 </div>
             </div>
         </div>
@@ -146,29 +142,34 @@
         <div class="gauge-title">
             <h3>Tank Temp</h3>
         </div>
-        <div id="temperature_graph" class="graph" style="margin-top: 10px;">
-            <img src="~/images/tank-temp.png">
+        <div id="temperature_graph_@Model.TankId" class="graph" style="margin-top: 10px;">
+            @*<img src="~/images/tank-temp.png">*@
         </div>
+        <script type="text/javascript">
+            generateTemperatureGraph('@Model.TankId');
+        </script>
     </div>
 
     <div id="tankVoltage" class="col-sm-6 sensor-voltage-box" style="margin-left: 20px;">
         <div class="gauge-title">
             <h3>Sensor Voltage</h3>
         </div>
-        <div id="voltage-graph" class="graph" style="margin-top: 10px;">
-            .
+        <div id="voltage_graph_@Model.TankId" class="graph" style="margin-top: 10px;">
+
         </div>
+        <script type="text/javascript">
+            generateVoltageGraph('@Model.TankId');
+        </script>
     </div>
 </div>
 
 @section Scripts {
-    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
-    <script src="~/Scripts/flot/jquery.flot.min.js"></script>
-    <script src="~/Scripts/app/tank-fasttracker.js"></script>
-
+    <script src="~/Scripts/app/tank-gauge.js"></script>
     <script type="text/javascript">
         $(function () {
-            initView();
+            showLoading();
+
+            hideLoading();
         });
     </script>
 }

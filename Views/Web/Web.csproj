@@ -248,7 +248,7 @@
     <Compile Include="Areas\Customer\Controllers\SiteController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeGraphViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankWithWaterVolume.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\ItemViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\SpotGPSViewModel.cs" />
@@ -264,6 +264,11 @@
     <Compile Include="Areas\Customer\ViewModels\Tank\DashboardViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\EditViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\VoltageViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\TemperatureViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\TankViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\EventViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\User\ChangePasswordViewModel.cs" />
     <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />

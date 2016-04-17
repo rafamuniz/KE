@@ -13,14 +13,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\KarmicEnergy.C
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		AWS|Any CPU = AWS|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DA52A87-280E-42A5-895B-9D7694942A42}.AWS|Any CPU.ActiveCfg = AWS|Any CPU
+		{1DA52A87-280E-42A5-895B-9D7694942A42}.AWS|Any CPU.Build.0 = AWS|Any CPU
 		{1DA52A87-280E-42A5-895B-9D7694942A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1DA52A87-280E-42A5-895B-9D7694942A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DA52A87-280E-42A5-895B-9D7694942A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DA52A87-280E-42A5-895B-9D7694942A42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4765A8A-4D17-4E1B-9116-F736E42A2EBB}.AWS|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4765A8A-4D17-4E1B-9116-F736E42A2EBB}.AWS|Any CPU.Build.0 = Debug|Any CPU
 		{F4765A8A-4D17-4E1B-9116-F736E42A2EBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F4765A8A-4D17-4E1B-9116-F736E42A2EBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4765A8A-4D17-4E1B-9116-F736E42A2EBB}.Release|Any CPU.ActiveCfg = Release|Any CPU

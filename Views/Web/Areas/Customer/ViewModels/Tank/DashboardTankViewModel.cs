@@ -48,7 +48,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
         public Decimal AmbientTemperature { get; set; }
         public DateTime? AmbientTemperatureLastMeasurement { get; set; }
 
-        public Decimal WaterTemperature { get; set; }
+        public Decimal? WaterTemperature { get; set; }
         public DateTime? WaterTemperatureLastMeasurement { get; set; }
 
         public Int32? Alarms { get; set; }

@@ -4,7 +4,7 @@ using System;
 
 namespace KarmicEnergy.Core.Persistence
 {
-    public class KEUnitOfWork : UnitOfWork<KEContext>, IDisposable
+    public class KEUnitOfWork : KEUnitOfWorkBase<KEContext>, IDisposable
     {
         #region Fields             
         private ICustomerRepository _CustomerRepository;

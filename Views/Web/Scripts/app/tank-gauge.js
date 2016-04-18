@@ -144,7 +144,7 @@ function generateTemperatureGraph(tankId) {
                             text += 'Weather: ' + this.y + ' °F';
 
                         return text;
-                    }                    
+                    }
                 },
                 loading: {
                     hideDuration: 100,
@@ -210,6 +210,95 @@ function generateTemperatureGraph(tankId) {
         },
         error: function (jqXHR, exception) {
             notifiyError("Error - Generate Temperature Graph");
+        }
+    });
+}
+
+
+function generateVoltageGraph(tankId) {
+    $.ajax({
+        url: getUrlBase() + "/Customer/Tank/GetsVoltage/",
+        type: "GET",
+        dataType: "JSON",
+        data: { TankId: tankId },
+        success: function (data) {
+            var dataX = [];
+            var dataY = [];
+            var minY = 0;
+            var maxY = 0;
+
+            $.each(data.Voltages, function (i, d) {
+                var momentDate = moment.utc(d.EventDate);
+                dataX.push(momentDate);
+
+                var value = parseFloat(d.Value);
+                if (maxY < value)
+                    maxY = value;
+
+                dataY.push(value);
+            });
+
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'voltage_graph_' + tankId,
+                    zoomType: 'x',
+                    height: '300'
+                },
+                title: {
+                    text: ''
+                },
+                tooltip: {
+                    useHTML: true,
+                    formatter: function () {
+                        return Highcharts.dateFormat('%m/%d/%Y ', this.x) + '<BR>' +
+                               Highcharts.dateFormat('%H:%M:%S', this.x) + '<BR>' +
+                               'Volts: ' + this.y;
+                    }
+                },
+                loading: {
+                    hideDuration: 100,
+                    labelStyle: { "fontWeight": "bold", "position": "relative", "top": "45%" },
+                    showDuration: 0
+                },
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    type: 'datetime',
+                    categories: dataX,
+                    labels: {
+                        useHTML: true,
+                        align: "center",
+                        enabled: true,
+                        formatter: function () {
+                            return Highcharts.dateFormat('%m/%d/%Y ', this.value) + '<BR>' +
+                                   Highcharts.dateFormat('%H:%M:%S', this.value);
+                        }
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'mV'
+                    },
+                    min: minY,
+                    max: maxY,
+                },
+                legend: {
+                    enabled: false
+                },
+                series: [{
+                    type: 'line',
+                    data: dataY
+                }],
+                navigation: {
+                    menuItemStyle: {
+                        fontSize: '10px'
+                    }
+                }
+            });
+        },
+        error: function (jqXHR, exception) {
+            notifiyError("Error - Generate Voltage Graph");
         }
     });
 }

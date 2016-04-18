@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public class AlarmRepository : Repository<Alarm, KEContext>, IAlarmRepository
+    public class AlarmRepository : KERepositoryBase<Alarm, KEContext>, IAlarmRepository
     {
         #region Constructor
         public AlarmRepository(KEContext context)

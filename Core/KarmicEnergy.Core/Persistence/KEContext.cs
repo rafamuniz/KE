@@ -26,7 +26,13 @@ namespace KarmicEnergy.Core.Persistence
             modelBuilder.Entity<TankModel>().Property(x => x.Image).HasColumnType("VARBINARY(MAX)");
             modelBuilder.Entity<CustomerSetting>().Property(x => x.Value).HasColumnType("NVARCHAR(MAX)");
             modelBuilder.Entity<CustomerUserSetting>().Property(x => x.Value).HasColumnType("NVARCHAR(MAX)");
-            
+
+            modelBuilder.Entity<CustomerUser>()
+                    .HasRequired<Contact>(p => p.Contact)
+                    .WithMany(r=>r.CustomerUsers)                 
+                    .HasForeignKey(l => l.ContactId)
+                    .WillCascadeOnDelete(false);
+
             //modelBuilder.HasDefaultSchema("security");
             CreateManyToMany(modelBuilder);
         }
@@ -45,10 +51,12 @@ namespace KarmicEnergy.Core.Persistence
         }
 
         #region DbSet
+
+        public IDbSet<Contact> Contacts { get; set; }
         public IDbSet<Customer> Customers { get; set; }
         public IDbSet<CustomerSetting> CustomerSettings { get; set; }
 
-        public IDbSet<CustomerUser> CustomerUsers { get; set; }                
+        public IDbSet<CustomerUser> CustomerUsers { get; set; }
         public IDbSet<CustomerUserSetting> CustomerUserSettings { get; set; }
 
         public IDbSet<Site> Sites { get; set; }
@@ -64,6 +72,7 @@ namespace KarmicEnergy.Core.Persistence
         public IDbSet<Alarm> Alarms { get; set; }
 
         public IDbSet<Geometry> Geometries { get; set; }
+        public IDbSet<Unit> Units { get; set; }
         public IDbSet<Country> Countries { get; set; }
         #endregion DbSet
     }

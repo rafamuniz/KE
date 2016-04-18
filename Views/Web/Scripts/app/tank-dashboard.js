@@ -44,15 +44,15 @@
                 xAxis: {
                     type: 'datetime',
                     categories: dataX,
-                    labels: {
-                        useHTML: true,
-                        align: "center",
-                        enabled: true,
-                        formatter: function () {
-                            return Highcharts.dateFormat('%m/%d/%Y ', this.value) + '<BR>' +
-                                   Highcharts.dateFormat('%H:%M:%S', this.value);
-                        }
-                    }
+                    //labels: {
+                    //    useHTML: true,
+                    //    align: "center",
+                    //    enabled: true,
+                    //    formatter: function () {
+                    //        return Highcharts.dateFormat('%m/%d/%Y ', this.value) + '<BR>' +
+                    //               Highcharts.dateFormat('%H:%M:%S', this.value);
+                    //    }
+                    //}
                 },
                 yAxis: {
                     title: {
@@ -74,4 +74,38 @@
             notifiyError("Error - Generate Graph");
         }
     });
+}
+
+function generateTemperatureGraph(tankId, waterTemperature) {
+    //$.ajax({
+    //    url: getUrlBase() + "/Customer/Tank/GetLastWaterTemperature",
+    //    type: "GET",
+    //    dataType: "JSON",
+    //    data: { TankId: tankId },
+    //    success: function (data) {
+
+    //    }
+    //});
+
+    if (waterTemperature != "" && waterTemperature != undefined) {
+        var majorTicks = { size: '10%', interval: 10 },
+            minorTicks = { size: '5%', interval: 2.5, style: { 'stroke-width': 1, stroke: '#AAAAAA' } },
+            labels = { interval: 10, position: 'far' };
+        var maxTemp = parseInt(waterTemperature * 1.2);
+
+        $('#graph-temperature-' + tankId).jqxLinearGauge({
+            orientation: 'vertical',
+            labels: labels,
+            ticksMajor: majorTicks,
+            ticksMinor: minorTicks,
+            max: maxTemp,
+            value: waterTemperature,
+            pointer: { size: '6%' },
+            colorScheme: 'scheme05',
+            ranges: [
+            { startValue: -10, endValue: 10, style: { fill: '#FFF157', stroke: '#FFF157' } },
+            { startValue: 10, endValue: 35, style: { fill: '#FFA200', stroke: '#FFA200' } },
+            { startValue: 35, endValue: maxTemp, style: { fill: '#FF4800', stroke: '#FF4800' } }]
+        });
+    }
 }

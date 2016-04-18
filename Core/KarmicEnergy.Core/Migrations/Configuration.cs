@@ -18,6 +18,9 @@ namespace KarmicEnergy.Core.Migrations
         {
             try
             {
+                Unit.Load()
+                    .ForEach(e => context.Units.AddOrUpdate(x => x.Id, e));
+
                 Severity.Load()
                     .ForEach(e => context.Severities.AddOrUpdate(x => x.Id, e));
 

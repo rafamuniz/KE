@@ -53,6 +53,9 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                     if (result.Succeeded)
                     {
                         Core.Entities.Customer customer = new Core.Entities.Customer() { Id = Guid.Parse(user.Id) };
+                        Core.Entities.Contact contact = viewModel.Map();
+                        customer.Contact = contact;
+
                         KEUnitOfWork.CustomerRepository.Add(customer);
                         KEUnitOfWork.Complete();
 
@@ -109,18 +112,25 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         public async Task<ActionResult> Edit(EditViewModel viewModel)
         {
             var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
+            var customer = KEUnitOfWork.CustomerRepository.Get(viewModel.Id);
 
-            if (user == null)
+            if (customer == null || user == null)
             {
                 AddErrors("Customer does not exist");
-                return View();
+                return View(viewModel);
             }
 
             user.Email = viewModel.Email;
             var result = await UserManager.UpdateAsync(user);
 
             if (result.Succeeded)
-            {
+            {                
+                Core.Entities.Contact contact = viewModel.Map();
+                customer.Contact = contact;
+
+                KEUnitOfWork.CustomerRepository.Add(customer);
+                KEUnitOfWork.Complete();
+
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

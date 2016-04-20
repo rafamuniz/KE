@@ -10,6 +10,7 @@ namespace KarmicEnergy.Core.Entities
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         [Column("Key", TypeName = "NVARCHAR")]

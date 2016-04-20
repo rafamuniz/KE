@@ -28,6 +28,14 @@ namespace KarmicEnergy.Core.Entities
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public String Status { get; set; } = "A";
 
+        [Column("Latitude", TypeName = "NVARCHAR")]
+        [StringLength(64)]
+        public String Latitude { get; set; }
+
+        [Column("Longitude", TypeName = "NVARCHAR")]
+        [StringLength(64)]
+        public String Longitude { get; set; }
+
         #endregion Property
 
         #region Customer
@@ -40,5 +48,16 @@ namespace KarmicEnergy.Core.Entities
         public virtual Customer Customer { get; set; }
 
         #endregion Customer
+
+        #region Address
+
+        [Column("AddressId", TypeName = "UNIQUEIDENTIFIER")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public Guid AddressId { get; set; }
+
+        [ForeignKey("AddressId")]
+        public virtual Address Address { get; set; }
+
+        #endregion Address
     }
 }

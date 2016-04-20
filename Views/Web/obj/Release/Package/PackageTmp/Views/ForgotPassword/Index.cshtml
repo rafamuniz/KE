@@ -1,0 +1,38 @@
+﻿@using KarmicEnergy.Web.ViewModels.Account
+@using Munizoft.Extensions
+
+@model ForgotPasswordViewModel
+
+@{
+    Layout = "~/Views/Shared/_LoginMaster.cshtml";
+    ViewBag.Title = "Forgot your password?";
+}
+
+<div class="login-box">
+    <div class="login-logo">
+        <a href="http://www.karmicenergy.com">
+            <img src="~/images/login_logo.png">
+        </a>
+    </div>
+
+    <div class="login-box-body">
+            @using (Html.BeginForm("ForgotPassword", "ForgotPassword", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+            @Html.AntiForgeryToken()
+            @Html.Partial("_Error")
+
+            <div class="has-feedback">
+                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "input-login", placeholder = AttributeExtension.GetDisplayAttributeNameValue<ForgotPasswordViewModel>(m => m.Email) } })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+            
+            <div class="has-feedback">
+                <button type="submit" class="btn-login">Confirm</button>
+            </div>
+        }     
+    </div><!-- /.login-box-body -->
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

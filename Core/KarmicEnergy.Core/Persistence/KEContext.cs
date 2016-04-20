@@ -27,11 +27,11 @@ namespace KarmicEnergy.Core.Persistence
             modelBuilder.Entity<CustomerSetting>().Property(x => x.Value).HasColumnType("NVARCHAR(MAX)");
             modelBuilder.Entity<CustomerUserSetting>().Property(x => x.Value).HasColumnType("NVARCHAR(MAX)");
 
-            modelBuilder.Entity<CustomerUser>()
-                    .HasRequired<Contact>(p => p.Contact)
-                    .WithMany(r=>r.CustomerUsers)                 
-                    .HasForeignKey(l => l.ContactId)
-                    .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<CustomerUser>()
+            //        .HasRequired<Contact>(p => p.Contact)
+            //        .WithMany(r=>r.CustomerUsers)                 
+            //        .HasForeignKey(l => l.ContactId)
+            //        .WillCascadeOnDelete(false);
 
             //modelBuilder.HasDefaultSchema("security");
             CreateManyToMany(modelBuilder);
@@ -52,6 +52,7 @@ namespace KarmicEnergy.Core.Persistence
 
         #region DbSet
 
+        public IDbSet<Address> Addresses { get; set; }
         public IDbSet<Contact> Contacts { get; set; }
         public IDbSet<Customer> Customers { get; set; }
         public IDbSet<CustomerSetting> CustomerSettings { get; set; }

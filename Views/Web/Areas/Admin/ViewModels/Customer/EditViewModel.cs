@@ -67,16 +67,16 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Customer
             return Mapper.Map<ApplicationUser, EditViewModel>(entity);
         }
 
-        public static EditViewModel Map(Core.Entities.Contact entity)
+        public static EditViewModel Map(Core.Entities.Address entity)
         {
-            Mapper.CreateMap<Core.Entities.Contact, EditViewModel>();
-            return Mapper.Map<Core.Entities.Contact, EditViewModel>(entity);
+            Mapper.CreateMap<Core.Entities.Address, EditViewModel>();
+            return Mapper.Map<Core.Entities.Address, EditViewModel>(entity);
         }
 
-        public Core.Entities.Contact Map()
+        public Core.Entities.Address Map()
         {
-            Mapper.CreateMap<EditViewModel, Core.Entities.Contact>();
-            return Mapper.Map<EditViewModel, Core.Entities.Contact>(this);
+            Mapper.CreateMap<EditViewModel, Core.Entities.Address>();
+            return Mapper.Map<EditViewModel, Core.Entities.Address>(this);
         }
 
         #endregion Map

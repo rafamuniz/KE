@@ -13,6 +13,7 @@ using System.Web.Mvc;
 using KarmicEnergy.Core.Entities;
 using Munizoft.MVC.Helpers.Models;
 using AutoMapper;
+using System.Data.Entity.Infrastructure;
 
 namespace KarmicEnergy.Web.Controllers
 {
@@ -139,7 +140,12 @@ namespace KarmicEnergy.Web.Controllers
 
         protected void AddErrors(Exception ex)
         {
-            ModelState.AddModelError("", ex.Message);
+            if (ex is DbEntityValidationException)
+                AddErrors(ex);
+            else if (ex is DbUpdateException)
+                AddErrors(ex);
+            else
+                ModelState.AddModelError("", ex.Message);
         }
 
         protected void AddErrors(String key, String message)
@@ -156,6 +162,11 @@ namespace KarmicEnergy.Web.Controllers
                     ModelState.AddModelError("", valError.ErrorMessage);
                 }
             }
+        }
+
+        protected void AddErrors(DbUpdateException uex)
+        {
+            ModelState.AddModelError("", uex.InnerException.InnerException.Message);
         }
 
         protected void AddErrors(String message)

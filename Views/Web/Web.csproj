@@ -28,7 +28,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -312,6 +312,7 @@
     <Compile Include="Areas\Admin\ViewModels\Customer\ListViewModel.cs" />
     <Compile Include="ViewModels\Account\ProfileViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\AddressViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -399,6 +400,7 @@
     <Content Include="images\login_logo.png" />
     <Content Include="images\logo_mni.png" />
     <Content Include="images\logo.png" />
+    <Content Include="images\map_icon.png" />
     <Content Include="images\menu-highlight.png" />
     <Content Include="images\my-tank-reports_03.png" />
     <Content Include="images\my-tank-reports_06.png" />
@@ -1867,6 +1869,7 @@
     <Content Include="Views\Shared\_Loading.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_Address.cshtml" />
     <None Include="Web.AWS.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

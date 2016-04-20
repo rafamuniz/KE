@@ -7,6 +7,8 @@ namespace KarmicEnergy.Core.Persistence
     public class KEUnitOfWork : KEUnitOfWorkBase<KEContext>, IDisposable
     {
         #region Fields             
+        private IAddressRepository _AddressRepository;
+
         private ICustomerRepository _CustomerRepository;
         private ICustomerUserRepository _CustomerUserRepository;
         private ISiteRepository _SiteRepository;
@@ -24,6 +26,7 @@ namespace KarmicEnergy.Core.Persistence
         private ITriggerRepository _TriggerRepository;
         private IAlarmRepository _AlarmRepository;
 
+        private IContactRepository _ContactRepository;
         private ICountryRepository _CountryRepository;
         private ISeverityRepository _SeverityRepository;
         #endregion Fields
@@ -47,6 +50,11 @@ namespace KarmicEnergy.Core.Persistence
         public static KEUnitOfWork Create()
         {
             return new KEUnitOfWork();
+        }
+
+        public IAddressRepository AddressRepository
+        {
+            get { return _AddressRepository ?? (_AddressRepository = new AddressRepository(_context)); }
         }
 
         public ICustomerRepository CustomerRepository
@@ -117,6 +125,11 @@ namespace KarmicEnergy.Core.Persistence
         public ICountryRepository CountryRepository
         {
             get { return _CountryRepository ?? (_CountryRepository = new CountryRepository(_context)); }
+        }
+
+        public IContactRepository ContactRepository
+        {
+            get { return _ContactRepository ?? (_ContactRepository = new ContactRepository(_context)); }
         }
     }
 }

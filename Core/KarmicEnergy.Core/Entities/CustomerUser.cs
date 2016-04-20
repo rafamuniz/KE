@@ -26,16 +26,16 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Customer
 
-        #region Contact
+        #region Address
 
-        [Column("ContactId", TypeName = "UNIQUEIDENTIFIER")]
+        [Column("AddressId", TypeName = "UNIQUEIDENTIFIER")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        public Guid ContactId { get; set; }
+        public Guid AddressId { get; set; }
 
-        [ForeignKey("ContactId")]
-        public virtual Contact Contact { get; set; }
+        [ForeignKey("AddressId")]
+        public virtual Address Address { get; set; }
 
-        #endregion Contact
+        #endregion Address
 
         #region Settings        
 

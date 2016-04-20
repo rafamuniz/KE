@@ -90,9 +90,25 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201604181616011_Initial.cs" />
-    <Compile Include="Migrations\201604181616011_Initial.Designer.cs">
-      <DependentUpon>201604181616011_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201604190239330_Initial.cs" />
+    <Compile Include="Migrations\201604190239330_Initial.Designer.cs">
+      <DependentUpon>201604190239330_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604190241071_Initial1.cs" />
+    <Compile Include="Migrations\201604190241071_Initial1.Designer.cs">
+      <DependentUpon>201604190241071_Initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604190242167_Initial2.cs" />
+    <Compile Include="Migrations\201604190242167_Initial2.Designer.cs">
+      <DependentUpon>201604190242167_Initial2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604190246197_Initial3.cs" />
+    <Compile Include="Migrations\201604190246197_Initial3.Designer.cs">
+      <DependentUpon>201604190246197_Initial3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604200557448_Initial4.cs" />
+    <Compile Include="Migrations\201604200557448_Initial4.Designer.cs">
+      <DependentUpon>201604200557448_Initial4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
@@ -101,14 +117,18 @@
     <Compile Include="Persistence\KEUnitOfWork.cs" />
     <Compile Include="Persistence\KEUnitOfWorkBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\Base\KERepositoryBase.cs" />
     <Compile Include="Repositories\CustomerUserSettingRepository.cs" />
     <Compile Include="Repositories\CustomerSettingRepository.cs" />
+    <Compile Include="Repositories\Interface\IAddressRepository.cs" />
     <Compile Include="Repositories\Interface\ICustomerUserSettingRepository.cs" />
     <Compile Include="Repositories\Interface\ICustomerSettingRepository.cs" />
+    <Compile Include="Repositories\Interface\IContactRepository.cs" />
     <Compile Include="Repositories\Interface\IItemRepository.cs" />
     <Compile Include="Repositories\Interface\ISensorItemRepository.cs" />
     <Compile Include="Repositories\Interface\ISeverityRepository.cs" />
+    <Compile Include="Repositories\ContactRepository.cs" />
     <Compile Include="Repositories\ItemRepository.cs" />
     <Compile Include="Repositories\SensorItemRepository.cs" />
     <Compile Include="Repositories\SeverityRepository.cs" />
@@ -140,8 +160,20 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604181616011_Initial.resx">
-      <DependentUpon>201604181616011_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604190239330_Initial.resx">
+      <DependentUpon>201604190239330_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604190241071_Initial1.resx">
+      <DependentUpon>201604190241071_Initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604190242167_Initial2.resx">
+      <DependentUpon>201604190242167_Initial2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604190246197_Initial3.resx">
+      <DependentUpon>201604190246197_Initial3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604200557448_Initial4.resx">
+      <DependentUpon>201604200557448_Initial4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,3 @@
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\AWS\KarmicEnergy.Core.Migrations.Initial.resources
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\AWS\Core.csproj.GenerateResource.Cache
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\AWS\Core.csprojResolveAssemblyReference.cache

@@ -10,6 +10,7 @@ namespace KarmicEnergy.Core.Entities
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         [Column("Key", TypeName = "NVARCHAR")]
@@ -17,7 +18,7 @@ namespace KarmicEnergy.Core.Entities
         [Required(AllowEmptyStrings = false, ErrorMessage = "{2} cannot be null or empty")]
         public String Key { get; set; }
 
-        [Column("Value", TypeName = "NVARCHAR")]        
+        [Column("Value", TypeName = "NVARCHAR")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{2} cannot be null or empty")]
         public String Value { get; set; }
 

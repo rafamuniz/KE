@@ -22,15 +22,18 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return View(viewModels);
         }
 
+        #endregion Index
+
+        #region Create
+
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Create()
         {
             LoadStatuses();
-            return View();
+            CreateViewModel viewModel = new CreateViewModel();
+            return View(viewModel);
         }
-        #endregion Index
 
-        #region Create
         //
         // POST: /User/Create
         [HttpPost]
@@ -46,19 +49,20 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             try
             {
-                Site site = new Site() { Name = viewModel.Name, IPAddress = viewModel.IPAddress, CustomerId = CustomerId, Status = viewModel.Status };
+                Site site = viewModel.Map();
+                site.CustomerId = CustomerId;
+
+                Core.Entities.Address address = viewModel.MapAddress();
+                site.Address = address;
+
                 KEUnitOfWork.SiteRepository.Add(site);
                 KEUnitOfWork.Complete();
 
                 return RedirectToAction("Index", "Site");
             }
-            catch (DbEntityValidationException dbex)
-            {
-                AddErrors(dbex);
-            }
             catch (Exception ex)
             {
-                AddErrors(ex.Message);
+                AddErrors(ex);
             }
 
             LoadStatuses();

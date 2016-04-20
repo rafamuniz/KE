@@ -114,3 +114,45 @@ function populateDropdown(select, data) {
         });
     };
 }(jQuery));
+
+function getGeoLocation(success, error) {
+    var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+    };
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success, error, options)
+    } else {
+        showNotify("Geolocation is not supported by this browser.");
+    }
+};
+
+function geoLocationSuccess(pos) {
+    var crd = pos.coords;
+
+    console.log('Sua posição atual é:');
+    console.log('Latitude : ' + crd.latitude);
+    console.log('Longitude: ' + crd.longitude);
+    console.log('Mais ou menos ' + crd.accuracy + ' metros.');
+
+    return crd;
+};
+
+function geoLocationError(err) {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+    }
+};

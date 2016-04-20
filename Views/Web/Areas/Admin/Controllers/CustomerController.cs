@@ -3,6 +3,7 @@ using KarmicEnergy.Web.Controllers;
 using KarmicEnergy.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,10 +24,12 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         #endregion Index
 
         #region Create
+
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            return View();
+            CreateViewModel viewModel = new CreateViewModel();
+            return View(viewModel);
         }
 
         //
@@ -43,7 +46,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 
             try
             {
-                var user = new ApplicationUser { UserName = viewModel.UserName, Email = viewModel.Email, Name = viewModel.Name };
+                var user = new ApplicationUser { UserName = viewModel.UserName, Email = viewModel.Address.Email, Name = viewModel.Name };
                 var result = await UserManager.CreateAsync(user, viewModel.Password);
 
                 if (result.Succeeded)
@@ -52,9 +55,11 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 
                     if (result.Succeeded)
                     {
-                        Core.Entities.Customer customer = new Core.Entities.Customer() { Id = Guid.Parse(user.Id) };
-                        Core.Entities.Contact contact = viewModel.Map();
-                        customer.Contact = contact;
+                        Core.Entities.Customer customer = viewModel.Map();
+                        customer.Id = Guid.Parse(user.Id);
+
+                        Core.Entities.Address address = viewModel.MapAddress();
+                        customer.Address = address;
 
                         KEUnitOfWork.CustomerRepository.Add(customer);
                         KEUnitOfWork.Complete();
@@ -71,13 +76,9 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 
                 AddErrors(result);
             }
-            catch (DbEntityValidationException dbex)
-            {
-                AddErrors(dbex);
-            }
             catch (Exception ex)
             {
-                AddErrors(ex.Message);
+                AddErrors(ex);
             }
 
             return View(viewModel);
@@ -124,9 +125,9 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
             var result = await UserManager.UpdateAsync(user);
 
             if (result.Succeeded)
-            {                
-                Core.Entities.Contact contact = viewModel.Map();
-                customer.Contact = contact;
+            {
+                Core.Entities.Address address = viewModel.Map();
+                //customer.Address = address;
 
                 KEUnitOfWork.CustomerRepository.Add(customer);
                 KEUnitOfWork.Complete();

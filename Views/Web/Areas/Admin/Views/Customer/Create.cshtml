@@ -59,7 +59,7 @@
             <div class="title green">
                 <h2>Info</h2>
             </div>
-            @Html.Partial("_Address", @Model.Address)
+            @Html.Partial("_Address", Model.Address, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "Address" } })
         </div>
     </div>
 

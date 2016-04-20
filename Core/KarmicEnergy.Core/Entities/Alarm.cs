@@ -13,7 +13,25 @@ namespace KarmicEnergy.Core.Entities
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
+        [Column("Value", TypeName = "NVARCHAR")]
+        [StringLength(256)]
+        public String Value { get; set; } = String.Empty;
+
+        [Column("StartDate", TypeName = "DATETIME")]
+        [Required]
+        public DateTime StartDate { get; set; } = DateTime.UtcNow;
+
+        [Column("EndDate", TypeName = "DATETIME")]        
+        public DateTime? EndDate { get; set; }
+
         #endregion Property
+
+        #region Sensor Event
+
+        [Column("SensorItemEventId", TypeName = "UNIQUEIDENTIFIER")]
+        public Guid SensorItemEventId { get; set; }
+
+        #endregion Sensor Event
 
         #region Trigger
 

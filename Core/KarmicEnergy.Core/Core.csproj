@@ -110,6 +110,10 @@
     <Compile Include="Migrations\201604200557448_Initial4.Designer.cs">
       <DependentUpon>201604200557448_Initial4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604201254551_Initial5.cs" />
+    <Compile Include="Migrations\201604201254551_Initial5.Designer.cs">
+      <DependentUpon>201604201254551_Initial5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
@@ -174,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604200557448_Initial4.resx">
       <DependentUpon>201604200557448_Initial4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604201254551_Initial5.resx">
+      <DependentUpon>201604201254551_Initial5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

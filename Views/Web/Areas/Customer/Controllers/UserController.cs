@@ -41,7 +41,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult Create()
         {
             LoadCustomerRoles();
-            return View();
+            CreateViewModel viewModel = new CreateViewModel();
+            return View(viewModel);
         }
 
         //
@@ -59,7 +60,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             try
             {
-                var user = new ApplicationUser { UserName = viewModel.Email, Email = viewModel.Email, Name = viewModel.Name };
+                var user = new ApplicationUser { UserName = viewModel.Username, Email = viewModel.Address.Email, Name = viewModel.Name };
                 var result = await UserManager.CreateAsync(user, viewModel.Password);
 
                 if (result.Succeeded)
@@ -69,6 +70,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     if (result.Succeeded)
                     {
                         CustomerUser customerUser = new CustomerUser() { Id = Guid.Parse(user.Id), CustomerId = CustomerId };
+
+                        Core.Entities.Address address = viewModel.MapAddress();
+                        customerUser.Address = address;
+
                         KEUnitOfWork.CustomerUserRepository.Add(customerUser);
                         KEUnitOfWork.Complete();
 

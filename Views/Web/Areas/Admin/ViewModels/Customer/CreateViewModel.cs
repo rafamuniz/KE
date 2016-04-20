@@ -21,7 +21,7 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Customer
         [Display(Name = "Name")]
         public String Name { get; set; }
 
-        [Display(Name = "UserName")]
+        [Display(Name = "Username")]
         [Required]
         [EmailAddress]
         public String UserName { get; set; }

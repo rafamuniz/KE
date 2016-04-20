@@ -40,7 +40,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
             }
         }
 
-        public DateTime EventDate { get; set; }
+        public DateTime? EventDate { get; set; }
 
         public List<WaterVolumeViewModel> WaterVolumeInfos { get; set; }
 

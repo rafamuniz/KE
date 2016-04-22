@@ -1,32 +1,29 @@
-﻿using KarmicEnergy.Web.Areas.Admin.ViewModels.TankModel;
+﻿using KarmicEnergy.Core.Entities;
+using KarmicEnergy.Web.Areas.Admin.ViewModels.TankModel;
 using KarmicEnergy.Web.Controllers;
-using KarmicEnergy.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.Validation;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Mvc;
 using Munizoft.Extensions;
-using KarmicEnergy.Core.Entities;
+using System;
 using System.IO;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace KarmicEnergy.Web.Areas.Admin.Controllers
 {
+    [Authorize]
     public class TankModelController : BaseController
     {
         #region Index
-        [Authorize(Roles = "Admin, Operator")]
+        [Authorize(Roles = "SuperAdmin, Admin, Operator")]
         public ActionResult Index()
         {
-            var tankModels = KEUnitOfWork.TankModelRepository.GetAll().ToList();
+            var tankModels = KEUnitOfWork.TankModelRepository.GetAllActive().ToList();
             var viewModels = ListViewModel.Map(tankModels);
             return View(viewModels);
         }
         #endregion Index
 
         #region Create
-        [Authorize(Roles = "Admin, Operator")]
+        [Authorize(Roles = "SuperAdmin, Admin, Operator")]
         public ActionResult Create()
         {
             LoadStatuses();
@@ -37,7 +34,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         // POST: /Customer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin, Operator")]
+        [Authorize(Roles = "SuperAdmin, Admin, Operator")]
         public ActionResult Create(CreateViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -76,7 +73,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         #endregion Create
 
         #region Edit
-        [Authorize(Roles = "Admin, Operator")]
+        [Authorize(Roles = "SuperAdmin, Admin, Operator")]
         public ActionResult Edit(Int32 id)
         {
             TankModel tankModel = KEUnitOfWork.TankModelRepository.Get(id);
@@ -89,7 +86,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         // POST: /Customer/Update
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin, Operator")]
+        [Authorize(Roles = "SuperAdmin, Admin, Operator")]
         public ActionResult Edit(EditViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -138,25 +135,36 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         //
         // GET: /Customer/Delete
         [HttpGet]
-        [Authorize(Roles = "Admin, Operator")]
+        [Authorize(Roles = "SuperAdmin, Admin, Operator")]
         public ActionResult Delete(Int32 id)
         {
-            var tankModel = KEUnitOfWork.TankModelRepository.Get(id);
-
-            if (tankModel == null)
+            try
             {
-                AddErrors("Tank Model does not exist");
-                return View("Index");
+                var tankModel = KEUnitOfWork.TankModelRepository.Get(id);
+
+                if (tankModel == null)
+                {
+                    AddErrors("Tank Model does not exist");
+                    return View("Index");
+                }
+
+                String originalPathFilename = Server.MapPath(String.Format("{0}{1}", "~/images/tank_models/", tankModel.ImageFilename));
+                String destPathFilename = Server.MapPath(String.Format("{0}{1}", "~/images/tank_models/delete/", tankModel.ImageFilename));
+                System.IO.File.Move(originalPathFilename, destPathFilename);
+                tankModel.DeletedDate = DateTime.UtcNow;
+
+                //KEUnitOfWork.TankModelRepository.Remove(tankModel);
+                KEUnitOfWork.TankModelRepository.Update(tankModel);
+                KEUnitOfWork.Complete();
+
+                return RedirectToAction("Index", "TankModel", new { area = "Admin" });
+            }
+            catch (Exception ex)
+            {
+                AddErrors(ex);
             }
 
-            String originalPathFilename = Server.MapPath(String.Format("{0}{1}", "~/images/tank_models/", tankModel.ImageFilename));
-            String destPathFilename = Server.MapPath(String.Format("{0}{1}", "~/images/tank_models/delete/", tankModel.ImageFilename));
-            System.IO.File.Move(originalPathFilename, destPathFilename);
-
-            KEUnitOfWork.TankModelRepository.Remove(tankModel);
-            KEUnitOfWork.Complete();
-
-            return RedirectToAction("Index", "TankModel", new { area = "Admin" });
+            return View();
         }
         #endregion Delete        
     }

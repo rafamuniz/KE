@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -43,5 +41,16 @@ namespace KarmicEnergy.Core.Entities
         public virtual Item Item { get; set; }
 
         #endregion Item          
+
+        #region Unit
+
+        [Column("UnitId", TypeName = "SMALLINT")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public Int16 UnitId { get; set; }
+
+        [ForeignKey("UnitId")]
+        public virtual Unit Unit { get; set; }
+
+        #endregion Sensor
     }
 }

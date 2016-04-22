@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using KarmicEnergy.Web.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
 {
@@ -19,6 +16,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
         #endregion Constructor
 
         #region Property
+
         [Display(Name = "Name")]
         [Required]
         public String Name { get; set; }

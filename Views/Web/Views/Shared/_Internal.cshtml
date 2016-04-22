@@ -28,11 +28,18 @@
             <!-- Logo -->
             <a href="/Home" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                @*<img src="^/images/logo_mini.png" alt="logo" title="Logo" />*@
+                <span class="logo-mini" style="display:none">
+                    <img src="~/images/logo_mini.png" alt="logo" title="Logo" />
+                </span>
+
+                @*<img src="~/images/logo_mini.png" alt="logo" title="Logo" />*@
                 @*<span class="logo-mini"><b>A</b>LT</span>*@
 
+                <span class="logo-lg">
+                    <img src="~/images/logo_sentence.png" alt="logo" border="0" title="Logo" />                    >
+                </span>
+
                 <!-- logo for regular state and mobile devices -->
-                <img src="~/images/logo_sentence.png" alt="logo" title="Logo" />
                 @*<span class="logo-lg"><b>Admin</b>LTE</span>*@
             </a>
 
@@ -44,7 +51,7 @@
                         <span class="sr-only">Toggle navigation</span>
                     </a>
                 </div>
-                @if (!this.HasRoles("Admin", "Operator"))
+                @if (!this.HasRoles("SuperAdmin", "Admin", "Operator"))
                 {
                     <div class="col-lg-6 my-tanks">
                         <p>WATER MINDER TANK INVENTORY OVERVIEW</p>

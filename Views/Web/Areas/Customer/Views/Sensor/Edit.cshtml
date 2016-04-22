@@ -12,8 +12,7 @@
 @using (Html.BeginForm("Edit", "Sensor", new { area = "Customer" }, FormMethod.Post, new { id = "formEditUser", @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    @Html.Partial("_Error")
-
+    
     @Html.HiddenFor(m => m.Id)
 
     <div class="row">

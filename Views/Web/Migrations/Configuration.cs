@@ -19,18 +19,54 @@ namespace KarmicEnergy.Web.Migrations
 
         protected override void Seed(KarmicEnergy.Web.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            IList<IdentityRole> roles = new List<IdentityRole>()
+            {
+                new IdentityRole("SuperAdmin"),
+                new IdentityRole("Admin"),
+                new IdentityRole("Operator"),
+                new IdentityRole("Customer"),
+                new IdentityRole("CustomerAdmin"),
+                new IdentityRole("CustomerOperator")
+            };
+
+            foreach (var r in roles)
+            {
+                //Create Role Admin if it does not exist
+                if (!roleManager.RoleExists(r.Name))
+                {
+                    var roleresult = roleManager.Create(r);
+                }
+            }
+
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            string password = "KarmicEnergy10$";
+
+            List<ApplicationUser> users = new List<ApplicationUser>()
+            {
+                new ApplicationUser() { UserName = "admin@karmicenergy.com", Email = "admin@karmicenergy.com", Name = "Admin" },
+                new ApplicationUser() { UserName = "karmicenergy@ke.com", Email = "karmicenergy@ke.com", Name = "Karmic Energy" },
+                new ApplicationUser() { UserName = "ke@karmicenergy.com", Email = "ke@karmicenergy.com", Name = "Karmic Energy" }
+            };
+
+            if (users.Any())
+            {
+                foreach (var user in users)
+                {
+                    var u = userManager.FindByName(user.Name);
+                    if (u == null)
+                    {
+                        var adminresult = userManager.Create(user, password);
+
+                        //Add User Admin to Role Admin
+                        if (adminresult.Succeeded)
+                        {
+                            var result = userManager.AddToRole(user.Id, "SuperAdmin");
+                        }
+                    }
+                }
+            }
 
             CreateUsers(context);
             base.Seed(context);

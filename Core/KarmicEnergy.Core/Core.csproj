@@ -77,6 +77,7 @@
     <Compile Include="Entities\Alarm.cs" />
     <Compile Include="Entities\SensorGroup.cs" />
     <Compile Include="Entities\SensorItem.cs" />
+    <Compile Include="Entities\UnitType.cs" />
     <Compile Include="Entities\Unit.cs" />
     <Compile Include="Entities\Trigger.cs" />
     <Compile Include="Entities\Item.cs" />
@@ -90,29 +91,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201604190239330_Initial.cs" />
-    <Compile Include="Migrations\201604190239330_Initial.Designer.cs">
-      <DependentUpon>201604190239330_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604190241071_Initial1.cs" />
-    <Compile Include="Migrations\201604190241071_Initial1.Designer.cs">
-      <DependentUpon>201604190241071_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604190242167_Initial2.cs" />
-    <Compile Include="Migrations\201604190242167_Initial2.Designer.cs">
-      <DependentUpon>201604190242167_Initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604190246197_Initial3.cs" />
-    <Compile Include="Migrations\201604190246197_Initial3.Designer.cs">
-      <DependentUpon>201604190246197_Initial3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604200557448_Initial4.cs" />
-    <Compile Include="Migrations\201604200557448_Initial4.Designer.cs">
-      <DependentUpon>201604200557448_Initial4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604201254551_Initial5.cs" />
-    <Compile Include="Migrations\201604201254551_Initial5.Designer.cs">
-      <DependentUpon>201604201254551_Initial5.cs</DependentUpon>
+    <Compile Include="Migrations\201604212350126_Initial.cs" />
+    <Compile Include="Migrations\201604212350126_Initial.Designer.cs">
+      <DependentUpon>201604212350126_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
@@ -133,6 +114,7 @@
     <Compile Include="Repositories\Interface\ISensorItemRepository.cs" />
     <Compile Include="Repositories\Interface\ISeverityRepository.cs" />
     <Compile Include="Repositories\ContactRepository.cs" />
+    <Compile Include="Repositories\Interface\IKERepositoryBase.cs" />
     <Compile Include="Repositories\ItemRepository.cs" />
     <Compile Include="Repositories\SensorItemRepository.cs" />
     <Compile Include="Repositories\SeverityRepository.cs" />
@@ -164,23 +146,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604190239330_Initial.resx">
-      <DependentUpon>201604190239330_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604190241071_Initial1.resx">
-      <DependentUpon>201604190241071_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604190242167_Initial2.resx">
-      <DependentUpon>201604190242167_Initial2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604190246197_Initial3.resx">
-      <DependentUpon>201604190246197_Initial3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604200557448_Initial4.resx">
-      <DependentUpon>201604200557448_Initial4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604201254551_Initial5.resx">
-      <DependentUpon>201604201254551_Initial5.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604212350126_Initial.resx">
+      <DependentUpon>201604212350126_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

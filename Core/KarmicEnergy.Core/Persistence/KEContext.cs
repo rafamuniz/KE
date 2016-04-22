@@ -74,6 +74,7 @@ namespace KarmicEnergy.Core.Persistence
 
         public IDbSet<Geometry> Geometries { get; set; }
         public IDbSet<Unit> Units { get; set; }
+        public IDbSet<UnitType> UnitTypes { get; set; }
         public IDbSet<Country> Countries { get; set; }
         #endregion DbSet
     }

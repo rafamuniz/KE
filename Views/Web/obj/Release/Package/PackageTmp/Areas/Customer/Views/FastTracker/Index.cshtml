@@ -47,11 +47,16 @@
                         <h3>@count</h3>
                     </div>
 
+                    @{
+                        String eventDate = @tank.EventDate.HasValue ? @tank.EventDate.Value.ToString("MM/dd/yyyy") : String.Empty;
+                        String eventTime = @tank.EventDate.HasValue ? @tank.EventDate.Value.ToString("hh:mm:ss tt") : String.Empty;
+                    }
+
                     <div class="col-sm-3 col-md-4 col-xs-4 col-lg-2 tracker-image">
                         <div>
                             <img src="~/images/tank_models/@tank.UrlImageTankModel" style="width: 100px; height: 100px;">
-                            <p>@tank.EventDate.ToString("MM/dd/yyyy")</p>
-                            <p>@tank.EventDate.ToString("hh:mm:ss tt")</p>
+                            <p>@eventDate</p>
+                            <p>@eventTime</p>
                         </div>
                     </div>
 
@@ -72,9 +77,9 @@
                 </div>
             </div>
 
-            count++;
-        }
-    }
+                                count++;
+                            }
+                        }
 </div>
 
 @section Scripts {

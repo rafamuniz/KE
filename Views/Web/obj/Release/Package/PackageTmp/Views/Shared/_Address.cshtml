@@ -1,0 +1,109 @@
+﻿@using KarmicEnergy.Web.ViewModels
+
+@model AddressViewModel
+
+<div class="form-group">
+    <div class="col-md-2">
+        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+    </div>
+    <div class="col-md-10">
+        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-2 col-lg-2">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
+    </div>
+    <div class="col-md-10 col-lg-10">
+        <div class="form-group">
+            <div class="col-md-2 col-lg-3">
+                @Html.EditorFor(m => m.PhoneNumberCountryCode, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-md-10 col-lg-9">
+                @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        @Html.ValidationMessageFor(m => m.PhoneNumberCountryCode, "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-2 col-lg-2">
+        @Html.LabelFor(m => m.MobileNumber, new { @class = "control-label" })
+    </div>
+    <div class="col-md-10 col-lg-10">
+        <div class="form-group">
+            <div class="col-md-2 col-lg-3">
+                @Html.EditorFor(m => m.MobileNumberCountryCode, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-md-10 col-lg-9">
+                @Html.EditorFor(m => m.MobileNumber, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        @Html.ValidationMessageFor(m => m.MobileNumberCountryCode, "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(m => m.MobileNumber, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-1 col-lg-2">
+        @Html.LabelFor(m => m.AddressLine1, new { @class = "control-label" })
+    </div>
+    <div class="col-md-11 col-lg-10">
+        @Html.EditorFor(m => m.AddressLine1, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.AddressLine1, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-1 col-lg-2">
+        @Html.LabelFor(m => m.AddressLine2, new { @class = "control-label" })
+    </div>
+    <div class="col-md-11 col-lg-10">
+        @Html.EditorFor(m => m.AddressLine2, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.AddressLine2, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-1 col-lg-2">
+        @Html.LabelFor(m => m.City, new { @class = "control-label" })
+    </div>
+    <div class="col-md-11 col-lg-10">
+        @Html.EditorFor(m => m.City, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-1 col-lg-2">
+        @Html.LabelFor(m => m.State, new { @class = "control-label" })
+    </div>
+    <div class="col-md-11 col-lg-10">
+        @Html.EditorFor(m => m.State, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.State, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-1 col-lg-2">
+        @Html.LabelFor(m => m.Country, new { @class = "control-label" })
+    </div>
+    <div class="col-md-11 col-lg-10">
+        @Html.EditorFor(m => m.Country, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Country, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-1 col-lg-2">
+        @Html.LabelFor(m => m.ZipCode, new { @class = "control-label" })
+    </div>
+    <div class="col-md-11 col-lg-10">
+        @Html.EditorFor(m => m.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.ZipCode, "", new { @class = "text-danger" })
+    </div>
+</div>

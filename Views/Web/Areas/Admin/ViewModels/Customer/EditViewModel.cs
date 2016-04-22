@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KarmicEnergy.Web.Models;
+using KarmicEnergy.Web.ViewModels;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,50 +8,22 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Customer
 {
     public class EditViewModel
     {
+        #region Constructor
+
+        public EditViewModel()
+        {
+            Address = new AddressViewModel();
+        }
+
+        #endregion Property
+
         #region Property
         public Guid Id { get; set; }
 
         [Display(Name = "Name")]
         public String Name { get; set; }
 
-        [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        [MaxLength(256)]
-        public String Email { get; set; }
-
-        [MaxLength(3)]
-        public String PhoneNumberCountryCode { get; set; }
-
-        [MaxLength(16)]
-        public String PhoneNumber { get; set; }
-
-        [MaxLength(3)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{2} cannot be null or empty")]
-        public String MobileNumberCountryCode { get; set; }
-
-        [MaxLength(16)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{2} cannot be null or empty")]
-        public String MobileNumber { get; set; }
-
-        [MaxLength(256)]
-        public String AddressLine1 { get; set; }
-
-        [MaxLength(256)]
-        public String AddressLine2 { get; set; }
-
-        [MaxLength(128)]
-        public String City { get; set; }
-
-        [MaxLength(64)]
-        public String State { get; set; }
-
-        [MaxLength(64)]
-        public String Country { get; set; }
-
-        [MaxLength(16)]
-        public String ZipCode { get; set; }
-
+        public AddressViewModel Address { get; set; }
         #endregion Property
 
         #region Map
@@ -67,16 +40,16 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Customer
             return Mapper.Map<ApplicationUser, EditViewModel>(entity);
         }
 
-        public static EditViewModel Map(Core.Entities.Address entity)
+        public static AddressViewModel Map(Core.Entities.Address entity)
         {
-            Mapper.CreateMap<Core.Entities.Address, EditViewModel>();
-            return Mapper.Map<Core.Entities.Address, EditViewModel>(entity);
+            Mapper.CreateMap<Core.Entities.Address, AddressViewModel>();
+            return Mapper.Map<Core.Entities.Address, AddressViewModel>(entity);
         }
 
-        public Core.Entities.Address Map()
+        public Core.Entities.Address MapAddress()
         {
-            Mapper.CreateMap<EditViewModel, Core.Entities.Address>();
-            return Mapper.Map<EditViewModel, Core.Entities.Address>(this);
+            Mapper.CreateMap<AddressViewModel, Core.Entities.Address>();
+            return Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address);
         }
 
         #endregion Map

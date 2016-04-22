@@ -6,11 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        Karmic Energy - @ViewBag.Title
+        KE Siteminder - @ViewBag.Title
     </title>
     @Styles.Render("~/Content/bootstrap")
     @Styles.Render("~/Content/font-awesome")
     @Styles.Render("~/Content/css")
+
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -30,7 +32,7 @@
                 @*<span class="logo-mini"><b>A</b>LT</span>*@
 
                 <!-- logo for regular state and mobile devices -->
-                <img src="~/images/logo.png" alt="logo" title="Logo" />
+                <img src="~/images/logo_sentence.png" alt="logo" title="Logo" />
                 @*<span class="logo-lg"><b>Admin</b>LTE</span>*@
             </a>
 
@@ -72,6 +74,7 @@
             </aside>
 
             <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <div class="section-head center-block">
                         <h1>@ViewBag.Title</h1>
@@ -80,19 +83,18 @@
 
                 <section class="content">
                     <div class="row">
-                        <div id="body-content">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            @Html.Partial("_Error")
                             @RenderBody()
                         </div>
                     </div>
                 </section>
             </div>
-
-            <footer></footer>
         </div>
+
+        @Html.Partial("_Footer")
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/slimscroll")
     @Scripts.Render("~/bundles/notify")

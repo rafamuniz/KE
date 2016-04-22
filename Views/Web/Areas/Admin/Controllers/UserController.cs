@@ -7,14 +7,14 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Munizoft.Extensions;
 
 namespace KarmicEnergy.Web.Areas.Admin.Controllers
 {
+    [Authorize]
     public class UserController : BaseController
     {
         #region Index
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<ActionResult> Index()
         {
             List<ApplicationUser> users = GetUsersInRoles("Admin", "Operator");
@@ -32,7 +32,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         #endregion Index
 
         #region Create
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public ActionResult Create()
         {
             LoadAdminRoles();
@@ -43,7 +43,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         // POST: /Customer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<ActionResult> Create(CreateViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -90,7 +90,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         #endregion Create
 
         #region Edit
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<ActionResult> Edit(Guid id)
         {
             LoadAdminRoles();
@@ -113,7 +113,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         // POST: /Customer/Update
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<ActionResult> Edit(EditViewModel viewModel)
         {
             var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
@@ -161,7 +161,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         //
         // GET: /Customer/Delete
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<ActionResult> Delete(Guid id)
         {
             var user = await UserManager.FindByIdAsync(id.ToString());
@@ -169,6 +169,15 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
             if (user == null)
             {
                 AddErrors("User does not exist");
+                return View();
+            }
+
+            var roleSuperAdmin = RoleManager.FindByNameAsync("SuperAdmin");
+
+            // Dont delete SuperAdmin
+            if (user.Roles.Where(x => x.RoleId == roleSuperAdmin.Result.Id).Any())
+            {
+                AddErrors("User cannot be deleted");
                 return View();
             }
 
@@ -193,7 +202,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 
         #region Change Password
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public ActionResult ChangePassword(Guid id)
         {
             ChangePasswordViewModel viewModel = new ChangePasswordViewModel() { Id = id };
@@ -202,7 +211,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel viewModel)
         {
             if (!ModelState.IsValid)

@@ -12,8 +12,7 @@
 @using (Html.BeginForm("Create", "Tank", new { area = "Customer" }, FormMethod.Post, new { id = "formCreateTank", @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    @Html.Partial("_Error")
-
+    
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" />
   <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -244,6 +244,7 @@
     <Compile Include="Areas\Admin\ViewModels\User\EditViewModel.cs" />
     <Compile Include="Areas\Customer\Controllers\SensorController.cs" />
     <Compile Include="Areas\Customer\Controllers\FastTrackerController.cs" />
+    <Compile Include="Areas\Customer\Controllers\TankReportController.cs" />
     <Compile Include="Areas\Customer\Controllers\TankController.cs" />
     <Compile Include="Areas\Customer\Controllers\SiteController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
@@ -257,6 +258,8 @@
     <Compile Include="Areas\Customer\ViewModels\Sensor\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Site\SiteAddressViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\TankReport\Report.cs" />
+    <Compile Include="Areas\Customer\ViewModels\TankReport\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\GaugeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\DashboardTankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TankModelViewModel.cs" />
@@ -275,10 +278,6 @@
     <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Extensions\ImageSelectExtensions.cs" />
     <Compile Include="Helpers\MenuItemActive.cs" />
-    <Compile Include="Migrations\201603161204326_Initial.cs" />
-    <Compile Include="Migrations\201603161204326_Initial.Designer.cs">
-      <DependentUpon>201603161204326_Initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\AdminRole.cs" />
@@ -358,9 +357,11 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="css\font-awesome.css" />
+    <Content Include="css\font-awesome.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\opensans-bold-webfont.svg" />
     <Content Include="fonts\opensans-condbold-webfont.svg" />
@@ -1177,8 +1178,9 @@
     <Content Include="images\glyphicons\glyphicons-99-vector-path-curve.png" />
     <Content Include="images\key_gray.png" />
     <Content Include="images\loga_sample.png" />
-    <Content Include="images\logo_mni.png" />
+    <Content Include="images\logo_mini.png" />
     <Content Include="images\logo.png" />
+    <Content Include="images\logo_sentence.png" />
     <Content Include="images\map_icon.png" />
     <Content Include="images\menu-highlight.png" />
     <Content Include="images\my_tank.png" />
@@ -1190,28 +1192,65 @@
     <Content Include="images\shutdown_gray.png" />
     <Content Include="images\shutdown_white.png" />
     <Content Include="images\sites.png" />
+    <Content Include="images\tank_models\1_measures.png" />
     <Content Include="images\tank_models\2.png" />
     <Content Include="images\tank_models\2_empty.png" />
     <Content Include="images\tank_models\2_measures.png" />
     <Content Include="images\tank_models\3.png" />
+    <Content Include="images\tank_models\3_measures.png" />
     <Content Include="images\tank_models\4.png" />
+    <Content Include="images\tank_models\4_measures.png" />
     <Content Include="images\tank_models\5.png" />
+    <Content Include="images\tank_models\5_measures.png" />
     <Content Include="images\tank_models\6.png" />
+    <Content Include="images\tank_models\6_measures.png" />
+    <Content Include="images\tank_models\6_water.png" />
     <Content Include="images\tank_models\7.png" />
+    <Content Include="images\tank_models\7_measures.png" />
+    <Content Include="images\tank_models\7_water.png" />
     <Content Include="images\tank_models\8.png" />
     <Content Include="images\tank_models\1.png" />
-    <Content Include="images\tank_models\delete\1.png" />
-    <Content Include="images\tank_models\delete\2.1.png" />
-    <Content Include="images\tank_models\delete\3.png" />
-    <Content Include="images\tank_models\delete\4.png" />
-    <Content Include="images\tank_models\delete\5.png" />
-    <Content Include="images\tank_models\delete\6.png" />
-    <Content Include="images\tank_models\delete\7.png" />
-    <Content Include="images\tank_models\delete\8.png" />
-    <Content Include="images\tank_models\delete\CylVert.png" />
+    <Content Include="images\tank_models\8_measures.png" />
+    <Content Include="images\tank_models\8_water.png" />
+    <Content Include="images\tank_models\delete\temp\1.png" />
+    <Content Include="images\tank_models\delete\temp\2.1.png" />
+    <Content Include="images\tank_models\delete\temp\3.png" />
+    <Content Include="images\tank_models\delete\temp\4.png" />
+    <Content Include="images\tank_models\delete\temp\5.png" />
+    <Content Include="images\tank_models\delete\temp\6.png" />
+    <Content Include="images\tank_models\delete\temp\7.png" />
+    <Content Include="images\tank_models\delete\temp\8.png" />
+    <Content Include="images\tank_models\delete\temp\CylVert.png" />
     <Content Include="images\tank_white.png" />
     <Content Include="images\users.png" />
     <Content Include="images\water-flow.gif" />
+    <Content Include="Scripts\angular-animate.js" />
+    <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-aria.js" />
+    <Content Include="Scripts\angular-aria.min.js" />
+    <Content Include="Scripts\angular-cookies.js" />
+    <Content Include="Scripts\angular-cookies.min.js" />
+    <Content Include="Scripts\angular-csp.css" />
+    <Content Include="Scripts\angular-loader.js" />
+    <Content Include="Scripts\angular-loader.min.js" />
+    <Content Include="Scripts\angular-message-format.js" />
+    <Content Include="Scripts\angular-message-format.min.js" />
+    <Content Include="Scripts\angular-messages.js" />
+    <Content Include="Scripts\angular-messages.min.js" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-parse-ext.js" />
+    <Content Include="Scripts\angular-parse-ext.min.js" />
+    <Content Include="Scripts\angular-resource.js" />
+    <Content Include="Scripts\angular-resource.min.js" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular-sanitize.js" />
+    <Content Include="Scripts\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular-scenario.js" />
+    <Content Include="Scripts\angular-touch.js" />
+    <Content Include="Scripts\angular-touch.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular\angular-animate.js" />
     <Content Include="Scripts\angular\angular-animate.min.js" />
     <Content Include="Scripts\angular\angular-aria.js" />
@@ -1308,6 +1347,76 @@
     <Content Include="Scripts\highcharts\themes\grid.js" />
     <Content Include="Scripts\highcharts\themes\sand-signika.js" />
     <Content Include="Scripts\highcharts\themes\skies.js" />
+    <Content Include="fonts\opensans-bold-webfont.eot" />
+    <Content Include="fonts\opensans-bold-webfont.ttf" />
+    <Content Include="fonts\opensans-bold-webfont.woff" />
+    <Content Include="fonts\opensans-condbold-webfont.eot" />
+    <Content Include="fonts\opensans-condbold-webfont.ttf" />
+    <Content Include="fonts\opensans-condbold-webfont.woff" />
+    <Content Include="fonts\opensans-italic-webfont.eot" />
+    <Content Include="fonts\opensans-italic-webfont.ttf" />
+    <Content Include="fonts\opensans-italic-webfont.woff" />
+    <Content Include="fonts\opensans-light-webfont.eot" />
+    <Content Include="fonts\opensans-light-webfont.ttf" />
+    <Content Include="fonts\opensans-light-webfont.woff" />
+    <Content Include="fonts\opensans-regular-webfont.eot" />
+    <Content Include="fonts\opensans-regular-webfont.ttf" />
+    <Content Include="fonts\opensans-regular-webfont.woff" />
+    <Content Include="fonts\opensans-semibolditalic-webfont.eot" />
+    <Content Include="fonts\opensans-semibolditalic-webfont.ttf" />
+    <Content Include="fonts\opensans-semibolditalic-webfont.woff" />
+    <Content Include="fonts\opensans-semibold_0-webfont.eot" />
+    <Content Include="fonts\opensans-semibold_0-webfont.ttf" />
+    <Content Include="fonts\opensans-semibold_0-webfont.woff" />
+    <Content Include="Grid.mvc.readme" />
+    <Content Include="Areas\Customer\Views\web.config" />
+    <Content Include="Areas\Customer\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Customer\Views\Site\Create.cshtml" />
+    <Content Include="Areas\Customer\Views\Site\Edit.cshtml" />
+    <Content Include="Areas\Customer\Views\Site\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\Create.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\Edit.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\Dashboard.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\User\ChangePassword.cshtml" />
+    <Content Include="Areas\Customer\Views\User\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\TankModel\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TankModel\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TankModel\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Sensor\Create.cshtml" />
+    <Content Include="Areas\Customer\Views\Sensor\Edit.cshtml" />
+    <Content Include="Areas\Customer\Views\Sensor\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\_TankData.cshtml" />
+    <Content Include="Areas\Customer\Views\FastTracker\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Sensor\_TankSpotGPS.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\Gauge.cshtml" />
+    <Content Include="Areas\Customer\Views\TankReport\Index.cshtml" />
+    <None Include="Areas\Customer\Views\Tank\_TankModel.cshtml" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <None Include="Properties\PublishProfiles\AWS.pubxml" />
+    <None Include="Properties\PublishProfiles\Prod.pubxml" />
+    <Content Include="Scripts\angular\angular.min.js.map" />
+    <Content Include="Scripts\angular\angular-touch.min.js.map" />
+    <Content Include="Scripts\angular\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\angular\angular-route.min.js.map" />
+    <Content Include="Scripts\angular\angular-resource.min.js.map" />
+    <Content Include="Scripts\angular\angular-messages.min.js.map" />
+    <Content Include="Scripts\angular\angular-message-format.min.js.map" />
+    <Content Include="Scripts\angular\angular-loader.min.js.map" />
+    <Content Include="Scripts\angular\angular-cookies.min.js.map" />
+    <Content Include="Scripts\angular\angular-aria.min.js.map" />
+    <Content Include="Scripts\angular\angular-animate.min.js.map" />
+    <Content Include="Scripts\d3\LICENSE" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-et.js" />
@@ -2052,80 +2161,9 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
-    <Content Include="Scripts\jquery-2.2.1.js" />
-    <Content Include="Scripts\jquery-2.2.1.min.js" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\opensans-bold-webfont.eot" />
-    <Content Include="fonts\opensans-bold-webfont.ttf" />
-    <Content Include="fonts\opensans-bold-webfont.woff" />
-    <Content Include="fonts\opensans-condbold-webfont.eot" />
-    <Content Include="fonts\opensans-condbold-webfont.ttf" />
-    <Content Include="fonts\opensans-condbold-webfont.woff" />
-    <Content Include="fonts\opensans-italic-webfont.eot" />
-    <Content Include="fonts\opensans-italic-webfont.ttf" />
-    <Content Include="fonts\opensans-italic-webfont.woff" />
-    <Content Include="fonts\opensans-light-webfont.eot" />
-    <Content Include="fonts\opensans-light-webfont.ttf" />
-    <Content Include="fonts\opensans-light-webfont.woff" />
-    <Content Include="fonts\opensans-regular-webfont.eot" />
-    <Content Include="fonts\opensans-regular-webfont.ttf" />
-    <Content Include="fonts\opensans-regular-webfont.woff" />
-    <Content Include="fonts\opensans-semibolditalic-webfont.eot" />
-    <Content Include="fonts\opensans-semibolditalic-webfont.ttf" />
-    <Content Include="fonts\opensans-semibolditalic-webfont.woff" />
-    <Content Include="fonts\opensans-semibold_0-webfont.eot" />
-    <Content Include="fonts\opensans-semibold_0-webfont.ttf" />
-    <Content Include="fonts\opensans-semibold_0-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="Grid.mvc.readme" />
-    <Content Include="Areas\Customer\Views\web.config" />
-    <Content Include="Areas\Customer\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Customer\Views\Site\Create.cshtml" />
-    <Content Include="Areas\Customer\Views\Site\Edit.cshtml" />
-    <Content Include="Areas\Customer\Views\Site\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\Create.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\Edit.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\Dashboard.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Customer\ChangePassword.cshtml" />
-    <Content Include="Areas\Admin\Views\User\ChangePassword.cshtml" />
-    <Content Include="Areas\Customer\Views\User\ChangePassword.cshtml" />
-    <Content Include="Areas\Admin\Views\TankModel\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\TankModel\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\TankModel\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Sensor\Create.cshtml" />
-    <Content Include="Areas\Customer\Views\Sensor\Edit.cshtml" />
-    <Content Include="Areas\Customer\Views\Sensor\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\_TankData.cshtml" />
-    <Content Include="Areas\Customer\Views\FastTracker\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\FastTracker\_Tank.cshtml" />
-    <Content Include="Areas\Customer\Views\Sensor\_TankSpotGPS.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\Gauge.cshtml" />
-    <None Include="Areas\Customer\Views\Tank\_TankModel.cshtml" />
-    <None Include="Properties\PublishProfiles\AWS.pubxml" />
-    <None Include="Properties\PublishProfiles\Prod.pubxml" />
-    <Content Include="Scripts\errors.json" />
-    <Content Include="Scripts\angular\angular.min.js.map" />
-    <Content Include="Scripts\angular\angular-touch.min.js.map" />
-    <Content Include="Scripts\angular\angular-sanitize.min.js.map" />
-    <Content Include="Scripts\angular\angular-route.min.js.map" />
-    <Content Include="Scripts\angular\angular-resource.min.js.map" />
-    <Content Include="Scripts\angular\angular-messages.min.js.map" />
-    <Content Include="Scripts\angular\angular-message-format.min.js.map" />
-    <Content Include="Scripts\angular\angular-loader.min.js.map" />
-    <Content Include="Scripts\angular\angular-cookies.min.js.map" />
-    <Content Include="Scripts\angular\angular-aria.min.js.map" />
-    <Content Include="Scripts\angular\angular-animate.min.js.map" />
-    <Content Include="Scripts\d3\LICENSE" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <None Include="Scripts\jquery-2.2.3-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.2.3.js" />
+    <Content Include="Scripts\jquery-2.2.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
     <Content Include="Scripts\jquery.dd.js" />
@@ -2140,6 +2178,7 @@
     <Content Include="Scripts\jquery.slimscroll.js" />
     <Content Include="Scripts\jquery.slimscroll.min.js" />
     <Content Include="Scripts\jquery.sparkline.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -2636,9 +2675,23 @@
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Shared\_ExternalMaster.cshtml" />
     <Content Include="Views\Shared\_Loading.cshtml" />
-    <Content Include="Scripts\version.json" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Address.cshtml" />
+    <Content Include="Scripts\version.json" />
+    <Content Include="Scripts\errors.json" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-touch.min.js.map" />
+    <Content Include="Scripts\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
+    <Content Include="Scripts\angular-resource.min.js.map" />
+    <Content Include="Scripts\angular-parse-ext.min.js.map" />
+    <Content Include="Scripts\angular-messages.min.js.map" />
+    <Content Include="Scripts\angular-message-format.min.js.map" />
+    <Content Include="Scripts\angular-loader.min.js.map" />
+    <Content Include="Scripts\angular-cookies.min.js.map" />
+    <Content Include="Scripts\angular-aria.min.js.map" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="Scripts\jquery-2.2.3.min.map" />
     <None Include="Web.AWS.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2657,18 +2710,12 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Scripts\jquery-2.2.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\KarmicEnergy.Core\Core.csproj">
       <Project>{f4765a8a-4d17-4e1b-9116-f736e42a2ebb}</Project>
       <Name>Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603161204326_Initial.resx">
-      <DependentUpon>201603161204326_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\app\tank-dashboard.js" />
@@ -2718,8 +2765,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

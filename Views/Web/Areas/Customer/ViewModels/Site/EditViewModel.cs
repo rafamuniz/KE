@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using KarmicEnergy.Web.ViewModels;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,6 +7,15 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Site
 {
     public class EditViewModel
     {
+        #region Constructor
+
+        public EditViewModel()
+        {
+            Address = new SiteAddressViewModel();
+        }
+
+        #endregion Constructor
+
         #region Property
         [Required]
         public Guid Id { get; set; }
@@ -22,20 +32,41 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Site
         [Display(Name = "Status")]
         [Required]
         public String Status { get; set; }
+
+        [Display(Name = "Latitude")]
+        public String Latitude { get; set; }
+
+        [Display(Name = "Longitude")]
+        public String Longitude { get; set; }
+
+        [IgnoreMap]
+        public SiteAddressViewModel Address { get; set; }
         #endregion Property
 
         #region Map
 
-        public Core.Entities.Site MapUpdate(Core.Entities.Site entity)
-        {
-            Mapper.CreateMap<EditViewModel, Core.Entities.Site>();
-            return Mapper.Map<EditViewModel, Core.Entities.Site>(this, entity);
-        }
-
-        public static EditViewModel Map(Core.Entities.Site entity)
+        public void Map(Core.Entities.Site entity)
         {
             Mapper.CreateMap<Core.Entities.Site, EditViewModel>();
-            return Mapper.Map<Core.Entities.Site, EditViewModel>(entity);
+            Mapper.Map<Core.Entities.Site, EditViewModel>(entity, this);
+        }
+
+        public void Map(Core.Entities.Address entity)
+        {
+            Mapper.CreateMap<Core.Entities.Address, SiteAddressViewModel>();
+            Mapper.Map<Core.Entities.Address, SiteAddressViewModel>(entity, this.Address);
+        }
+
+        public void MapVMToEntity(Core.Entities.Site entity)
+        {
+            Mapper.CreateMap<Core.Entities.Site, EditViewModel>();
+            Mapper.Map<Core.Entities.Site, EditViewModel>(entity, this);
+        }
+
+        public void MapVMToEntity(Core.Entities.Address entity)
+        {
+            Mapper.CreateMap<Core.Entities.Address, SiteAddressViewModel>();
+            Mapper.Map<Core.Entities.Address, SiteAddressViewModel>(entity, this.Address);
         }
 
         #endregion Map

@@ -1,13 +1,9 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
-using Munizoft.Core.Repositories;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public class AlarmRepository : KERepositoryBase<Alarm, KEContext>, IAlarmRepository
+    public class AlarmRepository : KERepositoryBase<Alarm>, IAlarmRepository
     {
         #region Constructor
         public AlarmRepository(KEContext context)

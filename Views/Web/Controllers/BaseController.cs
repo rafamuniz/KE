@@ -259,13 +259,13 @@ namespace KarmicEnergy.Web.Controllers
 
         protected List<TankModel> LoadTankModels()
         {
-            List<TankModel> tankModels = KEUnitOfWork.TankModelRepository.GetAll().ToList();
+            List<TankModel> tankModels = KEUnitOfWork.TankModelRepository.GetAllActive().ToList();
             ViewBag.TankModels = tankModels;
             return tankModels;
         }
         protected List<Item> LoadItems()
         {
-            List<Item> items = KEUnitOfWork.ItemRepository.GetAll().ToList();
+            List<Item> items = KEUnitOfWork.ItemRepository.GetAllActive().ToList();
             ViewBag.Items = items;
             return items;
         }

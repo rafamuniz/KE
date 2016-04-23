@@ -1,13 +1,12 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
-using Munizoft.Core.Repositories;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public class CustomerUserRepository : Repository<CustomerUser, KEContext>, ICustomerUserRepository
+    public class CustomerUserRepository : KERepositoryBase<CustomerUser>, ICustomerUserRepository
     {
         #region Constructor
         public CustomerUserRepository(KEContext context)

@@ -21,11 +21,12 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
         [Display(Name = "Name")]
         [Required]
         public String Name { get; set; }
-                
+
         [Required]
         [Display(Name = "Role")]
         public String Role { get; set; }
 
+        [IgnoreMap]
         public AddressViewModel Address { get; set; }
         #endregion Property
 
@@ -33,6 +34,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
 
         public static EditViewModel Map(Core.Entities.CustomerUser entity)
         {
+            //.ForMember(x => x.Address, opt => opt.Ignore());
             Mapper.CreateMap<Core.Entities.CustomerUser, EditViewModel>();
             return Mapper.Map<Core.Entities.CustomerUser, EditViewModel>(entity);
         }
@@ -43,10 +45,16 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
             return Mapper.Map<Core.Entities.Address, EditViewModel>(entity);
         }
 
-        public Core.Entities.Address MapAddress()
+        public AddressViewModel MapAddress(Core.Entities.Address entity)
+        {
+            Mapper.CreateMap<Core.Entities.Address, AddressViewModel>();
+            return Mapper.Map<Core.Entities.Address, AddressViewModel>(entity, this.Address);
+        }
+
+        public Core.Entities.Address MapAddressVMToEntity(Core.Entities.Address entity)
         {
             Mapper.CreateMap<AddressViewModel, Core.Entities.Address>();
-            return Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address);
+            return Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address, entity);
         }
 
         #endregion Map

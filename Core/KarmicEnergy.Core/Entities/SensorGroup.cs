@@ -22,6 +22,9 @@ namespace KarmicEnergy.Core.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
+        [Column("Weight", TypeName = "INT")]
+        public Int32 Weight { get; set; }
+
         #endregion Property     
 
         #region Sensor
@@ -33,17 +36,17 @@ namespace KarmicEnergy.Core.Entities
         [ForeignKey("SensorId")]
         public virtual Sensor Sensor { get; set; }
 
-        #endregion Sensor
+        #endregion Sensor   
 
-        #region Item
+        #region Group
 
-        [Column("ItemId", TypeName = "INT")]
+        [Column("GroupId", TypeName = "UNIQUEIDENTIFIER")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        public Int32 ItemId { get; set; }
+        public Guid GroupId { get; set; }
 
-        [ForeignKey("ItemId")]
-        public virtual Item Item { get; set; }
+        [ForeignKey("GroupId")]
+        public virtual Group Group { get; set; }
 
-        #endregion Item          
+        #endregion Group                
     }
 }

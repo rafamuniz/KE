@@ -2,13 +2,12 @@
 using KarmicEnergy.Web.Areas.Customer.ViewModels.TankReport;
 using KarmicEnergy.Web.Controllers;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace KarmicEnergy.Web.Areas.Customer.Controllers
 {
+    [Authorize]
     public class TankReportController : BaseController
     {
         #region Index

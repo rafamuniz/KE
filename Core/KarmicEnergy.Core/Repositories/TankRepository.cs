@@ -1,13 +1,12 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
-using Munizoft.Core.Repositories;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public class TankRepository : Repository<Tank, KEContext>, ITankRepository
+    public class TankRepository : KERepositoryBase<Tank>, ITankRepository
     {
         #region Constructor
         public TankRepository(KEContext context)
@@ -19,12 +18,12 @@ namespace KarmicEnergy.Core.Repositories
 
         public List<Tank> GetsByCustomerId(Guid customerId)
         {
-            return base.Find(x => x.Site.CustomerId == customerId).ToList();
+            return base.Find(x => x.Site.CustomerId == customerId && x.DeletedDate == null).ToList();
         }
 
         public List<Tank> GetsByCustomerIdAndSiteId(Guid customerId, Guid siteId)
         {
-            return base.Find(x => x.Site.CustomerId == customerId && x.SiteId == siteId && x.Status == "A").ToList();
+            return base.Find(x => x.Site.CustomerId == customerId && x.SiteId == siteId && x.Status == "A" && x.DeletedDate == null).ToList();
         }
 
         public List<Models.TankModel> GetsWithLastMeasurement(Guid customerId)

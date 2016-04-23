@@ -42,36 +42,37 @@
                 @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-md-9 col-lg-9">
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-md-3 col-lg-2">
-                        @Html.LabelFor(m => m.Latitude, new { @class = "control-label" })
+
+        <div class="form-group">
+            <div class="col-md-10 col-lg-10">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-3 col-lg-2">
+                            @Html.LabelFor(m => m.Latitude, new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-9 col-lg-10">
+                            @Html.EditorFor(m => m.Latitude, new { htmlAttributes = new { @class = "form-control", id = "txtLatitude" } })
+                            @Html.ValidationMessageFor(m => m.Latitude, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                    <div class="col-md-9 col-lg-10">
-                        @Html.EditorFor(m => m.Latitude, new { htmlAttributes = new { @class = "form-control", id = "txtLatitude" } })
-                        @Html.ValidationMessageFor(m => m.Latitude, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <div class="col-md-3 col-lg-2">
+                            @Html.LabelFor(m => m.Longitude, new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-9 col-lg-10">
+                            @Html.EditorFor(m => m.Longitude, new { htmlAttributes = new { @class = "form-control", id = "txtLongitude" } })
+                            @Html.ValidationMessageFor(m => m.Longitude, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-md-3 col-lg-2">
-                        @Html.LabelFor(m => m.Longitude, new { @class = "control-label" })
-                    </div>
-                    <div class="col-md-9 col-lg-10">
-                        @Html.EditorFor(m => m.Longitude, new { htmlAttributes = new { @class = "form-control", id = "txtLongitude" } })
-                        @Html.ValidationMessageFor(m => m.Longitude, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="col-md-2 col-lg-2">
+                <a id="archorMap" style="display: none;" target="_blank">
+                    <img id="imgMap" src="~/images/map_icon.png" style="width: 100%; height: 100%;" />
+                </a>
             </div>
-        </div>
-
-        <div class="col-md-3 col-lg-3">
-            <a id="archorMap" style="display: none;" target="_blank">
-                <img id="imgMap" src="~/images/map_icon.png" style="width: 100%; height: 100%;" />
-            </a>
         </div>
     </div>
 
@@ -80,6 +81,7 @@
             <div class="title green">
                 <h2>Info</h2>
             </div>
+
             @Html.Partial("_Address", Model.Address, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "Address" } })
         </div>
     </div>
@@ -111,16 +113,16 @@
         function geoLocationError(err) {
             switch (error.code) {
                 case error.PERMISSION_DENIED:
-                    x.innerHTML = "User denied the request for Geolocation."
+                    notifiyError("User denied the request for Geolocation.")
                     break;
                 case error.POSITION_UNAVAILABLE:
-                    x.innerHTML = "Location information is unavailable."
+                    notifiyError("Location information is unavailable.")
                     break;
                 case error.TIMEOUT:
-                    x.innerHTML = "The request to get user location timed out."
+                    notifiyError("The request to get user location timed out.")
                     break;
                 case error.UNKNOWN_ERROR:
-                    x.innerHTML = "An unknown error occurred."
+                    notifiyError("An unknown error occurred.")
                     break;
             }
         };

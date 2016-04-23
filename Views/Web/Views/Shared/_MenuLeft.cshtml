@@ -37,10 +37,14 @@
                 <p>USERS</p>
             </a>
         </li>
-    }
 
-    @if (this.HasRoles("Customer", "CustomerAdmin", "CustomerOperator"))
-    {
+        <li class="treeview @Html.MenuItemActive("Contact", "Index", "Customer")">
+            <a href="/Customer/Contact">
+                <img src="/images/contacts.png" alt="contacts" title="contacts">
+                <p>CONTACTS</p>
+            </a>
+        </li>
+
         <li class="treeview @Html.MenuItemActive("Site", "Index", "Customer")">
             <a href="/Customer/Site">
                 <img src="/images/sites.png" alt="sites" title="sites">
@@ -54,7 +58,10 @@
                 <p>TANK</p>
             </a>
         </li>
+    }
 
+    @if (this.HasRoles("Customer", "CustomerAdmin", "CustomerOperator"))
+    {     
         <li class="treeview @Html.MenuItemActive("FastTracker", "Index", "Customer")">
             <a href="/Customer/FastTracker">
                 <img src="/images/fast_track.png" alt="fast_track" title="fast_track">

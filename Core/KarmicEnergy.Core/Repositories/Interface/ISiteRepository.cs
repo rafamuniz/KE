@@ -1,12 +1,10 @@
 ﻿using KarmicEnergy.Core.Entities;
-using KarmicEnergy.Core.Persistence;
-using Munizoft.Core.Repositories;
 using System;
 using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public interface ISiteRepository : IRepository<Site, KEContext>
+    public interface ISiteRepository : IKERepositoryBase<Site>
     {
         List<Site> GetsByCustomerId(Guid customerId);
     }

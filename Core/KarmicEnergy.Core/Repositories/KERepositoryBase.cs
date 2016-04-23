@@ -6,12 +6,11 @@ using System.Linq;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public abstract class KERepositoryBase<TEntity, Ctx> : Repository<TEntity, Ctx>
+    public abstract class KERepositoryBase<TEntity> : Repository<TEntity, KEContext>
         where TEntity : BaseEntity
-        where Ctx : KEContext, new()
     {
         #region Constructor
-        public KERepositoryBase(Ctx context)
+        public KERepositoryBase(KEContext context)
             : base(context)
         {
 

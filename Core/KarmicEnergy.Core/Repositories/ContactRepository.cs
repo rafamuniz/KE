@@ -1,13 +1,12 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
-using Munizoft.Core.Repositories;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public class ContactRepository : Repository<Contact, KEContext>, IContactRepository
+    public class ContactRepository : KERepositoryBase<Contact>, IContactRepository
     {
         #region Constructor
         public ContactRepository(KEContext context)
@@ -16,5 +15,10 @@ namespace KarmicEnergy.Core.Repositories
 
         }
         #endregion Constructor              
+
+        public List<Contact> GetsByCustomerId(Guid customerId)
+        {
+            return base.Find(x => x.CustomerId == customerId && x.DeletedDate == null).ToList();
+        }
     }
 }

@@ -242,11 +242,13 @@
     <Compile Include="Areas\Admin\ViewModels\User\ChangePasswordViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\User\ListViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\User\EditViewModel.cs" />
+    <Compile Include="Areas\Customer\Controllers\SensorGroupController.cs" />
     <Compile Include="Areas\Customer\Controllers\SensorController.cs" />
     <Compile Include="Areas\Customer\Controllers\FastTrackerController.cs" />
     <Compile Include="Areas\Customer\Controllers\TankReportController.cs" />
     <Compile Include="Areas\Customer\Controllers\TankController.cs" />
     <Compile Include="Areas\Customer\Controllers\SiteController.cs" />
+    <Compile Include="Areas\Customer\Controllers\ContactController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeViewModel.cs" />
@@ -273,11 +275,18 @@
     <Compile Include="Areas\Customer\ViewModels\Tank\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\EventViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\WaterVolumeViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Contact\CreateViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Contact\EditViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Contact\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\User\ChangePasswordViewModel.cs" />
     <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Extensions\ImageSelectExtensions.cs" />
     <Compile Include="Helpers\MenuItemActive.cs" />
+    <Compile Include="Migrations\201604231604477_Initial.cs" />
+    <Compile Include="Migrations\201604231604477_Initial.Designer.cs">
+      <DependentUpon>201604231604477_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\AdminRole.cs" />
@@ -1222,6 +1231,7 @@
     <Content Include="images\tank_models\delete\temp\8.png" />
     <Content Include="images\tank_models\delete\temp\CylVert.png" />
     <Content Include="images\tank_white.png" />
+    <Content Include="images\contacts.png" />
     <Content Include="images\users.png" />
     <Content Include="images\water-flow.gif" />
     <Content Include="Scripts\angular-animate.js" />
@@ -1403,6 +1413,9 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Customer\Views\Contact\Create.cshtml" />
+    <Content Include="Areas\Customer\Views\Contact\Edit.cshtml" />
+    <Content Include="Areas\Customer\Views\Contact\Index.cshtml" />
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />
     <Content Include="Scripts\angular\angular.min.js.map" />
@@ -2722,6 +2735,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201604231604477_Initial.resx">
+      <DependentUpon>201604231604477_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -75,6 +75,7 @@
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Alarm.cs" />
+    <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\SensorGroup.cs" />
     <Compile Include="Entities\SensorItem.cs" />
     <Compile Include="Entities\UnitType.cs" />
@@ -95,6 +96,14 @@
     <Compile Include="Migrations\201604212350126_Initial.Designer.cs">
       <DependentUpon>201604212350126_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604231606134_Initial1.cs" />
+    <Compile Include="Migrations\201604231606134_Initial1.Designer.cs">
+      <DependentUpon>201604231606134_Initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604231635125_Initial2.cs" />
+    <Compile Include="Migrations\201604231635125_Initial2.Designer.cs">
+      <DependentUpon>201604231635125_Initial2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
@@ -103,7 +112,7 @@
     <Compile Include="Persistence\KEUnitOfWorkBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
-    <Compile Include="Repositories\Base\KERepositoryBase.cs" />
+    <Compile Include="Repositories\KERepositoryBase.cs" />
     <Compile Include="Repositories\CustomerUserSettingRepository.cs" />
     <Compile Include="Repositories\CustomerSettingRepository.cs" />
     <Compile Include="Repositories\Interface\IAddressRepository.cs" />
@@ -148,6 +157,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604212350126_Initial.resx">
       <DependentUpon>201604212350126_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604231606134_Initial1.resx">
+      <DependentUpon>201604231606134_Initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604231635125_Initial2.resx">
+      <DependentUpon>201604231635125_Initial2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

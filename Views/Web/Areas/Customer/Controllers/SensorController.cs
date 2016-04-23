@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
-using Munizoft.Extensions;
 
 namespace KarmicEnergy.Web.Areas.Customer.Controllers
 {
+    [Authorize]
     public class SensorController : BaseController
     {
         #region Index

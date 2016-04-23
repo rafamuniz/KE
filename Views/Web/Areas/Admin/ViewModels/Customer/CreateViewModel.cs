@@ -8,7 +8,6 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Customer
     public class CreateViewModel
     {
         #region Constructor
-
         public CreateViewModel()
         {
             Address = new AddressViewModel();

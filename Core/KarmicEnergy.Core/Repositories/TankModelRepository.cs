@@ -1,13 +1,9 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
-using Munizoft.Core.Repositories;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public class TankModelRepository : KERepositoryBase<TankModel, KEContext>, ITankModelRepository
+    public class TankModelRepository : KERepositoryBase<TankModel>, ITankModelRepository
     {
         #region Constructor
         public TankModelRepository(KEContext context)

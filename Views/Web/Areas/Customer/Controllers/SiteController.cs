@@ -1,16 +1,14 @@
 ﻿using KarmicEnergy.Core.Entities;
-using KarmicEnergy.Web.Controllers;
-using KarmicEnergy.Web.Models;
 using KarmicEnergy.Web.Areas.Customer.ViewModels.Site;
+using KarmicEnergy.Web.Controllers;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Validation;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace KarmicEnergy.Web.Areas.Customer.Controllers
 {
+    [Authorize]
     public class SiteController : BaseController
     {
         #region Index
@@ -41,14 +39,14 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Create(CreateViewModel viewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                LoadStatuses();
-                return View(viewModel);
-            }
-
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    LoadStatuses();
+                    return View(viewModel);
+                }
+
                 Site site = viewModel.Map();
                 site.CustomerId = CustomerId;
 
@@ -76,7 +74,6 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult Edit(Guid id)
         {
             var site = KEUnitOfWork.SiteRepository.Get(id);
-            LoadStatuses();
 
             if (site == null)
             {
@@ -84,7 +81,11 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 return View("Index");
             }
 
-            EditViewModel viewModel = EditViewModel.Map(site);
+            LoadStatuses();
+            EditViewModel viewModel = new EditViewModel();
+            viewModel.Map(site);
+            viewModel.Map(site.Address);
+
             return View(viewModel);
         }
 
@@ -95,24 +96,38 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Edit(EditViewModel viewModel)
         {
-            var site = KEUnitOfWork.SiteRepository.Get(viewModel.Id);
-
-            if (site == null)
+            try
             {
-                LoadStatuses();
-                AddErrors("Site does not exist");
-                return View("Index");
+                if (!ModelState.IsValid)
+                {
+                    LoadStatuses();
+                    return View(viewModel);
+                }
+
+                var site = KEUnitOfWork.SiteRepository.Get(viewModel.Id);
+
+                if (site == null)
+                {
+                    LoadStatuses();
+                    AddErrors("Site does not exist");
+                    return View("Index");
+                }
+
+                viewModel.MapVMToEntity(site);
+                viewModel.MapVMToEntity(site.Address);
+
+                KEUnitOfWork.SiteRepository.Update(site);
+                KEUnitOfWork.Complete();
+
+                return RedirectToAction("Index", "Site");
+            }
+            catch (Exception ex)
+            {
+                AddErrors(ex);
             }
 
-            //site.Name = viewModel.Name;
-            //site.IPAddress = viewModel.IPAddress;
-            //site.Status = viewModel.Status;
-            Site model = viewModel.MapUpdate(site);
-
-            KEUnitOfWork.SiteRepository.Update(model);
-            KEUnitOfWork.Complete();
-
-            return RedirectToAction("Index", "Site");
+            LoadStatuses();
+            return View(viewModel);
         }
         #endregion Edit
 
@@ -131,7 +146,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 return View("Index");
             }
 
-            KEUnitOfWork.SiteRepository.Remove(site);
+            site.DeletedDate = DateTime.UtcNow;
+            KEUnitOfWork.SiteRepository.Update(site);
             KEUnitOfWork.Complete();
 
             return RedirectToAction("Index", "Site");

@@ -2,13 +2,13 @@
 using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank;
 using KarmicEnergy.Web.Controllers;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace KarmicEnergy.Web.Areas.Customer.Controllers
 {
+    [Authorize]
     public class TankController : BaseController
     {
         #region Index
@@ -101,27 +101,39 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Edit(EditViewModel viewModel)
         {
-            var tank = KEUnitOfWork.TankRepository.Get(viewModel.Id);
-
-            if (tank == null)
+            try
             {
-                LoadSites(CustomerId);
-                LoadTankModels();
-                LoadStatuses();
-                AddErrors("Tank does not exist");
-                return View("Index");
+                var tank = KEUnitOfWork.TankRepository.Get(viewModel.Id);
+
+                if (tank == null)
+                {
+                    LoadSites(CustomerId);
+                    LoadTankModels();
+                    LoadStatuses();
+                    AddErrors("Tank does not exist");
+                    return View("Index");
+                }
+
+                tank.Name = viewModel.Name;
+                tank.Description = viewModel.Description;
+                tank.Status = viewModel.Status;
+                tank.SiteId = viewModel.SiteId;
+                tank.TankModelId = viewModel.TankModelId;
+
+                KEUnitOfWork.TankRepository.Update(tank);
+                KEUnitOfWork.Complete();
+
+                return RedirectToAction("Index", "Tank");
+            }
+            catch(Exception ex)
+            {
+                AddErrors(ex);
             }
 
-            tank.Name = viewModel.Name;
-            tank.Description = viewModel.Description;
-            tank.Status = viewModel.Status;
-            tank.SiteId = viewModel.SiteId;
-            tank.TankModelId = viewModel.TankModelId;
-
-            KEUnitOfWork.TankRepository.Update(tank);
-            KEUnitOfWork.Complete();
-
-            return RedirectToAction("Index", "Tank");
+            LoadSites(CustomerId);
+            LoadTankModels();
+            LoadStatuses();
+            return View(viewModel);
         }
         #endregion Edit
 
@@ -140,7 +152,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 return View("Index");
             }
 
-            KEUnitOfWork.TankRepository.Remove(tank);
+            tank.DeletedDate = DateTime.UtcNow;
+            KEUnitOfWork.TankRepository.Update(tank);
             KEUnitOfWork.Complete();
 
             return RedirectToAction("Index", "Tank");

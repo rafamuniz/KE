@@ -1,13 +1,12 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
-using Munizoft.Core.Repositories;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public class SensorItemEventRepository : Repository<SensorItemEvent, KEContext>, ISensorItemEventRepository
+    public class SensorItemEventRepository : KERepositoryBase<SensorItemEvent>, ISensorItemEventRepository
     {
         #region Constructor
         public SensorItemEventRepository(KEContext context)

@@ -132,12 +132,12 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 
                 if (result.Succeeded)
                 {
-                    Core.Entities.Address address = viewModel.MapAddress();
-                    address.Id = customer.Address.Id;
-                    address.RowVersion = customer.Address.RowVersion;
+                    Core.Entities.Address address = viewModel.MapAddress(customer.Address);
+                    //address.Id = customer.Address.Id;
+                    //address.RowVersion = customer.Address.RowVersion;
 
                     KEUnitOfWork.AddressRepository.Update(address);
-                    KEUnitOfWork.CustomerRepository.Update(customer);
+                    //KEUnitOfWork.CustomerRepository.Update(customer);
                     KEUnitOfWork.Complete();
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -156,7 +156,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                 AddErrors(ex);
             }
 
-            return View();
+            return View(viewModel);
         }
         #endregion Edit
 

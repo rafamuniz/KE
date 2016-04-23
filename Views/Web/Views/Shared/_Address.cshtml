@@ -2,6 +2,8 @@
 
 @model AddressViewModel
 
+@Html.HiddenFor(m => m.Id)
+
 <div class="form-group">
     <div class="col-md-2">
         @Html.LabelFor(m => m.Email, new { @class = "control-label" })

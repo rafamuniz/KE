@@ -1,10 +1,9 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
-using Munizoft.Core.Repositories;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public class CustomerRepository : Repository<Customer, KEContext>, ICustomerRepository
+    public class CustomerRepository : KERepositoryBase<Customer>, ICustomerRepository
     {
         #region Constructor
         public CustomerRepository(KEContext context)

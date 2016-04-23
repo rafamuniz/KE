@@ -1,10 +1,8 @@
 ﻿using KarmicEnergy.Core.Entities;
-using KarmicEnergy.Core.Persistence;
-using Munizoft.Core.Repositories;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public interface ISeverityRepository : IRepository<Severity, KEContext>
+    public interface ISeverityRepository : IKERepositoryBase<Severity>
     {
     }
 }

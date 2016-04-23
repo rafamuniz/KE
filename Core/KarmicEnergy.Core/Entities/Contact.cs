@@ -21,6 +21,17 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Property
 
+        #region Customer
+
+        [Column("CustomerId", TypeName = "UNIQUEIDENTIFIER")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{2} cannot be null or empty")]
+        public Guid CustomerId { get; set; }
+
+        [ForeignKey("CustomerId")]
+        public virtual Customer Customer { get; set; }
+
+        #endregion Customer
+
         #region Address
 
         [Column("AddressId", TypeName = "UNIQUEIDENTIFIER")]

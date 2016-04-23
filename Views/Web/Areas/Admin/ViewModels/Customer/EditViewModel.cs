@@ -46,10 +46,10 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Customer
             return Mapper.Map<Core.Entities.Address, AddressViewModel>(entity);
         }
 
-        public Core.Entities.Address MapAddress()
+        public Core.Entities.Address MapAddress(Core.Entities.Address entity)
         {
             Mapper.CreateMap<AddressViewModel, Core.Entities.Address>();
-            return Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address);
+            return Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address, entity);
         }
 
         #endregion Map

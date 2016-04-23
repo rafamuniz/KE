@@ -1,10 +1,9 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
-using Munizoft.Core.Repositories;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public class SeverityRepository : Repository<Severity, KEContext>, ISeverityRepository
+    public class SeverityRepository : KERepositoryBase<Severity>, ISeverityRepository
     {
         #region Constructor
         public SeverityRepository(KEContext context)

@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace KarmicEnergy.Web.Areas.Customer.Controllers
 {
+    [Authorize]
     public class UserController : BaseController
     {
         #region Index
@@ -88,11 +89,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 }
 
                 AddErrors(result);
-            }
-            catch (DbEntityValidationException dbex)
-            {
-                AddErrors(dbex);
-            }
+            }         
             catch (Exception ex)
             {
                 AddErrors(ex.Message);
@@ -107,7 +104,6 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public async Task<ActionResult> Edit(Guid id)
         {
-            LoadCustomerRoles();
             var customerUser = KEUnitOfWork.CustomerUserRepository.Get(id);
 
             if (customerUser == null)
@@ -116,12 +112,16 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 return View("Index");
             }
 
+            LoadCustomerRoles();
             EditViewModel viewModel = EditViewModel.Map(customerUser);
             var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
             viewModel.Name = user.Name;
-            viewModel.Email = user.Email;
+
             var roles = await UserManager.GetRolesAsync(viewModel.Id.ToString());
             viewModel.Role = roles.Single();
+
+            // Address            
+            viewModel.MapAddress(customerUser.Address);
 
             return View(viewModel);
         }
@@ -133,43 +133,64 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public async Task<ActionResult> Edit(EditViewModel viewModel)
         {
-            var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
-
-            if (user == null)
+            try
             {
-                LoadCustomerRoles();
-                AddErrors("User does not exist");
-                return View("Index");
-            }
+                if (!ModelState.IsValid)
+                {
+                    LoadCustomerRoles();
+                    return View(viewModel);
+                }
 
-            user.Name = viewModel.Name;
-            user.Email = viewModel.Email;
-            var result = await UserManager.UpdateAsync(user);
+                var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
+                var customerUser = KEUnitOfWork.CustomerUserRepository.Get(viewModel.Id);
 
-            if (result.Succeeded)
-            {
-                var roles = await UserManager.GetRolesAsync(user.Id);
-                result = await UserManager.RemoveFromRolesAsync(user.Id, roles.ToArray());
+                if (customerUser == null || user == null)
+                {
+                    LoadCustomerRoles();
+                    AddErrors("User does not exist");
+                    return View("Index");
+                }
+
+                user.Name = viewModel.Name;
+                user.Email = viewModel.Address.Email;
+                var result = await UserManager.UpdateAsync(user);
 
                 if (result.Succeeded)
                 {
-                    result = await UserManager.AddToRoleAsync(user.Id, viewModel.Role);
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+                    result = await UserManager.RemoveFromRolesAsync(user.Id, roles.ToArray());
 
                     if (result.Succeeded)
                     {
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        result = await UserManager.AddToRoleAsync(user.Id, viewModel.Role);
 
-                        return RedirectToAction("Index", "User", new { area = "Customer" });
+                        if (result.Succeeded)
+                        {
+                            Core.Entities.Address address = viewModel.MapAddressVMToEntity(customerUser.Address);
+
+                            KEUnitOfWork.AddressRepository.Update(address);
+                            //KEUnitOfWork.CustomerRepository.Update(customer);
+                            KEUnitOfWork.Complete();
+
+                            // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                            // Send an email with this link
+                            // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                            // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                            // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                            return RedirectToAction("Index", "User", new { area = "Customer" });
+                        }
                     }
                 }
+
+                AddErrors(result);
+            }
+            catch (Exception ex)
+            {
+                AddErrors(ex);
             }
 
-            AddErrors(result);
-            return View();
+            return View(viewModel);
         }
         #endregion Edit
 

@@ -13,16 +13,16 @@ namespace KarmicEnergy.Web.ViewModels
         [MaxLength(256)]
         public String Email { get; set; }
 
-        [MaxLength(3)]
-        [Display(Name = "Code")]
+        [MaxLength(3, ErrorMessage = "Phone Code must have 3 or less")]
+        [Display(Name = "Phone Number Country Code", ShortName = "Phone Code")]
         public String PhoneNumberCountryCode { get; set; } = "1";
 
         [MaxLength(16)]
         [Display(Name = "Phone Number")]
         public String PhoneNumber { get; set; }
 
-        [Display(Name = "Code")]
-        [MaxLength(3)]
+        [Display(Name = "Mobile Country Code", ShortName = "Mobile Code")]
+        [MaxLength(3, ErrorMessage = "Mobile Code must have 3 or less")]
         [Required(ErrorMessage = "{0} cannot be null or empty")]
         public String MobileNumberCountryCode { get; set; } = "1";
 

@@ -7,6 +7,8 @@ namespace KarmicEnergy.Web.ViewModels
     {
         #region Property
 
+        public Guid Id { get; set; }
+
         [Required]
         [Display(Name = "Email")]
         [EmailAddress]

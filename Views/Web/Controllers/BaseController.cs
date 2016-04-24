@@ -14,6 +14,7 @@ using KarmicEnergy.Core.Entities;
 using Munizoft.MVC.Helpers.Models;
 using AutoMapper;
 using System.Data.Entity.Infrastructure;
+using System.Configuration;
 
 namespace KarmicEnergy.Web.Controllers
 {
@@ -71,6 +72,19 @@ namespace KarmicEnergy.Web.Controllers
         protected String UserId
         {
             get { return HttpContext.User.Identity.GetUserId(); }
+        }
+
+        protected Boolean IsSite
+        {
+            get
+            {
+                String siteId = ConfigurationManager.AppSettings["Site:Idxxx"];
+
+                if (siteId.Trim() == String.Empty)
+                    return false;
+                else
+                    return true;
+            }
         }
 
         protected ApplicationUser AppUser
@@ -270,13 +284,12 @@ namespace KarmicEnergy.Web.Controllers
             return items;
         }
 
-
-        protected List<Site> LoadSites()
-        {
-            List<Site> sites = KEUnitOfWork.SiteRepository.GetAll().ToList();
-            ViewBag.Sites = sites;
-            return sites;
-        }
+        //protected List<Site> LoadSites()
+        //{
+        //    List<Site> sites = KEUnitOfWork.SiteRepository.GetAll().ToList();
+        //    ViewBag.Sites = sites;
+        //    return sites;
+        //}
 
         protected List<Site> LoadSites(Guid customerId)
         {
@@ -297,6 +310,12 @@ namespace KarmicEnergy.Web.Controllers
             List<Tank> tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(customerId, siteId);
             ViewBag.Tanks = tanks;
             return tanks;
+        }
+        protected List<Sensor> LoadSensors(Guid customerId, Guid tankId)
+        {
+            List<Sensor> sensors = KEUnitOfWork.SensorRepository.GetsByTankIdAndCustomerId(customerId, tankId);
+            ViewBag.Sensors = sensors;
+            return sensors;
         }
 
         protected List<SensorType> LoadSensorTypes()

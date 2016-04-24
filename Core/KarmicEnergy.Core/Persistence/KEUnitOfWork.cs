@@ -18,6 +18,8 @@ namespace KarmicEnergy.Core.Persistence
         private ISensorRepository _SensorRepository;
         private ISensorItemRepository _SensorItemRepository;
         private ISensorTypeRepository _SensorTypeRepository;
+        private ISensorGroupRepository _SensorGroupRepository;
+        private IGroupRepository _GroupRepository;
 
         private ISensorItemEventRepository _SensorItemEventRepository;
 
@@ -100,6 +102,16 @@ namespace KarmicEnergy.Core.Persistence
         public ISensorTypeRepository SensorTypeRepository
         {
             get { return _SensorTypeRepository ?? (_SensorTypeRepository = new SensorTypeRepository(_context)); }
+        }
+
+        public ISensorGroupRepository SensorGroupRepository
+        {
+            get { return _SensorGroupRepository ?? (_SensorGroupRepository = new SensorGroupRepository(_context)); }
+        }
+
+        public IGroupRepository GroupRepository
+        {
+            get { return _GroupRepository ?? (_GroupRepository = new GroupRepository(_context)); }
         }
 
         public ITriggerRepository TriggerRepository

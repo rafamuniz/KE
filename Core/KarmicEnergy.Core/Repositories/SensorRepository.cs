@@ -35,11 +35,11 @@ namespace KarmicEnergy.Core.Repositories
         {
             var sensors = base.Find(x => x.Tank.Site.CustomerId == customerId && x.TankId == tankId).ToList();
 
-            if (sensors.Any())
-                sensors.ForEach(n =>
-                {
-                    Context.Entry(n).Reference("Tank").Load();
-                });
+            //if (sensors.Any())
+            //    sensors.ForEach(n =>
+            //    {
+            //        Context.Entry(n).Reference("Tank").Load();
+            //    });
 
             return sensors;
         }

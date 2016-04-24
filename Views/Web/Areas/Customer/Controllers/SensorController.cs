@@ -102,14 +102,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.Complete();
 
                 return RedirectToAction("Index", "Sensor");
-            }
-            catch (DbEntityValidationException dbex)
-            {
-                AddErrors(dbex);
-            }
+            }        
             catch (Exception ex)
             {
-                AddErrors(ex.Message);
+                AddErrors(ex);
             }
 
             LoadSensorTypes();
@@ -218,14 +214,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.Complete();
 
                 return RedirectToAction("Index");
-            }
-            catch (DbEntityValidationException dbex)
-            {
-                AddErrors(dbex);
-            }
+            }      
             catch (Exception ex)
             {
-                AddErrors(ex.Message);
+                AddErrors(ex);
             }
 
             LoadDefault(viewModel, sensor);

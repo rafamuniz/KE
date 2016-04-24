@@ -112,6 +112,10 @@
     <Compile Include="Persistence\KEUnitOfWorkBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
+    <Compile Include="Repositories\Interface\ISensorGroupRepository.cs" />
+    <Compile Include="Repositories\Interface\IGroupRepository.cs" />
+    <Compile Include="Repositories\SensorGroupRepository.cs" />
+    <Compile Include="Repositories\GroupRepository.cs" />
     <Compile Include="Repositories\KERepositoryBase.cs" />
     <Compile Include="Repositories\CustomerUserSettingRepository.cs" />
     <Compile Include="Repositories\CustomerSettingRepository.cs" />

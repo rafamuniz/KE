@@ -253,6 +253,11 @@
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankWithWaterVolume.cs" />
+    <Compile Include="Areas\Customer\ViewModels\SensorGroup\CreateViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\SensorGroup\EditViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\SensorGroup\ItemViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\SensorGroup\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\SensorGroup\SensorGroupViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\ItemViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\SpotGPSViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\CreateViewModel.cs" />
@@ -1287,6 +1292,7 @@
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\app\fasttracker.js" />
+    <Content Include="Scripts\app\sensorgroup.js" />
     <Content Include="Scripts\app\tank-gauge.js" />
     <Content Include="Scripts\app\tank.js" />
     <Content Include="Scripts\app\utils.js" />
@@ -1407,6 +1413,9 @@
     <Content Include="Areas\Customer\Views\Sensor\_TankSpotGPS.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\Gauge.cshtml" />
     <Content Include="Areas\Customer\Views\TankReport\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\SensorGroup\Create.cshtml" />
+    <Content Include="Areas\Customer\Views\SensorGroup\Edit.cshtml" />
+    <Content Include="Areas\Customer\Views\SensorGroup\Index.cshtml" />
     <None Include="Areas\Customer\Views\Tank\_TankModel.cshtml" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />

@@ -1,5 +1,5 @@
 ﻿using KarmicEnergy.Core.Entities;
-using KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor;
+using KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup;
 using KarmicEnergy.Web.Controllers;
 using System;
 using System.Collections.Generic;
@@ -16,8 +16,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Index()
         {
-            var sensors = KEUnitOfWork.SensorRepository.GetsByCustomerId(CustomerId);
-            var viewModels = ListViewModel.Map(sensors);
+            List<ListViewModel> viewModels = new List<ListViewModel>();
             return View(viewModels);
         }
 
@@ -35,15 +34,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Create()
         {
+            LoadSites(CustomerId);
             CreateViewModel viewModel = new CreateViewModel();
-
-            LoadStatuses();
-            var items = LoadItems();
-            LoadTanks(CustomerId);
-            LoadSensorTypes();
-
-            viewModel.AvailableItems = ItemViewModel.Map(items);
-
             return View(viewModel);
         }
 
@@ -65,60 +57,85 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             if (!ModelState.IsValid)
             {
-                LoadTanks(CustomerId);
-                LoadSensorTypes();
-                LoadStatuses();
-                LoadItems();
                 return View(viewModel);
             }
 
             try
             {
-                Sensor sensor = new Sensor()
-                {
-                    Name = viewModel.Name,
-                    TankId = viewModel.TankId,
-                    SensorTypeId = viewModel.SensorTypeId,
-                    Status = viewModel.Status,
-                    Reference = viewModel.Reference
-                };
-
-                if (viewModel.Items.Any())
-                {
-                    sensor.SensorItems = new List<SensorItem>();
-
-                    foreach (var item in viewModel.Items)
-                    {
-                        SensorItem sensorItem = new SensorItem()
-                        {
-                            ItemId = Int32.Parse(item)
-                        };
-
-                        sensor.SensorItems.Add(sensorItem);
-                    }
-                }
-
-                KEUnitOfWork.SensorRepository.Add(sensor);
+                //KEUnitOfWork.SensorGroupRepository.Add(sensor);
                 KEUnitOfWork.Complete();
 
-                return RedirectToAction("Index", "Sensor");
-            }
-            catch (DbEntityValidationException dbex)
-            {
-                AddErrors(dbex);
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                AddErrors(ex.Message);
+                AddErrors(ex);
             }
 
-            LoadSensorTypes();
-            LoadItems();
-            LoadTanks(CustomerId);
-            LoadStatuses();
             return View(viewModel);
         }
         #endregion Create
+
+        #region Add
+        //
+        // POST: /User/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Customer, CustomerAdmin")]
+        public ActionResult Add(CreateViewModel viewModel)
+        {
+            LoadSites(CustomerId);
+            SensorGroup sensorGroup = new SensorGroup();
+
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            try
+            {
+                //sensorGroup = viewModel.Map();
+                sensorGroup.SensorId = viewModel.SensorId;
+
+                sensorGroup.Sensor = KEUnitOfWork.SensorRepository.Get(viewModel.SensorId);
+
+                sensorGroup.Weight = viewModel.Weight;
+                sensorGroup.Group = new Group();
+                sensorGroup.Group.Id = viewModel.GroupId != default(Guid) ? viewModel.GroupId : Guid.Empty;
+
+                KEUnitOfWork.SensorGroupRepository.Add(sensorGroup);
+                KEUnitOfWork.Complete();
+            }
+            catch (Exception ex)
+            {
+                AddErrors(ex);
+            }
+
+            var sensorGroups = KEUnitOfWork.SensorGroupRepository.Find(x => x.GroupId == sensorGroup.GroupId).ToList();
+            viewModel = new CreateViewModel();
+            viewModel.GroupId = sensorGroup.GroupId;
+            viewModel.Sensors = SensorGroupViewModel.Map(sensorGroups);
+
+            return View("Create", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult GetsTankBySiteId(Guid siteId)
+        {
+            var tanks = LoadTanks(CustomerId, siteId);
+            SelectList obgTanks = new SelectList(tanks, "Id", "Name", 0);
+            return Json(obgTanks);
+        }
+
+        [HttpPost]
+        public ActionResult GetsSensorByTankId(Guid tankId)
+        {
+            var sensors = LoadSensors(CustomerId, tankId);
+            SelectList obgSensors = new SelectList(sensors, "Id", "Name", 0);
+            return Json(obgSensors);
+        }
+
+        #endregion Add
 
         #region Edit
         [Authorize(Roles = "Customer, CustomerAdmin")]
@@ -219,13 +236,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (DbEntityValidationException dbex)
-            {
-                AddErrors(dbex);
-            }
             catch (Exception ex)
             {
-                AddErrors(ex.Message);
+                AddErrors(ex);
             }
 
             LoadDefault(viewModel, sensor);

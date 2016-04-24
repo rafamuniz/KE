@@ -92,7 +92,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }         
             catch (Exception ex)
             {
-                AddErrors(ex.Message);
+                AddErrors(ex);
             }
 
             LoadCustomerRoles();

@@ -75,13 +75,9 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 
                 AddErrors(result);
             }
-            catch (DbEntityValidationException dbex)
-            {
-                AddErrors(dbex);
-            }
             catch (Exception ex)
             {
-                AddErrors(ex.Message);
+                AddErrors(ex);
             }
 
             LoadAdminRoles();

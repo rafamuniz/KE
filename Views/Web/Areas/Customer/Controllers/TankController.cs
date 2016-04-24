@@ -58,14 +58,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.Complete();
 
                 return RedirectToAction("Index", "Tank");
-            }
-            catch (DbEntityValidationException dbex)
-            {
-                AddErrors(dbex);
-            }
+            }      
             catch (Exception ex)
             {
-                AddErrors(ex.Message);
+                AddErrors(ex);
             }
 
             LoadSites(CustomerId);

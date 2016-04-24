@@ -625,6 +625,13 @@ p {
             font-size: 13px;
         }
 
+            .sidebar-menu > li > a > img {
+            }
+
+            .sidebar-menu > li > a > p {
+                text-transform: uppercase;
+            }
+
             .sidebar-menu > li > a > .fa,
             .sidebar-menu > li > a > .glyphicon,
             .sidebar-menu > li > a > .ion {
@@ -697,14 +704,14 @@ p {
  * Component: Sidebar Mini
  */
 @media (min-width: 768px) {
-    .sidebar-mini.sidebar-collapse .content-wrapper,
-    .sidebar-mini.sidebar-collapse .right-side,
-    .sidebar-mini.sidebar-collapse .main-footer {
+    .sidebar-mini .sidebar-collapse .content-wrapper,
+    .sidebar-mini .sidebar-collapse .right-side,
+    .sidebar-mini .sidebar-collapse .main-footer {
         margin-left: 50px !important;
         z-index: 840;
     }
 
-    .sidebar-mini.sidebar-collapse .main-sidebar {
+    .sidebar-mini .sidebar-collapse .main-sidebar {
         -webkit-transform: translate(0, 0);
         -ms-transform: translate(0, 0);
         -o-transform: translate(0, 0);
@@ -717,26 +724,26 @@ p {
         position: relative;
     }
 
-        .sidebar-mini.sidebar-collapse .sidebar-menu > li > a {
+        .sidebar-mini .sidebar-collapse .sidebar-menu > li > a {
             margin-right: 0;
         }
 
-            .sidebar-mini.sidebar-collapse .sidebar-menu > li > a > span {
+            .sidebar-mini .sidebar-collapse .sidebar-menu > li > a > span {
                 border-top-right-radius: 4px;
             }
 
-        .sidebar-mini.sidebar-collapse .sidebar-menu > li:not(.treeview) > a > span {
+        .sidebar-mini .sidebar-collapse .sidebar-menu > li:not(.treeview) > a > span {
             border-bottom-right-radius: 4px;
         }
 
-        .sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
+        .sidebar-mini .sidebar-collapse .sidebar-menu > li > .treeview-menu {
             padding-top: 5px;
             padding-bottom: 5px;
             border-bottom-right-radius: 4px;
         }
 
-        .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > span:not(.pull-right),
-        .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
+        .sidebar-mini .sidebar-collapse .sidebar-menu > li:hover > a > span:not(.pull-right),
+        .sidebar-mini .sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
             display: block !important;
             position: absolute;
             width: 180px;

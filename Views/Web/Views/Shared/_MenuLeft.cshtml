@@ -58,10 +58,17 @@
                 <p>TANK</p>
             </a>
         </li>
+
+        <li class="treeview @Html.MenuItemActive("SensorGroup", "Index", "Custumes")">
+            <a href="/Customer/SensorGroup">
+                <img src="/images/my_tank.png" alt="tanks" title="tanks">
+                <p>Sensor Group</p>
+            </a>
+        </li>
     }
 
     @if (this.HasRoles("Customer", "CustomerAdmin", "CustomerOperator"))
-    {     
+    {
         <li class="treeview @Html.MenuItemActive("FastTracker", "Index", "Customer")">
             <a href="/Customer/FastTracker">
                 <img src="/images/fast_track.png" alt="fast_track" title="fast_track">

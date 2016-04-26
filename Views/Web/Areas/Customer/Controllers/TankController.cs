@@ -58,7 +58,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.Complete();
 
                 return RedirectToAction("Index", "Tank");
-            }      
+            }
             catch (Exception ex)
             {
                 AddErrors(ex);
@@ -86,7 +86,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             LoadStatuses();
             LoadSites(CustomerId);
             LoadTankModels();
-            EditViewModel viewModel = EditViewModel.Map(tank);
+            EditViewModel viewModel = new EditViewModel();
+            viewModel.Map(tank);
+            viewModel.Map(tank.TankModel);
             return View(viewModel);
         }
 
@@ -99,6 +101,14 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    LoadSites(CustomerId);
+                    LoadTankModels();
+                    LoadStatuses();
+                    return View(viewModel);
+                }
+
                 var tank = KEUnitOfWork.TankRepository.Get(viewModel.Id);
 
                 if (tank == null)
@@ -110,18 +120,15 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     return View("Index");
                 }
 
-                tank.Name = viewModel.Name;
-                tank.Description = viewModel.Description;
-                tank.Status = viewModel.Status;
-                tank.SiteId = viewModel.SiteId;
-                tank.TankModelId = viewModel.TankModelId;
+                viewModel.MapVMToEntity(tank);
+                tank.WaterVolumeCapacity = tank.CalculateWaterCapacity();
 
                 KEUnitOfWork.TankRepository.Update(tank);
                 KEUnitOfWork.Complete();
 
                 return RedirectToAction("Index", "Tank");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 AddErrors(ex);
             }
@@ -408,6 +415,29 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             var tankModel = KEUnitOfWork.TankModelRepository.Get(Int32.Parse(tankModelId));
             return Json(tankModel, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult CalculateVolumeCapacity(TankWaterCapacityViewModel viewModel)
+        {
+            Tank tank = new Tank()
+            {
+                TankModelId = viewModel.TankModelId,
+                Height = viewModel.Height,
+                Width = viewModel.Width,
+                Length = viewModel.Length,
+                FaceLength = viewModel.FaceLength,
+                BottomWidth = viewModel.BottomWidth,
+                Dimension1 = viewModel.Dimension1,
+                Dimension2 = viewModel.Dimension2,
+                Dimension3 = viewModel.Dimension3,
+                MinimumDistance = viewModel.MinimumDistance,
+                MaximumDistance = viewModel.MaximumDistance
+            };
+
+            viewModel.WaterVolumeCapacity = tank.CalculateWaterCapacity();
+
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetTankWaterVolume(Guid tankId)

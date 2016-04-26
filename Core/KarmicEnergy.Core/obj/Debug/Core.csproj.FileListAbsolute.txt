@@ -12,9 +12,7 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\Kar
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\bin\Debug\Munizoft.Extensions.pdb
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\bin\Debug\System.Web.Mvc.xml
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\Debug\Core.csprojResolveAssemblyReference.cache
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\Debug\KarmicEnergy.Core.Migrations.Initial.resources
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\Debug\Core.csproj.GenerateResource.Cache
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\Debug\KarmicEnergy.Core.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\Debug\KarmicEnergy.Core.pdb
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\Debug\KarmicEnergy.Core.Migrations.Initial1.resources
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\Debug\KarmicEnergy.Core.Migrations.Initial2.resources
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\Debug\KarmicEnergy.Core.Migrations.Initial.resources
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\Debug\Core.csproj.GenerateResource.Cache

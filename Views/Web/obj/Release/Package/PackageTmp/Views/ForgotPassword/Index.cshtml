@@ -11,12 +11,12 @@
 <div class="login-box">
     <div class="login-logo">
         <a href="http://www.karmicenergy.com">
-            <img src="~/images/login_logo.png">
+            <img src="~/images/logo.png">
         </a>
     </div>
 
     <div class="login-box-body">
-            @using (Html.BeginForm("ForgotPassword", "ForgotPassword", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        @using (Html.BeginForm("ForgotPassword", "ForgotPassword", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
             @Html.AntiForgeryToken()
             @Html.Partial("_Error")
@@ -25,12 +25,12 @@
                 @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "input-login", placeholder = AttributeExtension.GetDisplayAttributeNameValue<ForgotPasswordViewModel>(m => m.Email) } })
                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
             </div>
-            
+
             <div class="has-feedback">
                 <button type="submit" class="btn-login">Confirm</button>
             </div>
-        }     
-    </div><!-- /.login-box-body -->
+        }
+    </div>
 </div>
 
 @section Scripts {

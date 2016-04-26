@@ -63,6 +63,15 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
         [Display(Name = "Bottom Width")]
         public Decimal? BottomWidth { get; set; }
 
+        [Display(Name = "Dimension 1")]
+        public Decimal? Dimension1 { get; set; }
+
+        [Display(Name = "Dimension 2")]
+        public Decimal? Dimension2 { get; set; }
+
+        [Display(Name = "Dimension 3")]
+        public Decimal? Dimension3 { get; set; }
+
         [Display(Name = "Minimum Distance")]
         public Decimal? MinimumDistance { get; set; }
 

@@ -34,6 +34,12 @@ namespace KarmicEnergy.Core.Entities
         [Column("HasBottomWidth", TypeName = "BIT")]
         public Boolean HasBottomWidth { get; set; } = false;
 
+        [Column("HasRadius", TypeName = "BIT")]
+        public Boolean HasRadius { get; set; } = false;
+
+        [Column("HasDiagonal", TypeName = "BIT")]
+        public Boolean HasDiagonal { get; set; } = false;
+
         [Column("HasDimension1", TypeName = "BIT")]
         public Boolean HasDimension1 { get; set; } = false;
 
@@ -55,6 +61,10 @@ namespace KarmicEnergy.Core.Entities
         [StringLength(32)]
         public String DimensionTitle3 { get; set; }
 
+        [Column("FormulaVolume", TypeName = "NVARCHAR")]
+        [StringLength(128)]
+        public String FormulaVolume { get; set; } = String.Empty;
+
         #endregion Property
 
         #region Load
@@ -63,12 +73,13 @@ namespace KarmicEnergy.Core.Entities
         {
             List<Geometry> entities = new List<Geometry>()
             {
-                new Geometry() { Id = (Int16)GeometryEnum.CubeHorizontal, Name = "Cube Horizontal", HasHeight = true, HasWidth = true, HasLength = true },
+                new Geometry() { Id = (Int16)GeometryEnum.CubeHorizontal, Name = "Cube", HasWidth = true }, // OK
                 new Geometry() { Id = (Int16)GeometryEnum.StadiumVertical, Name = "Stadium Vertical", HasHeight = true, HasWidth = true, HasLength = true },
                 new Geometry() { Id = (Int16)GeometryEnum.StadiumHorizontal, Name = "Stadium Horizontal", HasHeight = true, HasWidth = true, HasLength = true, HasBottomWidth = true },
                 new Geometry() { Id = (Int16)GeometryEnum.EllipticalHorizontal, Name = "Elliptical Horizontal", HasHeight = true, HasWidth = true, HasLength = true },
                 new Geometry() { Id = (Int16)GeometryEnum.CylinderVertical, Name = "Cylinder Vertical", HasHeight = true, HasWidth = true },
-                new Geometry() { Id = (Int16)GeometryEnum.CylinderHorizontal, Name = "Cylinder Horizontal", HasHeight = true, HasLength = true }
+                new Geometry() { Id = (Int16)GeometryEnum.CylinderHorizontal, Name = "Cylinder Horizontal", HasHeight = true, HasLength = true },
+                new Geometry() { Id = (Int16)GeometryEnum.Rectangle, Name = "Rectangle", HasHeight = true, HasWidth = true, HasLength = true } // OK
             };
 
             return entities;
@@ -94,6 +105,9 @@ namespace KarmicEnergy.Core.Entities
         CylinderVertical = 5,
 
         [Description("Cylinder Horizontal")]
-        CylinderHorizontal = 6
+        CylinderHorizontal = 6,
+
+        [Description("Rectangle")]
+        Rectangle = 7
     }
 }

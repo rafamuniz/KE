@@ -54,6 +54,18 @@ namespace KarmicEnergy.Core.Entities
         [Column("Length", TypeName = "DECIMAL")]
         public Decimal? Length { get; set; }
 
+        [Column("FaceLength", TypeName = "DECIMAL")]
+        public Decimal? FaceLength { get; set; }
+
+        [Column("BottomWidth", TypeName = "DECIMAL")]
+        public Decimal? BottomWidth { get; set; }
+
+        [Column("Radius", TypeName = "DECIMAL")]
+        public Decimal? Radius { get; set; }
+
+        [Column("Diagonal", TypeName = "DECIMAL")]
+        public Decimal? Diagonal { get; set; }
+
         [Column("Dimension1", TypeName = "DECIMAL")]
         public Decimal? Dimension1 { get; set; }
 
@@ -105,22 +117,118 @@ namespace KarmicEnergy.Core.Entities
             {
                 switch (this.TankModelId)
                 {
+                    // Id: 1
+                    // set @area = PI() * (@height / 2) * (@width / 2)
+                    // set @cubicunits = @area * @length
+                    case (Int32)TankModelEnum.StandardTanker:
+                        if (this.Length.HasValue && this.Width.HasValue && this.Height.HasValue)
+                        {
+                            var areaST = Math.PI * Math.Pow((double)(Height / 2), (Double)(Width / 2));
+                            var cubicST = (Decimal)areaST * Length;
+                            return cubicST.Value;
+                        }
+                        else
+                            return 0;
+
+                    // Id: 2
+                    case (Int32)TankModelEnum.VerticalRoundTank:
+                        if (this.Length.HasValue && this.Width.HasValue && this.Height.HasValue)
+                            return Length.Value * Width.Value * Height.Value;
+                        else
+                            return 0;
+
+                    // Id: 3              
+                    case (Int32)TankModelEnum.HorizontalRoundTank:
+                        if (this.Length.HasValue && this.Width.HasValue && this.Height.HasValue)
+                            return Length.Value * Width.Value * Height.Value;
+                        else
+                            return 0;
+
+                    // Id: 4                    
+                    // set @area1 = @length * @width
+                    // set @area2 = PI() * power((@width / 2), 2)
+                    // set @cubicunits = (@area1 + @area2) * @height
+                    case (Int32)TankModelEnum.VerticalStadium:
+                        if (this.Length.HasValue && this.Width.HasValue && this.Height.HasValue)
+                        {
+                            var areaVS1 = Length * Width;
+                            var areaVS2 = Math.PI * Math.Pow((double)(Width / 2), 2);
+                            var cubicVS = (areaVS1 + (Decimal)areaVS2) * Height;
+                            return cubicVS.Value;
+                        }
+                        else
+                            return 0;
+
+                    // Id: 5                    
+                    // set @area1 = @height * @dim4
+                    // set @area2 = PI() * power((@height / 2), 2)
+                    // set @cubicunits = (@area1 + @area2) * @length
+                    case (Int32)TankModelEnum.HorizontalStadium:
+                        if (this.Length.HasValue && this.Dimension1.HasValue && this.Height.HasValue)
+                        {
+                            var areaHS1 = Height * Dimension1;
+                            var areaHS2 = Math.PI * Math.Pow((Double)(Height / 2), 2);
+                            var cubicHS = (areaHS1 + (Decimal)areaHS2) * Length;
+                            return cubicHS.Value;
+                        }
+                        else
+                            return 0;
+
+                    // Id: 6 - set @cubicunits = @length * @width * @height
+                    case (Int32)TankModelEnum.CubeHorizontal:
+                        if (this.Length.HasValue && this.Width.HasValue && this.Height.HasValue)
+                            return this.Length.Value * this.Width.Value * this.Height.Value;
+                        else
+                            return 0;
+
+                    // Id: 7
+                    case (Int32)TankModelEnum.FracTank21K:
+                        return 21000;
+
+                    // Id: 8
+                    case (Int32)TankModelEnum.FracPond48000bbl:
+                        return 48000;
+
+                    // Id: 9
+                    case (Int32)TankModelEnum.RectangleHorizontal:
+                        if (this.Length.HasValue && this.Width.HasValue && this.Height.HasValue)
+                            return Length.Value * Width.Value * Height.Value;
+                        else
+                            return 0;
+
+                    default:
+                        if (this.Length.HasValue && this.Width.HasValue && this.Height.HasValue)
+                            return Length.Value * Width.Value * Height.Value;
+                        else
+                            return 0;
+                }
+            }
+
+            return 0;
+        }
+
+        public Decimal CalculateWaterRemaining(Decimal height)
+        {
+            if (this.TankModelId != default(Int32))
+            {
+                switch (this.TankModelId)
+                {
                     // set @cubicunits = @length * @width * @height
                     case (Int32)TankModelEnum.CubeHorizontal:
-                        return this.Length.Value * this.Width.Value * this.Height.Value;
+                        return this.Length.Value * this.Width.Value * height;
 
                     case (Int32)TankModelEnum.HorizontalRoundTank:
-                        return Length.Value * Width.Value * Height.Value;
+                        return Length.Value * Width.Value * height;
 
                     case (Int32)TankModelEnum.VerticalRoundTank:
-                        return Length.Value * Width.Value * Height.Value;
+                        return Length.Value * Width.Value * height;
 
                     // set @area1 = @height * @dim4
                     // set @area2 = PI() * power((@height / 2), 2)
                     // set @cubicunits = (@area1 + @area2) * @length
                     case (Int32)TankModelEnum.HorizontalStadium:
-                        var areaHS1 = Height * Dimension1;
-                        var areaHS2 = Math.PI * Math.Pow((Double)(Height / 2), 2);
+                        var areaHS1 = height * Dimension1;
+                        var areaHS2 = Math.PI * Math.Pow((Double)(height / 2), 2);
                         var cubicHS = (areaHS1 + (Decimal)areaHS2) * Length;
                         return cubicHS.Value;
 
@@ -130,13 +238,13 @@ namespace KarmicEnergy.Core.Entities
                     case (Int32)TankModelEnum.VerticalStadium:
                         var areaVS1 = Length * Width;
                         var areaVS2 = Math.PI * Math.Pow((double)(Width / 2), 2);
-                        var cubicVS = (areaVS1 + (Decimal)areaVS2) * Height;
+                        var cubicVS = (areaVS1 + (Decimal)areaVS2) * height;
                         return cubicVS.Value;
 
                     // set @area = PI() * (@height / 2) * (@width / 2)
                     // set @cubicunits = @area * @length
                     case (Int32)TankModelEnum.StandardTanker:
-                        var areaST = Math.PI * Math.Pow((double)(Height / 2), (Double)(Width / 2));
+                        var areaST = Math.PI * Math.Pow((double)(height / 2), (Double)(Width / 2));
                         var cubicST = (Decimal)areaST * Length;
                         return cubicST.Value;
 
@@ -147,11 +255,11 @@ namespace KarmicEnergy.Core.Entities
                         return 21000;
 
                     default:
-                        return Length.Value * Width.Value * Height.Value;
+                        return Length.Value * Width.Value * height;
                 }
             }
 
-            return Length.Value * Width.Value * Height.Value;
+            return Length.Value * Width.Value * height;
         }
     }
 }

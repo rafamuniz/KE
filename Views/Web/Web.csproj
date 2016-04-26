@@ -275,6 +275,7 @@
     <Compile Include="Areas\Customer\ViewModels\Tank\DashboardViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\EditViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\TankWaterCapacityViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\VoltageViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TemperatureViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TankViewModel.cs" />
@@ -1226,6 +1227,9 @@
     <Content Include="images\tank_models\1.png" />
     <Content Include="images\tank_models\8_measures.png" />
     <Content Include="images\tank_models\8_water.png" />
+    <Content Include="images\tank_models\9.png" />
+    <Content Include="images\tank_models\9_empty.png" />
+    <Content Include="images\tank_models\9_measures.png" />
     <Content Include="images\tank_models\delete\temp\1.png" />
     <Content Include="images\tank_models\delete\temp\2.1.png" />
     <Content Include="images\tank_models\delete\temp\3.png" />

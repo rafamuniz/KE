@@ -94,7 +94,6 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             try
             {
-                //sensorGroup = viewModel.Map();
                 sensorGroup.SensorId = viewModel.SensorId;
 
                 sensorGroup.Sensor = KEUnitOfWork.SensorRepository.Get(viewModel.SensorId);

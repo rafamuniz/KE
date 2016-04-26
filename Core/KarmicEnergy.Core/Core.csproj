@@ -92,17 +92,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201604212350126_Initial.cs" />
-    <Compile Include="Migrations\201604212350126_Initial.Designer.cs">
-      <DependentUpon>201604212350126_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604231606134_Initial1.cs" />
-    <Compile Include="Migrations\201604231606134_Initial1.Designer.cs">
-      <DependentUpon>201604231606134_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604231635125_Initial2.cs" />
-    <Compile Include="Migrations\201604231635125_Initial2.Designer.cs">
-      <DependentUpon>201604231635125_Initial2.cs</DependentUpon>
+    <Compile Include="Migrations\201604261607109_Initial.cs" />
+    <Compile Include="Migrations\201604261607109_Initial.Designer.cs">
+      <DependentUpon>201604261607109_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
@@ -159,14 +151,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604212350126_Initial.resx">
-      <DependentUpon>201604212350126_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604231606134_Initial1.resx">
-      <DependentUpon>201604231606134_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604231635125_Initial2.resx">
-      <DependentUpon>201604231635125_Initial2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604261607109_Initial.resx">
+      <DependentUpon>201604261607109_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

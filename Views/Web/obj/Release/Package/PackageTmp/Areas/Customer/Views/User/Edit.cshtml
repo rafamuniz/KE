@@ -11,35 +11,42 @@
 @using (Html.BeginForm("Edit", "User", new { area = "Customer" }, FormMethod.Post, new { id = "formEditUser", @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    @Html.Partial("_Error")
-
     @Html.HiddenFor(m => m.Id)
 
-    <div class="col-md-1">
-        @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-    </div>
-    <div class="col-md-11 form-group">
-        @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;", placeholder = AttributeExtension.GetDisplayAttributeNameValue<EditViewModel>(m => m.Name) } })
-        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="form-group">
+                <div class="col-md-2 col-lg-2">
+                    @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10 col-lg-10">
+                    @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<EditViewModel>(m => m.Name) } })
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2 col-lg-2">
+                    @Html.LabelFor(m => m.Role, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10 col-lg-10">
+                    @Html.DropDownListFor(model => model.Role, new SelectList(ViewBag.CustomerRoles, "Id", "Name"), "-- Please select a Role--", new { @class = "form-control selectpicker", id = "ddlRole" })
+                    @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="box-sub">
+                <div class="title green">
+                    <h2>Info</h2>
+                </div>
+                @Html.Partial("_Address", Model.Address, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "Address" } })
+            </div>
+        </div>
     </div>
 
-    <div class="col-md-1">
-        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
-    </div>
-    <div class="col-md-11 form-group">
-        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;", placeholder = AttributeExtension.GetDisplayAttributeNameValue<EditViewModel>(m => m.Email) } })
-        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="col-md-1">
-        @Html.LabelFor(m => m.Role, new { @class = "control-label" })
-    </div>
-    <div class="col-md-11 form-group">
-        @Html.DropDownListFor(model => model.Role, new SelectList(ViewBag.CustomerRoles, "Id", "Name"), "-- Please select a Role--", new { @class = "form-control selectpicker", style = "width: 250px;", id = "ddlRole" })
-        @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="col-md-12 form-group text-center">
+    <div class="col-md-12 col-lg-12 btn-submit text-center">
         <input type="submit" class="btn btn-default" value="SAVE">
         <a class="btn" href="/Customer/User/">Cancel</a>
     </div>

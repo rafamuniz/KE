@@ -155,9 +155,9 @@ namespace KarmicEnergy.Web.Controllers
         protected void AddErrors(Exception ex)
         {
             if (ex is DbEntityValidationException)
-                AddErrors(ex);
+                AddErrors((DbEntityValidationException)ex);
             else if (ex is DbUpdateException)
-                AddErrors(ex);
+                AddErrors((DbUpdateException)ex);
             else
                 ModelState.AddModelError("", ex.Message);
         }

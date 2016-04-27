@@ -36,7 +36,7 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Customer
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public String PasswordConfirm { get; set; }
-            
+
         public AddressViewModel Address { get; set; }
 
         #endregion Property
@@ -51,7 +51,7 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Customer
 
         public Core.Entities.Customer Map()
         {
-            Mapper.CreateMap<CreateViewModel, Core.Entities.Customer>();
+            Mapper.CreateMap<CreateViewModel, Core.Entities.Customer>().ForMember(x => x.Address, opt => opt.Ignore());
             return Mapper.Map<CreateViewModel, Core.Entities.Customer>(this);
         }
 

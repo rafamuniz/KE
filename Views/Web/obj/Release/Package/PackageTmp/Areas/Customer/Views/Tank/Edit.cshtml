@@ -67,29 +67,31 @@
             </div>
 
             <div class="form-group">
-                <div class="col-md-2">
-                    @Html.LabelFor(m => m.Latitude, new { @class = "control-label" })
-                </div>
-                <div class="col-md-10">
-                    @Html.EditorFor(m => m.Latitude, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(m => m.Latitude, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                <div class="col-md-10 col-lg-10">
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            @Html.LabelFor(m => m.Latitude, new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(m => m.Latitude, new { htmlAttributes = new { @class = "form-control", id = "txtLatitude" } })
+                            @Html.ValidationMessageFor(m => m.Latitude, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                <div class="col-md-2">
-                    @Html.LabelFor(m => m.Longitude, new { @class = "control-label" })
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            @Html.LabelFor(m => m.Longitude, new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(m => m.Longitude, new { htmlAttributes = new { @class = "form-control", id = "txtLongitude" } })
+                            @Html.ValidationMessageFor(m => m.Longitude, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-10">
-                    @Html.EditorFor(m => m.Longitude, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(m => m.Longitude, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-12 col-lg-12">
-                    <a id="archorMap" style="display: none;" target="_blank">
-                        <img id="imgMap" src="~/images/map_icon.png" style="width: 100%; height: 100%;" onclick="getGeoLocation(geoLocationSuccess, geoLocationError);" />
+                <div class="col-md-2 col-lg-2">
+                    <a id="archorMap" href="http://maps.google.com/?q=@Model.Latitude,@Model.Longitude" target="_blank">
+                        <img id="imgMap" src="~/images/map_icon.png" style="width: 100%; height: 100%;" />
                     </a>
                 </div>
             </div>
@@ -97,9 +99,6 @@
 
         <div id="tankModel" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
             @Html.Partial("_TankModel", Model.TankModel, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "TankModel" } })
-            <script type="text/javascript">
-
-            </script>
         </div>
     </div>
 

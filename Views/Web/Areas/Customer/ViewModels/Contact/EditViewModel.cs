@@ -28,20 +28,19 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Contact
 
         #region Map
 
-        public void Map(Core.Entities.Contact entity)
+        public void MapEntityToVM(Core.Entities.Contact entity)
         {
-            //.ForMember(x => x.Address, opt => opt.Ignore());
-            Mapper.CreateMap<Core.Entities.Contact, EditViewModel>();
-            Mapper.Map<Core.Entities.Contact, EditViewModel>(entity);
+            Mapper.CreateMap<Core.Entities.Contact, EditViewModel>().ForMember(x => x.Address, opt => opt.Ignore());
+            Mapper.Map<Core.Entities.Contact, EditViewModel>(entity, this);
         }
 
-        public static EditViewModel Map(Core.Entities.Address entity)
-        {
-            Mapper.CreateMap<Core.Entities.Address, EditViewModel>();
-            return Mapper.Map<Core.Entities.Address, EditViewModel>(entity);
-        }
+        //public static EditViewModel Map(Core.Entities.Address entity)
+        //{
+        //    Mapper.CreateMap<Core.Entities.Address, EditViewModel>();
+        //    return Mapper.Map<Core.Entities.Address, EditViewModel>(entity);
+        //}
 
-        public AddressViewModel MapAddress(Core.Entities.Address entity)
+        public AddressViewModel MapEntityToVM(Core.Entities.Address entity)
         {
             Mapper.CreateMap<Core.Entities.Address, AddressViewModel>();
             return Mapper.Map<Core.Entities.Address, AddressViewModel>(entity, this.Address);
@@ -49,7 +48,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Contact
 
         public void MapVMToEntity(Core.Entities.Contact entity)
         {
-            Mapper.CreateMap<EditViewModel, Core.Entities.Contact>();
+            Mapper.CreateMap<EditViewModel, Core.Entities.Contact>().ForMember(x => x.Address, opt => opt.Ignore());
             Mapper.Map<EditViewModel, Core.Entities.Contact>(this, entity);
         }
 

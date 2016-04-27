@@ -48,10 +48,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 }
 
                 Core.Entities.Contact contact = viewModel.Map();
+                contact.Id = Guid.NewGuid();
+                contact.CustomerId = CustomerId;
+
                 Core.Entities.Address address = viewModel.MapAddress();
                 contact.Address = address;
-                KEUnitOfWork.AddressRepository.Add(contact.Address);
-                contact.AddressId = contact.Address.Id;
+
                 KEUnitOfWork.ContactRepository.Add(contact);
                 KEUnitOfWork.Complete();
 
@@ -81,10 +83,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 }
 
                 EditViewModel viewModel = new EditViewModel();
-                viewModel.Map(contact);
+                viewModel.MapEntityToVM(contact);
 
                 // Address
-                viewModel.MapAddress(contact.Address);
+                viewModel.MapEntityToVM(contact.Address);
 
                 return View(viewModel);
             }

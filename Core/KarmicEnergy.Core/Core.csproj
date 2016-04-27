@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\CustomerUserSetting.cs" />
     <Compile Include="Entities\CustomerSetting.cs" />
     <Compile Include="Entities\Geometry.cs" />
@@ -95,6 +96,18 @@
     <Compile Include="Migrations\201604261607109_Initial.cs" />
     <Compile Include="Migrations\201604261607109_Initial.Designer.cs">
       <DependentUpon>201604261607109_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604271447254_Initial1.cs" />
+    <Compile Include="Migrations\201604271447254_Initial1.Designer.cs">
+      <DependentUpon>201604271447254_Initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604271450441_Initial2.cs" />
+    <Compile Include="Migrations\201604271450441_Initial2.Designer.cs">
+      <DependentUpon>201604271450441_Initial2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604271452326_Initial3.cs" />
+    <Compile Include="Migrations\201604271452326_Initial3.Designer.cs">
+      <DependentUpon>201604271452326_Initial3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
@@ -153,6 +166,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604261607109_Initial.resx">
       <DependentUpon>201604261607109_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604271447254_Initial1.resx">
+      <DependentUpon>201604271447254_Initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604271450441_Initial2.resx">
+      <DependentUpon>201604271450441_Initial2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604271452326_Initial3.resx">
+      <DependentUpon>201604271452326_Initial3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

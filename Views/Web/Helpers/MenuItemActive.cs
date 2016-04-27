@@ -18,8 +18,7 @@ namespace KarmicEnergy.Web.Helpers
             string currentAction = helper.ViewContext.Controller.ValueProvider.GetValue("action").RawValue.ToString();
 
             if (currentArea == area &&
-                currentController == controller &&
-                currentAction == action)
+                currentController == controller) // && currentAction == action
             {
                 classValue = "active";
             }

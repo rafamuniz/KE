@@ -37,14 +37,16 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<ActionResult> Create(CreateViewModel viewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(viewModel);
-            }
+            ApplicationUser user = null;
 
             try
             {
-                var user = new ApplicationUser { UserName = viewModel.UserName, Email = viewModel.Address.Email, Name = viewModel.Name };
+                if (!ModelState.IsValid)
+                {
+                    return View(viewModel);
+                }
+
+                user = new ApplicationUser { UserName = viewModel.UserName, Email = viewModel.Address.Email, Name = viewModel.Name };
                 var result = await UserManager.CreateAsync(user, viewModel.Password);
 
                 if (result.Succeeded)
@@ -76,6 +78,9 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
+                if (user != null)
+                    await UserManager.DeleteAsync(user);
+
                 AddErrors(ex);
             }
 

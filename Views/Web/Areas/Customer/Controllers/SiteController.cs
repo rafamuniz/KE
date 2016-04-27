@@ -56,7 +56,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.SiteRepository.Add(site);
                 KEUnitOfWork.Complete();
 
-                return RedirectToAction("Index", "Site");
+                return RedirectToAction("Index", "Site", new { area = "Customer" });
             }
             catch (Exception ex)
             {

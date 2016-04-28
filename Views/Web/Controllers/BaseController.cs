@@ -1,20 +1,18 @@
-﻿using KarmicEnergy.Core.Persistence;
+﻿using KarmicEnergy.Core.Entities;
+using KarmicEnergy.Core.Persistence;
 using KarmicEnergy.Web.Models;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using KarmicEnergy.Core.Entities;
-using Munizoft.MVC.Helpers.Models;
-using AutoMapper;
-using System.Data.Entity.Infrastructure;
-using System.Configuration;
 
 namespace KarmicEnergy.Web.Controllers
 {
@@ -136,57 +134,92 @@ namespace KarmicEnergy.Web.Controllers
             {
                 Guid tankId = default(Guid);
 
-                if (Request.QueryString.AllKeys.Contains("tankId"))
-                    if (Guid.TryParse(Request.QueryString["tankId"], out tankId))
+                if (Request.QueryString.AllKeys.Contains("TankId"))
+                    if (Guid.TryParse(Request.QueryString["TankId"], out tankId))
                         return tankId;
 
                 return tankId;
             }
         }
 
+        #region Log
+        protected void AddLog(String message, String type = "error")
+        {
+            Log log = new Log() { Type = type, Message = message };
+            KEUnitOfWork.LogRepository.Add(log);
+            KEUnitOfWork.Complete();
+        }
+        #endregion Log
+
+        #region Errors
         protected void AddErrors(IdentityResult result)
         {
-            foreach (var error in result.Errors)
+            if (result.Errors.Any())
             {
-                ModelState.AddModelError("", error);
+                StringBuilder message = new StringBuilder();
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error);
+                    message.Append(error);
+                }
+
+                AddLog(message.ToString());
             }
         }
 
         protected void AddErrors(Exception ex)
         {
+            String message = String.Empty;
+
             if (ex is DbEntityValidationException)
+            {
                 AddErrors((DbEntityValidationException)ex);
+            }
             else if (ex is DbUpdateException)
+            {
                 AddErrors((DbUpdateException)ex);
+            }
             else
-                ModelState.AddModelError("", ex.Message);
+            {
+                AddErrors(ex.Message);
+            }
         }
 
         protected void AddErrors(String key, String message)
         {
             ModelState.AddModelError(key, message);
+            AddLog(message);
         }
 
         protected void AddErrors(DbEntityValidationException dbex)
         {
+            StringBuilder message = new StringBuilder();
             foreach (var error in dbex.EntityValidationErrors)
             {
                 foreach (var valError in error.ValidationErrors)
                 {
                     ModelState.AddModelError("", valError.ErrorMessage);
+                    message.Append(valError.ErrorMessage);
                 }
             }
+
+            AddLog(message.ToString());
         }
 
         protected void AddErrors(DbUpdateException uex)
         {
-            ModelState.AddModelError("", uex.InnerException.InnerException.Message);
+            String message = uex.InnerException.InnerException.Message;
+            ModelState.AddModelError("", message);
+            AddLog(message);
         }
 
         protected void AddErrors(String message)
         {
             ModelState.AddModelError("", message);
+            AddLog(message);
         }
+
+        #endregion Errors
 
         protected ActionResult RedirectToLocal(string returnUrl)
         {
@@ -282,6 +315,13 @@ namespace KarmicEnergy.Web.Controllers
             List<Item> items = KEUnitOfWork.ItemRepository.GetAllActive().ToList();
             ViewBag.Items = items;
             return items;
+        }
+
+        protected List<Unit> LoadUnits()
+        {
+            List<Unit> units = KEUnitOfWork.UnitRepository.GetAllActive().ToList();
+            ViewBag.Units = units;
+            return units;
         }
 
         //protected List<Site> LoadSites()

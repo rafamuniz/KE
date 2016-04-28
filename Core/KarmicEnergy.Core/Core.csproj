@@ -76,6 +76,7 @@
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Alarm.cs" />
+    <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\SensorGroup.cs" />
     <Compile Include="Entities\SensorItem.cs" />
@@ -93,21 +94,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201604261607109_Initial.cs" />
-    <Compile Include="Migrations\201604261607109_Initial.Designer.cs">
-      <DependentUpon>201604261607109_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604271447254_Initial1.cs" />
-    <Compile Include="Migrations\201604271447254_Initial1.Designer.cs">
-      <DependentUpon>201604271447254_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604271450441_Initial2.cs" />
-    <Compile Include="Migrations\201604271450441_Initial2.Designer.cs">
-      <DependentUpon>201604271450441_Initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604271452326_Initial3.cs" />
-    <Compile Include="Migrations\201604271452326_Initial3.Designer.cs">
-      <DependentUpon>201604271452326_Initial3.cs</DependentUpon>
+    <Compile Include="Migrations\201604281234248_Dev.cs" />
+    <Compile Include="Migrations\201604281234248_Dev.Designer.cs">
+      <DependentUpon>201604281234248_Dev.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
@@ -117,8 +106,12 @@
     <Compile Include="Persistence\KEUnitOfWorkBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
+    <Compile Include="Repositories\Interface\IUnitRepository.cs" />
+    <Compile Include="Repositories\Interface\ILogRepository.cs" />
     <Compile Include="Repositories\Interface\ISensorGroupRepository.cs" />
     <Compile Include="Repositories\Interface\IGroupRepository.cs" />
+    <Compile Include="Repositories\UnitRepository.cs" />
+    <Compile Include="Repositories\LogRepository.cs" />
     <Compile Include="Repositories\SensorGroupRepository.cs" />
     <Compile Include="Repositories\GroupRepository.cs" />
     <Compile Include="Repositories\KERepositoryBase.cs" />
@@ -164,17 +157,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604261607109_Initial.resx">
-      <DependentUpon>201604261607109_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604271447254_Initial1.resx">
-      <DependentUpon>201604271447254_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604271450441_Initial2.resx">
-      <DependentUpon>201604271450441_Initial2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604271452326_Initial3.resx">
-      <DependentUpon>201604271452326_Initial3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604281234248_Dev.resx">
+      <DependentUpon>201604281234248_Dev.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

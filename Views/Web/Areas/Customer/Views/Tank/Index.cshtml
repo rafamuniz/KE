@@ -31,7 +31,7 @@
      .Encoded(false)
      .Sanitized(false)
      .SetWidth(30)
-     .RenderValueAs(o => @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-signal'></span>", "Sensors", "Tank", "Sensor", routeValues: new { tankId = o.Id, area = "Customer" }, htmlAttributes: new { data_modal = "", @class = "btn btn-default" }));
+     .RenderValueAs(o => @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-signal'></span>", "Sensors", "Tank", "Sensor", routeValues: new { TankId = o.Id, area = "Customer" }, htmlAttributes: new { data_modal = "", @class = "btn btn-default" }));
 
     columns.Add()
      .Encoded(false)

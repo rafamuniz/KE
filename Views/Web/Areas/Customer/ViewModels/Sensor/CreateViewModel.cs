@@ -1,15 +1,20 @@
-﻿using Munizoft.MVC.Helpers.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
 {
     public class CreateViewModel
     {
+        #region Constructor
+        public CreateViewModel()
+        {
+            Items = new List<ItemViewModel>();
+        }
+
+        #endregion Constructor
+
         #region Property
 
         [Display(Name = "Name")]
@@ -32,14 +37,10 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
         [Required]
         public Guid TankId { get; set; }
 
-        [Display(Name = "Spot GPS")]        
+        [Display(Name = "Spot GPS")]
         public String SpotGPS { get; set; }
 
-        [Display(Name = "Items")]
-        public String[] Items { get; set; }
-
-        public IEnumerable<ItemViewModel> AvailableItems { get; set; }
-        public IEnumerable<ItemViewModel> SelectedItems { get; set; }
+        public IList<ItemViewModel> Items { get; set; }
 
         #endregion Property
     }

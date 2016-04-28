@@ -8,6 +8,14 @@ namespace KarmicEnergy.Core.Entities
     [Table("Sensors", Schema = "dbo")]
     public class Sensor : BaseEntity
     {
+        #region Constructor
+        public Sensor()
+        {
+            SensorItems = new List<SensorItem>();
+        }
+
+        #endregion Constructor
+
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]

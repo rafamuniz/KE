@@ -12,7 +12,6 @@
 @using (Html.BeginForm("Edit", "Sensor", new { area = "Customer" }, FormMethod.Post, new { id = "formEditUser", @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-
     @Html.HiddenFor(m => m.Id)
 
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
@@ -70,25 +69,26 @@
     <div class="col-sm-6 col-md-6 col-xs-6 visible-lg-block">
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="row">
-                <div class="col-sm-12 box-sub">
-                    <div class="title">
+                <div class="col-sm-12 col-md-12 col-lg-12 box-sub">
+                    <div class="title green">
                         <h2>Items</h2>
                     </div>
 
-                    @{
-                        var htmlListInfo = new HtmlListInfo(HtmlTag.vertical_columns, 1, new
+                    <div class="checkboxlist" style="float:left;">
+                        @for (var i = 0; i < Model.Items.Count(); i++)
                         {
-                            @class = "checkboxlist"
-                        });
-                    }
-
-                    @Html.CheckBoxListFor(model => model.Items,
-                                  model => model.AvailableItems,
-                                  item => item.Id,
-                                  item => item.Name,
-                                  model => model.SelectedItems,
-                                  htmlListInfo
-                                  )
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    @Html.HiddenFor(model => model.Items[i].Id)
+                                    @Html.CheckBoxFor(model => model.Items[i].IsSelected, new { Style = "vertical-align: 3px;" })
+                                    @Html.DisplayFor(model => model.Items[i].Name)
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    @Html.DropDownListFor(model => model.Items[i].UnitSelected, new SelectList(Model.Items[i].Units, "Id", "Name", Model.Items[i].UnitSelected), "-- Please select an Unit --", new { @class = "form-control selectpicker", id = "ddlUnit_" + Model.Items[i].Id })
+                                </div>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

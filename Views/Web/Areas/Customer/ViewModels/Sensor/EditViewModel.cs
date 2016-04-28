@@ -8,11 +8,12 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
     public class EditViewModel
     {
         #region Constructor
+
         public EditViewModel()
         {
-            AvailableItems = new List<ItemViewModel>();
-            SelectedItems = new List<ItemViewModel>();
+            Items = new List<ItemViewModel>();
         }
+
         #endregion Constructor
 
         #region Property
@@ -41,11 +42,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
         [Display(Name = "Spot GPS")]
         public String SpotGPS { get; set; }
 
-        [Display(Name = "Items")]
-        public String[] Items { get; set; }
-
-        public IList<ItemViewModel> AvailableItems { get; set; }
-        public IList<ItemViewModel> SelectedItems { get; set; }
+        public IList<ItemViewModel> Items { get; set; }
 
         #endregion Property
 

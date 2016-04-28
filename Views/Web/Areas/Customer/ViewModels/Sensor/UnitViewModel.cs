@@ -6,7 +6,7 @@ using System.Web;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
 {
-    public class ItemViewModel
+    public class UnitViewModel
     {
         #region Property
 
@@ -20,30 +20,26 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
         //on the list
         public Boolean IsSelected { get; set; }
 
-        public Int16? UnitSelected { get; set; }
-
-        public List<UnitViewModel> Units { get; set; }
-
         #endregion Property
 
         #region Map
 
-        public static List<ItemViewModel> Map(List<Core.Entities.Item> entities)
+        public static List<UnitViewModel> Map(List<Core.Entities.Unit> entities)
         {
-            List<ItemViewModel> vms = new List<ItemViewModel>();
+            List<UnitViewModel> vms = new List<UnitViewModel>();
 
             if (entities != null && entities.Any())
             {
-                entities.ForEach(c => vms.Add(ItemViewModel.Map(c)));
+                entities.ForEach(c => vms.Add(UnitViewModel.Map(c)));
             }
 
             return vms;
         }
 
-        public static ItemViewModel Map(Core.Entities.Item entity)
+        public static UnitViewModel Map(Core.Entities.Unit entity)
         {
-            Mapper.CreateMap<Core.Entities.Item, ItemViewModel>();
-            return Mapper.Map<Core.Entities.Item, ItemViewModel>(entity);
+            Mapper.CreateMap<Core.Entities.Unit, UnitViewModel>();
+            return Mapper.Map<Core.Entities.Unit, UnitViewModel>(entity);
         }
 
         #endregion Map

@@ -25,18 +25,32 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Property        
 
+        #region Item
+
+        public virtual List<Item> Items { get; set; }
+
+        #endregion Item          
+
         #region Load
 
         public static List<SensorType> Load()
         {
             List<SensorType> entities = new List<SensorType>()
             {
-                new SensorType() { Id = 1, Name = "KE Depth Sensor" },
-                new SensorType() { Id = 2, Name = "Flow Meter" }
+                new SensorType() { Id = (Int16)SensorTypeEnum.KEDepth, Name = "KE Depth Sensor" },
+                new SensorType() { Id = (Int16)SensorTypeEnum.FlowMeter, Name = "Flow Meter" },
+                new SensorType() { Id = (Int16)SensorTypeEnum.PH, Name = "PH" }
             };
 
             return entities;
         }
         #endregion Load
+    }
+
+    public enum SensorTypeEnum : short
+    {
+        KEDepth = 1,
+        FlowMeter = 2,
+        PH = 3
     }
 }

@@ -53,20 +53,12 @@ namespace KarmicEnergy.Core.Migrations
                             ve.PropertyName, ve.ErrorMessage);
                     }
                 }
-                throw;
+                throw e;
+            }            
+            catch(Exception ex)
+            {
+                throw ex;
             }
-
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //context.SensorTypes.AddOrUpdate(
-            //  p => p.FullName,
-            //  new Person { FullName = "Andrew Peters" },
-            //  new Person { FullName = "Brice Lambson" },
-            //  new Person { FullName = "Rowan Miller" }
-            //);
         }
     }
 }

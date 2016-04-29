@@ -31,7 +31,7 @@
                 @Html.LabelFor(m => m.SensorTypeId, new { @class = "control-label" })
             </div>
             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                @Html.DropDownListFor(m => m.SensorTypeId, new SelectList(ViewBag.SensorTypes, "Id", "Name"), "-- Please select a Sensor Type --", new { @class = "form-control selectpicker", @id = "ddlSensorType" })
+                @Html.DropDownListFor(m => m.SensorTypeId, new SelectList(ViewBag.SensorTypes, "Id", "Name"), "-- Please select a Sensor Type --", new { @class = "form-control selectpicker", @id = "ddlSensorType", onchange = "loadItems(this);" })
                 @Html.ValidationMessageFor(m => m.SensorTypeId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -107,4 +107,10 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        function loadItems(element) {
+
+        }
+    </script>
 }

@@ -2,7 +2,6 @@
     if (siteId != "" || siteId != "0") {
         var procemessage = "<option value='0'> Please wait...</option>";
         $("#" + element).html(procemessage).show();
-        //var url = url;
 
         $.ajax({
             url: url,
@@ -15,9 +14,10 @@
                     markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
                 }
                 $("#" + element).html(markup).show();
+                $("#" + element).removeAttr("disabled");
             },
             error: function (reponse) {
-                showNotify("error : " + reponse);
+                notifiyError("error : " + reponse);
             }
         });
     }
@@ -39,9 +39,10 @@ function GetsSensorByTankId(tankId, element, url) {
                     markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
                 }
                 $("#" + element).html(markup).show();
+                $("#" + element).removeAttr("disabled");    
             },
             error: function (reponse) {
-                showNotify("error : " + reponse);
+                notifiyError("error : " + reponse);
             }
         });
     }

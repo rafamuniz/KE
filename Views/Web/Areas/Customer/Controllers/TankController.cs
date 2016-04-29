@@ -26,10 +26,15 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Create()
         {
+            CreateViewModel viewModel = new CreateViewModel();
+
+            if (IsSite)
+                viewModel.SiteId = SiteId;
+
             LoadSites(CustomerId);
             LoadTankModels();
             LoadStatuses();
-            CreateViewModel viewModel = new CreateViewModel();
+
             return View(viewModel);
         }
 
@@ -83,12 +88,17 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 return View("Index");
             }
 
+            EditViewModel viewModel = new EditViewModel();
+
+            if (IsSite)
+                viewModel.SiteId = SiteId;
+            viewModel.Map(tank);
+            viewModel.Map(tank.TankModel);
+
             LoadStatuses();
             LoadSites(CustomerId);
             LoadTankModels();
-            EditViewModel viewModel = new EditViewModel();
-            viewModel.Map(tank);
-            viewModel.Map(tank.TankModel);
+
             return View(viewModel);
         }
 
@@ -196,12 +206,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                             vm.WaterVolumeCapacity = tank.WaterVolumeCapacity;
 
                             // Water Volume
-                            if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.WaterVolume))
+                            if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.Range))
                             {
-                                var waterVolume = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.WaterVolume);
+                                var waterVolume = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.Range);
                                 if (waterVolume != null)
                                 {
-                                    vm.WaterVolume = Decimal.Parse(waterVolume.Value);
+                                    vm.WaterVolume = Decimal.Parse(waterVolume.CalculatedValue);
                                     vm.WaterVolumeLastMeasurement = waterVolume.EventDate;
                                 }
                             }

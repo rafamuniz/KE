@@ -94,9 +94,13 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201604281234248_Dev.cs" />
-    <Compile Include="Migrations\201604281234248_Dev.Designer.cs">
-      <DependentUpon>201604281234248_Dev.cs</DependentUpon>
+    <Compile Include="Migrations\201604290230101_Dev.cs" />
+    <Compile Include="Migrations\201604290230101_Dev.Designer.cs">
+      <DependentUpon>201604290230101_Dev.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604290306220_Dev1.cs" />
+    <Compile Include="Migrations\201604290306220_Dev1.Designer.cs">
+      <DependentUpon>201604290306220_Dev1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
@@ -157,8 +161,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604281234248_Dev.resx">
-      <DependentUpon>201604281234248_Dev.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604290230101_Dev.resx">
+      <DependentUpon>201604290230101_Dev.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604290306220_Dev1.resx">
+      <DependentUpon>201604290306220_Dev1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -289,6 +289,7 @@
     <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Extensions\ImageSelectExtensions.cs" />
+    <Compile Include="Extensions\KEExtension.cs" />
     <Compile Include="Helpers\MenuItemActive.cs" />
     <Compile Include="Migrations\201604231604477_Initial.cs" />
     <Compile Include="Migrations\201604231604477_Initial.Designer.cs">

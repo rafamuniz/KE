@@ -15,6 +15,9 @@ namespace KarmicEnergy.Web
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                        "~/Scripts/jquery-ui-{version}.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate.min.js",
                         "~/Scripts/jquery.validate.unobtrusive.min.js"));
@@ -31,7 +34,7 @@ namespace KarmicEnergy.Web
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                       "~/Scripts/app.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/app/utils").Include(
+            bundles.Add(new ScriptBundle("~/bundles/utils").Include(
                      "~/Scripts/app/utils.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/slimscroll").Include(
@@ -50,8 +53,7 @@ namespace KarmicEnergy.Web
                     "~/Scripts/jquery.inputmask/inputmask.js",
                     "~/Scripts/jquery.inputmask/jquery.inputmask.js",
                     "~/Scripts/jquery.inputmask/inputmask.extensions.js",
-                    "~/Scripts/jquery.inputmask/inputmask.date.extensions.js",
-                    //and other extensions you want to include
+                    "~/Scripts/jquery.inputmask/inputmask.date.extensions.js",                    
                     "~/Scripts/jquery.inputmask/inputmask.numeric.extensions.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
@@ -62,6 +64,7 @@ namespace KarmicEnergy.Web
 
             bundles.Add(new ScriptBundle("~/bundles/highcharts")
                 .IncludeDirectory("~/Scripts/highcharts", "*.js", true));
+
             #endregion Scripts
 
             #region Style

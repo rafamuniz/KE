@@ -31,18 +31,42 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Property
 
+        #region Unit Type
+
+        [Column("UnitTypeId", TypeName = "SMALLINT")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        [DefaultValue(1)]
+        public Int16 UnitTypeId { get; set; } = 1;
+
+        [ForeignKey("UnitTypeId")]
+        public virtual UnitType UnitType { get; set; }
+
+        #endregion Unit Type
+
+        #region Sensor Type
+
+        [Column("SensorTypeId", TypeName = "SMALLINT")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        [DefaultValue(1)]
+        public Int16 SensorTypeId { get; set; } = 1;
+
+        [ForeignKey("SensorTypeId")]
+        public virtual SensorType SensorType { get; set; }
+
+        #endregion Sensor Type
+
         #region Load
 
         public static List<Item> Load()
         {
             List<Item> entities = new List<Item>()
             {
-                new Item() { Id = (int)ItemEnum.Range, Code = "RG", Name = "Range" },
-                new Item() { Id = (int)ItemEnum.WaterVolume, Code = "WV", Name = "Water Volume" },
-                new Item() { Id = (int)ItemEnum.WaterTemperature, Code = "WT", Name = "Water Temperature" },
-                new Item() { Id = (int)ItemEnum.WeatherTemperature, Code= "WV", Name = "Weather Temperature" },
-                new Item() { Id = (int)ItemEnum.Voltage, Code= "V", Name = "Voltage" },
-                new Item() { Id = (int)ItemEnum.PH, Code= "PH", Name = "PH" }
+                new Item() { Id = (Int32)ItemEnum.Range, Code = "RG", Name = "Range", SensorTypeId = (Int16)SensorTypeEnum.FlowMeter, UnitTypeId = (Int16)UnitTypeEnum.Length },
+                new Item() { Id = (Int32)ItemEnum.WaterVolume, Code = "WV", Name = "Water Volume", SensorTypeId = (Int16)SensorTypeEnum.FlowMeter, UnitTypeId = (Int16)UnitTypeEnum.Volume },
+                new Item() { Id = (Int32)ItemEnum.WaterTemperature, Code = "WT", Name = "Water Temperature", SensorTypeId = (Int16)SensorTypeEnum.KEDepth, UnitTypeId = (Int16)UnitTypeEnum.Temperature },
+                new Item() { Id = (Int32)ItemEnum.WeatherTemperature, Code= "WV", Name = "Weather Temperature", SensorTypeId = (Int16)SensorTypeEnum.KEDepth, UnitTypeId = (Int16)UnitTypeEnum.Temperature },
+                new Item() { Id = (Int32)ItemEnum.Voltage, Code= "V", Name = "Voltage", SensorTypeId = (Int16)SensorTypeEnum.KEDepth, UnitTypeId = (Int16)UnitTypeEnum.Energy },
+                new Item() { Id = (Int32)ItemEnum.PH, Code= "PH", Name = "PH", SensorTypeId = (Int16)SensorTypeEnum.PH, UnitTypeId = (Int16)UnitTypeEnum.Volume }
             };
 
             return entities;

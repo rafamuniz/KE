@@ -51,6 +51,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             CreateViewModel viewModel = new CreateViewModel();
 
+            viewModel.TankId = TankId;
+
             LoadStatuses();
             var items = LoadItems();
             var itemsViewModel = ItemViewModel.Map(items);

@@ -1,6 +1,7 @@
 ﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
 @using Munizoft.Extensions
 @using Munizoft.MVC.Helpers
+@using KarmicEnergy.Web.Extensions
 
 @model CreateViewModel
 
@@ -15,15 +16,22 @@
 
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            <div class="form-group">
-                <div class="col-md-2">
-                    @Html.LabelFor(m => m.SiteId, new { @class = "control-label" })
+            @if (!this.IsSite())
+            {
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.LabelFor(m => m.SiteId, new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name", Model.SiteId), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
+                        @Html.ValidationMessageFor(m => m.SiteId, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
-                    @Html.ValidationMessageFor(m => m.SiteId, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            }
+            else
+            {
+                @Html.HiddenFor(m=>m.SiteId)
+            }
 
             <div class="form-group">
                 <div class="col-sm-3 col-md-2 col-xs-1">

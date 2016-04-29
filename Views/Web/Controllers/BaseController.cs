@@ -72,11 +72,16 @@ namespace KarmicEnergy.Web.Controllers
             get { return HttpContext.User.Identity.GetUserId(); }
         }
 
+        protected Guid SiteId
+        {
+            get { return Guid.Parse(ConfigurationManager.AppSettings["Site:Id"].Trim()); }
+        }
+
         protected Boolean IsSite
         {
             get
             {
-                String siteId = ConfigurationManager.AppSettings["Site:Idxxx"];
+                String siteId = ConfigurationManager.AppSettings["Site:Id"];
 
                 if (siteId.Trim() == String.Empty)
                     return false;

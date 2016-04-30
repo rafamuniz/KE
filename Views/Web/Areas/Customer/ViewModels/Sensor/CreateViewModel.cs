@@ -18,10 +18,12 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
         #region Property
 
         [Display(Name = "Name")]
+        [Required]
         public String Name { get; set; }
 
         [Display(Name = "Reference")]
         [MaxLength(8)]
+        [Required]
         public String Reference { get; set; }
 
         [Display(Name = "Status")]

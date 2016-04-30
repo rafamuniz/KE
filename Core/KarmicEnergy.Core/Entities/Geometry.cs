@@ -73,13 +73,13 @@ namespace KarmicEnergy.Core.Entities
         {
             List<Geometry> entities = new List<Geometry>()
             {
-                new Geometry() { Id = (Int16)GeometryEnum.CubeHorizontal, Name = "Cube", HasWidth = true }, // OK
-                new Geometry() { Id = (Int16)GeometryEnum.StadiumVertical, Name = "Stadium Vertical", HasHeight = true, HasWidth = true, HasLength = true },
-                new Geometry() { Id = (Int16)GeometryEnum.StadiumHorizontal, Name = "Stadium Horizontal", HasHeight = true, HasWidth = true, HasLength = true, HasBottomWidth = true },
+                new Geometry() { Id = (Int16)GeometryEnum.Cube, Name = "Cube", HasWidth = true },
+                new Geometry() { Id = (Int16)GeometryEnum.StadiumVertical, Name = "Stadium Vertical", HasHeight = true, HasWidth = true, HasFaceLength = true },
+                new Geometry() { Id = (Int16)GeometryEnum.StadiumHorizontal, Name = "Stadium Horizontal", HasHeight = true, HasLength = true, HasBottomWidth = true },
                 new Geometry() { Id = (Int16)GeometryEnum.EllipticalHorizontal, Name = "Elliptical Horizontal", HasHeight = true, HasWidth = true, HasLength = true },
                 new Geometry() { Id = (Int16)GeometryEnum.CylinderVertical, Name = "Cylinder Vertical", HasHeight = true, HasWidth = true },
                 new Geometry() { Id = (Int16)GeometryEnum.CylinderHorizontal, Name = "Cylinder Horizontal", HasHeight = true, HasLength = true },
-                new Geometry() { Id = (Int16)GeometryEnum.Rectangle, Name = "Rectangle", HasHeight = true, HasWidth = true, HasLength = true } // OK
+                new Geometry() { Id = (Int16)GeometryEnum.Rectangle, Name = "Rectangle", HasHeight = true, HasWidth = true, HasLength = true }
             };
 
             return entities;
@@ -89,8 +89,8 @@ namespace KarmicEnergy.Core.Entities
 
     public enum GeometryEnum : short
     {
-        [Description("Cube Horizontal")]
-        CubeHorizontal = 1,
+        [Description("Cube")]
+        Cube = 1,
 
         [Description("Stadium Vertical")]
         StadiumVertical = 2,

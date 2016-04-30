@@ -50,22 +50,23 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         private CreateViewModel LoadCreateViewModel()
         {
             CreateViewModel viewModel = new CreateViewModel();
-
             viewModel.TankId = TankId;
 
-            LoadStatuses();
-            var items = LoadItems();
-            var itemsViewModel = ItemViewModel.Map(items);
-            var units = LoadUnits();
+            //var items = LoadItems();
+            //var itemsViewModel = ItemViewModel.Map(items);
+            //var units = LoadUnits();
 
-            foreach (var item in itemsViewModel)
-            {
-                item.Units = UnitViewModel.Map(units);
-            }
+            //foreach (var item in itemsViewModel)
+            //{
+            //    item.Units = UnitViewModel.Map(units);
+            //}
+
+            //viewModel.Items = itemsViewModel;
 
             LoadTanks(CustomerId);
             LoadSensorTypes();
-            viewModel.Items = itemsViewModel;
+            LoadStatuses();
+
             return viewModel;
         }
 
@@ -75,14 +76,18 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Create(CreateViewModel viewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(LoadCreateViewModel());
-            }
-
+        {            
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(LoadCreateViewModel());
+                }
+
+                // Validate Item check=true
+
+
+
                 Sensor sensor = new Sensor()
                 {
                     Name = viewModel.Name,
@@ -274,5 +279,37 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         #endregion Delete
+
+        #region JSON
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult GetsItemBySensorTypeId(String sensorTypeId)
+        {
+            List<ItemViewModel> viewModels = new List<ItemViewModel>();
+            List<Item> items = KEUnitOfWork.ItemRepository.GetsBySensorTypeId(Int16.Parse(sensorTypeId));
+            List<Unit> units = KEUnitOfWork.UnitRepository.GetAllActive().ToList();
+
+            if (items.Any())
+            {
+                foreach (var i in items)
+                {
+                    ItemViewModel vm = new ItemViewModel()
+                    {
+                        Id = i.Id,
+                        Name = i.Name
+                    };
+
+                    var u = units.Where(x => x.UnitTypeId == i.UnitTypeId).ToList();
+                    vm.Units = UnitViewModel.Map(u);
+
+                    viewModels.Add(vm);
+                }
+            }
+
+            return Json(viewModels, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion JSON
     }
 }

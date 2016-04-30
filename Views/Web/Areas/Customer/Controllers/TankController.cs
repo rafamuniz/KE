@@ -2,7 +2,7 @@
 using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank;
 using KarmicEnergy.Web.Controllers;
 using System;
-using System.Data.Entity.Validation;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -15,8 +15,19 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Index()
         {
-            var tanks = KEUnitOfWork.TankRepository.GetsByCustomerId(CustomerId).ToList();
-            var viewModels = ListViewModel.Map(tanks);
+            List<ListViewModel> viewModels = new List<ListViewModel>();
+
+            if (!IsSite)
+            {
+                var tanks = KEUnitOfWork.TankRepository.GetsByCustomerId(CustomerId).ToList();
+                viewModels = ListViewModel.Map(tanks);
+            }
+            else
+            {
+                var tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(CustomerId, SiteId).ToList();
+                viewModels = ListViewModel.Map(tanks);
+            }
+
             return View(viewModels);
         }
         #endregion Index
@@ -26,16 +37,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Create()
         {
-            CreateViewModel viewModel = new CreateViewModel();
-
-            if (IsSite)
-                viewModel.SiteId = SiteId;
-
-            LoadSites(CustomerId);
-            LoadTankModels();
-            LoadStatuses();
-
-            return View(viewModel);
+            return View(InitCreate());
         }
 
         //
@@ -47,10 +49,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             if (!ModelState.IsValid)
             {
-                LoadSites(CustomerId);
-                LoadTankModels();
-                LoadStatuses();
-                return View(viewModel);
+                return View(InitCreate());
             }
 
             try
@@ -69,11 +68,28 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 AddErrors(ex);
             }
 
-            LoadSites(CustomerId);
+            return View(InitCreate());
+        }
+
+        private CreateViewModel InitCreate()
+        {
+            CreateViewModel viewModel = new CreateViewModel();
+
+            if (!IsSite)
+            {
+                LoadSites(CustomerId);
+            }
+            else
+            {
+                viewModel.SiteId = SiteId;
+            }
+
             LoadTankModels();
             LoadStatuses();
-            return View(viewModel);
+
+            return viewModel;
         }
+
         #endregion Create
 
         #region Edit
@@ -88,16 +104,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 return View("Index");
             }
 
-            EditViewModel viewModel = new EditViewModel();
-
-            if (IsSite)
-                viewModel.SiteId = SiteId;
+            EditViewModel viewModel = InitEdit();
             viewModel.Map(tank);
             viewModel.Map(tank.TankModel);
-
-            LoadStatuses();
-            LoadSites(CustomerId);
-            LoadTankModels();
 
             return View(viewModel);
         }
@@ -113,9 +122,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    LoadSites(CustomerId);
-                    LoadTankModels();
-                    LoadStatuses();
+                    InitEdit();
                     return View(viewModel);
                 }
 
@@ -123,9 +130,6 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                 if (tank == null)
                 {
-                    LoadSites(CustomerId);
-                    LoadTankModels();
-                    LoadStatuses();
                     AddErrors("Tank does not exist");
                     return View("Index");
                 }
@@ -143,10 +147,27 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 AddErrors(ex);
             }
 
-            LoadSites(CustomerId);
+            InitEdit();
+            return View(viewModel);
+        }
+
+        private EditViewModel InitEdit()
+        {
+            EditViewModel viewModel = new EditViewModel();
+
+            if (!IsSite)
+            {
+                LoadSites(CustomerId);
+            }
+            else
+            {
+                viewModel.SiteId = SiteId;
+            }
+
             LoadTankModels();
             LoadStatuses();
-            return View(viewModel);
+
+            return viewModel;
         }
         #endregion Edit
 
@@ -179,8 +200,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
         public ActionResult Dashboard()
         {
+            DashboardViewModel viewModel = new DashboardViewModel();
             LoadSites(CustomerId);
-            return View();
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -424,6 +446,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult GetTankModel(String tankModelId)
         {
             var tankModel = KEUnitOfWork.TankModelRepository.Get(Int32.Parse(tankModelId));
+            var waterVolume = tankModel.CalculateWaterCapacity();
+            tankModel.WaterVolumeCapacity = waterVolume.HasValue ? waterVolume.Value : 0;
             return Json(tankModel, JsonRequestBehavior.AllowGet);
         }
 

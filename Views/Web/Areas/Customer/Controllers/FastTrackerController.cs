@@ -15,8 +15,19 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
         public ActionResult Index()
         {
-            LoadSites(CustomerId);
-            return View();
+            ListViewModel viewModel = new ListViewModel();
+
+            if (!IsSite)
+            {
+                LoadSites(CustomerId);
+            }
+            else
+            {
+                viewModel.SiteId = SiteId;
+                LoadTanksWithWaterVolume(viewModel);
+            }
+
+            return View(viewModel);
         }
 
         #endregion Index
@@ -29,38 +40,46 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             if (viewModel.SiteId != default(Guid))
             {
-                var tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(CustomerId, viewModel.SiteId);
-
-                if (tanks.Any())
-                {
-                    foreach (var tank in tanks)
-                    {
-                        TankWithWaterVolume tankWithWaterVolume = new TankWithWaterVolume();
-
-                        tankWithWaterVolume.TankId = tank.Id;
-                        tankWithWaterVolume.UrlImageTankModel = tank.TankModel.ImageFilename;
-                        tankWithWaterVolume.TankName = tank.Name;
-                        tankWithWaterVolume.WaterVolumeCapacity = tank.WaterVolumeCapacity;
-
-                        if (KEUnitOfWork.SensorRepository.HasSensor(tank.Id) &&
-                            KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.WaterVolume))
-                        {
-                            var waterVolumesLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.WaterVolume);
-
-                            if (waterVolumesLastEvent != null)
-                            {
-                                tankWithWaterVolume.WaterVolume = Decimal.Parse(waterVolumesLastEvent.Value);
-                                tankWithWaterVolume.EventDate = waterVolumesLastEvent.EventDate;
-                            }
-                        }
-
-                        viewModel.Tanks.Add(tankWithWaterVolume);
-                    }
-                }
+                LoadTanksWithWaterVolume(viewModel);
             }
 
             LoadSites(CustomerId);
             return View("Index", viewModel);
+        }
+
+        private void LoadTanksWithWaterVolume(ListViewModel viewModel)
+        {
+            var tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(CustomerId, viewModel.SiteId);
+
+            if (tanks.Any())
+            {
+                foreach (var tank in tanks)
+                {
+                    TankWithWaterVolume tankWithWaterVolume = new TankWithWaterVolume();
+
+                    tankWithWaterVolume.TankId = tank.Id;
+                    tankWithWaterVolume.TankName = tank.Name;
+
+                    tankWithWaterVolume.TankModelId = tank.TankModelId;
+                    tankWithWaterVolume.TankModelImage = tank.TankModel.ImageFilename;
+
+                    tankWithWaterVolume.WaterVolumeCapacity = tank.WaterVolumeCapacity;
+
+                    if (KEUnitOfWork.SensorRepository.HasSensor(tank.Id) &&
+                        KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.Range))
+                    {
+                        var waterVolumesLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.Range);
+
+                        if (waterVolumesLastEvent != null)
+                        {
+                            tankWithWaterVolume.WaterVolume = Decimal.Parse(waterVolumesLastEvent.CalculatedValue);
+                            tankWithWaterVolume.EventDate = waterVolumesLastEvent.EventDate;
+                        }
+                    }
+
+                    viewModel.Tanks.Add(tankWithWaterVolume);
+                }
+            }
         }
 
         [HttpGet]

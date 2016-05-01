@@ -44,30 +44,26 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Create()
         {
-            return View(LoadCreateViewModel());
+            return View(LoadCreateViewModel(null));
         }
 
-        private CreateViewModel LoadCreateViewModel()
+        private CreateViewModel LoadCreateViewModel(CreateViewModel viewModel)
         {
-            CreateViewModel viewModel = new CreateViewModel();
-            viewModel.TankId = TankId;
+            CreateViewModel vm = null;
 
-            //var items = LoadItems();
-            //var itemsViewModel = ItemViewModel.Map(items);
-            //var units = LoadUnits();
-
-            //foreach (var item in itemsViewModel)
-            //{
-            //    item.Units = UnitViewModel.Map(units);
-            //}
-
-            //viewModel.Items = itemsViewModel;
+            if (viewModel == null)
+            {
+                vm = new CreateViewModel();
+                vm.TankId = TankId;
+            }
+            else
+                vm = viewModel; 
 
             LoadTanks(CustomerId);
             LoadSensorTypes();
             LoadStatuses();
 
-            return viewModel;
+            return vm;
         }
 
         //
@@ -76,17 +72,19 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Create(CreateViewModel viewModel)
-        {            
+        {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    return View(LoadCreateViewModel());
+                    return View(LoadCreateViewModel(viewModel));
                 }
 
                 // Validate Item check=true
-
-
+                if (!IsValidateItems(viewModel))
+                {
+                    return View(LoadCreateViewModel(viewModel));
+                }
 
                 Sensor sensor = new Sensor()
                 {
@@ -124,7 +122,26 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 AddErrors(ex);
             }
 
-            return View(LoadCreateViewModel());
+            return View(LoadCreateViewModel(viewModel));
+        }
+
+        private Boolean IsValidateItems(CreateViewModel viewModel)
+        {
+            Boolean flag = true;
+
+            if (viewModel.Items.Any())
+            {
+                foreach (var item in viewModel.Items)
+                {
+                    if (item.IsSelected && item.UnitSelected == null)
+                    {
+                        AddErrors("Unit is required");
+                        flag = false;
+                    }
+                }
+            }
+
+            return flag;
         }
         #endregion Create
 

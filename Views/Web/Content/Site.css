@@ -5844,6 +5844,7 @@ bottom-buttons a {
 }
 
 .checkboxlist {
+    width: 100%;
 }
 
     .checkboxlist label {

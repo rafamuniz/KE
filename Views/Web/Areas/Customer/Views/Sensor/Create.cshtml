@@ -18,7 +18,7 @@
                 @Html.LabelFor(m => m.TankId, new { @class = "control-label" })
             </div>
             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                @Html.DropDownListFor(m => m.TankId, new SelectList(ViewBag.Tanks, "Id", "Name", Request.QueryString["TankId"].ToString()), "-- Please select a Tank --", new { @class = "form-control selectpicker", @id = "ddlTank" })
+                @Html.DropDownListFor(m => m.TankId, new SelectList(ViewBag.Tanks, "Id", "Name"), "-- Please select a Tank --", new { @class = "form-control selectpicker", @id = "ddlTank" })
                 @Html.ValidationMessageFor(m => m.TankId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -28,7 +28,7 @@
                 @Html.LabelFor(m => m.SensorTypeId, new { @class = "control-label" })
             </div>
             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                @Html.DropDownListFor(m => m.SensorTypeId, new SelectList(ViewBag.SensorTypes, "Id", "Name"), "-- Please select a Sensor Type --", new { @class = "form-control selectpicker", @id = "ddlSensorType", onchange = "getsItemBySensorTypeId(this);" })
+                @Html.DropDownListFor(m => m.SensorTypeId, new SelectList(ViewBag.SensorTypes, "Id", "Name"), "-- Please select a Sensor Type --", new { @class = "form-control selectpicker", @id = "ddlSensorType", onchange = "getsItemBySensorTypeId();" })
                 @Html.ValidationMessageFor(m => m.SensorTypeId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -72,7 +72,7 @@
                         <h2>Items</h2>
                     </div>
 
-                    <div id="divCheckboxlist" class="checkboxlist" style="float:left;">
+                    <div id="divCheckboxlist" class="checkboxlist">
                         @*@for (var i = 0; i < Model.Items.Count(); i++)
                             {
                                 <div class="row">
@@ -102,5 +102,9 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script src="~/Scripts/app/sensor.js"></script>
+    <script src="~/Scripts/app/sensor.js"></script>
+
+    <script type="text/javascript">        
+        getsItemBySensorTypeId();
+    </script>
 }

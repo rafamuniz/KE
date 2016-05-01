@@ -1,17 +1,19 @@
 ﻿
-function getsItemBySensorTypeId(element) {
-    if (element.value != 0 && element.value != "") {
+function getsItemBySensorTypeId() {
+    var val = $("#ddlSensorType").val();
+
+    if (val != 0 && val != "") {
         $.ajax({
             url: getUrlBase() + "/Customer/Sensor/GetsItemBySensorTypeId/",
             type: "GET",
             dataType: "JSON",
-            data: { sensorTypeId: element.value },
+            data: { sensorTypeId: val },
             success: function (data) {
                 $('#divCheckboxlist').empty();
                 showItems(data);
             },
             error: function (jqXHR, exception) {
-                notifiyError('Error - Get Item By SensorType' + exception);
+                notifiyError('Error - Get Item By SensorType');
             }
         });
     }

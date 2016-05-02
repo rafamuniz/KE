@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Munizoft.Extensions;
 
 namespace KarmicEnergy.Web.Areas.Customer.Controllers
 {
@@ -57,7 +58,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 vm.TankId = TankId;
             }
             else
-                vm = viewModel; 
+                vm = viewModel;
 
             LoadTanks(CustomerId);
             LoadSensorTypes();
@@ -81,7 +82,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 }
 
                 // Validate Item check=true
-                if (!IsValidateItems(viewModel))
+                if (!IsValidateCreateItems(viewModel))
                 {
                     return View(LoadCreateViewModel(viewModel));
                 }
@@ -122,10 +123,11 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 AddErrors(ex);
             }
 
+            //return View();
             return View(LoadCreateViewModel(viewModel));
         }
 
-        private Boolean IsValidateItems(CreateViewModel viewModel)
+        private Boolean IsValidateCreateItems(CreateViewModel viewModel)
         {
             Boolean flag = true;
 
@@ -133,9 +135,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             {
                 foreach (var item in viewModel.Items)
                 {
-                    if (item.IsSelected && item.UnitSelected == null)
+                    if (item.IsSelected && !item.UnitSelected.HasValue)
                     {
-                        AddErrors("Unit is required");
+                        AddErrors(String.Format("Unit is required for {0}", item.Name));
                         flag = false;
                     }
                 }
@@ -160,7 +162,27 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             EditViewModel viewModel = new EditViewModel();
             viewModel = EditViewModel.Map(sensor);
 
-            LoadEditViewModel(viewModel, sensor);
+            LoadEditViewModel(viewModel);
+
+            var items = LoadItems();
+            viewModel.Items = ItemViewModel.Map(items);
+
+            if (sensor.SensorItems.Any())
+            {
+                List<ItemViewModel> selectedItems = new List<ItemViewModel>();
+
+                foreach (var item in sensor.SensorItems)
+                {
+                    foreach (var avalItem in viewModel.Items)
+                    {
+                        if (item.ItemId == avalItem.Id)
+                        {
+                            avalItem.IsSelected = true;
+                            avalItem.UnitSelected = item.UnitId;
+                        }
+                    }
+                }
+            }
 
             return View(viewModel);
         }
@@ -178,8 +200,15 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    LoadEditViewModel(viewModel, sensor);
+                    LoadEditViewModel(viewModel);
                     AddErrors("Tank does not exist");
+                    return View(viewModel);
+                }
+
+                // Validate Item check=true
+                if (!IsValidateEditItems(viewModel))
+                {
+                    LoadEditViewModel(viewModel);
                     return View(viewModel);
                 }
 
@@ -199,7 +228,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                         {
                             var hasSensorItem = sensor.SensorItems.Where(x => x.ItemId == item.Id && x.DeletedDate == null).SingleOrDefault();
 
-                            if (hasSensorItem == null)
+                            if (hasSensorItem == null) // ADD
                             {
                                 SensorItem sensorItem = new SensorItem()
                                 {
@@ -209,8 +238,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                                 sensor.SensorItems.Add(sensorItem);
                             }
+                            else if (hasSensorItem.UnitId != item.UnitSelected.Value) // UPDATE
+                            {
+                                sensor.SensorItems.Where(x => x.ItemId == item.Id && x.DeletedDate == null).SingleOrDefault().UnitId = item.UnitSelected.Value;
+                            }
                         }
-                        else
+                        else // DELETE
                         {
                             var hasSensorItem = sensor.SensorItems.Where(x => x.ItemId == item.Id && x.DeletedDate == null).SingleOrDefault();
 
@@ -232,43 +265,62 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 AddErrors(ex);
             }
 
-            LoadEditViewModel(viewModel, sensor);
+            LoadEditViewModel(viewModel);
 
             return View(viewModel);
         }
 
-        private void LoadEditViewModel(EditViewModel viewModel, Sensor sensor)
+        private void LoadEditViewModel(EditViewModel viewModel)
         {
-            var items = LoadItems();
-            viewModel.Items = ItemViewModel.Map(items);
+            //var items = LoadItems();
+            //viewModel.Items = ItemViewModel.Map(items);
 
-            var units = LoadUnits();
+            //var units = LoadUnits();
 
-            foreach (var item in viewModel.Items)
-            {
-                item.Units = UnitViewModel.Map(units);
-            }
+            //foreach (var item in viewModel.Items)
+            //{
+            //    item.Units = UnitViewModel.Map(units);
+            //}
 
-            if (sensor.SensorItems.Any())
-            {
-                List<ItemViewModel> selectedItems = new List<ItemViewModel>();
+            //if (sensor.SensorItems.Any())
+            //{
+            //    List<ItemViewModel> selectedItems = new List<ItemViewModel>();
 
-                foreach (var item in sensor.SensorItems)
-                {
-                    foreach (var avalItem in viewModel.Items)
-                    {
-                        if (item.ItemId == avalItem.Id)
-                        {
-                            avalItem.IsSelected = true;
-                            avalItem.UnitSelected = item.UnitId;
-                        }
-                    }
-                }
-            }
+            //    foreach (var item in sensor.SensorItems)
+            //    {
+            //        foreach (var avalItem in viewModel.Items)
+            //        {
+            //            if (item.ItemId == avalItem.Id)
+            //            {
+            //                avalItem.IsSelected = true;
+            //                avalItem.UnitSelected = item.UnitId;
+            //            }
+            //        }
+            //    }
+            //}
 
             LoadStatuses();
             LoadTanks(CustomerId);
             LoadSensorTypes();
+        }
+
+        private Boolean IsValidateEditItems(EditViewModel viewModel)
+        {
+            Boolean flag = true;
+
+            if (viewModel.Items.Any())
+            {
+                foreach (var item in viewModel.Items)
+                {
+                    if (item.IsSelected && !item.UnitSelected.HasValue)
+                    {
+                        AddErrors(String.Format("Unit is required for {0}", item.Name));
+                        flag = false;
+                    }
+                }
+            }
+
+            return flag;
         }
 
         #endregion Edit

@@ -1,5 +1,5 @@
 ﻿
-function getsItemBySensorTypeId() {
+function getsItemBySensorTypeId(items) {
     var val = $("#ddlSensorType").val();
 
     if (val != 0 && val != "") {
@@ -10,7 +10,7 @@ function getsItemBySensorTypeId() {
             data: { sensorTypeId: val },
             success: function (data) {
                 $('#divCheckboxlist').empty();
-                showItems(data);
+                showItems(items, data);
             },
             error: function (jqXHR, exception) {
                 notifiyError('Error - Get Item By SensorType');
@@ -22,26 +22,42 @@ function getsItemBySensorTypeId() {
     }
 };
 
-function showItems(items) {
+function showItems(itemsSelected, items) {
     $.each(items, function (i, v) {
-        var html = '<div class="row"><div class="col-md-6 col-lg-6">{HIDDEN}{CHECKBOX}{HIDDEN_CHECKBOX}</div><div class="col-md-6 col-lg-6">{DROPDOWNLIST}</div></div>';
+        var html = '<div class="row"><div class="col-md-6 col-lg-6">{HIDDEN_ITEM_ID}{CHECKBOX}{HIDDEN_ITEM_NAME}</div><div class="col-md-6 col-lg-6">{DROPDOWNLIST}</div></div>';
 
-        var hidden = '<input name="Items[' + i + '].Id" type="hidden" value="' + v.Id + '">';
-        var checkbox = '<input type="checkbox" style="vertical-align: 3px;" name="Items[' + i + '].IsSelected" value="true" /><label>' + v.Name + '</label>';
-        var hidden_checkbox = '<input name="Items[' + i + '].IsSelected" type="hidden" value="false">';
+        var hidden_item_id = '<input name="Items[' + i + '].Id" type="hidden" value="' + v.Id + '">';
+        var hidden_item_name = '<input name="Items[' + i + '].Name" type="hidden" value="' + v.Name + '">';
+        var hidden_item_isselected = '<input name="Items[' + i + '].IsSelected" type="hidden" value="' + v.IsSelected + '">';
 
-        var dropdownlist = '<select class="form-control selectpicker" data-val="true" id="ddlUnit_"' + v.Id + '"name=Items["' + i + '"].UnitSelected">';
+        var checked = "";
+        var foundItem = $.map(itemsSelected, function (val) {
+            if (val.Id == v.Id && val.IsSelected == true)
+                checked = "checked";
+        });
+
+        var checkbox = '<input type="checkbox" style="vertical-align: 3px;" name="Items[' + i + '].IsSelected" ' + checked + ' value="true" /><label>' + v.Name + '</label>';
+
+        var dropdownlist = "<select class='form-control selectpicker' data-val='true' id='ddlUnit_" + v.Id + "' name='Items[" + i + "].UnitSelected'>";
         dropdownlist += '<option value="">-- Please select an Unit --</option>';
 
         $.each(v.Units, function (iu, vu) {
-            dropdownlist += '<option value="' + vu.Id + '">' + vu.Name + '</option>';
+            var selected = "";
+
+            var foundUnit = $.map(itemsSelected, function (val) {
+                if (val.UnitSelected != null && val.UnitSelected == vu.Id && val.Id == v.Id)
+                    selected = "selected";
+            })
+
+            dropdownlist += '<option value="' + vu.Id + '"' + selected + '>' + vu.Name + '</option>';
         });
 
         dropdownlist += '</select>';
 
-        html = ReplaceAll(html, "{HIDDEN}", hidden);
+        html = ReplaceAll(html, "{HIDDEN_ITEM_ID}", hidden_item_id);
+        html = ReplaceAll(html, "{HIDDEN_ITEM_NAME}", hidden_item_name);
+        html = ReplaceAll(html, "{HIDDEN_ITEM_ISSELECTED}", hidden_item_isselected);
         html = ReplaceAll(html, "{CHECKBOX}", checkbox);
-        html = ReplaceAll(html, "{HIDDEN_CHECKBOX}", hidden_checkbox);
         html = ReplaceAll(html, "{DROPDOWNLIST}", dropdownlist);
 
         $('#divCheckboxlist').append(html);

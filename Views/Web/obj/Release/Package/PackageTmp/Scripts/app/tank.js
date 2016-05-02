@@ -12,7 +12,7 @@ function getTankModel(tank) {
                 showTankModel(tankModel, tank);
             },
             error: function (jqXHR, exception) {
-                console.log('Error - Get Tank Model' + exception);
+                notifiyError('Error - Get Tank Model' + exception);
             }
         });
     }
@@ -26,7 +26,8 @@ function showTankModel(tankModel, tank) {
 
         $('#divtankModel').visible();
 
-        $('#imgTankModel').attr('src', getUrlBase() + '/images/tank_models/' + tankModel.ImageFilename);
+        var image_url = getUrlBase() + '/images/tankmodels/' + tankModel.Id + '/' + ReplaceAll(tankModel.ImageFilename, "{info}", "measure");
+        $('#imgTankModel').attr('src', image_url);
         $('#imgTankModel').removeAttr('style');
 
         if (tankModel.Geometry.HasHeight) {
@@ -138,7 +139,7 @@ function calculateVolumeCapacity() {
                 $("#waterVolumeCapacity").val(data.WaterVolumeCapacity);
             },
             error: function (jqXHR, exception) {
-                console.log('Error - Calculate Volume Capacity ' + exception);
+                notifiyError('Error - Calculate Volume Capacity ' + exception);
             }
         });
     }

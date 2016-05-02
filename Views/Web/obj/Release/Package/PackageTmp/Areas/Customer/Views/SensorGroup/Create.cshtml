@@ -38,9 +38,12 @@
                     @Html.LabelFor(m => m.TankId, new { @class = "control-label" })
                 </div>
                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                    <select id="ddlTank" name="TankId" class="form-control" disabled onclick = "GetsSensorByTankId(this.value, 'ddlSensor', '/SensorGroup/GetsSensorByTankId');">
+                        <option value="">-- Please select a Tank --</option>
+                    </select>
                     @*@Html.DropDownList("ddlTank", new List<SelectListItem>() { new SelectListItem() }, new { @class = "form-control", onclick = "GetsSensorByTankId(this.value, 'ddlSensor', '/SensorGroup/GetsSensorByTankId');" })*@
 
-                    @Html.DropDownListFor(model => model.TankId, new SelectList(new List<SelectListItem>() { new SelectListItem() }), "-- Please select a Tank --", new { @class = "form-control selectpicker", id = "ddlTank", onclick = "GetsSensorByTankId(this.value, 'ddlSensor', '/SensorGroup/GetsSensorByTankId');" })
+                    @*@Html.DropDownListFor(model => model.TankId, new SelectList(new List<SelectListItem>() { new SelectListItem() }), "-- Please select a Tank --", new { @class = "form-control selectpicker", id = "ddlTank", onclick = "GetsSensorByTankId(this.value, 'ddlSensor', '/SensorGroup/GetsSensorByTankId');" })*@
                     @Html.ValidationMessageFor(m => m.TankId, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -50,11 +53,11 @@
                     @Html.LabelFor(m => m.SensorId, new { @class = "control-label" })
                 </div>
                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                    @*@Html.DropDownList("ddlSensor", new List<SelectListItem>() { new SelectListItem() }, new { @class = "form-control", name = "SensorId" })*@
+                    <select id="ddlSensor" name="SensorId" class="form-control" disabled>
+                        <option value="">-- Please select a Sensor --</option>
+                    </select>
 
-                    @Html.DropDownListFor(model => model.SensorId, new SelectList(new List<SelectListItem>() { new SelectListItem() }), "-- Please select a Sensor --", new { @class = "form-control selectpicker", id = "ddlSensor" })
-
-                    @*@Html.DropDownListFor(model => model.SensorId, new SelectList(ViewBag.Sensors, "Id", "Name"), "-- Please select a Sensor --", new { @class = "form-control selectpicker", id = "ddlSensor" })*@
+                    @*@Html.DropDownListFor(model => model.SensorId, new SelectList(new List<SelectListItem>() { new SelectListItem() }), "-- Please select a Sensor --", new { @class = "form-control selectpicker", id = "ddlSensor" })*@
                     @Html.ValidationMessageFor(m => m.SensorId, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -101,7 +104,6 @@
 }
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center btn-submit">
-    @*<input type="submit" class="btn btn-default" value="SAVE">*@
     <a class="btn" href="/Customer/SensorGroup/">Cancel</a>
 </div>
 

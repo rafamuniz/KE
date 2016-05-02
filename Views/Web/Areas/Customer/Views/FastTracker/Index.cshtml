@@ -67,13 +67,13 @@ else
                     </div>
 
                     @{
-                        String waterVolumePerc = @tank.WaterVolumePerc.HasValue ? @tank.WaterVolumePerc.Value.ToString("P2") : String.Empty;
+                        String waterVolumePercentage = @tank.WaterVolumePercentage.HasValue ? @tank.WaterVolumePercentage.Value.ToString("P2") : String.Empty;
                         String waterVolume = @tank.WaterVolume.ToString();
                     }
 
                     <div class="col-sm-2 col-md-3 col-xs-4 col-lg-2 tracker-text">
                         <div class="gals">
-                            <h2>@waterVolumePerc</h2>
+                            <h2>@waterVolumePercentage</h2>
                             @if (@tank.WaterVolume.HasValue)
                             {
                                 <h2>@waterVolume</h2>

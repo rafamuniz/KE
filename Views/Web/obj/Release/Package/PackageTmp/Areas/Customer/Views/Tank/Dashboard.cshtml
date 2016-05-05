@@ -26,10 +26,14 @@
 @if (!this.IsSite())
 {
     <div class="row" style="margin-bottom: 20px;">
-        @using (Html.BeginForm("Site", "Tank", new { }, FormMethod.Post, new { }))
-        {
-            @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
-        }
+        <div class="form-group">
+            <div class="col-md-12">
+                @using (Html.BeginForm("Site", "Tank", new { }, FormMethod.Post, new { }))
+                {
+                    @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
+                }
+            </div>
+        </div>
     </div>
 }
 else
@@ -43,14 +47,14 @@ else
     }
 
     @if (Model != null && Model.Tanks != null && Model.Tanks.Any())
-            {
-                foreach (var tank in Model.Tanks)
-                {
-                    List<String> colors = new List<string>() { "green", "blue", "orange" };
-                    tank.Color = colors.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+    {
+        foreach (var tank in Model.Tanks)
+        {
+            List<String> colors = new List<string>() { "green", "blue", "orange" };
+            tank.Color = colors.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
 
-                    if (@counter % 2 == 0)
-                    {
+            if (@counter % 2 == 0)
+            {
                 @Html.Raw("<div class='row'>")
             }
 

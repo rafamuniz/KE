@@ -37,7 +37,9 @@ namespace KarmicEnergy.Core.Entities
                 new UnitType() { Id = (int)UnitTypeEnum.Length, Name = "Length" },
                 new UnitType() { Id = (int)UnitTypeEnum.Energy, Name = "Energy" },
                 new UnitType() { Id = (int)UnitTypeEnum.Mass, Name = "Mass" },
-                new UnitType() { Id = (int)UnitTypeEnum.LuminousIntensity, Name = "Luminous Intensity" }
+                new UnitType() { Id = (int)UnitTypeEnum.LuminousIntensity, Name = "Luminous Intensity" },
+                new UnitType() { Id = (int)UnitTypeEnum.UnitConcentration, Name = "Unit Of Concentration" },
+                new UnitType() { Id = (int)UnitTypeEnum.PH, Name = "PH" }
             };
 
             return entities;
@@ -63,6 +65,12 @@ namespace KarmicEnergy.Core.Entities
         Mass = 5,
 
         [Description("Luminous Intensity")]
-        LuminousIntensity = 6
+        LuminousIntensity = 6,
+
+        [Description("Unit of Concentration")]
+        UnitConcentration = 7,
+
+        [Description("PH")]
+        PH = 8
     }
 }

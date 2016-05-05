@@ -72,12 +72,8 @@
     <Reference Include="Munizoft.Extensions">
       <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Extensions\bin\Debug\Munizoft.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Munizoft.MVC.Extensions">
-      <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.MVC.Extensions\bin\Debug\Munizoft.MVC.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Munizoft.MVC.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.MVC.Helpers\bin\Debug\Munizoft.MVC.Helpers.dll</HintPath>
+    <Reference Include="Munizoft.MVC">
+      <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.MVC\bin\Debug\Munizoft.MVC.dll</HintPath>
     </Reference>
     <Reference Include="Munizoft.Util">
       <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Util\bin\Debug\Munizoft.Util.dll</HintPath>
@@ -276,6 +272,7 @@
     <Compile Include="Areas\Customer\ViewModels\Tank\DashboardViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\EditViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\FlowMeterViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TankWaterCapacityViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\VoltageViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TemperatureViewModel.cs" />
@@ -290,7 +287,6 @@
     <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Extensions\ImageSelectExtensions.cs" />
     <Compile Include="Extensions\KEExtension.cs" />
-    <Compile Include="Helpers\MenuItemActive.cs" />
     <Compile Include="Migrations\201604231604477_Initial.cs" />
     <Compile Include="Migrations\201604231604477_Initial.Designer.cs">
       <DependentUpon>201604231604477_Initial.cs</DependentUpon>
@@ -2799,6 +2795,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\" />
     <Folder Include="images\geometries\" />
   </ItemGroup>
   <ItemGroup>

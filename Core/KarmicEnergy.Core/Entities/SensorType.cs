@@ -39,7 +39,9 @@ namespace KarmicEnergy.Core.Entities
             {
                 new SensorType() { Id = (Int16)SensorTypeEnum.KEDepth, Name = "KE Depth Sensor" },
                 new SensorType() { Id = (Int16)SensorTypeEnum.FlowMeter, Name = "Flow Meter" },
-                new SensorType() { Id = (Int16)SensorTypeEnum.PH, Name = "PH" }
+                new SensorType() { Id = (Int16)SensorTypeEnum.PHMeter, Name = "PH Meter" },
+                new SensorType() { Id = (Int16)SensorTypeEnum.GasSensor, Name = "Gas Sensor" },
+                new SensorType() { Id = (Int16)SensorTypeEnum.SalinitySensor, Name = "Salinity Sensor" }
             };
 
             return entities;
@@ -51,6 +53,8 @@ namespace KarmicEnergy.Core.Entities
     {
         KEDepth = 1,
         FlowMeter = 2,
-        PH = 3
+        PHMeter = 3,
+        GasSensor = 4,
+        SalinitySensor = 5
     }
 }

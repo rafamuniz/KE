@@ -23,7 +23,8 @@
                     height: '220'
                 },
                 title: {
-                    text: 'Water Volume'
+                    //text: 'Water Volume'
+                    text: ''
                 },
                 tooltip: {
                     useHTML: true,
@@ -44,19 +45,25 @@
                 xAxis: {
                     type: 'datetime',
                     categories: dataX,
-                    //labels: {
-                    //    useHTML: true,
-                    //    align: "center",
-                    //    enabled: true,
-                    //    formatter: function () {
-                    //        return Highcharts.dateFormat('%m/%d/%Y ', this.value) + '<BR>' +
-                    //               Highcharts.dateFormat('%H:%M:%S', this.value);
-                    //    }
-                    //}
+                    labels: {
+                        useHTML: true,
+                        align: "center",
+                        enabled: true,
+                        formatter: function () {
+                            return '';
+                            //return Highcharts.dateFormat('%m/%d/%Y ', this.value) + '<BR>' +
+                            //       Highcharts.dateFormat('%H:%M:%S', this.value);
+                        }
+                    }
                 },
                 yAxis: {
                     title: {
-                        text: 'Water'
+                        //text: 'Water'
+                        text: ''
+                    },
+                    opposite: true,
+                    labels: {
+                        align: 'right'
                     },
                     min: minY,
                     max: maxY,
@@ -77,20 +84,12 @@
 }
 
 function generateTemperatureGraph(tankId, waterTemperature) {
-    //$.ajax({
-    //    url: getUrlBase() + "/Customer/Tank/GetLastWaterTemperature",
-    //    type: "GET",
-    //    dataType: "JSON",
-    //    data: { TankId: tankId },
-    //    success: function (data) {
-
-    //    }
-    //});
 
     if (waterTemperature != "" && waterTemperature != undefined) {
         var majorTicks = { size: '10%', interval: 10 },
             minorTicks = { size: '5%', interval: 2.5, style: { 'stroke-width': 1, stroke: '#AAAAAA' } },
             labels = { interval: 10, position: 'far' };
+        var minTemp = waterTemperature > 0 ? 0 : 10;
         var maxTemp = parseInt(waterTemperature * 1.2);
 
         $('#graph-temperature-' + tankId).jqxLinearGauge({
@@ -98,6 +97,7 @@ function generateTemperatureGraph(tankId, waterTemperature) {
             labels: labels,
             ticksMajor: majorTicks,
             ticksMinor: minorTicks,
+            min: minTemp,
             max: maxTemp,
             value: waterTemperature,
             pointer: { size: '6%' },

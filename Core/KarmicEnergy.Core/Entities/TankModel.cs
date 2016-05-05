@@ -64,8 +64,7 @@ namespace KarmicEnergy.Core.Entities
         public Decimal? DimensionValue3 { get; set; }
 
         [Column("WaterVolumeCapacity", TypeName = "DECIMAL")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        public Decimal WaterVolumeCapacity { get; set; }
+        public Decimal? WaterVolumeCapacity { get; set; }
 
         #endregion Property      
 
@@ -163,43 +162,78 @@ namespace KarmicEnergy.Core.Entities
                 {
                     // Formula: @width 3
                     case (Int16)GeometryEnum.Cube:
-                        return this.Width.Value;
+                        if (this.Width.HasValue)
+                        {
+                            var result = Math.Pow((Double)this.Width.Value, 3);
+                            return Decimal.Parse(result.ToString());
+                        }
+                        else
+                            break;
 
                     // Formula: @length * @width * @height
                     case (Int16)GeometryEnum.Rectangle:
-                        return this.Length.Value * this.Height.Value * this.Width.Value;
+                        if (this.Length.HasValue && this.Height.HasValue && this.Width.HasValue)
+                        {
+                            return this.Length.Value * this.Height.Value * this.Width.Value;
+                        }
+                        else
+                            break;
 
                     case (Int16)GeometryEnum.CylinderHorizontal:
-                        return Height.Value * Length.Value * BottomWidth.Value;
+                        if (this.Height.HasValue && this.Length.HasValue && this.BottomWidth.HasValue)
+                        {
+                            return Height.Value * Length.Value * BottomWidth.Value;
+                        }
+                        else
+                            break;
 
                     case (Int16)GeometryEnum.CylinderVertical:
-                        return Width.Value * Height.Value * FaceLength.Value;
+                        if (Width.HasValue && this.Height.HasValue && this.FaceLength.HasValue)
+                        {
+                            return Width.Value * Height.Value * FaceLength.Value;
+                        }
+                        else
+                            break;
 
                     // set @area1 = @height * @dim4
                     // set @area2 = PI() * power((@height / 2), 2)
                     // set @cubicunits = (@area1 + @area2) * @length
                     case (Int16)GeometryEnum.StadiumHorizontal:
-                        var areaHS1 = Height * DimensionValue1;
-                        var areaHS2 = Math.PI * Math.Pow((Double)(Height / 2), 2);
-                        var cubicHS = (areaHS1 + (Decimal)areaHS2) * Length;
-                        return cubicHS.Value;
+                        if (this.Height.HasValue && this.DimensionValue1.HasValue && this.Height.HasValue)
+                        {
+                            var areaHS1 = (Double)Height * (Double)DimensionValue1;
+                            var areaHS2 = Math.PI * Math.Pow(((Double)Height / 2), 2);
+                            var cubicHS = (areaHS1 + areaHS2) * (Double)Length;
+                            return (Decimal)cubicHS;
+                        }
+                        else
+                            break;
 
                     // set @area1 = @length * @width
                     // set @area2 = PI() * power((@width / 2), 2)
                     // set @cubicunits = (@area1 + @area2) * @height
                     case (Int16)GeometryEnum.StadiumVertical:
-                        var areaVS1 = Length * Width;
-                        var areaVS2 = Math.PI * Math.Pow((double)(Width / 2), 2);
-                        var cubicVS = (areaVS1 + (Decimal)areaVS2) * Height;
-                        return cubicVS.Value;
+                        if (this.Length.HasValue && this.Width.HasValue && this.Height.HasValue)
+                        {
+                            var areaVS1 = (Double)Length * (Double)Width;
+                            var areaVS2 = Math.PI * Math.Pow(((Double)Width / 2), 2);
+                            var cubicVS = (areaVS1 + areaVS2) * (Double)Height;
+                            return (Decimal)cubicVS;
+                        }
+                        else
+                            break;
 
                     // set @area = PI() * (@height / 2) * (@width / 2)
                     // set @cubicunits = @area * @length
                     case (Int16)GeometryEnum.EllipticalHorizontal:
-                        var areaST = Math.PI * Math.Pow((double)(Height / 2), (Double)(Width / 2));
-                        var cubicST = (Decimal)areaST * Length;
-                        return cubicST.Value;
-
+                        if (this.Height.HasValue && this.Length.HasValue)
+                        {
+                            var areaST = Math.PI * Math.Pow((Double)(Height.Value / 2), (Double)(Width.Value / 2));
+                            var cubicST = areaST * (Double)Length.Value;
+                            return (Decimal)cubicST;
+                        }
+                        else
+                            break;
                     default:
                         return null;
                 }

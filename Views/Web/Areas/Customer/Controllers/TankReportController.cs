@@ -67,14 +67,14 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                             }
 
                             // Weather Temperature
-                            if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.WeatherTemperature))
+                            if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.AmbientTemperature))
                             {
-                                var weatherTemperatureLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.WeatherTemperature);
+                                var ambientTemperatureLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.AmbientTemperature);
 
-                                if (weatherTemperatureLastEvent != null)
+                                if (ambientTemperatureLastEvent != null)
                                 {
-                                    report.WeatherTemperature = Decimal.Parse(weatherTemperatureLastEvent.Value);
-                                    report.WeatherTemperatureEventDate = weatherTemperatureLastEvent.EventDate;
+                                    report.WeatherTemperature = Decimal.Parse(ambientTemperatureLastEvent.Value);
+                                    report.WeatherTemperatureEventDate = ambientTemperatureLastEvent.EventDate;
                                 }
                             }
                         }

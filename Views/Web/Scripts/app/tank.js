@@ -12,7 +12,7 @@ function getTankModel(tank) {
                 showTankModel(tankModel, tank);
             },
             error: function (jqXHR, exception) {
-                notifiyError('Error - Get Tank Model' + exception);
+                notifiyError('Error - Get Tank Model');
             }
         });
     }
@@ -110,7 +110,7 @@ function showTankModel(tankModel, tank) {
             $('#divMaximumDistance').invisible();
         }
 
-        $('#waterVolumeCapacity').val(tank != null && tank.WaterVolumeCapacity != null ? tank.WaterVolumeCapacity : tankModel.WaterVolumeCapacity);
+        $('#waterVolumeCapacity').val(tank != null && tank.WaterVolumeCapacity != null ? tank.WaterVolumeCapacity.toFixed(2) : parseFloat(tankModel.WaterVolumeCapacity).toFixed(2));
     }
 }
 

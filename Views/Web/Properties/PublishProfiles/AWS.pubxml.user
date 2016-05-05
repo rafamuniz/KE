@@ -98,19 +98,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2016 23:57:19</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Dashboard.cshtml">
-      <publishTime>05/03/2016 01:25:49</publishTime>
+      <publishTime>05/03/2016 02:06:19</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Edit.cshtml">
       <publishTime>04/29/2016 23:58:53</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Gauge.cshtml">
-      <publishTime>04/14/2016 16:27:29</publishTime>
+      <publishTime>05/06/2016 01:21:51</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Index.cshtml">
       <publishTime>04/29/2016 00:00:49</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/_TankData.cshtml">
-      <publishTime>05/03/2016 01:52:34</publishTime>
+      <publishTime>05/05/2016 20:52:48</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/_TankModel.cshtml">
       <publishTime>04/26/2016 23:26:11</publishTime>
@@ -155,13 +155,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>05/03/2016 01:59:06</publishTime>
+      <publishTime>05/06/2016 02:05:13</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>05/03/2016 01:59:13</publishTime>
+      <publishTime>05/06/2016 02:05:21</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -219,6 +219,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/Munizoft.Extensions.pdb">
       <publishTime>04/12/2016 15:49:14</publishTime>
+    </File>
+    <File Include="bin/Munizoft.MVC.dll">
+      <publishTime>05/04/2016 19:24:33</publishTime>
     </File>
     <File Include="bin/Munizoft.MVC.Extensions.dll">
       <publishTime>02/25/2016 23:04:53</publishTime>
@@ -401,7 +404,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:39:49</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>05/01/2016 22:18:34</publishTime>
+      <publishTime>05/06/2016 00:32:08</publishTime>
     </File>
     <File Include="Content/themes/base/accordion.css">
       <publishTime>03/30/2016 03:59:42</publishTime>
@@ -677,7 +680,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/25/2016 17:53:56</publishTime>
     </File>
     <File Include="images/contacts.png">
-      <publishTime>04/24/2016 02:14:33</publishTime>
+      <publishTime>02/03/2016 11:28:08</publishTime>
     </File>
     <File Include="images/cube.png">
       <publishTime>02/23/2016 16:33:32</publishTime>
@@ -3203,13 +3206,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/25/2016 17:58:26</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_0.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_10.png">
       <publishTime>04/30/2016 20:41:04</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_100.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_20.png">
       <publishTime>04/30/2016 20:41:04</publishTime>
@@ -3236,19 +3239,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2016 20:41:04</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_measure.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_NoData.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/04/2016 21:38:25</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_0.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_10.png">
       <publishTime>04/30/2016 20:41:04</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_100.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_20.png">
       <publishTime>04/30/2016 20:41:04</publishTime>
@@ -3275,19 +3278,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2016 20:41:04</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_measure.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_NoData.png">
-      <publishTime>04/30/2016 23:55:08</publishTime>
+      <publishTime>05/04/2016 21:40:44</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_0.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_10.png">
       <publishTime>04/30/2016 20:41:05</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_100.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_20.png">
       <publishTime>04/30/2016 20:41:04</publishTime>
@@ -3314,19 +3317,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2016 20:41:04</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_measure.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_NoData.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/04/2016 22:35:18</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_0.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_10.png">
       <publishTime>04/30/2016 20:41:03</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_100.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_20.png">
       <publishTime>04/30/2016 20:41:03</publishTime>
@@ -3353,19 +3356,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2016 20:41:03</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_measure.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_NoData.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/04/2016 22:36:26</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_0.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_10.png">
       <publishTime>04/30/2016 20:41:03</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_100.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_20.png">
       <publishTime>04/30/2016 20:41:03</publishTime>
@@ -3392,19 +3395,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2016 20:41:04</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_measure.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_NoData.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/04/2016 22:34:37</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_0.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/06/2016 02:07:10</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_10.png">
       <publishTime>04/30/2016 20:41:05</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_100.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_20.png">
       <publishTime>04/30/2016 20:41:05</publishTime>
@@ -3431,19 +3434,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2016 20:41:05</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_measure.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_nodata.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/04/2016 22:32:38</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_0.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_10.png">
       <publishTime>04/30/2016 20:41:03</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_100.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_20.png">
       <publishTime>04/30/2016 20:41:03</publishTime>
@@ -3470,19 +3473,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2016 20:41:02</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_measure.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_NoData.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/04/2016 22:32:10</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_0.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_10.png">
       <publishTime>04/30/2016 20:41:02</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_100.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_20.png">
       <publishTime>04/30/2016 20:41:02</publishTime>
@@ -3509,10 +3512,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2016 20:41:02</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_measure.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_NoData.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/04/2016 22:31:30</publishTime>
     </File>
     <File Include="images/tank_models/1.png">
       <publishTime>04/26/2016 15:13:27</publishTime>
@@ -3887,13 +3890,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2016 22:51:09</publishTime>
     </File>
     <File Include="Scripts/app/tank-dashboard.js">
-      <publishTime>04/18/2016 23:33:24</publishTime>
+      <publishTime>05/05/2016 15:10:00</publishTime>
     </File>
     <File Include="Scripts/app/tank-gauge.js">
-      <publishTime>04/18/2016 12:51:06</publishTime>
+      <publishTime>05/06/2016 02:03:06</publishTime>
     </File>
     <File Include="Scripts/app/tank.js">
-      <publishTime>04/30/2016 23:18:54</publishTime>
+      <publishTime>05/04/2016 20:36:12</publishTime>
     </File>
     <File Include="Scripts/app/utils.js">
       <publishTime>04/20/2016 12:34:10</publishTime>
@@ -7826,7 +7829,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:45</publishTime>
     </File>
     <File Include="Views/Shared/_Internal.cshtml">
-      <publishTime>04/29/2016 10:46:05</publishTime>
+      <publishTime>05/04/2016 19:22:53</publishTime>
     </File>
     <File Include="Views/Shared/_Loading.cshtml">
       <publishTime>03/23/2016 23:39:22</publishTime>
@@ -7838,7 +7841,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:32:23</publishTime>
     </File>
     <File Include="Views/Shared/_MenuLeft.cshtml">
-      <publishTime>04/30/2016 23:15:49</publishTime>
+      <publishTime>05/04/2016 19:35:33</publishTime>
     </File>
     <File Include="Views/Shared/_MenuTop.cshtml">
       <publishTime>04/21/2016 00:55:05</publishTime>

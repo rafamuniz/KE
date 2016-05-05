@@ -27,7 +27,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
         {
             get
             {
-                if (WaterVolume != default(Decimal))
+                if (WaterVolume.HasValue)
                 {
                     return WaterVolume / WaterVolumeCapacity;
                 }
@@ -36,13 +36,21 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
             set { }
         }
 
-        public Decimal WaterVolumeRemaining
+        public Decimal? WaterVolumeRemaining
         {
-            get { return WaterVolumeCapacity - WaterVolume; }
+            get
+            {
+                if (WaterVolume.HasValue)
+                {
+                    return WaterVolumeCapacity - WaterVolume;
+                }
+
+                return null;
+            }
             set { }
         }
 
-        public Decimal WaterVolume { get; set; }
+        public Decimal? WaterVolume { get; set; }
         public DateTime? WaterVolumeLastMeasurement { get; set; }
 
         #endregion Property

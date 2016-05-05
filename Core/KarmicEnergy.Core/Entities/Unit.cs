@@ -24,7 +24,7 @@ namespace KarmicEnergy.Core.Entities
         public String NamePlural { get; set; }
 
         [Column("Symbol", TypeName = "NVARCHAR")]
-        [StringLength(4)]
+        [StringLength(8)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public String Symbol { get; set; }
 
@@ -62,7 +62,11 @@ namespace KarmicEnergy.Core.Entities
                 new Unit() { Id = 8, Name = "Centimeter", NamePlural = "Centimeters", Symbol = "cm", UnitTypeId = (int)UnitTypeEnum.Length },
                 new Unit() { Id = 9, Name = "Meter", NamePlural = "Meters", Symbol = "m", UnitTypeId = (int)UnitTypeEnum.Length },
                 new Unit() { Id = 10, Name = "Millimeter", NamePlural = "Millimeters", Symbol = "mm", UnitTypeId = (int)UnitTypeEnum.Length },
-                new Unit() { Id = 11, Name = "Yard ", NamePlural = "Yards", Symbol = "yd", UnitTypeId = (int)UnitTypeEnum.Length },
+                new Unit() { Id = 11, Name = "Yard", NamePlural = "Yards", Symbol = "yd", UnitTypeId = (int)UnitTypeEnum.Length },
+                new Unit() { Id = 12, Name = "PPM", NamePlural = "PPM", Symbol = "ppm", UnitTypeId = (int)UnitTypeEnum.UnitConcentration },
+                new Unit() { Id = 13, Name = "mg/m3", NamePlural = "mg/m3", Symbol = "mg/m3", UnitTypeId = (int)UnitTypeEnum.UnitConcentration },
+                new Unit() { Id = 14, Name = "PH", NamePlural = "PH", Symbol = "PH", UnitTypeId = (int)UnitTypeEnum.PH },
+                new Unit() { Id = 14, Name = "Volt", NamePlural = "Volts", Symbol = "Vm", UnitTypeId = (int)UnitTypeEnum.Energy }
 
             };
 

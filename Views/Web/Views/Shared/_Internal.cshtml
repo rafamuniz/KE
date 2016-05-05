@@ -56,6 +56,7 @@
                         <span class="sr-only">Toggle navigation</span>
                     </a>
                 </div>
+
                 @if (!this.HasRoles("SuperAdmin", "Admin", "Operator"))
                 {
                     <div class="col-lg-6 my-tanks">
@@ -106,7 +107,7 @@
 
         @Html.Partial("_Footer")
     </div>
-      
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

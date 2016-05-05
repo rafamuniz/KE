@@ -2,90 +2,108 @@
 
 @model DashboardTankViewModel
 
-<a data-tankname='@Model.TankName' href='@Url.Action("Gauge", "Tank", new { TankId = Model.TankId, Area="Customer" })'>
-    <div class="tank-dashboard">
-        <div class="title @Model.Color-light">
-            <h3>@Model.TankName</h3>
-        </div>
+<div class="tank-dashboard">
+    <div class="title @Model.Color-light">
+        <h3>@Model.TankName</h3>
+    </div>
 
-        <div class="details @Model.Color">
-            @{
-                String waterVolumeLastMeasurement = @Model.WaterVolumeLastMeasurement.HasValue ? @Model.WaterVolumeLastMeasurement.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : String.Empty;
-            }
+    <div class="details @Model.Color">
+        @{
+            String waterVolumeLastMeasurement = @Model.WaterVolumeLastMeasurement.HasValue ? @Model.WaterVolumeLastMeasurement.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : String.Empty;
+        }
 
-            <div class="detail-box detail-watervolume" title="@waterVolumeLastMeasurement">
-                <p>Volume</p>
+        <div class="detail-box detail-watervolume" title="@waterVolumeLastMeasurement">
+            <p>Volume</p>
+            @if (@Model.WaterVolumeCapacity != default(Decimal))
+            {
                 <p><span>@Model.WaterVolumeCapacity</span></p>
                 <p>Gallons</p>
-            </div>
-
-            @{
-                String ambientTemperatureLastMeasurement = @Model.AmbientTemperatureLastMeasurement.HasValue ? @Model.AmbientTemperatureLastMeasurement.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : String.Empty;
             }
-
-            <div class="detail-box detail-ambienttemperature" title="@ambientTemperatureLastMeasurement">
-                <p>Amb Temp</p>
-                <p><span>@Model.AmbientTemperature &#8457;</span></p>
-            </div>
-
-            @{
-                String waterTemperatureLastMeasurement = @Model.WaterTemperatureLastMeasurement.HasValue ? @Model.WaterTemperatureLastMeasurement.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : String.Empty;
-                String waterTemperatureLast = @Model.WaterTemperature.HasValue ? @Model.WaterTemperature.Value.ToString() : String.Empty;
-                String waterTemperatureLastJS = @Model.WaterTemperature.HasValue ? @Model.WaterTemperature.Value.ToString() : "undefined";
+            else
+            {
+                <p><span>--</span></p>
             }
-
-            <div class="detail-box detail-watertemperature" title="@waterTemperatureLastMeasurement">
-                <p>Water Temp</p>
-                <p><span>@Model.WaterTemperature &#8457;</span></p>
-            </div>
-
-            <div class="detail-box detail-alarm">
-                <p>Alarms</p>
-                <p><span>@Model.Alarms</span></p>
-            </div>
         </div>
 
         @{
-            String waterVolumePercentage = @Model.WaterVolumePercentage.HasValue ? @Model.WaterVolumePercentage.Value.ToString("P2") : String.Empty;
-            String waterVolume = @Model.WaterVolume.ToString();
+            String ambientTemperatureLastMeasurement = @Model.AmbientTemperatureLastMeasurement.HasValue ? @Model.AmbientTemperatureLastMeasurement.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : String.Empty;
         }
 
-        <div id="graph-draw">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            @if (@Model.WaterVolumePercentage.HasValue)
-                            {
-                                <span>@waterVolumePercentage</span>
-                                <label>Full</label>
-                            }
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            @if (@Model.WaterVolume.HasValue)
-                            {
-                                <span>@Model.WaterVolume</span>
-                                <label>Gallons Remaining</label>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="detail-box detail-ambienttemperature" title="@ambientTemperatureLastMeasurement">
+            <p>Amb Temp</p>
+            @if (@Model.AmbientTemperatureLastMeasurement.HasValue)
+            {
+                <p><span>@Model.AmbientTemperature &#8457;</span></p>
+            }
+            else
+            {
+                <p><span>--</span></p>
+            }
+        </div>
 
-            <div class="row">
-                <div class="col-sm-3 col-md-3 col-lg-3">
+        @{
+            String waterTemperatureLastMeasurement = @Model.WaterTemperatureLastMeasurement.HasValue ? @Model.WaterTemperatureLastMeasurement.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : String.Empty;
+            String waterTemperatureLast = @Model.WaterTemperature.HasValue ? @Model.WaterTemperature.Value.ToString() : String.Empty;
+            String waterTemperatureLastJS = @Model.WaterTemperature.HasValue ? @Model.WaterTemperature.Value.ToString() : "undefined";
+        }
+
+        <div class="detail-box detail-watertemperature" title="@waterTemperatureLastMeasurement">
+            <p>Water Temp</p>
+            @if (@Model.WaterTemperature.HasValue)
+            {
+                <p><span>@Model.WaterTemperature &#8457;</span></p>
+            }
+            else
+            {
+                <p><span>--</span></p>
+            }
+        </div>
+
+        <div class="detail-box detail-alarm">
+            <p>Alarms</p>
+            <p><span>@Model.Alarms</span></p>
+        </div>
+    </div>
+
+    @{
+        String waterVolumePercentage = @Model.WaterVolumePercentage.HasValue ? @Model.WaterVolumePercentage.Value.ToString("P2") : String.Empty;
+        String waterVolume = @Model.WaterVolume.ToString();
+    }
+    <div id="graph-draw">
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 pull-left waterVolumePercentage">
+                @if (@Model.WaterVolumePercentage.HasValue)
+            {
+                    <span>@waterVolumePercentage</span>
+                    <label>Full</label>
+                }
+            </div>
+            <div class="col-sm-8 col-md-8 col-lg-8 pull-right waterVolume">
+                @if (@Model.WaterVolume.HasValue)
+            {
+                    <span>@Model.WaterVolume</span>
+                    <label>Gallons Remaining</label>
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="col-sm-2 col-md-2 col-lg-2">
                     <div id="graph-temperature-@Model.TankId"></div>
                     <script type="text/javascript">
                         generateTemperatureGraph('@Model.TankId', @waterTemperatureLastJS);
                     </script>
                 </div>
 
-                <div class="col-sm-5 col-md-5 col-lg-5 tank-image">
-                    <img src="@Model.UrlImageTankModel">
+                <div class="col-sm-4 col-md-4 col-lg-4 tank-image">
+                    <a data-tankname='@Model.TankName' href='@Url.Action("Gauge", "Tank", new { TankId = Model.TankId, Area="Customer" })'>
+                        <img src="@Model.UrlImageTankModel">
+                    </a>
                 </div>
 
-                <div class="col-sm-4 col-md-4 col-lg-4 chart">
-                    <div id="graph-@Model.TankId"></div>
+                <div class="col-sm-6 col-md-6 col-lg-6 chart">
+                    <div id='graph-@Model.TankId'></div>
                     <script type="text/javascript">
                         generateWaterVolumeGraph('@Model.TankId');
                     </script>
@@ -97,7 +115,6 @@
                         <p>Remaining</p>
                     </div>*@
             </div>
-
         </div>
     </div>
-</a>
+</div>

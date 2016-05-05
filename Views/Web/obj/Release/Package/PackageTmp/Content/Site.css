@@ -5625,7 +5625,7 @@ label {
 .chart {
     position: relative;
     overflow: hidden;
-    width: 100%;
+    /*width: 100%;*/
 }
 
     .chart svg,
@@ -6256,8 +6256,7 @@ div.uploader {
     }
 
 .guage-table {
-    display: table;
-    width: 100%;
+    padding: 0px;
 }
 
     .guage-table .gauge-cell {
@@ -6293,19 +6292,26 @@ div.uploader {
         padding: 0 13px;
     }
 
-.gauge-cell .guage-value h3 {
-    font-size: 24px;
-    color: #fff;
-    text-align: center;
-    font-family: "open_sansbold";
+.gauge-cell {
+    min-height: 400px;
+    height: 400px;
 }
 
+    .gauge-cell .guage-value h3 {
+        font-size: 24px;
+        color: #FFF;
+        text-align: center;
+        font-family: 'open_sansbold';
+    }
+
 .alarm-box {
-    margin: 5px 0;
     padding: 8px;
     background: #F2F2F2;
-    min-height: 300px;
-    max-width: 100%;
+}
+
+.gauge-alarm-bg {
+    min-height: 385px;
+    height: 385px;
 }
 
 .tank-volume-box {
@@ -6321,21 +6327,21 @@ div.uploader {
 }
 
 .tank-temperature-box {
-    margin: 5px 0;
+    /*margin: 5px 0;*/
     padding: 8px;
     background: #F2F2F2;
-    min-height: 300px;
+    /*min-height: 300px;
     min-width: 200px;
-    max-width: 45%;
+    max-width: 45%;*/
 }
 
 .sensor-voltage-box {
-    margin: 5px 0;
+    /*margin: 5px 0;*/
     padding: 8px;
     background: #F2F2F2;
-    min-height: 300px;
+    /*min-height: 300px;
     min-width: 200px;
-    max-width: 55%;
+    max-width: 55%;*/
 }
 
 .gauge-title {
@@ -6345,7 +6351,7 @@ div.uploader {
 
     .gauge-title h3 {
         font-size: 20px;
-        font-family: inherit;
+        font-family: 'open_sansbold';
         color: #FFF;
         text-align: center;
         padding: 10px 0;
@@ -6524,7 +6530,6 @@ div.uploader {
     background: #FFF;
     text-align: center;
     border-bottom: 5px;
-    padding-top: 20px;
 }
 
     #graph-draw .tank-image {
@@ -6537,25 +6542,40 @@ div.uploader {
 
     #graph-draw .waterVolumePercentage {
         height: 50px;
-        text-align: left;
+        padding-left: 30px;
     }
 
         #graph-draw .waterVolumePercentage span {
             color: #00BAC7;
             font-family: 'open_sansbold';
             font-size: 25px;
-            margin-left: 30px;
         }
 
-        #graph-draw .waterVolumePercentage p {
+        #graph-draw .waterVolumePercentage label {
             color: #00BAC7;
             font-family: 'open_sansregular';
             font-size: 15px;
-            margin-left: 30px;
         }
 
-    #graph-draw .chart {
+    #graph-draw .waterVolume {
+        text-align: right;
+        padding-right: 30px;
     }
+
+        #graph-draw .waterVolume span {
+            color: #1C2B39;
+            font-family: 'open_sansbold';
+            font-size: 25px;
+        }
+
+        #graph-draw .waterVolume label {
+            color: #1C2B39;
+            font-family: 'open_sansregular';
+            font-size: 15px;
+        }
+
+background-color: #1C2B39; #graph-draw .chart {
+}
 
 .balloon-water-remaining {
     background-color: #1C2B39;

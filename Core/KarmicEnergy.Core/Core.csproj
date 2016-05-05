@@ -94,9 +94,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201605021439217_AWS.cs" />
-    <Compile Include="Migrations\201605021439217_AWS.Designer.cs">
-      <DependentUpon>201605021439217_AWS.cs</DependentUpon>
+    <Compile Include="Migrations\201605051612037_AWS.cs" />
+    <Compile Include="Migrations\201605051612037_AWS.Designer.cs">
+      <DependentUpon>201605051612037_AWS.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
@@ -157,8 +157,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605021439217_AWS.resx">
-      <DependentUpon>201605021439217_AWS.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605051612037_AWS.resx">
+      <DependentUpon>201605051612037_AWS.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -35,6 +35,9 @@ namespace KarmicEnergy.Core.Persistence
         private ISeverityRepository _SeverityRepository;
 
         private IUnitRepository _UnitRepository;
+
+        private IStickConversionRepository _StickConversionRepository;
+        private IStickConversionValueRepository _StickConversionValueRepository;
         #endregion Fields
 
         #region Constructor
@@ -156,6 +159,16 @@ namespace KarmicEnergy.Core.Persistence
         public IContactRepository ContactRepository
         {
             get { return _ContactRepository ?? (_ContactRepository = new ContactRepository(_context)); }
+        }
+
+        public IStickConversionRepository StickConversionRepository
+        {
+            get { return _StickConversionRepository ?? (_StickConversionRepository = new StickConversionRepository(_context)); }
+        }
+
+        public IStickConversionValueRepository StickConversionValueRepository
+        {
+            get { return _StickConversionValueRepository ?? (_StickConversionValueRepository = new StickConversionValueRepository(_context)); }
         }
     }
 }

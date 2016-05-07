@@ -1,97 +1,105 @@
 ﻿@using Munizoft.MVC.Extensions
 @using KarmicEnergy.Web.Extensions
 
-    <ul class="sidebar-menu">
-        @if (this.HasRoles("SuperAdmin", "Admin"))
-        {
-            <li class="treeview @Html.MenuItemActive("Customer", "Index", "Admin")">
-                <a href="/Admin/Customer">
-                    <img src="/images/customers.png" alt="customers" title="customers">
-                    <p>CUSTOMERS</p>
-                </a>
-            </li>
+<ul class="sidebar-menu">
+    @if (this.HasRoles("SuperAdmin", "Admin"))
+    {
+        <li class="treeview @Html.MenuItemActive("Customer", "Index", "Admin")">
+            <a href="/Admin/Customer">
+                <img src="/images/customers.png" alt="customers" title="customers">
+                <p>CUSTOMERS</p>
+            </a>
+        </li>
 
-            <li class="treeview @Html.MenuItemActive("User", "Index", "Admin")">
-                <a href="/Admin/User">
-                    <img src="/images/users.png" alt="users" title="users">
-                    <p>USERS</p>
+        <li class="treeview @Html.MenuItemActive("User", "Index", "Admin")">
+            <a href="/Admin/User">
+                <img src="/images/users.png" alt="users" title="users">
+                <p>USERS</p>
+            </a>
+        </li>
+    }
+
+    @if (this.HasRoles("SuperAdmin", "Admin", "Operator"))
+    {
+        <li class="treeview @Html.MenuItemActive("TankModel", "Admin")">
+>
+            <a href="/Admin/TankModel">
+                <img src="/images/my_tank.png" alt="tank_models" title="tank_models">
+                <p>TANK MODEL</p>
+            </a>
+        </li>
+
+        <li class="treeview @Html.MenuItemActive("StickConversion", "Admin")">
+            <a href="/Admin/StickConversion">
+                <img src="/images/my_tank.png" alt="tank_models" title="tank_models">
+                <p>STICK CONVERSION</p>
+            </a>
+        </li>
+    }
+
+    @if (this.HasRoles("Customer", "CustomerAdmin"))
+    {
+        <li class='treeview @Html.MenuItemActive("User", "Index", "Customer")'>
+            <a href="/Customer/User">
+                <img src="/images/users.png" alt="users" title="users">
+                <p>USERS</p>
+            </a>
+        </li>
+
+        <li class="treeview @Html.MenuItemActive("Contact", "Index", "Customer")">
+            <a href="/Customer/Contact">
+                <img src="/images/contacts.png" alt="contacts" title="contacts">
+                <p>CONTACTS</p>
+            </a>
+        </li>
+
+        if (!this.IsSite())
+        {
+            <li class="treeview @Html.MenuItemActive("Site", "Index", "Customer")">
+                <a href="/Customer/Site">
+                    <img src="/images/sites.png" alt="sites" title="sites">
+                    <p>SITES</p>
                 </a>
             </li>
         }
 
-        @if (this.HasRoles("SuperAdmin", "Admin", "Operator"))
-        {
-            <li class="treeview @Html.MenuItemActive("TankModel", "Index", "Admin")">
-                <a href="/Admin/TankModel">
-                    <img src="/images/my_tank.png" alt="tank_models" title="tank_models">
-                    <p>TANK MODEL</p>
-                </a>
-            </li>
-        }
+        <li class="treeview @Html.MenuItemActive("Tank", "Index", "Customer")">
+            <a href="/Customer/Tank">
+                <img src="/images/my_tank.png" alt="tanks" title="tanks">
+                <p>TANK</p>
+            </a>
+        </li>
 
-        @if (this.HasRoles("Customer", "CustomerAdmin"))
-        {
-            <li class='treeview @Html.MenuItemActive("User", "Index", "Customer")'>
-                <a href="/Customer/User">
-                    <img src="/images/users.png" alt="users" title="users">
-                    <p>USERS</p>
-                </a>
-            </li>
+        <li class="treeview @Html.MenuItemActive("SensorGroup", "Index", "Custumes")">
+            <a href="/Customer/SensorGroup">
+                <img src="/images/my_tank.png" alt="tanks" title="tanks">
+                <p>Sensor Group</p>
+            </a>
+        </li>
+    }
 
-            <li class="treeview @Html.MenuItemActive("Contact", "Index", "Customer")">
-                <a href="/Customer/Contact">
-                    <img src="/images/contacts.png" alt="contacts" title="contacts">
-                    <p>CONTACTS</p>
-                </a>
-            </li>
+    @if (this.HasRoles("Customer", "CustomerAdmin", "CustomerOperator"))
+    {
+        <li class="treeview @Html.MenuItemActive("FastTracker", "Index", "Customer")">
+            <a href="/Customer/FastTracker">
+                <img src="/images/fast_track.png" alt="fast_track" title="fast_track">
+                <p>FAST TRACKER</p>
+            </a>
+        </li>
 
-            if (!this.IsSite())
-            {
-                <li class="treeview @Html.MenuItemActive("Site", "Index", "Customer")">
-                    <a href="/Customer/Site">
-                        <img src="/images/sites.png" alt="sites" title="sites">
-                        <p>SITES</p>
-                    </a>
-                </li>
-            }
+        <li class="treeview @Html.MenuItemActive("TankReport", "Index", "Customer")">
+            <a href="/Customer/TankReport">
+                <img src="/images/my_tank_report.png" alt="tank_report" title="tank_report">
+                <p>MY TANK REPORT</p>
+            </a>
+        </li>
 
-            <li class="treeview @Html.MenuItemActive("Tank", "Index", "Customer")">
-                <a href="/Customer/Tank">
-                    <img src="/images/my_tank.png" alt="tanks" title="tanks">
-                    <p>TANK</p>
-                </a>
-            </li>
-
-            <li class="treeview @Html.MenuItemActive("SensorGroup", "Index", "Custumes")">
-                <a href="/Customer/SensorGroup">
-                    <img src="/images/my_tank.png" alt="tanks" title="tanks">
-                    <p>Sensor Group</p>
-                </a>
-            </li>
-        }
-
-        @if (this.HasRoles("Customer", "CustomerAdmin", "CustomerOperator"))
-        {
-            <li class="treeview @Html.MenuItemActive("FastTracker", "Index", "Customer")">
-                <a href="/Customer/FastTracker">
-                    <img src="/images/fast_track.png" alt="fast_track" title="fast_track">
-                    <p>FAST TRACKER</p>
-                </a>
-            </li>
-
-            <li class="treeview @Html.MenuItemActive("TankReport", "Index", "Customer")">
-                <a href="/Customer/TankReport">
-                    <img src="/images/my_tank_report.png" alt="tank_report" title="tank_report">
-                    <p>MY TANK REPORT</p>
-                </a>
-            </li>
-
-            <li class="treeview @Html.MenuItemActive("Log", "Index", "Customer")">
-                >
-                <a href="#">
-                    <img src="/images/loga_sample.png" alt="logs" title="logs">
-                    <p>LOG A SAMPLE</p>
-                </a>
-            </li>
-        }
-    </ul>
+        <li class="treeview @Html.MenuItemActive("Log", "Index", "Customer")">
+            >
+            <a href="#">
+                <img src="/images/loga_sample.png" alt="logs" title="logs">
+                <p>LOG A SAMPLE</p>
+            </a>
+        </li>
+    }
+</ul>

@@ -105,6 +105,16 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion TankModel
 
+        #region StickConversion
+
+        [Column("StickConversionId", TypeName = "INT")]
+        public Int32? StickConversionId { get; set; }
+
+        [ForeignKey("StickConversionId")]
+        public virtual StickConversion StickConversion { get; set; }
+
+        #endregion StickConversion
+
         #region Sensors
 
         public virtual List<Sensor> Sensors { get; set; }

@@ -51,6 +51,6 @@ namespace KarmicEnergy.Core.Entities
         [ForeignKey("UnitId")]
         public virtual Unit Unit { get; set; }
 
-        #endregion Sensor
+        #endregion Unit
     }
 }

@@ -315,6 +315,7 @@ namespace KarmicEnergy.Web.Controllers
             ViewBag.TankModels = tankModels;
             return tankModels;
         }
+
         protected List<Item> LoadItems()
         {
             List<Item> items = KEUnitOfWork.ItemRepository.GetAllActive().ToList();

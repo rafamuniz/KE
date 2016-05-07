@@ -82,7 +82,7 @@
                     },
                     dataLabels: false,
                     title: {
-                        text: totalizer
+                        text: ''
                     },
                     plotBands: [{
                         from: 0,

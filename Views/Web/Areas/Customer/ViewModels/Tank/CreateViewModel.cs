@@ -42,6 +42,9 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
         [Required]
         public Int32 TankModelId { get; set; }
 
+        [Display(Name = "Stick Conversion")]
+        public Int32 StickConversionId { get; set; }
+
         [Display(Name = "Latitude")]
         public String Latitude { get; set; }
 

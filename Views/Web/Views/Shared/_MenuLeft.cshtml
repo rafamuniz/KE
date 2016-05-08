@@ -22,7 +22,7 @@
     @if (this.HasRoles("SuperAdmin", "Admin", "Operator"))
     {
         <li class="treeview @Html.MenuItemActive("TankModel", "Admin")">
->
+            >
             <a href="/Admin/TankModel">
                 <img src="/images/my_tank.png" alt="tank_models" title="tank_models">
                 <p>TANK MODEL</p>
@@ -72,7 +72,7 @@
 
         <li class="treeview @Html.MenuItemActive("SensorGroup", "Customer")">
             <a href="/Customer/SensorGroup">
-                <img src="/images/my_tank.png" alt="tanks" title="tanks">
+                <img src="~/images/sensor.png" alt="sensor" title="sensor">
                 <p>Sensor Group</p>
             </a>
         </li>

@@ -40,7 +40,7 @@
                             @Html.LabelFor(m => m.TankId, new { @class = "control-label" })
                         </div>
                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                            <select id="ddlTank" name="TankId" class="form-control" disabled onclick="GetsSensorByTankId(this.value, 'ddlSensor', '/SensorGroup/GetsSensorByTankId');">
+                            <select id="ddlTank" name="TankId" class="form-control" disabled onclick="GetsSensorByTankId(this.value, 'SensorId', '/SensorGroup/GetsSensorByTankId');">
                                 <option value="">-- Please select a Tank --</option>
                             </select>
                             @Html.ValidationMessageFor(m => m.TankId, "", new { @class = "text-danger" })

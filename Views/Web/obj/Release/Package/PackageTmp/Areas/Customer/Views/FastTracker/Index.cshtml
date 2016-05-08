@@ -59,10 +59,16 @@ else
                     }
 
                     <div class="col-sm-3 col-md-4 col-xs-4 col-lg-2 tracker-image">
-                        <div>
-                            <img src="@tank.UrlImageTankModel" style="width: 300px; height: 150px;">
-                            <p>@eventDate</p>
-                            <p>@eventTime</p>
+                        <div class="row">
+                            <div class="col-sm12 col-md-12 col-xs-12 col-lg-12">
+                                <img src="@tank.UrlImageTankModel">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm12 col-md-12 col-xs-12 col-lg-12">
+                                <p>@eventDate</p>
+                                <p>@eventTime</p>
+                            </div>
                         </div>
                     </div>
 
@@ -72,13 +78,19 @@ else
                     }
 
                     <div class="col-sm-2 col-md-3 col-xs-4 col-lg-2 tracker-text">
-                        <div class="gals">
-                            <h2>@waterVolumePercentage</h2>
-                            @if (@tank.WaterVolume.HasValue)
-                            {
-                                <h2>@waterVolume</h2>
-                                <p>gals</p>
-                            }
+                        <div class="row">
+                            <div class="col-sm12 col-md-12 col-xs-12 col-lg-12 gals">
+                                <h2>@waterVolumePercentage</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm12 col-md-12 col-xs-12 col-lg-12 gals">
+                                @if (@tank.WaterVolume.HasValue)
+                                {
+                                    <h2>@waterVolume</h2>
+                                    <p>gals</p>
+                                }
+                            </div>
                         </div>
                     </div>
 

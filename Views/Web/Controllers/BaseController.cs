@@ -316,6 +316,13 @@ namespace KarmicEnergy.Web.Controllers
             return tankModels;
         }
 
+        protected List<StickConversion> LoadStickConversions()
+        {
+            List<StickConversion> stickConversions = KEUnitOfWork.StickConversionRepository.GetAllActive().ToList();
+            ViewBag.StickConversions = stickConversions;
+            return stickConversions;
+        }
+
         protected List<Item> LoadItems()
         {
             List<Item> items = KEUnitOfWork.ItemRepository.GetAllActive().ToList();

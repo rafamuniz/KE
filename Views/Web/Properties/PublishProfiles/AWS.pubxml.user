@@ -71,7 +71,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/24/2016 02:15:33</publishTime>
     </File>
     <File Include="Areas/Customer/Views/FastTracker/Index.cshtml">
-      <publishTime>05/03/2016 01:44:55</publishTime>
+      <publishTime>05/09/2016 01:01:24</publishTime>
     </File>
     <File Include="Areas/Customer/Views/FastTracker/_Tank.cshtml">
       <publishTime>04/02/2016 12:38:46</publishTime>
@@ -89,7 +89,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/13/2016 22:03:28</publishTime>
     </File>
     <File Include="Areas/Customer/Views/SensorGroup/Create.cshtml">
-      <publishTime>05/08/2016 20:57:55</publishTime>
+      <publishTime>05/08/2016 23:47:13</publishTime>
     </File>
     <File Include="Areas/Customer/Views/SensorGroup/Edit.cshtml">
       <publishTime>04/24/2016 21:47:19</publishTime>
@@ -107,13 +107,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/20/2016 21:51:04</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Create.cshtml">
-      <publishTime>04/29/2016 23:57:19</publishTime>
+      <publishTime>05/08/2016 23:53:52</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Dashboard.cshtml">
       <publishTime>05/03/2016 02:06:19</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Edit.cshtml">
-      <publishTime>04/29/2016 23:58:53</publishTime>
+      <publishTime>05/08/2016 23:54:04</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Gauge.cshtml">
       <publishTime>05/06/2016 01:21:51</publishTime>
@@ -173,7 +173,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/27/2016 02:07:30</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>05/08/2016 23:24:37</publishTime>
+      <publishTime>05/09/2016 01:54:32</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -416,7 +416,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:39:49</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>05/06/2016 00:32:08</publishTime>
+      <publishTime>05/09/2016 01:01:30</publishTime>
     </File>
     <File Include="Content/themes/base/accordion.css">
       <publishTime>03/30/2016 03:59:42</publishTime>
@@ -3195,6 +3195,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="images/sensor-voltage.png">
       <publishTime>02/25/2016 18:06:16</publishTime>
+    </File>
+    <File Include="images/sensor.png">
+      <publishTime>05/09/2016 01:22:25</publishTime>
     </File>
     <File Include="images/setting.png">
       <publishTime>02/03/2016 11:28:08</publishTime>
@@ -7853,7 +7856,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:32:23</publishTime>
     </File>
     <File Include="Views/Shared/_MenuLeft.cshtml">
-      <publishTime>05/08/2016 17:25:29</publishTime>
+      <publishTime>05/09/2016 01:18:59</publishTime>
     </File>
     <File Include="Views/Shared/_MenuTop.cshtml">
       <publishTime>04/21/2016 00:55:05</publishTime>

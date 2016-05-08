@@ -18,7 +18,13 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
         public Guid Id { get; set; }
 
         [Display(Name = "Name")]
+        [Required]
         public String Name { get; set; }
+
+        [Display(Name = "Reference")]
+        [Required]
+        [MaxLength(8)]
+        public String Reference { get; set; }
 
         [Display(Name = "Description")]
         public String Description { get; set; }
@@ -34,6 +40,9 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
         [Display(Name = "Tank Model")]
         [Required]
         public Int32 TankModelId { get; set; }
+
+        [Display(Name = "Stick Conversion")]
+        public Int32 StickConversionId { get; set; }
 
         [Display(Name = "Latitude")]
         public String Latitude { get; set; }

@@ -86,6 +86,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             LoadTankModels();
             LoadStatuses();
+            LoadStickConversions();
 
             return viewModel;
         }
@@ -164,6 +165,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 viewModel.SiteId = SiteId;
             }
 
+            LoadStickConversions();
             LoadTankModels();
             LoadStatuses();
 

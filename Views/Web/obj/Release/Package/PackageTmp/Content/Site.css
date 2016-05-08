@@ -6376,7 +6376,6 @@ div.uploader {
     text-align: center;
     padding: 10px 20px;
     vertical-align: middle;
-    /*/*display: table-cell;*/
 }
 
 .tracker-number {
@@ -6398,6 +6397,7 @@ div.uploader {
 }
 
     .tracker-image img {
+        width: 100%;
     }
 
     .tracker-image p {
@@ -6409,13 +6409,8 @@ div.uploader {
 .tracker-text {
     background: #E1E1E1;
     height: 240px;
+    padding-top: 5%;
 }
-
-    .tracker-text div {
-        top: 35%;
-        left: 5%;
-        position: absolute;
-    }
 
     .tracker-text h2 {
         color: #000;

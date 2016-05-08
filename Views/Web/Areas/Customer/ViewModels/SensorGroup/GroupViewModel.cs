@@ -1,18 +1,14 @@
 ﻿using AutoMapper;
-using Munizoft.MVC.Helpers.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup
 {
-    public class CreateViewModel
+    public class GroupViewModel
     {
         #region Constructor
-        public CreateViewModel()
+        public GroupViewModel()
         {
             Sensors = new List<SensorGroupViewModel>();
         }
@@ -21,19 +17,31 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup
         #region Property
 
         [Display(Name = "Group")]
-        public Guid GroupId { get; set; }
+        public Guid? GroupId { get; set; }
 
         [Display(Name = "Site")]
-        public Guid SiteId { get; set; }
+        public Guid? SiteId { get; set; }
+
+        [Display(Name = "Site")]
+        public Guid SiteName { get; set; }
 
         [Display(Name = "Tank")]
-        public Guid TankId { get; set; }
+        [Required]
+        public Guid? TankId { get; set; }
+
+        [Display(Name = "Tank")]
+        public Guid TankName { get; set; }
 
         [Display(Name = "Sensor")]
-        public Guid SensorId { get; set; }
+        [Required]
+        public Guid? SensorId { get; set; }
+
+        [Display(Name = "Sensor")]
+        public Guid SensorName { get; set; }
 
         [Display(Name = "Weight")]
-        public Int32 Weight { get; set; }
+        [Required]
+        public Int32? Weight { get; set; }
 
         public List<SensorGroupViewModel> Sensors { get; set; }
 
@@ -43,8 +51,8 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup
 
         public Core.Entities.SensorGroup Map()
         {
-            //Mapper.CreateMap<CreateViewModel, Core.Entities.Contact>().ForMember(x => x.Address, opt => opt.Ignore());
-            return Mapper.Map<CreateViewModel, Core.Entities.SensorGroup>(this);
+            Mapper.CreateMap<GroupViewModel, Core.Entities.Contact>();
+            return Mapper.Map<GroupViewModel, Core.Entities.SensorGroup>(this);
         }
 
         #endregion Map

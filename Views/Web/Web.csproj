@@ -256,9 +256,7 @@
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankWithWaterVolume.cs" />
-    <Compile Include="Areas\Customer\ViewModels\SensorGroup\CreateViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\SensorGroup\EditViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\SensorGroup\ItemViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\SensorGroup\GroupViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\SensorGroupViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\UnitViewModel.cs" />
@@ -1496,7 +1494,6 @@
     <Content Include="Areas\Customer\Views\Tank\Gauge.cshtml" />
     <Content Include="Areas\Customer\Views\TankReport\Index.cshtml" />
     <Content Include="Areas\Customer\Views\SensorGroup\Create.cshtml" />
-    <Content Include="Areas\Customer\Views\SensorGroup\Edit.cshtml" />
     <Content Include="Areas\Customer\Views\SensorGroup\Index.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\_TankModel.cshtml" />
     <Content Include="fonts\FontAwesome.otf" />

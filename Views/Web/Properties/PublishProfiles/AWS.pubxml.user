@@ -14,7 +14,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/26/2016 15:09:07</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Customer/Create.cshtml">
-      <publishTime>04/22/2016 22:06:53</publishTime>
+      <publishTime>05/08/2016 00:57:57</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Customer/Edit.cshtml">
       <publishTime>04/23/2016 16:49:06</publishTime>
@@ -22,11 +22,23 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Admin/Views/Customer/Index.cshtml">
       <publishTime>04/17/2016 22:00:39</publishTime>
     </File>
+    <File Include="Areas/Admin/Views/StickConversion/Create.cshtml">
+      <publishTime>05/08/2016 00:54:54</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/StickConversion/Edit.cshtml">
+      <publishTime>05/08/2016 00:44:06</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/StickConversion/Index.cshtml">
+      <publishTime>05/07/2016 22:49:19</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/StickConversion/Values.cshtml">
+      <publishTime>05/08/2016 01:00:17</publishTime>
+    </File>
     <File Include="Areas/Admin/Views/TankModel/Create.cshtml">
-      <publishTime>03/20/2016 22:45:49</publishTime>
+      <publishTime>05/08/2016 00:55:10</publishTime>
     </File>
     <File Include="Areas/Admin/Views/TankModel/Edit.cshtml">
-      <publishTime>04/17/2016 22:01:33</publishTime>
+      <publishTime>05/07/2016 23:39:31</publishTime>
     </File>
     <File Include="Areas/Admin/Views/TankModel/Index.cshtml">
       <publishTime>04/22/2016 20:11:32</publishTime>
@@ -77,13 +89,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/13/2016 22:03:28</publishTime>
     </File>
     <File Include="Areas/Customer/Views/SensorGroup/Create.cshtml">
-      <publishTime>04/29/2016 22:49:13</publishTime>
+      <publishTime>05/08/2016 20:57:55</publishTime>
     </File>
     <File Include="Areas/Customer/Views/SensorGroup/Edit.cshtml">
       <publishTime>04/24/2016 21:47:19</publishTime>
     </File>
     <File Include="Areas/Customer/Views/SensorGroup/Index.cshtml">
-      <publishTime>04/25/2016 06:08:01</publishTime>
+      <publishTime>05/08/2016 15:40:45</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Site/Create.cshtml">
       <publishTime>04/23/2016 19:46:42</publishTime>
@@ -155,13 +167,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>05/06/2016 02:05:13</publishTime>
+      <publishTime>05/08/2016 23:24:29</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>05/06/2016 02:05:21</publishTime>
+      <publishTime>05/08/2016 23:24:37</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -3206,316 +3218,316 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/25/2016 17:58:26</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_0.png">
-      <publishTime>05/04/2016 17:22:10</publishTime>
+      <publishTime>05/06/2016 22:06:44</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_10.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:42</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_100.png">
-      <publishTime>05/04/2016 17:22:10</publishTime>
+      <publishTime>05/06/2016 22:06:32</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_20.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:41</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_30.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:39</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_40.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:38</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_50.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:37</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_60.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:36</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_70.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:35</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_80.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:34</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_90.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:32</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_measure.png">
       <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/1/EllipseHoriz_NoData.png">
-      <publishTime>05/04/2016 21:38:25</publishTime>
+      <publishTime>05/06/2016 22:06:44</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_0.png">
-      <publishTime>05/04/2016 17:22:10</publishTime>
+      <publishTime>05/06/2016 22:06:56</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_10.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:55</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_100.png">
-      <publishTime>05/04/2016 17:22:10</publishTime>
+      <publishTime>05/06/2016 22:06:45</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_20.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:53</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_30.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:52</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_40.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:51</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_50.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:50</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_60.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:49</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_70.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:47</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_80.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:46</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_90.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:45</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_measure.png">
       <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/2/CylVert_NoData.png">
-      <publishTime>05/04/2016 21:40:44</publishTime>
+      <publishTime>05/06/2016 22:06:56</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_0.png">
-      <publishTime>05/04/2016 17:22:10</publishTime>
+      <publishTime>05/06/2016 22:07:07</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_10.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/06/2016 22:07:06</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_100.png">
-      <publishTime>05/04/2016 17:22:10</publishTime>
+      <publishTime>05/06/2016 22:06:57</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_20.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:07:05</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_30.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:07:04</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_40.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:07:03</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_50.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:07:02</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_60.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:07:01</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_70.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:59</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_80.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:58</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_90.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:06:57</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_measure.png">
       <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/3/CylHoriz_NoData.png">
-      <publishTime>05/04/2016 22:35:18</publishTime>
+      <publishTime>05/06/2016 22:07:07</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_0.png">
-      <publishTime>05/04/2016 17:22:11</publishTime>
+      <publishTime>05/06/2016 22:05:37</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_10.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:05:34</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_100.png">
-      <publishTime>05/04/2016 17:22:11</publishTime>
+      <publishTime>05/06/2016 22:04:40</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_20.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:05:32</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_30.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:05:28</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_40.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:05:24</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_50.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:05:19</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_60.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:05:07</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_70.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:05:05</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_80.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:04:59</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_90.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:04:40</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_measure.png">
       <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_NoData.png">
-      <publishTime>05/04/2016 22:36:26</publishTime>
+      <publishTime>05/06/2016 22:05:37</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_0.png">
-      <publishTime>05/04/2016 17:22:11</publishTime>
+      <publishTime>05/06/2016 22:06:00</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_10.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:20:02</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_100.png">
-      <publishTime>05/04/2016 17:22:11</publishTime>
+      <publishTime>05/06/2016 22:05:39</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_20.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:17:31</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_30.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:05:57</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_40.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:05:54</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_50.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:05:46</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_60.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:10:45</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_70.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:05:44</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_80.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:05:42</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_90.png">
-      <publishTime>04/30/2016 20:41:04</publishTime>
+      <publishTime>05/06/2016 22:05:39</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_measure.png">
       <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/5/StadiumHoriz_NoData.png">
-      <publishTime>05/04/2016 22:34:37</publishTime>
+      <publishTime>05/06/2016 22:06:00</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_0.png">
-      <publishTime>05/06/2016 02:07:10</publishTime>
+      <publishTime>05/06/2016 22:07:19</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_10.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/06/2016 22:07:18</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_100.png">
-      <publishTime>05/04/2016 17:22:11</publishTime>
+      <publishTime>05/06/2016 22:07:09</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_20.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/06/2016 22:07:17</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_30.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/06/2016 22:07:15</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_40.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/06/2016 22:07:14</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_50.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/06/2016 22:07:13</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_60.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/06/2016 22:07:12</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_70.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/06/2016 22:07:11</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_80.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/06/2016 22:07:10</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_90.png">
-      <publishTime>04/30/2016 20:41:05</publishTime>
+      <publishTime>05/06/2016 22:07:09</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_measure.png">
       <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/6/CubeHoriz_nodata.png">
-      <publishTime>05/04/2016 22:32:38</publishTime>
+      <publishTime>05/06/2016 22:07:19</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_0.png">
-      <publishTime>05/04/2016 17:22:10</publishTime>
+      <publishTime>05/06/2016 22:06:19</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_10.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:06:18</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_100.png">
-      <publishTime>05/04/2016 17:22:10</publishTime>
+      <publishTime>05/06/2016 22:06:02</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_20.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:06:16</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_30.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:06:13</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_40.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:06:11</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_50.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:06:09</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_60.png">
-      <publishTime>04/30/2016 20:41:03</publishTime>
+      <publishTime>05/06/2016 22:06:07</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_70.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/06/2016 22:06:05</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_80.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/06/2016 22:06:04</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_90.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/06/2016 22:06:02</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_measure.png">
       <publishTime>05/04/2016 17:22:10</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_NoData.png">
-      <publishTime>05/04/2016 22:32:10</publishTime>
+      <publishTime>05/06/2016 22:06:19</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_0.png">
-      <publishTime>05/04/2016 17:22:11</publishTime>
+      <publishTime>05/06/2016 22:06:31</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_10.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/06/2016 22:06:30</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_100.png">
-      <publishTime>05/04/2016 17:22:11</publishTime>
+      <publishTime>05/06/2016 22:06:21</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_20.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/06/2016 22:06:29</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_30.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/06/2016 22:06:28</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_40.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/06/2016 22:06:27</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_50.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/06/2016 22:06:25</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_60.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/06/2016 22:06:24</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_70.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/06/2016 22:06:23</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_80.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/06/2016 22:06:22</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_90.png">
-      <publishTime>04/30/2016 20:41:02</publishTime>
+      <publishTime>05/06/2016 22:06:21</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_measure.png">
       <publishTime>05/04/2016 17:22:11</publishTime>
     </File>
     <File Include="images/tankmodels/8/FracPO1_NoData.png">
-      <publishTime>05/04/2016 22:31:30</publishTime>
+      <publishTime>05/06/2016 22:06:31</publishTime>
     </File>
     <File Include="images/tank_models/1.png">
       <publishTime>04/26/2016 15:13:27</publishTime>
@@ -3887,13 +3899,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/02/2016 23:21:24</publishTime>
     </File>
     <File Include="Scripts/app/sensorgroup.js">
-      <publishTime>04/29/2016 22:51:09</publishTime>
+      <publishTime>05/08/2016 21:00:24</publishTime>
     </File>
     <File Include="Scripts/app/tank-dashboard.js">
       <publishTime>05/05/2016 15:10:00</publishTime>
     </File>
     <File Include="Scripts/app/tank-gauge.js">
-      <publishTime>05/06/2016 02:03:06</publishTime>
+      <publishTime>05/06/2016 02:33:33</publishTime>
     </File>
     <File Include="Scripts/app/tank.js">
       <publishTime>05/04/2016 20:36:12</publishTime>
@@ -7739,7 +7751,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/01/2016 01:48:49</publishTime>
     </File>
     <File Include="Views/Account/ChangePassword.cshtml">
-      <publishTime>03/12/2016 02:13:50</publishTime>
+      <publishTime>05/07/2016 23:39:41</publishTime>
     </File>
     <File Include="Views/Account/ConfirmEmail.cshtml">
       <publishTime>03/07/2016 00:39:38</publishTime>
@@ -7754,7 +7766,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 00:39:38</publishTime>
     </File>
     <File Include="Views/Account/Profile.cshtml">
-      <publishTime>03/13/2016 02:11:22</publishTime>
+      <publishTime>05/07/2016 23:39:49</publishTime>
     </File>
     <File Include="Views/Account/Register.cshtml">
       <publishTime>03/07/2016 00:39:38</publishTime>
@@ -7772,7 +7784,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/12/2016 21:59:31</publishTime>
     </File>
     <File Include="Views/ForgotPassword/Index.cshtml">
-      <publishTime>04/22/2016 16:10:52</publishTime>
+      <publishTime>05/07/2016 23:39:55</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>03/07/2016 11:59:14</publishTime>
@@ -7802,7 +7814,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/12/2016 22:29:15</publishTime>
     </File>
     <File Include="Views/ResetPassword/Index.cshtml">
-      <publishTime>03/12/2016 23:33:39</publishTime>
+      <publishTime>05/07/2016 23:40:15</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>03/07/2016 00:39:38</publishTime>
@@ -7817,7 +7829,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 18:59:48</publishTime>
     </File>
     <File Include="Views/Shared/_ExternalMaster.cshtml">
-      <publishTime>04/22/2016 16:05:32</publishTime>
+      <publishTime>05/07/2016 23:40:54</publishTime>
     </File>
     <File Include="Views/Shared/_Footer.cshtml">
       <publishTime>04/29/2016 13:18:06</publishTime>
@@ -7841,7 +7853,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:32:23</publishTime>
     </File>
     <File Include="Views/Shared/_MenuLeft.cshtml">
-      <publishTime>05/04/2016 19:35:33</publishTime>
+      <publishTime>05/08/2016 17:25:29</publishTime>
     </File>
     <File Include="Views/Shared/_MenuTop.cshtml">
       <publishTime>04/21/2016 00:55:05</publishTime>

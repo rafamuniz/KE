@@ -17,16 +17,21 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult Index()
         {
             List<ListViewModel> viewModels = new List<ListViewModel>();
+
+            if (!IsSite)
+            {
+                var groups = KEUnitOfWork.GroupRepository.GetAllActive().ToList();
+                viewModels = ListViewModel.Map(groups);
+            }
+            else
+            {
+                var groups = KEUnitOfWork.GroupRepository.GetsBySiteId(SiteId).ToList();
+                viewModels = ListViewModel.Map(groups);
+            }
+
             return View(viewModels);
         }
 
-        [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Tank(Guid tankId)
-        {
-            var sensors = KEUnitOfWork.SensorRepository.GetsByTankIdAndCustomerId(CustomerId, TankId);
-            var viewModels = ListViewModel.Map(sensors);
-            return View("Index", viewModels);
-        }
         #endregion Index
 
         #region Create
@@ -34,254 +39,134 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Create()
         {
-            LoadSites(CustomerId);
-            CreateViewModel viewModel = new CreateViewModel();
-            return View(viewModel);
+            return View(LoadDefault());
         }
 
-        //[Authorize(Roles = "Customer, CustomerAdmin")]
-        //public ActionResult Create(Guid tankId)
-        //{
-        //    LoadStatuses();
-        //    LoadTanks(CustomerId);
-        //    LoadSensorTypes();
-        //    return View();
-        //}
-
-        //
-        // POST: /User/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Create(CreateViewModel viewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(viewModel);
-            }
-
-            try
-            {
-                //KEUnitOfWork.SensorGroupRepository.Add(sensor);
-                KEUnitOfWork.Complete();
-
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                AddErrors(ex);
-            }
-
-            return View(viewModel);
-        }
         #endregion Create
 
         #region Add
-        //
-        // POST: /User/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+
         [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Add(CreateViewModel viewModel)
+        public ActionResult Add(Guid groupId)
         {
-            LoadSites(CustomerId);
-            SensorGroup sensorGroup = new SensorGroup();
-
-            if (!ModelState.IsValid)
-            {
-                return View(viewModel);
-            }
-
-            try
-            {
-                sensorGroup.SensorId = viewModel.SensorId;
-
-                sensorGroup.Sensor = KEUnitOfWork.SensorRepository.Get(viewModel.SensorId);
-
-                sensorGroup.Weight = viewModel.Weight;
-                sensorGroup.Group = new Group();
-                sensorGroup.Group.Id = viewModel.GroupId != default(Guid) ? viewModel.GroupId : Guid.Empty;
-
-                KEUnitOfWork.SensorGroupRepository.Add(sensorGroup);
-                KEUnitOfWork.Complete();
-            }
-            catch (Exception ex)
-            {
-                AddErrors(ex);
-            }
-
-            var sensorGroups = KEUnitOfWork.SensorGroupRepository.Find(x => x.GroupId == sensorGroup.GroupId).ToList();
-            viewModel = new CreateViewModel();
-            viewModel.GroupId = sensorGroup.GroupId;
+            GroupViewModel viewModel = LoadDefault();
+            var sensorGroups = KEUnitOfWork.SensorGroupRepository.Find(x => x.GroupId == groupId).ToList();
             viewModel.Sensors = SensorGroupViewModel.Map(sensorGroups);
 
             return View("Create", viewModel);
         }
 
-        [HttpPost]
-        public ActionResult GetsTankBySiteId(Guid siteId)
+        private GroupViewModel LoadDefault()
         {
-            var tanks = LoadTanks(CustomerId, siteId);
-            SelectList obgTanks = new SelectList(tanks, "Id", "Name", 0);
-            return Json(obgTanks);
-        }
+            GroupViewModel viewModel = new GroupViewModel();
 
-        [HttpPost]
-        public ActionResult GetsSensorByTankId(Guid tankId)
-        {
-            var sensors = LoadSensors(CustomerId, tankId);
-            SelectList obgSensors = new SelectList(sensors, "Id", "Name", 0);
-            return Json(obgSensors);
-        }
-
-        #endregion Add
-
-        #region Edit
-        [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Edit(Guid id)
-        {
-            var sensor = KEUnitOfWork.SensorRepository.Get(id);
-
-            if (sensor == null)
+            if (!IsSite)
             {
-                AddErrors("Sensor does not exist");
-                return View("Index");
+                LoadSites(CustomerId);
+            }
+            else
+            {
+                viewModel.SiteId = SiteId;
+                LoadTanks(CustomerId, SiteId);
             }
 
-            EditViewModel viewModel = new EditViewModel();
-            viewModel = EditViewModel.Map(sensor);
-
-            LoadDefault(viewModel, sensor);
-
-            return View(viewModel);
+            return viewModel;
         }
 
         //
-        // POST: /User/Update
+        // POST: /SensorGroup/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Edit(EditViewModel viewModel)
+        public ActionResult Add(GroupViewModel viewModel)
         {
-            Sensor sensor = null;
+            Group group = new Group();
 
             try
             {
-                sensor = KEUnitOfWork.SensorRepository.Get(viewModel.Id);
-
                 if (!ModelState.IsValid)
                 {
-                    LoadDefault(viewModel, sensor);
-                    AddErrors("Tank does not exist");
-                    return View(viewModel);
+                    LoadDefault();
+                    return View("Create", viewModel);
                 }
 
-                sensor.Name = viewModel.Name;
-                sensor.TankId = viewModel.TankId;
-                sensor.SensorTypeId = viewModel.SensorTypeId;
-                sensor.Status = viewModel.Status;
-                sensor.Reference = viewModel.Reference;
-
-                if (viewModel.Items.Any())
+                if (viewModel.GroupId.HasValue) // Update Group
                 {
-                    foreach (var item in viewModel.Items)
-                    {
-                        var sensorItem = sensor.SensorItems.Where(x => x.ItemId == Int32.Parse(item)).SingleOrDefault();
-
-                        // Add
-                        if (sensorItem == null)
-                        {
-                            Int32 itemId = Int32.Parse(item);
-
-                            var i = KEUnitOfWork.ItemRepository.Get(itemId);
-
-                            sensorItem = new SensorItem()
-                            {
-                                ItemId = itemId,
-                                Item = i
-                            };
-
-                            sensor.SensorItems.Add(sensorItem);
-                        }
-                    }
+                    group = KEUnitOfWork.GroupRepository.Get(viewModel.GroupId.Value);
                 }
-
-                if (sensor.SensorItems.Any())
+                else
                 {
-                    List<SensorItem> itemsRemove = new List<SensorItem>();
-
-                    foreach (var sensorItem in sensor.SensorItems)
-                    {
-                        var item = viewModel.Items.Where(x => Int32.Parse(x) == sensorItem.ItemId).SingleOrDefault();
-
-                        // Remove
-                        if (item == null)
-                        {
-                            itemsRemove.Add(sensorItem);
-                        }
-                    }
-
-                    if (itemsRemove.Any())
-                    {
-                        foreach (var ir in itemsRemove)
-                        {
-                            sensor.SensorItems.Remove(ir);
-                        }
-                    }
+                    group.SiteId = SiteId;
                 }
 
-                KEUnitOfWork.SensorRepository.Update(sensor);
+                SensorGroup sensorGroup = new SensorGroup();
+                sensorGroup.SensorId = viewModel.SensorId.Value;
+                sensorGroup.Weight = viewModel.Weight.Value;
+
+                group.SensorGroups.Add(sensorGroup);
+
+                if (viewModel.GroupId.HasValue)
+                {
+                    KEUnitOfWork.GroupRepository.Update(group);
+                }
+                else
+                {
+                    KEUnitOfWork.GroupRepository.Add(group);
+                }
+
                 KEUnitOfWork.Complete();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Add", new { GroupId = sensorGroup.GroupId });
             }
             catch (Exception ex)
             {
                 AddErrors(ex);
             }
 
-            LoadDefault(viewModel, sensor);
-
-            return View(viewModel);
+            LoadDefault();
+            return View("Create", viewModel);
         }
 
-        private void LoadDefault(EditViewModel viewModel, Sensor sensor)
+        #endregion Add
+
+        #region Edit
+
+        [Authorize(Roles = "Customer, CustomerAdmin")]
+        public ActionResult Edit(Guid id)
         {
-            var items = LoadItems();
-            viewModel.AvailableItems = ItemViewModel.Map(items);
-
-            if (sensor.SensorItems.Any())
-            {
-                List<ItemViewModel> selectedItems = new List<ItemViewModel>();
-
-                foreach (var item in sensor.SensorItems)
-                {
-                    foreach (var avalItem in viewModel.AvailableItems)
-                    {
-                        if (item.ItemId == avalItem.Id)
-                        {
-                            avalItem.IsSelected = true;
-                            viewModel.SelectedItems.Add(avalItem);
-                        }
-                    }
-                }
-            }
-
-            LoadStatuses();
-            LoadTanks(CustomerId);
-            LoadSensorTypes();
+            return RedirectToAction("Add", new { GroupId = id });
         }
 
         #endregion Edit
 
         #region Delete
         //
-        // GET: /User/Delete
+        // GET: /SensorGroup/Delete
         [HttpGet]
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Delete(Guid id)
         {
-            var sensor = KEUnitOfWork.SensorRepository.Get(id);
+            var group = KEUnitOfWork.GroupRepository.Get(id);
+
+            if (group == null)
+            {
+                AddErrors("Group does not exist");
+                return View("Index");
+            }
+
+            KEUnitOfWork.GroupRepository.Remove(group);
+            KEUnitOfWork.Complete();
+
+            return RedirectToAction("Index");
+        }
+
+        //
+        // GET: /SensorGroup/Delete
+        [HttpGet]
+        [Authorize(Roles = "Customer, CustomerAdmin")]
+        public ActionResult DeleteSensor(Guid id)
+        {
+            var sensor = KEUnitOfWork.SensorGroupRepository.Get(id);
 
             if (sensor == null)
             {
@@ -289,12 +174,29 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 return View("Index");
             }
 
-            KEUnitOfWork.SensorRepository.Remove(sensor);
+            var groupId = sensor.GroupId;
+            KEUnitOfWork.SensorGroupRepository.Remove(sensor);
             KEUnitOfWork.Complete();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Add", new { GroupId = groupId });
         }
 
         #endregion Delete
+
+        [HttpGet]
+        public ActionResult GetsTankBySiteId(Guid siteId)
+        {
+            var tanks = LoadTanks(CustomerId, siteId);
+            SelectList obgTanks = new SelectList(tanks, "Id", "Name", 0);
+            return Json(obgTanks, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetsSensorByTankId(Guid tankId)
+        {
+            var sensors = LoadSensors(CustomerId, tankId);
+            SelectList obgSensors = new SelectList(sensors, "Id", "Name", 0);
+            return Json(obgSensors, JsonRequestBehavior.AllowGet);
+        }
     }
 }

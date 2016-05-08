@@ -10,8 +10,14 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup
     public class SensorGroupViewModel
     {
         #region Property
+        [Display(Name = "Sensor Group")]
+        public Guid Id { get; set; }
+
         [Display(Name = "Site")]
         public Guid SiteId { get; set; }
+
+        [Display(Name = "Site")]
+        public String SiteName { get; set; }
 
         [Display(Name = "Tank")]
         public Guid TankId { get; set; }
@@ -27,6 +33,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup
 
         [Display(Name = "Weight")]
         public Int32 Weight { get; set; }
+
         #endregion Property
 
         #region Map
@@ -46,8 +53,13 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup
         {
             Mapper.CreateMap<Core.Entities.SensorGroup, SensorGroupViewModel>();
             var viewModel = Mapper.Map<Core.Entities.SensorGroup, SensorGroupViewModel>(entity);
+            viewModel.Id = entity.Id;
+            viewModel.SiteId = entity.Sensor.Tank.Site.Id;
+            viewModel.SiteName = entity.Sensor.Tank.Site.Name;
             viewModel.TankId = entity.Sensor.TankId;
             viewModel.TankName = entity.Sensor.Tank.Name;
+            viewModel.SensorId = entity.Sensor.Id;
+            viewModel.SensorName = entity.Sensor.Name;
             return viewModel;
         }
 

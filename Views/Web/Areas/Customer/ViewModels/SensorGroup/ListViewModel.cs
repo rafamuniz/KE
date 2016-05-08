@@ -12,26 +12,17 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup
 
         public Guid Id { get; set; }
 
-        [Display(Name = "Name")]
-        public String Name { get; set; }
+        [Display(Name = "Site")]
+        public Guid SiteId { get; set; }
 
-        [Display(Name = "Reference")]
-        [MaxLength(8)]
-        public String Reference { get; set; }
-
-        [Display(Name = "Status")]
-        [Required]
-        public String Status { get; set; }
-
-        [Display(Name = "Tank")]
-        [Required]
-        public Guid TankId { get; set; }
+        [Display(Name = "Site")]
+        public String SiteName { get; set; }
 
         #endregion Property
 
         #region Map
 
-        public static List<ListViewModel> Map(List<Core.Entities.Sensor> entities)
+        public static List<ListViewModel> Map(List<Core.Entities.Group> entities)
         {
             List<ListViewModel> vms = new List<ListViewModel>();
 
@@ -43,10 +34,15 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup
             return vms;
         }
 
-        public static ListViewModel Map(Core.Entities.Sensor entity)
+        public static ListViewModel Map(Core.Entities.Group entity)
         {
-            Mapper.CreateMap<Core.Entities.Sensor, ListViewModel>();
-            return Mapper.Map<Core.Entities.Sensor, ListViewModel>(entity);
+            Mapper.CreateMap<Core.Entities.Group, ListViewModel>();
+            var viewModel = Mapper.Map<Core.Entities.Group, ListViewModel>(entity);
+
+            viewModel.SiteId = entity.Site.Id;
+            viewModel.SiteName = entity.Site.Name;
+
+            return viewModel;
         }
 
         #endregion Map

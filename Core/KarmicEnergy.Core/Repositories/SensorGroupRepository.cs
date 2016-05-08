@@ -1,5 +1,7 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
+using System;
+using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Repositories
 {
@@ -11,6 +13,6 @@ namespace KarmicEnergy.Core.Repositories
         {
 
         }
-        #endregion Constructor              
+        #endregion Constructor   
     }
 }

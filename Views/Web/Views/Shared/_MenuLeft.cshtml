@@ -4,14 +4,14 @@
 <ul class="sidebar-menu">
     @if (this.HasRoles("SuperAdmin", "Admin"))
     {
-        <li class="treeview @Html.MenuItemActive("Customer", "Index", "Admin")">
+        <li class="treeview @Html.MenuItemActive("Customer", "Admin")">
             <a href="/Admin/Customer">
                 <img src="/images/customers.png" alt="customers" title="customers">
                 <p>CUSTOMERS</p>
             </a>
         </li>
 
-        <li class="treeview @Html.MenuItemActive("User", "Index", "Admin")">
+        <li class="treeview @Html.MenuItemActive("User", "Admin")">
             <a href="/Admin/User">
                 <img src="/images/users.png" alt="users" title="users">
                 <p>USERS</p>
@@ -39,14 +39,14 @@
 
     @if (this.HasRoles("Customer", "CustomerAdmin"))
     {
-        <li class='treeview @Html.MenuItemActive("User", "Index", "Customer")'>
+        <li class='treeview @Html.MenuItemActive("User", "Customer")'>
             <a href="/Customer/User">
                 <img src="/images/users.png" alt="users" title="users">
                 <p>USERS</p>
             </a>
         </li>
 
-        <li class="treeview @Html.MenuItemActive("Contact", "Index", "Customer")">
+        <li class="treeview @Html.MenuItemActive("Contact", "Customer")">
             <a href="/Customer/Contact">
                 <img src="/images/contacts.png" alt="contacts" title="contacts">
                 <p>CONTACTS</p>
@@ -55,7 +55,7 @@
 
         if (!this.IsSite())
         {
-            <li class="treeview @Html.MenuItemActive("Site", "Index", "Customer")">
+            <li class="treeview @Html.MenuItemActive("Site", "Customer")">
                 <a href="/Customer/Site">
                     <img src="/images/sites.png" alt="sites" title="sites">
                     <p>SITES</p>
@@ -63,14 +63,14 @@
             </li>
         }
 
-        <li class="treeview @Html.MenuItemActive("Tank", "Index", "Customer")">
+        <li class="treeview @Html.MenuItemActive("Tank", "Customer")">
             <a href="/Customer/Tank">
                 <img src="/images/my_tank.png" alt="tanks" title="tanks">
                 <p>TANK</p>
             </a>
         </li>
 
-        <li class="treeview @Html.MenuItemActive("SensorGroup", "Index", "Custumes")">
+        <li class="treeview @Html.MenuItemActive("SensorGroup", "Customer")">
             <a href="/Customer/SensorGroup">
                 <img src="/images/my_tank.png" alt="tanks" title="tanks">
                 <p>Sensor Group</p>
@@ -80,21 +80,21 @@
 
     @if (this.HasRoles("Customer", "CustomerAdmin", "CustomerOperator"))
     {
-        <li class="treeview @Html.MenuItemActive("FastTracker", "Index", "Customer")">
+        <li class="treeview @Html.MenuItemActive("FastTracker", "Customer")">
             <a href="/Customer/FastTracker">
                 <img src="/images/fast_track.png" alt="fast_track" title="fast_track">
                 <p>FAST TRACKER</p>
             </a>
         </li>
 
-        <li class="treeview @Html.MenuItemActive("TankReport", "Index", "Customer")">
+        <li class="treeview @Html.MenuItemActive("TankReport", "Customer")">
             <a href="/Customer/TankReport">
                 <img src="/images/my_tank_report.png" alt="tank_report" title="tank_report">
                 <p>MY TANK REPORT</p>
             </a>
         </li>
 
-        <li class="treeview @Html.MenuItemActive("Log", "Index", "Customer")">
+        <li class="treeview @Html.MenuItemActive("Log", "Customer")">
             >
             <a href="#">
                 <img src="/images/loga_sample.png" alt="logs" title="logs">

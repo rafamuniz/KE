@@ -257,6 +257,7 @@
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankWithWaterVolume.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Monitoring\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\GroupViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\SensorGroupViewModel.cs" />
@@ -1510,6 +1511,7 @@
     <Content Include="Areas\Admin\Views\StickConversion\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\StickConversion\Index.cshtml" />
     <Content Include="Areas\Admin\Views\StickConversion\Values.cshtml" />
+    <Content Include="Areas\Customer\Views\Monitoring\Index.cshtml" />
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />
     <Content Include="Scripts\angular\angular.min.js.map" />
@@ -2805,8 +2807,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Customer\ViewModels\Monitoring\" />
-    <Folder Include="Areas\Customer\Views\Monitoring\" />
     <Folder Include="Helpers\" />
     <Folder Include="images\geometries\" />
   </ItemGroup>

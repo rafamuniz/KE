@@ -13,7 +13,7 @@ namespace KarmicEnergy.Core.Repositories
         public KERepositoryBase(KEContext context)
             : base(context)
         {
-
+     
         }
         #endregion Constructor
 

@@ -76,6 +76,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Customer/Views/FastTracker/_Tank.cshtml">
       <publishTime>04/02/2016 12:38:46</publishTime>
     </File>
+    <File Include="Areas/Customer/Views/Monitoring/Index.cshtml">
+      <publishTime>05/10/2016 00:38:16</publishTime>
+    </File>
     <File Include="Areas/Customer/Views/Sensor/Create.cshtml">
       <publishTime>05/03/2016 00:01:13</publishTime>
     </File>
@@ -122,7 +125,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2016 00:00:49</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/_TankData.cshtml">
-      <publishTime>05/05/2016 20:52:48</publishTime>
+      <publishTime>05/09/2016 15:09:49</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/_TankModel.cshtml">
       <publishTime>04/26/2016 23:26:11</publishTime>
@@ -167,13 +170,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>05/08/2016 23:24:29</publishTime>
+      <publishTime>05/10/2016 00:38:45</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>05/09/2016 01:54:32</publishTime>
+      <publishTime>05/10/2016 00:38:52</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -416,7 +419,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:39:49</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>05/09/2016 01:01:30</publishTime>
+      <publishTime>05/09/2016 15:12:06</publishTime>
     </File>
     <File Include="Content/themes/base/accordion.css">
       <publishTime>03/30/2016 03:59:42</publishTime>
@@ -3914,7 +3917,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/04/2016 20:36:12</publishTime>
     </File>
     <File Include="Scripts/app/utils.js">
-      <publishTime>04/20/2016 12:34:10</publishTime>
+      <publishTime>05/09/2016 15:02:39</publishTime>
     </File>
     <File Include="Scripts/bootstrap-notify.js">
       <publishTime>03/23/2016 23:44:28</publishTime>
@@ -7856,7 +7859,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:32:23</publishTime>
     </File>
     <File Include="Views/Shared/_MenuLeft.cshtml">
-      <publishTime>05/09/2016 01:18:59</publishTime>
+      <publishTime>05/09/2016 23:10:02</publishTime>
     </File>
     <File Include="Views/Shared/_MenuTop.cshtml">
       <publishTime>04/21/2016 00:55:05</publishTime>

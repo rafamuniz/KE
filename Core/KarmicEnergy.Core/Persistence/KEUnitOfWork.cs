@@ -29,6 +29,7 @@ namespace KarmicEnergy.Core.Persistence
 
         private ITriggerRepository _TriggerRepository;
         private IAlarmRepository _AlarmRepository;
+        private IAlarmHistoryRepository _AlarmHistoryRepository;
 
         private IContactRepository _ContactRepository;
         private ICountryRepository _CountryRepository;
@@ -139,6 +140,11 @@ namespace KarmicEnergy.Core.Persistence
         public IAlarmRepository AlarmRepository
         {
             get { return _AlarmRepository ?? (_AlarmRepository = new AlarmRepository(_context)); }
+        }
+
+        public IAlarmHistoryRepository AlarmHistoryRepository
+        {
+            get { return _AlarmHistoryRepository ?? (_AlarmHistoryRepository = new AlarmHistoryRepository(_context)); }
         }
 
         public ISensorItemEventRepository SensorItemEventRepository

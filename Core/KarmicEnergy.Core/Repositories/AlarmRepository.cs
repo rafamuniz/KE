@@ -1,5 +1,10 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+//using System.Data.Linq;
+//using System.Data.Entity;
 
 namespace KarmicEnergy.Core.Repositories
 {
@@ -12,14 +17,35 @@ namespace KarmicEnergy.Core.Repositories
 
         }
         #endregion Constructor    
+        public List<Alarm> GetsActive()
+        {
+            return base.Find(x => x.EndDate == null).ToList();
+        }
 
-        //public List<Alarm> GetsByTankId(Guid tankId)
-        //{
-        //    var lastEvent = Context.Alarms.Where(x => x.SensorItem.Sensor.Tank.Id == tankId && x.SensorItem.ItemId == (int)item).OrderByDescending(d => d.EventDate);
-        //    if (!lastEvent.Any())
-        //        return null;
+        public List<Alarm> GetsBySiteId(Guid siteId)
+        {
+            return base.Find(x => x.Trigger.SensorItem.Sensor.Tank.SiteId == siteId && x.EndDate == null).ToList();
+        }
 
-        //    return lastEvent.AsEnumerable().Last();
-        //}
+        public Int32 GetTotalOpenByTankId(Guid tankId)
+        {
+            //var total = (from a in Context.Alarms
+            //             join sie in Context.SensorItemEvents on a.SensorItemEventId equals sie.Id
+            //             join si in Context.SensorItems on sie.SensorItemId equals si.Id
+            //             join s in Context.Sensors on si.SensorId equals s.Id
+            //             join t in Context.Tanks on s.TankId equals tankId
+            //             select a).Count();
+
+            //var query = (from a in Context.Alarms
+            //             join sie in Context.SensorItemEvents on a.SensorItemEventId equals sie.Id
+            //             join si in Context.SensorItems on sie.SensorItemId equals si.Id
+            //             join s in Context.Sensors on si.SensorId equals s.Id
+            //             join t in Context.Tanks on s.TankId equals tankId
+            //             select a);
+
+            var total = base.Find(x => x.Trigger.SensorItem.Sensor.TankId == tankId).Count();
+
+            return total;
+        }
     }
 }

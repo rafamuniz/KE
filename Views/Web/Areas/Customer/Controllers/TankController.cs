@@ -285,8 +285,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                         }
 
                         // Alarms
-                        vm.Alarms = 0;
-                        //var alarms = KEUnitOfWork.AlarmRepository.GetAll(tank.Id, ItemEnum.WaterTemperature);
+                        var alarms = KEUnitOfWork.AlarmRepository.GetTotalOpenByTankId(tank.Id);
+                        vm.Alarms = alarms;
 
                         viewModel.Tanks.Add(vm);
                     }

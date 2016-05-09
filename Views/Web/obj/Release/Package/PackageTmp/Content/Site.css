@@ -6608,3 +6608,24 @@ background-color: #1C2B39; #graph-draw .chart {
         font-family: 'open_sansregular';
         font-size: 10px;
     }
+
+
+/*****************/
+/*    BLINK      */
+/*****************/
+.blink {
+    animation: blink-animation 1s steps(5, start) infinite;
+    -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+
+@-webkit-keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}

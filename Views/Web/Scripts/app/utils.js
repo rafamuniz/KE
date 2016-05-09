@@ -156,3 +156,11 @@ function geoLocationError(err) {
             break;
     }
 };
+
+
+function blink(element, fadeout, fadin) {
+    fadeout = typeof fadeout !== 'undefined' ? fadeout : 100;
+    fadin = typeof fadin !== 'undefined' ? fadin : 100;
+
+    $(element).fadeOut(fadeout).fadeIn(fadin, blink);
+};

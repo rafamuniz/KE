@@ -1,10 +1,10 @@
 ﻿using KarmicEnergy.Core.Entities;
-using KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup;
+using KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring;
 using KarmicEnergy.Web.Controllers;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Validation;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace KarmicEnergy.Web.Areas.Customer.Controllers
@@ -13,20 +13,30 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     public class MonitoringController : BaseController
     {
         #region Index
-        [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Index()
+
+        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        public async Task<ActionResult> Index()
         {
             List<ListViewModel> viewModels = new List<ListViewModel>();
 
             if (!IsSite)
             {
-                var groups = KEUnitOfWork.GroupRepository.GetAllActive().ToList();
-                viewModels = ListViewModel.Map(groups);
+                var alarms = KEUnitOfWork.AlarmRepository.GetAllActive().ToList();
+                viewModels = ListViewModel.Map(alarms);
             }
             else
             {
-                var groups = KEUnitOfWork.GroupRepository.GetsBySiteId(SiteId).ToList();
-                viewModels = ListViewModel.Map(groups);
+                var alarms = KEUnitOfWork.AlarmRepository.GetsBySiteId(SiteId).ToList();
+                viewModels = ListViewModel.Map(alarms);
+            }
+
+            if (viewModels.Any())
+            {
+                foreach (var vm in viewModels.Where(x => x.AckUserId.HasValue))
+                {
+                    var user = await UserManager.FindByIdAsync(vm.AckUserId.Value.ToString());
+                    vm.AckUser = user.Name;
+                }
             }
 
             return View(viewModels);
@@ -34,154 +44,46 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #endregion Index
 
-        #region Create
-
-        [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Create()
-        {
-            return View(LoadDefault());
-        }
-
-        #endregion Create
-
-        #region Add
-
-        [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Add(Guid groupId)
-        {
-            GroupViewModel viewModel = LoadDefault();
-            var sensorGroups = KEUnitOfWork.SensorGroupRepository.Find(x => x.GroupId == groupId).ToList();
-            viewModel.Sensors = SensorGroupViewModel.Map(sensorGroups);
-
-            return View("Create", viewModel);
-        }
-
-        private GroupViewModel LoadDefault()
-        {
-            GroupViewModel viewModel = new GroupViewModel();
-
-            if (!IsSite)
-            {
-                LoadSites(CustomerId);
-            }
-            else
-            {
-                viewModel.SiteId = SiteId;
-                LoadTanks(CustomerId, SiteId);
-            }
-
-            return viewModel;
-        }
+        #region Ack
 
         //
-        // POST: /SensorGroup/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Add(GroupViewModel viewModel)
+        // POST: /Monitoring/Acknowledge
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        public ActionResult Acknowledge(Guid id)
         {
-            Group group = new Group();
-
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    LoadDefault();
-                    return View("Create", viewModel);
-                }
+                var alarm = KEUnitOfWork.AlarmRepository.Get(id);
 
-                if (viewModel.GroupId.HasValue) // Update Group
-                {
-                    group = KEUnitOfWork.GroupRepository.Get(viewModel.GroupId.Value);
-                }
-                else
-                {
-                    group.SiteId = SiteId;
-                }
+                alarm.LastAckDate = DateTime.UtcNow;
+                alarm.LastAckUserId = Guid.Parse(UserId);
 
-                SensorGroup sensorGroup = new SensorGroup();
-                sensorGroup.SensorId = viewModel.SensorId.Value;
-                sensorGroup.Weight = viewModel.Weight.Value;
-
-                group.SensorGroups.Add(sensorGroup);
-
-                if (viewModel.GroupId.HasValue)
+                AlarmHistory alarmHistory = new AlarmHistory()
                 {
-                    KEUnitOfWork.GroupRepository.Update(group);
-                }
-                else
-                {
-                    KEUnitOfWork.GroupRepository.Add(group);
-                }
+                    AckDate = alarm.LastAckDate.Value,
+                    AckUserId = alarm.LastAckUserId.Value,
+                    AlarmId = alarm.Id,
+                    Value = alarm.Value,
+                    CalculatedValue = alarm.CalculatedValue
+                };
 
+                KEUnitOfWork.AlarmHistoryRepository.Add(alarmHistory);
+                KEUnitOfWork.AlarmRepository.Update(alarm);
                 KEUnitOfWork.Complete();
 
-                return RedirectToAction("Add", new { GroupId = sensorGroup.GroupId });
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
                 AddErrors(ex);
             }
 
-            LoadDefault();
-            return View("Create", viewModel);
+            return View();
         }
 
-        #endregion Add
-
-        #region Edit
-
-        [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Edit(Guid id)
-        {
-            return RedirectToAction("Add", new { GroupId = id });
-        }
-
-        #endregion Edit
-
-        #region Delete
-        //
-        // GET: /SensorGroup/Delete
-        [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Delete(Guid id)
-        {
-            var group = KEUnitOfWork.GroupRepository.Get(id);
-
-            if (group == null)
-            {
-                AddErrors("Group does not exist");
-                return View("Index");
-            }
-
-            KEUnitOfWork.GroupRepository.Remove(group);
-            KEUnitOfWork.Complete();
-
-            return RedirectToAction("Index");
-        }
-
-        //
-        // GET: /SensorGroup/Delete
-        [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult DeleteSensor(Guid id)
-        {
-            var sensor = KEUnitOfWork.SensorGroupRepository.Get(id);
-
-            if (sensor == null)
-            {
-                AddErrors("Sensor does not exist");
-                return View("Index");
-            }
-
-            var groupId = sensor.GroupId;
-            KEUnitOfWork.SensorGroupRepository.Remove(sensor);
-            KEUnitOfWork.Complete();
-
-            return RedirectToAction("Add", new { GroupId = groupId });
-        }
-
-        #endregion Delete
+        #endregion Ack
 
         [HttpGet]
         public ActionResult GetsTankBySiteId(Guid siteId)

@@ -59,9 +59,14 @@
             }
         </div>
 
+        @{
+            var red = @Model.Alarms > 0 ? "color:red;" : "";
+            var blink = @Model.Alarms > 0 ? "blink" : "";
+        }
+
         <div class="detail-box detail-alarm">
             <p>Alarms</p>
-            <p><span>@Model.Alarms</span></p>
+            <p><span id="spanAlarm" style="@red" class="@blink">@Model.Alarms</span></p>
         </div>
     </div>
 

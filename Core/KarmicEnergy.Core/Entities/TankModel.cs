@@ -63,8 +63,8 @@ namespace KarmicEnergy.Core.Entities
         [Column("DimensionValue3", TypeName = "DECIMAL")]
         public Decimal? DimensionValue3 { get; set; }
 
-        [Column("WaterVolumeCapacity", TypeName = "DECIMAL")]
-        public Decimal? WaterVolumeCapacity { get; set; }
+        [Column("WaterVolumeCapacity", TypeName = "FLOAT")]
+        public Double? WaterVolumeCapacity { get; set; }
 
         #endregion Property      
 
@@ -154,7 +154,7 @@ namespace KarmicEnergy.Core.Entities
         //    return Length.Value * Width.Value * Height.Value;
         //}
 
-        public Decimal? CalculateWaterCapacity()
+        public Double? CalculateWaterCapacity()
         {
             if (this.GeometryId != default(Int16))
             {
@@ -165,7 +165,7 @@ namespace KarmicEnergy.Core.Entities
                         if (this.Width.HasValue)
                         {
                             var result = Math.Pow((Double)this.Width.Value, 3);
-                            return Decimal.Parse(result.ToString());
+                            return result;
                         }
                         else
                             break;
@@ -174,7 +174,7 @@ namespace KarmicEnergy.Core.Entities
                     case (Int16)GeometryEnum.Rectangle:
                         if (this.Length.HasValue && this.Height.HasValue && this.Width.HasValue)
                         {
-                            return this.Length.Value * this.Height.Value * this.Width.Value;
+                            return (Double)(this.Length.Value * this.Height.Value * this.Width.Value);
                         }
                         else
                             break;
@@ -182,15 +182,15 @@ namespace KarmicEnergy.Core.Entities
                     case (Int16)GeometryEnum.CylinderHorizontal:
                         if (this.Height.HasValue && this.Length.HasValue && this.BottomWidth.HasValue)
                         {
-                            return Height.Value * Length.Value * BottomWidth.Value;
+                            return (Double)(Height.Value * Length.Value * BottomWidth.Value);
                         }
                         else
                             break;
 
                     case (Int16)GeometryEnum.CylinderVertical:
-                        if (Width.HasValue && this.Height.HasValue && this.FaceLength.HasValue)
+                        if (Width.HasValue && this.Height.HasValue)
                         {
-                            return Width.Value * Height.Value * FaceLength.Value;
+                            return (Double)(Width.Value * Height.Value);
                         }
                         else
                             break;
@@ -204,7 +204,7 @@ namespace KarmicEnergy.Core.Entities
                             var areaHS1 = (Double)Height * (Double)DimensionValue1;
                             var areaHS2 = Math.PI * Math.Pow(((Double)Height / 2), 2);
                             var cubicHS = (areaHS1 + areaHS2) * (Double)Length;
-                            return (Decimal)cubicHS;
+                            return cubicHS;
                         }
                         else
                             break;
@@ -218,7 +218,7 @@ namespace KarmicEnergy.Core.Entities
                             var areaVS1 = (Double)Length * (Double)Width;
                             var areaVS2 = Math.PI * Math.Pow(((Double)Width / 2), 2);
                             var cubicVS = (areaVS1 + areaVS2) * (Double)Height;
-                            return (Decimal)cubicVS;
+                            return cubicVS;
                         }
                         else
                             break;
@@ -230,7 +230,7 @@ namespace KarmicEnergy.Core.Entities
                         {
                             var areaST = Math.PI * Math.Pow((Double)(Height.Value / 2), (Double)(Width.Value / 2));
                             var cubicST = areaST * (Double)Length.Value;
-                            return (Decimal)cubicST;
+                            return cubicST;
                         }
                         else
                             break;
@@ -240,6 +240,22 @@ namespace KarmicEnergy.Core.Entities
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Get the integral and floating point portions of a Double
+        /// as separate integer values, where the floating point value is 
+        /// raised to the specified power of ten, given by 'places'.
+        /// </summary>
+        public static void Split(Double value, Int32 places, out Int32 left, out Int32 right)
+        {
+            left = (Int32)Math.Truncate(value);
+            right = (Int32)((value - left) * Math.Pow(10, places));
+        }
+
+        public static void Split(Double value, out Int32 left, out Int32 right)
+        {
+            Split(value, 1, out left, out right);
         }
 
         public Decimal? CalculateWaterRemaining(Int32 minimalDistance, Int32 maxDistance)

@@ -19,59 +19,64 @@
 <script src="~/Scripts/app/tank-gauge.js"></script>
 
 <div class="row">
-    <div class="col-sm-12 col-md-12 col-lg-12">
-        <div class="col-sm-6 col-md-6 col-lg-6">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12 gauge-image">
+    <div id="gauge-alarm" class="col-sm-12 col-md-12 col-lg-12">
+        <div id="gauge" class="col-sm-7 col-md-7 col-lg-7">
+            <div class="row gauge">
+                <div class="col-sm-12 col-md-12 col-lg-12 gauge-title">
                     <h3>@Model.TankName</h3>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="row">
-                        <div class="col-sm-4 col-md-4 col-lg-4 guage-table">
-                            <div class="col-sm-12 col-md-12 col-lg-12 gauge-cell">
-                                <div id="tankWaterVolumePerc" class="guage-value">
-                                    <h3>@Model.WaterVolumePercentage.Value.ToString("P2")</h3>
-                                    <p>Full</p>
-                                </div>
-                                <div id="tankWaterVolume" class="guage-value">
-                                    <p>Total volume</p>
-                                    <h3>@Model.WaterVolumeCapacity</h3>
-                                    <p>gallons</p>
-                                </div>
-                                <div id="tankWaterLastMeasurement" class="guage-value">
-                                    <p>@Model.WaterVolumeLastMeasurement.Value.ToString("hh:mm:ss tt") </p>
-                                    <p>@Model.WaterVolumeLastMeasurement.Value.ToString("MM/dd/yyyy") </p>
-                                </div>
+                    <div class="row guage-table">
+                        <div class="col-sm-4 col-md-4 col-lg-4 gauge-data">
+                            <div id="tankWaterVolumePerc" class="guage-value">
+                                <h3>@Model.WaterVolumePercentage.Value.ToString("P2")</h3>
+                                <p>Full</p>
+                            </div>
+                            <div id="tankWaterVolume" class="guage-value">
+                                <p>Total volume</p>
+                                <h3>@Model.WaterVolumeCapacity</h3>
+                                <p>gallons</p>
+                            </div>
+                            <div id="tankWaterLastMeasurement" class="guage-value">
+                                <p>@Model.WaterVolumeLastMeasurement.Value.ToString("hh:mm:ss tt") </p>
+                                <p>@Model.WaterVolumeLastMeasurement.Value.ToString("MM/dd/yyyy") </p>
                             </div>
                         </div>
 
-                        <div class="col-sm-8 col-md-8 col-lg-8 gauge-cell" style="background: #FFF;">
-                            <div class="col-sm-12 col-md-12 col-lg-12 gauge-cell">
-                                <div id="gauge_@Model.TankId"></div>
-
-                                <script type="text/javascript">
-                                    generateFlowMeter('@Model.TankId');
-                                </script>
+                        <div class="col-sm-8 col-md-8 col-lg-8 gauge-cell">
+                            <div id="gauge_@Model.TankId"></div>
+                            <div class="tube">
+                                <img src="~/images/water-flow.gif" />
                             </div>
+                            <script type="text/javascript">
+                                generateFlowMeter('@Model.TankId');
+                            </script>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-6 col-md-6 col-lg-6 alarm-box">
-            <div class="gauge-title">
-                <h3>Alarms</h3>
+        <div id="alarm" class="col-sm-5 col-md-5 col-lg-5 gauge-box">
+            <div class="header">
+                <h3>Alarm</h3>
             </div>
-            <div class="gauge-alarm-bg">
+            <div class="body">
                 <div class="alarm-table">
                     <table>
                         <tbody></tbody>
                     </table>
                 </div>
+
+                <div class="">
+                    @Html.NoEncodeActionLink("<span>ADD</span>", "Add new Trigger", "Create", "Trigger", routeValues: new { area = "Customer", TankId = Request.QueryString["TankId"] }, htmlAttributes: new { @class = "btn" })
+                </div>
+            </div>
+            <div class="footer">
+
             </div>
         </div>
     </div>
@@ -145,7 +150,8 @@
     <script type="text/javascript">
         $(function () {
             showLoading();
-
+            var rowheight = $("#gauge-alarm").height();
+            $("#alarm").height(rowheight);
             hideLoading();
         });
     </script>

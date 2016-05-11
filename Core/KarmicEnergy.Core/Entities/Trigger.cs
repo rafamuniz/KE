@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,15 +14,13 @@ namespace KarmicEnergy.Core.Entities
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        [Column("Name", TypeName = "NVARCHAR")]
-        [StringLength(128)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        public String Name { get; set; }
-
-        [Column("Email", TypeName = "NVARCHAR")]
+        [Column("MinValue", TypeName = "NVARCHAR")]
         [StringLength(256)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        public String Email { get; set; }
+        public String MinValue { get; set; }
+
+        [Column("MaxValue", TypeName = "NVARCHAR")]
+        [StringLength(256)]
+        public String MaxValue { get; set; }
 
         [Column("Status", TypeName = "CHAR")]
         [StringLength(1)]
@@ -51,5 +50,11 @@ namespace KarmicEnergy.Core.Entities
         public virtual Severity Severity { get; set; }
 
         #endregion Severity   
+
+        #region Contacts
+
+        public virtual List<TriggerContact> Contacts { get; set; }
+
+        #endregion Contacts  
     }
 }

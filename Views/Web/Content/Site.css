@@ -6242,6 +6242,32 @@ div.uploader {
 /********************/
 /* TANK WATER GAUGE */
 /********************/
+.gauge-box {
+    padding: 0px;
+    background: #F2F2F2;
+    margin-right: 0px;
+}
+
+    .gauge-box .header {
+        min-height: 40px;
+        background: #00A2AE;
+    }
+
+        .gauge-box .header h3 {
+            font-size: 20px;
+            font-family: 'open_sansbold';
+            color: #FFF;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+    .gauge-box .body {
+        min-height: 400px;
+    }
+
+    .gauge-box .footer {
+    }
+
 .gauge-image {
     min-height: 40px;
     background: #00A2AE;
@@ -6257,47 +6283,40 @@ div.uploader {
 
 .guage-table {
     padding: 0px;
+    background: #00BAC7;
+    margin-right: 0px;
 }
 
-    .guage-table .gauge-cell {
-        display: table-cell;
-        vertical-align: middle;
-        text-align: center;
-        position: relative;
+    .guage-table .gauge-data {
+        background: #00BAC7;
     }
 
-.gauge-cell .arrow {
-    position: absolute;
-    z-index: 1;
-    top: 55px;
-    left: 50%;
-    margin-left: -11px;
+    .guage-table .gauge-cell {
+        padding: 0px !important;
+    }
+
+        .guage-table .gauge-cell .tube {
+        }
+
+.gauge-cell .highcharts-container {
+    height: 370px !important;
 }
 
-.guage-table .gauge-cell:first-child {
-    background: #00bac7;
-}
-
-.guage-table .gauge-cell .guage-value {
+.guage-table .gauge-data .guage-value {
     padding: 15px 0;
     text-align: center;
-    color: #fff;
+    color: #FFF;
 }
 
-    .guage-table .gauge-cell .guage-value p {
+    .guage-table .gauge-data .guage-value p {
         font-size: 12px;
-        color: #fff;
+        color: #FFF;
         text-align: center;
         font-family: "open_sansregular";
         padding: 0 13px;
     }
 
-.gauge-cell {
-    min-height: 400px;
-    height: 400px;
-}
-
-    .gauge-cell .guage-value h3 {
+    .guage-table .gauge-data .guage-value h3 {
         font-size: 24px;
         color: #FFF;
         text-align: center;
@@ -6327,21 +6346,17 @@ div.uploader {
 }
 
 .tank-temperature-box {
-    /*margin: 5px 0;*/
     padding: 8px;
     background: #F2F2F2;
-    /*min-height: 300px;
-    min-width: 200px;
-    max-width: 45%;*/
 }
 
 .sensor-voltage-box {
-    /*margin: 5px 0;*/
     padding: 8px;
     background: #F2F2F2;
-    /*min-height: 300px;
-    min-width: 200px;
-    max-width: 55%;*/
+}
+
+.gauge {
+    margin-right: 0px;
 }
 
 .gauge-title {

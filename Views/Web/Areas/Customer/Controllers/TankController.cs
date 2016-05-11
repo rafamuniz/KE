@@ -47,13 +47,13 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Create(CreateViewModel viewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(InitCreate());
-            }
-
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(InitCreate());
+                }
+
                 var tank = viewModel.Map();
                 var tankModel = viewModel.TankModelViewModel.Map();
                 tank.WaterVolumeCapacity = tank.CalculateWaterCapacity();

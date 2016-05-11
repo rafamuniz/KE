@@ -83,6 +83,7 @@
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\SensorGroup.cs" />
     <Compile Include="Entities\SensorItem.cs" />
+    <Compile Include="Entities\TriggerContact.cs" />
     <Compile Include="Entities\UnitType.cs" />
     <Compile Include="Entities\Unit.cs" />
     <Compile Include="Entities\Trigger.cs" />
@@ -97,9 +98,13 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201605091440025_AWS.cs" />
-    <Compile Include="Migrations\201605091440025_AWS.Designer.cs">
-      <DependentUpon>201605091440025_AWS.cs</DependentUpon>
+    <Compile Include="Migrations\201605111215333_Dev.cs" />
+    <Compile Include="Migrations\201605111215333_Dev.Designer.cs">
+      <DependentUpon>201605111215333_Dev.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605111514436_Dev1.cs" />
+    <Compile Include="Migrations\201605111514436_Dev1.Designer.cs">
+      <DependentUpon>201605111514436_Dev1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
@@ -166,8 +171,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605091440025_AWS.resx">
-      <DependentUpon>201605091440025_AWS.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605111215333_Dev.resx">
+      <DependentUpon>201605111215333_Dev.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605111514436_Dev1.resx">
+      <DependentUpon>201605111514436_Dev1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

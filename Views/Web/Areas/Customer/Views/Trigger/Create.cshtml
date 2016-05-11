@@ -1,0 +1,156 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
+@using Munizoft.Extensions
+@using Munizoft.MVC.Helpers
+@using KarmicEnergy.Web.Extensions
+
+@model CreateViewModel
+
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Trigger - Create";
+}
+
+@using (Html.BeginForm("Create", "Trigger", new { area = "Customer" }, FormMethod.Post, new { id = "form", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            @if (!this.IsSite())
+                {
+                <div class="form-group">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                        @Html.LabelFor(m => m.SiteId, new { @class = "control-label" })
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                        @Html.DropDownListFor(model => model.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", id = "ddlSite", onclick = "GetsTankBySiteId(this.value, 'ddlTank', '/Trigger/GetsTankBySiteId');" })
+                        @Html.ValidationMessageFor(m => m.SiteId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                        @Html.LabelFor(m => m.TankId, new { @class = "control-label" })
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                        <select id="ddlTank" name="TankId" class="form-control" disabled onclick="GetsSensorByTankId(this.value, 'SensorId', '/Trigger/GetsSensorByTankId');">
+                            <option value="">-- Please select a Tank --</option>
+                        </select>
+                        @Html.ValidationMessageFor(m => m.TankId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+            else
+            {
+                @Html.HiddenFor(m => m.SiteId)
+
+                <div class="form-group">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                        @Html.LabelFor(m => m.TankId, new { @class = "control-label" })
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                        @Html.DropDownListFor(model => model.TankId, new SelectList(ViewBag.Tanks, "Id", "Name"), "-- Please select a Tank --", new { @class = "form-control selectpicker", id = "ddlTank", onclick = "GetsSensorByTankId(this.value, 'SensorId', '/Trigger/GetsSensorByTankId');" })
+                        @Html.ValidationMessageFor(m => m.TankId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+
+            <div class="form-group">
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                    @Html.LabelFor(m => m.SensorId, new { @class = "control-label" })
+                </div>
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                    <select id="SensorId" name="SensorId" class="form-control selectpicker" disabled , onclick="GetsSensorItemBySensorId(this.value, 'SensorItemId', '/Trigger/GetsSensorItemBySensorId');">
+                        <option value="">-- Please select a Sensor --</option>
+                    </select>
+                    @Html.ValidationMessageFor(m => m.SensorId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                    @Html.LabelFor(m => m.SensorItemId, new { @class = "control-label" })
+                </div>
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                    <select id="SensorItemId" name="SensorItemId" class="form-control selectpicker" disabled>
+                        <option value="">-- Please select an Item --</option>
+                    </select>
+                    @Html.ValidationMessageFor(m => m.SensorItemId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.MinValue, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.MinValue, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.MinValue, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.MaxValue, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.MaxValue, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.MaxValue, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.SeverityId, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.SeverityId, new SelectList(ViewBag.Severities, "Id", "Name"), "-- Please select a Severity --", new { @class = "form-control selectpicker", id = "ddlSeverity" })
+                    @Html.ValidationMessageFor(m => m.SeverityId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.Status, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Status, new SelectList(ViewBag.Statuses, "Id", "Name", "A"), "-- Please select a Status --", new { @class = "form-control selectpicker", id = "ddlStatus" })
+                    @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            @for (int i = 0; i < ViewBag.Contacts.Count; i++)
+            {
+                <input name="Contacts[' + i + '].Id" type="hidden" value="@ViewBag.Contacts[i].Id">
+                <input name="Contacts[' + i + '].Name" type="hidden" value="@ViewBag.Contacts[i].Name">
+                <input name="Contacts[' + i + '].IsSelected" type="hidden">
+                <input type="checkbox" style="vertical-align: 3px;" name="Contacts[' + i + '].IsSelected" /><label>@ViewBag.Contacts[i].Name</label>
+            }
+
+            @for (int i = 0; i < ViewBag.CustomerUsers.Count; i++)
+            {
+                <input name="Users[' + i + '].Id" type="hidden" value="@ViewBag.CustomerUsers[i].Id">
+                <input name="Users[' + i + '].Name" type="hidden" value="@ViewBag.CustomerUsers[i].Name">
+                <input name="Users[' + i + '].IsSelected" type="hidden">
+                <input type="checkbox" style="vertical-align: 3px;" name="Users[' + i + '].IsSelected" /><label>@ViewBag.CustomerUsers[i].Name</label>
+            }
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center btn-submit">
+        <input type="submit" class="btn btn-default" value="SAVE">
+        <a class="btn" href='/Customer/Tank/Gauge/tankId=@Request.QueryString["TankId"]'>Cancel</a>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/app/trigger.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+        })
+    </script>
+}

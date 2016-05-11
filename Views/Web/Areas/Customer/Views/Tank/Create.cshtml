@@ -154,7 +154,7 @@
             $('#archorMap').visible();
         };
 
-        function geoLocationError(err) {
+        function geoLocationError(error) {
             switch (error.code) {
                 case error.PERMISSION_DENIED:
                     notifiyError("User denied the request for Geolocation.")

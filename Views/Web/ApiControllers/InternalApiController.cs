@@ -18,23 +18,5 @@ namespace KarmicEnergy.Web.ApiControllers
         }
         #endregion Tank
 
-        #region SensorAlarm
-        [HttpPost]
-        [Route("api/v1/json/customer/sensoralarm/add", Name = "AddSensorAlarm")]
-        public IHttpActionResult AddSensorAlarm(ApiControllers.Models.SensorAlarm model)
-        {
-            Trigger trigger = new Trigger()
-            {
-                Name = model.Description,
-                Email = model.Email,
-                SeverityId = model.SeverityId//,
-                //SensorItemId = model.SensorId
-            };
-
-            KEUnitOfWork.TriggerRepository.Add(trigger);
-            KEUnitOfWork.Complete();
-            return Ok(trigger);
-        }
-        #endregion SensorAlarm
     }
 }

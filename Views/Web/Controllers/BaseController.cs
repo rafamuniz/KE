@@ -309,6 +309,13 @@ namespace KarmicEnergy.Web.Controllers
         //    return imagesSelect;
         //}
 
+        protected List<Severity> LoadSeverities()
+        {
+            List<Severity> severities = KEUnitOfWork.SeverityRepository.GetAllActive().ToList();
+            ViewBag.Severities = severities;
+            return severities;
+        }
+
         protected List<TankModel> LoadTankModels()
         {
             List<TankModel> tankModels = KEUnitOfWork.TankModelRepository.GetAllActive().ToList();
@@ -330,11 +337,40 @@ namespace KarmicEnergy.Web.Controllers
             return items;
         }
 
+        protected List<Contact> LoadContacts(Guid customerId)
+        {
+            List<Contact> contacts = KEUnitOfWork.ContactRepository.GetsByCustomerId(customerId);
+            ViewBag.Contacts = contacts;
+            return contacts;
+        }
+
+        protected List<SensorItem> LoadSensorItems(Guid sensorId)
+        {
+            List<SensorItem> sensorItems = KEUnitOfWork.SensorItemRepository.GetsBySensor(sensorId);
+            ViewBag.SensorItems = sensorItems;
+            return sensorItems;
+        }
+
         protected List<Unit> LoadUnits()
         {
             List<Unit> units = KEUnitOfWork.UnitRepository.GetAllActive().ToList();
             ViewBag.Units = units;
             return units;
+        }
+
+        protected List<CustomerUser> LoadUsers(Guid customerId)
+        {
+            dynamic customerUsers = KEUnitOfWork.CustomerUserRepository.GetsByCustomerId(customerId);
+
+            foreach (var u in customerUsers)
+            {
+                var id = u.Id.ToString();
+                ApplicationUser user = UserManager.FindByIdAsync(id);
+                u.Name = user.Name;
+            }
+
+            ViewBag.CustomerUsers = customerUsers;
+            return customerUsers;
         }
 
         //protected List<Site> LoadSites()

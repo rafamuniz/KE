@@ -81,7 +81,6 @@
             <div class="title green">
                 <h2>Info</h2>
             </div>
-
             @Html.Partial("_Address", Model.Address, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "Address" } })
         </div>
     </div>
@@ -94,6 +93,8 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/inputmask")
+    @Scripts.Render("~/bundles/jqueryval")
+
     <script type="text/javascript">
         $(function () {
             //$("#txtIPAddress").mask("999.999.999.999");

@@ -37,6 +37,7 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Customer
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public String PasswordConfirm { get; set; }
 
+        [IgnoreMap]
         public AddressViewModel Address { get; set; }
 
         #endregion Property

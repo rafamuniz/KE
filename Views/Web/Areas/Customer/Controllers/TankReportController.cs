@@ -43,13 +43,13 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                         if (KEUnitOfWork.SensorRepository.HasSensor(tank.Id))
                         {
                             // Water Volume
-                            if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.WaterVolume))
+                            if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.Range))
                             {
-                                var waterVolumesLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.WaterVolume);
+                                var waterVolumesLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.Range);
 
                                 if (waterVolumesLastEvent != null)
                                 {
-                                    report.WaterVolume = Decimal.Parse(waterVolumesLastEvent.Value);
+                                    report.WaterVolume = Decimal.Parse(waterVolumesLastEvent.CalculatedValue);
                                     report.WaterVolumeEventDate = waterVolumesLastEvent.EventDate;
                                 }
                             }
@@ -78,6 +78,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                                 }
                             }
                         }
+
+                        // Alarms
+                        var alarms = KEUnitOfWork.AlarmRepository.GetTotalOpenByTankId(tank.Id);
+                        report.Alarms = alarms;
 
                         viewModel.Reports.Add(report);
                     }

@@ -238,19 +238,19 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             {
                 foreach (var tank in tanks)
                 {
+                    DashboardTankViewModel vm = new DashboardTankViewModel();
+
+                    vm.TankId = tank.Id;
+                    vm.TankName = tank.Name;
+
+                    vm.TankModelId = tank.TankModelId;
+                    vm.TankModelImage = tank.TankModel.ImageFilename;
+
+                    vm.SiteId = tank.SiteId;
+                    vm.WaterVolumeCapacity = tank.WaterVolumeCapacity;
+
                     if (KEUnitOfWork.SensorRepository.HasSensor(tank.Id))
                     {
-                        DashboardTankViewModel vm = new DashboardTankViewModel();
-
-                        vm.TankId = tank.Id;
-                        vm.TankName = tank.Name;
-
-                        vm.TankModelId = tank.TankModelId;
-                        vm.TankModelImage = tank.TankModel.ImageFilename;
-
-                        vm.SiteId = tank.SiteId;
-                        vm.WaterVolumeCapacity = tank.WaterVolumeCapacity;
-
                         // Water Volume
                         if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.Range))
                         {
@@ -283,13 +283,13 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                                 vm.WaterTemperatureLastMeasurement = waterTemperature.EventDate;
                             }
                         }
-
-                        // Alarms
-                        var alarms = KEUnitOfWork.AlarmRepository.GetTotalOpenByTankId(tank.Id);
-                        vm.Alarms = alarms;
-
-                        viewModel.Tanks.Add(vm);
                     }
+
+                    // Alarms
+                    var alarms = KEUnitOfWork.AlarmRepository.GetTotalOpenByTankId(tank.Id);
+                    vm.Alarms = alarms;
+
+                    viewModel.Tanks.Add(vm);
                 }
             }
         }

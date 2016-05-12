@@ -39,8 +39,6 @@
         .Filterable(true)
         .RenderValueAs(o => @Html.Raw("<span title='" + o.WaterVolumeEventDate.ToString() + "'>" + o.WaterVolume + "</span>"));
 
-    //.RenderValueAs(o => @Html.NoEncodeActionLink("<span>" + o.WaterVolume + "</span>", o.WaterVolumeEventDate.ToString(), "Gauge", "Tank", routeValues: new { TankId = o.TankId, area = "Customer" }, htmlAttributes: new { data_modal = "" }));
-
     columns.Add(c => c.WaterVolumePercentage)
         .Titled("% Full")
         .Filterable(true);
@@ -53,9 +51,12 @@
         .Titled("Weather Temp")
         .Filterable(true);
 
-    columns.Add(c => c.AlarmQuantity)
-        .Titled("Alarms")
-        .Filterable(true);
+    columns.Add(c => c.Alarms)
+        .Titled("Alarm")
+           .Encoded(false)
+        .Sanitized(false)
+        .Filterable(true)
+        .RenderValueAs(o => o.Alarms.Value > 0 ? @Html.Raw("<span style='color:red;' class='blink'>" + o.Alarms.Value + "</span>") : @Html.Raw("<span>" + o.Alarms.Value + "</span>"));
 
 }).WithPaging(10).Sortable(true).Filterable().WithMultipleFilters()
 

@@ -12,7 +12,17 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.TankModel
 
         public String Name { get; set; }
 
-        public Byte[] Image { get; set; }
+        [IgnoreMap]
+        public String Image
+        {
+            get
+            {
+                String urlBase = "/images/tankmodels/";
+                return String.Format("{0}/{1}/{2}", urlBase, Id, ImageFileName.Replace("{info}", "measure"));
+            }
+
+            private set { }
+        }
 
         public String ImageFileName { get; set; }
 
@@ -33,7 +43,7 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.TankModel
 
             return vms;
         }
-        
+
         public static ListViewModel Map(Core.Entities.TankModel entity)
         {
             Mapper.CreateMap<Core.Entities.TankModel, ListViewModel>();

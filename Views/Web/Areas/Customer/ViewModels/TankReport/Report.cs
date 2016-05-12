@@ -48,7 +48,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.TankReport
         public Decimal? WeatherTemperature { get; set; }
         public DateTime? WeatherTemperatureEventDate { get; set; }
 
-        public Int32 AlarmQuantity { get; set; }
+        public Int32? Alarms { get; set; }
 
         #endregion Property
 

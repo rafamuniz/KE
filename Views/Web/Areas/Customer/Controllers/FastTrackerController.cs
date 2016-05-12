@@ -89,9 +89,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             TankViewModel viewModel = new TankViewModel();
 
             if (KEUnitOfWork.SensorRepository.HasSensor(tankId) &&
-                 KEUnitOfWork.SensorItemRepository.HasSensorItem(tankId, ItemEnum.WaterVolume))
+                 KEUnitOfWork.SensorItemRepository.HasSensorItem(tankId, ItemEnum.Range))
             {
-                var waterInfos = KEUnitOfWork.SensorItemEventRepository.GetsByTankIdAndByItem(tankId, ItemEnum.WaterVolume, 5);
+                var waterInfos = KEUnitOfWork.SensorItemEventRepository.GetsByTankIdAndByItem(tankId, ItemEnum.Range, 5);
 
                 if (waterInfos.Any())
                 {
@@ -104,7 +104,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                         WaterVolumeViewModel wvi = new WaterVolumeViewModel()
                         {
                             EventDate = wi.EventDate,
-                            WaterVolume = Decimal.Parse(wi.Value)
+                            WaterVolume = Decimal.Parse(wi.CalculatedValue)
                         };
 
                         viewModel.WaterVolumes.Add(wvi);

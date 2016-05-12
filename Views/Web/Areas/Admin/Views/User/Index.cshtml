@@ -10,7 +10,7 @@
     ViewBag.Title = "User";
 }
 
-@Styles.Render("~/Content/grid")
+<link href="~/Content/Gridmvc.css" rel="stylesheet" />
 
 <div class="pull-right">
     @Html.NoEncodeActionLink("<span>CREATE</span>", "Add new User", "Create", "User", routeValues: null, htmlAttributes: new { @class = "btn" })
@@ -19,7 +19,7 @@
 @Html.Grid(Model).Columns(columns =>
 {
     columns.Add(c => c.Name).Titled("Name")
-         .Filterable(true);
+    .Filterable(true);
 
     columns.Add(c => c.UserName).Titled("UserName")
      .Filterable(true);

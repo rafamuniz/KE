@@ -29,6 +29,12 @@ namespace KarmicEnergy.Core.Entities
         [Column("Message", TypeName = "NVARCHAR")]
         public String Message { get; set; }
 
+        [Column("CustomerId", TypeName = "UNIQUEIDENTIFIER")]
+        public Guid CustomerId { get; set; }
+
+        [Column("UserId", TypeName = "UNIQUEIDENTIFIER")]
+        public Guid UserId { get; set; }
+
         #endregion Property
     }
 }

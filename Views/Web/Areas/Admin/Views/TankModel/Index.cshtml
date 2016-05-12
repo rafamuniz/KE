@@ -23,7 +23,7 @@
         .Encoded(false)
         .Sanitized(false)
         .SetWidth(100)
-        .RenderValueAs(o => @<img src="~/images/tank_models/@o.ImageFileName" width="50" height="50"></img>);
+        .RenderValueAs(o => @<img src="@o.Image" width="50" height="50"></img>);
 
     columns.Add(c => c.Name).Titled("Name")
          .Filterable(true);

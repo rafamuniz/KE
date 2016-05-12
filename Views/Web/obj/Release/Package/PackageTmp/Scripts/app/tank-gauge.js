@@ -18,8 +18,7 @@
                     plotBackgroundColor: null,
                     plotBackgroundImage: null,
                     plotBorderWidth: 0,
-                    plotShadow: false,
-                    height: '300'
+                    plotShadow: false
                 },
                 title: {
                     text: ''
@@ -64,7 +63,6 @@
                 yAxis: {
                     min: 0,
                     max: 140,
-
                     minorTickInterval: 'auto',
                     minorTickWidth: 1,
                     minorTickLength: 10,
@@ -103,7 +101,10 @@
                     name: 'Speed',
                     data: flowMeters,
                     tooltip: {
-                        valueSuffix: ''
+                        valueSuffix: '',
+                        pointFormatter: function () {
+                            return this.y;
+                        }
                     },
                     dataLabels: {
                         formatter: function () {
@@ -131,7 +132,7 @@
             });
         },
         error: function (jqXHR, exception) {
-            notifiyError("Error - Generate Graph");
+            notifiyError("Error - Generate Gauge");
         }
     });
 }

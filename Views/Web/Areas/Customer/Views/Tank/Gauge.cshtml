@@ -1,6 +1,7 @@
 ﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
 @using Munizoft.Extensions
 @using Munizoft.MVC.Helpers
+@using GridMvc.Html
 
 @model GaugeViewModel
 
@@ -11,6 +12,7 @@
 
 @Scripts.Render("~/bundles/moment")
 @Scripts.Render("~/bundles/jqueryui")
+@Styles.Render("~/Content/grid")
 
 <script src="~/Scripts/app/utils.js"></script>
 <script src="~/Scripts/highcharts/highcharts.js"></script>
@@ -65,13 +67,27 @@
                 <h3>Alarm</h3>
             </div>
             <div class="body">
-                <div class="alarm-table">
-                    <table>
-                        <tbody></tbody>
-                    </table>
+                <div>
+                    @Html.Grid(Model.Triggers).Columns(columns =>
+               {
+                   columns.Add(c => c.Name).Titled("Name")
+                   .Filterable(false);
+
+                   columns.Add(c => c.MinValue).Titled("Min")
+                   .Filterable(false);
+
+                   columns.Add(c => c.MaxValue).Titled("Max")
+                   .Filterable(false);
+
+                   columns.Add()
+                    .Encoded(false)
+                    .Sanitized(false)
+                    .SetWidth(30)
+                    .RenderValueAs(o => @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-remove'></span>", "Delete", "DeleteTrigger", "Tank", routeValues: new { id = o.Id, TankId = Request.QueryString["TankId"], area = "Customer" }, htmlAttributes: new { data_modal = "", @class = "btn-delete", onclick = "return confirm('Are you sure you wish to delete this registry?');" }));
+               }).WithPaging(10).Sortable(false)
                 </div>
 
-                <div class="">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center btn-submit">
                     @Html.NoEncodeActionLink("<span>ADD</span>", "Add new Trigger", "Create", "Trigger", routeValues: new { area = "Customer", TankId = Request.QueryString["TankId"] }, htmlAttributes: new { @class = "btn" })
                 </div>
             </div>
@@ -146,6 +162,7 @@
 </div>
 
 @section Scripts {
+    @Scripts.Render("~/bundles/grid")
     <script src="~/Scripts/app/tank-gauge.js"></script>
     <script type="text/javascript">
         $(function () {

@@ -282,6 +282,7 @@
     <Compile Include="Areas\Customer\ViewModels\Tank\EditViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\FlowMeterViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TankWaterCapacityViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\TriggerViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\VoltageViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TemperatureViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TankViewModel.cs" />
@@ -290,6 +291,7 @@
     <Compile Include="Areas\Customer\ViewModels\Contact\CreateViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Contact\EditViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Contact\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Trigger\CustomerUserViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\UserViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\CreateViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\ContactViewModel.cs" />

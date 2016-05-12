@@ -11,6 +11,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -358,18 +359,9 @@ namespace KarmicEnergy.Web.Controllers
             return units;
         }
 
-        protected List<CustomerUser> LoadUsers(Guid customerId)
+        protected List<CustomerUser> LoadCustomerUsers(Guid customerId)
         {
-            dynamic customerUsers = KEUnitOfWork.CustomerUserRepository.GetsByCustomerId(customerId);
-
-            foreach (var u in customerUsers)
-            {
-                var id = u.Id.ToString();
-                ApplicationUser user = UserManager.FindByIdAsync(id);
-                u.Name = user.Name;
-            }
-
-            ViewBag.CustomerUsers = customerUsers;
+            List<CustomerUser> customerUsers = KEUnitOfWork.CustomerUserRepository.GetsByCustomerId(customerId);
             return customerUsers;
         }
 

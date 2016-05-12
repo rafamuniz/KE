@@ -1,0 +1,119 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
+
+@model TankModelViewModel
+
+<div id="divtankModel" style="display: none;">
+    <div id="divImageTankModal" class="form-group divImageTankModel">
+        <img id="imgTankModel" src="#" onerror="this.style.display='none'">
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.WaterVolumeCapacity, new { @class = "control-label" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.WaterVolumeCapacity, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", id = "waterVolumeCapacity" } })
+            @Html.ValidationMessageFor(m => m.WaterVolumeCapacity, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div id="divWidth" class="form-group">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.Width, new { @class = "control-label" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Width, new { htmlAttributes = new { @class = "form-control", @id = "width", onchange = "calculateVolumeCapacity();" } })
+            @Html.ValidationMessageFor(m => m.Width, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div id="divHeight" class="form-group">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.Height, new { @class = "control-label" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Height, new { htmlAttributes = new { @class = "form-control", @id = "height", onchange = "calculateVolumeCapacity();" } })
+            @Html.ValidationMessageFor(m => m.Height, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div id="divLength" class="form-group">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.Length, new { @class = "control-label" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Length, new { htmlAttributes = new { @class = "form-control", @id = "length", onchange = "calculateVolumeCapacity();" } })
+            @Html.ValidationMessageFor(m => m.Length, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div id="divFaceLength" class="form-group">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.FaceLength, new { @class = "control-label" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.FaceLength, new { htmlAttributes = new { @class = "form-control", @id = "faceLength", onchange = "calculateVolumeCapacity();" } })
+            @Html.ValidationMessageFor(m => m.FaceLength, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div id="divBottomWidth" class="form-group">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.BottomWidth, new { @class = "control-label" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.BottomWidth, new { htmlAttributes = new { @class = "form-control", @id = "bottomWidth", onchange = "calculateVolumeCapacity();" } })
+            @Html.ValidationMessageFor(m => m.BottomWidth, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div id="divDimension1" class="form-group">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.Dimension1, new { @class = "control-label" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Dimension1, new { htmlAttributes = new { @class = "form-control", @id = "dimension1", onchange = "calculateVolumeCapacity();" } })
+            @Html.ValidationMessageFor(m => m.Dimension1, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div id="divDimension2" class="form-group">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.Dimension2, new { @class = "control-label" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Dimension2, new { htmlAttributes = new { @class = "form-control", @id = "dimension2", onchange = "calculateVolumeCapacity();" } })
+            @Html.ValidationMessageFor(m => m.Dimension2, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div id="divDimension3" class="form-group">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.Dimension3, new { @class = "control-label" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Dimension3, new { htmlAttributes = new { @class = "form-control", @id = "dimension3", onchange = "calculateVolumeCapacity();" } })
+            @Html.ValidationMessageFor(m => m.Dimension3, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div id="divMinDistance" class="form-group">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.MinimumDistance, new { @class = "control-label" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.MinimumDistance, new { htmlAttributes = new { @class = "form-control", @id = "mindistance", onchange = "calculateVolumeCapacity();" } })
+            @Html.ValidationMessageFor(m => m.MinimumDistance, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div id="divMaxDistance" class="form-group">
+        <div class="col-md-2">
+            @Html.LabelFor(m => m.MaximumDistance, new { @class = "control-label" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.MaximumDistance, new { htmlAttributes = new { @class = "form-control", @id = "maxdistance", onchange = "calculateVolumeCapacity();" } })
+            @Html.ValidationMessageFor(m => m.MaximumDistance, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>

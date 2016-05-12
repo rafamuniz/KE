@@ -53,6 +53,8 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
         public Decimal? WaterVolume { get; set; }
         public DateTime? WaterVolumeLastMeasurement { get; set; }
 
+        public List<TriggerViewModel> Triggers { get; set; }
+
         #endregion Property
 
         #region Map

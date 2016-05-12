@@ -6644,3 +6644,7 @@ background-color: #1C2B39; #graph-draw .chart {
         visibility: hidden;
     }
 }
+
+.btn-delete {
+    color: red;
+}

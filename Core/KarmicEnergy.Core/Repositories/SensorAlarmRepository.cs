@@ -1,5 +1,8 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
+using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Repositories
 {
@@ -12,5 +15,10 @@ namespace KarmicEnergy.Core.Repositories
 
         }
         #endregion Constructor               
+
+        public List<Trigger> GetsByTank(Guid tankId)
+        {
+            return base.Find(x => x.SensorItem.Sensor.TankId == tankId && x.DeletedDate == null).ToList();
+        }
     }
 }

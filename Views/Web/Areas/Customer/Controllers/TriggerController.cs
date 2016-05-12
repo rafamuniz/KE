@@ -1,9 +1,11 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger;
 using KarmicEnergy.Web.Controllers;
+using KarmicEnergy.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace KarmicEnergy.Web.Areas.Customer.Controllers
@@ -35,33 +37,58 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #region Create
 
         [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View(InitCreate());
+            return View(await InitCreate(null));
         }
 
         //
-        // POST: /User/Create
+        // POST: /Trigger/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Create(CreateViewModel viewModel)
+        public async Task<ActionResult> Create(CreateViewModel viewModel)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    return View(InitCreate());
+                    //, new { TankId = viewModel.TankId.Value };
+                    return View(await InitCreate(viewModel));
+                }
+
+                Decimal min, max;
+
+                if (!Decimal.TryParse(viewModel.MinValue, out min))
+                {
+                    AddErrors("Min value must be a decimal number");
+                    return View(await InitCreate(viewModel));
+                }
+
+                if (!Decimal.TryParse(viewModel.MaxValue, out max))
+                {
+                    AddErrors("Max value must be a decimal number");
+                    return View(await InitCreate(viewModel));
+                }
+
+                if (min > max ||
+                    min == max)
+                {
+                    AddErrors("Max value must be greater than Min value");
+                    return View(await InitCreate(viewModel));
                 }
 
                 Trigger trigger = new Trigger()
                 {
                     Status = viewModel.Status,
-                    SeverityId = viewModel.SeverityId,
-                    SensorItemId = viewModel.SensorItemId,
+                    SeverityId = viewModel.SeverityId.Value,
+                    SensorItemId = viewModel.SensorItemId.Value,
                     MinValue = viewModel.MinValue,
                     MaxValue = viewModel.MaxValue
                 };
+
+                trigger.Contacts.AddRange(viewModel.Contacts.Where(x => x.IsSelected == true).Select(s => new TriggerContact() { ContactId = s.Id }).ToList());
+                trigger.Contacts.AddRange(viewModel.Users.Where(x => x.IsSelected == true).Select(s => new TriggerContact() { UserId = s.Id }).ToList());
 
                 KEUnitOfWork.TriggerRepository.Add(trigger);
                 KEUnitOfWork.Complete();
@@ -73,12 +100,21 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 AddErrors(ex);
             }
 
-            return View(InitCreate());
+            return View(await InitCreate(viewModel));
         }
 
-        private CreateViewModel InitCreate()
+        private async Task<CreateViewModel> InitCreate(CreateViewModel viewModel)
         {
-            CreateViewModel viewModel = new CreateViewModel();
+            List<ContactViewModel> contactVM = null;
+            List<UserViewModel> userVM = null;
+
+            if (viewModel == null)
+                viewModel = new CreateViewModel();
+            else
+            {
+                contactVM = viewModel.Contacts.ToList();
+                userVM = viewModel.Users.ToList();
+            }
 
             if (!IsSite)
             {
@@ -91,10 +127,52 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             if (Request.QueryString["TankId"] != null)
+            {
                 viewModel.TankId = new Guid(Request.QueryString["TankId"]);
+            }
 
-            LoadContacts(CustomerId);
-            LoadUsers(CustomerId);
+            if (viewModel.TankId.HasValue)
+            {
+                LoadSensors(CustomerId, viewModel.TankId.Value);
+            }
+
+            List<Contact> contacts = LoadContacts(CustomerId);
+            List<ContactViewModel> contactViewModels = ContactViewModel.Map(contacts);
+            viewModel.Contacts = contactViewModels;
+
+            List<CustomerUser> customerUsers = LoadCustomerUsers(CustomerId);
+            List<UserViewModel> customerUserViewModels = UserViewModel.Map(customerUsers);
+
+            foreach (var cuvm in customerUserViewModels)
+            {
+                var id = cuvm.Id.ToString();
+                ApplicationUser user = await UserManager.FindByIdAsync(id);
+                cuvm.Name = user.Name;
+            }
+
+            viewModel.Users = customerUserViewModels;
+
+            if (viewModel.SensorItemId.HasValue)
+            {
+                LoadSensorItems(viewModel.SensorId.Value);
+            }
+
+            if (viewModel.Contacts.Any() && contactVM != null)
+            {
+                foreach (var contact in contactVM.Where(x => x.IsSelected == true))
+                {
+                    viewModel.Contacts.Where(x => x.Id == contact.Id).Single().IsSelected = true;
+                }
+            }
+
+            if (viewModel.Users.Any() && userVM != null)
+            {
+                foreach (var user in userVM.Where(x => x.IsSelected == true))
+                {
+                    viewModel.Users.Where(x => x.Id == user.Id).Single().IsSelected = true;
+                }
+            }
+
             LoadSeverities();
             LoadStatuses();
 

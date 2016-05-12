@@ -8,6 +8,14 @@ namespace KarmicEnergy.Core.Entities
     [Table("Triggers", Schema = "dbo")]
     public class Trigger : BaseEntity
     {
+        #region Constructor
+        public Trigger()
+        {
+            Contacts = new List<TriggerContact>();
+        }
+
+        #endregion Constructor
+
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]

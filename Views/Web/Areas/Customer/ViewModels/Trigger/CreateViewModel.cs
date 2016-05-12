@@ -34,23 +34,23 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
 
         [Display(Name = "Site")]
         [Required]
-        public Guid SiteId { get; set; }
+        public Guid? SiteId { get; set; }
 
         [Display(Name = "Tank")]
         [Required]
-        public Guid TankId { get; set; }
+        public Guid? TankId { get; set; }
 
         [Display(Name = "Sensor")]
         [Required]
-        public Guid SensorId { get; set; }
+        public Guid? SensorId { get; set; }
 
         [Display(Name = "Item")]
         [Required]
-        public Guid SensorItemId { get; set; }
+        public Guid? SensorItemId { get; set; }
 
         [Display(Name = "Severity")]
         [Required]
-        public Int16 SeverityId { get; set; }
+        public Int16? SeverityId { get; set; }
 
         public IList<ContactViewModel> Contacts { get; set; }
 

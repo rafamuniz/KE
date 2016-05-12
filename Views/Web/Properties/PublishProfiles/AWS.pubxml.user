@@ -119,7 +119,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/08/2016 23:54:04</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Gauge.cshtml">
-      <publishTime>05/06/2016 01:21:51</publishTime>
+      <publishTime>05/12/2016 22:12:26</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Index.cshtml">
       <publishTime>04/29/2016 00:00:49</publishTime>
@@ -130,8 +130,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Customer/Views/Tank/_TankModel.cshtml">
       <publishTime>04/26/2016 23:26:11</publishTime>
     </File>
+    <File Include="Areas/Customer/Views/Tank/_Trigger.cshtml">
+      <publishTime>05/12/2016 00:52:16</publishTime>
+    </File>
     <File Include="Areas/Customer/Views/TankReport/Index.cshtml">
       <publishTime>04/21/2016 15:25:59</publishTime>
+    </File>
+    <File Include="Areas/Customer/Views/Trigger/Create.cshtml">
+      <publishTime>05/12/2016 22:17:37</publishTime>
     </File>
     <File Include="Areas/Customer/Views/User/ChangePassword.cshtml">
       <publishTime>04/26/2016 15:09:20</publishTime>
@@ -170,13 +176,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>05/10/2016 23:09:50</publishTime>
+      <publishTime>05/12/2016 22:22:49</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>05/11/2016 01:26:22</publishTime>
+      <publishTime>05/12/2016 22:22:55</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -419,7 +425,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:39:49</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>05/09/2016 15:12:06</publishTime>
+      <publishTime>05/12/2016 21:47:09</publishTime>
     </File>
     <File Include="Content/themes/base/accordion.css">
       <publishTime>03/30/2016 03:59:42</publishTime>
@@ -720,6 +726,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="images/frack_fa_chart.png">
       <publishTime>02/03/2016 11:28:08</publishTime>
+    </File>
+    <File Include="images/gauge_after.gif">
+      <publishTime>02/23/2016 22:44:54</publishTime>
+    </File>
+    <File Include="images/gauge_after.tif">
+      <publishTime>05/06/2016 09:41:51</publishTime>
+    </File>
+    <File Include="images/gauge_before.gif">
+      <publishTime>02/23/2016 22:44:54</publishTime>
     </File>
     <File Include="images/glyphicons/glyphicons-1-glass.png">
       <publishTime>03/22/2016 05:54:26</publishTime>
@@ -3664,8 +3679,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="images/users.png">
       <publishTime>02/03/2016 11:28:08</publishTime>
     </File>
+    <File Include="images/water-flow-idle.gif">
+      <publishTime>05/11/2016 22:26:55</publishTime>
+    </File>
     <File Include="images/water-flow.gif">
-      <publishTime>02/23/2016 22:44:54</publishTime>
+      <publishTime>05/11/2016 23:13:04</publishTime>
+    </File>
+    <File Include="images/water-reverse-flow.gif">
+      <publishTime>05/11/2016 22:26:55</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>05/11/2016 01:00:06</publishTime>
@@ -3911,10 +3932,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/05/2016 15:10:00</publishTime>
     </File>
     <File Include="Scripts/app/tank-gauge.js">
-      <publishTime>05/06/2016 02:33:33</publishTime>
+      <publishTime>05/11/2016 23:45:07</publishTime>
     </File>
     <File Include="Scripts/app/tank.js">
       <publishTime>05/04/2016 20:36:12</publishTime>
+    </File>
+    <File Include="Scripts/app/trigger.js">
+      <publishTime>05/12/2016 01:34:56</publishTime>
     </File>
     <File Include="Scripts/app/utils.js">
       <publishTime>05/09/2016 15:02:39</publishTime>
@@ -7754,7 +7778,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/22/2016 13:46:54</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>05/11/2016 01:03:18</publishTime>
+      <publishTime>05/12/2016 01:33:56</publishTime>
     </File>
     <File Include="Views/Account/ChangePassword.cshtml">
       <publishTime>05/07/2016 23:39:41</publishTime>
@@ -7871,7 +7895,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 01:07:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/11/2016 01:26:25</publishTime>
+      <publishTime>05/12/2016 22:23:04</publishTime>
     </File>
   </ItemGroup>
 </Project>

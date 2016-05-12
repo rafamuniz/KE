@@ -3,7 +3,7 @@ namespace KarmicEnergy.Core.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Dev1 : DbMigration
+    public partial class AWS : DbMigration
     {
         public override void Up()
         {
@@ -26,6 +26,7 @@ namespace KarmicEnergy.Core.Migrations
             
             AddColumn("dbo.Triggers", "MinValue", c => c.String(maxLength: 256));
             AddColumn("dbo.Triggers", "MaxValue", c => c.String(maxLength: 256));
+            AlterColumn("dbo.TankModels", "WaterVolumeCapacity", c => c.Double());
             DropColumn("dbo.Triggers", "Name");
             DropColumn("dbo.Triggers", "Email");
         }
@@ -36,6 +37,7 @@ namespace KarmicEnergy.Core.Migrations
             AddColumn("dbo.Triggers", "Name", c => c.String(nullable: false, maxLength: 128));
             DropForeignKey("dbo.TriggerContacts", "TriggerId", "dbo.Triggers");
             DropIndex("dbo.TriggerContacts", new[] { "TriggerId" });
+            AlterColumn("dbo.TankModels", "WaterVolumeCapacity", c => c.Decimal(precision: 18, scale: 2));
             DropColumn("dbo.Triggers", "MaxValue");
             DropColumn("dbo.Triggers", "MinValue");
             DropTable("dbo.TriggerContacts");

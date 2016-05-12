@@ -354,6 +354,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 }
             }
 
+            // Trigger
+            var triggers = KEUnitOfWork.TriggerRepository.GetsByTank(tank.Id);
+            viewModel.Triggers = TriggerViewModel.Map(triggers);
+
             return View(viewModel);
         }
 
@@ -519,6 +523,34 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         #endregion Partial View
+
+        #region Trigger
+
+        #region Delete
+        //
+        // GET: /Trigger/Delete
+        [HttpGet]
+        [Authorize(Roles = "Customer, CustomerAdmin")]
+        public ActionResult DeleteTrigger(Guid id, Guid tankId)
+        {
+            var trigger = KEUnitOfWork.TriggerRepository.Get(id);
+
+            if (trigger == null)
+            {
+                AddErrors("Trigger does not exist");
+                return View();
+            }
+
+            trigger.DeletedDate = DateTime.UtcNow;
+            KEUnitOfWork.TriggerRepository.Update(trigger);
+            KEUnitOfWork.Complete();
+
+            return RedirectToAction("Gauge", "Tank", new { TankId = tankId });
+        }
+
+        #endregion Delete
+
+        #endregion Trigger
 
         #region Fills
 

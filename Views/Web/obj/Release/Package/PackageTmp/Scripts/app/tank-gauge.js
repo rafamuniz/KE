@@ -1,6 +1,6 @@
 ﻿function generateFlowMeter(tankId) {
     $.ajax({
-        url: getUrlBase() + "/Customer/Tank/GetLastFlowMeter/",
+        url: getUrlBase() + "/Customer/Site/GetLastFlowMeter/",
         type: "GET",
         dataType: "JSON",
         data: { TankId: tankId },

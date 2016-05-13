@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
-namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
+namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Site
 {
     public class FlowMeterViewModel
     {
@@ -14,10 +14,6 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
         #endregion Constructor
 
         #region Property
-
-        public Guid TankId { get; set; }
-
-        public String TankName { get; set; }
 
         public Decimal? RateFlow { get; set; }
 

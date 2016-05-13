@@ -98,6 +98,10 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Migrations\201605131346159_Dev.cs" />
+    <Compile Include="Migrations\201605131346159_Dev.Designer.cs">
+      <DependentUpon>201605131346159_Dev.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
@@ -161,6 +165,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201605131346159_Dev.resx">
+      <DependentUpon>201605131346159_Dev.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

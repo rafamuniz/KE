@@ -80,6 +80,13 @@
 
     @if (this.HasRoles("Customer", "CustomerAdmin", "CustomerOperator"))
     {
+        <li class="treeview @Html.MenuItemActive("Site", "Customer")">
+            <a href="/Customer/Site/Report">
+                <img src="/images/my_tank_report.png" alt="tank_report" title="tank_report">
+                <p>MY SITE REPORT</p>
+            </a>
+        </li>
+
         <li class="treeview @Html.MenuItemActive("FastTracker", "Customer")">
             <a href="/Customer/FastTracker">
                 <img src="/images/fast_track.png" alt="fast_track" title="fast_track">
@@ -87,7 +94,8 @@
             </a>
         </li>
 
-        <li class="treeview @Html.MenuItemActive("Monitoring", "Customer")">>
+        <li class="treeview @Html.MenuItemActive("Monitoring", "Customer")">
+            >
             <a href="/Customer/Monitoring">
                 <img src="/images/fast_track.png" alt="Monitoring" title="Monitoring">
                 <p>MONITORING</p>

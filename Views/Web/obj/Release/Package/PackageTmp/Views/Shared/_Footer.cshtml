@@ -1,8 +1,7 @@
 ﻿@using System.Configuration
 
-<footer class="main-footer">
-    <div class="pull-right hidden-xs">
-        <b>Version</b> @ConfigurationManager.AppSettings["KEApp:Version"].ToString()
-    </div>
-    <strong>Copyright &copy; @DateTime.Now.Year <a href="http://karmicenergy.com" target="_blank">Karmic Energy</a>.</strong> All rights reserved.
-</footer>
+
+<div class="pull-right hidden-xs">
+    <b>Version</b> @ConfigurationManager.AppSettings["KEApp:Version"].ToString()
+</div>
+<strong>Copyright &copy; @DateTime.Now.Year <a href="http://karmicenergy.com" target="_blank">Karmic Energy</a>.</strong> All rights reserved.

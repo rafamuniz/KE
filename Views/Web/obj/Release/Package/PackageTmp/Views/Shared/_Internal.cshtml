@@ -30,28 +30,17 @@
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <header class="main-header">
-            <!-- Logo -->
             <a href="/Home" class="logo">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini" style="display:none">
                     <img src="~/images/logo_mini.png" alt="logo" title="Logo" />
                 </span>
-
-                @*<img src="~/images/logo_mini.png" alt="logo" title="Logo" />*@
-                @*<span class="logo-mini"><b>A</b>LT</span>*@
-
                 <span class="logo-lg">
                     <img src="~/images/logo_sentence.png" alt="logo" border="0" title="Logo" />                    >
                 </span>
-
-                <!-- logo for regular state and mobile devices -->
-                @*<span class="logo-lg"><b>Admin</b>LTE</span>*@
             </a>
 
-            <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
                 <div class="col-lg-1 toggle-button">
-                    <!-- Sidebar toggle button-->
                     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                         <span class="sr-only">Toggle navigation</span>
                     </a>
@@ -59,10 +48,10 @@
 
                 @if (!this.HasRoles("SuperAdmin", "Admin", "Operator"))
                 {
-                    <div class="col-lg-6 my-tanks">
-                        <p>WATER MINDER TANK INVENTORY OVERVIEW</p>
-                        <a href="/Customer/Tank/Dashboard" class="btn">MY TANKS</a>
-                    </div>
+                <div class="col-lg-6 my-tanks">
+                    <p>WATER MINDER TANK INVENTORY OVERVIEW</p>
+                    <a href="/Customer/Tank/Dashboard" class="btn">MY TANKS</a>
+                </div>
                 }
 
                 <div class="col-lg-5 my-login pull-right">
@@ -70,14 +59,6 @@
                 </div>
             </nav>
         </header>
-
-        <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                @Html.Partial("_MenuLeft")
-            </section>
-        </aside>
 
         <div id="main-content" class="content-row">
             <aside class="main-sidebar">
@@ -87,7 +68,6 @@
             </aside>
 
             <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <div class="section-head center-block">
                         <h1>@ViewBag.Title</h1>
@@ -105,7 +85,9 @@
             </div>
         </div>
 
-        @Html.Partial("_Footer")
+        <footer class="main-footer">
+            @Html.Partial("_Footer")
+        </footer>
     </div>
 
     @RenderSection("scripts", required: false)

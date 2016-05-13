@@ -269,9 +269,12 @@
     <Compile Include="Areas\Customer\ViewModels\Sensor\EditViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Site\TankViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Site\ReportViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Site\SiteAddressViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\TankReport\Report.cs" />
     <Compile Include="Areas\Customer\ViewModels\TankReport\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\FlowMeterViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\GaugeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\DashboardTankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TankModelViewModel.cs" />
@@ -280,7 +283,7 @@
     <Compile Include="Areas\Customer\ViewModels\Tank\DashboardViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\EditViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Tank\FlowMeterViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Site\FlowMeterViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TankWaterCapacityViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TriggerViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\VoltageViewModel.cs" />
@@ -1359,6 +1362,7 @@
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\app\fasttracker.js" />
+    <Content Include="Scripts\app\site.js" />
     <Content Include="Scripts\app\trigger.js" />
     <Content Include="Scripts\app\sensorgroup.js" />
     <Content Include="Scripts\app\sensor.js" />
@@ -1500,6 +1504,7 @@
     <Content Include="Areas\Customer\Views\Monitoring\Index.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\_Trigger.cshtml" />
     <Content Include="Areas\Customer\Views\Trigger\Create.cshtml" />
+    <Content Include="Areas\Customer\Views\Site\Report.cshtml" />
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />
     <Content Include="Scripts\angular\angular.min.js.map" />
@@ -2031,6 +2036,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Address.cshtml" />
     <Content Include="Scripts\jquery-2.2.3.min.map" />
+    <Content Include="Views\Shared\_InternalNoLeftMenu.cshtml" />
     <None Include="Web.AWS.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

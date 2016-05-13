@@ -6648,3 +6648,63 @@ background-color: #1C2B39; #graph-draw .chart {
 .btn-delete {
     color: red;
 }
+
+
+/***************/
+/* Report Site */
+/***************/
+#report-site {
+}
+
+    #report-site .water-volume {
+    }
+
+        #report-site .water-volume label {
+            font-family: 'open_sansbold';
+            font-size: 15px;
+        }
+
+    #report-site .flow-meter {
+    }
+
+        #report-site .flow-meter .item {
+            display: table;
+        }
+
+        #report-site .flow-meter .item .content {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        #report-site .flow-meter .graph {
+        }
+
+/* centered columns styles */
+.row-centered {
+    text-align: center;
+}
+
+.col-centered {
+    display: inline-block;
+    float: none;
+    /* reset the text-align */
+    text-align: left;
+    /* inline-block space fix */
+    margin-right: -4px;
+}
+
+.col-fixed {
+    /* custom width */
+    width: 320px;
+}
+
+.col-min {
+    /* custom min width */
+    min-width: 320px;
+}
+
+.col-max {
+    /* custom max width */
+    max-width: 320px;
+}

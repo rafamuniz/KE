@@ -56,7 +56,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup
             viewModel.Id = entity.Id;
             viewModel.SiteId = entity.Sensor.Tank.Site.Id;
             viewModel.SiteName = entity.Sensor.Tank.Site.Name;
-            viewModel.TankId = entity.Sensor.TankId;
+            viewModel.TankId = entity.Sensor.TankId.Value;
             viewModel.TankName = entity.Sensor.Tank.Name;
             viewModel.SensorId = entity.Sensor.Id;
             viewModel.SensorName = entity.Sensor.Name;

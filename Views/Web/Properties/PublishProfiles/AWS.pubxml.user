@@ -14,10 +14,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/26/2016 15:09:07</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Customer/Create.cshtml">
-      <publishTime>05/08/2016 00:57:57</publishTime>
+      <publishTime>05/13/2016 01:35:47</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Customer/Edit.cshtml">
-      <publishTime>04/23/2016 16:49:06</publishTime>
+      <publishTime>05/13/2016 01:35:53</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Customer/Index.cshtml">
       <publishTime>04/17/2016 22:00:39</publishTime>
@@ -47,10 +47,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/26/2016 15:09:16</publishTime>
     </File>
     <File Include="Areas/Admin/Views/User/Create.cshtml">
-      <publishTime>04/22/2016 22:03:41</publishTime>
+      <publishTime>05/13/2016 01:36:02</publishTime>
     </File>
     <File Include="Areas/Admin/Views/User/Edit.cshtml">
-      <publishTime>04/23/2016 16:47:11</publishTime>
+      <publishTime>05/13/2016 01:36:06</publishTime>
     </File>
     <File Include="Areas/Admin/Views/User/Index.cshtml">
       <publishTime>05/12/2016 23:36:59</publishTime>
@@ -101,13 +101,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/08/2016 15:40:45</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Site/Create.cshtml">
-      <publishTime>04/23/2016 19:46:42</publishTime>
+      <publishTime>05/13/2016 01:34:17</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Site/Edit.cshtml">
       <publishTime>04/23/2016 20:21:32</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Site/Index.cshtml">
       <publishTime>04/20/2016 21:51:04</publishTime>
+    </File>
+    <File Include="Areas/Customer/Views/Site/Report.cshtml">
+      <publishTime>05/13/2016 22:55:40</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Create.cshtml">
       <publishTime>05/11/2016 01:21:05</publishTime>
@@ -119,7 +122,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/08/2016 23:54:04</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Gauge.cshtml">
-      <publishTime>05/12/2016 22:12:26</publishTime>
+      <publishTime>05/13/2016 15:22:54</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Index.cshtml">
       <publishTime>04/29/2016 00:00:49</publishTime>
@@ -143,7 +146,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/26/2016 15:09:20</publishTime>
     </File>
     <File Include="Areas/Customer/Views/User/Create.cshtml">
-      <publishTime>04/23/2016 17:16:27</publishTime>
+      <publishTime>05/13/2016 01:34:53</publishTime>
     </File>
     <File Include="Areas/Customer/Views/User/Edit.cshtml">
       <publishTime>04/23/2016 17:17:56</publishTime>
@@ -182,7 +185,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/27/2016 02:07:30</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>05/13/2016 00:54:23</publishTime>
+      <publishTime>05/13/2016 22:45:08</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -425,7 +428,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:39:49</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>05/12/2016 21:47:09</publishTime>
+      <publishTime>05/13/2016 22:38:10</publishTime>
     </File>
     <File Include="Content/themes/base/accordion.css">
       <publishTime>03/30/2016 03:59:42</publishTime>
@@ -3928,11 +3931,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/app/sensorgroup.js">
       <publishTime>05/08/2016 21:00:24</publishTime>
     </File>
+    <File Include="Scripts/app/site.js">
+      <publishTime>05/13/2016 22:30:19</publishTime>
+    </File>
     <File Include="Scripts/app/tank-dashboard.js">
       <publishTime>05/05/2016 15:10:00</publishTime>
     </File>
     <File Include="Scripts/app/tank-gauge.js">
-      <publishTime>05/11/2016 23:45:07</publishTime>
+      <publishTime>05/13/2016 21:39:22</publishTime>
     </File>
     <File Include="Scripts/app/tank.js">
       <publishTime>05/04/2016 20:36:12</publishTime>
@@ -7778,7 +7784,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/22/2016 13:46:54</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>05/12/2016 01:33:56</publishTime>
+      <publishTime>05/13/2016 14:41:33</publishTime>
     </File>
     <File Include="Views/Account/ChangePassword.cshtml">
       <publishTime>05/07/2016 23:39:41</publishTime>
@@ -7862,7 +7868,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/07/2016 23:40:54</publishTime>
     </File>
     <File Include="Views/Shared/_Footer.cshtml">
-      <publishTime>04/29/2016 13:18:06</publishTime>
+      <publishTime>05/13/2016 20:27:08</publishTime>
     </File>
     <File Include="Views/Shared/_Grid.cshtml">
       <publishTime>03/10/2016 22:54:45</publishTime>
@@ -7871,7 +7877,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:45</publishTime>
     </File>
     <File Include="Views/Shared/_Internal.cshtml">
-      <publishTime>05/04/2016 19:22:53</publishTime>
+      <publishTime>05/13/2016 20:27:30</publishTime>
+    </File>
+    <File Include="Views/Shared/_InternalNoLeftMenu.cshtml">
+      <publishTime>05/13/2016 20:30:04</publishTime>
     </File>
     <File Include="Views/Shared/_Loading.cshtml">
       <publishTime>03/23/2016 23:39:22</publishTime>
@@ -7883,7 +7892,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:32:23</publishTime>
     </File>
     <File Include="Views/Shared/_MenuLeft.cshtml">
-      <publishTime>05/09/2016 23:10:02</publishTime>
+      <publishTime>05/13/2016 14:43:55</publishTime>
     </File>
     <File Include="Views/Shared/_MenuTop.cshtml">
       <publishTime>04/21/2016 00:55:05</publishTime>

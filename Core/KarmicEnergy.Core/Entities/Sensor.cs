@@ -56,14 +56,23 @@ namespace KarmicEnergy.Core.Entities
 
         #region Tank
 
-        [Column("TankId", TypeName = "UNIQUEIDENTIFIER")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        public Guid TankId { get; set; }
+        [Column("TankId", TypeName = "UNIQUEIDENTIFIER")]        
+        public Guid? TankId { get; set; }
 
         [ForeignKey("TankId")]
         public virtual Tank Tank { get; set; }
 
         #endregion Tank
+
+        #region Site
+
+        [Column("SiteId", TypeName = "UNIQUEIDENTIFIER")]
+        public Guid? SiteId { get; set; }
+
+        [ForeignKey("SiteId")]
+        public virtual Site Site { get; set; }
+
+        #endregion Site
 
         #region SensorItems        
 

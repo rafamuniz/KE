@@ -116,6 +116,8 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<ActionResult> Edit(EditViewModel viewModel)
         {
+            ApplicationUser user = null;
+
             try
             {
                 if (!ModelState.IsValid)
@@ -123,7 +125,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                     return View(viewModel);
                 }
 
-                var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
+                user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
                 var customer = KEUnitOfWork.CustomerRepository.Get(viewModel.Id);
 
                 if (customer == null || user == null)
@@ -132,6 +134,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                     return View(viewModel);
                 }
 
+                user.Name = viewModel.Name;
                 user.Email = viewModel.Address.Email;
                 var result = await UserManager.UpdateAsync(user);
 
@@ -158,6 +161,9 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
+                if (user != null)
+                    await UserManager.DeleteAsync(user);
+
                 AddErrors(ex);
             }
 

@@ -10,5 +10,9 @@ namespace KarmicEnergy.Core.Repositories
         List<Sensor> GetsByCustomerId(Guid customerId);
         List<Sensor> GetsByTankId(Guid tankId);
         List<Sensor> GetsByTankIdAndCustomerId(Guid customerId, Guid tankId);
+
+        List<Sensor> GetsSiteByCustomer(Guid customerId);
+
+        List<Sensor> GetsSiteByCustomerAndSite(Guid customerId, Guid siteId);
     }
 }

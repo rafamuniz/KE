@@ -19,11 +19,13 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Customer
 
         #region Property
         public Guid Id { get; set; }
-
+        
         [Display(Name = "Name")]
+        [Required]
         public String Name { get; set; }
 
         public AddressViewModel Address { get; set; }
+
         #endregion Property
 
         #region Map

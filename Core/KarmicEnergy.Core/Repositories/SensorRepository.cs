@@ -37,5 +37,15 @@ namespace KarmicEnergy.Core.Repositories
             
             return sensors;
         }
+
+        public List<Sensor> GetsSiteByCustomer(Guid customerId)
+        {
+            return base.Find(x => x.Tank.Site.CustomerId == customerId && x.TankId == null && x.DeletedDate == null).ToList();
+        }
+
+        public List<Sensor> GetsSiteByCustomerAndSite(Guid customerId, Guid siteId)
+        {
+            return base.Find(x => x.Tank.Site.CustomerId == customerId && x.TankId == null && x.DeletedDate == null).ToList();
+        }
     }
 }

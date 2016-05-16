@@ -5,7 +5,7 @@
 
 @{
     Layout = "~/Views/Shared/_Internal.cshtml";
-    ViewBag.Title = "CUSTOMER - EDIT";
+    ViewBag.Title = "Customer - Edit";
 }
 
 @using (Html.BeginForm("Edit", "Customer", new { area = "Admin" }, FormMethod.Post, new { id = "formCreateCustomer", @class = "form-horizontal", role = "form" }))
@@ -30,18 +30,18 @@
         </div>
 
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            @*<div class="box-sub">
+            <div class="box-sub">
                 <div class="title green">
                     <h2>Info</h2>
                 </div>
                 @Html.Partial("_Address", Model.Address, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "Address" } })
-            </div>*@
+            </div>
         </div>
     </div>
 
-    <div class="col-md-12 form-group text-center">
+    <div class="col-md-12 col-lg-12 text-center btn-submit">
         <input type="submit" class="btn btn-default" value="SAVE">
-        <a class="btn" href="/Admin/Customer/Index">Cancel</a>
+        <a class="btn" href="/Admin/Customer">Cancel</a>
     </div>
 }
 

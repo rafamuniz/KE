@@ -58,6 +58,8 @@ namespace KarmicEnergy.Core.Persistence
         public IDbSet<Customer> Customers { get; set; }
         public IDbSet<CustomerSetting> CustomerSettings { get; set; }
 
+        public IDbSet<User> Users { get; set; }
+
         public IDbSet<CustomerUser> CustomerUsers { get; set; }
         public IDbSet<CustomerUserSetting> CustomerUserSettings { get; set; }
 

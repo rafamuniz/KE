@@ -13,6 +13,26 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     public class SensorController : BaseController
     {
         #region Index
+
+        [Authorize(Roles = "Customer, CustomerAdmin")]
+        public ActionResult Site()
+        {
+            List<ListViewModel> viewModels = new List<ListViewModel>();
+
+            if (!IsSite)
+            {
+                var sensors = KEUnitOfWork.SensorRepository.GetsSiteByCustomer(CustomerId).ToList();
+                viewModels = ListViewModel.Map(sensors);
+            }
+            else
+            {
+                var sensors = KEUnitOfWork.SensorRepository.GetsSiteByCustomerAndSite(CustomerId, SiteId).ToList();
+                viewModels = ListViewModel.Map(sensors);
+            }
+
+            return View(viewModels);
+        }
+
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Index()
         {
@@ -38,6 +58,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             var viewModels = ListViewModel.Map(sensors);
             return View("Index", viewModels);
         }
+
         #endregion Index
 
         #region Create

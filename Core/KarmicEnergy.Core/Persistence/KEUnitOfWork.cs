@@ -13,6 +13,9 @@ namespace KarmicEnergy.Core.Persistence
 
         private ICustomerRepository _CustomerRepository;
         private ICustomerUserRepository _CustomerUserRepository;
+
+        private IUserRepository _UserRepository;
+
         private ISiteRepository _SiteRepository;
         private ITankRepository _TankRepository;
         private ITankModelRepository _TankModelRepository;
@@ -80,6 +83,11 @@ namespace KarmicEnergy.Core.Persistence
         public ICustomerRepository CustomerRepository
         {
             get { return _CustomerRepository ?? (_CustomerRepository = new CustomerRepository(_context)); }
+        }
+
+        public IUserRepository UserRepository
+        {
+            get { return _UserRepository ?? (_UserRepository = new UserRepository(_context)); }
         }
 
         public ICustomerUserRepository CustomerUserRepository

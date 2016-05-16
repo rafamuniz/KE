@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using KarmicEnergy.Web.ViewModels;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace KarmicEnergy.Web.Areas.Admin.ViewModels.User
@@ -9,11 +11,6 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.User
         [Display(Name = "Name")]
         [Required]
         public String Name { get; set; }
-
-        [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public String Email { get; set; }
 
         [Display(Name = "UserName")]
         [Required]
@@ -34,6 +31,24 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.User
         [Required]
         [Display(Name = "Role")]
         public String Role { get; set; }
+
+        public AddressViewModel Address { get; set; }
         #endregion Property
+
+        #region Map
+
+        public Core.Entities.User Map()
+        {
+            Mapper.CreateMap<CreateViewModel, Core.Entities.User>().ForMember(x => x.Address, opt => opt.Ignore());
+            return Mapper.Map<CreateViewModel, Core.Entities.User>(this);
+        }
+
+        public Core.Entities.Address MapAddress()
+        {
+            Mapper.CreateMap<AddressViewModel, Core.Entities.Address>();
+            return Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address);
+        }
+
+        #endregion Map
     }
 }

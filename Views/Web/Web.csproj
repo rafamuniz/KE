@@ -1505,6 +1505,7 @@
     <Content Include="Areas\Customer\Views\Tank\_Trigger.cshtml" />
     <Content Include="Areas\Customer\Views\Trigger\Create.cshtml" />
     <Content Include="Areas\Customer\Views\Site\Report.cshtml" />
+    <Content Include="Areas\Customer\Views\Sensor\Site.cshtml" />
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />
     <Content Include="Scripts\angular\angular.min.js.map" />

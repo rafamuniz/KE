@@ -16,6 +16,7 @@
 <script src="~/Scripts/highcharts/highcharts-3d.js"></script>
 <script src="~/Scripts/highcharts/highcharts-more.js"></script>
 <script src="~/Scripts/app/site.js"></script>
+
 <div id="report-site">
     @if (!this.IsSite())
     {
@@ -23,7 +24,7 @@
             <div class="form-group">
                 <div class="col-md-12">
                     @using (Html.BeginForm("Site", "Site", new { }, FormMethod.Post, new { }))
-                {
+                    {
                         @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
                     }
                 </div>
@@ -35,59 +36,81 @@
         @Html.HiddenFor(m => m.SiteId)
     }
 
-    @if (Model != null && Model.Tanks.Any())
-    {
-        <div class="row-fluid row-centered">
-            @foreach (var tank in Model.Tanks)
-            {                
-                <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-centered water-volume">
-                    <div class="row-fluid">
-                        <label>@tank.Name</label>
-                    </div>
-                    <div class="row-fluid">
-                        <div id="Tank_@tank.Id" style="display: table-cell; vertical-align: bottom; border: 1px solid black; width: 50px; height: 100px;">
-                            <div id="TankFill_@tank.Id">
-
-                            </div>
-                        </div>
-
-                        @{
-                            var waterVolumePercentage = @tank.WaterVolumePercentage.HasValue ? @tank.WaterVolumePercentage.Value : 0;
-                        }
-
-                        <script type="text/javascript">
-                            fillTankWater('Tank_@tank.Id', '@tank.Id', @waterVolumePercentage);
-                        </script>
-                    </div>
-                    <div class="row">
-                        @waterVolumePercentage.ToString("P2")
-                    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="box-sub">
+                <div class="title green">
+                    <h2>TANKS</h2>
                 </div>
-                            }
+
+                @if (Model != null && Model.Tanks.Any())
+            {
+                    <div class="row-fluid row-centered">
+
+                        @foreach (var tank in Model.Tanks)
+                        {
+                            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 col-centered water-volume">
+                                <div class="row-fluid">
+                                    <label>@tank.Name</label>
+                                </div>
+                                <div class="row-fluid">
+                                    <div id="Tank_@tank.Id" style="display: table-cell; vertical-align: bottom; border: 1px solid black; width: 50px; height: 100px;">
+                                        <div id="TankFill_@tank.Id">
+
+                                        </div>
+                                    </div>
+
+                                    @{
+                                        var waterVolumePercentage = @tank.WaterVolumePercentage.HasValue ? @tank.WaterVolumePercentage.Value : 0;
+                                    }
+
+                                    <script type="text/javascript">
+                                        fillTankWater('Tank_@tank.Id', '@tank.Id', @waterVolumePercentage);
+                                    </script>
+                                </div>
+                                <div class="row">
+                                    @waterVolumePercentage.ToString("P2")
+                                </div>
+                            </div>
+                                        }
+                    </div>
+                                        }
+            </div>
         </div>
+    </div>
 
-        <div class="row row-centered">
-            @{ Int32 idFlowMeter = 0; }
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="box-sub">
+                <div class="title green">
+                    <h2>FLOW METERS</h2>
+                </div>
 
-            @foreach (var flowMeter in Model.FlowMeters)
+                <div class="row row-centered">
+                    @{ Int32 idFlowMeter = 0; }
+
+                    @foreach (var flowMeter in Model.FlowMeters)
             {
                 if (flowMeter.RateFlow.HasValue && flowMeter.Totalizer.HasValue)
                 {
-                    <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4 col-centered flow-meter">
+                    <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3 flow-meter">
                         <div class="item">
                             <div id="FlowMeter_@idFlowMeter" class="content">
                             </div>
                             <script type="text/javascript">
-                                generateFlowMeter(@idFlowMeter, @flowMeter.RateFlow.Value, @flowMeter.Totalizer.Value);
+                                    generateFlowMeter(@idFlowMeter, @flowMeter.RateFlow.Value, @flowMeter.Totalizer.Value);
                             </script>
                         </div>
                     </div>
-                }
+                    }
 
-                idFlowMeter++;
-            }
-        </div>
+                    idFlowMeter++;
                 }
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {

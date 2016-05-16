@@ -32,11 +32,13 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         #endregion Index
 
         #region Create
+
         [Authorize(Roles = "SuperAdmin, Admin")]
         public ActionResult Create()
         {
+            CreateViewModel viewModel = new CreateViewModel();
             LoadAdminRoles();
-            return View();
+            return View(viewModel);
         }
 
         //
@@ -46,15 +48,17 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<ActionResult> Create(CreateViewModel viewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                LoadAdminRoles();
-                return View(viewModel);
-            }
+            ApplicationUser user = null;
 
             try
             {
-                var user = new ApplicationUser { UserName = viewModel.UserName, Email = viewModel.Email, Name = viewModel.Name };
+                if (!ModelState.IsValid)
+                {
+                    LoadAdminRoles();
+                    return View(viewModel);
+                }
+
+                user = new ApplicationUser { UserName = viewModel.UserName, Email = viewModel.Address.Email, Name = viewModel.Name };
                 var result = await UserManager.CreateAsync(user, viewModel.Password);
 
                 if (result.Succeeded)
@@ -63,6 +67,15 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 
                     if (result.Succeeded)
                     {
+                        Core.Entities.User userKE = viewModel.Map();
+                        userKE.Id = Guid.Parse(user.Id);
+
+                        Core.Entities.Address address = viewModel.MapAddress();
+                        userKE.Address = address;
+
+                        KEUnitOfWork.UserRepository.Add(userKE);
+                        KEUnitOfWork.Complete();
+
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
                         // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -77,12 +90,16 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
+                if (user != null)
+                    await UserManager.DeleteAsync(user);
+
                 AddErrors(ex);
             }
 
             LoadAdminRoles();
             return View(viewModel);
         }
+
         #endregion Create
 
         #region Edit
@@ -91,14 +108,16 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         {
             LoadAdminRoles();
             var user = await UserManager.FindByIdAsync(id.ToString());
+            var userKE = KEUnitOfWork.UserRepository.Get(id);
 
-            if (user == null)
+            if (user == null || userKE == null)
             {
                 AddErrors("User does not exist");
                 return View();
             }
 
             EditViewModel viewModel = EditViewModel.Map(user);
+            viewModel.Address = EditViewModel.Map(userKE.Address);
             var roles = await UserManager.GetRolesAsync(user.Id);
             viewModel.Role = roles.Single();
 
@@ -112,42 +131,69 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<ActionResult> Edit(EditViewModel viewModel)
         {
-            var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
+            ApplicationUser user = null;
 
-            if (user == null)
+            try
             {
-                AddErrors("User does not exist");
-                LoadAdminRoles();
-                return View();
-            }
+                if (!ModelState.IsValid)
+                {
+                    LoadAdminRoles();
+                    return View(viewModel);
+                }
 
-            user.Name = viewModel.Name;
-            user.Email = viewModel.Email;
-            var result = await UserManager.UpdateAsync(user);
+                user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
+                var userKE = KEUnitOfWork.UserRepository.Get(viewModel.Id);
 
-            if (result.Succeeded)
-            {
-                var roles = await UserManager.GetRolesAsync(user.Id);
-                result = await UserManager.RemoveFromRolesAsync(user.Id, roles.ToArray());
+                if (user == null || userKE == null)
+                {
+                    AddErrors("User does not exist");
+                    LoadAdminRoles();
+                    return View();
+                }
+
+                user.Name = viewModel.Name;
+                user.Email = viewModel.Address.Email;
+                var result = await UserManager.UpdateAsync(user);
 
                 if (result.Succeeded)
                 {
-                    result = await UserManager.AddToRoleAsync(user.Id, viewModel.Role);
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+                    result = await UserManager.RemoveFromRolesAsync(user.Id, roles.ToArray());
 
                     if (result.Succeeded)
                     {
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        result = await UserManager.AddToRoleAsync(user.Id, viewModel.Role);
 
-                        return RedirectToAction("Index", "User", new { area = "Admin" });
+                        if (result.Succeeded)
+                        {
+                            Core.Entities.Address address = viewModel.MapAddress(userKE.Address);
+                            //address.Id = customer.Address.Id;
+                            //address.RowVersion = customer.Address.RowVersion;
+
+                            KEUnitOfWork.AddressRepository.Update(address);
+                            //KEUnitOfWork.CustomerRepository.Update(customer);
+                            KEUnitOfWork.Complete();
+
+                            // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                            // Send an email with this link
+                            // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                            // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                            // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                            return RedirectToAction("Index", "User", new { area = "Admin" });
+                        }
                     }
                 }
-            }
 
-            AddErrors(result);
+                AddErrors(result);
+            }
+            catch (Exception ex)
+            {
+                if (user != null)
+                    await UserManager.DeleteAsync(user);
+
+                AddErrors(ex);
+            }
             LoadAdminRoles();
             return View();
         }
@@ -160,37 +206,48 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<ActionResult> Delete(Guid id)
         {
-            var user = await UserManager.FindByIdAsync(id.ToString());
-
-            if (user == null)
+            try
             {
-                AddErrors("User does not exist");
-                return View();
+                var user = await UserManager.FindByIdAsync(id.ToString());
+                var userKE = KEUnitOfWork.UserRepository.Get(id);
+
+                if (user == null || userKE == null)
+                {
+                    AddErrors("User does not exist");
+                    return View();
+                }
+
+                var roleSuperAdmin = RoleManager.FindByNameAsync("SuperAdmin");
+
+                // Dont delete SuperAdmin
+                if (user.Roles.Where(x => x.RoleId == roleSuperAdmin.Result.Id).Any())
+                {
+                    AddErrors("User cannot be deleted");
+                    return View();
+                }
+
+                KEUnitOfWork.UserRepository.Remove(userKE);
+                var result = await UserManager.DeleteAsync(user);
+
+                if (result.Succeeded)
+                {
+                    KEUnitOfWork.Complete();
+
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "User", new { area = "Admin" });
+                }
+
+                AddErrors(result);
             }
-
-            var roleSuperAdmin = RoleManager.FindByNameAsync("SuperAdmin");
-
-            // Dont delete SuperAdmin
-            if (user.Roles.Where(x => x.RoleId == roleSuperAdmin.Result.Id).Any())
+            catch (Exception ex)
             {
-                AddErrors("User cannot be deleted");
-                return View();
+                AddErrors(ex);
             }
-
-            var result = await UserManager.DeleteAsync(user);
-
-            if (result.Succeeded)
-            {
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                return RedirectToAction("Index", "User", new { area = "Admin" });
-            }
-
-            AddErrors(result);
 
             return View();
         }

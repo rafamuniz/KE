@@ -73,13 +73,24 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             CreateViewModel vm = null;
 
+            if (!IsSite)
+            {
+                LoadSites(CustomerId);
+            }
+            else
+            {
+                viewModel.SiteId = SiteId;
+            }
+
             if (viewModel == null)
             {
                 vm = new CreateViewModel();
                 vm.TankId = TankId;
             }
             else
+            {
                 vm = viewModel;
+            }
 
             LoadTanks(CustomerId);
             LoadSensorTypes();
@@ -112,6 +123,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 {
                     Name = viewModel.Name,
                     TankId = viewModel.TankId,
+                    SiteId = viewModel.SiteId,
                     SensorTypeId = viewModel.SensorTypeId,
                     Status = viewModel.Status,
                     Reference = viewModel.Reference
@@ -144,7 +156,6 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 AddErrors(ex);
             }
 
-            //return View();
             return View(LoadCreateViewModel(viewModel));
         }
 
@@ -398,6 +409,14 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             return Json(viewModels, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetsTankBySite(Guid siteId)
+        {
+            var tanks = LoadTanks(CustomerId, siteId);
+            SelectList obgTanks = new SelectList(tanks, "Id", "Name", 0);
+            return Json(obgTanks, JsonRequestBehavior.AllowGet);
         }
 
         #endregion JSON

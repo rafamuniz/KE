@@ -80,7 +80,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/10/2016 00:38:16</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Sensor/Create.cshtml">
-      <publishTime>05/03/2016 00:01:13</publishTime>
+      <publishTime>05/16/2016 23:50:51</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Sensor/Edit.cshtml">
       <publishTime>05/03/2016 00:01:17</publishTime>
@@ -95,7 +95,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/13/2016 22:03:28</publishTime>
     </File>
     <File Include="Areas/Customer/Views/SensorGroup/Create.cshtml">
-      <publishTime>05/08/2016 23:47:13</publishTime>
+      <publishTime>05/16/2016 23:50:39</publishTime>
     </File>
     <File Include="Areas/Customer/Views/SensorGroup/Edit.cshtml">
       <publishTime>04/24/2016 21:47:19</publishTime>
@@ -104,7 +104,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/08/2016 15:40:45</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Site/Create.cshtml">
-      <publishTime>05/13/2016 01:34:17</publishTime>
+      <publishTime>05/18/2016 13:43:41</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Site/Edit.cshtml">
       <publishTime>04/23/2016 20:21:32</publishTime>
@@ -128,7 +128,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/13/2016 15:22:54</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Index.cshtml">
-      <publishTime>04/29/2016 00:00:49</publishTime>
+      <publishTime>05/18/2016 22:52:25</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/_TankData.cshtml">
       <publishTime>05/09/2016 15:09:49</publishTime>
@@ -182,13 +182,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>05/16/2016 23:33:54</publishTime>
+      <publishTime>05/18/2016 22:55:52</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>05/16/2016 23:34:00</publishTime>
+      <publishTime>05/18/2016 22:55:59</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -3221,7 +3221,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/25/2016 18:06:16</publishTime>
     </File>
     <File Include="images/sensor.png">
+      <publishTime>05/18/2016 22:50:53</publishTime>
+    </File>
+    <File Include="images/sensor1.png">
       <publishTime>05/09/2016 01:22:25</publishTime>
+    </File>
+    <File Include="images/sensor_16x16.png">
+      <publishTime>05/18/2016 22:54:51</publishTime>
+    </File>
+    <File Include="images/sensor_group.png">
+      <publishTime>05/18/2016 21:15:17</publishTime>
     </File>
     <File Include="images/setting.png">
       <publishTime>02/03/2016 11:28:08</publishTime>
@@ -3234,6 +3243,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="images/sites.png">
       <publishTime>02/03/2016 11:28:08</publishTime>
+    </File>
+    <File Include="images/stick_conversion.png">
+      <publishTime>05/18/2016 22:47:32</publishTime>
     </File>
     <File Include="images/tank-gauge.png">
       <publishTime>02/25/2016 17:13:54</publishTime>
@@ -3929,7 +3941,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/21/2016 01:11:22</publishTime>
     </File>
     <File Include="Scripts/app/sensor.js">
-      <publishTime>05/02/2016 23:21:24</publishTime>
+      <publishTime>05/16/2016 23:49:23</publishTime>
     </File>
     <File Include="Scripts/app/sensorgroup.js">
       <publishTime>05/08/2016 21:00:24</publishTime>
@@ -7895,7 +7907,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:32:23</publishTime>
     </File>
     <File Include="Views/Shared/_MenuLeft.cshtml">
-      <publishTime>05/16/2016 22:34:00</publishTime>
+      <publishTime>05/18/2016 22:51:37</publishTime>
     </File>
     <File Include="Views/Shared/_MenuTop.cshtml">
       <publishTime>04/21/2016 00:55:05</publishTime>
@@ -7907,7 +7919,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 01:07:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/16/2016 23:34:12</publishTime>
+      <publishTime>05/18/2016 22:56:12</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -39,7 +39,8 @@
             // 
             // serviceInstaller1
             // 
-            this.serviceInstaller1.ServiceName = "KE - Sync Sensors";
+            this.serviceInstaller1.DisplayName = "KE - Sensor Events Sync";
+            this.serviceInstaller1.ServiceName = "KE - Sensor Events Sync";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller

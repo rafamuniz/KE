@@ -49,16 +49,16 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Add(Guid groupId)
         {
-            GroupViewModel viewModel = LoadDefault();
+            CreateViewModel viewModel = LoadDefault();
             var sensorGroups = KEUnitOfWork.SensorGroupRepository.Find(x => x.GroupId == groupId).ToList();
             viewModel.Sensors = SensorGroupViewModel.Map(sensorGroups);
 
             return View("Create", viewModel);
         }
 
-        private GroupViewModel LoadDefault()
+        private CreateViewModel LoadDefault()
         {
-            GroupViewModel viewModel = new GroupViewModel();
+            CreateViewModel viewModel = new CreateViewModel();
 
             if (!IsSite)
             {
@@ -78,7 +78,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Add(GroupViewModel viewModel)
+        public ActionResult Add(CreateViewModel viewModel)
         {
             Group group = new Group();
 

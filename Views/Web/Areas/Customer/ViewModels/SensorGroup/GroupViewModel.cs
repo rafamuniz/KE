@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup
 {
-    public class GroupViewModel
+    public class CreateViewModel
     {
         #region Constructor
-        public GroupViewModel()
+        public CreateViewModel()
         {
             Sensors = new List<SensorGroupViewModel>();
         }
@@ -51,8 +51,8 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup
 
         public Core.Entities.SensorGroup Map()
         {
-            Mapper.CreateMap<GroupViewModel, Core.Entities.Contact>();
-            return Mapper.Map<GroupViewModel, Core.Entities.SensorGroup>(this);
+            Mapper.CreateMap<CreateViewModel, Core.Entities.Contact>();
+            return Mapper.Map<CreateViewModel, Core.Entities.SensorGroup>(this);
         }
 
         #endregion Map

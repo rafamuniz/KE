@@ -1,13 +1,19 @@
-﻿Installing assembly 'M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KarmicEnergy.Service.exe'.
+﻿Uninstalling assembly 'M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KarmicEnergy.Service.exe'.
 Affected parameters are:
    logtoconsole = 
    logfile = M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KarmicEnergy.Service.InstallLog
    assemblypath = M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KarmicEnergy.Service.exe
-Installing service KE - Sync Sensors...
-Service KE - Sync Sensors has been successfully installed.
-Creating EventLog source KE - Sync Sensors in log Application...
-Committing assembly 'M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KarmicEnergy.Service.exe'.
+No public installers with the RunInstallerAttribute.Yes attribute could be found in the M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KarmicEnergy.Service.exe assembly.
+Uninstalling assembly 'M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KarmicEnergy.Service.exe'.
 Affected parameters are:
    logtoconsole = 
    logfile = M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KarmicEnergy.Service.InstallLog
    assemblypath = M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KarmicEnergy.Service.exe
+No public installers with the RunInstallerAttribute.Yes attribute could be found in the M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KarmicEnergy.Service.exe assembly.
+Uninstalling assembly 'M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KarmicEnergy.Service.exe'.
+Affected parameters are:
+   f = 
+   logtoconsole = 
+   logfile = M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KarmicEnergy.Service.InstallLog
+   assemblypath = M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KarmicEnergy.Service.exe
+No public installers with the RunInstallerAttribute.Yes attribute could be found in the M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KarmicEnergy.Service.exe assembly.

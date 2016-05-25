@@ -13,16 +13,13 @@
 @using (Html.BeginForm("Create", "Trigger", new { area = "Customer" }, FormMethod.Post, new { id = "form", @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-        
+
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
             @if (!this.IsSite())
             {
                 <div class="form-group">
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                        @Html.LabelFor(m => m.SiteId, new { @class = "control-label" })
-                    </div>
-                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         @Html.DropDownListFor(model => model.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", id = "ddlSite", onclick = "GetsTankBySiteId(this.value, 'ddlTank', '/Trigger/GetsTankBySiteId');" })
                         @Html.ValidationMessageFor(m => m.SiteId, "", new { @class = "text-danger" })
                     </div>
@@ -34,10 +31,7 @@
             }
 
             <div class="form-group">
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                    @Html.LabelFor(m => m.TankId, new { @class = "control-label" })
-                </div>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     @if (Model.SiteId.HasValue)
                     {
                         @Html.DropDownListFor(model => model.TankId, new SelectList(ViewBag.Tanks, "Id", "Name"), "-- Please select a Tank --", new { @class = "form-control selectpicker", id = "ddlTank", onclick = "GetsSensorByTankId(this.value, 'SensorId', '/Trigger/GetsSensorByTankId');" })
@@ -48,15 +42,13 @@
                             <option value="">-- Please select a Tank --</option>
                         </select>
                     }
+
                     @Html.ValidationMessageFor(m => m.TankId, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                    @Html.LabelFor(m => m.SensorId, new { @class = "control-label" })
-                </div>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     @if (Model.TankId.HasValue)
                     {
                         @Html.DropDownListFor(model => model.SensorId, new SelectList(ViewBag.Sensors, "Id", "Name"), "-- Please select a Sensor --", new { @class = "form-control selectpicker", id = "SensorId", onclick = "GetsSensorItemBySensorId(this.value, 'SensorItemId', '/Trigger/GetsSensorItemBySensorId');" })
@@ -72,13 +64,10 @@
             </div>
 
             <div class="form-group">
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                    @Html.LabelFor(m => m.SensorItemId, new { @class = "control-label" })
-                </div>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     @if (Model.SensorId.HasValue)
                     {
-                        @Html.DropDownListFor(model => model.SensorItemId, new SelectList(ViewBag.SensorItems, "Id", "Item.Name"), "-- Please select an Item --", new { @class = "form-control selectpicker", id = "SensorItemId" })
+                        @Html.DropDownListFor(model => model.SensorItemId, new SelectList(ViewBag.SensorItems, "Id", "Item.Name"), "-- Please select an Item --", new { @class = "form-control selectpicker", id = "SensorItemId", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.SensorItemId) })
                     }
                     else
                     {
@@ -91,40 +80,28 @@
             </div>
 
             <div class="form-group">
-                <div class="col-md-2">
-                    @Html.LabelFor(m => m.MinValue, new { @class = "control-label" })
-                </div>
-                <div class="col-md-10">
-                    @Html.EditorFor(m => m.MinValue, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.MinValue, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.MinValue) } })
                     @Html.ValidationMessageFor(m => m.MinValue, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-md-2">
-                    @Html.LabelFor(m => m.MaxValue, new { @class = "control-label" })
-                </div>
-                <div class="col-md-10">
-                    @Html.EditorFor(m => m.MaxValue, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.MaxValue, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.MaxValue) } })
                     @Html.ValidationMessageFor(m => m.MaxValue, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-md-2">
-                    @Html.LabelFor(m => m.SeverityId, new { @class = "control-label" })
-                </div>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.SeverityId, new SelectList(ViewBag.Severities, "Id", "Name"), "-- Please select a Severity --", new { @class = "form-control selectpicker", id = "ddlSeverity" })
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.DropDownListFor(model => model.SeverityId, new SelectList(ViewBag.Severities, "Id", "Name"), "-- Please select a Severity --", new { @class = "form-control selectpicker", id = "ddlSeverity", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.SeverityId) })
                     @Html.ValidationMessageFor(m => m.SeverityId, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-md-2">
-                    @Html.LabelFor(m => m.Status, new { @class = "control-label" })
-                </div>
-                <div class="col-md-10">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     @Html.DropDownListFor(model => model.Status, new SelectList(ViewBag.Statuses, "Id", "Name", "A"), "-- Please select a Status --", new { @class = "form-control selectpicker", id = "ddlStatus" })
                     @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
                 </div>
@@ -132,12 +109,11 @@
         </div>
 
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12 box-sub">
                         <div class="title green">
-                            <h2>Contacts</h2>
+                            <h2>CONTACTS</h2>
                         </div>
 
                         <div class="body checkboxlist">
@@ -161,9 +137,9 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12 box-sub">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 box-sub">
                         <div class="title green">
-                            <h2>Users</h2>
+                            <h2>USERS</h2>
                         </div>
 
                         <div class="body checkboxlist">

@@ -13,7 +13,7 @@
 @Styles.Render("~/Content/grid")
 
 <div class="pull-right">
-    @Html.NoEncodeActionLink("<span>CREATE</span>", "Add new Sensor", "Create", "Sensor", routeValues: new { area = "Customer", TankId = Request.QueryString["TankId"] }, htmlAttributes: new { @class = "btn" })
+    @Html.NoEncodeActionLink("<span>CREATE</span>", "Add new Sensor", "Create", "Sensor", routeValues: new { area = "Customer", IsSensorSite = 1, tankId = Request.QueryString["TankId"] }, htmlAttributes: new { @class = "btn" })
 </div>
 
 @Html.Grid(Model).Columns(columns =>

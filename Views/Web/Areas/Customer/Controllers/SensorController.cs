@@ -19,6 +19,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             List<ListViewModel> viewModels = new List<ListViewModel>();
 
+            ViewBag.IsSensorSite = 1;
+
             if (!IsSite)
             {
                 var sensors = KEUnitOfWork.SensorRepository.GetsSiteByCustomer(CustomerId).ToList();
@@ -33,23 +35,23 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return View(viewModels);
         }
 
-        [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Index()
-        {
-            List<Sensor> sensors = null;
+        //[Authorize(Roles = "Customer, CustomerAdmin")]
+        //public ActionResult Index()
+        //{
+        //    List<Sensor> sensors = null;
 
-            if (Request.QueryString.AllKeys.Contains("TankId"))
-            {
-                sensors = KEUnitOfWork.SensorRepository.GetsByTankIdAndCustomerId(CustomerId, TankId);
-            }
-            else
-            {
-                sensors = KEUnitOfWork.SensorRepository.GetsByCustomerId(CustomerId);
-            }
+        //    if (Request.QueryString.AllKeys.Contains("TankId"))
+        //    {
+        //        sensors = KEUnitOfWork.SensorRepository.GetsByTankIdAndCustomerId(CustomerId, TankId);
+        //    }
+        //    else
+        //    {
+        //        sensors = KEUnitOfWork.SensorRepository.GetsByCustomerId(CustomerId);
+        //    }
 
-            var viewModels = ListViewModel.Map(sensors);
-            return View(viewModels);
-        }
+        //    var viewModels = ListViewModel.Map(sensors);
+        //    return View(viewModels);
+        //}
 
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Tank(Guid tankId)
@@ -63,15 +65,33 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Create
 
+        [HttpGet]
         [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Create()
+        public ActionResult Create(Guid? tankId, Int16? IsSensorSite)
         {
-            return View(LoadCreateViewModel(null));
+            CreateViewModel viewModel = new CreateViewModel()
+            {
+                TankId = tankId,
+                IsSensorSite = true
+            };
+
+            return View(LoadCreateViewModel(viewModel));
         }
 
         private CreateViewModel LoadCreateViewModel(CreateViewModel viewModel)
         {
-            CreateViewModel vm = null;
+            if (viewModel == null)
+                viewModel = new CreateViewModel();
+
+            if (Request.QueryString["IsSite"] == "1") // Sensor Site
+            {
+                viewModel.IsSensorSite = true;
+            }
+            else // Sensor Tank
+            {
+                viewModel.TankId = TankId;
+                LoadTanks(CustomerId);
+            }
 
             if (!IsSite)
             {
@@ -82,21 +102,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 viewModel.SiteId = SiteId;
             }
 
-            if (viewModel == null)
-            {
-                vm = new CreateViewModel();
-                vm.TankId = TankId;
-            }
-            else
-            {
-                vm = viewModel;
-            }
-
-            LoadTanks(CustomerId);
             LoadSensorTypes();
             LoadStatuses();
 
-            return vm;
+            return viewModel;
         }
 
         //

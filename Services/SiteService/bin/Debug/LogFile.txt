@@ -1,8 +1,0 @@
-24/05/16 22:26:16: Service started
-24/05/16 22:27:37: Sensor 1 start collection
-24/05/16 22:27:37: Flow Meter start collection
-24/05/16 22:27:39: Sensor PH start collection
-24/05/16 22:27:43: Flow Meter error collection
-Object reference not set to an instance of an object.
-24/05/16 22:52:14: Service started
-24/05/16 22:53:43: Sensor PH start collection

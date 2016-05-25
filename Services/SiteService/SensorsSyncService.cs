@@ -80,13 +80,14 @@ namespace SiteService
 
                     foreach (var sensor in sensors)
                     {
+                        GetData(sensor);
                         // Create an MRE for each thread.
-                        var handle = new ManualResetEvent(false);
+                        //var handle = new ManualResetEvent(false);
 
                         // Store it for use below.
-                        handles.Add(handle);
+                        //handles.Add(handle);
 
-                        ThreadPool.QueueUserWorkItem(new WaitCallback(GetData), Tuple.Create(sensor, handle));
+                        //ThreadPool.QueueUserWorkItem(new WaitCallback(GetData), Tuple.Create(sensor, handle));
 
                         //Thread _thread = new Thread(GetData);
                         //_thread.Name = sensor.Name;
@@ -94,7 +95,7 @@ namespace SiteService
                         //_thread.Start();
                     }
 
-                    WaitHandle.WaitAll(handles.ToArray());
+                    //WaitHandle.WaitAll(handles.ToArray());
                 }
 
                 Logger.WriteLog("Service has been done successfully");
@@ -111,12 +112,20 @@ namespace SiteService
             }
         }
 
-        private void GetData(Object stateInfo)
+        /// <summary>
+        /// Communicate with Serial Port and execute a command
+        /// eg: !01002*M65001~
+        /// cmdstr = "!" + tanks.Tables(0).Rows(tankindex).Item("tdefSensorID") + "*" + "M" + SiteID + "~"
+        /// </summary>
+        /// <param name="sensor"></param>
+        //private void GetData(Object stateInfo)
+        private void GetData(Sensor sensor)
         {
-            var tuple = (Tuple<Sensor, ManualResetEvent>)stateInfo;
-            Sensor sensor = tuple.Item1;
+            //var tuple = (Tuple<Sensor, ManualResetEvent>)stateInfo;
+            //Sensor sensor = tuple.Item1;
             Site site = null;
             SerialPort serialPort = null;
+            String message = String.Empty;
 
             try
             {
@@ -124,23 +133,25 @@ namespace SiteService
                 Logger.WriteLog(startMessage);
                 EventLog.WriteEntry(startMessage);
 
-                // eg: !01002*M65001~
-                //cmdstr = "!" + tanks.Tables(0).Rows(tankindex).Item("tdefSensorID") + "*" + "M" + SiteID + "~"
-
                 if (sensor.SiteId.HasValue)
                     site = sensor.Site;
                 else if (sensor.TankId.HasValue)
                     site = sensor.Tank.Site;
 
                 String command = String.Format("!{0}*M{1}~", sensor.Reference, site.Id);
-                serialPort = new SerialPort();
+                serialPort = CreatePort();
+
+#if (!DEBUG)
                 serialPort.Open();
                 serialPort.WriteLine(command);
 
-                String message = "No response";
+                message = "No response";
                 message = serialPort.ReadLine();
 
+#else
                 message = "!65001*R274~";
+#endif
+
                 if (message != "No response")
                 {
                     SaveData(sensor, message);
@@ -157,20 +168,22 @@ namespace SiteService
             }
             catch (Exception ex)
             {
-                String errorMessage = String.Format("{0} error collection\n{1}", sensor.Name, ex.Message);
+                String errorMessage = String.Format("{0} error collection - {1}", sensor.Name, ex.Message);
                 Logger.WriteLog(errorMessage);
                 EventLog.WriteEntry(errorMessage);
                 Environment.Exit(1);
             }
             finally
             {
+#if (!DEBUG)
                 if (serialPort != null && serialPort.IsOpen)
                     serialPort.Close();
+#endif
 
                 // Signal that the work is done...even if an exception occurred.
                 // Otherwise, PerformTimerOperation() will block forever.
-                ManualResetEvent mreEvent = tuple.Item2;
-                mreEvent.Set();
+                //ManualResetEvent mreEvent = tuple.Item2;
+                //mreEvent.Set();
             }
         }
 
@@ -218,6 +231,113 @@ namespace SiteService
                 EventLog.WriteEntry("Error: SaveData - " + ex.Message);
                 throw ex;
             }
+        }
+
+        private SerialPort CreatePort()
+        {
+            SerialPort serialPort = new SerialPort();
+
+            if (ConfigurationManager.AppSettings["PortName"] != null &&
+                ConfigurationManager.AppSettings["PortName"].ToString() != String.Empty)
+            {
+                serialPort.PortName = ConfigurationManager.AppSettings["PortName"].ToString();
+            }
+            else
+            {
+                serialPort.PortName = "COM1";
+            }
+
+            if (ConfigurationManager.AppSettings["BaudRate"] != null &&
+                ConfigurationManager.AppSettings["BaudRate"].ToString() != String.Empty)
+            {
+                serialPort.BaudRate = Int32.Parse(ConfigurationManager.AppSettings["BaudRate"].ToString());
+            }
+            else
+            {
+                serialPort.BaudRate = 9600;
+            }
+
+            if (ConfigurationManager.AppSettings["Parity"] != null &&
+                ConfigurationManager.AppSettings["Parity"].ToString() != String.Empty)
+            {
+                var parity = ConfigurationManager.AppSettings["Parity"].ToString().ToUpper();
+                switch (parity)
+                {
+                    case "EVEN":
+                        serialPort.Parity = Parity.Even;
+                        break;
+                    case "MARK":
+                        serialPort.Parity = Parity.Mark;
+                        break;
+                    case "ODD":
+                        serialPort.Parity = Parity.Odd;
+                        break;
+                    case "SPACE":
+                        serialPort.Parity = Parity.Space;
+                        break;
+                    case "NONE":
+                        serialPort.Parity = Parity.None;
+                        break;
+                    default:
+                        serialPort.Parity = Parity.None;
+                        break;
+                }
+            }
+            else
+            {
+                serialPort.Parity = Parity.None;
+            }
+
+            if (ConfigurationManager.AppSettings["DataBits"] != null &&
+                ConfigurationManager.AppSettings["DataBits"].ToString() != String.Empty)
+            {
+                serialPort.DataBits = Int32.Parse(ConfigurationManager.AppSettings["DataBits"].ToString());
+            }
+            else
+            {
+                serialPort.DataBits = 8;
+            }
+
+
+            if (ConfigurationManager.AppSettings["StopBits"] != null &&
+                ConfigurationManager.AppSettings["StopBits"].ToString() != String.Empty)
+            {
+                var stopBits = ConfigurationManager.AppSettings["StopBits"].ToString();
+                switch (stopBits)
+                {
+                    case "0":
+                        serialPort.StopBits = StopBits.None;
+                        break;
+                    case "1":
+                        serialPort.StopBits = StopBits.One;
+                        break;
+                    case "1.5":
+                        serialPort.StopBits = StopBits.OnePointFive;
+                        break;
+                    case "2":
+                        serialPort.StopBits = StopBits.Two;
+                        break;
+                    default:
+                        serialPort.StopBits = StopBits.One;
+                        break;
+                }
+            }
+            else
+            {
+                serialPort.StopBits = StopBits.One;
+            }
+
+            if (ConfigurationManager.AppSettings["ReadTimeout"] != null &&
+                ConfigurationManager.AppSettings["ReadTimeout"].ToString() != String.Empty)
+            {
+                serialPort.ReadTimeout = Int32.Parse(ConfigurationManager.AppSettings["ReadTimeout"].ToString());
+            }
+            else
+            {
+                serialPort.ReadTimeout = 5000;
+            }
+
+            return serialPort;
         }
     }
 }

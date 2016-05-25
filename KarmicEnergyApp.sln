@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Views\Web\Web.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\KarmicEnergy.Core\Core.csproj", "{F4765A8A-4D17-4E1B-9116-F736E42A2EBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorsSyncService", "Services\SiteService\SensorsSyncService.csproj", "{65C2ECD5-218B-442A-ACF1-735FF3944BA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorEventsSyncService", "Services\SiteService\SensorEventsSyncService.csproj", "{65C2ECD5-218B-442A-ACF1-735FF3944BA7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{01FA4B5C-738B-4EEF-9665-B0DDEC66F9CE}"
 EndProject
@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "Views\Console\Co
 EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "SiteServiceSetup", "SiteServiceSetup\SiteServiceSetup.isproj", "{06521E87-9911-4815-A237-0C3ED6D800A4}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SensorsSyncServiceSetup", "Services\SensorsSyncServiceSetup\SensorsSyncServiceSetup.vdproj", "{A508B858-5745-4430-830F-11F39A21E07D}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SensorEventsSyncServiceSetup", "Services\SensorsSyncServiceSetup\SensorsSyncServiceSetup.vdproj", "{A508B858-5745-4430-830F-11F39A21E07D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

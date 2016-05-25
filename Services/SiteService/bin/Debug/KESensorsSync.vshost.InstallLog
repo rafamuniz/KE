@@ -1,0 +1,6 @@
+﻿Uninstalling assembly 'M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KESensorsSync.vshost.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KESensorsSync.vshost.InstallLog
+   assemblypath = M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KESensorsSync.vshost.exe
+No public installers with the RunInstallerAttribute.Yes attribute could be found in the M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Debug\KESensorsSync.vshost.exe assembly.

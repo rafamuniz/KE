@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
+using System.Reflection;
 using System.ServiceProcess;
 using System.Threading;
 using System.Timers;
@@ -27,13 +28,16 @@ namespace SiteService
 
         protected override void OnStart(string[] args)
         {
+            Double interval = 5000;
+            Double.TryParse(GetAppConfigValue("Interval"), out interval);
+
             timer = new System.Timers.Timer();
-            timer.Interval = Double.Parse(ConfigurationManager.AppSettings["Interval"]);
+            timer.Interval = interval;
             timer.Elapsed += SyncSensors_Tick;
             timer.Enabled = true;
             timer.AutoReset = false; // makes it fire only once
             Logger.WriteLog("Service started");
-            EventLog.WriteEntry("Service started");
+            //EventLog.WriteEntry("Service started");
         }
 
         public void OnDebug()
@@ -62,7 +66,7 @@ namespace SiteService
             }
 
             Logger.WriteLog("Service stopped");
-            EventLog.WriteEntry("Service stopped");
+            //EventLog.WriteEntry("Service stopped");
         }
 
         private void SyncSensors_Tick(object sender, ElapsedEventArgs e)
@@ -99,12 +103,12 @@ namespace SiteService
                 }
 
                 Logger.WriteLog("Service has been done successfully");
-                EventLog.WriteEntry("Service has been done successfully");
+                //EventLog.WriteEntry("Service has been done successfully");
             }
             catch (Exception ex)
             {
                 Logger.WriteLog(ex.Message);
-                EventLog.WriteEntry(ex.Message);
+                //EventLog.WriteEntry(ex.Message);
             }
             finally
             {
@@ -131,7 +135,6 @@ namespace SiteService
             {
                 String startMessage = String.Format("{0} start collection", sensor.Name);
                 Logger.WriteLog(startMessage);
-                EventLog.WriteEntry(startMessage);
 
                 if (sensor.SiteId.HasValue)
                     site = sensor.Site;
@@ -139,7 +142,9 @@ namespace SiteService
                     site = sensor.Tank.Site;
 
                 String command = String.Format("!{0}*M{1}~", sensor.Reference, site.Id);
-                serialPort = CreatePort();
+                serialPort = CreatePortWithSettings();
+                Logger.WriteLog(String.Format("Serial Port: {0} - {1} - {2} - {3} - {4} - {5}", serialPort.PortName, serialPort.BaudRate, serialPort.Parity, serialPort.DataBits, serialPort.StopBits, serialPort.ReadTimeout));
+
 
 #if (!DEBUG)
                 serialPort.Open();
@@ -155,11 +160,15 @@ namespace SiteService
                 if (message != "No response")
                 {
                     SaveData(sensor, message);
-                    EventLog.WriteEntry(String.Format("{0} responds: {1}", sensor.Name, command, EventLogEntryType.Information));
+                    String messageResponse = String.Format("{0} responds: {1}", sensor.Name, command);
+                    //EventLog.WriteEntry(messageResponse, EventLogEntryType.Information);
+                    Logger.WriteLog(messageResponse);
                 }
                 else
                 {
-                    EventLog.WriteEntry(String.Format("Error - {0} did not respond: {1}", sensor.Name, command, EventLogEntryType.Error));
+                    String messageResponse = String.Format("Error - {0} did not respond: {1}", sensor.Name, command);
+                    //EventLog.WriteEntry(messageResponse, EventLogEntryType.Error);
+                    Logger.WriteLog(messageResponse);
                 }
 
                 String endMessage = String.Format("{0} finish collection", sensor.Name);
@@ -170,8 +179,7 @@ namespace SiteService
             {
                 String errorMessage = String.Format("{0} error collection - {1}", sensor.Name, ex.Message);
                 Logger.WriteLog(errorMessage);
-                EventLog.WriteEntry(errorMessage);
-                Environment.Exit(1);
+                //Environment.Exit(1);
             }
             finally
             {
@@ -179,6 +187,8 @@ namespace SiteService
                 if (serialPort != null && serialPort.IsOpen)
                     serialPort.Close();
 #endif
+                String startMessage = String.Format("{0} stop collection", sensor.Name);
+                Logger.WriteLog(startMessage);
 
                 // Signal that the work is done...even if an exception occurred.
                 // Otherwise, PerformTimerOperation() will block forever.
@@ -229,38 +239,36 @@ namespace SiteService
             {
                 Logger.WriteLog("Error: SaveData - " + ex.Message);
                 EventLog.WriteEntry("Error: SaveData - " + ex.Message);
-                throw ex;
             }
         }
 
-        private SerialPort CreatePort()
+        private SerialPort CreatePortWithSettings()
         {
             SerialPort serialPort = new SerialPort();
 
-            if (ConfigurationManager.AppSettings["PortName"] != null &&
-                ConfigurationManager.AppSettings["PortName"].ToString() != String.Empty)
+            if (GetAppConfigValue("PortName") != null)
             {
-                serialPort.PortName = ConfigurationManager.AppSettings["PortName"].ToString();
+                serialPort.PortName = GetAppConfigValue("PortName").ToUpper();
             }
             else
             {
                 serialPort.PortName = "COM1";
             }
 
-            if (ConfigurationManager.AppSettings["BaudRate"] != null &&
-                ConfigurationManager.AppSettings["BaudRate"].ToString() != String.Empty)
+            if (GetAppConfigValue("BaudRate") != null)
             {
-                serialPort.BaudRate = Int32.Parse(ConfigurationManager.AppSettings["BaudRate"].ToString());
+                Int32 baudRate = 9600;
+                Int32.TryParse(GetAppConfigValue("BaudRate"), out baudRate);
+                serialPort.BaudRate = baudRate;
             }
             else
             {
                 serialPort.BaudRate = 9600;
             }
 
-            if (ConfigurationManager.AppSettings["Parity"] != null &&
-                ConfigurationManager.AppSettings["Parity"].ToString() != String.Empty)
+            if (GetAppConfigValue("Parity") != null)
             {
-                var parity = ConfigurationManager.AppSettings["Parity"].ToString().ToUpper();
+                var parity = GetAppConfigValue("Parity").ToUpper();
                 switch (parity)
                 {
                     case "EVEN":
@@ -288,10 +296,11 @@ namespace SiteService
                 serialPort.Parity = Parity.None;
             }
 
-            if (ConfigurationManager.AppSettings["DataBits"] != null &&
-                ConfigurationManager.AppSettings["DataBits"].ToString() != String.Empty)
+            if (GetAppConfigValue("DataBits") != null)
             {
-                serialPort.DataBits = Int32.Parse(ConfigurationManager.AppSettings["DataBits"].ToString());
+                Int32 dataBits = 8;
+                Int32.TryParse(GetAppConfigValue("DataBits"), out dataBits);
+                serialPort.DataBits = dataBits;
             }
             else
             {
@@ -299,10 +308,9 @@ namespace SiteService
             }
 
 
-            if (ConfigurationManager.AppSettings["StopBits"] != null &&
-                ConfigurationManager.AppSettings["StopBits"].ToString() != String.Empty)
+            if (GetAppConfigValue("StopBits") != null)
             {
-                var stopBits = ConfigurationManager.AppSettings["StopBits"].ToString();
+                var stopBits = GetAppConfigValue("StopBits");
                 switch (stopBits)
                 {
                     case "0":
@@ -327,10 +335,11 @@ namespace SiteService
                 serialPort.StopBits = StopBits.One;
             }
 
-            if (ConfigurationManager.AppSettings["ReadTimeout"] != null &&
-                ConfigurationManager.AppSettings["ReadTimeout"].ToString() != String.Empty)
+            if (GetAppConfigValue("ReadTimeout") != null)
             {
-                serialPort.ReadTimeout = Int32.Parse(ConfigurationManager.AppSettings["ReadTimeout"].ToString());
+                Int32 readtimeout = 5000;
+                Int32.TryParse(GetAppConfigValue("ReadTimeout"), out readtimeout);
+                serialPort.ReadTimeout = readtimeout;
             }
             else
             {
@@ -338,6 +347,15 @@ namespace SiteService
             }
 
             return serialPort;
+        }
+
+        private String GetAppConfigValue(String key)
+        {
+            var config = ConfigurationManager.OpenExeConfiguration(Assembly.GetAssembly(typeof(ProjectInstaller)).Location);
+            if (config.AppSettings.Settings[key] == null)
+                return null;
+            else
+                return config.AppSettings.Settings[key].Value;
         }
     }
 }

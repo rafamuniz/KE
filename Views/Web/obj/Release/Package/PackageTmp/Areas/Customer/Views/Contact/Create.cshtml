@@ -15,11 +15,8 @@
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div class="form-group">
-                <div class="col-md-2 col-lg-2">
-                    @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-                </div>
-                <div class="col-md-10 col-lg-10">
-                    @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.Name) } })
                     @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -28,14 +25,14 @@
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div class="box-sub">
                 <div class="title green">
-                    <h2>Info</h2>
+                    <h2>INFO</h2>
                 </div>
                 @Html.Partial("_Address", Model.Address, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "Address" } })
             </div>
         </div>
     </div>
 
-    <div class="col-md-12 btn-submit text-center">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 btn-submit text-center">
         <input type="submit" class="btn btn-default" value="SAVE">
         <a class="btn" href="/Customer/Contact">Cancel</a>
     </div>

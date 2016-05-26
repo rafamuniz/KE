@@ -12,38 +12,37 @@
 @using (Html.BeginForm("Create", "TankModel", new { area = "Admin" }, FormMethod.Post, new { id = "form", enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <div class="col-md-1">
-            @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-        </div>
-        <div class="col-md-11 form-group">
-            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", style = "width: 300px;" } })
-            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
-        </div>
 
-        <div class="col-md-12 form-group">
-            <div class="col-md-1">
-                @Html.LabelFor(m => m.Image, new { @class = "control-label" })
+    <div class="row">
+
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.Name) } })
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                </div>
             </div>
-            <div class="col-md-11 form-group">
-                <input type="file" name="Image" />
-                @Html.ValidationMessageFor(m => m.Image, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <input type="file" name="Image" />
+                    @Html.ValidationMessageFor(m => m.Image, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.DropDownListFor(model => model.Status, new SelectList(ViewBag.Statuses, "Id", "Name", "A"), "-- Please select a Status--", new { @class = "form-control selectpicker", style = "width: 250px;", id = "ddlStatus" })
+                    @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-1">
-            @Html.LabelFor(m => m.Status, new { @class = "control-label" })
-        </div>
-        <div class="col-md-11 form-group">
-            @Html.DropDownListFor(model => model.Status, new SelectList(ViewBag.Statuses, "Id", "Name", "A"), "-- Please select a Status--", new { @class = "form-control selectpicker", style = "width: 250px;", id = "ddlStatus" })
-            @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="col-md-12 form-group text-center">
-            <input type="submit" class="btn btn-default" value="SAVE">
-            <a class="btn" href="/Admin/TankModel/">Cancel</a>
-        </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 btn-submit text-center">
+        <input type="submit" class="btn btn-default" value="SAVE">
+        <a class="btn" href="/Admin/TankModel/">Cancel</a>
     </div>
 }
 

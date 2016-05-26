@@ -17,50 +17,35 @@
 
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                    @Html.LabelFor(m => m.TankId, new { @class = "control-label" })
-                </div>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     @Html.DropDownListFor(m => m.TankId, new SelectList(ViewBag.Tanks, "Id", "Name"), "-- Please select a Tank --", new { @class = "form-control selectpicker", @id = "ddlTank" })
                     @Html.ValidationMessageFor(m => m.TankId, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                    @Html.LabelFor(m => m.SensorTypeId, new { @class = "control-label" })
-                </div>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     @Html.DropDownListFor(m => m.SensorTypeId, new SelectList(ViewBag.SensorTypes, "Id", "Name"), "-- Please select a Sensor Type --", new { @class = "form-control selectpicker", @id = "ddlSensorType", onchange = "getsItemBySensorTypeId(undefined);" })
                     @Html.ValidationMessageFor(m => m.SensorTypeId, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                    @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-                </div>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                    @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<EditViewModel>(m => m.Name) } })
                     @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                    @Html.LabelFor(m => m.Reference, new { @class = "control-label" })
-                </div>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                    @Html.EditorFor(m => m.Reference, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.Reference, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<EditViewModel>(m => m.Reference) } })
                     @Html.ValidationMessageFor(m => m.Reference, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                    @Html.LabelFor(m => m.Status, new { @class = "control-label" })
-                </div>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     @Html.DropDownListFor(model => model.Status, new SelectList(ViewBag.Statuses, "Id", "Name", "A"), "-- Please select a Status --", new { @class = "form-control selectpicker", id = "ddlStatus" })
                     @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
                 </div>
@@ -68,11 +53,11 @@
         </div>
 
         <div class="col-sm-6 col-md-6 col-xs-6 visible-lg-block">
-            <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12 box-sub">
                         <div class="title green">
-                            <h2>Items</h2>
+                            <h2>ITEMS</h2>
                         </div>
 
                         <div id="divCheckboxlist" class="checkboxlist">
@@ -85,9 +70,16 @@
             @Html.Partial("_TankSpotGPS", new SpotGPSViewModel())
         </div>
 
-        <div class="col-md-12 col-lg-12 text-center btn-submit">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center btn-submit">
             <input type="submit" class="btn btn-default" value="SAVE">
-            <a class="btn" href="/Customer/Sensor/Index?TankId=@Model.TankId">Cancel</a>
+            @if (Request.QueryString["TankId"] != null)
+            {
+                <a class="btn" href="/Customer/Sensor/Index?TankId=@Request.QueryString["TankId"]">Cancel</a>
+            }
+            else
+            {
+                <a class="btn" href="/Customer/Sensor/">Cancel</a>
+            }
         </div>
     }
 </div>

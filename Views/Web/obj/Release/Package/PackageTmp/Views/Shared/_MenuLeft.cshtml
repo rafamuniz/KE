@@ -21,8 +21,7 @@
 
     @if (this.HasRoles("SuperAdmin", "Admin", "Operator"))
     {
-        <li class="treeview @Html.MenuItemActive("TankModel", "Admin")">
-            >
+        <li class="treeview @Html.MenuItemActive("TankModel", "Admin")">            
             <a href="/Admin/TankModel">
                 <img src="/images/my_tank.png" alt="tank_models" title="tank_models">
                 <p>TANK MODEL</p>
@@ -102,7 +101,6 @@
         </li>
 
         <li class="treeview @Html.MenuItemActive("Monitoring", "Customer")">
-            >
             <a href="/Customer/Monitoring">
                 <img src="/images/fast_track.png" alt="Monitoring" title="Monitoring">
                 <p>MONITORING</p>
@@ -116,11 +114,11 @@
             </a>
         </li>
 
-        <li class="treeview @Html.MenuItemActive("Log", "Customer")">
-            <a href="#">
-                <img src="/images/loga_sample.png" alt="logs" title="logs">
-                <p>LOG A SAMPLE</p>
-            </a>
-        </li>
+        @*<li class="treeview @Html.MenuItemActive("Log", "Customer")">
+                <a href="#">
+                    <img src="/images/loga_sample.png" alt="logs" title="logs">
+                    <p>LOG A SAMPLE</p>
+                </a>
+            </li>*@
     }
 </ul>

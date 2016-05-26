@@ -18,14 +18,17 @@
 
 @Html.Grid(Model).Columns(columns =>
 {
+    columns.Add(c => c.Id).Titled("Id")
+        .Filterable(true);
+
     columns.Add(c => c.Name).Titled("Name")
-         .Filterable(true);
+        .Filterable(true);
 
     columns.Add(c => c.IPAddress).Titled("IP Address")
-      .Filterable(true);
+        .Filterable(true);
 
     columns.Add(c => c.Status).Titled("Status")
-      .Filterable(true);
+        .Filterable(true);
 
     columns.Add()
      .Encoded(false)

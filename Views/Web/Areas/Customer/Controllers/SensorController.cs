@@ -15,50 +15,52 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #region Index
 
         [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Site()
+        public ActionResult Index()
         {
-            List<ListViewModel> viewModels = new List<ListViewModel>();
-
-            ViewBag.IsSensorSite = 1;
+            ListViewModel viewModel = new ListViewModel();
+            List<SensorViewModel> sensorViewModels = new List<SensorViewModel>();
 
             if (!IsSite)
             {
                 var sensors = KEUnitOfWork.SensorRepository.GetsSiteByCustomer(CustomerId).ToList();
-                viewModels = ListViewModel.Map(sensors);
+                sensorViewModels = SensorViewModel.Map(sensors);
             }
             else
             {
                 var sensors = KEUnitOfWork.SensorRepository.GetsSiteByCustomerAndSite(CustomerId, SiteId).ToList();
-                viewModels = ListViewModel.Map(sensors);
+                sensorViewModels = SensorViewModel.Map(sensors);
+                viewModel.SiteId = SiteId;
             }
 
-            return View(viewModels);
+            viewModel.Sensors = sensorViewModels;
+            LoadSites(CustomerId);
+            return View("Index", viewModel);
         }
 
-        //[Authorize(Roles = "Customer, CustomerAdmin")]
-        //public ActionResult Index()
-        //{
-        //    List<Sensor> sensors = null;
+        [Authorize(Roles = "Customer, CustomerAdmin")]
+        public ActionResult Site(Guid siteId)
+        {
+            ListViewModel viewModel = new ListViewModel();
+           
+            var sensors = KEUnitOfWork.SensorRepository.GetsSiteByCustomerAndSite(CustomerId, siteId).ToList();
 
-        //    if (Request.QueryString.AllKeys.Contains("TankId"))
-        //    {
-        //        sensors = KEUnitOfWork.SensorRepository.GetsByTankIdAndCustomerId(CustomerId, TankId);
-        //    }
-        //    else
-        //    {
-        //        sensors = KEUnitOfWork.SensorRepository.GetsByCustomerId(CustomerId);
-        //    }
-
-        //    var viewModels = ListViewModel.Map(sensors);
-        //    return View(viewModels);
-        //}
+            List<SensorViewModel> sensorViewModels = SensorViewModel.Map(sensors);
+            viewModel.SiteId = siteId;
+            viewModel.Sensors = sensorViewModels;
+            LoadSites(CustomerId);
+            return View("Index", viewModel);
+        }
 
         [Authorize(Roles = "Customer, CustomerAdmin")]
         public ActionResult Tank(Guid tankId)
         {
             var sensors = KEUnitOfWork.SensorRepository.GetsByTankIdAndCustomerId(CustomerId, TankId);
-            var viewModels = ListViewModel.Map(sensors);
-            return View("Index", viewModels);
+            var sensorViewModels = SensorViewModel.Map(sensors);
+
+            ListViewModel viewModel = new ListViewModel();
+            viewModel.TankId = tankId;
+
+            return View("Index", viewModel);
         }
 
         #endregion Index
@@ -67,12 +69,11 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Customer, CustomerAdmin")]
-        public ActionResult Create(Guid? tankId, Int16? IsSensorSite)
+        public ActionResult Create(Guid? tankId)
         {
             CreateViewModel viewModel = new CreateViewModel()
             {
-                TankId = tankId,
-                IsSensorSite = true
+                TankId = tankId
             };
 
             return View(LoadCreateViewModel(viewModel));

@@ -69,8 +69,8 @@
             </a>
         </li>
 
-        <li class="treeview @Html.MenuItemActive("Sensor", "Site", "Customer")">
-            <a href="/Customer/Sensor/Site">
+        <li class="treeview @Html.MenuItemActive("Sensor", "Index", "Customer")">
+            <a href="/Customer/Sensor">
                 <img src="~/images/sensor.png" alt="sensor" title="sensor">
                 <p>SENSOR</p>
             </a>
@@ -86,8 +86,8 @@
 
     @if (this.HasRoles("Customer", "CustomerAdmin", "CustomerOperator"))
     {
-        <li class="treeview @Html.MenuItemActive("Site", "Report", "Customer")">
-            <a href="/Customer/Site/Report">
+        <li class="treeview @Html.MenuItemActive("Dashboard", "Site", "Customer")">
+            <a href="/Customer/Dashboard/Site">
                 <img src="/images/my_tank_report.png" alt="tank_report" title="tank_report">
                 <p>MY SITE REPORT</p>
             </a>
@@ -107,7 +107,7 @@
             </a>
         </li>
 
-        <li class="treeview @Html.MenuItemActive("TankReport", "Customer")">
+        <li class="treeview @Html.MenuItemActive("Dashboard", "Tank", "Customer")">
             <a href="/Customer/TankReport">
                 <img src="/images/my_tank_report.png" alt="tank_report" title="tank_report">
                 <p>MY TANK REPORT</p>

@@ -24,7 +24,30 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
 
         public String UrlImageTankModel { get; set; }
 
-        public Decimal WaterVolumeCapacity { get; set; }
+        public Decimal? WaterVolumeCapacity { get; set; }
+
+        public Decimal? WaterVolume { get; set; }
+
+        public DateTime? WaterVolumeLastMeasurement { get; set; }
+
+        public Decimal? WaterVolumePercentage
+        {
+            get
+            {
+                if (WaterVolume.HasValue)
+                {
+                    return WaterVolume / WaterVolumeCapacity;
+                }
+                return null;
+            }
+            set { }
+        }
+
+        public Decimal WaterVolumeRemaining
+        {
+            get { return WaterVolumeCapacity.Value - WaterVolume.Value; }
+            set { }
+        }
 
         public List<WaterVolumeViewModel> WaterVolumes { get; set; }
         public List<EventViewModel> Voltages { get; set; }

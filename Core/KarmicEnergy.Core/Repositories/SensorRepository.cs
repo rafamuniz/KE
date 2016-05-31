@@ -34,7 +34,7 @@ namespace KarmicEnergy.Core.Repositories
         public List<Sensor> GetsByTankIdAndCustomerId(Guid customerId, Guid tankId)
         {
             var sensors = base.Find(x => x.Tank.Site.CustomerId == customerId && x.TankId == tankId && x.DeletedDate == null).ToList();
-            
+
             return sensors;
         }
 
@@ -45,7 +45,7 @@ namespace KarmicEnergy.Core.Repositories
 
         public List<Sensor> GetsSiteByCustomerAndSite(Guid customerId, Guid siteId)
         {
-            return base.Find(x => x.Tank.Site.CustomerId == customerId && x.TankId == null && x.DeletedDate == null).ToList();
+            return base.Find(x => x.Tank.Site.CustomerId == customerId && x.SiteId == siteId && x.TankId == null && x.DeletedDate == null).ToList();
         }
     }
 }

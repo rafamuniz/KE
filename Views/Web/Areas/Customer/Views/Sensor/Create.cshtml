@@ -30,12 +30,15 @@
                 @Html.HiddenFor(m => m.SiteId)
             }
 
-            <div class="form-group">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    @Html.DropDownListFor(m => m.TankId, new SelectList(ViewBag.Tanks, "Id", "Name"), "-- Please select a Tank --", new { @class = "form-control selectpicker", @id = "ddlTank" })
-                    @Html.ValidationMessageFor(m => m.TankId, "", new { @class = "text-danger" })
+            @if (Model.TankId.HasValue && Model.TankId.Value != default(Guid))
+            {
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        @Html.DropDownListFor(m => m.TankId, new SelectList(ViewBag.Tanks, "Id", "Name"), "-- Please select a Tank --", new { @class = "form-control selectpicker", @id = "ddlTank" })
+                        @Html.ValidationMessageFor(m => m.TankId, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
+            }
 
             <div class="form-group">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">

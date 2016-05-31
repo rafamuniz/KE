@@ -158,7 +158,8 @@ body.hold-transition .main-header .logo {
 }
 /* Content */
 .content {
-    min-height: 250px;
+    /*min-height: 250px;*/
+    min-height: 100%;
     padding: 15px;
     margin-right: auto;
     margin-left: auto;

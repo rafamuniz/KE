@@ -271,6 +271,7 @@
     <Compile Include="Areas\Customer\Controllers\SensorGroupController.cs" />
     <Compile Include="Areas\Customer\Controllers\SensorController.cs" />
     <Compile Include="Areas\Customer\Controllers\FastTrackerController.cs" />
+    <Compile Include="Areas\Customer\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Customer\Controllers\TriggerController.cs" />
     <Compile Include="Areas\Customer\Controllers\TankReportController.cs" />
     <Compile Include="Areas\Customer\Controllers\TankController.cs" />
@@ -284,6 +285,7 @@
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\GroupViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\SensorGroupViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Sensor\SensorViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\UnitViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\ItemViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\SpotGPSViewModel.cs" />
@@ -292,10 +294,10 @@
     <Compile Include="Areas\Customer\ViewModels\Sensor\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Site\TankViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Site\ReportViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Dashboard\SiteDashboardViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Site\SiteAddressViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\TankReport\Report.cs" />
-    <Compile Include="Areas\Customer\ViewModels\TankReport\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Dashboard\TankViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Dashboard\TankDashboardViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\FlowMeterViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\GaugeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\DashboardTankViewModel.cs" />
@@ -305,7 +307,7 @@
     <Compile Include="Areas\Customer\ViewModels\Tank\DashboardViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\EditViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Site\FlowMeterViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Dashboard\FlowMeterViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TankWaterCapacityViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TriggerViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\VoltageViewModel.cs" />
@@ -1499,7 +1501,7 @@
     <Content Include="Areas\Customer\Views\Tank\Create.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\Edit.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\Dashboard.cshtml" />
+    <Content Include="Areas\Customer\Views\Dashboard\Tank.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
@@ -1512,14 +1514,14 @@
     <Content Include="Areas\Customer\Views\Sensor\Create.cshtml" />
     <Content Include="Areas\Customer\Views\Sensor\Edit.cshtml" />
     <Content Include="Areas\Customer\Views\Sensor\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\_TankData.cshtml" />
+    <Content Include="Areas\Customer\Views\Dashboard\_TankData.cshtml" />
     <Content Include="Areas\Customer\Views\FastTracker\Index.cshtml" />
     <Content Include="Areas\Customer\Views\Sensor\_TankSpotGPS.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\Gauge.cshtml" />
+    <Content Include="Areas\Customer\Views\Dashboard\Gauge.cshtml" />
     <Content Include="Areas\Customer\Views\TankReport\Index.cshtml" />
     <Content Include="Areas\Customer\Views\SensorGroup\Create.cshtml" />
     <Content Include="Areas\Customer\Views\SensorGroup\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\_TankModel.cshtml" />
+    <Content Include="Areas\Customer\Views\Dashboard\_TankModel.cshtml" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -1533,9 +1535,9 @@
     <Content Include="Areas\Admin\Views\StickConversion\Index.cshtml" />
     <Content Include="Areas\Admin\Views\StickConversion\Values.cshtml" />
     <Content Include="Areas\Customer\Views\Monitoring\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\_Trigger.cshtml" />
+    <Content Include="Areas\Customer\Views\Dashboard\_Trigger.cshtml" />
     <Content Include="Areas\Customer\Views\Trigger\Create.cshtml" />
-    <Content Include="Areas\Customer\Views\Site\Report.cshtml" />
+    <Content Include="Areas\Customer\Views\Dashboard\Site.cshtml" />
     <Content Include="Areas\Customer\Views\Sensor\Site.cshtml" />
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Properties\PublishProfiles\ClickOnce.pubxml" />

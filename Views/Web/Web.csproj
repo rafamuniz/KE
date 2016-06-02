@@ -278,6 +278,7 @@
     <Compile Include="Areas\Customer\Controllers\SiteController.cs" />
     <Compile Include="Areas\Customer\Controllers\ContactController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Dashboard\AlarmViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankWithWaterVolume.cs" />
@@ -433,8 +434,10 @@
     <Content Include="Content\Site.css" />
     <Content Include="images\close.png" />
     <Content Include="images\customers.png" />
+    <Content Include="images\dashboard.png" />
     <Content Include="images\default_user_image.png" />
     <Content Include="images\fast_track.png" />
+    <Content Include="images\favicon-16x16.png" />
     <Content Include="images\gauge_after.gif" />
     <Content Include="images\gauge_after.tif" />
     <Content Include="images\gauge_before.gif" />
@@ -1247,7 +1250,6 @@
     <Content Include="images\map_icon.png" />
     <Content Include="images\menu-highlight.png" />
     <Content Include="images\my_tank.png" />
-    <Content Include="images\my_tank_report.png" />
     <Content Include="images\pond_white.png" />
     <Content Include="images\profile_gray.png" />
     <Content Include="images\pull-down.png" />
@@ -1521,7 +1523,7 @@
     <Content Include="Areas\Customer\Views\TankReport\Index.cshtml" />
     <Content Include="Areas\Customer\Views\SensorGroup\Create.cshtml" />
     <Content Include="Areas\Customer\Views\SensorGroup\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Dashboard\_TankModel.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\_TankModel.cshtml" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -2099,7 +2101,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\app\tank-dashboard.js" />
+    <Content Include="Scripts\app\dashboard.js" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

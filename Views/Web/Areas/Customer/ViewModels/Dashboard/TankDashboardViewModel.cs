@@ -17,7 +17,9 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
 
         #region Property
 
-        public Guid SiteId { get; set; }
+        public Guid? SiteId { get; set; }
+
+        public Guid? TankId { get; set; }
 
         public List<TankViewModel> Tanks { get; set; }
 

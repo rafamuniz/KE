@@ -16,34 +16,37 @@ namespace KarmicEnergy.Core.Repositories
         }
         #endregion Constructor       
 
-        public Boolean HasSensor(Guid tankId)
+        public Boolean HasSensorTank(Guid tankId)
         {
             return base.Find(x => x.TankId == tankId).Any();
         }
 
-        public List<Sensor> GetsByCustomerId(Guid customerId)
+        public Boolean HasSensorSite(Guid siteId)
+        {
+            return base.Find(x => x.SiteId == siteId && x.TankId == null).Any();
+        }
+
+        public List<Sensor> GetsByCustomer(Guid customerId)
         {
             return base.Find(x => x.Tank.Site.CustomerId == customerId && x.DeletedDate == null).ToList();
         }
 
-        public List<Sensor> GetsByTankId(Guid tankId)
+        public List<Sensor> GetsByTank(Guid tankId)
         {
             return base.Find(x => x.TankId == tankId).ToList();
         }
 
-        public List<Sensor> GetsByTankIdAndCustomerId(Guid customerId, Guid tankId)
+        public List<Sensor> GetsByCustomerAndTank(Guid customerId, Guid tankId)
         {
-            var sensors = base.Find(x => x.Tank.Site.CustomerId == customerId && x.TankId == tankId && x.DeletedDate == null).ToList();
-
-            return sensors;
+            return base.Find(x => x.Tank.Site.CustomerId == customerId && x.TankId == tankId && x.DeletedDate == null).ToList();
         }
 
-        public List<Sensor> GetsSiteByCustomer(Guid customerId)
+        public List<Sensor> GetsBySite(Guid siteId)
         {
-            return base.Find(x => x.Tank.Site.CustomerId == customerId && x.TankId == null && x.DeletedDate == null).ToList();
+            return base.Find(x => x.SiteId == siteId && x.TankId == null && x.DeletedDate == null).ToList();
         }
 
-        public List<Sensor> GetsSiteByCustomerAndSite(Guid customerId, Guid siteId)
+        public List<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId)
         {
             return base.Find(x => x.Tank.Site.CustomerId == customerId && x.SiteId == siteId && x.TankId == null && x.DeletedDate == null).ToList();
         }

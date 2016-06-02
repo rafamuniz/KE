@@ -394,7 +394,7 @@ namespace KarmicEnergy.Web.Controllers
         }
         protected List<Sensor> LoadSensors(Guid customerId, Guid tankId)
         {
-            List<Sensor> sensors = KEUnitOfWork.SensorRepository.GetsByTankIdAndCustomerId(customerId, tankId);
+            List<Sensor> sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndTank(customerId, tankId);
             ViewBag.Sensors = sensors;
             return sensors;
         }

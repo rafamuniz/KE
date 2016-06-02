@@ -16,9 +16,11 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
         #region Property
 
         public Decimal? RateFlow { get; set; }
+        public DateTime? RateFlowLastMeasurement { get; set; }
 
         public Int32? Totalizer { get; set; }
-
+        public DateTime? TotalizerLastMeasurement { get; set; }
+        
         #endregion Property        
     }
 }

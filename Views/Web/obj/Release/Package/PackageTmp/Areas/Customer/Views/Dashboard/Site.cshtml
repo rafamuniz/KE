@@ -1,0 +1,215 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
+@using KarmicEnergy.Web.Extensions
+
+@model SiteDashboardViewModel
+
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Site - Report";
+}
+
+@Scripts.Render("~/bundles/moment")
+@Scripts.Render("~/bundles/jqueryui")
+
+<script src="~/Scripts/app/utils.js"></script>
+<script src="~/Scripts/highcharts/highcharts.js"></script>
+<script src="~/Scripts/highcharts/highcharts-3d.js"></script>
+<script src="~/Scripts/highcharts/highcharts-more.js"></script>
+<script src="~/Scripts/app/dashboard.js"></script>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        @if (!this.IsSite())
+            {
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("SiteSiteSelected", "Dashboard", new { }, FormMethod.Post, new { }))
+                        {
+                    @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
+                        }
+                </div>
+            </div>
+        </div>
+        }
+        else
+        {
+        @Html.HiddenFor(m => m.SiteId)
+        }
+    </div>
+</div>
+
+<div class="table-container">
+    @if (this.IsSite() || (Model.SiteId.HasValue && Model.SiteId != default(Guid)))
+    {
+        <div class="row table-row">
+
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 table-col">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="row">
+                            <div class="box-sub">
+                                <div class="title blue">
+                                    <h2>ALARMS</h2>
+                                </div>
+                            </div>
+
+                            <div class="row row-centered">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="row">
+                            <div class="box-sub">
+                                <div class="title blue">
+                                    <h2>WATER QUALITY</h2>
+                                </div>
+
+                                <div class="row row-centered">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="row">
+                            <div class="box-sub">
+                                <div class="title blue">
+                                    <h2>FLOW METER</h2>
+                                </div>
+
+                                <div class="row row-centered">
+
+                                    @if (Model.FlowMeters.Any())
+                                    {
+                                        Int32 idFlowMeter = 0;
+
+                                        foreach (var flowMeter in Model.FlowMeters)
+                                        {
+                                            if (flowMeter.RateFlow.HasValue && flowMeter.Totalizer.HasValue)
+                                            {
+                                                <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 flow-meter">
+                                                    <div id="flowmeter_@idFlowMeter">
+                                                    </div>
+                                                    <script type="text/javascript">
+                                                        generateFlowMeter(@idFlowMeter, @flowMeter.RateFlow.Value, @flowMeter.Totalizer.Value);
+                                                    </script>
+                                                </div>
+                                            }
+
+                                            idFlowMeter++;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 flow-meter">
+                                            <div id="flowmeter_none">
+                                            </div>
+                                            <script type="text/javascript">
+                                                generateFlowMeter(none, 0, 0);
+                                            </script>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 table-col">
+                <div class="box-sub table-col">
+                    <div class="title blue">
+                        <h2>TANKS</h2>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="row">
+                            @if (Model != null && Model.Tanks.Any())
+                            {
+                                foreach (var tank in Model.Tanks)
+                                {
+                                    String color_box = String.Empty;
+                                    String color_progress = String.Empty;
+                                    Int16 waterPerc = (Int16)tank.WaterVolumePercentage;
+
+                                    if (waterPerc > 0 && waterPerc <= 15)
+                                    {
+                                        color_box = "box_watervolumepercentage_red";
+                                        color_progress = "progress-bar-red";
+                                    }
+                                    else if (waterPerc > 15 && waterPerc <= 75)
+                                    {
+                                        color_box = "box_watervolumepercentage_yellow";
+                                        color_progress = "progress-bar-yellow";
+                                    }
+                                    else if (waterPerc > 75)
+                                    {
+                                        color_box = "box_watervolumepercentage_green";
+                                        color_progress = "progress-bar-green";
+                                    }
+                                    else
+                                    {
+                                        color_box = "box_watervolumepercentage_gray";
+                                        color_progress = "progress-bar-gray";
+                                    }
+
+                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding-left: 0px;">
+                                        <span>@tank.Name</span>
+                                    </div>
+
+                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                        <span class="box_watervolumepercentage @color_box">@waterPerc %</span>
+                                    </div>
+
+                                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                        <span>0 %</span>
+                                    </div>
+
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+                                        <div class="progress-group">
+                                            @*<span class="progress-text"></span>
+                                                <span class="progress-number"><b>160</b>/200</span>*@
+                                            <div class="progress sm box_watervolumepercentage_gray">
+                                                <div class="progress-bar @color_progress" style="width: @waterPerc%"></div>
+                                            </div>
+
+                                            @*progress-bar-aqua
+                                                progress-bar-green
+                                                progress-bar-red
+                                                progress-bar-yellow*@
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="padding-right: 0px;">
+                                        <span>100 %</span>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('#ddlSite').on('change', function (event) {
+                var form = $(event.target).parents('form');
+                form.submit();
+            });
+        });
+    </script>
+}

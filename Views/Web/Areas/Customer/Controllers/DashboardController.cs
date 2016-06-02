@@ -31,11 +31,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
-        public ActionResult Site(TankDashboardViewModel viewModel)
+        public ActionResult SiteTankSelected(TankDashboardViewModel viewModel)
         {
-            if (viewModel.SiteId != default(Guid))
+            if (viewModel.SiteId.HasValue && viewModel.SiteId.Value != default(Guid))
             {
-                var tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(CustomerId, viewModel.SiteId);
+                #region Tanks
+                var tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(CustomerId, viewModel.SiteId.Value);
 
                 if (tanks.Any())
                 {
@@ -47,12 +48,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                         tankViewModel.Name = tank.Name;
                         tankViewModel.WaterVolumeCapacity = tank.WaterVolumeCapacity;
 
-                        if (KEUnitOfWork.SensorRepository.HasSensor(tank.Id))
+                        if (KEUnitOfWork.SensorRepository.HasSensorTank(tank.Id))
                         {
                             // Water Volume
                             if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.Range))
                             {
-                                var waterVolumesLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.Range);
+                                var waterVolumesLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tank.Id, ItemEnum.Range);
 
                                 if (waterVolumesLastEvent != null)
                                 {
@@ -64,7 +65,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                             // Water Temperature
                             if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.WaterTemperature))
                             {
-                                var waterTemperatureLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.WaterTemperature);
+                                var waterTemperatureLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tank.Id, ItemEnum.WaterTemperature);
 
                                 if (waterTemperatureLastEvent != null)
                                 {
@@ -76,7 +77,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                             // Weather Temperature
                             if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.AmbientTemperature))
                             {
-                                var ambientTemperatureLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.AmbientTemperature);
+                                var ambientTemperatureLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tank.Id, ItemEnum.AmbientTemperature);
 
                                 if (ambientTemperatureLastEvent != null)
                                 {
@@ -93,11 +94,13 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                         viewModel.Tanks.Add(tankViewModel);
                     }
                 }
+                #endregion Tanks    
             }
 
             LoadSites(CustomerId);
-            return View("Index", viewModel);
+            return View("Tank", viewModel);
         }
+
         #endregion Tank
 
         #region Site
@@ -111,68 +114,35 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             {
                 LoadSites(CustomerId);
             }
-            else
+            else // It is a site
             {
                 viewModel.SiteId = SiteId;
                 LoadTanks(viewModel);
+                LoadAlarms(viewModel);
+                LoadFlowMeters(viewModel);
             }
 
             return View(viewModel);
         }
-        
+
         [HttpPost]
         [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
-        public ActionResult SiteSelected(SiteDashboardViewModel viewModel)
+        public ActionResult SiteSiteSelected(SiteDashboardViewModel viewModel)
         {
-            if (viewModel.SiteId != default(Guid))
+            if (viewModel.SiteId.HasValue && viewModel.SiteId != default(Guid))
             {
                 LoadTanks(viewModel);
+                LoadAlarms(viewModel);
+                LoadFlowMeters(viewModel);
             }
 
             LoadSites(CustomerId);
             return View("Site", viewModel);
         }
 
-        [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
-        public ActionResult GetLastFlowMeter(Guid tankId)
-        {
-            FlowMeterViewModel viewModel = new FlowMeterViewModel();
-
-            //if (KEUnitOfWork.SensorRepository.HasSensor(tankId))
-            //{
-            //    if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tankId, ItemEnum.RateFlow))
-            //    {
-            //        var rateFlow = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tankId, ItemEnum.RateFlow);
-
-            //        if (rateFlow != null)
-            //        {
-            //            viewModel.TankId = rateFlow.SensorItem.Sensor.Tank.Id;
-            //            viewModel.TankName = rateFlow.SensorItem.Sensor.Tank.Name;
-            //            viewModel.RateFlow = Decimal.Parse(rateFlow.Value);
-            //        }
-            //    }
-
-            //    if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tankId, ItemEnum.Totalizer))
-            //    {
-            //        var totalizer = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tankId, ItemEnum.Totalizer);
-
-            //        if (totalizer != null)
-            //        {
-            //            viewModel.TankId = totalizer.SensorItem.Sensor.Tank.Id;
-            //            viewModel.TankName = totalizer.SensorItem.Sensor.Tank.Name;
-
-            //            viewModel.Totalizer = Int32.Parse(totalizer.Value);
-            //        }
-            //    }
-            //}
-
-            return Json(viewModel, JsonRequestBehavior.AllowGet);
-        }
-        
         private void LoadTanks(SiteDashboardViewModel viewModel)
         {
-            var tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(CustomerId, viewModel.SiteId);
+            var tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(CustomerId, viewModel.SiteId.Value);
 
             if (tanks.Any())
             {
@@ -184,75 +154,88 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     tankViewModel.Name = tank.Name;
                     tankViewModel.WaterVolumeCapacity = tank.WaterVolumeCapacity;
 
-                    if (KEUnitOfWork.SensorRepository.HasSensor(tank.Id))
+                    if (KEUnitOfWork.SensorRepository.HasSensorTank(tank.Id))
                     {
                         // Water Volume
                         if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.Range))
                         {
-                            var waterVolume = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.Range);
+                            var waterVolume = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tank.Id, ItemEnum.Range);
                             if (waterVolume != null)
                             {
                                 tankViewModel.WaterVolumeLast = Decimal.Parse(waterVolume.CalculatedValue);
                                 tankViewModel.WaterVolumeLastMeasurement = waterVolume.EventDate;
                             }
                         }
-
-                        FlowMeterViewModel flowMeterViewModel = new FlowMeterViewModel();
-
-                        // Rate Flow
-                        if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.RateFlow))
-                        {
-                            var rateFlow = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.RateFlow);
-
-                            if (rateFlow != null)
-                            {
-                                flowMeterViewModel.RateFlow = Decimal.Parse(rateFlow.Value);
-                            }
-                        }
-
-                        // Totalizer
-                        if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.Totalizer))
-                        {
-                            var totalizer = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.Totalizer);
-
-                            if (totalizer != null)
-                            {
-                                flowMeterViewModel.Totalizer = Int32.Parse(totalizer.Value);
-                            }
-                        }
-
-                        viewModel.FlowMeters.Add(flowMeterViewModel);
-
-                        //if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.AmbientTemperature))
-                        //{
-                        //    // Ambient Temperature
-                        //    var ambientTemperature = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.AmbientTemperature);
-                        //    if (ambientTemperature != null)
-                        //    {
-                        //        vm.AmbientTemperature = Decimal.Parse(ambientTemperature.Value);
-                        //        vm.AmbientTemperatureLastMeasurement = ambientTemperature.EventDate;
-                        //    }
-                        //}
-
-                        //if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.WaterTemperature))
-                        //{
-                        //    // Water Temperature
-                        //    var waterTemperature = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.WaterTemperature);
-                        //    if (waterTemperature != null)
-                        //    {
-                        //        vm.WaterTemperature = Decimal.Parse(waterTemperature.Value);
-                        //        vm.WaterTemperatureLastMeasurement = waterTemperature.EventDate;
-                        //    }
-                        //}
                     }
-
-                    //// Alarms
-                    //var alarms = KEUnitOfWork.AlarmRepository.GetTotalOpenByTankId(tank.Id);
-                    //vm.Alarms = alarms;                   
 
                     viewModel.Tanks.Add(tankViewModel);
                 }
             }
+        }
+
+        private void LoadAlarms(SiteDashboardViewModel viewModel)
+        {
+            AlarmViewModel alarmViewModel = new AlarmViewModel();
+        }
+
+        private void LoadFlowMeters(SiteDashboardViewModel viewModel)
+        {
+            FlowMeterViewModel flowMeterViewModel = new FlowMeterViewModel();
+
+            if (KEUnitOfWork.SensorRepository.HasSensorSite(viewModel.SiteId.Value) &&
+                KEUnitOfWork.SensorItemRepository.HasSiteSensorItem(viewModel.SiteId.Value, ItemEnum.RateFlow) &&
+                KEUnitOfWork.SensorItemRepository.HasSiteSensorItem(viewModel.SiteId.Value, ItemEnum.Totalizer))
+            {
+                var rateFlow = KEUnitOfWork.SensorItemEventRepository.GetLastEventBySiteAndItem(viewModel.SiteId.Value, ItemEnum.RateFlow);
+                if (rateFlow != null)
+                {
+                    flowMeterViewModel.RateFlow = Decimal.Parse(rateFlow.Value);
+                    flowMeterViewModel.RateFlowLastMeasurement = rateFlow.EventDate;
+                }
+
+                var totalizer = KEUnitOfWork.SensorItemEventRepository.GetLastEventBySiteAndItem(viewModel.SiteId.Value, ItemEnum.Totalizer);
+                if (totalizer != null)
+                {
+                    flowMeterViewModel.Totalizer = Int32.Parse(totalizer.Value);
+                    flowMeterViewModel.TotalizerLastMeasurement = totalizer.EventDate;
+                }
+
+                viewModel.FlowMeters.Add(flowMeterViewModel);
+            }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        public ActionResult GetLastFlowMeter(Guid siteId)
+        {
+            FlowMeterViewModel viewModel = new FlowMeterViewModel();
+
+            if (KEUnitOfWork.SensorRepository.HasSensorSite(siteId))
+            {
+                if (KEUnitOfWork.SensorItemRepository.HasSiteSensorItem(siteId, ItemEnum.RateFlow))
+                {
+                    var rateFlow = KEUnitOfWork.SensorItemEventRepository.GetLastEventBySiteAndItem(siteId, ItemEnum.RateFlow);
+
+                    if (rateFlow != null)
+                    {
+                        viewModel.RateFlow = Decimal.Parse(rateFlow.Value);
+                        viewModel.RateFlowLastMeasurement = rateFlow.EventDate;
+                    }
+                }
+
+                if (KEUnitOfWork.SensorItemRepository.HasSiteSensorItem(siteId, ItemEnum.Totalizer))
+                {
+                    var totalizer = KEUnitOfWork.SensorItemEventRepository.GetLastEventBySiteAndItem(siteId, ItemEnum.Totalizer);
+
+                    if (totalizer != null)
+                    {
+                        viewModel.Totalizer = Int32.Parse(totalizer.Value);
+                        viewModel.TotalizerLastMeasurement = totalizer.EventDate;
+                    }
+                }
+            }
+
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
 
         #endregion Site

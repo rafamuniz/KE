@@ -60,6 +60,32 @@ namespace KarmicEnergy.Core.Persistence
 
         #endregion Constructor
 
+        //#region Disposable
+
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (!this.disposed)
+        //    {
+        //        if (disposing)
+        //        {
+        //            _context.Dispose();
+        //        }
+        //    }
+        //    this.disposed = true;
+        //}
+
+        //public override void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
+
+        //~KEUnitOfWork()
+        //{
+        //    Dispose(false);
+        //}
+        //#endregion Disposable
+
         public static KEUnitOfWork Create()
         {
             return new KEUnitOfWork();

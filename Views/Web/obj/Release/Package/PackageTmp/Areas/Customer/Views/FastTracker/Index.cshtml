@@ -1,0 +1,124 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
+@using KarmicEnergy.Web.Extensions
+
+@model ListViewModel
+
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Fast Tracker";
+}
+
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/moment")
+
+<script src="~/Scripts/app/utils.js"></script>
+<script src="~/Scripts/highcharts/highcharts.js"></script>
+<script src="~/Scripts/highcharts/highcharts-3d.js"></script>
+<script src="~/Scripts/app/fasttracker.js"></script>
+
+@if (!this.IsSite())
+{
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="form-group">
+            <div class="col-md-12">
+                @using (Html.BeginForm("Site", "FastTracker", new { }, FormMethod.Post, new { }))
+                {
+                    @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    @Html.HiddenFor(m => m.SiteId)
+}
+
+<div id="tanks">
+    @{
+        Int32 count = 1;
+    }
+
+    @if (Model != null && Model.Tanks != null && Model.Tanks.Any())
+    {
+        foreach (var tank in Model.Tanks)
+        {
+            List<String> colors = new List<string>() { "green", "blue", "orange" };
+            var color = colors.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 tracker-table">
+
+                    <div class="col-sm-1 col-md-2 col-xs-1 col-lg-1 tracker-number @color">
+                        <h3>@count</h3>
+                    </div>
+
+                    @{
+                        String eventDate = @tank.EventDate.HasValue ? @tank.EventDate.Value.ToString("MM/dd/yyyy") : String.Empty;
+                        String eventTime = @tank.EventDate.HasValue ? @tank.EventDate.Value.ToString("hh:mm:ss tt") : String.Empty;
+                    }
+
+                    <div class="col-sm-3 col-md-4 col-xs-4 col-lg-2 tracker-image">
+                        <div class="row">
+                            <div class="col-sm12 col-md-12 col-xs-12 col-lg-12">
+                                <img src="@tank.UrlImageTankModel">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm12 col-md-12 col-xs-12 col-lg-12">
+                                <p>@eventDate</p>
+                                <p>@eventTime</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    @{
+                        String waterVolumePercentage = @tank.WaterVolumePercentage.HasValue ? @tank.WaterVolumePercentage.Value.ToString("P2") : String.Empty;
+                        String waterVolume = @tank.WaterVolume.ToString();
+                    }
+
+                    <div class="col-sm-2 col-md-3 col-xs-4 col-lg-2 tracker-text">
+                        <div class="row">
+                            <div class="col-sm12 col-md-12 col-xs-12 col-lg-12 gals">
+                                <h2>@waterVolumePercentage</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm12 col-md-12 col-xs-12 col-lg-12 gals">
+                                @if (@tank.WaterVolume.HasValue)
+                                {
+                                    <h2>@waterVolume</h2>
+                                    <p>gals</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-5 col-xs-7 col-lg-7 tracker-graph">
+                        <div id="graph-@tank.TankId"></div>
+                        <script type="text/javascript">
+                            generateWaterVolumeGraph('@tank.TankId');
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+                                count++;
+                            }
+                        }
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            showLoading();
+
+            $('#ddlSite').on('change', function (event) {
+                var form = $(event.target).parents('form');
+                form.submit();
+            });
+
+            hideLoading();
+        });
+    </script>
+}

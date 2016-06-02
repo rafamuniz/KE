@@ -17,10 +17,13 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
 
         #region Property
 
-        public Guid SiteId { get; set; }
+        public Guid? SiteId { get; set; }
 
         public List<TankViewModel> Tanks { get; set; }
+
         public List<FlowMeterViewModel> FlowMeters { get; set; }
+
+        public List<AlarmViewModel> Alarms { get; set; }
 
         #endregion Property
 

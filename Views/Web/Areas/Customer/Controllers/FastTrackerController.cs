@@ -65,10 +65,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                     tankWithWaterVolume.WaterVolumeCapacity = tank.WaterVolumeCapacity;
 
-                    if (KEUnitOfWork.SensorRepository.HasSensor(tank.Id) &&
+                    if (KEUnitOfWork.SensorRepository.HasSensorTank(tank.Id) &&
                         KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.Range))
                     {
-                        var waterVolumesLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankIdAndItem(tank.Id, ItemEnum.Range);
+                        var waterVolumesLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tank.Id, ItemEnum.Range);
 
                         if (waterVolumesLastEvent != null)
                         {
@@ -88,7 +88,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             TankViewModel viewModel = new TankViewModel();
 
-            if (KEUnitOfWork.SensorRepository.HasSensor(tankId) &&
+            if (KEUnitOfWork.SensorRepository.HasSensorTank(tankId) &&
                  KEUnitOfWork.SensorItemRepository.HasSensorItem(tankId, ItemEnum.Range))
             {
                 var waterInfos = KEUnitOfWork.SensorItemEventRepository.GetsByTankIdAndByItem(tankId, ItemEnum.Range, 5);

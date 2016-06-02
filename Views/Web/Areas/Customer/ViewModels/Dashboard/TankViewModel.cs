@@ -27,16 +27,30 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
 
         public Decimal? WaterVolumeLast { get; set; }
 
-        public String WaterVolumePercentage
+        //public String WaterVolumePercentage
+        //{
+        //    get
+        //    {
+        //        if (WaterVolumeLast.HasValue)
+        //        {
+        //            return ((WaterVolumeLast.Value / WaterVolumeCapacity)).ToString("P2");
+        //        }
+
+        //        return "0 %";
+        //    }
+        //    private set { }
+        //}
+
+        public Decimal WaterVolumePercentage
         {
             get
             {
                 if (WaterVolumeLast.HasValue)
                 {
-                    return ((WaterVolumeLast.Value / WaterVolumeCapacity)).ToString("P2");
+                    return (WaterVolumeLast.Value / WaterVolumeCapacity) * 100;
                 }
 
-                return "0 %";
+                return 0;
             }
             private set { }
         }
@@ -50,6 +64,8 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
         public DateTime? WeatherTemperatureEventDate { get; set; }
 
         public Int32? Alarms { get; set; }
+
+        public String Color { get; set; }
 
         #endregion Property
 

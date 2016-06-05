@@ -22,9 +22,32 @@ namespace KarmicEnergy.Core.Repositories
             return base.Find(x => x.EndDate == null).ToList();
         }
 
-        public List<Alarm> GetsBySiteId(Guid siteId)
+        public List<Alarm> GetsActiveByCustomer(Guid customerId)
+        {
+            List<Alarm> alarms = new List<Alarm>();
+
+            var alarmsTank = base.Find(x => x.Trigger.SensorItem.Sensor.Tank.Site.CustomerId == customerId && x.EndDate == null).ToList();
+            var alarmsSite = base.Find(x => x.Trigger.SensorItem.Sensor.Site.CustomerId == customerId && x.EndDate == null).ToList();
+
+            alarms.AddRange(alarmsTank);
+            alarms.AddRange(alarmsSite);
+
+            return alarms;
+        }
+
+        public List<Alarm> GetsActiveBySite(Guid siteId)
         {
             return base.Find(x => x.Trigger.SensorItem.Sensor.Tank.SiteId == siteId && x.EndDate == null).ToList();
+        }
+
+        public List<Alarm> GetsBySite(Guid siteId)
+        {
+            return base.Find(x => x.Trigger.SensorItem.Sensor.Tank.SiteId == siteId && x.EndDate == null).ToList();
+        }
+
+        public List<Alarm> GetsByTank(Guid tankId)
+        {
+            return base.Find(x => x.Trigger.SensorItem.Sensor.TankId == tankId).ToList();
         }
 
         public Int32 GetTotalOpenByTankId(Guid tankId)

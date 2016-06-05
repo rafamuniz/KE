@@ -593,7 +593,6 @@ function _init() {
  * @usage $("#box-widget").boxRefresh( options );
  */
 (function ($) {
-
     "use strict";
 
     $.fn.boxRefresh = function (options) {
@@ -671,7 +670,6 @@ function _init() {
  * @usage $("#box-widget").activateBox();
  */
 (function ($) {
-
     'use strict';
 
     $.fn.activateBox = function () {
@@ -689,7 +687,6 @@ function _init() {
  * @usage $("#todo-widget").todolist( options );
  */
 (function ($) {
-
     'use strict';
 
     $.fn.todolist = function (options) {
@@ -733,3 +730,76 @@ function _init() {
         });
     };
 }(jQuery));
+
+
+/*
+ * NOTIFICATION ALARM
+ * ----------------------- 
+ */
+function showNotications() {
+    $.ajax({
+        url: getUrlBase() + "/Home/GetsAlarm/",
+        type: "GET",
+        dataType: "JSON",
+        //data: { quantity: 5},
+        success: function (data) {
+            $('.notifications-menu .dropdown-toggle #totalAlarms').text(data.Alarms.length);
+
+            if (data.HasAlarmCritical) {
+                $('.notifications-menu .dropdown-toggle .fa-warning').addClass("text-red");
+                $('.notifications-menu .dropdown-toggle #totalAlarms').removeClass();
+                $('.notifications-menu .dropdown-toggle #totalAlarms').addClass("label label-danger");
+            } else if (data.HasAlarmMedium) {
+                $('.notifications-menu .dropdown-toggle .fa-warning').addClass("text-yellow");
+                $('.notifications-menu .dropdown-toggle #totalAlarms').removeClass();
+                $('.notifications-menu .dropdown-toggle #totalAlarms').addClass("label label-warning");
+            } else if (data.HasAlarmLow) {
+                $('.notifications-menu .dropdown-toggle .fa-warning').addClass("text-blue");
+                $('.notifications-menu .dropdown-toggle #totalAlarms').removeClass();
+                $('.notifications-menu .dropdown-toggle #totalAlarms').addClass("label label-primary");
+            } else {
+                //$('.notifications-menu .dropdown-toggle .fa-warning').addClass("text-blue");
+            }
+
+            var template = "<li><a href='{URL}'><i class='fa fa-warning {ICON}'></i><span>{SITE}</span><span>{TANK}</span><span>{SENSOR}</span><span>{ITEM}</span></a></li>";
+
+            $('.notifications-menu .dropdown-menu li .menu').empty();
+
+            $.each(data.Alarms, function (iu, vu) {
+                var url = "/Customer/Monitoring/Alarm/?alarmId=" + vu.Id;
+                var html_item = ReplaceAll(template, "{URL}", url);
+
+                if (vu.SeverityId == 1) {
+                    var html_item = ReplaceAll(html_item, "{ICON}", "text-blue");
+                } else if (vu.SeverityId == 2) {
+                    var html_item = ReplaceAll(html_item, "{ICON}", "text-yellow");
+                } else if (vu.SeverityId == 3) {
+                    var html_item = ReplaceAll(html_item, "{ICON}", "text-red");
+                } else if (vu.SeverityId == 4) {
+                    var html_item = ReplaceAll(html_item, "{ICON}", "text-white");
+                }
+
+                var html_item = ReplaceAll(html_item, "{SITE}", vu.SiteName);
+                if (vu.TankId != null) {
+                    var html_item = ReplaceAll(html_item, "{TANK}", " > " + vu.TankName);
+                }
+                else {
+                    var html_item = ReplaceAll(html_item, "{TANK}", "");
+                }
+
+                var html_item = ReplaceAll(html_item, "{SENSOR}", " > " + vu.SensorName);
+                var html_item = ReplaceAll(html_item, "{ITEM}", " > " + vu.ItemName);
+                $('.notifications-menu .dropdown-menu li .menu').append(html_item);
+            });
+
+            //notifiySuccess('Notificiation - Success');
+        },
+        error: function (jqXHR, exception) {
+            notifiyError("Error - Get Alarms");
+        }
+    });
+
+    setTimeout(function () {
+        showNotications();
+    }, 30000);
+}

@@ -273,7 +273,7 @@
     <Compile Include="Areas\Customer\Controllers\FastTrackerController.cs" />
     <Compile Include="Areas\Customer\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Customer\Controllers\TriggerController.cs" />
-    <Compile Include="Areas\Customer\Controllers\TankReportController.cs" />
+    <Compile Include="Areas\Customer\Controllers\ReportController.cs" />
     <Compile Include="Areas\Customer\Controllers\TankController.cs" />
     <Compile Include="Areas\Customer\Controllers\SiteController.cs" />
     <Compile Include="Areas\Customer\Controllers\ContactController.cs" />
@@ -299,26 +299,21 @@
     <Compile Include="Areas\Customer\ViewModels\Site\SiteAddressViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Dashboard\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Dashboard\TankDashboardViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Tank\FlowMeterViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Tank\GaugeViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Tank\DashboardTankViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Dashboard\GaugeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TankModelViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\CreateViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Tank\FastTrackerViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Tank\DashboardViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\EditViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Dashboard\FlowMeterViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Tank\TankWaterCapacityViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Tank\TriggerViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Tank\VoltageViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Tank\TemperatureViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Tank\TankViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Tank\EventViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Tank\WaterVolumeViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Dashboard\TriggerViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Dashboard\VoltageViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Dashboard\TemperatureViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Dashboard\EventViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Dashboard\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Contact\CreateViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Contact\EditViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Contact\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Tank\TankWaterCapacityViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\CustomerUserViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\UserViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\CreateViewModel.cs" />
@@ -374,6 +369,8 @@
     <Compile Include="Areas\Admin\ViewModels\Customer\ListViewModel.cs" />
     <Compile Include="ViewModels\Account\ProfileViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\NotificationViewModel.cs" />
+    <Compile Include="ViewModels\AlarmViewModel.cs" />
     <Compile Include="ViewModels\AddressViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -384,7 +381,6 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Gridmvc.css" />
-    <Content Include="Content\Site - Copy.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -432,6 +428,9 @@
     <Content Include="fonts\opensans-semibold_0-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\alarm_high.png" />
+    <Content Include="images\alarm_low.png" />
+    <Content Include="images\alarm_medium.png" />
     <Content Include="images\close.png" />
     <Content Include="images\customers.png" />
     <Content Include="images\dashboard.png" />
@@ -1503,7 +1502,7 @@
     <Content Include="Areas\Customer\Views\Tank\Create.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\Edit.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Dashboard\Tank.cshtml" />
+    <Content Include="Areas\Customer\Views\Dashboard\Tanks.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
@@ -1520,7 +1519,7 @@
     <Content Include="Areas\Customer\Views\FastTracker\Index.cshtml" />
     <Content Include="Areas\Customer\Views\Sensor\_TankSpotGPS.cshtml" />
     <Content Include="Areas\Customer\Views\Dashboard\Gauge.cshtml" />
-    <Content Include="Areas\Customer\Views\TankReport\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Report\Index.cshtml" />
     <Content Include="Areas\Customer\Views\SensorGroup\Create.cshtml" />
     <Content Include="Areas\Customer\Views\SensorGroup\Index.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\_TankModel.cshtml" />
@@ -2080,6 +2079,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Customer\ViewModels\Report\" />
+    <Folder Include="Areas\Customer\ViewModels\Temp\" />
     <Folder Include="Helpers\" />
     <Folder Include="images\geometries\" />
   </ItemGroup>

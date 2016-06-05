@@ -1,6 +1,7 @@
 ﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
 @using Munizoft.Extensions
 @using Munizoft.MVC.Helpers
+@using KarmicEnergy.Web.Extensions
 @using GridMvc.Html
 
 @model List<ListViewModel>
@@ -24,8 +25,11 @@
     columns.Add(c => c.Status).Titled("Status")
      .Filterable(true);
 
-    columns.Add(c => c.SiteName).Titled("Site")
-         .Filterable(true);
+    if (!this.IsSite())
+    {
+        columns.Add(c => c.SiteName).Titled("Site")
+             .Filterable(true);
+    }
 
     columns.Add()
      .Encoded(false)

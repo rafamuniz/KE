@@ -1160,10 +1160,15 @@ p {
         background-color: #eee;
     }
 
+.navbar-nav > .notifications-menu a i {
+    font-size: 1.5rem;
+    margin-right: 15px;
+}
+
 .navbar-nav > .notifications-menu > .dropdown-menu,
 .navbar-nav > .messages-menu > .dropdown-menu,
 .navbar-nav > .tasks-menu > .dropdown-menu {
-    width: 280px;
+    width: 400px;
     padding: 0 0 0 0;
     margin: 0;
     top: 100%;
@@ -1211,6 +1216,10 @@ p {
         background: #fff !important;
         color: #444 !important;
     }
+
+    .navbar-nav > .notifications-menu a i {
+        font-size: 1.5rem;
+    }
 }
 
 .navbar-nav > .notifications-menu > .dropdown-menu > li.footer > a:hover,
@@ -1244,10 +1253,12 @@ p {
         .navbar-nav > .tasks-menu > .dropdown-menu > li .menu > li > a:hover {
             background: #f4f4f4;
             text-decoration: none;
+            color: #444444;
         }
 
     .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a {
-        color: #444444;
+        /*color: #444444;*/
+        color: #FFF;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -5042,13 +5053,18 @@ label {
     background-color: #111111 !important;
 }
 
+
+.label-danger {
+    background-color: #DD4B39 !important;
+    color: #B94A48;
+    border-color: #DD4B39;
+}
+
 .bg-red,
 .callout.callout-danger,
 .alert-danger,
 .alert-error,
-.label-danger,
 .modal-danger .modal-body {
-    /*background-color: #DD4B39 !important;*/
     color: #B94A48;
     background-color: #F2DEDE;
     border-color: #DD4B39;
@@ -6751,16 +6767,16 @@ background-color: #1C2B39; #graph-draw .chart {
 /******************/
 
 .table-container {
-  display: table;
+    display: table;
 }
 
-.table-container .table-row {
-  height: 100%;
-  display: table-row;
-}
+    .table-container .table-row {
+        height: 100%;
+        display: table-row;
+    }
 
-.table-container .table-row .table-col {
-  display: table-cell;
-  float: none;
-  vertical-align: top;
-}
+        .table-container .table-row .table-col {
+            display: table-cell;
+            float: none;
+            vertical-align: top;
+        }

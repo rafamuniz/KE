@@ -37,6 +37,9 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
 
         public DateTime AlarmDate { get; set; }
 
+        public Int16 SeverityId { get; set; }
+        public String SeverityName { get; set; }
+
         #endregion Property
 
         #region Map
@@ -56,25 +59,31 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
         public static ListViewModel Map(Core.Entities.Alarm entity)
         {
             Mapper.CreateMap<Core.Entities.Alarm, ListViewModel>();
-            var viewmodel = Mapper.Map<Core.Entities.Alarm, ListViewModel>(entity);
+            var viewModel = Mapper.Map<Core.Entities.Alarm, ListViewModel>(entity);
 
-            viewmodel.SiteId = entity.Trigger.SensorItem.Sensor.Tank.Site.Id;
-            viewmodel.SiteName = entity.Trigger.SensorItem.Sensor.Tank.Site.Name;
+            viewModel.SiteId = entity.Trigger.SensorItem.Sensor.Tank != null ? entity.Trigger.SensorItem.Sensor.Tank.Site.Id : entity.Trigger.SensorItem.Sensor.Site.Id;
+            viewModel.SiteName = entity.Trigger.SensorItem.Sensor.Tank != null ? entity.Trigger.SensorItem.Sensor.Tank.Site.Name : entity.Trigger.SensorItem.Sensor.Site.Name;
 
-            viewmodel.TankId = entity.Trigger.SensorItem.Sensor.Tank.Id;
-            viewmodel.TankName = entity.Trigger.SensorItem.Sensor.Tank.Name;
+            if (entity.Trigger.SensorItem.Sensor.Tank != null)
+            {
+                viewModel.TankId = entity.Trigger.SensorItem.Sensor.Tank.Id;
+                viewModel.TankName = entity.Trigger.SensorItem.Sensor.Tank.Name;
+            }
 
-            viewmodel.SensorId = entity.Trigger.SensorItem.Sensor.Id;
-            viewmodel.SensorName = entity.Trigger.SensorItem.Sensor.Name;
+            viewModel.SensorId = entity.Trigger.SensorItem.Sensor.Id;
+            viewModel.SensorName = entity.Trigger.SensorItem.Sensor.Name;
 
-            viewmodel.ItemId = entity.Trigger.SensorItem.Item.Id;
-            viewmodel.ItemName = entity.Trigger.SensorItem.Item.Name;
+            viewModel.ItemId = entity.Trigger.SensorItem.Item.Id;
+            viewModel.ItemName = entity.Trigger.SensorItem.Item.Name;
 
-            viewmodel.AlarmDate = entity.StartDate;
-            viewmodel.AckDate = entity.LastAckDate;
-            viewmodel.AckUserId = entity.LastAckUserId;
+            viewModel.AlarmDate = entity.StartDate;
+            viewModel.AckDate = entity.LastAckDate;
+            viewModel.AckUserId = entity.LastAckUserId;
 
-            return viewmodel;
+            viewModel.SeverityId = entity.Trigger.Severity.Id;
+            viewModel.SeverityName = entity.Trigger.Severity.Name;
+
+            return viewModel;
         }
 
         #endregion Map

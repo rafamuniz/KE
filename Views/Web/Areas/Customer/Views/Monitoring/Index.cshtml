@@ -1,6 +1,7 @@
 ﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
 @using Munizoft.Extensions
 @using Munizoft.MVC.Helpers
+@using KarmicEnergy.Web.Extensions
 @using GridMvc.Html
 
 @model List<ListViewModel>
@@ -14,13 +15,22 @@
 
 @Html.Grid(Model).Columns(columns =>
 {
-    columns.Add(c => c.SiteName).Titled("Site")
-        .Filterable(true);
+    if (!this.IsSite())
+    {
+        columns.Add(c => c.SiteName).Titled("Site")
+            .Filterable(true);
+    }
 
     columns.Add(c => c.TankName).Titled("Tank")
         .Filterable(true);
 
+    columns.Add(c => c.SensorName).Titled("Sensor")
+        .Filterable(true);
+
     columns.Add(c => c.ItemName).Titled("Item")
+        .Filterable(true);
+
+    columns.Add(c => c.SeverityName).Titled("Severity")
         .Filterable(true);
 
     columns.Add(c => c.AlarmDate).Titled("Date")

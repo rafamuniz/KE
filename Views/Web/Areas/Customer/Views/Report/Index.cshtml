@@ -23,7 +23,7 @@
     </div>
 </div>
 
-@Html.Grid(Model.Reports).Columns(columns =>
+@*@Html.Grid(Model.Reports).Columns(columns =>
 {
     columns.Add(c => c.TankName)
         .Titled("Name")
@@ -58,7 +58,7 @@
         .Filterable(true)
         .RenderValueAs(o => o.Alarms.Value > 0 ? @Html.Raw("<span style='color:red;' class='blink'>" + o.Alarms.Value + "</span>") : @Html.Raw("<span>" + o.Alarms.Value + "</span>"));
 
-}).WithPaging(10).Sortable(true).Filterable().WithMultipleFilters()
+}).WithPaging(10).Sortable(true).Filterable().WithMultipleFilters()*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/grid")

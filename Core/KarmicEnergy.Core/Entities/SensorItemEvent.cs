@@ -20,7 +20,7 @@ namespace KarmicEnergy.Core.Entities
         [Column("CalculatedValue", TypeName = "NVARCHAR")]
         [StringLength(256)]
         public String CalculatedValue { get; set; }
-        
+
         [Column("EventDate", TypeName = "DATETIME")]
         [Required]
         public DateTime EventDate { get; set; } = DateTime.UtcNow;
@@ -37,5 +37,19 @@ namespace KarmicEnergy.Core.Entities
         public virtual SensorItem SensorItem { get; set; }
 
         #endregion Sensor Item
+
+        #region Event
+
+        [Column("SensorItemEventId", TypeName = "UNIQUEIDENTIFIER")]
+        public Guid? SensorItemEventId { get; set; }
+
+        #endregion Event
+
+        #region Alarm
+
+        [Column("CheckedAlarm", TypeName = "BIT")]
+        public Boolean CheckedAlarm { get; set; } = false;
+
+        #endregion Alarm
     }
 }

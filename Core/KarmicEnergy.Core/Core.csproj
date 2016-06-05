@@ -107,6 +107,14 @@
     <Compile Include="Migrations\201605161304034_Dev1.Designer.cs">
       <DependentUpon>201605161304034_Dev1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606050709045_Dev2.cs" />
+    <Compile Include="Migrations\201606050709045_Dev2.Designer.cs">
+      <DependentUpon>201606050709045_Dev2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606051134085_Dev3.cs" />
+    <Compile Include="Migrations\201606051134085_Dev3.Designer.cs">
+      <DependentUpon>201606051134085_Dev3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
@@ -179,6 +187,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605161304034_Dev1.resx">
       <DependentUpon>201605161304034_Dev1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606050709045_Dev2.resx">
+      <DependentUpon>201606050709045_Dev2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606051134085_Dev3.resx">
+      <DependentUpon>201606051134085_Dev3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

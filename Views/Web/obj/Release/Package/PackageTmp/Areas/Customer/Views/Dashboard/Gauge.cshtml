@@ -1,4 +1,4 @@
-﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
 @using Munizoft.Extensions
 @using Munizoft.MVC.Helpers
 @using GridMvc.Html
@@ -18,7 +18,7 @@
 <script src="~/Scripts/highcharts/highcharts.js"></script>
 <script src="~/Scripts/highcharts/highcharts-3d.js"></script>
 <script src="~/Scripts/highcharts/highcharts-more.js"></script>
-<script src="~/Scripts/app/tank-gauge.js"></script>
+<script src="~/Scripts/app/dashboard.js"></script>
 
 <div class="row">
     <div id="gauge-alarm" class="col-sm-12 col-md-12 col-lg-12">
@@ -50,11 +50,10 @@
 
                         <div class="col-sm-8 col-md-8 col-lg-8 gauge-cell">
                             <div id="gauge_@Model.TankId"></div>
-                            <div class="tube">
-                                <img src="~/images/water-flow.gif" />
+                            <div id="flowmeter_tube" class="tube">
                             </div>
                             <script type="text/javascript">
-                                generateFlowMeter('@Model.TankId');
+                                generateLastFlowMeter('@Model.TankId');
                             </script>
                         </div>
                     </div>
@@ -101,32 +100,34 @@
 <div class="row tank-volume-box" style="margin-top: 20px;">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                <div class="gauge-title">
-                    <h3>Tank Volume</h3>
-                </div>
+            <div class="gauge-title">
+                <h3>Tank Volume</h3>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-sm-10 col-md-10 col-lg-10 tank-volume-sec">
-                <div id="tankVolumeGraph_@Model.TankId" class="tank-volume">
-                </div>
-                <script type="text/javascript">
-                    generateWaterVolumeGraph('@Model.TankId', 1);
-                </script>
-            </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-sm-10 col-md-10 col-lg-10 tank-volume-sec">
+                        <div id="tankVolumeGraph_@Model.TankId" class="tank-volume">
+                        </div>
+                        <script type="text/javascript">
+                    generateWaterVolumeGraphByPeriod('@Model.TankId', 1);
+                        </script>
+                    </div>
 
-            <div class="col-sm-2 col-md-2 col-lg-2">
-                <div class="radio-buttons">
-                    <div class="radio">
-                        <label><input type="radio" name="optradio" checked onclick="generateWaterVolumeGraph('@Model.TankId', 1);">Real Time</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="optradio" onclick="generateWaterVolumeGraph('@Model.TankId', 7);">Hourly (7d)</label>
-                    </div>
-                    <div class="radio disabled">
-                        <label><input type="radio" name="optradio" onclick="generateWaterVolumeGraph('@Model.TankId', 45);">Daily (45d)</label>
+                    <div class="col-sm-2 col-md-2 col-lg-2">
+                        <div class="radio-buttons">
+                            <div class="radio">
+                                <label><input type="radio" name="optradio" checked onclick="generateWaterVolumeGraphByPeriod('@Model.TankId', 1);">Real Time</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="optradio" onclick="generateWaterVolumeGraphByPeriod('@Model.TankId', 7);">Hourly (7d)</label>
+                            </div>
+                            <div class="radio disabled">
+                                <label><input type="radio" name="optradio" onclick="generateWaterVolumeGraphByPeriod('@Model.TankId', 45);">Daily (45d)</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -143,7 +144,7 @@
             <div id="temperature_graph_@Model.TankId" class="graph" style="margin-top: 10px;">
             </div>
             <script type="text/javascript">
-                generateTemperatureGraph('@Model.TankId');
+                generateWaterAndAmbientTemperatureGraph('@Model.TankId');
             </script>
         </div>
 

@@ -26,7 +26,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
             else
             {
-                var alarms = KEUnitOfWork.AlarmRepository.GetsBySiteId(SiteId).ToList();
+                var alarms = KEUnitOfWork.AlarmRepository.GetsBySite(SiteId).ToList();
                 viewModels = ListViewModel.Map(alarms);
             }
 
@@ -40,6 +40,46 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             return View(viewModels);
+        }
+
+        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        public async Task<ActionResult> Tank(Guid tankId)
+        {
+            List<ListViewModel> viewModels = new List<ListViewModel>();
+
+            var alarms = KEUnitOfWork.AlarmRepository.GetsByTank(tankId).ToList();
+            viewModels = ListViewModel.Map(alarms.OrderByDescending(x => x.Trigger.SeverityId).ToList());
+
+            if (viewModels.Any())
+            {
+                foreach (var vm in viewModels.Where(x => x.AckUserId.HasValue))
+                {
+                    var user = await UserManager.FindByIdAsync(vm.AckUserId.Value.ToString());
+                    vm.AckUser = user.Name;
+                }
+            }
+
+            return View("Index", viewModels);
+        }
+
+        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        public async Task<ActionResult> Alarm(Guid alarmId)
+        {
+            List<ListViewModel> viewModels = new List<ListViewModel>();
+
+            var alarm = KEUnitOfWork.AlarmRepository.Get(alarmId);
+            viewModels.Add(ListViewModel.Map(alarm));
+
+            if (viewModels.Any())
+            {
+                foreach (var vm in viewModels.Where(x => x.AckUserId.HasValue))
+                {
+                    var user = await UserManager.FindByIdAsync(vm.AckUserId.Value.ToString());
+                    vm.AckUser = user.Name;
+                }
+            }
+
+            return View("Index", viewModels);
         }
 
         #endregion Index

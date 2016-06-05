@@ -4,10 +4,17 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
+namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
 {
     public class GaugeViewModel
     {
+        #region Constructor
+        public GaugeViewModel()
+        {
+
+        }
+        #endregion Constructor
+
         #region Property
 
         [Display(Name = "SiteId")]

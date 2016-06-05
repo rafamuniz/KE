@@ -8,7 +8,7 @@ using System.Web.Mvc;
 namespace KarmicEnergy.Web.Areas.Customer.Controllers
 {
     [Authorize]
-    public class TankReportController : BaseController
+    public class ReportController : BaseController
     {
         //#region Index
 
@@ -40,7 +40,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         //                report.TankName = tank.Name;
         //                report.WaterVolumeCapacity = tank.WaterVolumeCapacity;
 
-        //                if (KEUnitOfWork.SensorRepository.HasSensor(tank.Id))
+        //                if (KEUnitOfWork.SensorRepository.HasSensorTank(tank.Id))
         //                {
         //                    // Water Volume
         //                    if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.Range))

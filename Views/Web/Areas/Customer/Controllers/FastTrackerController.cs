@@ -12,7 +12,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     {
         #region Index
 
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult Index()
         {
             ListViewModel viewModel = new ListViewModel();
@@ -35,7 +35,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #region FastTracker
 
         [HttpPost]
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult Site(ListViewModel viewModel)
         {
             if (viewModel.SiteId != default(Guid))
@@ -83,7 +83,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsWaterVolume(Guid tankId)
         {
             TankViewModel viewModel = new TankViewModel();

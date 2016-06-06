@@ -42,5 +42,11 @@ namespace KarmicEnergy.Core.Entities
         public virtual IList<CustomerUserSetting> Settings { get; set; }
 
         #endregion Settings
+
+        #region Settings        
+
+        public virtual IList<CustomerUserSite> Sites { get; set; }
+
+        #endregion Settings
     }
 }

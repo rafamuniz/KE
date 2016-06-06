@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using KarmicEnergy.Web.ViewModels;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
@@ -11,6 +13,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
         public CreateViewModel()
         {
             Address = new AddressViewModel();
+            Sites = new List<SiteViewModel>();
         }
 
         #endregion Constructor
@@ -41,7 +44,11 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
         [Required]
         [Display(Name = "Role")]
         public String Role { get; set; }
-                
+
+        [Required]
+        [Display(Name = "Sites")]
+        public List<SiteViewModel> Sites { get; set; }
+
         public AddressViewModel Address { get; set; }
 
         #endregion Property
@@ -58,6 +65,25 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
         {
             Mapper.CreateMap<Core.Entities.Address, CreateViewModel>();
             return Mapper.Map<Core.Entities.Address, CreateViewModel>(entity);
+        }
+
+        public List<Core.Entities.CustomerUserSite> MapSites()
+        {
+            List<Core.Entities.CustomerUserSite> entities = new List<Core.Entities.CustomerUserSite>();
+
+            if (this.Sites.Any())
+            {
+                foreach (var item in this.Sites)
+                {
+                    if (item.IsSelected)
+                    {
+                        Core.Entities.CustomerUserSite entity = new Core.Entities.CustomerUserSite() { SiteId = item.Id };
+                        entities.Add(entity);
+                    }
+                }
+            }
+
+            return entities;
         }
 
         public Core.Entities.Address MapAddress()

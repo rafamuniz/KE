@@ -14,7 +14,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     {
         #region Index
 
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public async Task<ActionResult> Index()
         {
             List<ListViewModel> viewModels = new List<ListViewModel>();
@@ -42,7 +42,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return View(viewModels);
         }
 
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public async Task<ActionResult> Tank(Guid tankId)
         {
             List<ListViewModel> viewModels = new List<ListViewModel>();
@@ -62,7 +62,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return View("Index", viewModels);
         }
 
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public async Task<ActionResult> Alarm(Guid alarmId)
         {
             List<ListViewModel> viewModels = new List<ListViewModel>();
@@ -90,7 +90,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         // POST: /Monitoring/Acknowledge
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult Acknowledge(Guid id)
         {
             try
@@ -126,6 +126,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #endregion Ack
 
         [HttpGet]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsTankBySiteId(Guid siteId)
         {
             var tanks = LoadTanks(CustomerId, siteId);
@@ -134,6 +135,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsSensorByTankId(Guid tankId)
         {
             var sensors = LoadSensors(CustomerId, tankId);

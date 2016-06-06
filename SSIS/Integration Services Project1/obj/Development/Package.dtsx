@@ -11,8 +11,8 @@
   DTS:LocaleID="3081"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{CBD6B03F-6331-4716-A45F-B7D9620A222D}">
+  DTS:VersionBuild="61"
+  DTS:VersionGUID="{E7E7CB19-A9CF-4E84-A06E-B7C90A38B313}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -21,14 +21,10 @@
       DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
       DTS:DTSID="{1FEBB3AF-4A84-4E1E-AF41-ECBBCB4A4D58}"
       DTS:ObjectName="DBDestination">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::DBDestinationConnectionString]</DTS:PropertyExpression>
       <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=NOTE11;User ID=sa;Initial Catalog=KE;Persist Security Info=True;Application Name=SSIS-Package-{1FEBB3AF-4A84-4E1E-AF41-ECBBCB4A4D58}NOTE11.KE.sa;">
-          <DTS:Password
-            DTS:Name="Password"
-            Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8k86WfMn1kSGPxmPrkyTJQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADqDgYfUMT17F4U9RIpAYzyPzA+7MeVdYLhQxErYUU6dgAAAAAOgAAAAAIAACAAAABkLU4PNWFRSUBMSWXWC8tZXFeE7P8lZsKgGASFCEJ4uiAAAABdxDNdc3gWXz4OzfD208gEnfsAxnZ59PQy35jUMImzJkAAAACho7WqQU2fQvHJ3roHDNARWKQrFBlp3SDxgSWm/uUyMMIo9cHbm/ITt5R9ovY8H3y7UMLa+raGj71PmsHJa6fO</DTS:Password>
-        </DTS:ConnectionManager>
+        <DTS:ConnectionManager />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -38,11 +34,41 @@
       DTS:ObjectName="DBSource">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=NOTE11;User ID=sa;Initial Catalog=KE;Persist Security Info=True;Application Name=SSIS-Package-{8A46073B-C961-47E1-8025-A1F7CE1A1E34}NOTE11.KE.sa;">
+          DTS:ConnectionString="Data Source=NOTE11;User ID=sa;Initial Catalog=KE;Persist Security Info=True;Application Name=SSIS-Package-DBSource;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8k86WfMn1kSGPxmPrkyTJQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB9F/Pe4EO7J86MwrcGjaj7GnhR5xNkWVHhX/CAIoohbwAAAAAOgAAAAAIAACAAAAAMW4c0yaNcZA2DdfBORBge6UDorhyt7XISS1D9S6KfmSAAAAAZafZzgOUJVyYnqu/8+eIriVaRrP0ea/SscaezLJj5PEAAAABhxS7CFNp8Lp7m6Fdyf0k7I+FTLjyy15i1DffT+U4E0n4TVMmhHFoGlmH/2JoI6s6J4YunslbV5UItzv7kXFsi</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8k86WfMn1kSGPxmPrkyTJQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB2rVuuv5pzK1IyCxhEW5ZCUD8oP+fPsh7KXGaC7hIu7gAAAAAOgAAAAAIAACAAAADeLnZ1jpyNqSPPAMtiGIcRGHTiSUW6F+ix+/b9fMqTbSAAAADRVu0t3sZaT3LTYU9tL2L9g12I2wM8QtiRS/ajPPIrTEAAAADT6q+4vBt5Gr2vgf3vmvv/hD2e4HuAInUB0mVUfdYnlErLgu0rff87pXnONmpKPd1iBRcgluBbe4c5ZqkHmZrl</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDBDestination]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{017863E3-F87E-473B-8979-B3CEF063C01E}"
+      DTS:ObjectName="OLEDBDestination">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;User ID=sa;Initial Catalog=KESite;Provider=SQLNCLI11.1;Persist Security Info=True;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8k86WfMn1kSGPxmPrkyTJQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADYLDla0NOSnd0RrCdCp1ABYeQ/ccWJFjuQwSvGWGcdFwAAAAAOgAAAAAIAACAAAABzTfHIoSt0hg7GEJjqBfByIhS2rNDIdZqS6hdYFfMBKSAAAAB+NqCLasasiwKf0l4VuOp1Bn2sm3Rpo1Wcqnt3WOGdUUAAAAAX12BXInyED/6E/8wflL6MfbeMa41oa+6SjcJTQAT0WCCZcuV78HK8pu0cYuiRguPHiUSKocqFpSKsjrGXKF6e</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDBSource]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1A045ABC-8A32-4FB9-97FB-A0D8530B667D}"
+      DTS:ObjectName="OLEDBSource">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=NOTE11;User ID=sa;Initial Catalog=KE;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8k86WfMn1kSGPxmPrkyTJQAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAB3+VMu6pqWsPbl7hPFPfkoaiM8HlVY1uahJpmE/DDO2QAAAAAOgAAAAAIAACAAAAA2YTm2Qon9xQfNuUWISJHqdVyuAypd/kXiHtmL2RZ+oiAAAAD5oHqf/447nqkuBo0lxisoAb6fRtEDdLmGSchKVnDsFUAAAACWS6NOzOgBRHagEj2/MGjIyBlPLXGeAiCWlmeUQzPTDL7+zj34kZnZJqAsBXJM99cHvNc731+ep2qZw7WrLYyJ</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -71,10 +97,39 @@
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{0748A504-4E02-4603-8A1B-430188D31B1A}"
+      DTS:DTSID="{F32D81FF-9945-45FA-8099-764E8F6F326D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DBDestinationConnectionString">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{60487060-83CB-4ABF-87A6-EEF5B4B13FC4}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
-      DTS:ObjectName="Customers">
+      DTS:ObjectName="MaxDestinationAddressTS">
+      <DTS:VariableValue
+        DTS:DataType="17">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{02D604FE-A9DE-43BE-A24A-54D36A2930B1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SiteId">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D3D7F636-F878-492B-A560-CBA47BE3E171}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Sites">
       <DTS:VariableValue
         DTS:DataSubType="ManagedSerializable"
         DTS:DataType="13">
@@ -90,389 +145,13 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Customers - Loop"
-      DTS:CreationName="STOCK:FOREACHLOOP"
-      DTS:DTSID="{34A98153-49D5-44F6-8F00-65A21BD1FB48}"
-      DTS:ExecutableType="STOCK:FOREACHLOOP"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Customers - Loop">
-      <DTS:ForEachEnumerator
-        DTS:CreationName="Microsoft.ForEachADOEnumerator"
-        DTS:DTSID="{EDC554A8-9F11-482E-A620-FB1B2FE096A4}"
-        DTS:ObjectName="{EDC554A8-9F11-482E-A620-FB1B2FE096A4}">
-        <DTS:ObjectData>
-          <FEEADO
-            EnumType="EnumerateRowsInFirstTable"
-            VarName="User::Customers" />
-        </DTS:ObjectData>
-      </DTS:ForEachEnumerator>
-      <DTS:Variables>
-        <DTS:Variable
-          DTS:CreationName=""
-          DTS:DTSID="{3D7147D1-D391-47AC-9736-C9A577C69CED}"
-          DTS:IncludeInDebugDump="2345"
-          DTS:Namespace="User"
-          DTS:ObjectName="CustomerId">
-          <DTS:VariableValue
-            DTS:DataType="8"
-            xml:space="preserve"></DTS:VariableValue>
-        </DTS:Variable>
-        <DTS:Variable
-          DTS:CreationName=""
-          DTS:DTSID="{5CA8C1BA-6026-4C73-BF32-B7B94E63C1FA}"
-          DTS:IncludeInDebugDump="2345"
-          DTS:Namespace="User"
-          DTS:ObjectName="MaxContact">
-          <DTS:VariableValue
-            DTS:DataType="8"
-            xml:space="preserve"></DTS:VariableValue>
-        </DTS:Variable>
-        <DTS:Variable
-          DTS:CreationName=""
-          DTS:DTSID="{CBC36D44-F6C6-42DA-BD6E-EFFB1E9F3D56}"
-          DTS:IncludeInDebugDump="6789"
-          DTS:Namespace="User"
-          DTS:ObjectName="Sites">
-          <DTS:VariableValue
-            DTS:DataSubType="ManagedSerializable"
-            DTS:DataType="13">
-            <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-              <SOAP-ENV:Body>
-                <xsd:anyType
-                  id="ref-1"></xsd:anyType>
-              </SOAP-ENV:Body>
-            </SOAP-ENV:Envelope>
-          </DTS:VariableValue>
-        </DTS:Variable>
-      </DTS:Variables>
-      <DTS:Executables>
-        <DTS:Executable
-          DTS:refId="Package\Customers - Loop\GET Sites"
-          DTS:CreationName="Microsoft.ExecuteSQLTask"
-          DTS:Description="Execute SQL Task"
-          DTS:DTSID="{7D78CE27-1203-4849-9C81-B1AB9BACF6F9}"
-          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="GET Sites"
-          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 RC3; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <SQLTask:SqlTaskData
-              SQLTask:Connection="{8A46073B-C961-47E1-8025-A1F7CE1A1E34}"
-              SQLTask:IsStoredProc="True"
-              SQLTask:SqlStatementSource="GetMaxContact"
-              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
-              <SQLTask:ResultBinding
-                SQLTask:ResultName="0"
-                SQLTask:DtsVariableName="User::MaxContact" />
-              <SQLTask:ParameterBinding
-                SQLTask:ParameterName="customerId"
-                SQLTask:DtsVariableName="User::CustomerId"
-                SQLTask:ParameterDirection="Input"
-                SQLTask:DataType="16"
-                SQLTask:ParameterSize="-1" />
-            </SQLTask:SqlTaskData>
-          </DTS:ObjectData>
-        </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\Customers - Loop\Sites - Loop"
-          DTS:CreationName="STOCK:FOREACHLOOP"
-          DTS:Description="Foreach Loop Container"
-          DTS:DTSID="{9965B317-9BAB-4A63-B9E4-7FE7EB033100}"
-          DTS:ExecutableType="STOCK:FOREACHLOOP"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="Sites - Loop">
-          <DTS:Variables>
-            <DTS:Variable
-              DTS:CreationName=""
-              DTS:DTSID="{8CE2A537-7B41-4A71-8052-776E90DD94E8}"
-              DTS:IncludeInDebugDump="6789"
-              DTS:Namespace="User"
-              DTS:ObjectName="Contacts">
-              <DTS:VariableValue
-                DTS:DataSubType="ManagedSerializable"
-                DTS:DataType="13">
-                <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-                  <SOAP-ENV:Body>
-                    <xsd:anyType
-                      id="ref-1"></xsd:anyType>
-                  </SOAP-ENV:Body>
-                </SOAP-ENV:Envelope>
-              </DTS:VariableValue>
-            </DTS:Variable>
-          </DTS:Variables>
-          <DTS:Executables>
-            <DTS:Executable
-              DTS:refId="Package\Customers - Loop\Sites - Loop\Data Flow Task"
-              DTS:CreationName="Microsoft.Pipeline"
-              DTS:Description="Data Flow Task"
-              DTS:DTSID="{9DB9F358-7007-4E4D-BD31-405AD9424CCB}"
-              DTS:ExecutableType="Microsoft.Pipeline"
-              DTS:LocaleID="-1"
-              DTS:ObjectName="Data Flow Task"
-              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-              <DTS:Variables />
-              <DTS:ObjectData>
-                <pipeline
-                  version="1">
-                  <components>
-                    <component
-                      refId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Destination"
-                      componentClassID="Microsoft.ManagedComponentHost"
-                      contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
-                      description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
-                      name="ADO NET Destination"
-                      usesDispositions="true"
-                      version="2">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="The Destination database table name."
-                          expressionType="Notify"
-                          name="TableOrViewName"
-                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
-                          expressionType="Notify"
-                          name="BatchSize">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
-                          expressionType="Notify"
-                          name="CommandTimeout">30</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
-                          expressionType="Notify"
-                          name="UseBulkInsertWhenPossible">true</property>
-                        <property
-                          dataType="System.String"
-                          name="UserComponentTypeName">Microsoft.ADONETDestination</property>
-                      </properties>
-                      <connections>
-                        <connection
-                          refId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Destination.Connections[IDbConnection]"
-                          description="Managed connection manager"
-                          name="IDbConnection" />
-                      </connections>
-                      <inputs>
-                        <input
-                          refId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input]"
-                          errorRowDisposition="FailComponent"
-                          hasSideEffects="true"
-                          name="ADO NET Destination Input">
-                          <externalMetadataColumns
-                            isUsed="True" />
-                        </input>
-                      </inputs>
-                      <outputs>
-                        <output
-                          refId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Destination.Outputs[ADO NET Destination Error Output]"
-                          exclusionGroup="1"
-                          isErrorOut="true"
-                          name="ADO NET Destination Error Output"
-                          synchronousInputId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input]">
-                          <outputColumns>
-                            <outputColumn
-                              refId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
-                              dataType="i4"
-                              lineageId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
-                              name="ErrorCode"
-                              specialFlags="1" />
-                            <outputColumn
-                              refId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
-                              dataType="i4"
-                              lineageId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
-                              name="ErrorColumn"
-                              specialFlags="2" />
-                          </outputColumns>
-                          <externalMetadataColumns />
-                        </output>
-                      </outputs>
-                    </component>
-                    <component
-                      refId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Source"
-                      componentClassID="Microsoft.ManagedComponentHost"
-                      contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
-                      description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
-                      name="ADO NET Source"
-                      usesDispositions="true"
-                      version="4">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the SQL statement used by the component to extract data."
-                          expressionType="Notify"
-                          name="SqlCommand"
-                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                        <property
-                          dataType="System.Int32"
-                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                          name="CommandTimeout">30</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
-                          name="AllowImplicitStringConversion">true</property>
-                        <property
-                          dataType="System.String"
-                          description="The Source database table name."
-                          expressionType="Notify"
-                          name="TableOrViewName"
-                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specify the mode to retrieve external column information"
-                          name="AccessMode"
-                          typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
-                        <property
-                          dataType="System.String"
-                          name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
-                      </properties>
-                      <connections>
-                        <connection
-                          refId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Source.Connections[IDbConnection]"
-                          description="Managed connection manager"
-                          name="IDbConnection" />
-                      </connections>
-                      <outputs>
-                        <output
-                          refId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output]"
-                          name="ADO NET Source Output">
-                          <externalMetadataColumns
-                            isUsed="True" />
-                        </output>
-                        <output
-                          refId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output]"
-                          isErrorOut="true"
-                          name="ADO NET Source Error Output">
-                          <outputColumns>
-                            <outputColumn
-                              refId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
-                              dataType="i4"
-                              lineageId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
-                              name="ErrorCode"
-                              specialFlags="1" />
-                            <outputColumn
-                              refId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
-                              dataType="i4"
-                              lineageId="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
-                              name="ErrorColumn"
-                              specialFlags="2" />
-                          </outputColumns>
-                          <externalMetadataColumns />
-                        </output>
-                      </outputs>
-                    </component>
-                  </components>
-                </pipeline>
-              </DTS:ObjectData>
-            </DTS:Executable>
-            <DTS:Executable
-              DTS:refId="Package\Customers - Loop\Sites - Loop\Gets Contacts"
-              DTS:CreationName="Microsoft.ExecuteSQLTask"
-              DTS:DTSID="{7B997636-110F-4F51-9685-8D97106C37CC}"
-              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-              DTS:LocaleID="-1"
-              DTS:ObjectName="Gets Contacts"
-              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 RC3; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="0">
-              <DTS:Variables />
-              <DTS:ObjectData>
-                <SQLTask:SqlTaskData
-                  SQLTask:Connection="{8A46073B-C961-47E1-8025-A1F7CE1A1E34}"
-                  SQLTask:IsStoredProc="True"
-                  SQLTask:SqlStatementSource="GetsContact"
-                  SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
-                  <SQLTask:ResultBinding
-                    SQLTask:ResultName="0"
-                    SQLTask:DtsVariableName="User::Contacts" />
-                  <SQLTask:ParameterBinding
-                    SQLTask:ParameterName="customerId"
-                    SQLTask:DtsVariableName="User::CustomerId"
-                    SQLTask:ParameterDirection="Input"
-                    SQLTask:DataType="16"
-                    SQLTask:ParameterSize="-1" />
-                  <SQLTask:ParameterBinding
-                    SQLTask:ParameterName="rowVersion"
-                    SQLTask:DtsVariableName="User::MaxContact"
-                    SQLTask:ParameterDirection="Input"
-                    SQLTask:DataType="16"
-                    SQLTask:ParameterSize="-1" />
-                </SQLTask:SqlTaskData>
-              </DTS:ObjectData>
-            </DTS:Executable>
-            <DTS:Executable
-              DTS:refId="Package\Customers - Loop\Sites - Loop\MAX Contact"
-              DTS:CreationName="Microsoft.ExecuteSQLTask"
-              DTS:Description="Execute SQL Task"
-              DTS:DTSID="{c117ea45-31e4-4518-8fb3-7bcdfdec19ce}"
-              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-              DTS:LocaleID="-1"
-              DTS:ObjectName="MAX Contact"
-              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 RC3; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="0">
-              <DTS:Variables />
-              <DTS:ObjectData>
-                <SQLTask:SqlTaskData
-                  SQLTask:Connection="{1FEBB3AF-4A84-4E1E-AF41-ECBBCB4A4D58}"
-                  SQLTask:IsStoredProc="True"
-                  SQLTask:SqlStatementSource="GetMaxContact"
-                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
-                  <SQLTask:ResultBinding
-                    SQLTask:ResultName="MaxRowVersion"
-                    SQLTask:DtsVariableName="User::MaxContact" />
-                  <SQLTask:ParameterBinding
-                    SQLTask:ParameterName="customerId"
-                    SQLTask:DtsVariableName="User::CustomerId"
-                    SQLTask:ParameterDirection="Input"
-                    SQLTask:DataType="16"
-                    SQLTask:ParameterSize="-1" />
-                </SQLTask:SqlTaskData>
-              </DTS:ObjectData>
-            </DTS:Executable>
-          </DTS:Executables>
-          <DTS:PrecedenceConstraints>
-            <DTS:PrecedenceConstraint
-              DTS:refId="Package\Customers - Loop\Sites - Loop.PrecedenceConstraints[Constraint]"
-              DTS:CreationName=""
-              DTS:DTSID="{04077074-BF35-49F4-80E5-6DD1788A8F35}"
-              DTS:From="Package\Customers - Loop\Sites - Loop\MAX Contact"
-              DTS:LogicalAnd="True"
-              DTS:ObjectName="Constraint"
-              DTS:To="Package\Customers - Loop\Sites - Loop\Gets Contacts" />
-          </DTS:PrecedenceConstraints>
-        </DTS:Executable>
-      </DTS:Executables>
-      <DTS:PrecedenceConstraints>
-        <DTS:PrecedenceConstraint
-          DTS:refId="Package\Customers - Loop.PrecedenceConstraints[Constraint]"
-          DTS:CreationName=""
-          DTS:DTSID="{45769FAC-7186-4256-A657-931C70DFE8D2}"
-          DTS:From="Package\Customers - Loop\GET Sites"
-          DTS:LogicalAnd="True"
-          DTS:ObjectName="Constraint"
-          DTS:To="Package\Customers - Loop\Sites - Loop" />
-      </DTS:PrecedenceConstraints>
-      <DTS:ForEachVariableMappings>
-        <DTS:ForEachVariableMapping
-          DTS:CreationName=""
-          DTS:DTSID="{60EFBCE1-E096-4F7D-804E-B17484574BDC}"
-          DTS:ObjectName="{60EFBCE1-E096-4F7D-804E-B17484574BDC}"
-          DTS:ValueIndex="0"
-          DTS:VariableName="User::CustomerId" />
-      </DTS:ForEachVariableMappings>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\GET Customers Active"
+      DTS:refId="Package\GET Sites"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:DTSID="{1324C271-9ADA-4A35-9E7E-DA7C15E9EDB3}"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{d33f5210-6924-4be4-a624-80e73a29335c}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="GET Customers Active"
+      DTS:ObjectName="GET Sites"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 RC3; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
@@ -480,24 +159,1905 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{8A46073B-C961-47E1-8025-A1F7CE1A1E34}"
           SQLTask:IsStoredProc="True"
-          SQLTask:SqlStatementSource="GetsCustomerActive"
+          SQLTask:SqlStatementSource="GetsSite"
           SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
-            SQLTask:DtsVariableName="User::Customers" />
+            SQLTask:DtsVariableName="User::Sites" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="customerId"
+            SQLTask:DtsVariableName="$Project::CustomerId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="16"
+            SQLTask:ParameterSize="-1" />
         </SQLTask:SqlTaskData>
       </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sites - Loop"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{c0bb63d9-6458-4d17-8e22-7783b5126e76}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sites - Loop">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{5328BB69-0A18-4CC0-BCF6-7D268D85B7FC}"
+        DTS:ObjectName="{5328BB69-0A18-4CC0-BCF6-7D268D85B7FC}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::Sites" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{7D8B7751-596D-4634-B054-A20264EF73E9}"
+          DTS:IncludeInDebugDump="2345"
+          DTS:Namespace="User"
+          DTS:ObjectName="DBDestinationDatabasename">
+          <DTS:VariableValue
+            DTS:DataType="8">KESite</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{2640A835-2ABE-4D02-9F75-879446812B9B}"
+          DTS:IncludeInDebugDump="2345"
+          DTS:Namespace="User"
+          DTS:ObjectName="DBDestinationIPAddress">
+          <DTS:VariableValue
+            DTS:DataType="8"
+            xml:space="preserve"></DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{57338BFF-808D-4AB5-B706-23026BE0B257}"
+          DTS:IncludeInDebugDump="2345"
+          DTS:Namespace="User"
+          DTS:ObjectName="DBDestinationPassword">
+          <DTS:VariableValue
+            DTS:DataType="8">muniz11$</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{A0D3834E-A730-40A2-951D-F7AC226D3C45}"
+          DTS:IncludeInDebugDump="2345"
+          DTS:Namespace="User"
+          DTS:ObjectName="DBDestinationUser">
+          <DTS:VariableValue
+            DTS:DataType="8">sa</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{0C78CEC2-1BF2-4BB5-89DE-D376B612076B}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="MaxSourceAddressTS">
+          <DTS:VariableValue
+            DTS:DataType="17">0</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sites - Loop\Address S-&gt;D"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{3b52bb8c-8873-4dc5-8461-7cf3b09025f2}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Address S-&gt;D"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="INSERT Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Addresses]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">ROWS_PER_BATCH = 2147483647</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[OLEDBDestination]"
+                      connectionManagerRefId="Package.ConnectionManagers[OLEDBDestination]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].Columns[Id]"
+                          cachedDataType="guid"
+                          cachedName="Id"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]" />
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].Columns[Email]"
+                          cachedDataType="wstr"
+                          cachedLength="256"
+                          cachedName="Email"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]" />
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].Columns[PhoneNumberCountryCode]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="PhoneNumberCountryCode"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumberCountryCode]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumberCountryCode]" />
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="16"
+                          cachedName="PhoneNumber"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].Columns[MobileNumberCountryCode]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="MobileNumberCountryCode"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[MobileNumberCountryCode]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[MobileNumberCountryCode]" />
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].Columns[MobileNumber]"
+                          cachedDataType="wstr"
+                          cachedLength="16"
+                          cachedName="MobileNumber"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[MobileNumber]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[MobileNumber]" />
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].Columns[AddressLine1]"
+                          cachedDataType="wstr"
+                          cachedLength="256"
+                          cachedName="AddressLine1"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[AddressLine1]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[AddressLine1]" />
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].Columns[AddressLine2]"
+                          cachedDataType="wstr"
+                          cachedLength="256"
+                          cachedName="AddressLine2"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[AddressLine2]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[AddressLine2]" />
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].Columns[City]"
+                          cachedDataType="wstr"
+                          cachedLength="128"
+                          cachedName="City"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]" />
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].Columns[State]"
+                          cachedDataType="wstr"
+                          cachedLength="64"
+                          cachedName="State"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]" />
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].Columns[Country]"
+                          cachedDataType="wstr"
+                          cachedLength="64"
+                          cachedName="Country"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[Country]" />
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].Columns[ZipCode]"
+                          cachedDataType="wstr"
+                          cachedLength="16"
+                          cachedName="ZipCode"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[ZipCode]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[ZipCode]" />
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].Columns[CreatedDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="CreatedDate"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedDate]" />
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].Columns[DeletedDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="DeletedDate"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[DeletedDate]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[DeletedDate]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                          dataType="guid"
+                          name="Id" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                          dataType="wstr"
+                          length="256"
+                          name="Email" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumberCountryCode]"
+                          dataType="wstr"
+                          length="3"
+                          name="PhoneNumberCountryCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                          dataType="wstr"
+                          length="16"
+                          name="PhoneNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[MobileNumberCountryCode]"
+                          dataType="wstr"
+                          length="3"
+                          name="MobileNumberCountryCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[MobileNumber]"
+                          dataType="wstr"
+                          length="16"
+                          name="MobileNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[AddressLine1]"
+                          dataType="wstr"
+                          length="256"
+                          name="AddressLine1" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[AddressLine2]"
+                          dataType="wstr"
+                          length="256"
+                          name="AddressLine2" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                          dataType="wstr"
+                          length="128"
+                          name="City" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                          dataType="wstr"
+                          length="64"
+                          name="State" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                          dataType="wstr"
+                          length="64"
+                          name="Country" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[ZipCode]"
+                          dataType="wstr"
+                          length="16"
+                          name="ZipCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowVersion]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersion" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                          dataType="dbTimeStamp"
+                          name="CreatedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input].ExternalColumns[DeletedDate]"
+                          dataType="dbTimeStamp"
+                          name="DeletedDate" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sites - Loop\Address S-&gt;D\Lookup"
+                  componentClassID="Microsoft.Lookup"
+                  contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+                  description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+                  name="Lookup"
+                  usesDispositions="true"
+                  version="6">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the SQL statement that generates the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Addresses]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                      expressionType="Notify"
+                      name="SqlCommandParam"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Addresses]) [refTable]
+where [refTable].[Id] = ?</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of connection used to access the reference dataset."
+                      name="ConnectionType"
+                      typeConverter="LookupConnectionType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the cache type of the lookup table."
+                      name="CacheType"
+                      typeConverter="CacheType">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                      name="NoMatchBehavior"
+                      typeConverter="LookupNoMatchBehavior">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                      name="NoMatchCachePercentage">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                      name="MaxMemoryUsage">25</property>
+                    <property
+                      dataType="System.Int64"
+                      description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                      name="MaxMemoryUsage64">25</property>
+                    <property
+                      dataType="System.String"
+                      description="Indicates whether to reference metadata in an XML format."
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="Id" dataType="DT_GUID" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Email" dataType="DT_WSTR" length="256" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PhoneNumberCountryCode" dataType="DT_WSTR" length="3" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PhoneNumber" dataType="DT_WSTR" length="16" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="MobileNumberCountryCode" dataType="DT_WSTR" length="3" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="MobileNumber" dataType="DT_WSTR" length="16" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AddressLine1" dataType="DT_WSTR" length="256" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AddressLine2" dataType="DT_WSTR" length="256" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="City" dataType="DT_WSTR" length="128" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="State" dataType="DT_WSTR" length="64" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Country" dataType="DT_WSTR" length="64" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ZipCode" dataType="DT_WSTR" length="16" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="RowVersion" dataType="DT_BYTES" length="8" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CreatedDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DeletedDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                      name="ParameterMap">#{Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]};</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                      name="TreatDuplicateKeysAsError">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[OLEDBDestination]"
+                      connectionManagerRefId="Package.ConnectionManagers[OLEDBDestination]"
+                      description="Connection manager used to access lookup data."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Inputs[Lookup Input]"
+                      name="Lookup Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Inputs[Lookup Input].Columns[Id]"
+                          cachedDataType="guid"
+                          cachedName="Id"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table that a column joins."
+                              name="JoinToReferenceColumn">Id</property>
+                            <property
+                              dataType="System.Null"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn" />
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output]"
+                      errorOrTruncationOperation="Lookup"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="Lookup Match Output"
+                      synchronousInputId="Package\Sites - Loop\Address S-&gt;D\Lookup.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[Email]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="256"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[Email]"
+                          name="Email"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">Email</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[PhoneNumberCountryCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="3"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[PhoneNumberCountryCode]"
+                          name="PhoneNumberCountryCode"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">PhoneNumberCountryCode</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[PhoneNumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="16"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[PhoneNumber]"
+                          name="PhoneNumber"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">PhoneNumber</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[MobileNumberCountryCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="3"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[MobileNumberCountryCode]"
+                          name="MobileNumberCountryCode"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">MobileNumberCountryCode</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[MobileNumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="16"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[MobileNumber]"
+                          name="MobileNumber"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">MobileNumber</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[AddressLine1]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="256"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[AddressLine1]"
+                          name="AddressLine1"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">AddressLine1</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[AddressLine2]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="256"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[AddressLine2]"
+                          name="AddressLine2"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">AddressLine2</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[City]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="128"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[City]"
+                          name="City"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">City</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[State]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="64"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[State]"
+                          name="State"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">State</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[Country]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="64"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[Country]"
+                          name="Country"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">Country</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[ZipCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Copy Column"
+                          length="16"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[ZipCode]"
+                          name="ZipCode"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">ZipCode</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[RowVersion]"
+                          dataType="bytes"
+                          errorOrTruncationOperation="Copy Column"
+                          length="8"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[RowVersion]"
+                          name="RowVersion"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">RowVersion</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[CreatedDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[CreatedDate]"
+                          name="CreatedDate"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">CreatedDate</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[DeletedDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[DeletedDate]"
+                          name="DeletedDate"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">DeletedDate</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[Id]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output].Columns[Id]"
+                          name="Id"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">Id</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup No Match Output]"
+                      description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                      exclusionGroup="1"
+                      name="Lookup No Match Output"
+                      synchronousInputId="Package\Sites - Loop\Address S-&gt;D\Lookup.Inputs[Lookup Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Lookup Error Output"
+                      synchronousInputId="Package\Sites - Loop\Address S-&gt;D\Lookup.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Addresses]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC GetsAddress ?</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"@siteId:Input",{02D604FE-A9DE-43BE-A24A-54D36A2930B1};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[OLEDBSource]"
+                      connectionManagerRefId="Package.ConnectionManagers[OLEDBSource]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]"
+                          name="Id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                          length="256"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]"
+                          name="Email"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumberCountryCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumberCountryCode]"
+                          length="3"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumberCountryCode]"
+                          name="PhoneNumberCountryCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                          length="16"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                          name="PhoneNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[MobileNumberCountryCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MobileNumberCountryCode]"
+                          length="3"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[MobileNumberCountryCode]"
+                          name="MobileNumberCountryCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[MobileNumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MobileNumber]"
+                          length="16"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[MobileNumber]"
+                          name="MobileNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[AddressLine1]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AddressLine1]"
+                          length="256"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[AddressLine1]"
+                          name="AddressLine1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[AddressLine2]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AddressLine2]"
+                          length="256"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[AddressLine2]"
+                          name="AddressLine2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                          length="128"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
+                          name="City"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                          length="64"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]"
+                          name="State"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[Country]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                          length="64"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[Country]"
+                          name="Country"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[ZipCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ZipCode]"
+                          length="16"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[ZipCode]"
+                          name="ZipCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[RowVersion]"
+                          dataType="bytes"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RowVersion]"
+                          length="8"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[RowVersion]"
+                          name="RowVersion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedDate]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedDate]"
+                          name="CreatedDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[DeletedDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DeletedDate]"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].Columns[DeletedDate]"
+                          name="DeletedDate"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                          dataType="guid"
+                          name="Id" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                          dataType="wstr"
+                          length="256"
+                          name="Email" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumberCountryCode]"
+                          dataType="wstr"
+                          length="3"
+                          name="PhoneNumberCountryCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                          dataType="wstr"
+                          length="16"
+                          name="PhoneNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MobileNumberCountryCode]"
+                          dataType="wstr"
+                          length="3"
+                          name="MobileNumberCountryCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MobileNumber]"
+                          dataType="wstr"
+                          length="16"
+                          name="MobileNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AddressLine1]"
+                          dataType="wstr"
+                          length="256"
+                          name="AddressLine1" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AddressLine2]"
+                          dataType="wstr"
+                          length="256"
+                          name="AddressLine2" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                          dataType="wstr"
+                          length="128"
+                          name="City" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                          dataType="wstr"
+                          length="64"
+                          name="State" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                          dataType="wstr"
+                          length="64"
+                          name="Country" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ZipCode]"
+                          dataType="wstr"
+                          length="16"
+                          name="ZipCode" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RowVersion]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersion" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedDate]"
+                          dataType="dbTimeStamp"
+                          name="CreatedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DeletedDate]"
+                          dataType="dbTimeStamp"
+                          name="DeletedDate" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Id]"
+                          dataType="guid"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Id]"
+                          name="Id" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                          dataType="wstr"
+                          length="256"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                          name="Email" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumberCountryCode]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumberCountryCode]"
+                          name="PhoneNumberCountryCode" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                          dataType="wstr"
+                          length="16"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                          name="PhoneNumber" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MobileNumberCountryCode]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MobileNumberCountryCode]"
+                          name="MobileNumberCountryCode" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MobileNumber]"
+                          dataType="wstr"
+                          length="16"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MobileNumber]"
+                          name="MobileNumber" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AddressLine1]"
+                          dataType="wstr"
+                          length="256"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AddressLine1]"
+                          name="AddressLine1" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AddressLine2]"
+                          dataType="wstr"
+                          length="256"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AddressLine2]"
+                          name="AddressLine2" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                          dataType="wstr"
+                          length="128"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                          name="City" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State]"
+                          dataType="wstr"
+                          length="64"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State]"
+                          name="State" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Country]"
+                          dataType="wstr"
+                          length="64"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Country]"
+                          name="Country" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ZipCode]"
+                          dataType="wstr"
+                          length="16"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ZipCode]"
+                          name="ZipCode" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RowVersion]"
+                          dataType="bytes"
+                          length="8"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RowVersion]"
+                          name="RowVersion" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreatedDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreatedDate]"
+                          name="CreatedDate" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DeletedDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DeletedDate]"
+                          name="DeletedDate" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sites - Loop\Address S-&gt;D.Paths[Lookup Match Output]"
+                  endId="Package\Sites - Loop\Address S-&gt;D\INSERT Destination.Inputs[OLE DB Destination Input]"
+                  name="Lookup Match Output"
+                  startId="Package\Sites - Loop\Address S-&gt;D\Lookup.Outputs[Lookup Match Output]" />
+                <path
+                  refId="Package\Sites - Loop\Address S-&gt;D.Paths[OLE DB Source Output]"
+                  endId="Package\Sites - Loop\Address S-&gt;D\Lookup.Inputs[Lookup Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Sites - Loop\Address S-&gt;D\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sites - Loop\Destination Conn String"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Build Destination Connection String"
+          DTS:DTSID="{72938D5A-5B00-4672-882B-67447561F5F7}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Destination Conn String"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_c816b013b7b74f79931292758daaeb57"
+              VSTAMajorVersion="14"
+              VSTAMinorVersion="0"
+              Language="CSharp"
+              ReadOnlyVariables="User::DBDestinationDatabasename,User::DBDestinationIPAddress,User::DBDestinationPassword,User::DBDestinationUser"
+              ReadWriteVariables="User::DBDestinationConnectionString">
+              <ProjectItem
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_c816b013b7b74f79931292758daaeb57")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_c816b013b7b74f79931292758daaeb57")]
+[assembly: AssemblyCopyright("Copyright @  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.resx"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+              <ProjectItem
+                Name="ScriptMain.cs"
+                Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
+/* The Script Task allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services control flow. 
+ * 
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script task. */
+#endregion
+
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.Windows.Forms;
+#endregion
+
+namespace ST_c816b013b7b74f79931292758daaeb57
+{
+    /// <summary>
+    /// ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+    /// or parent of this class.
+    /// </summary>
+	[Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+    public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+    {
+        #region Help:  Using Integration Services variables and parameters in a script
+        /* To use a variable in this script, first ensure that the variable has been added to 
+         * either the list contained in the ReadOnlyVariables property or the list contained in 
+         * the ReadWriteVariables property of this script task, according to whether or not your
+         * code needs to write to the variable.  To add the variable, save this script, close this instance of
+         * Visual Studio, and update the ReadOnlyVariables and 
+         * ReadWriteVariables properties in the Script Transformation Editor window.
+         * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+         * 
+         * Example of reading from a variable:
+         *  DateTime startTime = (DateTime) Dts.Variables["System::StartTime"].Value;
+         * 
+         * Example of writing to a variable:
+         *  Dts.Variables["User::myStringVariable"].Value = "new value";
+         * 
+         * Example of reading from a package parameter:
+         *  int batchId = (int) Dts.Variables["$Package::batchId"].Value;
+         *  
+         * Example of reading from a project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].Value;
+         * 
+         * Example of reading from a sensitive project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].GetSensitiveValue();
+         * */
+
+        #endregion
+
+        #region Help:  Firing Integration Services events from a script
+        /* This script task can fire events for logging purposes.
+         * 
+         * Example of firing an error event:
+         *  Dts.Events.FireError(18, "Process Values", "Bad value", "", 0);
+         * 
+         * Example of firing an information event:
+         *  Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, ref fireAgain)
+         * 
+         * Example of firing a warning event:
+         *  Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0);
+         * */
+        #endregion
+
+        #region Help:  Using Integration Services connection managers in a script
+        /* Some types of connection managers can be used in this script task.  See the topic 
+         * "Working with Connection Managers Programatically" for details.
+         * 
+         * Example of using an ADO.Net connection manager:
+         *  object rawConnection = Dts.Connections["Sales DB"].AcquireConnection(Dts.Transaction);
+         *  SqlConnection myADONETConnection = (SqlConnection)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Sales DB"].ReleaseConnection(rawConnection);
+         *
+         * Example of using a File connection manager
+         *  object rawConnection = Dts.Connections["Prices.zip"].AcquireConnection(Dts.Transaction);
+         *  string filePath = (string)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Prices.zip"].ReleaseConnection(rawConnection);
+         * */
+        #endregion
+
+
+        /// <summary>
+        /// This method is called when this script task executes in the control flow.
+        /// Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+        /// To open Help, press F1.
+        /// </summary>
+        public void Main()
+        {
+            // User::DBDestinationDatabasename
+            // User::DBDestinationPassword 
+            // User::DBDestinationUser 
+            // User::IPDestination
+            String username = (String)Dts.Variables["User::DBDestinationUser"].Value;
+            String password = (String)Dts.Variables["User::DBDestinationPassword"].Value;
+            String ip = (String)Dts.Variables["User::DBDestinationIPAddress"].Value;
+            String databasename = (String)Dts.Variables["User::DBDestinationDatabasename"].Value;
+
+            Dts.Variables["User::DBDestinationConnectionString"].Value = String.Format("Data Source={0};Initial Catalog={1};User={2};password={3};Integrated Security=false;", ip, databasename, username, password);
+
+            Dts.TaskResult = (int)ScriptResults.Success;
+        }
+
+        #region ScriptResults declaration
+        /// <summary>
+        /// This enum provides a convenient shorthand within the scope of this class for setting the
+        /// result of the script.
+        /// 
+        /// This code was generated automatically.
+        /// </summary>
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+    }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="ST_c816b013b7b74f79931292758daaeb57.csproj"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{53004637-70fc-4760-b68e-79b2f8d8aff2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ST_c816b013b7b74f79931292758daaeb57</RootNamespace>
+    <AssemblyName>ST_c816b013b7b74f79931292758daaeb57</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+         <Generator>ResXFileCodeGenerator</Generator>
+         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+             <AutoGen>True</AutoGen>
+         <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+         <Generator>SettingsSingleFileGenerator</Generator>
+         <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+         <AutoGen>True</AutoGen>
+         <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptMain.cs">
+         <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="ScriptTask"
+                           HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}"
+                           ApplicationType="usd"
+                           Language="cs"
+                           TemplatesPath=""
+                           DebugInfoCommandLine=""
+                           DebugInfoWorkingDir=""
+                           IconImageList=""/>
+        <Host Name="ScriptTask" GeneratedNamespace="$safeprojectname" IconIndex="">
+        </Host>
+        <ProjectClient>
+            <HostIdentifier>SSIS_ST130</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Project"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:CodeName>ST_c816b013b7b74f79931292758daaeb57</msb:CodeName>
+		<msb:Language>msBuild</msb:Language>
+		<msb:DisplayName>ST_c816b013b7b74f79931292758daaeb57</msb:DisplayName>
+		<msb:ProjectId>{F1687352-E428-4130-86E1-5A152B820FEC}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="ST_c816b013b7b74f79931292758daaeb57.csproj"/>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Settings.settings"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="ScriptMain.cs"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_c816b013b7b74f79931292758daaeb57.Properties.Settings.get_Default():ST_c816b013b7b74f79931292758daaeb57.Properties.Sett" +
+    "ings")]
+
+namespace ST_c816b013b7b74f79931292758daaeb57.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_c816b013b7b74f79931292758daaeb57.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_c816b013b7b74f79931292758daaeb57.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_c816b013b7b74f79931292758daaeb57.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace ST_c816b013b7b74f79931292758daaeb57.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ST_c816b013b7b74f79931292758daaeb57.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <BinaryItem
+                Name="ST_c816b013b7b74f79931292758daaeb57.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDACmKVVcAAAAAAAAAAOAAIiALATAAABIAAAAIAAAAAAAA/i8A
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACAAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAKwvAABPAAAAAEAAAGwEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAABBAAAAAgAAAAEgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAGwEAAAAQAAAAAYAAAAUAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAGgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAADg
+LwAAAAAAAEgAAAACAAUAjCEAAGgNAAABAAAAAAAAAPQuAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAABMwBgDHAAAAAQAAEQIoEAAACm8RAAAKcgEAAHBvEgAACm8T
+AAAKdBsAAAEKAigQAAAKbxEAAApyMQAAcG8SAAAKbxMAAAp0GwAAAQsCKBAAAApvEQAACnJpAABw
+bxIAAApvEwAACnQbAAABDAIoEAAACm8RAAAKcqMAAHBvEgAACm8TAAAKdBsAAAENAigQAAAKbxEA
+AApy4wAAcG8SAAAKcisBAHAajREAAAElFgiiJRcJoiUYBqIlGQeiKBQAAApvFQAACgIoEAAAChZv
+FgAACioeAigXAAAKKh4CKBgAAAoqrn4BAAAELR5y1gEAcNADAAACKBkAAApvGgAACnMbAAAKgAEA
+AAR+AQAABCoafgIAAAQqHgKAAgAABCoafgMAAAQqHgIoHAAACioucwgAAAaAAwAABCoAAABCU0pC
+AQABAAAAAAAMAAAAdjQuMC4zMDMxOQAAAAAFAGwAAADIAwAAI34AADQEAABsBQAAI1N0cmluZ3MA
+AAAAoAkAAEgCAAAjVVMA6AsAABAAAAAjR1VJRAAAAPgLAABwAQAAI0Jsb2IAAAAAAAAAAgAAAVcd
+ogEJAwAAAPoBMwAWAAABAAAAHgAAAAUAAAAGAAAACQAAAAEAAAAcAAAAAgAAABAAAAABAAAAAgAA
+AAMAAAAEAAAAAQAAAAQAAAABAAAAAQAAAAAAfQMBAAAAAAAGACUCTQQGALQCTQQGAHEBOgQPAMEE
+AAAGAJ4B+wMGAAgC+wMGAOkB+wMGAJsC+wMGAEUC+wMGAF4C+wMGALUB+wMGANAB7AIKAHkCLAMK
+APAALAMGALUDrgMGAFQBOgQGADsFrgMGAB0EbQQGAA0E5gMOACQBZwMOAIUBZwMOAAwB0QMGADkB
+TQQKAFUDLAMSAAMFmwASAG4AmwAGAAYDrgMGALsArgMGAHcArgMGAGEF+wMAAAAAJQAAAAAAAQAB
+AAEAEADGAwEAOQABAAEAAAAQAHQE0ARFAAEAAwAAARAADQXQBFkAAwAHAAMBAAAmBQAAPQAEAAoA
+EQC6A3EAEQDgAHUAEQBeAHkABgZNAH0AVoAWBYAAVoDAAIAAUCAAAAAAhgDMAwYAAQAjIQAAAACG
+GC0EBgABACshAAAAAIMYLQQGAAEAMyEAAAAAkwgZBIQAAQBfIQAAAACTCMgAiQABAGYhAAAAAJMI
+1ACOAAEAbiEAAAAAlghCBZQAAgB1IQAAAACGGC0EBgACAH0hAAAAAJEYMwSZAAIAAAABAOYCCQAt
+BAEAEQAtBAYAGQAtBAoAKQAtBBAAMQAtBBAAOQAtBBAAQQAtBBAASQAtBBAAUQAtBBAAWQAtBBAA
+YQAtBBAAaQAtBAYAgQAtBAYAqQAtBBUAuQAtBAYAcQAeBSIAwQD/BCcAyQClAywA0QDSAjIA2QA0
+BTYA0QDcAj0AwQBOBQEAcQAtBAYAiQAtBAYA4QCJAEIA4QBdBUkAkQAtBE4AsQAtBAYACAAUAGcA
+CAAYAGwAKQBzANQALgALAKwALgATALUALgAbANQALgAjAN0ALgArAAYBLgAzAAYBLgA7AAYBLgBD
+AN0ALgBLAAwBLgBTAAYBLgBbACMBQwBjAGwASQBzANQAYQB7AGwAYwBrAGwAGwADAAEABAADAAAA
+HQSdAAAA6ACiAAAARgWnAAIABAADAAIABQAFAAEABgAFAAIABwAHAASAAAABAAAAchckBAAAAAAA
+AAEAAAAEAAAAAAAAAAAAAABVAFUAAAAAAA0AAAAAAAAAAAAAAF4ADQMAAAAABAAAAAAAAAAAAAAA
+VQCuAwAAAAANAAAAAAAAAAAAAABeAC4AAAAAAAAAAAABAAAAfgQAAAUAAgAAAABTVF9jODE2YjAx
+M2I3Yjc0Zjc5OTMxMjkyNzU4ZGFhZWI1NwA8TW9kdWxlPgBNaWNyb3NvZnQuU3FsU2VydmVyLk1h
+bmFnZWREVFMAdmFsdWVfXwBtc2NvcmxpYgBkZWZhdWx0SW5zdGFuY2UAVmFyaWFibGUAUnVudGlt
+ZVR5cGVIYW5kbGUAR2V0VHlwZUZyb21IYW5kbGUATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuUnVu
+dGltZQBUeXBlAEZhaWx1cmUAZ2V0X0N1bHR1cmUAc2V0X0N1bHR1cmUAcmVzb3VyY2VDdWx0dXJl
+AFZTVEFSVFNjcmlwdE9iamVjdE1vZGVsQmFzZQBBcHBsaWNhdGlvblNldHRpbmdzQmFzZQBFZGl0
+b3JCcm93c2FibGVTdGF0ZQBDb21waWxlckdlbmVyYXRlZEF0dHJpYnV0ZQBEZWJ1Z2dlck5vblVz
+ZXJDb2RlQXR0cmlidXRlAERlYnVnZ2FibGVBdHRyaWJ1dGUARWRpdG9yQnJvd3NhYmxlQXR0cmli
+dXRlAEFzc2VtYmx5VGl0bGVBdHRyaWJ1dGUAQXNzZW1ibHlUcmFkZW1hcmtBdHRyaWJ1dGUAVGFy
+Z2V0RnJhbWV3b3JrQXR0cmlidXRlAEFzc2VtYmx5Q29uZmlndXJhdGlvbkF0dHJpYnV0ZQBBc3Nl
+bWJseURlc2NyaXB0aW9uQXR0cmlidXRlAENvbXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRyaWJ1dGUA
+QXNzZW1ibHlQcm9kdWN0QXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmlidXRlAFNTSVNT
+Y3JpcHRUYXNrRW50cnlQb2ludEF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1dGUAUnVu
+dGltZUNvbXBhdGliaWxpdHlBdHRyaWJ1dGUAZ2V0X1ZhbHVlAHNldF9WYWx1ZQB2YWx1ZQBTeXN0
+ZW0uUnVudGltZS5WZXJzaW9uaW5nAFN0cmluZwBNaWNyb3NvZnQuU3FsU2VydmVyLlNjcmlwdFRh
+c2sATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuVGFza3MuU2NyaXB0VGFzawBTY3JpcHRPYmplY3RN
+b2RlbABTeXN0ZW0uQ29tcG9uZW50TW9kZWwAU1RfYzgxNmIwMTNiN2I3NGY3OTkzMTI5Mjc1OGRh
+YWViNTcuZGxsAGdldF9JdGVtAFN5c3RlbQBFbnVtAHJlc291cmNlTWFuAFNjcmlwdE1haW4AU3lz
+dGVtLkNvbmZpZ3VyYXRpb24AU3lzdGVtLkdsb2JhbGl6YXRpb24AU3lzdGVtLlJlZmxlY3Rpb24A
+Q3VsdHVyZUluZm8AZ2V0X1Jlc291cmNlTWFuYWdlcgAuY3RvcgAuY2N0b3IAU3lzdGVtLkRpYWdu
+b3N0aWNzAFN5c3RlbS5SdW50aW1lLkNvbXBpbGVyU2VydmljZXMAU3lzdGVtLlJlc291cmNlcwBT
+VF9jODE2YjAxM2I3Yjc0Zjc5OTMxMjkyNzU4ZGFhZWI1Ny5Qcm9wZXJ0aWVzLlJlc291cmNlcy5y
+ZXNvdXJjZXMARGVidWdnaW5nTW9kZXMAU1RfYzgxNmIwMTNiN2I3NGY3OTkzMTI5Mjc1OGRhYWVi
+NTcuUHJvcGVydGllcwBnZXRfVmFyaWFibGVzAFNldHRpbmdzAFN1Y2Nlc3MAZ2V0X0R0cwBTY3Jp
+cHRSZXN1bHRzAEZvcm1hdABPYmplY3QAZ2V0X0RlZmF1bHQAc2V0X1Rhc2tSZXN1bHQAZ2V0X0Fz
+c2VtYmx5AAAAAC9VAHMAZQByADoAOgBEAEIARABlAHMAdABpAG4AYQB0AGkAbwBuAFUAcwBlAHIA
+ADdVAHMAZQByADoAOgBEAEIARABlAHMAdABpAG4AYQB0AGkAbwBuAFAAYQBzAHMAdwBvAHIAZAAA
+OVUAcwBlAHIAOgA6AEQAQgBEAGUAcwB0AGkAbgBhAHQAaQBvAG4ASQBQAEEAZABkAHIAZQBzAHMA
+AD9VAHMAZQByADoAOgBEAEIARABlAHMAdABpAG4AYQB0AGkAbwBuAEQAYQB0AGEAYgBhAHMAZQBu
+AGEAbQBlAABHVQBzAGUAcgA6ADoARABCAEQAZQBzAHQAaQBuAGEAdABpAG8AbgBDAG8AbgBuAGUA
+YwB0AGkAbwBuAFMAdAByAGkAbgBnAACAqUQAYQB0AGEAIABTAG8AdQByAGMAZQA9AHsAMAB9ADsA
+SQBuAGkAdABpAGEAbAAgAEMAYQB0AGEAbABvAGcAPQB7ADEAfQA7AFUAcwBlAHIAPQB7ADIAfQA7
+AHAAYQBzAHMAdwBvAHIAZAA9AHsAMwB9ADsASQBuAHQAZQBnAHIAYQB0AGUAZAAgAFMAZQBjAHUA
+cgBpAHQAeQA9AGYAYQBsAHMAZQA7AABxUwBUAF8AYwA4ADEANgBiADAAMQAzAGIANwBiADcANABm
+ADcAOQA5ADMAMQAyADkAMgA3ADUAOABkAGEAYQBlAGIANQA3AC4AUAByAG8AcABlAHIAdABpAGUA
+cwAuAFIAZQBzAG8AdQByAGMAZQBzAAAiWiZCXfShSZKPH8qCTZDlAAQgAQEIAyAAAQUgAQEREQQg
+AQEOBSABARFRBgcEDg4ODgQgABJhBCAAEmUFIAESaRwDIAAcBgACDg4dHAQgAQEcBgABEnERdQQg
+ABJ5BiACAQ4SeQi3elxWGTTgiQiJhF3NgIDMkQQAAAAABAEAAAADBhJJAwYSTQMGEhACBggDBhEU
+BAAAEkkEAAASTQUAAQESTQQAABIQAwAAAQQIABJJBAgAEk0ECAASEAgBAAgAAAAAAB4BAAEAVAIW
+V3JhcE5vbkV4Y2VwdGlvblRocm93cwEIAQACAAAAAAAoAQAjU1RfYzgxNmIwMTNiN2I3NGY3OTkz
+MTI5Mjc1OGRhYWViNTcAAAUBAAAAABYBABFDb3B5cmlnaHQgQCAgMjAxNgAASQEAGi5ORVRGcmFt
+ZXdvcmssVmVyc2lvbj12NC41AQBUDhRGcmFtZXdvcmtEaXNwbGF5TmFtZRIuTkVUIEZyYW1ld29y
+ayA0LjUAAAC0AAAAzsrvvgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIs
+IG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9r
+ZW49Yjc3YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIA
+AAAAAAAAAAAAAFBBRFBBRFC0AAAA1C8AAAAAAAAAAAAA7i8AAAAgAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAOAvAAAAAAAAAAAAAAAAX0NvckRsbE1haW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAEAEAAAABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAAADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAA
+AEgAAABYQAAAEAQAAAAAAAAAAAAAEAQ0AAAAVgBTAF8AVgBFAFIAUwBJAE8ATgBfAEkATgBGAE8A
+AAAAAL0E7/4AAAEAAAABACQEchcAAAEAJARyFz8AAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAABE
+AAAAAQBWAGEAcgBGAGkAbABlAEkAbgBmAG8AAAAAACQABAAAAFQAcgBhAG4AcwBsAGEAdABpAG8A
+bgAAAAAAAACwBHADAAABAFMAdAByAGkAbgBnAEYAaQBsAGUASQBuAGYAbwAAAEwDAAABADAAMAAw
+ADAAMAA0AGIAMAAAABoAAQABAEMAbwBtAG0AZQBuAHQAcwAAAAAAAAAiAAEAAQBDAG8AbQBwAGEA
+bgB5AE4AYQBtAGUAAAAAAAAAAABwACQAAQBGAGkAbABlAEQAZQBzAGMAcgBpAHAAdABpAG8AbgAA
+AAAAUwBUAF8AYwA4ADEANgBiADAAMQAzAGIANwBiADcANABmADcAOQA5ADMAMQAyADkAMgA3ADUA
+OABkAGEAYQBlAGIANQA3AAAAPAAOAAEARgBpAGwAZQBWAGUAcgBzAGkAbwBuAAAAAAAxAC4AMAAu
+ADYAMAAwADIALgAxADAANgAwAAAAcAAoAAEASQBuAHQAZQByAG4AYQBsAE4AYQBtAGUAAABTAFQA
+XwBjADgAMQA2AGIAMAAxADMAYgA3AGIANwA0AGYANwA5ADkAMwAxADIAOQAyADcANQA4AGQAYQBh
+AGUAYgA1ADcALgBkAGwAbAAAAEgAEgABAEwAZQBnAGEAbABDAG8AcAB5AHIAaQBnAGgAdAAAAEMA
+bwBwAHkAcgBpAGcAaAB0ACAAQAAgACAAMgAwADEANgAAACoAAQABAEwAZQBnAGEAbABUAHIAYQBk
+AGUAbQBhAHIAawBzAAAAAAAAAAAAeAAoAAEATwByAGkAZwBpAG4AYQBsAEYAaQBsAGUAbgBhAG0A
+ZQAAAFMAVABfAGMAOAAxADYAYgAwADEAMwBiADcAYgA3ADQAZgA3ADkAOQAzADEAMgA5ADIANwA1
+ADgAZABhAGEAZQBiADUANwAuAGQAbABsAAAAaAAkAAEAUAByAG8AZAB1AGMAdABOAGEAbQBlAAAA
+AABTAFQAXwBjADgAMQA2AGIAMAAxADMAYgA3AGIANwA0AGYANwA5ADkAMwAxADIAOQAyADcANQA4
+AGQAYQBhAGUAYgA1ADcAAABAAA4AAQBQAHIAbwBkAHUAYwB0AFYAZQByAHMAaQBvAG4AAAAxAC4A
+MAAuADYAMAAwADIALgAxADAANgAwAAAARAAOAAEAQQBzAHMAZQBtAGIAbAB5ACAAVgBlAHIAcwBp
+AG8AbgAAADEALgAwAC4ANgAwADAAMgAuADEAMAA2ADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAADAAAAAAwAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
+            </ScriptProject>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sites - Loop\MAX - Destination"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{1729D7F2-644D-43EB-91C5-91B46BC928EA}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="MAX - Destination"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 RC3; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{1FEBB3AF-4A84-4E1E-AF41-ECBBCB4A4D58}"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="GetMaxAddress"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="MaxRowVersion"
+                SQLTask:DtsVariableName="User::MaxDestinationAddressTS" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="siteId"
+                SQLTask:DtsVariableName="User::SiteId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sites - Loop\MAX Source"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{799de37f-1e41-4d18-87a0-94116dfc5068}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="MAX Source"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 RC3; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{1FEBB3AF-4A84-4E1E-AF41-ECBBCB4A4D58}"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="GetMaxAddress"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="MaxRowVersion"
+                SQLTask:DtsVariableName="User::MaxDestinationAddressTS" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="siteId"
+                SQLTask:DtsVariableName="User::SiteId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sites - Loop.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{A92A954C-2ED5-4105-9F52-80687AD92A52}"
+          DTS:From="Package\Sites - Loop\Destination Conn String"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Sites - Loop\MAX Source" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sites - Loop.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{891D53E7-91F5-4EB2-8AA7-81D45939EB14}"
+          DTS:From="Package\Sites - Loop\MAX Source"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Sites - Loop\MAX - Destination" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sites - Loop.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{8EAAB82D-E10E-4026-A2A6-F741F3BE7F83}"
+          DTS:From="Package\Sites - Loop\MAX - Destination"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Sites - Loop\Address S-&gt;D" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{94DF4EA5-9430-4CD8-8784-A62952AB505C}"
+          DTS:ObjectName="{94DF4EA5-9430-4CD8-8784-A62952AB505C}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::SiteId" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{D8722C43-A9CA-4B5B-922F-9FD00F2EBDE8}"
+          DTS:ObjectName="{D8722C43-A9CA-4B5B-922F-9FD00F2EBDE8}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::DBDestinationIPAddress" />
+      </DTS:ForEachVariableMappings>
     </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{3A0DD67F-693D-4B09-AB76-B83F46DB2396}"
-      DTS:From="Package\GET Customers Active"
+      DTS:DTSID="{03C7C140-1755-48FB-ADF6-5103638C823E}"
+      DTS:From="Package\GET Sites"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Customers - Loop" />
+      DTS:To="Package\Sites - Loop" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -513,42 +2073,38 @@
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="124,42"
-          Id="Package\Customers - Loop\GET Sites"
-          TopLeft="35,5.5" />
+          Id="Package\GET Sites"
+          TopLeft="285,0.49999999999989" />
         <NodeLayout
-          Size="172,42"
-          Id="Package\Customers - Loop\Sites - Loop\Gets Contacts"
-          TopLeft="6.5,85.5" />
+          Size="144,42"
+          Id="Package\Sites - Loop\Address S-&gt;D"
+          TopLeft="37.5,261.5" />
         <NodeLayout
-          Size="139,42"
-          Id="Package\Customers - Loop\Sites - Loop\MAX Contact"
-          TopLeft="5.5,9.5" />
+          Size="190,42"
+          Id="Package\Sites - Loop\Destination Conn String"
+          TopLeft="25,20" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Sites - Loop\MAX - Destination"
+          TopLeft="31,180" />
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Sites - Loop\MAX Source"
+          TopLeft="45,94.5" />
         <EdgeLayout
-          Id="Package\Customers - Loop\Sites - Loop.PrecedenceConstraints[Constraint]"
-          TopLeft="75,51.5">
+          Id="Package\Sites - Loop.PrecedenceConstraints[Constraint 1]"
+          TopLeft="116.25,62">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="17.5,34"
+              EndConnector="0,32.5"
               Start="0,0"
-              End="17.5,26.5">
+              End="0,25">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,13" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,13"
-                    Point2="0,17"
-                    Point3="4,17" />
-                  <mssgle:LineSegment
-                    End="13.5,17" />
-                  <mssgle:CubicBezierSegment
-                    Point1="13.5,17"
-                    Point2="17.5,17"
-                    Point3="17.5,21" />
-                  <mssgle:LineSegment
-                    End="17.5,26.5" />
+                    End="0,25" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -557,43 +2113,42 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="151,42"
-          Id="Package\Customers - Loop\Sites - Loop\Data Flow Task"
-          TopLeft="145.384615384615,168.692307692308" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="301,266"
-          Size="301,309"
-          Id="Package\Customers - Loop\Sites - Loop"
-          TopLeft="5.50000000000006,107.5" />
         <EdgeLayout
-          Id="Package\Customers - Loop.PrecedenceConstraints[Constraint]"
-          TopLeft="97,47.5">
+          Id="Package\Sites - Loop.PrecedenceConstraints[Constraint 2]"
+          TopLeft="112.5,136.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="59,60"
+              EndConnector="0,43.5"
               Start="0,0"
-              End="59,52.5">
+              End="0,36">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,26" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,26"
-                    Point2="0,30"
-                    Point3="4,30" />
+                    End="0,36" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sites - Loop.PrecedenceConstraints[Constraint 3]"
+          TopLeft="111,222">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.5"
+              Start="0,0"
+              End="0,32">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="55,30" />
-                  <mssgle:CubicBezierSegment
-                    Point1="55,30"
-                    Point2="59,30"
-                    Point3="59,34" />
-                  <mssgle:LineSegment
-                    End="59,52.5" />
+                    End="0,32" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -605,28 +2160,24 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="414,472"
-          Size="414,514"
-          Id="Package\Customers - Loop"
-          TopLeft="94,244.833333333333" />
-        <NodeLayout
-          Size="183,42"
-          Id="Package\GET Customers Active"
-          TopLeft="205,131" />
+          PanelSize="665,412"
+          Size="665,455"
+          Id="Package\Sites - Loop"
+          TopLeft="18.0000000000001,109.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="298.75,173">
+          TopLeft="348.75,42.4999999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,71.833333333333"
+              EndConnector="0,67.0000000000001"
               Start="0,0"
-              End="0,64.333333333333">
+              End="0,59.5000000000001">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,64.333333333333" />
+                    End="0,59.5000000000001" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -639,20 +2190,143 @@
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Customers - Loop\Sites - Loop\Data Flow Task">
+    design-time-name="Package\Sites - Loop\Address S-&gt;D">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="158,42"
-          Id="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Source"
-          TopLeft="143,56" />
+          Size="171,42"
+          Id="Package\Sites - Loop\Address S-&gt;D\INSERT Destination"
+          TopLeft="30,251" />
         <NodeLayout
-          Size="179,42"
-          Id="Package\Customers - Loop\Sites - Loop\Data Flow Task\ADO NET Destination"
-          TopLeft="129,228" />
+          Size="150,42"
+          Id="Package\Sites - Loop\Address S-&gt;D\OLE DB Source"
+          TopLeft="152,39" />
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Sites - Loop\Address S-&gt;D\Lookup"
+          TopLeft="196,135" />
+        <EdgeLayout
+          Id="Package\Sites - Loop\Address S-&gt;D.Paths[OLE DB Source Output]"
+          TopLeft="227,81">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="25.5,54"
+              Start="0,0"
+              End="25.5,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23"
+                    Point2="0,27"
+                    Point3="4,27" />
+                  <mssgle:LineSegment
+                    End="21.5,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="21.5,27"
+                    Point2="25.5,27"
+                    Point3="25.5,31" />
+                  <mssgle:LineSegment
+                    End="25.5,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sites - Loop\Address S-&gt;D.Paths[Lookup Match Output]"
+          TopLeft="252.5,177">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-137,74"
+              Start="0,0"
+              End="-137,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33"
+                    Point2="0,37"
+                    Point3="-4,37" />
+                  <mssgle:LineSegment
+                    End="-133,37" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-133,37"
+                    Point2="-137,37"
+                    Point3="-137,41" />
+                  <mssgle:LineSegment
+                    End="-137,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-116.69138671875,42,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sites - Loop\Address S-&gt;D\INSERT Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sites - Loop\Address S-&gt;D\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sites - Loop\Address S-&gt;D\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[Addresses]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

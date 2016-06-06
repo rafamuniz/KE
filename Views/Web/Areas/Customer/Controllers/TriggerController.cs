@@ -14,7 +14,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     public class TriggerController : BaseController
     {
         #region Index
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Index()
         {
             List<ListViewModel> viewModels = new List<ListViewModel>();
@@ -36,7 +36,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Create
 
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Create()
         {
             return View(await InitCreate(null));
@@ -46,7 +46,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         // POST: /Trigger/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Create(CreateViewModel viewModel)
         {
             try
@@ -185,7 +185,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         //
         // GET: /User/Delete
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Delete(Guid id)
         {
             var trigger = KEUnitOfWork.TriggerRepository.Get(id);
@@ -206,6 +206,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #endregion Delete      
 
         [HttpGet]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult GetsTankBySiteId(Guid siteId)
         {
             var tanks = LoadTanks(CustomerId, siteId);
@@ -214,6 +215,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult GetsSensorByTankId(Guid tankId)
         {
             var sensors = LoadSensors(CustomerId, tankId);
@@ -222,6 +224,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult GetsSensorItemBySensorId(Guid sensorId)
         {
             var sensorItems = LoadSensorItems(sensorId);

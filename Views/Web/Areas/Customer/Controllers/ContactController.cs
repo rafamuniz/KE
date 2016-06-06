@@ -15,7 +15,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     public class ContactController : BaseController
     {
         #region Index
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Index()
         {
             List<Contact> entities = KEUnitOfWork.ContactRepository.GetsByCustomerId(CustomerId).ToList();
@@ -26,7 +26,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #endregion Index
 
         #region Create
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Create()
         {
             CreateViewModel viewModel = new CreateViewModel();
@@ -37,7 +37,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         // POST: /Contact/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Create(CreateViewModel viewModel)
         {
             try
@@ -69,7 +69,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #endregion Create
 
         #region Edit
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Edit(Guid id)
         {
             try
@@ -102,7 +102,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         // POST: /User/Update
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Edit(EditViewModel viewModel)
         {
             try
@@ -141,7 +141,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         //
         // GET: /Contact/Delete
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Delete(Guid id)
         {
             try

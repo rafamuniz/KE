@@ -12,7 +12,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     public class SiteController : BaseController
     {
         #region Index
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Index()
         {
             List<Site> entities = KEUnitOfWork.SiteRepository.GetsByCustomerId(CustomerId).ToList();
@@ -24,7 +24,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Create
 
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Create()
         {
             LoadStatuses();
@@ -36,7 +36,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         // POST: /User/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Create(CreateViewModel viewModel)
         {
             try
@@ -70,7 +70,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Edit
 
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Edit(Guid id)
         {
             var site = KEUnitOfWork.SiteRepository.Get(id);
@@ -93,7 +93,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         // POST: /User/Update
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Edit(EditViewModel viewModel)
         {
             try
@@ -135,7 +135,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         //
         // GET: /User/Delete
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Delete(Guid id)
         {
             var site = KEUnitOfWork.SiteRepository.Get(id);

@@ -70,6 +70,7 @@
     <Compile Include="Entities\AlarmHistory.cs" />
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\City.cs" />
+    <Compile Include="Entities\CustomerUserSite.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\CustomerUserSetting.cs" />
     <Compile Include="Entities\CustomerSetting.cs" />
@@ -99,21 +100,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201605131346159_Dev.cs" />
-    <Compile Include="Migrations\201605131346159_Dev.Designer.cs">
-      <DependentUpon>201605131346159_Dev.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605161304034_Dev1.cs" />
-    <Compile Include="Migrations\201605161304034_Dev1.Designer.cs">
-      <DependentUpon>201605161304034_Dev1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606050709045_Dev2.cs" />
-    <Compile Include="Migrations\201606050709045_Dev2.Designer.cs">
-      <DependentUpon>201606050709045_Dev2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606051134085_Dev3.cs" />
-    <Compile Include="Migrations\201606051134085_Dev3.Designer.cs">
-      <DependentUpon>201606051134085_Dev3.cs</DependentUpon>
+    <Compile Include="Migrations\v1.0.cs" />
+    <Compile Include="Migrations\v1.0.Designer.cs">
+      <DependentUpon>v1.0.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
@@ -182,17 +171,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605131346159_Dev.resx">
-      <DependentUpon>201605131346159_Dev.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605161304034_Dev1.resx">
-      <DependentUpon>201605161304034_Dev1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606050709045_Dev2.resx">
-      <DependentUpon>201606050709045_Dev2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606051134085_Dev3.resx">
-      <DependentUpon>201606051134085_Dev3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\v1.0.resx">
+      <DependentUpon>v1.0.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

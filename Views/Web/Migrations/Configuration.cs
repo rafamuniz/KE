@@ -25,10 +25,12 @@ namespace KarmicEnergy.Web.Migrations
             {
                 new IdentityRole("SuperAdmin"),
                 new IdentityRole("Admin"),
-                new IdentityRole("Operator"),
+                new IdentityRole("User"),
+
                 new IdentityRole("Customer"),
-                new IdentityRole("CustomerAdmin"),
-                new IdentityRole("CustomerOperator")
+                new IdentityRole("General Manager"),
+                new IdentityRole("Supervisor"),
+                new IdentityRole("Operator")                
             };
 
             foreach (var r in roles)

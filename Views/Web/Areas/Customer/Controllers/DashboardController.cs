@@ -12,7 +12,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     {
         #region Tank
 
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult Tanks()
         {
             TankDashboardViewModel viewModel = new TankDashboardViewModel();
@@ -29,7 +29,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return View(viewModel);
         }
 
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult SiteDashboard(Guid tankId)
         {
             TankDashboardViewModel viewModel = new TankDashboardViewModel();
@@ -40,7 +40,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult SiteTankSelected(TankDashboardViewModel viewModel)
         {
             if (viewModel.SiteId.HasValue && viewModel.SiteId.Value != default(Guid))
@@ -114,7 +114,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsWaterVolume(Guid tankId)
         {
             TankViewModel viewModel = new TankViewModel();
@@ -150,7 +150,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Site
 
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult Site()
         {
             SiteDashboardViewModel viewModel = new SiteDashboardViewModel();
@@ -171,7 +171,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult SiteSiteSelected(SiteDashboardViewModel viewModel)
         {
             if (viewModel.SiteId.HasValue && viewModel.SiteId != default(Guid))
@@ -294,7 +294,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Gauge
 
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult Gauge(Guid tankId)
         {
             var tank = KEUnitOfWork.TankRepository.Get(tankId);
@@ -325,7 +325,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetLastFlowMeter(Guid tankId)
         {
             FlowMeterViewModel viewModel = new FlowMeterViewModel();
@@ -363,7 +363,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsWaterVolumeByOption(Guid tankId, Int64 option)
         {
             TankViewModel viewModel = new TankViewModel();
@@ -396,7 +396,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsVoltage(Guid tankId)
         {
             VoltageViewModel viewModel = new VoltageViewModel();
@@ -425,7 +425,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsWaterAndWeatherTemperature(Guid tankId)
         {
             TemperatureViewModel viewModel = new TemperatureViewModel();
@@ -484,7 +484,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         //
         // GET: /Trigger/Delete
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult DeleteTrigger(Guid id, Guid tankId)
         {
             var trigger = KEUnitOfWork.TriggerRepository.Get(id);

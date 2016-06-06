@@ -14,7 +14,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     {
         #region Index
 
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Index()
         {
             ListViewModel viewModel = new ListViewModel();
@@ -38,7 +38,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return View("Index", viewModel);
         }
 
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult SiteSiteSelected(Guid siteId)
         {
             ListViewModel viewModel = new ListViewModel();
@@ -52,7 +52,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return View("Index", viewModel);
         }
 
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Tank(Guid tankId)
         {
             var sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndTank(CustomerId, TankId);
@@ -70,7 +70,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #region Create
 
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Create(Guid? tankId)
         {
             CreateViewModel viewModel = new CreateViewModel()
@@ -112,7 +112,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         // POST: /User/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Create(CreateViewModel viewModel)
         {
             try
@@ -189,7 +189,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #endregion Create
 
         #region Edit
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Edit(Guid id)
         {
             var sensor = KEUnitOfWork.SensorRepository.Get(id);
@@ -232,7 +232,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         // POST: /User/Update
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Edit(EditViewModel viewModel)
         {
             Sensor sensor = null;
@@ -370,7 +370,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         //
         // GET: /User/Delete
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Delete(Guid id)
         {
             var sensor = KEUnitOfWork.SensorRepository.Get(id);
@@ -393,7 +393,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #region JSON
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult GetsItemBySensorTypeId(String sensorTypeId)
         {
             List<ItemViewModel> viewModels = new List<ItemViewModel>();

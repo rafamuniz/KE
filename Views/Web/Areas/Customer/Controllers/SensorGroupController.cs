@@ -13,7 +13,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     public class SensorGroupController : BaseController
     {
         #region Index
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Index()
         {
             List<ListViewModel> viewModels = new List<ListViewModel>();
@@ -36,7 +36,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Create
 
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Create()
         {
             return View(LoadDefault());
@@ -46,7 +46,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Add
 
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Add(Guid groupId)
         {
             CreateViewModel viewModel = LoadDefault();
@@ -77,7 +77,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         // POST: /SensorGroup/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Add(CreateViewModel viewModel)
         {
             Group group = new Group();
@@ -131,7 +131,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Edit
 
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Edit(Guid id)
         {
             return RedirectToAction("Add", new { GroupId = id });
@@ -143,7 +143,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         //
         // GET: /SensorGroup/Delete
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Delete(Guid id)
         {
             var group = KEUnitOfWork.GroupRepository.Get(id);
@@ -163,7 +163,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         //
         // GET: /SensorGroup/Delete
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult DeleteSensor(Guid id)
         {
             var sensor = KEUnitOfWork.SensorGroupRepository.Get(id);
@@ -184,6 +184,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #endregion Delete
 
         [HttpGet]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult GetsTankBySiteId(Guid siteId)
         {
             var tanks = LoadTanks(CustomerId, siteId);
@@ -192,6 +193,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult GetsSensorByTankId(Guid tankId)
         {
             var sensors = LoadSensors(CustomerId, tankId);

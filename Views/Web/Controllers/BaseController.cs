@@ -261,7 +261,7 @@ namespace KarmicEnergy.Web.Controllers
             List<AdminRole> roles = new List<AdminRole>()
             {
                 new AdminRole() { Id = "Admin", Name = "Admin" },
-                new AdminRole() { Id = "Operator", Name = "Operator" }
+                new AdminRole() { Id = "User", Name = "User" }
             };
 
             ViewBag.AdminRoles = roles;
@@ -272,8 +272,9 @@ namespace KarmicEnergy.Web.Controllers
         {
             List<CustomerRole> roles = new List<CustomerRole>()
             {
-                new CustomerRole() { Id = "CustomerAdmin", Name = "Admin" },
-                new CustomerRole() { Id = "CustomerOperator", Name = "Operator" }
+                new CustomerRole() { Id = "General Manager", Name = "General Manager" },
+                new CustomerRole() { Id = "Supervisor", Name = "Supervisor" },
+                new CustomerRole() { Id = "Operator", Name = "Operator" }
             };
 
             ViewBag.CustomerRoles = roles;

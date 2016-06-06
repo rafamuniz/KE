@@ -15,7 +15,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     public class UserController : BaseController
     {
         #region Index
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Index()
         {
             List<CustomerUser> entities = KEUnitOfWork.CustomerUserRepository.GetsByCustomerId(CustomerId).ToList();
@@ -38,25 +38,23 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #endregion Index
 
         #region Create
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Create()
         {
-            LoadCustomerRoles();
             CreateViewModel viewModel = new CreateViewModel();
-            return View(viewModel);
+            return View(LoadCreate(viewModel));
         }
 
         //
         // POST: /User/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Create(CreateViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                LoadCustomerRoles();
-                return View(viewModel);
+                return View(LoadCreate(viewModel));
             }
 
             try
@@ -71,6 +69,15 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     if (result.Succeeded)
                     {
                         CustomerUser customerUser = new CustomerUser() { Id = Guid.Parse(user.Id), CustomerId = CustomerId };
+
+                        if (!IsSite)
+                        {
+                            customerUser.Sites = viewModel.MapSites();
+                        }
+                        else
+                        {
+                            customerUser.Sites.Add(new CustomerUserSite { SiteId = SiteId });
+                        }
 
                         Core.Entities.Address address = viewModel.MapAddress();
                         customerUser.Address = address;
@@ -89,19 +96,38 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 }
 
                 AddErrors(result);
-            }         
+            }
             catch (Exception ex)
             {
                 AddErrors(ex);
             }
 
+            return View(LoadCreate(viewModel));
+        }
+
+        private CreateViewModel LoadCreate(CreateViewModel viewModel)
+        {
+            if (viewModel == null)
+                viewModel = new CreateViewModel();
+
             LoadCustomerRoles();
-            return View(viewModel);
+
+            if (!IsSite)
+            {
+                List<Site> sites = LoadSites(CustomerId);
+                viewModel.Sites = SiteViewModel.Map(sites);
+            }
+            else
+            {
+                viewModel.Sites.Add(new SiteViewModel() { Id = SiteId });
+            }
+
+            return viewModel;
         }
         #endregion Create
 
         #region Edit
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Edit(Guid id)
         {
             var customerUser = KEUnitOfWork.CustomerUserRepository.Get(id);
@@ -130,7 +156,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         // POST: /User/Update
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Edit(EditViewModel viewModel)
         {
             try
@@ -198,7 +224,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         //
         // GET: /User/Delete
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Delete(Guid id)
         {
             var customerUser = KEUnitOfWork.CustomerUserRepository.Get(id);
@@ -236,7 +262,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Change Password
 
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult ChangePassword(Guid id)
         {
             ChangePasswordViewModel viewModel = new ChangePasswordViewModel() { Id = id };
@@ -245,7 +271,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel viewModel)
         {
             if (!ModelState.IsValid)

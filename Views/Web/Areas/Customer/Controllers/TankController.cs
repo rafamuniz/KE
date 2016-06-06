@@ -12,7 +12,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     public class TankController : BaseController
     {
         #region Index
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Index()
         {
             List<ListViewModel> viewModels = new List<ListViewModel>();
@@ -34,7 +34,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Create
 
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Create()
         {
             return View(InitCreate());
@@ -44,7 +44,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         // POST: /User/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Create(CreateViewModel viewModel)
         {
             try
@@ -94,7 +94,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #endregion Create
 
         #region Edit
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Edit(Guid id)
         {
             var tank = KEUnitOfWork.TankRepository.Get(id);
@@ -116,7 +116,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         // POST: /User/Update
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Edit(EditViewModel viewModel)
         {
             try
@@ -177,7 +177,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         //
         // GET: /User/Delete
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Delete(Guid id)
         {
             var tank = KEUnitOfWork.TankRepository.Get(id);
@@ -261,13 +261,13 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         //    }
         //}
 
-      
+
 
         //#endregion Dashboard
 
         #region Partial View
 
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult GetTankModelPartial()
         {
             return PartialView("_TankModel");
@@ -277,18 +277,22 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Fills
 
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult FillTank(Guid siteId)
         {
             var tanks = LoadTanks(CustomerId, siteId);
             return Json(tanks, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult GetTankInfo(Guid tankId)
         {
             var tankInfo = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tankId, ItemEnum.WaterVolume);
             return Json(tankInfo, JsonRequestBehavior.AllowGet);
         }
 
+
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult GetTankModel(String tankModelId)
         {
             var tankModel = KEUnitOfWork.TankModelRepository.Get(Int32.Parse(tankModelId));
@@ -297,6 +301,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult CalculateVolumeCapacity(TankWaterCapacityViewModel viewModel)
         {
             Tank tank = new Tank()

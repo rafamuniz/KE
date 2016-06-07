@@ -34,7 +34,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             viewModel.Sensors = sensorViewModels;
-            LoadSites(CustomerId);
+            LoadSites();
             return View("Index", viewModel);
         }
 
@@ -48,7 +48,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             List<SensorViewModel> sensorViewModels = SensorViewModel.Map(sensors);
             viewModel.SiteId = siteId;
             viewModel.Sensors = sensorViewModels;
-            LoadSites(CustomerId);
+            LoadSites();
             return View("Index", viewModel);
         }
 
@@ -95,7 +95,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             if (!IsSite)
             {
-                LoadSites(CustomerId);
+                LoadSites();
             }
             else
             {

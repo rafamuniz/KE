@@ -16,7 +16,7 @@ namespace KarmicEnergy.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Customer, CustomerAdmin, CustomerOperator")]
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsAlarm(Int32 quantity = 5)
         {
             NotificationViewModel notificationViewModel = new NotificationViewModel();

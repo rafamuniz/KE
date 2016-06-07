@@ -149,9 +149,9 @@ namespace KarmicEnergy.Web.Controllers
         }
 
         #region Log
-        protected void AddLog(String message, String type = "error")
+        protected void AddLog(String message, LogTypeEnum type = LogTypeEnum.Error)
         {
-            Log log = new Log() { Type = type, Message = message };
+            Log log = new Log() { LogTypeId = (Int16)type, Message = message };
             KEUnitOfWork.LogRepository.Add(log);
             KEUnitOfWork.Complete();
         }
@@ -362,20 +362,38 @@ namespace KarmicEnergy.Web.Controllers
 
         protected List<CustomerUser> LoadCustomerUsers(Guid customerId)
         {
-            List<CustomerUser> customerUsers = KEUnitOfWork.CustomerUserRepository.GetsByCustomerId(customerId);
+            List<CustomerUser> customerUsers = KEUnitOfWork.CustomerUserRepository.GetsByCustomer(customerId);
             return customerUsers;
         }
 
-        //protected List<Site> LoadSites()
-        //{
-        //    List<Site> sites = KEUnitOfWork.SiteRepository.GetAll().ToList();
-        //    ViewBag.Sites = sites;
-        //    return sites;
-        //}
+        protected List<Site> LoadSites()
+        {
+            List<Site> sites = new List<Site>();
+
+            if (User.IsInRole("General Manager") || User.IsInRole("Customer"))
+            {
+                sites = KEUnitOfWork.SiteRepository.GetsByCustomer(CustomerId);
+            }
+            else
+            {
+                sites = KEUnitOfWork.CustomerUserSiteRepository.GetsSiteByUser(Guid.Parse(UserId));
+            }
+
+            sites = sites.Any() ? sites.OrderBy(x => x.Name).ToList() : sites;
+            ViewBag.Sites = sites;
+            return sites;
+        }
 
         protected List<Site> LoadSites(Guid customerId)
         {
-            List<Site> sites = KEUnitOfWork.SiteRepository.GetsByCustomerId(customerId);
+            List<Site> sites = KEUnitOfWork.SiteRepository.GetsByCustomer(customerId);
+            ViewBag.Sites = sites;
+            return sites;
+        }
+
+        protected List<Site> LoadSites(Guid customerId, Guid userId)
+        {
+            List<Site> sites = KEUnitOfWork.CustomerUserSiteRepository.GetsSiteByUser(userId);
             ViewBag.Sites = sites;
             return sites;
         }

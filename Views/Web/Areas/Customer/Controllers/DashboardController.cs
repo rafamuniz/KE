@@ -19,7 +19,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             if (!IsSite)
             {
-                LoadSites(CustomerId);
+                LoadSites();
             }
             else
             {
@@ -109,7 +109,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 #endregion Tanks    
             }
 
-            LoadSites(CustomerId);
+            LoadSites();
             return View("Tanks", viewModel);
         }
 
@@ -157,7 +157,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             if (!IsSite)
             {
-                LoadSites(CustomerId);
+                LoadSites();
             }
             else // It is a site
             {
@@ -181,7 +181,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 LoadFlowMeters(viewModel);
             }
 
-            LoadSites(CustomerId);
+            LoadSites();
             return View("Site", viewModel);
         }
 

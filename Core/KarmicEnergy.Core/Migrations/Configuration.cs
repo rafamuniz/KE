@@ -18,8 +18,17 @@ namespace KarmicEnergy.Core.Migrations
         {
             try
             {
+                LogType.Load()
+                    .ForEach(e => context.LogTypes.AddOrUpdate(x => x.Id, e));
+
+                OperatorType.Load()
+                    .ForEach(e => context.OperatorTypes.AddOrUpdate(x => x.Id, e));
+
+                Operator.Load()
+                    .ForEach(e => context.Operators.AddOrUpdate(x => x.Id, e));
+
                 UnitType.Load()
-                 .ForEach(e => context.UnitTypes.AddOrUpdate(x => x.Id, e));
+                    .ForEach(e => context.UnitTypes.AddOrUpdate(x => x.Id, e));
 
                 Unit.Load()
                     .ForEach(e => context.Units.AddOrUpdate(x => x.Id, e));
@@ -47,15 +56,17 @@ namespace KarmicEnergy.Core.Migrations
                 {
                     Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
                         eve.Entry.Entity.GetType().Name, eve.Entry.State);
+
                     foreach (var ve in eve.ValidationErrors)
                     {
                         Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
                             ve.PropertyName, ve.ErrorMessage);
                     }
                 }
+
                 throw e;
-            }            
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

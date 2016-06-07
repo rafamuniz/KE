@@ -18,7 +18,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Index()
         {
-            List<CustomerUser> entities = KEUnitOfWork.CustomerUserRepository.GetsByCustomerId(CustomerId).ToList();
+            List<CustomerUser> entities = KEUnitOfWork.CustomerUserRepository.GetsByCustomer(CustomerId).ToList();
             var viewModels = ListViewModel.Map(entities);
 
             foreach (var vm in viewModels)
@@ -52,13 +52,13 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Create(CreateViewModel viewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(LoadCreate(viewModel));
-            }
-
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(LoadCreate(viewModel));
+                }
+
                 var user = new ApplicationUser { UserName = viewModel.Username, Email = viewModel.Address.Email, Name = viewModel.Name };
                 var result = await UserManager.CreateAsync(user, viewModel.Password);
 
@@ -114,7 +114,19 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             if (!IsSite)
             {
-                List<Site> sites = LoadSites(CustomerId);
+                //List<Site> sites = new List<Site>();
+
+                List<Site> sites = LoadSites();
+
+                //if (User.IsInRole("General Manager"))
+                //{
+                //    sites = LoadSites(CustomerId);
+                //}
+                //else
+                //{
+                //    sites = LoadSites(CustomerId, Guid.Parse(UserId));
+                //}
+
                 viewModel.Sites = SiteViewModel.Map(sites);
             }
             else
@@ -124,6 +136,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             return viewModel;
         }
+
         #endregion Create
 
         #region Edit
@@ -138,7 +151,6 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 return View("Index");
             }
 
-            LoadCustomerRoles();
             EditViewModel viewModel = EditViewModel.Map(customerUser);
             var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
             viewModel.Name = user.Name;
@@ -148,6 +160,29 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             // Address            
             viewModel.MapAddress(customerUser.Address);
+
+            LoadCustomerRoles();
+
+            if (!IsSite)
+            {
+                //List<Site> sites = new List<Site>();
+                List<Site> sites = LoadSites();
+
+                //if (User.IsInRole("General Manager"))
+                //{
+                //    sites = LoadSites(CustomerId);
+                //}
+                //else
+                //{
+                //    List<Site> sites = LoadSites();
+                //}
+
+                viewModel.MapSites(sites, customerUser.Sites.Where(x => x.DeletedDate == null).ToList());
+            }
+            else
+            {
+                viewModel.Sites.Add(new SiteViewModel() { Id = SiteId });
+            }
 
             return View(viewModel);
         }
@@ -194,8 +229,45 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                         {
                             Core.Entities.Address address = viewModel.MapAddressVMToEntity(customerUser.Address);
 
-                            KEUnitOfWork.AddressRepository.Update(address);
-                            //KEUnitOfWork.CustomerRepository.Update(customer);
+                            if (!IsSite)
+                            {
+                                if (viewModel.Sites.Any())
+                                {
+                                    foreach (var item in viewModel.Sites)
+                                    {
+                                        var siteItem = customerUser.Sites.Where(x => x.SiteId == item.Id && x.DeletedDate == null).SingleOrDefault();
+
+                                        if (item.IsSelected)
+                                        {
+                                            if (siteItem == null) // ADD
+                                            {
+                                                CustomerUserSite customerUserSite = new CustomerUserSite()
+                                                {
+                                                    CustomerUserId = customerUser.Id,
+                                                    SiteId = item.Id
+                                                };
+
+                                                customerUser.Sites.Add(customerUserSite);
+                                            }
+                                        }
+                                        else // DELETE
+                                        {
+                                            if (siteItem != null)
+                                            {
+                                                siteItem.DeletedDate = DateTime.UtcNow;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                customerUser.Sites.Add(new CustomerUserSite { SiteId = SiteId });
+                            }
+
+                            customerUser.Address = address;
+                            //KEUnitOfWork.AddressRepository.Update(address);
+                            KEUnitOfWork.CustomerUserRepository.Update(customerUser);
                             KEUnitOfWork.Complete();
 
                             // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -216,7 +288,28 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 AddErrors(ex);
             }
 
+            LoadCustomerRoles();
             return View(viewModel);
+        }
+
+        private EditViewModel LoadEdit(EditViewModel viewModel, CustomerUser customerUser)
+        {
+            if (viewModel == null)
+                viewModel = new EditViewModel();
+
+            LoadCustomerRoles();
+
+            if (!IsSite)
+            {
+                List<Site> sites = LoadSites();
+                viewModel.MapSites(sites, customerUser.Sites);
+            }
+            else
+            {
+                viewModel.Sites.Add(new SiteViewModel() { Id = SiteId });
+            }
+
+            return viewModel;
         }
         #endregion Edit
 

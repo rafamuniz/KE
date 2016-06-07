@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using KarmicEnergy.Web.ViewModels;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
@@ -11,6 +13,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
         public EditViewModel()
         {
             Address = new AddressViewModel();
+            Sites = new List<SiteViewModel>();
         }
 
         #endregion Constructor
@@ -28,6 +31,10 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
 
         [IgnoreMap]
         public AddressViewModel Address { get; set; }
+
+        [IgnoreMap]
+        public List<SiteViewModel> Sites { get; set; }
+
         #endregion Property
 
         #region Map
@@ -57,6 +64,54 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
             return Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address, entity);
         }
 
+        public List<SiteViewModel> MapSites(List<Core.Entities.Site> sites, IList<Core.Entities.CustomerUserSite> userSites)
+        {
+            List<SiteViewModel> viewModels = new List<SiteViewModel>();
+
+            if (sites.Any())
+            {
+                foreach (var s in sites)
+                {
+                    SiteViewModel viewModel = new SiteViewModel() { Id = s.Id, Name = s.Name };
+
+                    foreach (var us in userSites)
+                    {
+                        if (s.Id == us.SiteId)
+                        {
+                            viewModel.IsSelected = true;
+                        }
+                    }
+
+                    viewModels.Add(viewModel);
+                    this.Sites.Add(viewModel);
+                }
+            }
+
+            return viewModels;
+        }
+
+        public List<Core.Entities.CustomerUserSite> MapSites()
+        {
+            List<Core.Entities.CustomerUserSite> entities = new List<Core.Entities.CustomerUserSite>();
+
+            if (this.Sites.Any())
+            {
+                foreach (var item in this.Sites)
+                {
+                    if (item.IsSelected)
+                    {
+                        Core.Entities.CustomerUserSite entity = new Core.Entities.CustomerUserSite() { SiteId = item.Id };
+                        entities.Add(entity);
+                    }
+                }
+            }
+
+
+
+           
+
+            return entities;
+        }
         #endregion Map
     }
 }

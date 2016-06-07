@@ -52,7 +52,6 @@ namespace KarmicEnergy.Core.Persistence
 
         #region DbSet
 
-        public IDbSet<Log> Logs { get; set; }
         public IDbSet<Address> Addresses { get; set; }
         public IDbSet<Contact> Contacts { get; set; }
         public IDbSet<Customer> Customers { get; set; }
@@ -62,6 +61,7 @@ namespace KarmicEnergy.Core.Persistence
 
         public IDbSet<CustomerUser> CustomerUsers { get; set; }
         public IDbSet<CustomerUserSetting> CustomerUserSettings { get; set; }
+        public IDbSet<CustomerUserSite> CustomerUserSites { get; set; }
 
         public IDbSet<Site> Sites { get; set; }
         public IDbSet<Tank> Tanks { get; set; }
@@ -74,6 +74,9 @@ namespace KarmicEnergy.Core.Persistence
         public IDbSet<SensorGroup> SensorGroups { get; set; }
         public IDbSet<SensorItemEvent> SensorItemEvents { get; set; }
         public IDbSet<Trigger> Triggers { get; set; }
+
+        public IDbSet<Operator> Operators { get; set; }
+        public IDbSet<OperatorType> OperatorTypes { get; set; }
 
         public IDbSet<TriggerContact> TriggerContacts { get; set; }
 
@@ -90,6 +93,9 @@ namespace KarmicEnergy.Core.Persistence
         public IDbSet<StickConversion> StickConversions { get; set; }
 
         public IDbSet<StickConversionValue> StickConversionValues { get; set; }
+        
+        public IDbSet<Log> Logs { get; set; }
+        public IDbSet<LogType> LogTypes { get; set; }
         #endregion DbSet
     }
 }

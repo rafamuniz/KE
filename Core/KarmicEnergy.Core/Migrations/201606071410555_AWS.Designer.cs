@@ -7,13 +7,13 @@ namespace KarmicEnergy.Core.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Dev : IMigrationMetadata
+    public sealed partial class AWS : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Dev));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AWS));
         
         string IMigrationMetadata.Id
         {
-            get { return "201606061521448_Dev"; }
+            get { return "201606071410555_AWS"; }
         }
         
         string IMigrationMetadata.Source

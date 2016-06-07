@@ -22,19 +22,29 @@ namespace KarmicEnergy.Core.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        [Column("Type", TypeName = "NVARCHAR")]
-        [StringLength(16)]
-        public String Type { get; set; }
-
         [Column("Message", TypeName = "NVARCHAR")]
         public String Message { get; set; }
 
         [Column("CustomerId", TypeName = "UNIQUEIDENTIFIER")]
-        public Guid CustomerId { get; set; }
+        public Guid? CustomerId { get; set; }
 
         [Column("UserId", TypeName = "UNIQUEIDENTIFIER")]
-        public Guid UserId { get; set; }
+        public Guid? UserId { get; set; }
+
+        [Column("SiteId", TypeName = "UNIQUEIDENTIFIER")]
+        public Guid? SiteId { get; set; }
 
         #endregion Property
+
+        #region LogType
+
+        [Column("LogTypeId", TypeName = "SMALLINT")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public Int16 LogTypeId { get; set; } = (Int16)LogTypeEnum.Info;
+
+        [ForeignKey("LogTypeId")]
+        public virtual LogType LogType { get; set; }
+
+        #endregion LogType
     }
 }

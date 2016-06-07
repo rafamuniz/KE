@@ -18,8 +18,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             ListViewModel viewModel = new ListViewModel();
 
             if (!IsSite)
-            {
-                LoadSites(CustomerId);
+            {                
+                LoadSites();
             }
             else
             {
@@ -43,7 +43,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 LoadTanksWithWaterVolume(viewModel);
             }
 
-            LoadSites(CustomerId);
+            LoadSites();
             return View("Index", viewModel);
         }
 

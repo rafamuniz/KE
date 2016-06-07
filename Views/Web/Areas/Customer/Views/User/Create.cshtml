@@ -1,5 +1,6 @@
 ﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.User
 @using Munizoft.Extensions
+@using KarmicEnergy.Web.Extensions
 
 @model CreateViewModel
 
@@ -49,7 +50,7 @@
                 </div>
             </div>
 
-            @if (Model.Sites.Any())
+            @if (Model.Sites.Any() && !this.IsSite())
             {
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 box-sub">
                     <div class="title blue">
@@ -70,7 +71,7 @@
                         }
                     </div>
                 </div>
-            }
+            }           
         </div>
 
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">

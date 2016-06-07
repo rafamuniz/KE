@@ -15,7 +15,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Index()
         {
-            List<Site> entities = KEUnitOfWork.SiteRepository.GetsByCustomerId(CustomerId).ToList();
+            List<Site> entities = LoadSites();
             var viewModels = ListViewModel.Map(entities);
             return View(viewModels);
         }

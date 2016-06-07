@@ -71,6 +71,9 @@
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\CustomerUserSite.cs" />
+    <Compile Include="Entities\LogType.cs" />
+    <Compile Include="Entities\OperatorType.cs" />
+    <Compile Include="Entities\Operator.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\CustomerUserSetting.cs" />
     <Compile Include="Entities\CustomerSetting.cs" />
@@ -100,9 +103,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\v1.0.cs" />
-    <Compile Include="Migrations\v1.0.Designer.cs">
-      <DependentUpon>v1.0.cs</DependentUpon>
+    <Compile Include="Migrations\201606071410555_AWS.cs" />
+    <Compile Include="Migrations\201606071410555_AWS.Designer.cs">
+      <DependentUpon>201606071410555_AWS.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
@@ -113,6 +116,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\AlarmHistoryRepository.cs" />
+    <Compile Include="Repositories\CustomerUserSiteRepository.cs" />
+    <Compile Include="Repositories\Interface\ICustomerUserSiteRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\Interface\IAlarmHistoryRepository.cs" />
     <Compile Include="Repositories\Interface\IUserRepository.cs" />
@@ -154,7 +159,7 @@
     <Compile Include="Repositories\Interface\ITankModelRepository.cs" />
     <Compile Include="Repositories\Interface\ISensorRepository.cs" />
     <Compile Include="Repositories\Interface\ITankRepository.cs" />
-    <Compile Include="Repositories\SensorAlarmRepository.cs" />
+    <Compile Include="Repositories\TriggerRepository.cs" />
     <Compile Include="Repositories\SensorTypeRepository.cs" />
     <Compile Include="Repositories\TankModelRepository.cs" />
     <Compile Include="Repositories\SensorRepository.cs" />
@@ -171,8 +176,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\v1.0.resx">
-      <DependentUpon>v1.0.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606071410555_AWS.resx">
+      <DependentUpon>201606071410555_AWS.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

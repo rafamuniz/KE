@@ -6,6 +6,6 @@ namespace KarmicEnergy.Core.Repositories
 {
     public interface ISiteRepository : IKERepositoryBase<Site>
     {
-        List<Site> GetsByCustomerId(Guid customerId);
+        List<Site> GetsByCustomer(Guid customerId);
     }
 }

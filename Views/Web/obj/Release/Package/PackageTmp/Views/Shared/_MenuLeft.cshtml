@@ -19,7 +19,7 @@
         </li>
     }
 
-    @if (this.HasRoles("SuperAdmin", "Admin", "Operator"))
+    @if (this.HasRoles("SuperAdmin", "Admin", "User"))
     {
         <li class="treeview @Html.MenuItemActive("TankModel", "Admin")">
             <a href="/Admin/TankModel">
@@ -36,7 +36,7 @@
         </li>
     }
 
-    @if (this.HasRoles("Customer", "CustomerAdmin"))
+    @if (this.HasRoles("Customer", "General Manager", "Supervisor"))
     {
         <li class='treeview @Html.MenuItemActive("User", "Customer")'>
             <a href="/Customer/User">
@@ -84,7 +84,7 @@
         </li>
     }
 
-    @if (this.HasRoles("Customer", "CustomerAdmin", "CustomerOperator"))
+    @if (this.HasRoles("Customer", "General Manager", "Supervisor", "Operator"))
     {
         <li class="treeview @Html.MenuItemActive("Dashboard", "Site", "Customer")">
             <a href="/Customer/Dashboard/Site">

@@ -16,7 +16,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         //public ActionResult Index()
         //{
         //    ListViewModel viewModel = new ListViewModel();
-        //    LoadSites(CustomerId);
+        //    LoadSites();
         //    return View(viewModel);
         //}
 
@@ -88,7 +88,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         //        }
         //    }
 
-        //    LoadSites(CustomerId);
+        //    LoadSites();
         //    return View("Index", viewModel);
         //}
     }

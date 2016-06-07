@@ -16,7 +16,7 @@ namespace KarmicEnergy.Core.Repositories
         }
         #endregion Constructor
 
-        public List<CustomerUser> GetsByCustomerId(Guid customerId)
+        public List<CustomerUser> GetsByCustomer(Guid customerId)
         {
             return base.Find(x => x.CustomerId == customerId).ToList();
         }

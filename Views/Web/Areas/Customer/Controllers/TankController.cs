@@ -77,7 +77,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             if (!IsSite)
             {
-                LoadSites(CustomerId);
+                LoadSites();
             }
             else
             {
@@ -158,7 +158,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             if (!IsSite)
             {
-                LoadSites(CustomerId);
+                LoadSites();
             }
             else
             {

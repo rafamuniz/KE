@@ -3,8 +3,6 @@ using KarmicEnergy.Core.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Data.Linq;
-//using System.Data.Entity;
 
 namespace KarmicEnergy.Core.Repositories
 {
@@ -16,7 +14,8 @@ namespace KarmicEnergy.Core.Repositories
         {
 
         }
-        #endregion Constructor    
+        #endregion Constructor 
+
         public List<Alarm> GetsActive()
         {
             return base.Find(x => x.EndDate == null).ToList();
@@ -37,12 +36,17 @@ namespace KarmicEnergy.Core.Repositories
 
         public List<Alarm> GetsActiveBySite(Guid siteId)
         {
-            return base.Find(x => x.Trigger.SensorItem.Sensor.Tank.SiteId == siteId && x.EndDate == null).ToList();
+            return base.Find(x => x.Trigger.SensorItem.Sensor.SiteId == siteId && x.Trigger.SensorItem.Sensor.Tank == null && x.EndDate == null).ToList();
+        }
+
+        public List<Alarm> GetsActiveByTank(Guid tankId)
+        {
+            return base.Find(x => x.Trigger.SensorItem.Sensor.TankId == tankId && x.EndDate == null).ToList();
         }
 
         public List<Alarm> GetsBySite(Guid siteId)
         {
-            return base.Find(x => x.Trigger.SensorItem.Sensor.Tank.SiteId == siteId && x.EndDate == null).ToList();
+            return base.Find(x => x.Trigger.SensorItem.Sensor.SiteId == siteId && x.Trigger.SensorItem.Sensor.Tank == null).ToList();
         }
 
         public List<Alarm> GetsByTank(Guid tankId)

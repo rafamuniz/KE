@@ -26,10 +26,11 @@ namespace KarmicEnergy.Core.Entities
         {
             List<Severity> entities = new List<Severity>()
             {
+                new Severity() { Id = (Int16)SeverityEnum.Info, Name = "Info" },
                 new Severity() { Id = (Int16)SeverityEnum.Low, Name = "Low" },
                 new Severity() { Id = (Int16)SeverityEnum.Medium, Name = "Medium" },
+                new Severity() { Id = (Int16)SeverityEnum.High, Name = "High" },
                 new Severity() { Id = (Int16)SeverityEnum.Critical, Name = "Critical" },
-                new Severity() { Id = (Int16)SeverityEnum.Info, Name = "Info" },
             };
 
             return entities;
@@ -39,9 +40,10 @@ namespace KarmicEnergy.Core.Entities
 
     public enum SeverityEnum : short
     {
-        Low = 1,
-        Medium = 2,
-        Critical = 3,
-        Info = 4,
+        Info = 1,
+        Low = 2,
+        Medium = 3,
+        High = 4,
+        Critical = 5,
     }
 }

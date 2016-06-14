@@ -128,8 +128,9 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
         public Boolean HasAlarmMedium { get; set; }
         public Boolean HasAlarmLow { get; set; }
 
-        public String Color { get; set; }
-
+        //tankViewModel.HasAlarmHigh = alarms.Where(x => x.Trigger.SeverityId == (Int16)SeverityEnum.Critical).Any();
+        //tankViewModel.HasAlarmMedium = alarms.Where(x => x.Trigger.SeverityId == (Int16)SeverityEnum.Medium).Any();
+        //tankViewModel.HasAlarmLow = alarms.Where(x => x.Trigger.SeverityId == (Int16)SeverityEnum.Low).Any();
 
         public List<WaterVolumeViewModel> WaterVolumes { get; set; }
 

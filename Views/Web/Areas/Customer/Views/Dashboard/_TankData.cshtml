@@ -4,11 +4,11 @@
 
 <div class="tank-dashboard">
     @Html.HiddenFor(m => m.Id)
-    <div class="title @Model.Color-light">
+    <div class="title blue-light">
         <h3>@Model.Name</h3>
     </div>
 
-    <div class="details @Model.Color">
+    <div class="details blue">
         @{
             String waterVolumeLastMeasurement = @Model.WaterVolumeLastEventDate.HasValue ? @Model.WaterVolumeLastEventDate.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : String.Empty;
         }

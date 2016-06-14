@@ -92,8 +92,11 @@
 
     @RenderSection("scripts", required: false)
 
-    <script type="text/javascript">
-        showNotications();
-    </script>
+    @if (this.HasRoles("Customer", "CustomerAdmin", "CustomerOperator"))
+    {
+        <script type="text/javascript">
+            showNotications();
+        </script>
+    }
 </body>
 </html>

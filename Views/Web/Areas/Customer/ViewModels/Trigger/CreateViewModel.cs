@@ -19,13 +19,10 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
 
         #region Property
 
-        [Display(Name = "Min Value")]
-        [MaxLength(256)]
-        public String MinValue { get; set; }
-
-        [Display(Name = "Max Value")]
-        [MaxLength(256)]
-        public String MaxValue { get; set; }
+        [Display(Name = "Value")]
+        [MaxLength(20)]
+        [Required]
+        public String Value { get; set; }
 
         [Display(Name = "Status")]
         [DefaultValue("A")]
@@ -37,7 +34,6 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
         public Guid? SiteId { get; set; }
 
         [Display(Name = "Tank")]
-        [Required]
         public Guid? TankId { get; set; }
 
         [Display(Name = "Sensor")]
@@ -50,7 +46,11 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
 
         [Display(Name = "Severity")]
         [Required]
-        public Int16? SeverityId { get; set; }
+        public Int16 SeverityId { get; set; }
+
+        [Display(Name = "Operator")]
+        [Required]
+        public Int16 OperatorId { get; set; }
 
         public IList<ContactViewModel> Contacts { get; set; }
 

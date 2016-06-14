@@ -44,8 +44,8 @@ namespace KarmicEnergy.Core.Entities
         {
             List<Operator> entities = new List<Operator>()
             {
-                new Operator() { Id = 1, Symbol = "==", OperatorTypeId = (Int16)OperatorTypeEnum.Relational, Name = "Equal", Description = "Checks if the values of two operands are equal or not, if yes then condition becomes true." },
-                new Operator() { Id = 2, Symbol = "!=", OperatorTypeId = (Int16)OperatorTypeEnum.Relational, Name = "Not Equal", Description = "Checks if the values of two operands are equal or not, if values are not equal then condition becomes true." },
+                new Operator() { Id = 1, Symbol = "=", OperatorTypeId = (Int16)OperatorTypeEnum.Relational, Name = "Equal", Description = "Checks if the values of two operands are equal or not, if yes then condition becomes true." },
+                new Operator() { Id = 2, Symbol = "<>", OperatorTypeId = (Int16)OperatorTypeEnum.Relational, Name = "Not Equal", Description = "Checks if the values of two operands are equal or not, if values are not equal then condition becomes true." },
                 new Operator() { Id = 3, Symbol = ">", OperatorTypeId = (Int16)OperatorTypeEnum.Relational, Name = "Greater than", Description = "Checks if the value of left operand is greater than the value of right operand, if yes then condition becomes true." },
                 new Operator() { Id = 4, Symbol = "<", OperatorTypeId = (Int16)OperatorTypeEnum.Relational, Name = "Less than", Description = "Checks if the value of left operand is less than the value of right operand, if yes then condition becomes true." },
                 new Operator() { Id = 5, Symbol = ">=", OperatorTypeId = (Int16)OperatorTypeEnum.Relational, Name = "Greater than or Equal", Description = "Checks if the value of left operand is greater than or equal to the value of right operand, if yes then condition becomes true." },

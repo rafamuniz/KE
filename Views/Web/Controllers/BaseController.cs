@@ -311,6 +311,13 @@ namespace KarmicEnergy.Web.Controllers
         //    return imagesSelect;
         //}
 
+        protected List<Operator> LoadOperators(OperatorTypeEnum type)
+        {
+            List<Operator> operators = KEUnitOfWork.OperatorRepository.GetsByOperatorType(type).ToList();
+            ViewBag.Operators = operators;
+            return operators;
+        }
+
         protected List<Severity> LoadSeverities()
         {
             List<Severity> severities = KEUnitOfWork.SeverityRepository.GetAllActive().ToList();

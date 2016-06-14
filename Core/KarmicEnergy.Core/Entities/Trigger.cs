@@ -22,13 +22,17 @@ namespace KarmicEnergy.Core.Entities
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        [Column("MinValue", TypeName = "NVARCHAR")]
+        [Column("Value", TypeName = "NVARCHAR")]
         [StringLength(256)]
-        public String MinValue { get; set; }
+        public String Value { get; set; }
 
-        [Column("MaxValue", TypeName = "NVARCHAR")]
-        [StringLength(256)]
-        public String MaxValue { get; set; }
+        //[Column("MinValue", TypeName = "NVARCHAR")]
+        //[StringLength(256)]
+        //public String MinValue { get; set; }
+
+        //[Column("MaxValue", TypeName = "NVARCHAR")]
+        //[StringLength(256)]
+        //public String MaxValue { get; set; }
 
         [Column("Status", TypeName = "CHAR")]
         [StringLength(1)]
@@ -64,5 +68,69 @@ namespace KarmicEnergy.Core.Entities
         public virtual List<TriggerContact> Contacts { get; set; }
 
         #endregion Contacts  
+
+        #region Operator
+
+        [Column("OperatorId", TypeName = "SMALLINT")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public Int16 OperatorId { get; set; }
+
+        [ForeignKey("OperatorId")]
+        public virtual Operator Operator { get; set; }
+
+        #endregion Operator
+
+        public Boolean IsAlarm(String value)
+        {
+            Decimal eventValue;
+
+            if (Decimal.TryParse(value, out eventValue))
+            {
+                throw new ArgumentException("Event Value invalid");
+            }
+
+            Decimal triggerValue;
+
+            if (!Decimal.TryParse(this.Value, out triggerValue))
+            {
+                throw new ArgumentException("Value invalid");
+            }
+
+            switch (this.Operator.Symbol)
+            {
+                case "=":
+                    if (eventValue == triggerValue)
+                        return true;
+                    else
+                        return false;
+                case "<>":
+                    if (eventValue != triggerValue)
+                        return true;
+                    else
+                        return false;
+                case ">":
+                    if (eventValue > triggerValue)
+                        return true;
+                    else
+                        return false;
+                case "<":
+                    if (eventValue < triggerValue)
+                        return true;
+                    else
+                        return false;
+                case ">=":
+                    if (eventValue >= triggerValue)
+                        return true;
+                    else
+                        return false;
+                case "<=":
+                    if (eventValue <= triggerValue)
+                        return true;
+                    else
+                        return false;
+                default:
+                    throw new ArgumentException("Value wrong");
+            }
+        }
     }
 }

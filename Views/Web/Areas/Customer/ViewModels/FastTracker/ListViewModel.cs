@@ -10,36 +10,54 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
         #region Constructor
         public ListViewModel()
         {
-            Tanks = new List<TankWithWaterVolume>();
+            Tanks = new List<TankViewModel>();            
+            FlowMeters = new List<FlowMeterViewModel>();
+            Alarms = new List<AlarmViewModel>();
         }
         #endregion Constructor
 
         #region Property
 
-        public Guid SiteId { get; set; }
-                
-        public List<TankWithWaterVolume> Tanks { get; set; }
+        public Guid? SiteId { get; set; }
+
+        public String IPAddress { get; set; }
+
+        public String Latitude { get; set; }
+
+        public String Longitude { get; set; }
+
+        public List<TankViewModel> Tanks { get; set; }
+
+        public List<FlowMeterViewModel> FlowMeters { get; set; }
+
+        public List<AlarmViewModel> Alarms { get; set; }
 
         #endregion Property
 
         #region Map
 
-        public static List<ListViewModel> Map(List<Core.Entities.Tank> entities)
+        //public static List<ListViewModel> Map(List<Core.Entities.Tank> entities)
+        //{
+        //    List<ListViewModel> vms = new List<ListViewModel>();
+
+        //    if (entities != null && entities.Any())
+        //    {
+        //        entities.ForEach(c => vms.Add(ListViewModel.Map(c)));
+        //    }
+
+        //    return vms;
+        //}
+
+        //public static ListViewModel Map(Core.Entities.Site entity)
+        //{
+        //    Mapper.CreateMap<Core.Entities.Site, ListViewModel>();
+        //    return Mapper.Map<Core.Entities.Site, ListViewModel>(entity);
+        //}
+
+        public ListViewModel Map(Core.Entities.Site entity)
         {
-            List<ListViewModel> vms = new List<ListViewModel>();
-
-            if (entities != null && entities.Any())
-            {
-                entities.ForEach(c => vms.Add(ListViewModel.Map(c)));
-            }
-
-            return vms;
-        }
-
-        public static ListViewModel Map(Core.Entities.Tank entity)
-        {
-            Mapper.CreateMap<Core.Entities.Tank, ListViewModel>();
-            return Mapper.Map<Core.Entities.Tank, ListViewModel>(entity);
+            Mapper.CreateMap<Core.Entities.Site, ListViewModel>();
+            return Mapper.Map<Core.Entities.Site, ListViewModel>(entity);
         }
 
         #endregion Map

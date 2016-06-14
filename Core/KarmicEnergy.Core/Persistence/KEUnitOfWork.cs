@@ -33,6 +33,10 @@ namespace KarmicEnergy.Core.Persistence
         private IItemRepository _ItemRepository;
 
         private ITriggerRepository _TriggerRepository;
+        private IOperatorRepository _OperatorRepository;
+        private IOperatorTypeRepository _OperatorTypeRepository;
+
+
         private IAlarmRepository _AlarmRepository;
         private IAlarmHistoryRepository _AlarmHistoryRepository;
 
@@ -181,6 +185,16 @@ namespace KarmicEnergy.Core.Persistence
         public ITriggerRepository TriggerRepository
         {
             get { return _TriggerRepository ?? (_TriggerRepository = new TriggerRepository(_context)); }
+        }
+
+        public IOperatorRepository OperatorRepository
+        {
+            get { return _OperatorRepository ?? (_OperatorRepository = new OperatorRepository(_context)); }
+        }
+
+        public IOperatorTypeRepository OperatorTypeRepository
+        {
+            get { return _OperatorTypeRepository ?? (_OperatorTypeRepository = new OperatorTypeRepository(_context)); }
         }
 
         public IAlarmRepository AlarmRepository

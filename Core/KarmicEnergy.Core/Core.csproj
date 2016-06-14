@@ -103,9 +103,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201606071410555_AWS.cs" />
-    <Compile Include="Migrations\201606071410555_AWS.Designer.cs">
-      <DependentUpon>201606071410555_AWS.cs</DependentUpon>
+    <Compile Include="Migrations\201606091328117_Dev.cs" />
+    <Compile Include="Migrations\201606091328117_Dev.Designer.cs">
+      <DependentUpon>201606091328117_Dev.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
@@ -118,6 +118,10 @@
     <Compile Include="Repositories\AlarmHistoryRepository.cs" />
     <Compile Include="Repositories\CustomerUserSiteRepository.cs" />
     <Compile Include="Repositories\Interface\ICustomerUserSiteRepository.cs" />
+    <Compile Include="Repositories\Interface\IOperatorTypeRepository.cs" />
+    <Compile Include="Repositories\Interface\IOperatorRepository.cs" />
+    <Compile Include="Repositories\OperatorTypeRepository.cs" />
+    <Compile Include="Repositories\OperatorRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\Interface\IAlarmHistoryRepository.cs" />
     <Compile Include="Repositories\Interface\IUserRepository.cs" />
@@ -176,8 +180,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606071410555_AWS.resx">
-      <DependentUpon>201606071410555_AWS.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606091328117_Dev.resx">
+      <DependentUpon>201606091328117_Dev.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

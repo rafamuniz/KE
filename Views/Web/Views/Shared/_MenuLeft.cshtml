@@ -82,11 +82,18 @@
                 <p>SENSOR GROUP</p>
             </a>
         </li>
+
+        <li class="treeview @Html.MenuItemActive("Trigger", "Customer")">
+            <a href="/Customer/Trigger">
+                <img src="/images/fast_track.png" alt="Trigger" title="Trigger">
+                <p>TRIGGER</p>
+            </a>
+        </li>
     }
 
     @if (this.HasRoles("Customer", "General Manager", "Supervisor", "Operator"))
     {
-        <li class="treeview @Html.MenuItemActive("Dashboard", "Site", "Customer")">
+        @*<li class="treeview @Html.MenuItemActive("Dashboard", "Site", "Customer")">
             <a href="/Customer/Dashboard/Site">
                 <img src="/images/dashboard.png" alt="dashboard" title="dashboard">
                 <p>SITE DASHBOARD</p>
@@ -98,7 +105,7 @@
                 <img src="/images/dashboard.png" alt="dashboard" title="dashboard">
                 <p>TANK DASHBOARD</p>
             </a>
-        </li>
+        </li>*@
 
         <li class="treeview @Html.MenuItemActive("FastTracker", "Customer")">
             <a href="/Customer/FastTracker">
@@ -110,7 +117,7 @@
         <li class="treeview @Html.MenuItemActive("Monitoring", "Customer")">
             <a href="/Customer/Monitoring">
                 <img src="/images/fast_track.png" alt="Monitoring" title="Monitoring">
-                <p>MONITORING</p>
+                <p>ALARMS</p>
             </a>
         </li>
 

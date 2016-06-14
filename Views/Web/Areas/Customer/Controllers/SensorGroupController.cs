@@ -50,7 +50,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult Add(Guid groupId)
         {
             CreateViewModel viewModel = LoadDefault();
+            var group = KEUnitOfWork.GroupRepository.Find(x => x.Id == groupId).Single();
             var sensorGroups = KEUnitOfWork.SensorGroupRepository.Find(x => x.GroupId == groupId).ToList();
+
+            viewModel.SiteId = group.SiteId;
             viewModel.Sensors = SensorGroupViewModel.Map(sensorGroups);
 
             return View("Create", viewModel);
@@ -93,6 +96,11 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 if (viewModel.GroupId.HasValue) // Update Group
                 {
                     group = KEUnitOfWork.GroupRepository.Get(viewModel.GroupId.Value);
+                }
+
+                if (!IsSite)
+                {
+                    group.SiteId = viewModel.SiteId.Value;
                 }
                 else
                 {

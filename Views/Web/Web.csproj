@@ -279,9 +279,10 @@
     <Compile Include="Areas\Customer\Controllers\ContactController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
     <Compile Include="Areas\Customer\ViewModels\Dashboard\AlarmViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\FastTracker\AlarmViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\FastTracker\FlowMeterViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\FastTracker\TankWithWaterVolume.cs" />
+    <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\GroupViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\ListViewModel.cs" />
@@ -314,6 +315,7 @@
     <Compile Include="Areas\Customer\ViewModels\Contact\EditViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Contact\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Tank\TankWaterCapacityViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Trigger\EditViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\CustomerUserViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\UserViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\CreateViewModel.cs" />
@@ -1537,6 +1539,9 @@
     <Content Include="Areas\Customer\Views\Trigger\Create.cshtml" />
     <Content Include="Areas\Customer\Views\Dashboard\Site.cshtml" />
     <Content Include="Areas\Customer\Views\Sensor\Site.cshtml" />
+    <Content Include="Areas\Customer\Views\Trigger\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Trigger\Edit.cshtml" />
+    <Content Include="Areas\Customer\Views\FastTracker\FastTracker.cshtml" />
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Properties\PublishProfiles\ClickOnce.pubxml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />

@@ -26,7 +26,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
             else
             {
-                var triggers = KEUnitOfWork.TriggerRepository.GetAll().ToList();
+                var triggers = KEUnitOfWork.TriggerRepository.GetsBySite(SiteId).ToList();
                 viewModels = ListViewModel.Map(triggers);
             }
 
@@ -53,38 +53,24 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    //, new { TankId = viewModel.TankId.Value };
                     return View(await InitCreate(viewModel));
                 }
 
                 Decimal min, max;
 
-                if (!Decimal.TryParse(viewModel.MinValue, out min))
+                if (!Decimal.TryParse(viewModel.Value, out min))
                 {
-                    AddErrors("Min value must be a decimal number");
-                    return View(await InitCreate(viewModel));
-                }
-
-                if (!Decimal.TryParse(viewModel.MaxValue, out max))
-                {
-                    AddErrors("Max value must be a decimal number");
-                    return View(await InitCreate(viewModel));
-                }
-
-                if (min > max ||
-                    min == max)
-                {
-                    AddErrors("Max value must be greater than Min value");
+                    AddErrors("Value must be a decimal number");
                     return View(await InitCreate(viewModel));
                 }
 
                 Trigger trigger = new Trigger()
                 {
                     Status = viewModel.Status,
-                    SeverityId = viewModel.SeverityId.Value,
+                    SeverityId = viewModel.SeverityId,
+                    OperatorId = viewModel.OperatorId,
                     SensorItemId = viewModel.SensorItemId.Value,
-                    MinValue = viewModel.MinValue,
-                    MaxValue = viewModel.MaxValue
+                    Value = viewModel.Value,
                 };
 
                 trigger.Contacts.AddRange(viewModel.Contacts.Where(x => x.IsSelected == true).Select(s => new TriggerContact() { ContactId = s.Id }).ToList());
@@ -93,7 +79,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.TriggerRepository.Add(trigger);
                 KEUnitOfWork.Complete();
 
-                return RedirectToAction("Gauge", "Tank", new { area = "Customer", tankId = viewModel.TankId });
+                //return RedirectToAction("Gauge", "Tank", new { area = "Customer", tankId = viewModel.TankId });
+                return RedirectToAction("Index", "Trigger");
             }
             catch (Exception ex)
             {
@@ -173,6 +160,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 }
             }
 
+            LoadOperators(OperatorTypeEnum.Relational);
             LoadSeverities();
             LoadStatuses();
 
@@ -180,6 +168,147 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         #endregion Create
+
+        #region Edit
+
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
+        public async Task<ActionResult> Edit(Guid id)
+        {
+            var trigger = KEUnitOfWork.TriggerRepository.Get(id);
+
+            if (trigger == null)
+            {
+                AddErrors("Trigger does not exist");
+                return View("Index");
+            }
+
+            EditViewModel viewModel = new EditViewModel();
+
+            return View(await InitEdit(viewModel, trigger));
+        }
+
+        //
+        // POST: /Trigger/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
+        public async Task<ActionResult> Edit(EditViewModel viewModel)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(await InitEdit(viewModel, null));
+                }
+
+                Decimal value = 0;
+                if (!Decimal.TryParse(viewModel.Value, out value))
+                {
+                    AddErrors("Value must be a decimal number");
+                    return View(await InitEdit(viewModel, null));
+                }
+
+                KEUnitOfWork.TriggerRepository.Get(viewModel.Id);
+                Trigger trigger = new Trigger()
+                {
+                    Status = viewModel.Status,
+                    SeverityId = viewModel.SeverityId,
+                    OperatorId = viewModel.OperatorId,
+                    SensorItemId = viewModel.SensorItemId.Value,
+                    Value = viewModel.Value,
+                };
+
+                trigger.Contacts.AddRange(viewModel.Contacts.Where(x => x.IsSelected == true).Select(s => new TriggerContact() { ContactId = s.Id }).ToList());
+                trigger.Contacts.AddRange(viewModel.Users.Where(x => x.IsSelected == true).Select(s => new TriggerContact() { UserId = s.Id }).ToList());
+
+                KEUnitOfWork.TriggerRepository.Update(trigger);
+                KEUnitOfWork.Complete();
+
+                return RedirectToAction("Index", "Trigger");
+            }
+            catch (Exception ex)
+            {
+                AddErrors(ex);
+            }
+
+            return View(await InitEdit(viewModel, null));
+        }
+
+        private async Task<EditViewModel> InitEdit(EditViewModel viewModel, Trigger trigger)
+        {
+            List<ContactViewModel> contactVM = null;
+            List<UserViewModel> userVM = null;
+
+            if (viewModel == null)
+            {
+                viewModel = new EditViewModel();
+            }
+            else
+            {
+                contactVM = viewModel.Contacts.ToList();
+                userVM = viewModel.Users.ToList();
+            }
+
+            if (!IsSite)
+            {
+                LoadSites();
+            }
+            else
+            {
+                viewModel.SiteId = SiteId;
+                LoadTanks(CustomerId, SiteId);
+            }
+
+            if (viewModel.TankId.HasValue)
+            {
+                LoadSensors(CustomerId, viewModel.TankId.Value);
+            }
+
+            List<Contact> contacts = LoadContacts(CustomerId);
+            List<ContactViewModel> contactViewModels = ContactViewModel.Map(contacts);
+            viewModel.Contacts = contactViewModels;
+
+            List<CustomerUser> customerUsers = LoadCustomerUsers(CustomerId);
+            List<UserViewModel> customerUserViewModels = UserViewModel.Map(customerUsers);
+
+            foreach (var cuvm in customerUserViewModels)
+            {
+                var id = cuvm.Id.ToString();
+                ApplicationUser user = await UserManager.FindByIdAsync(id);
+                cuvm.Name = user.Name;
+            }
+
+            viewModel.Users = customerUserViewModels;
+
+            if (viewModel.SensorItemId.HasValue)
+            {
+                LoadSensorItems(viewModel.SensorId.Value);
+            }
+
+            if (viewModel.Contacts.Any() && contactVM != null)
+            {
+                foreach (var contact in contactVM.Where(x => x.IsSelected == true))
+                {
+                    viewModel.Contacts.Where(x => x.Id == contact.Id).Single().IsSelected = true;
+                }
+            }
+
+            if (viewModel.Users.Any() && userVM != null)
+            {
+                foreach (var user in userVM.Where(x => x.IsSelected == true))
+                {
+                    viewModel.Users.Where(x => x.Id == user.Id).Single().IsSelected = true;
+                }
+            }
+
+            LoadOperators(OperatorTypeEnum.Relational);
+            LoadSeverities();
+            LoadStatuses();
+
+            return viewModel;
+        }
+
+        #endregion Edit
 
         #region Delete
         //

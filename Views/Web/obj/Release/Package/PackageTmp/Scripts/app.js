@@ -801,5 +801,5 @@ function showNotications() {
 
     setTimeout(function () {
         showNotications();
-    }, 30000);
+    }, 60000);
 }

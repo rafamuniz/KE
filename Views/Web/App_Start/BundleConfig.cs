@@ -9,9 +9,6 @@ namespace KarmicEnergy.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             #region Scripts
-            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                      "~/Scripts/angular/angular.min.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 

@@ -51,7 +51,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         private void LoadSite(ListViewModel viewModel)
         {
             var site = KEUnitOfWork.SiteRepository.Get(viewModel.SiteId.Value);
-            viewModel.Map(site);
+            viewModel.Longitude = site.Longitude;
+            viewModel.Latitude = site.Latitude;
         }
 
         private void LoadTanks(ListViewModel viewModel)

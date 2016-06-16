@@ -52,7 +52,8 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
 
             viewModel.ItemId = entity.Trigger.SensorItem.Item.Id;
             viewModel.ItemName = entity.Trigger.SensorItem.Item.Name;
-                        
+            viewModel.SeverityId = entity.Trigger.SeverityId;
+
             return viewModel;
         }
 

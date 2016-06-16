@@ -26,7 +26,8 @@ function showTankModel(tankModel, tank) {
 
         $('#divtankModel').visible();
 
-        var image_url = getUrlBase() + '/images/tankmodels/' + tankModel.Id + '/' + ReplaceAll(tankModel.ImageFilename, "{info}", "measure");
+        var imageTankModel = ReplaceAll(tankModel.ImageFilename, "-{color}", "");
+        var image_url = getUrlBase() + '/images/tankmodels/' + tankModel.Id + '/' + ReplaceAll(imageTankModel, "{info}", "measure");
         $('#imgTankModel').attr('src', image_url);
         $('#imgTankModel').removeAttr('style');
 

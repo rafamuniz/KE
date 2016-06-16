@@ -8,117 +8,186 @@
     ViewBag.Title = "Fast Tracker";
 }
 
-@Scripts.Render("~/bundles/jqueryui")
 @Scripts.Render("~/bundles/moment")
+@Scripts.Render("~/bundles/jqueryui")
 
 <script src="~/Scripts/app/utils.js"></script>
 <script src="~/Scripts/highcharts/highcharts.js"></script>
 <script src="~/Scripts/highcharts/highcharts-3d.js"></script>
-<script src="~/Scripts/app/fasttracker.js"></script>
+<script src="~/Scripts/highcharts/highcharts-more.js"></script>
+<script src="~/Scripts/app/dashboard.js"></script>
 
-@if (!this.IsSite())
-{
-    <div class="row" style="margin-bottom: 20px;">
-        <div class="form-group">
-            <div class="col-md-12">
-                @using (Html.BeginForm("Site", "FastTracker", new { }, FormMethod.Post, new { }))
+<div class="row">
+    @if (!this.IsSite())
+    {
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-back">
+                @using (Html.BeginForm("SiteSiteSelected", "FastTracker", new { }, FormMethod.Post, new { }))
                 {
                     @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
                 }
             </div>
         </div>
-    </div>
-}
-else
-{
-    @Html.HiddenFor(m => m.SiteId)
-}
 
-<div id="tanks">
-    @{
-        Int32 count = 1;
-    }
-
-    @if (Model != null && Model.Tanks != null && Model.Tanks.Any())
-    {
-        foreach (var tank in Model.Tanks)
+        if (!Model.Latitude.IsEmpty() && !Model.Longitude.IsEmpty())
         {
-            List<String> colors = new List<string>() { "green", "blue", "orange" };
-            var color = colors.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
-
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 tracker-table">
-
-                    <div class="col-sm-1 col-md-2 col-xs-1 col-lg-1 tracker-number @color">
-                        <h3>@count</h3>
-                    </div>
-
-                    @{
-                        String eventDate = @tank.EventDate.HasValue ? @tank.EventDate.Value.ToString("MM/dd/yyyy") : String.Empty;
-                        String eventTime = @tank.EventDate.HasValue ? @tank.EventDate.Value.ToString("hh:mm:ss tt") : String.Empty;
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-back">
+                    @if (!this.IsSite())
+                    {
+                        <span><a href="http://maps.google.com/?q=@Model.Latitude,@Model.Longitude" target="_blank">@Model.Latitude / @Model.Longitude </a></span>
                     }
-
-                    <div class="col-sm-3 col-md-4 col-xs-4 col-lg-2 tracker-image">
-                        <div class="row">
-                            <div class="col-sm12 col-md-12 col-xs-12 col-lg-12">
-                                <img src="@tank.UrlImageTankModel">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm12 col-md-12 col-xs-12 col-lg-12">
-                                <p>@eventDate</p>
-                                <p>@eventTime</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    @{
-                        String waterVolumePercentage = @tank.WaterVolumePercentage.HasValue ? @tank.WaterVolumePercentage.Value.ToString("P2") : String.Empty;
-                        String waterVolume = @tank.WaterVolume.ToString();
+                    else
+                    {
+                        <span>@Model.Latitude / @Model.Longitude</span>
                     }
-
-                    <div class="col-sm-2 col-md-3 col-xs-4 col-lg-2 tracker-text">
-                        <div class="row">
-                            <div class="col-sm12 col-md-12 col-xs-12 col-lg-12 gals">
-                                <h2>@waterVolumePercentage</h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm12 col-md-12 col-xs-12 col-lg-12 gals">
-                                @if (@tank.WaterVolume.HasValue)
-                                {
-                                    <h2>@waterVolume</h2>
-                                    <p>gals</p>
-                                }
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-5 col-xs-7 col-lg-7 tracker-graph">
-                        <div id="graph-@tank.TankId"></div>
-                        <script type="text/javascript">
-                            generateWaterVolumeGraph('@tank.TankId');
-                        </script>
-                    </div>
                 </div>
             </div>
 
-                                count++;
-                            }
-                        }
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-back">
+                    <span style="font-weight: bold;">Stage Reports</span>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-back">
+                    <span style="font-weight: bold;">Stage Reports</span>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        @Html.HiddenFor(m => m.SiteId)
+    }
 </div>
+
+<div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 box-back">
+        <span style="font-weight: bold; text-align: left !important;">Alarms</span>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 box-back">
+
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 box-back">
+
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 box-back">
+
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 box-back">
+
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 box-back">
+
+    </div>
+</div>
+
+<div class="form-group" style="margin-top:15px;">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
+        <div class="title blue">
+            <h2>TANKS</h2>
+        </div>
+
+        @if (Model.Tanks.Any())
+            {
+            <div class="row" style="margin: 0px !important;">
+                @foreach (var tank in Model.Tanks)
+                {
+                    String color_box = String.Empty;
+                    String icon_alarm = String.Empty;
+
+                    if (tank.HasAlarmCritical)
+                    {
+                        color_box = "box_watervolumepercentage red";
+                        icon_alarm = "alarm_critical.png";
+                    }
+                    else if (tank.HasAlarmHigh)
+                    {
+                        color_box = "box_watervolumepercentage orange";
+                        icon_alarm = "alarm_high.png";
+                    }
+                    else if (tank.HasAlarmMedium)
+                    {
+                        color_box = "box_watervolumepercentage yellow";
+                        icon_alarm = "alarm_medium.png";
+                    }
+                    else if (tank.HasAlarmLow)
+                    {
+                        color_box = "box_watervolumepercentage gray";
+                        icon_alarm = "alarm_low.png";
+                    }
+                    else if (tank.HasAlarmInfo)
+                    {
+                        color_box = "box_watervolumepercentage white";
+                        icon_alarm = "alarm_info.png";
+                    }
+                    else
+                    {
+                        color_box = "box_watervolumepercentage blue";
+                        icon_alarm = "alarm_no.png";
+                    }
+
+                    @*int idx = Model.Tanks.FindIndex(x => x.Id == tank.Id);
+                        if (idx == 0 || idx % 5 == 0)
+                        {
+                            @Html.Raw("<div class='row'>");
+                        }*@
+
+                    <div id="tank_@tank.Id" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        @Html.Hidden("tankId", @tank.Id)
+                        <div class="row">
+                            <img src="@tank.UrlImageTankModel" style="width: 100px; height: 100px; display: block; margin-left: auto; margin-right: auto;" />
+                        </div>
+                        <div class="row" style="text-align: center;">
+                            <span>@tank.Name</span>
+                        </div>
+
+                        @{
+                            var waterVolumePercentage = @tank.WaterVolumePercentage.HasValue ? @tank.WaterVolumePercentage.ToString() + " %" : "0 %";
+                        }
+
+                        <div class="row" style="text-align: center;">
+                            <span class="center-block box_watervolumepercentage @color_box">@waterVolumePercentage</span>
+                        </div>
+                    </div>
+
+
+                            }
+            </div>
+                            }
+    </div>
+</div>
+
+<div class="form-group row" style="margin-top:15px;">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
+            <div class="title blue">
+                <h2>WATER QUALITY</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
+            <div class="title blue">
+                <h2>WT FLOW</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-            showLoading();
-
             $('#ddlSite').on('change', function (event) {
                 var form = $(event.target).parents('form');
                 form.submit();
             });
-
-            hideLoading();
         });
     </script>
 }

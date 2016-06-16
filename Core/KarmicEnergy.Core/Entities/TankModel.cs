@@ -85,14 +85,14 @@ namespace KarmicEnergy.Core.Entities
         {
             List<TankModel> entities = new List<TankModel>()
             {
-                new TankModel() { Id = (int)TankModelEnum.StandardTanker, Name = "Standard Tanker", GeometryId = (Int16)GeometryEnum.EllipticalHorizontal, Height = 96, Width = 144, Length = 480, ImageFilename = "EllipseHoriz_{info}.png", WaterVolumeCapacity = 0 },
-                new TankModel() { Id = (int)TankModelEnum.VerticalRoundTank, Name = "Vertical Round Tank", GeometryId = (Int16)GeometryEnum.CylinderVertical, Height = 12, Width = 8, ImageFilename = "CylVert_{info}.png", WaterVolumeCapacity = 0 },
-                new TankModel() { Id = (int)TankModelEnum.HorizontalRoundTank, Name = "Horizontal Round Tank", GeometryId = (Int16)GeometryEnum.CylinderHorizontal, Height = 12, Length = 8, ImageFilename = "CylHoriz_{info}.png", WaterVolumeCapacity = 0 },
-                new TankModel() { Id = (int)TankModelEnum.VerticalStadium, Name = "Vertical Stadium", GeometryId = (Int16)GeometryEnum.StadiumVertical, Height = 10, Width = 10, FaceLength = 10, ImageFilename = "StadiumVert_{info}.png", WaterVolumeCapacity = 0 },
-                new TankModel() { Id = (int)TankModelEnum.HorizontalStadium, Name = "Horizontal Stadium", GeometryId = (Int16)GeometryEnum.StadiumHorizontal, Height = 10, Length = 10, BottomWidth = 10, ImageFilename = "StadiumHoriz_{info}.png", WaterVolumeCapacity = 0 },
-                new TankModel() { Id = (int)TankModelEnum.CubeHorizontal, Name = "Cube Horizontal", GeometryId = (Int16)GeometryEnum.Rectangle, Height = 10, Width = 144, Length = 480, ImageFilename = "CubeHoriz_{info}.png", WaterVolumeCapacity = 0 },
-                new TankModel() { Id = (int)TankModelEnum.FracTank21K, Name = "Frac Tank 21K", GeometryId = (Int16)GeometryEnum.Rectangle, Height = 120, Width = 92, Length = 500, ImageFilename = "FracFA1_{info}.png", WaterVolumeCapacity = 21000 },
-                new TankModel() { Id = (int)TankModelEnum.FracPond48000bbl, Name = "Frac Pond 48000bbl", GeometryId = (Int16)GeometryEnum.CylinderVertical, Height = 144, Width = 1800, ImageFilename = "FracPO1_{info}.png", WaterVolumeCapacity = 48000 },
+                new TankModel() { Id = (int)TankModelEnum.StandardTanker, Name = "Standard Tanker", GeometryId = (Int16)GeometryEnum.EllipticalHorizontal, Height = 96, Width = 144, Length = 480, ImageFilename = "EllipseHoriz-{color}-{info}.png", WaterVolumeCapacity = 0 },
+                new TankModel() { Id = (int)TankModelEnum.VerticalRoundTank, Name = "Vertical Round Tank", GeometryId = (Int16)GeometryEnum.CylinderVertical, Height = 12, Width = 8, ImageFilename = "CylVert-{color}-{info}.png", WaterVolumeCapacity = 0 },
+                new TankModel() { Id = (int)TankModelEnum.HorizontalRoundTank, Name = "Horizontal Round Tank", GeometryId = (Int16)GeometryEnum.CylinderHorizontal, Height = 12, Length = 8, ImageFilename = "CylHoriz-{color}-{info}.png", WaterVolumeCapacity = 0 },
+                new TankModel() { Id = (int)TankModelEnum.VerticalStadium, Name = "Vertical Stadium", GeometryId = (Int16)GeometryEnum.StadiumVertical, Height = 10, Width = 10, FaceLength = 10, ImageFilename = "StadiumVert-{color}-{info}.png", WaterVolumeCapacity = 0 },
+                new TankModel() { Id = (int)TankModelEnum.HorizontalStadium, Name = "Horizontal Stadium", GeometryId = (Int16)GeometryEnum.StadiumHorizontal, Height = 10, Length = 10, BottomWidth = 10, ImageFilename = "StadiumHoriz-{color}-{info}.png", WaterVolumeCapacity = 0 },
+                new TankModel() { Id = (int)TankModelEnum.CubeHorizontal, Name = "Cube Horizontal", GeometryId = (Int16)GeometryEnum.Rectangle, Height = 10, Width = 144, Length = 480, ImageFilename = "CubeHoriz-{color}-{info}.png", WaterVolumeCapacity = 0 },
+                new TankModel() { Id = (int)TankModelEnum.FracTank21K, Name = "Frac Tank 21K", GeometryId = (Int16)GeometryEnum.Rectangle, Height = 120, Width = 92, Length = 500, ImageFilename = "FracFA1-{color}-{info}.png", WaterVolumeCapacity = 21000 },
+                new TankModel() { Id = (int)TankModelEnum.FracPond48000bbl, Name = "Frac Pond 48000bbl", GeometryId = (Int16)GeometryEnum.CylinderVertical, Height = 144, Width = 1800, ImageFilename = "FracPO1-{color}-{info}.png", WaterVolumeCapacity = 48000 },
             };
 
             return entities;

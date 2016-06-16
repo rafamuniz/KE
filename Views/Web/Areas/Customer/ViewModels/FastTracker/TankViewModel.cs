@@ -32,67 +32,77 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
             get
             {
                 var baseurl = "/images/tankmodels/";
-
+      
                 if (!WaterVolumePercentage.HasValue)
-                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "NoData"));
+                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "NoData").Replace("-{color}", ""));
 
-                //Int32 volume = 0;
-
-                //if (Int32.TryParse(WaterVolumePercentage.ToString(), out volume))
-                //{
-                //    var rnd = Math.Round(WaterVolumePercentage.Value);
-                //}
-
-                var percentage = (Int32)WaterVolumePercentage;
-
-                if (percentage == 0)
+                if (WaterVolumePercentage <= 0)
                 {
-                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "0"));
+                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "Empty").Replace("{color}", TankColor));
                 }
-                else if (percentage > 0 && percentage < 20)
+                else if (WaterVolumePercentage > 0 && WaterVolumePercentage < 20)
                 {
-                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "10"));
+                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "10").Replace("{color}", TankColor));
                 }
-                else if (percentage >= 20 && percentage < 30)
+                else if (WaterVolumePercentage >= 20 && WaterVolumePercentage < 30)
                 {
-                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "20"));
+                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "20").Replace("{color}", TankColor));
                 }
-                else if (percentage >= 30 && percentage < 40)
+                else if (WaterVolumePercentage >= 30 && WaterVolumePercentage < 40)
                 {
-                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "30"));
+                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "30").Replace("{color}", TankColor));
                 }
-                else if (percentage >= 40 && percentage < 50)
+                else if (WaterVolumePercentage >= 40 && WaterVolumePercentage < 50)
                 {
-                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "40"));
+                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "40").Replace("{color}", TankColor));
                 }
-                else if (percentage >= 50 && percentage < 60)
+                else if (WaterVolumePercentage >= 50 && WaterVolumePercentage < 60)
                 {
-                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "50"));
+                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "50").Replace("{color}", TankColor));
                 }
-                else if (percentage >= 60 && percentage < 70)
+                else if (WaterVolumePercentage >= 60 && WaterVolumePercentage < 70)
                 {
-                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "60"));
+                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "60").Replace("{color}", TankColor));
                 }
-                else if (percentage >= 70 && percentage < 80)
+                else if (WaterVolumePercentage >= 70 && WaterVolumePercentage < 80)
                 {
-                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "70"));
+                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "70").Replace("{color}", TankColor));
                 }
-                else if (percentage >= 80 && percentage < 90)
+                else if (WaterVolumePercentage >= 80 && WaterVolumePercentage < 90)
                 {
-                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "80"));
+                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "80").Replace("{color}", TankColor));
                 }
-                else if (percentage >= 90 && percentage < 100)
+                else if (WaterVolumePercentage >= 90 && WaterVolumePercentage < 100)
                 {
-                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "90"));
+                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "90").Replace("{color}", TankColor));
                 }
-                else if (percentage == 100)
+                else if (WaterVolumePercentage >= 100)
                 {
-                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "100"));
+                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "100").Replace("{color}", TankColor));
                 }
 
-                return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "NoData"));
+                return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "NoData").Replace("-{color}", ""));
             }
             private set { }
+        }
+
+        private String TankColor
+        {
+            get
+            {
+                if (HasAlarmCritical)
+                    return "red";
+                else if (HasAlarmHigh)
+                    return "red";
+                else if (HasAlarmMedium)
+                    return "orange";
+                else if (HasAlarmLow)
+                    return "orange";
+                else if (HasAlarmInfo)
+                    return "blue";
+                else
+                    return "blue";
+            }
         }
 
         public Decimal WaterVolumeCapacity { get; set; }
@@ -104,13 +114,16 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
         public Decimal? WaterVolumeLastValue { get; set; }
         public DateTime? WaterVolumeLastEventDate { get; set; }
 
-        public Decimal? WaterVolumePercentage
+        public Int32? WaterVolumePercentage
         {
             get
             {
+                Decimal? perc = 0;
+
                 if (WaterVolumeCapacity != 0 && WaterVolumeLastValue.HasValue)
                 {
-                    return (WaterVolumeLastValue / WaterVolumeCapacity) * 100;
+                    perc = (WaterVolumeLastValue / WaterVolumeCapacity) * 100;
+                    return (Int32)perc;
                 }
                 else if (WaterVolumeCapacity == 0)
                 {
@@ -120,6 +133,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
                 return null;
             }
         }
+
         #endregion Last Water Volume
 
         #region Last Temperature

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\..\packages\Microsoft.Net.Compilers.1.2.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.1.2.2\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -105,16 +105,16 @@
       <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SendGrid, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sendgrid.6.3.4\lib\SendGrid.dll</HintPath>
+    <Reference Include="SendGrid, Version=7.0.2.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Sendgrid.7.0.2\lib\SendGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid.CSharp.HTTP.Client, Version=2.0.4.0, Culture=neutral, PublicKeyToken=79219bf4e5ecaaca, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SendGrid.CSharp.HTTP.Client.2.0.4\lib\SendGrid.CSharp.HTTP.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SendGrid.SmtpApi, Version=1.3.1.0, Culture=neutral, PublicKeyToken=2ae73662c35d80e4, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SendGrid.SmtpApi.1.3.1\lib\net40\SendGrid.SmtpApi.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SendGridMail, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Sendgrid.6.3.4\lib\SendGridMail.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -283,6 +283,7 @@
     <Compile Include="Areas\Customer\ViewModels\FastTracker\FlowMeterViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Monitoring\AlarmViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\GroupViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\ListViewModel.cs" />
@@ -333,6 +334,14 @@
     <Compile Include="Installer.Designer.cs">
       <DependentUpon>Installer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606170943430_Initial.cs" />
+    <Compile Include="Migrations\201606170943430_Initial.Designer.cs">
+      <DependentUpon>201606170943430_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606170954057_Initial1.cs" />
+    <Compile Include="Migrations\201606170954057_Initial1.Designer.cs">
+      <DependentUpon>201606170954057_Initial1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\AdminRole.cs" />
@@ -373,49 +382,61 @@
     <Compile Include="ViewModels\AddressViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap\bootstrap.css" />
+    <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\datepicker.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\Gridmvc.css" />
-    <Content Include="Content\themes\base\accordion.css" />
-    <Content Include="Content\themes\base\all.css" />
-    <Content Include="Content\themes\base\autocomplete.css" />
-    <Content Include="Content\themes\base\base.css" />
-    <Content Include="Content\themes\base\button.css" />
-    <Content Include="Content\themes\base\core.css" />
-    <Content Include="Content\themes\base\datepicker.css" />
-    <Content Include="Content\themes\base\dialog.css" />
-    <Content Include="Content\themes\base\draggable.css" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\base\menu.css" />
-    <Content Include="Content\themes\base\progressbar.css" />
-    <Content Include="Content\themes\base\resizable.css" />
-    <Content Include="Content\themes\base\selectable.css" />
-    <Content Include="Content\themes\base\selectmenu.css" />
-    <Content Include="Content\themes\base\slider.css" />
-    <Content Include="Content\themes\base\sortable.css" />
-    <Content Include="Content\themes\base\spinner.css" />
-    <Content Include="Content\themes\base\tabs.css" />
-    <Content Include="Content\themes\base\theme.css" />
-    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\gridmvc.datepicker.css" />
+    <Content Include="Content\gridmvc.datepicker.min.css" />
+    <Content Include="Content\gridmvc\Gridmvc.css" />
+    <Content Include="Content\bootstrap\themes\base\accordion.css" />
+    <Content Include="Content\bootstrap\themes\base\all.css" />
+    <Content Include="Content\bootstrap\themes\base\autocomplete.css" />
+    <Content Include="Content\bootstrap\themes\base\base.css" />
+    <Content Include="Content\bootstrap\themes\base\button.css" />
+    <Content Include="Content\bootstrap\themes\base\core.css" />
+    <Content Include="Content\bootstrap\themes\base\datepicker.css" />
+    <Content Include="Content\bootstrap\themes\base\dialog.css" />
+    <Content Include="Content\bootstrap\themes\base\draggable.css" />
+    <Content Include="Content\bootstrap\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\bootstrap\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\bootstrap\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\bootstrap\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\bootstrap\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\bootstrap\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\bootstrap\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\bootstrap\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\bootstrap\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\bootstrap\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\bootstrap\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\bootstrap\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\bootstrap\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\bootstrap\themes\base\menu.css" />
+    <Content Include="Content\bootstrap\themes\base\progressbar.css" />
+    <Content Include="Content\bootstrap\themes\base\resizable.css" />
+    <Content Include="Content\bootstrap\themes\base\selectable.css" />
+    <Content Include="Content\bootstrap\themes\base\selectmenu.css" />
+    <Content Include="Content\bootstrap\themes\base\slider.css" />
+    <Content Include="Content\bootstrap\themes\base\sortable.css" />
+    <Content Include="Content\bootstrap\themes\base\spinner.css" />
+    <Content Include="Content\bootstrap\themes\base\tabs.css" />
+    <Content Include="Content\bootstrap\themes\base\theme.css" />
+    <Content Include="Content\bootstrap\themes\base\tooltip.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="Content\fonts.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\opensans-bold-webfont.svg" />
+    <Content Include="Content\fonts\opensans-condbold-webfont.svg" />
+    <Content Include="Content\fonts\opensans-italic-webfont.svg" />
+    <Content Include="Content\fonts\opensans-light-webfont.svg" />
+    <Content Include="Content\fonts\opensans-regular-webfont.svg" />
+    <Content Include="Content\fonts\opensans-semibolditalic-webfont.svg" />
+    <Content Include="Content\fonts\opensans-semibold_0-webfont.svg" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\opensans-bold-webfont.svg" />
@@ -1414,10 +1435,11 @@
     <Content Include="Scripts\app\tank-gauge.js" />
     <Content Include="Scripts\app\tank.js" />
     <Content Include="Scripts\app\utils.js" />
-    <Content Include="Scripts\bootstrap-notify.js" />
-    <Content Include="Scripts\bootstrap-notify.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-notify.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-notify.min.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\d3\d3.js" />
     <Content Include="Scripts\d3\d3.min.js" />
     <Content Include="Scripts\flot\excanvas.js" />
@@ -1481,27 +1503,27 @@
     <Content Include="Scripts\highcharts\themes\grid.js" />
     <Content Include="Scripts\highcharts\themes\sand-signika.js" />
     <Content Include="Scripts\highcharts\themes\skies.js" />
-    <Content Include="fonts\opensans-bold-webfont.eot" />
-    <Content Include="fonts\opensans-bold-webfont.ttf" />
-    <Content Include="fonts\opensans-bold-webfont.woff" />
-    <Content Include="fonts\opensans-condbold-webfont.eot" />
-    <Content Include="fonts\opensans-condbold-webfont.ttf" />
-    <Content Include="fonts\opensans-condbold-webfont.woff" />
-    <Content Include="fonts\opensans-italic-webfont.eot" />
-    <Content Include="fonts\opensans-italic-webfont.ttf" />
-    <Content Include="fonts\opensans-italic-webfont.woff" />
-    <Content Include="fonts\opensans-light-webfont.eot" />
-    <Content Include="fonts\opensans-light-webfont.ttf" />
-    <Content Include="fonts\opensans-light-webfont.woff" />
-    <Content Include="fonts\opensans-regular-webfont.eot" />
-    <Content Include="fonts\opensans-regular-webfont.ttf" />
-    <Content Include="fonts\opensans-regular-webfont.woff" />
-    <Content Include="fonts\opensans-semibolditalic-webfont.eot" />
-    <Content Include="fonts\opensans-semibolditalic-webfont.ttf" />
-    <Content Include="fonts\opensans-semibolditalic-webfont.woff" />
-    <Content Include="fonts\opensans-semibold_0-webfont.eot" />
-    <Content Include="fonts\opensans-semibold_0-webfont.ttf" />
-    <Content Include="fonts\opensans-semibold_0-webfont.woff" />
+    <Content Include="Content\fonts\opensans-bold-webfont.eot" />
+    <Content Include="Content\fonts\opensans-bold-webfont.ttf" />
+    <Content Include="Content\fonts\opensans-bold-webfont.woff" />
+    <Content Include="Content\fonts\opensans-condbold-webfont.eot" />
+    <Content Include="Content\fonts\opensans-condbold-webfont.ttf" />
+    <Content Include="Content\fonts\opensans-condbold-webfont.woff" />
+    <Content Include="Content\fonts\opensans-italic-webfont.eot" />
+    <Content Include="Content\fonts\opensans-italic-webfont.ttf" />
+    <Content Include="Content\fonts\opensans-italic-webfont.woff" />
+    <Content Include="Content\fonts\opensans-light-webfont.eot" />
+    <Content Include="Content\fonts\opensans-light-webfont.ttf" />
+    <Content Include="Content\fonts\opensans-light-webfont.woff" />
+    <Content Include="Content\fonts\opensans-regular-webfont.eot" />
+    <Content Include="Content\fonts\opensans-regular-webfont.ttf" />
+    <Content Include="Content\fonts\opensans-regular-webfont.woff" />
+    <Content Include="Content\fonts\opensans-semibolditalic-webfont.eot" />
+    <Content Include="Content\fonts\opensans-semibolditalic-webfont.ttf" />
+    <Content Include="Content\fonts\opensans-semibolditalic-webfont.woff" />
+    <Content Include="Content\fonts\opensans-semibold_0-webfont.eot" />
+    <Content Include="Content\fonts\opensans-semibold_0-webfont.ttf" />
+    <Content Include="Content\fonts\opensans-semibold_0-webfont.woff" />
     <Content Include="Areas\Customer\Views\web.config" />
     <Content Include="Areas\Customer\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
@@ -1533,11 +1555,11 @@
     <Content Include="Areas\Customer\Views\SensorGroup\Create.cshtml" />
     <Content Include="Areas\Customer\Views\SensorGroup\Index.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\_TankModel.cshtml" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Areas\Customer\Views\Contact\Create.cshtml" />
     <Content Include="Areas\Customer\Views\Contact\Edit.cshtml" />
     <Content Include="Areas\Customer\Views\Contact\Index.cshtml" />
@@ -1553,13 +1575,53 @@
     <Content Include="Areas\Customer\Views\Trigger\Index.cshtml" />
     <Content Include="Areas\Customer\Views\Trigger\Edit.cshtml" />
     <Content Include="Areas\Customer\Views\FastTracker\FastTracker.cshtml" />
+    <Content Include="Content\bootstrap\datepicker.less" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap\bootstrap.css.map" />
+    <Content Include="Content\bootstrap\bootstrap-theme.css.map" />
+    <Content Include="Areas\Customer\Views\Monitoring\Alarms.cshtml" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\opensans-bold-webfont.eot" />
+    <Content Include="fonts\opensans-bold-webfont.ttf" />
+    <Content Include="fonts\opensans-bold-webfont.woff" />
+    <Content Include="fonts\opensans-condbold-webfont.eot" />
+    <Content Include="fonts\opensans-condbold-webfont.ttf" />
+    <Content Include="fonts\opensans-condbold-webfont.woff" />
+    <Content Include="fonts\opensans-italic-webfont.eot" />
+    <Content Include="fonts\opensans-italic-webfont.ttf" />
+    <Content Include="fonts\opensans-italic-webfont.woff" />
+    <Content Include="fonts\opensans-light-webfont.eot" />
+    <Content Include="fonts\opensans-light-webfont.ttf" />
+    <Content Include="fonts\opensans-light-webfont.woff" />
+    <Content Include="fonts\opensans-regular-webfont.eot" />
+    <Content Include="fonts\opensans-regular-webfont.ttf" />
+    <Content Include="fonts\opensans-regular-webfont.woff" />
+    <Content Include="fonts\opensans-semibold_0-webfont.eot" />
+    <Content Include="fonts\opensans-semibold_0-webfont.ttf" />
+    <Content Include="fonts\opensans-semibold_0-webfont.woff" />
+    <Content Include="fonts\opensans-semibolditalic-webfont.eot" />
+    <Content Include="fonts\opensans-semibolditalic-webfont.ttf" />
+    <Content Include="fonts\opensans-semibolditalic-webfont.woff" />
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Properties\PublishProfiles\ClickOnce.pubxml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />
     <Content Include="Scripts\d3\LICENSE" />
-    <None Include="Scripts\jquery-2.2.3-vsdoc.js" />
-    <Content Include="Scripts\jquery-2.2.3.js" />
-    <Content Include="Scripts\jquery-2.2.3.min.js" />
+    <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.0.0.js" />
+    <Content Include="Scripts\jquery-3.0.0.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
     <Content Include="Scripts\jquery.dd.js" />
@@ -1574,6 +1636,8 @@
     <Content Include="Scripts\jquery.slimscroll.js" />
     <Content Include="Scripts\jquery.slimscroll.min.js" />
     <Content Include="Scripts\jquery.sparkline.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.0.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -2073,7 +2137,6 @@
     <Content Include="Views\Shared\_Loading.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Address.cshtml" />
-    <Content Include="Scripts\jquery-2.2.3.min.map" />
     <Content Include="Views\Shared\_InternalNoLeftMenu.cshtml" />
     <None Include="Web.AWS.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2088,14 +2151,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\KarmicEnergy.Core\Core.csproj">
@@ -2108,6 +2163,14 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201606170943430_Initial.resx">
+      <DependentUpon>201606170943430_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606170954057_Initial1.resx">
+      <DependentUpon>201606170954057_Initial1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -2152,7 +2215,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.1.2.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.1.2.2\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

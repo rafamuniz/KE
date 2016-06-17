@@ -766,7 +766,7 @@ function showNotications() {
             $('.notifications-menu .dropdown-menu li .menu').empty();
 
             $.each(data.Alarms, function (iu, vu) {
-                var url = "/Customer/Monitoring/Alarm/?alarmId=" + vu.Id;
+                var url = "/Customer/Monitoring/AlarmById/?alarmId=" + vu.Id;
                 var html_item = ReplaceAll(template, "{URL}", url);
 
                 if (vu.SeverityId == 1) {

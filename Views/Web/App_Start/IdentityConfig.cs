@@ -30,14 +30,14 @@ namespace KarmicEnergy.Web
 
         private async Task configSendGridasync(EmailMessage message)
         {
-            var sendGridMessage = new SendGridMessage();
+            //var sendGridMessage = new SendGridMessage();
 
-            sendGridMessage.AddTo(message.Destination);
-            sendGridMessage.From = new MailAddress(ConfigurationManager.AppSettings["EmailService:From"], "Karmic Energy - Support");
-            sendGridMessage.Subject = message.Subject;
-            sendGridMessage.Text = message.Body;
-            sendGridMessage.Html = message.Body;
-            sendGridMessage.EnableTemplateEngine(message.TemplateId);
+            //sendGridMessage.AddTo(message.Destination);
+            //sendGridMessage.From = new MailAddress(ConfigurationManager.AppSettings["EmailService:From"], "Karmic Energy - Support");
+            //sendGridMessage.Subject = message.Subject;
+            //sendGridMessage.Text = message.Body;
+            //sendGridMessage.Html = message.Body;
+            //sendGridMessage.EnableTemplateEngine(message.TemplateId);
 
             String apiKey = ConfigurationManager.AppSettings["EmailService:APIKey"];
 
@@ -45,21 +45,21 @@ namespace KarmicEnergy.Web
                                                     ConfigurationManager.AppSettings["EmailService:Password"]);
 
             // Create a Web transport for sending email.
-            var transportWeb = new SendGrid.Web(credentials);
+            //var transportWeb = new SendGrid.Web(credentials);
             //var transportWeb = new SendGrid.Web(apiKey);
 
             try
             {
-                // Send the email.
-                if (transportWeb != null)
-                {
-                    await transportWeb.DeliverAsync(sendGridMessage);
-                }
-                else
-                {
-                    //Trace.TraceError("Failed to create Web transport.");
-                    await Task.FromResult(0);
-                }
+                //// Send the email.
+                //if (transportWeb != null)
+                //{
+                //    await transportWeb.DeliverAsync(sendGridMessage);
+                //}
+                //else
+                //{
+                //    //Trace.TraceError("Failed to create Web transport.");
+                //    await Task.FromResult(0);
+                //}
             }
             catch (Exception ex)
             {

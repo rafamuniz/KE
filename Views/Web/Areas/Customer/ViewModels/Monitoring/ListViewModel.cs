@@ -31,20 +31,19 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
         public Int32 ItemId { get; set; }
         public String ItemName { get; set; }
 
-        public DateTime? AckDate { get; set; }
-        public Guid? AckUserId { get; set; }
-        public String AckUser { get; set; }
+        public DateTime EventDate { get; set; }
 
-        public DateTime AlarmDate { get; set; }
-
-        public Int16 SeverityId { get; set; }
-        public String SeverityName { get; set; }
+        public DateTime EventDateLocal
+        {
+            get { return EventDate.ToLocalTime(); }
+            set { }
+        }
 
         #endregion Property
 
         #region Map
 
-        public static List<ListViewModel> Map(List<Core.Entities.Alarm> entities)
+        public static List<ListViewModel> Map(List<Core.Entities.SensorItemEvent> entities)
         {
             List<ListViewModel> vms = new List<ListViewModel>();
 
@@ -56,32 +55,29 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
             return vms;
         }
 
-        public static ListViewModel Map(Core.Entities.Alarm entity)
+        public static ListViewModel Map(Core.Entities.SensorItemEvent entity)
         {
-            Mapper.CreateMap<Core.Entities.Alarm, ListViewModel>();
-            var viewModel = Mapper.Map<Core.Entities.Alarm, ListViewModel>(entity);
+            Mapper.CreateMap<Core.Entities.SensorItemEvent, ListViewModel>();
+            var viewModel = Mapper.Map<Core.Entities.SensorItemEvent, ListViewModel>(entity);
 
-            viewModel.SiteId = entity.Trigger.SensorItem.Sensor.Tank != null ? entity.Trigger.SensorItem.Sensor.Tank.Site.Id : entity.Trigger.SensorItem.Sensor.Site.Id;
-            viewModel.SiteName = entity.Trigger.SensorItem.Sensor.Tank != null ? entity.Trigger.SensorItem.Sensor.Tank.Site.Name : entity.Trigger.SensorItem.Sensor.Site.Name;
+            viewModel.Id = entity.Id;
 
-            if (entity.Trigger.SensorItem.Sensor.Tank != null)
+            viewModel.SiteId = entity.SensorItem.Sensor.Tank != null ? entity.SensorItem.Sensor.Tank.Site.Id : entity.SensorItem.Sensor.Site.Id;
+            viewModel.SiteName = entity.SensorItem.Sensor.Tank != null ? entity.SensorItem.Sensor.Tank.Site.Name : entity.SensorItem.Sensor.Site.Name;
+
+            if (entity.SensorItem.Sensor.Tank != null)
             {
-                viewModel.TankId = entity.Trigger.SensorItem.Sensor.Tank.Id;
-                viewModel.TankName = entity.Trigger.SensorItem.Sensor.Tank.Name;
+                viewModel.TankId = entity.SensorItem.Sensor.Tank.Id;
+                viewModel.TankName = entity.SensorItem.Sensor.Tank.Name;
             }
 
-            viewModel.SensorId = entity.Trigger.SensorItem.Sensor.Id;
-            viewModel.SensorName = entity.Trigger.SensorItem.Sensor.Name;
+            viewModel.SensorId = entity.SensorItem.Sensor.Id;
+            viewModel.SensorName = entity.SensorItem.Sensor.Name;
 
-            viewModel.ItemId = entity.Trigger.SensorItem.Item.Id;
-            viewModel.ItemName = entity.Trigger.SensorItem.Item.Name;
+            viewModel.ItemId = entity.SensorItem.Item.Id;
+            viewModel.ItemName = entity.SensorItem.Item.Name;
 
-            viewModel.AlarmDate = entity.StartDate;
-            viewModel.AckDate = entity.LastAckDate;
-            viewModel.AckUserId = entity.LastAckUserId;
-
-            viewModel.SeverityId = entity.Trigger.Severity.Id;
-            viewModel.SeverityName = entity.Trigger.Severity.Name;
+            viewModel.EventDate = entity.EventDate;
 
             return viewModel;
         }

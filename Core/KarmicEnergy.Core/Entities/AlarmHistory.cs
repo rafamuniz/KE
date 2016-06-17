@@ -13,6 +13,14 @@ namespace KarmicEnergy.Core.Entities
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
+        [Column("Action", TypeName = "NVARCHAR")]
+        [StringLength(256)]
+        public String Action { get; set; } = String.Empty;
+
+        [Column("Message", TypeName = "NVARCHAR")]
+        [StringLength(4000)]
+        public String Message { get; set; } = String.Empty;
+
         [Column("Value", TypeName = "NVARCHAR")]
         [StringLength(256)]
         public String Value { get; set; } = String.Empty;
@@ -21,12 +29,9 @@ namespace KarmicEnergy.Core.Entities
         [StringLength(256)]
         public String CalculatedValue { get; set; } = String.Empty;
 
-        [Column("AckUserId", TypeName = "UNIQUEIDENTIFIER")]
-        public Guid AckUserId { get; set; }
-
-        [Column("AckDate", TypeName = "DATETIME")]
-        public DateTime AckDate { get; set; }
-
+        [Column("UserId", TypeName = "UNIQUEIDENTIFIER")]
+        public Guid UserId { get; set; }
+                
         #endregion Property
 
         #region Alarm

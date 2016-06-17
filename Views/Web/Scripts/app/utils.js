@@ -90,17 +90,17 @@ function populateDropdown(select, data) {
 }
 
 (function ($) {
-    $.fn.hide = function () {
-        return this.each(function () {
-            $(this).css("visibility", "hidden");
-        });
-    };
+    //$.fn.hide = function () {
+    //    return this.each(function () {
+    //        $(this).css("visibility", "hidden");
+    //    });
+    //};
 
-    $.fn.show = function () {
-        return this.each(function () {
-            $(this).css("visibility", "visible");
-        });
-    };
+    //$.fn.show = function () {
+    //    return this.each(function () {
+    //        $(this).css("visibility", "visible");
+    //    });
+    //};
 
     $.fn.invisible = function () {
         return this.each(function () {
@@ -132,10 +132,10 @@ function getGeoLocation(success, error) {
 function geoLocationSuccess(pos) {
     var crd = pos.coords;
 
-    console.log('Sua posição atual é:');
-    console.log('Latitude : ' + crd.latitude);
+    console.log('Your position:');
+    console.log('Latitude: ' + crd.latitude);
     console.log('Longitude: ' + crd.longitude);
-    console.log('Mais ou menos ' + crd.accuracy + ' metros.');
+    console.log('Accuracy: ' + crd.accuracy + ' meters.');
 
     return crd;
 };

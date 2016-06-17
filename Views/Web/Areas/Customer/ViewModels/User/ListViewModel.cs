@@ -17,20 +17,20 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
 
         public String Email { get; set; }
 
-        private String role;
-        public String Role
-        {
-            get
-            {
-                if (role == "CustomerAdmin")
-                    return "Admin";
-                else if (role == "CustomerOperator")
-                    return "Operator";
-                else
-                    return String.Empty;
-            }
-            set { role = value; }
-        }
+        //private String role;
+        public String Role { get; set; }
+        //{
+        //    get
+        //    {
+        //        if (role == "CustomerAdmin")
+        //            return "Admin";
+        //        else if (role == "CustomerOperator")
+        //            return "Operator";
+        //        else
+        //            return String.Empty;
+        //    }
+        //    set { role = value; }
+        //}
 
         #endregion Property
 

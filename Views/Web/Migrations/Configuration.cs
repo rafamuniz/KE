@@ -30,7 +30,7 @@ namespace KarmicEnergy.Web.Migrations
                 new IdentityRole("Customer"),
                 new IdentityRole("General Manager"),
                 new IdentityRole("Supervisor"),
-                new IdentityRole("Operator")                
+                new IdentityRole("Operator")
             };
 
             foreach (var r in roles)
@@ -80,11 +80,14 @@ namespace KarmicEnergy.Web.Migrations
 
             IList<IdentityRole> roles = new List<IdentityRole>()
             {
+                new IdentityRole("SuperAdmin"),
                 new IdentityRole("Admin"),
-                new IdentityRole("Operator"),
+                new IdentityRole("User"),
+
                 new IdentityRole("Customer"),
-                new IdentityRole("CustomerAdmin"),
-                new IdentityRole("CustomerOperator")
+                new IdentityRole("General Manager"),
+                new IdentityRole("Supervisor"),
+                new IdentityRole("Operator"),
             };
 
             foreach (var r in roles)
@@ -97,15 +100,43 @@ namespace KarmicEnergy.Web.Migrations
             }
 
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            var user = new ApplicationUser() { UserName = "karmicenergy@ke.com", Email = "karmicenergy@ke.com", Name = "Karmic Energy" };
-            String password = "KarmicEnergy10$";
 
-            var adminresult = userManager.Create(user, password);
+            var userkarmicenergy = new ApplicationUser() { UserName = "karmicenergy@ke.com", Email = "karmicenergy@ke.com", Name = "Karmic Energy" };
+            String passwordkarmicenergy = "KarmicEnergy10$";
 
-            //Add User Admin to Role Admin
-            if (adminresult.Succeeded)
+            if (userManager.FindByName(userkarmicenergy.UserName) == null)
             {
-                var result = userManager.AddToRole(user.Id, "Admin");
+                var resultkarmicenergy = userManager.Create(userkarmicenergy, passwordkarmicenergy);
+
+                //Add User Admin to Role Admin
+                if (resultkarmicenergy.Succeeded)
+                {
+                    var resultRole = userManager.AddToRole(userkarmicenergy.Id, "SuperAdmin");
+
+                    if (!resultRole.Succeeded)
+                    {
+                        throw new Exception(resultRole.Errors.Aggregate((i, j) => i + "\n" + j));
+                    }
+                }
+            }
+
+            var userRafaelMuniz = new ApplicationUser() { UserName = "muniz@ke.com", Email = "muniz@ke.com", Name = "Rafael Muniz" };
+            String passwordRafaelMuniz = "KEMuniz11$";            
+
+            if (userManager.FindByName(userkarmicenergy.UserName) == null)
+            {
+                var resultRafaelMuniz = userManager.Create(userRafaelMuniz, passwordRafaelMuniz);
+
+                //Add User Admin to Role Admin
+                if (resultRafaelMuniz.Succeeded)
+                {
+                    var resultRole = userManager.AddToRole(userRafaelMuniz.Id, "SuperAdmin");
+                    
+                    if (!resultRole.Succeeded)
+                    {
+                        throw new Exception(resultRole.Errors.Aggregate((i, j) => i + "\n" + j));
+                    }
+                }
             }
         }
     }

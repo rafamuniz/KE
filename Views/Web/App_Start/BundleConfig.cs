@@ -25,8 +25,13 @@ namespace KarmicEnergy.Web
                         "~/Scripts/modernizr-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.min.js",
-                      "~/Scripts/respond.min.js"));
+                      "~/Scripts/bootstrap/bootstrap.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-datepicker").Include(
+                    "~/Scripts/bootstrap/bootstrap-datepicker.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/respond").Include(
+                    "~/Scripts/respond.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                       "~/Scripts/app.js"));
@@ -50,14 +55,14 @@ namespace KarmicEnergy.Web
                     "~/Scripts/jquery.inputmask/inputmask.js",
                     "~/Scripts/jquery.inputmask/jquery.inputmask.js",
                     "~/Scripts/jquery.inputmask/inputmask.extensions.js",
-                    "~/Scripts/jquery.inputmask/inputmask.date.extensions.js",                    
+                    "~/Scripts/jquery.inputmask/inputmask.date.extensions.js",
                     "~/Scripts/jquery.inputmask/inputmask.numeric.extensions.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
                     "~/Scripts/moment.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/notify").Include(
-              "~/Scripts/bootstrap-notify.min.js"));
+                    "~/Scripts/bootstrap-notify.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/highcharts")
                 .IncludeDirectory("~/Scripts/highcharts", "*.js", true));
@@ -67,17 +72,20 @@ namespace KarmicEnergy.Web
             #region Style
 
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
-                     "~/Content/bootstrap.min.css"));
+                        "~/Content/bootstrap/bootstrap.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/bootstrap-datepicker").Include(
+                        "~/Content/bootstrap/datepicker.css"));
 
             bundles.Add(new StyleBundle("~/Content/font-awesome").Include(
-                     "~/Content/font-awesome.min.css"));
+                        "~/Content/font-awesome.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/fonts.css",
-                      "~/Content/site.css"));
+                        "~/Content/fonts.css",
+                        "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/grid").Include(
-                  "~/Content/Gridmvc.css"));
+                        "~/Content/gridmvc/Gridmvc.css"));
 
             #endregion Style
 

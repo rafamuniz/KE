@@ -16,6 +16,17 @@ namespace KarmicEnergy.Core.Repositories
         }
         #endregion Constructor       
 
+        public List<SensorItemEvent> GetsBySite(Guid siteId)
+        {
+            return Context.SensorItemEvents.Where(x => x.SensorItem.Sensor.SiteId == siteId && x.SensorItem.Sensor.TankId == null).ToList();
+        }
+
+        public List<SensorItemEvent> GetsByTank(Guid tankId)
+        {
+            return Context.SensorItemEvents.Where(x => x.SensorItem.Sensor.TankId == tankId).ToList();
+        }
+
+
         public SensorItemEvent GetLastEventByTankAndItem(Guid tankId, ItemEnum item)
         {
             var lastEvent = Context.SensorItemEvents.Where(x => x.SensorItem.Sensor.TankId == tankId && x.SensorItem.ItemId == (int)item).OrderByDescending(d => d.EventDate);
@@ -43,7 +54,7 @@ namespace KarmicEnergy.Core.Repositories
         //public List<SensorItemEvent> GetsByTankIdAndByHour(Guid tankId, ItemEnum item, Int32 beforDays)
         //{
         //    var events = Context.SensorItemEvents.Where(u => u.EventDate != null && u.EventDate <= DateTime.UtcNow.AddDays(-beforDays)).GroupBy(u => u.EventDate.Hour).Select(g => new { Hour = g.Key, Totals = g.Count() }).ToList();
-            
+
         //    return events.ToList();
         //}
 

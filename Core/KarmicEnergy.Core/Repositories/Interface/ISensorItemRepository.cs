@@ -8,6 +8,7 @@ namespace KarmicEnergy.Core.Repositories
     {
         Boolean HasSensorItem(Guid tankId, ItemEnum item);
         Boolean HasSiteSensorItem(Guid siteId, ItemEnum item);
+        List<SensorItem> GetsBySiteAndItem(Guid siteId, ItemEnum item);
         List<SensorItem> GetsBySensor(Guid sensorId);
     }
 }

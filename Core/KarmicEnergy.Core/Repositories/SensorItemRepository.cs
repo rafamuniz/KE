@@ -26,6 +26,11 @@ namespace KarmicEnergy.Core.Repositories
             return base.Find(x => x.Sensor.SiteId == siteId && x.Sensor.TankId == null && x.ItemId == (Int32)item).Any();
         }
 
+        public List<SensorItem> GetsBySiteAndItem(Guid siteId, ItemEnum item)
+        {
+            return base.Find(x => x.Sensor.SiteId == siteId && x.Sensor.TankId == null && x.ItemId == (Int32)item).ToList();
+        }
+
         public List<SensorItem> GetsBySensor(Guid sensorId)
         {
             return base.Find(x => x.SensorId == sensorId && x.DeletedDate == null).ToList();

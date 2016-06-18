@@ -2,6 +2,7 @@
 using KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker;
 using KarmicEnergy.Web.Controllers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -26,9 +27,11 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 viewModel.SiteId = SiteId;
                 LoadTanks(viewModel);
                 LoadAlarmsBySite(viewModel);
+                LoadTemperatureBySite(viewModel);
                 LoadFlowMeters(viewModel);
             }
 
+            AddLog("Navigate to Fast Tracker View", LogTypeEnum.Info);
             return View(viewModel);
         }
 
@@ -41,6 +44,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 LoadSite(viewModel);
                 LoadTanks(viewModel);
                 LoadAlarmsBySite(viewModel);
+                LoadTemperatureBySite(viewModel);
                 LoadFlowMeters(viewModel);
             }
 
@@ -101,29 +105,46 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             viewModel.Alarms.AddRange(AlarmViewModel.Map(alarms));
         }
 
+        private void LoadTemperatureBySite(ListViewModel viewModel)
+        {
+            var alarms = KEUnitOfWork.AlarmRepository.GetsBySite(viewModel.SiteId.Value);
+            viewModel.Alarms.AddRange(AlarmViewModel.Map(alarms));
+        }
+
         private void LoadFlowMeters(ListViewModel viewModel)
         {
-            FlowMeterViewModel flowMeterViewModel = new FlowMeterViewModel();
+            List<FlowMeterViewModel> viewModels = new List<FlowMeterViewModel>();
 
-            if (KEUnitOfWork.SensorRepository.HasSensorSite(viewModel.SiteId.Value) &&
-                KEUnitOfWork.SensorItemRepository.HasSiteSensorItem(viewModel.SiteId.Value, ItemEnum.RateFlow) &&
-                KEUnitOfWork.SensorItemRepository.HasSiteSensorItem(viewModel.SiteId.Value, ItemEnum.Totalizer))
+            var flowMeters = KEUnitOfWork.SensorItemRepository.GetsBySiteAndItem(viewModel.SiteId.Value, ItemEnum.RateFlow);
+
+            if (flowMeters.Any())
             {
-                var rateFlow = KEUnitOfWork.SensorItemEventRepository.GetLastEventBySiteAndItem(viewModel.SiteId.Value, ItemEnum.RateFlow);
-                if (rateFlow != null)
+                foreach (var flowMeter in flowMeters)
                 {
-                    flowMeterViewModel.RateFlow = Decimal.Parse(rateFlow.Value);
-                    flowMeterViewModel.RateFlowLastMeasurement = rateFlow.EventDate;
-                }
+                    FlowMeterViewModel flowMeterViewModel = new FlowMeterViewModel();
 
-                var totalizer = KEUnitOfWork.SensorItemEventRepository.GetLastEventBySiteAndItem(viewModel.SiteId.Value, ItemEnum.Totalizer);
-                if (totalizer != null)
-                {
-                    flowMeterViewModel.Totalizer = Int32.Parse(totalizer.Value);
-                    flowMeterViewModel.TotalizerLastMeasurement = totalizer.EventDate;
-                }
+                    if (KEUnitOfWork.SensorItemRepository.HasSiteSensorItem(viewModel.SiteId.Value, ItemEnum.RateFlow))
+                    {
+                        var rateFlow = KEUnitOfWork.SensorItemEventRepository.GetLastEventBySiteAndItem(viewModel.SiteId.Value, ItemEnum.RateFlow);
+                        if (rateFlow != null)
+                        {
+                            flowMeterViewModel.RateFlow = Decimal.Parse(rateFlow.Value);
+                            flowMeterViewModel.RateFlowLastMeasurement = rateFlow.EventDate;
+                        }
 
-                viewModel.FlowMeters.Add(flowMeterViewModel);
+                        if (KEUnitOfWork.SensorItemRepository.HasSiteSensorItem(viewModel.SiteId.Value, ItemEnum.Totalizer))
+                        {
+                            var totalizer = KEUnitOfWork.SensorItemEventRepository.GetLastEventBySiteAndItem(viewModel.SiteId.Value, ItemEnum.Totalizer);
+                            if (totalizer != null)
+                            {
+                                flowMeterViewModel.Totalizer = Int32.Parse(totalizer.Value);
+                                flowMeterViewModel.TotalizerLastMeasurement = totalizer.EventDate;
+                            }
+                        }
+
+                        viewModel.FlowMeters.Add(flowMeterViewModel);
+                    }
+                }
             }
         }
 

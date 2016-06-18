@@ -111,6 +111,18 @@
     <Compile Include="Migrations\201606171420098_Dev.Designer.cs">
       <DependentUpon>201606171420098_Dev.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606181347099_Dev1.cs" />
+    <Compile Include="Migrations\201606181347099_Dev1.Designer.cs">
+      <DependentUpon>201606181347099_Dev1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606181413417_Dev2.cs" />
+    <Compile Include="Migrations\201606181413417_Dev2.Designer.cs">
+      <DependentUpon>201606181413417_Dev2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606181419091_Dev3.cs" />
+    <Compile Include="Migrations\201606181419091_Dev3.Designer.cs">
+      <DependentUpon>201606181419091_Dev3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
@@ -189,6 +201,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606171420098_Dev.resx">
       <DependentUpon>201606171420098_Dev.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606181347099_Dev1.resx">
+      <DependentUpon>201606181347099_Dev1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606181413417_Dev2.resx">
+      <DependentUpon>201606181413417_Dev2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606181419091_Dev3.resx">
+      <DependentUpon>201606181419091_Dev3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

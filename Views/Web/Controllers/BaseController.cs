@@ -75,7 +75,17 @@ namespace KarmicEnergy.Web.Controllers
 
         protected Guid SiteId
         {
-            get { return Guid.Parse(ConfigurationManager.AppSettings["Site:Id"].Trim()); }
+            get
+            {
+                if (ConfigurationManager.AppSettings["Site:Id"] != null)
+                {
+                    Guid siteId;
+                    if (Guid.TryParse(ConfigurationManager.AppSettings["Site:Id"], out siteId))
+                        return siteId;                                    
+                }
+
+                return Guid.Empty;
+            }
         }
 
         protected Boolean IsSite
@@ -151,7 +161,8 @@ namespace KarmicEnergy.Web.Controllers
         #region Log
         protected void AddLog(String message, LogTypeEnum type = LogTypeEnum.Error)
         {
-            Log log = new Log() { LogTypeId = (Int16)type, Message = message };
+            var siteId = SiteId == Guid.Empty ? (Guid?)null : SiteId;
+            Log log = new Log() { LogTypeId = (Int16)type, Message = message, CustomerId = CustomerId, SiteId = siteId, UserId = Guid.Parse(UserId) };
             KEUnitOfWork.LogRepository.Add(log);
             KEUnitOfWork.Complete();
         }

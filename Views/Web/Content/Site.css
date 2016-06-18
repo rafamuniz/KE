@@ -6850,3 +6850,8 @@ table.grid-table .grid-filter-btn span {
 table.grid-table .grid-filter-buttons{
     text-align: center;
 }
+
+table.grid-table tr.grid-row-selected td {
+    background: #00ADBD !important;
+    color: white;
+}

@@ -268,6 +268,7 @@
     <Compile Include="Areas\Admin\ViewModels\User\ListViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\User\EditViewModel.cs" />
     <Compile Include="Areas\Customer\Controllers\MonitoringController.cs" />
+    <Compile Include="Areas\Customer\Controllers\LogController.cs" />
     <Compile Include="Areas\Customer\Controllers\SensorGroupController.cs" />
     <Compile Include="Areas\Customer\Controllers\SensorController.cs" />
     <Compile Include="Areas\Customer\Controllers\FastTrackerController.cs" />
@@ -283,6 +284,7 @@
     <Compile Include="Areas\Customer\ViewModels\FastTracker\FlowMeterViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Log\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\AlarmViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\GroupViewModel.cs" />
@@ -1613,6 +1615,7 @@
     <Content Include="fonts\opensans-semibolditalic-webfont.eot" />
     <Content Include="fonts\opensans-semibolditalic-webfont.ttf" />
     <Content Include="fonts\opensans-semibolditalic-webfont.woff" />
+    <Content Include="Areas\Customer\Views\Log\Index.cshtml" />
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Properties\PublishProfiles\ClickOnce.pubxml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />

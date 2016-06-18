@@ -28,11 +28,20 @@ namespace KarmicEnergy.Core.Entities
         [Column("CustomerId", TypeName = "UNIQUEIDENTIFIER")]
         public Guid? CustomerId { get; set; }
 
+        [ForeignKey("CustomerId")]
+        public virtual Customer Customer { get; set; }
+
         [Column("UserId", TypeName = "UNIQUEIDENTIFIER")]
         public Guid? UserId { get; set; }
 
+        //[ForeignKey("UserId")]
+        //public virtual User User { get; set; }
+
         [Column("SiteId", TypeName = "UNIQUEIDENTIFIER")]
         public Guid? SiteId { get; set; }
+
+        [ForeignKey("SiteId")]
+        public virtual Site Site { get; set; }
 
         #endregion Property
 

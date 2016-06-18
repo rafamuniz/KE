@@ -94,18 +94,18 @@
     @if (this.HasRoles("Customer", "General Manager", "Supervisor", "Operator"))
     {
         @*<li class="treeview @Html.MenuItemActive("Dashboard", "Site", "Customer")">
-            <a href="/Customer/Dashboard/Site">
-                <img src="/images/dashboard.png" alt="dashboard" title="dashboard">
-                <p>SITE DASHBOARD</p>
-            </a>
-        </li>
+                <a href="/Customer/Dashboard/Site">
+                    <img src="/images/dashboard.png" alt="dashboard" title="dashboard">
+                    <p>SITE DASHBOARD</p>
+                </a>
+            </li>
 
-        <li class="treeview @Html.MenuItemActive("Dashboard", "Tank", "Customer")">
-            <a href="/Customer/Dashboard/Tanks">
-                <img src="/images/dashboard.png" alt="dashboard" title="dashboard">
-                <p>TANK DASHBOARD</p>
-            </a>
-        </li>*@
+            <li class="treeview @Html.MenuItemActive("Dashboard", "Tank", "Customer")">
+                <a href="/Customer/Dashboard/Tanks">
+                    <img src="/images/dashboard.png" alt="dashboard" title="dashboard">
+                    <p>TANK DASHBOARD</p>
+                </a>
+            </li>*@
 
         <li class="treeview @Html.MenuItemActive("FastTracker", "Customer")">
             <a href="/Customer/FastTracker">
@@ -114,8 +114,8 @@
             </a>
         </li>
 
-        <li class="treeview @Html.MenuItemActive("Monitoring", "Customer")">
-            <a href="/Customer/Monitoring">
+        <li class="treeview @Html.MenuItemActive("Monitoring", "Index", "Customer")">
+            <a href="/Customer/Monitoring/Index">
                 <img src="/images/fast_track.png" alt="Monitoring" title="Monitoring">
                 <p>MONITORING</p>
             </a>
@@ -128,11 +128,11 @@
             </a>
         </li>
 
-        @*<li class="treeview @Html.MenuItemActive("Log", "Customer")">
-                <a href="#">
-                    <img src="/images/loga_sample.png" alt="logs" title="logs">
-                    <p>LOG A SAMPLE</p>
-                </a>
-            </li>*@
+        <li class="treeview @Html.MenuItemActive("Log", "Index", "Customer")">
+            <a href="/Customer/Log/Index">
+                <img src="/images/loga_sample.png" alt="logs" title="logs">
+                <p>LOGS</p>
+            </a>
+        </li>
     }
 </ul>

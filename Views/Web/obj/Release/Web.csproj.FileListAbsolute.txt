@@ -55,7 +55,6 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\We
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\Owin.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\SendGrid.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\SendGrid.SmtpApi.dll
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\SendGridMail.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\System.Net.Http.Formatting.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\System.Web.Helpers.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\System.Web.Http.dll
@@ -102,3 +101,7 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\We
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Release\Web.csprojResolveAssemblyReference.cache
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Release\KarmicEnergy.Web.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Release\KarmicEnergy.Web.pdb
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\SendGrid.CSharp.HTTP.Client.dll
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Release\KarmicEnergy.Web.Migrations.Initial.resources
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Release\KarmicEnergy.Web.Migrations.Initial1.resources
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Release\Web.csproj.GenerateResource.Cache

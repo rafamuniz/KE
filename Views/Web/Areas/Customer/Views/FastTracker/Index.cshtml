@@ -65,25 +65,20 @@
     }
 </div>
 
-<div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 box-back">
-        <span style="font-weight: bold; text-align: left !important;">Alarms</span>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-back">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <span class="text-bold" style="text-align: left !important;">Alarms</span>
     </div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 box-back">
 
-    </div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 box-back">
-
-    </div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 box-back">
-
-    </div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 box-back">
-
-    </div>
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 box-back">
-
-    </div>
+    @if (Model.Triggers.Any())
+    {
+        foreach (var trigger in Model.Triggers)
+        {
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <span>@trigger.ItemName</span>
+            </div>
+        }
+    }
 </div>
 
 <div class="form-group" style="margin-top:15px;">
@@ -93,7 +88,7 @@
         </div>
 
         @if (Model.Tanks.Any())
-        {
+            {
             <div class="row" style="margin: 0px !important;">
                 @foreach (var tank in Model.Tanks)
                 {
@@ -168,6 +163,21 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
             <div class="title blue">
                 <h2>WATER QUALITY</h2>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <div class="text-left text-bold"><span>Chlorides</span></div>
+                <div class="text-right"><span>@Model.WaterQuality.ChloridesLastEventValue</span></div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <div class="text-left text-bold"><span>pH A</span></div>
+                <div class="text-right"><span>@Model.WaterQuality.PHLastEventValue</span></div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <div class="text-left text-bold"><span>Temperature A</span></div>
+                <div class="text-right"><span>@Model.WaterQuality.TemperatureAmbientLastEventValue</span></div>
             </div>
         </div>
     </div>

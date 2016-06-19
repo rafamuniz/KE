@@ -10,14 +10,14 @@ namespace KarmicEnergy.Web
         {
             #region Scripts
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-{version}.js"));
+                        "~/Scripts/jquery/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate.min.js",
-                        "~/Scripts/jquery.validate.unobtrusive.min.js"));
+                        "~/Scripts/jquery/jquery.validate.min.js",
+                        "~/Scripts/jquery/jquery.validate.unobtrusive.min.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -40,23 +40,26 @@ namespace KarmicEnergy.Web
                      "~/Scripts/app/utils.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/slimscroll").Include(
-                      "~/Scripts/jquery.slimscroll.min.js"));
+                      "~/Scripts/jquery/jquery.slimscroll.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/sparkline").Include(
-                     "~/Scripts/jquery.sparkline.min.js"));
+                     "~/Scripts/jquery/jquery.sparkline.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/grid").Include(
-                      "~/Scripts/gridmvc.min.js"));
+                      "~/Scripts/gridmvc/gridmvc.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery-mask").Include(
                     "~/Scripts/jquery/jquery.mask.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/inputmask").Include(
-                    "~/Scripts/jquery.inputmask/inputmask.js",
-                    "~/Scripts/jquery.inputmask/jquery.inputmask.js",
-                    "~/Scripts/jquery.inputmask/inputmask.extensions.js",
-                    "~/Scripts/jquery.inputmask/inputmask.date.extensions.js",
-                    "~/Scripts/jquery.inputmask/inputmask.numeric.extensions.js"));
+                    "~/Scripts/inputmask/inputmask.js",
+                    "~/Scripts/inputmask/jquery.inputmask.js",
+                    "~/Scripts/inputmask/inputmask.extensions.js",
+                    "~/Scripts/inputmask/inputmask.date.extensions.js",
+                    "~/Scripts/inputmask/inputmask.numeric.extensions.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery-inputmask").Include(
+                         "~/Scripts/jquery/jquery.inputmask.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
                     "~/Scripts/moment.min.js"));
@@ -71,7 +74,7 @@ namespace KarmicEnergy.Web
 
             #region Style
 
-            bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
+            bundles.Add(new StyleBundle("~/Content/bootstrapcss").Include(
                         "~/Content/bootstrap/bootstrap.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/bootstrap-datepicker").Include(
@@ -89,7 +92,7 @@ namespace KarmicEnergy.Web
 
             #endregion Style
 
-            //BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

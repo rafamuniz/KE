@@ -289,7 +289,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsTankBySiteId(Guid siteId)
         {
-            var tanks = LoadTanks(CustomerId, siteId);
+            var tanks = LoadTankSensors(CustomerId, siteId);
             SelectList obgTanks = new SelectList(tanks, "Id", "Name", 0);
             return Json(obgTanks, JsonRequestBehavior.AllowGet);
         }
@@ -298,7 +298,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsSensorByTankId(Guid tankId)
         {
-            var sensors = LoadSensors(CustomerId, tankId);
+            var sensors = LoadTankSensors(CustomerId, tankId);
             SelectList obgSensors = new SelectList(sensors, "Id", "Name", 0);
             return Json(obgSensors, JsonRequestBehavior.AllowGet);
         }

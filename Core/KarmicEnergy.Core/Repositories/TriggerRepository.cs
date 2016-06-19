@@ -16,7 +16,7 @@ namespace KarmicEnergy.Core.Repositories
         }
         #endregion Constructor               
 
-        public List<Trigger> GetsBySite(Guid siteId)
+        public List<Trigger> GetsAllBySite(Guid siteId)
         {
             List<Trigger> triggers = new List<Trigger>();
 
@@ -28,6 +28,11 @@ namespace KarmicEnergy.Core.Repositories
             triggers.AddRange(triggertanks);
 
             return triggers;
+        }
+
+        public List<Trigger> GetsBySite(Guid siteId, Int32 quantity = 5)
+        {
+            return base.Find(x => x.SensorItem.Sensor.SiteId == siteId && x.DeletedDate == null).Take(quantity).ToList();
         }
 
         public List<Trigger> GetsByTank(Guid tankId)

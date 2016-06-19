@@ -19,7 +19,6 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
         #region Property
 
         public Guid Id { get; set; }
-        public Guid TriggerId { get; set; }
 
         public Int16 SeverityId { get; set; }
 
@@ -28,6 +27,8 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
 
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+
+        public Boolean HasAlarm { get; set; }
 
         #endregion Property        
 
@@ -50,6 +51,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
             Mapper.CreateMap<Core.Entities.Alarm, AlarmViewModel>();
             var viewModel = Mapper.Map<Core.Entities.Alarm, AlarmViewModel>(entity);
 
+            viewModel.Id = entity.Id;
             viewModel.ItemId = entity.Trigger.SensorItem.Item.Id;
             viewModel.ItemName = entity.Trigger.SensorItem.Item.Name;
             viewModel.SeverityId = entity.Trigger.SeverityId;

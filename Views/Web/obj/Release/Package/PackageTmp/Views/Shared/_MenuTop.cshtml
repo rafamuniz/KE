@@ -7,7 +7,7 @@
 
         @if (Request.IsAuthenticated)
         {
-            if (this.HasRoles("Customer", "CustomerAdmin", "CustomerOperator"))
+            if (this.HasRoles("Customer", "General Manager", "Supervisor", "Operator"))
             {
                 <!-- Notifications -->
                 <li class="dropdown notifications-menu">

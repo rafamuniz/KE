@@ -15,5 +15,7 @@ namespace KarmicEnergy.Core.Repositories
 
         List<Sensor> GetsBySite(Guid siteId);
         List<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId);
+
+        List<Sensor> GetsBySiteAndSensorType(Guid siteId, SensorTypeEnum sensorType);
     }
 }

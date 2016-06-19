@@ -8,6 +8,7 @@ namespace KarmicEnergy.Core.Repositories
     {
         List<SensorItemEvent> GetsBySite(Guid siteId);
         List<SensorItemEvent> GetsByTank(Guid tankId);
+        SensorItemEvent GetLastEventBySensorItem(Guid sensorItemId);
 
         SensorItemEvent GetLastEventByTankAndItem(Guid tankId, ItemEnum item);
         SensorItemEvent GetLastEventBySiteAndItem(Guid siteId, ItemEnum item);

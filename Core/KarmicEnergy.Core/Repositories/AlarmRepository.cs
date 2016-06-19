@@ -74,5 +74,15 @@ namespace KarmicEnergy.Core.Repositories
 
             return total;
         }
+
+        /// <summary>
+        /// Get Alarm Active by TriggerId
+        /// </summary>
+        /// <param name="triggerId"></param>
+        /// <returns></returns>
+        public Alarm GetActiveByTrigger(Guid triggerId)
+        {
+            return base.Find(x => x.TriggerId == triggerId && x.EndDate == null).OrderByDescending(x => x.StartDate).SingleOrDefault();
+        }
     }
 }

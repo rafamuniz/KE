@@ -10,9 +10,10 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
         #region Constructor
         public ListViewModel()
         {
-            Tanks = new List<TankViewModel>();            
+            Tanks = new List<TankViewModel>();
             FlowMeters = new List<FlowMeterViewModel>();
-            Alarms = new List<AlarmViewModel>();
+            Triggers = new List<TriggerViewModel>();
+            WaterQuality = new WaterQualityViewModel();
         }
         #endregion Constructor
 
@@ -30,7 +31,9 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
 
         public List<FlowMeterViewModel> FlowMeters { get; set; }
 
-        public List<AlarmViewModel> Alarms { get; set; }
+        public List<TriggerViewModel> Triggers { get; set; }
+
+        public WaterQualityViewModel WaterQuality { get; set; }
 
         #endregion Property
 

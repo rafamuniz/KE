@@ -81,7 +81,7 @@ namespace KarmicEnergy.Web.Controllers
                 {
                     Guid siteId;
                     if (Guid.TryParse(ConfigurationManager.AppSettings["Site:Id"], out siteId))
-                        return siteId;                                    
+                        return siteId;
                 }
 
                 return Guid.Empty;
@@ -429,13 +429,21 @@ namespace KarmicEnergy.Web.Controllers
             ViewBag.Tanks = tanks;
             return tanks;
         }
-        protected List<Sensor> LoadSensors(Guid customerId, Guid tankId)
+
+        protected List<Sensor> LoadTankSensors(Guid customerId, Guid tankId)
         {
             List<Sensor> sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndTank(customerId, tankId);
             ViewBag.Sensors = sensors;
             return sensors;
         }
 
+        protected List<Sensor> LoadSiteSensors(Guid customerId, Guid siteId)
+        {
+            List<Sensor> sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndSite(customerId, siteId);
+            ViewBag.Sensors = sensors;
+            return sensors;
+        }
+        
         protected List<SensorType> LoadSensorTypes()
         {
             List<SensorType> sensorTypes = KEUnitOfWork.SensorTypeRepository.GetAll().ToList();

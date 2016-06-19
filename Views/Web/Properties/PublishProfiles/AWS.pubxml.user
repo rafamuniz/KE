@@ -92,19 +92,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/10/2016 21:19:10</publishTime>
     </File>
     <File Include="Areas/Customer/Views/FastTracker/Index.cshtml">
-      <publishTime>06/17/2016 00:08:54</publishTime>
+      <publishTime>06/20/2016 00:41:58</publishTime>
     </File>
     <File Include="Areas/Customer/Views/FastTracker/_Tank.cshtml">
       <publishTime>04/02/2016 12:38:46</publishTime>
     </File>
+    <File Include="Areas/Customer/Views/Log/Index.cshtml">
+      <publishTime>06/18/2016 23:26:26</publishTime>
+    </File>
+    <File Include="Areas/Customer/Views/Monitoring/Alarms.cshtml">
+      <publishTime>06/18/2016 01:05:05</publishTime>
+    </File>
     <File Include="Areas/Customer/Views/Monitoring/Index.cshtml">
-      <publishTime>06/06/2016 02:41:52</publishTime>
+      <publishTime>06/17/2016 23:58:13</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Report/Index.cshtml">
       <publishTime>06/03/2016 21:40:36</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Sensor/Create.cshtml">
-      <publishTime>06/01/2016 13:03:57</publishTime>
+      <publishTime>06/19/2016 19:30:24</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Sensor/Edit.cshtml">
       <publishTime>06/01/2016 13:03:59</publishTime>
@@ -134,7 +140,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/01/2016 13:04:09</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Site/Index.cshtml">
-      <publishTime>05/25/2016 15:38:47</publishTime>
+      <publishTime>06/17/2016 21:50:33</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Site/Report.cshtml">
       <publishTime>05/15/2016 00:53:14</publishTime>
@@ -167,10 +173,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/31/2016 20:43:30</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Trigger/Create.cshtml">
-      <publishTime>06/09/2016 23:56:20</publishTime>
+      <publishTime>06/19/2016 19:47:39</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Trigger/Edit.cshtml">
-      <publishTime>06/10/2016 01:01:40</publishTime>
+      <publishTime>06/19/2016 20:54:24</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Trigger/Index.cshtml">
       <publishTime>06/10/2016 00:25:15</publishTime>
@@ -212,13 +218,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>06/16/2016 23:16:47</publishTime>
+      <publishTime>06/20/2016 01:01:08</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>06/17/2016 00:12:43</publishTime>
+      <publishTime>06/20/2016 02:28:38</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -299,88 +305,91 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 00:39:42</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe.config">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/csc.rsp">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/csi.exe">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/csi.rsp">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:28</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:28</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:28</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:28</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:28</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:28</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.AppContext.dll">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Collections.Immutable.dll">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Console.dll">
       <publishTime>03/07/2016 00:47:20</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.dll">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Reflection.Metadata.dll">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe.config">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.rsp">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
-      <publishTime>03/29/2016 14:28:16</publishTime>
+      <publishTime>05/13/2016 17:51:30</publishTime>
+    </File>
+    <File Include="bin/SendGrid.CSharp.HTTP.Client.dll">
+      <publishTime>06/16/2016 16:41:16</publishTime>
     </File>
     <File Include="bin/SendGrid.dll">
-      <publishTime>03/12/2016 21:27:31</publishTime>
+      <publishTime>06/16/2016 16:40:20</publishTime>
     </File>
     <File Include="bin/SendGrid.SmtpApi.dll">
       <publishTime>03/12/2016 21:27:30</publishTime>
@@ -445,23 +454,278 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/bootstrap.min.css.map">
       <publishTime>03/07/2016 00:47:19</publishTime>
     </File>
+    <File Include="Content/bootstrap/bootstrap-theme.css">
+      <publishTime>06/17/2016 22:07:46</publishTime>
+    </File>
+    <File Include="Content/bootstrap/bootstrap-theme.css.map">
+      <publishTime>06/17/2016 22:07:46</publishTime>
+    </File>
+    <File Include="Content/bootstrap/bootstrap-theme.min.css">
+      <publishTime>06/17/2016 22:07:46</publishTime>
+    </File>
+    <File Include="Content/bootstrap/bootstrap.css">
+      <publishTime>06/17/2016 22:07:46</publishTime>
+    </File>
+    <File Include="Content/bootstrap/bootstrap.css.map">
+      <publishTime>06/17/2016 22:07:46</publishTime>
+    </File>
+    <File Include="Content/bootstrap/bootstrap.min.css">
+      <publishTime>06/17/2016 22:07:46</publishTime>
+    </File>
+    <File Include="Content/bootstrap/datepicker.css">
+      <publishTime>06/17/2016 20:44:10</publishTime>
+    </File>
+    <File Include="Content/bootstrap/datepicker.less">
+      <publishTime>06/17/2016 20:44:10</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/accordion.css">
+      <publishTime>03/30/2016 03:59:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/all.css">
+      <publishTime>03/30/2016 03:59:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/autocomplete.css">
+      <publishTime>03/30/2016 03:59:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/base.css">
+      <publishTime>03/30/2016 03:59:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/button.css">
+      <publishTime>03/30/2016 03:59:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/core.css">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/datepicker.css">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/dialog.css">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/draggable.css">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/images/ui-bg_flat_75_ffffff_40x100.png">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/images/ui-bg_glass_65_ffffff_1x400.png">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/images/ui-bg_glass_75_dadada_1x400.png">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/images/ui-icons_222222_256x240.png">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/images/ui-icons_2e83ff_256x240.png">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/images/ui-icons_454545_256x240.png">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/images/ui-icons_888888_256x240.png">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/images/ui-icons_cd0a0a_256x240.png">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/menu.css">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/progressbar.css">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/resizable.css">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/selectable.css">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/selectmenu.css">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/slider.css">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/sortable.css">
+      <publishTime>03/30/2016 03:59:41</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/spinner.css">
+      <publishTime>03/30/2016 03:59:40</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/tabs.css">
+      <publishTime>03/30/2016 03:59:40</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/theme.css">
+      <publishTime>03/30/2016 03:59:40</publishTime>
+    </File>
+    <File Include="Content/bootstrap/themes/base/tooltip.css">
+      <publishTime>03/30/2016 03:59:40</publishTime>
+    </File>
     <File Include="Content/font-awesome.css">
-      <publishTime>03/07/2016 14:26:13</publishTime>
+      <publishTime>04/22/2016 13:48:10</publishTime>
     </File>
     <File Include="Content/font-awesome.min.css">
-      <publishTime>03/07/2016 14:26:13</publishTime>
+      <publishTime>04/22/2016 13:48:09</publishTime>
     </File>
     <File Include="Content/fonts.css">
       <publishTime>03/07/2016 14:33:49</publishTime>
     </File>
+    <File Include="Content/fonts/fontawesome-webfont.eot">
+      <publishTime>04/22/2016 13:48:09</publishTime>
+    </File>
+    <File Include="Content/fonts/fontawesome-webfont.svg">
+      <publishTime>04/22/2016 13:48:09</publishTime>
+    </File>
+    <File Include="Content/fonts/fontawesome-webfont.ttf">
+      <publishTime>04/22/2016 13:48:09</publishTime>
+    </File>
+    <File Include="Content/fonts/fontawesome-webfont.woff">
+      <publishTime>04/22/2016 13:48:08</publishTime>
+    </File>
+    <File Include="Content/fonts/fontawesome-webfont.woff2">
+      <publishTime>04/22/2016 13:48:08</publishTime>
+    </File>
+    <File Include="Content/fonts/FontAwesome.otf">
+      <publishTime>04/22/2016 13:48:08</publishTime>
+    </File>
+    <File Include="Content/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>06/17/2016 22:07:46</publishTime>
+    </File>
+    <File Include="Content/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>06/17/2016 22:07:46</publishTime>
+    </File>
+    <File Include="Content/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>06/17/2016 22:07:46</publishTime>
+    </File>
+    <File Include="Content/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>06/17/2016 22:07:46</publishTime>
+    </File>
+    <File Include="Content/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>06/17/2016 22:07:46</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-bold-webfont.eot">
+      <publishTime>02/19/2014 02:37:48</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-bold-webfont.svg">
+      <publishTime>02/19/2014 02:37:48</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-bold-webfont.ttf">
+      <publishTime>02/19/2014 02:37:48</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-bold-webfont.woff">
+      <publishTime>02/19/2014 02:37:48</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-condbold-webfont.eot">
+      <publishTime>02/19/2014 02:07:42</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-condbold-webfont.svg">
+      <publishTime>02/19/2014 02:07:42</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-condbold-webfont.ttf">
+      <publishTime>02/19/2014 02:07:42</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-condbold-webfont.woff">
+      <publishTime>02/19/2014 02:07:42</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-italic-webfont.eot">
+      <publishTime>02/19/2014 04:04:22</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-italic-webfont.svg">
+      <publishTime>02/19/2014 04:04:22</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-italic-webfont.ttf">
+      <publishTime>02/19/2014 04:04:22</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-italic-webfont.woff">
+      <publishTime>02/19/2014 04:04:22</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-light-webfont.eot">
+      <publishTime>03/14/2014 15:21:04</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-light-webfont.svg">
+      <publishTime>01/30/1980 00:00:00</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-light-webfont.ttf">
+      <publishTime>01/30/1980 00:00:00</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-light-webfont.woff">
+      <publishTime>01/30/1980 00:00:00</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-regular-webfont.eot">
+      <publishTime>02/19/2014 03:59:22</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-regular-webfont.svg">
+      <publishTime>02/19/2014 03:59:22</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-regular-webfont.ttf">
+      <publishTime>02/19/2014 03:59:22</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-regular-webfont.woff">
+      <publishTime>02/19/2014 03:59:22</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-semibolditalic-webfont.eot">
+      <publishTime>02/04/1980 00:00:00</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-semibolditalic-webfont.svg">
+      <publishTime>02/07/1980 00:00:00</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-semibolditalic-webfont.ttf">
+      <publishTime>02/07/1980 00:00:00</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-semibolditalic-webfont.woff">
+      <publishTime>02/07/1980 00:00:00</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-semibold_0-webfont.eot">
+      <publishTime>02/24/2014 03:55:42</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-semibold_0-webfont.svg">
+      <publishTime>02/24/2014 03:55:42</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-semibold_0-webfont.ttf">
+      <publishTime>02/24/2014 03:55:42</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-semibold_0-webfont.woff">
+      <publishTime>02/24/2014 03:55:42</publishTime>
+    </File>
     <File Include="Content/Gridmvc.css">
       <publishTime>03/10/2016 22:54:45</publishTime>
+    </File>
+    <File Include="Content/gridmvc.datepicker.css">
+      <publishTime>06/18/2016 00:55:33</publishTime>
+    </File>
+    <File Include="Content/gridmvc.datepicker.min.css">
+      <publishTime>06/18/2016 00:55:33</publishTime>
+    </File>
+    <File Include="Content/gridmvc/Gridmvc.css">
+      <publishTime>03/10/2016 22:54:45</publishTime>
+    </File>
+    <File Include="Content/gridmvc/gridmvc.datepicker.css">
+      <publishTime>06/18/2016 00:55:33</publishTime>
+    </File>
+    <File Include="Content/gridmvc/gridmvc.datepicker.min.css">
+      <publishTime>06/18/2016 00:55:33</publishTime>
     </File>
     <File Include="Content/Site - Copy.css">
       <publishTime>03/11/2016 21:39:49</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>06/15/2016 23:30:49</publishTime>
+      <publishTime>06/19/2016 00:30:01</publishTime>
     </File>
     <File Include="Content/themes/base/accordion.css">
       <publishTime>03/30/2016 03:59:42</publishTime>
@@ -572,121 +836,121 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/26/2016 21:36:32</publishTime>
     </File>
     <File Include="fonts/fontawesome-webfont.eot">
-      <publishTime>04/22/2016 13:48:09</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/fontawesome-webfont.svg">
-      <publishTime>04/22/2016 13:48:09</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/fontawesome-webfont.ttf">
-      <publishTime>04/22/2016 13:48:09</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/fontawesome-webfont.woff">
-      <publishTime>04/22/2016 13:48:08</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/fontawesome-webfont.woff2">
-      <publishTime>04/22/2016 13:48:08</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/FontAwesome.otf">
-      <publishTime>04/22/2016 13:48:08</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>03/07/2016 00:47:19</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>03/07/2016 00:47:19</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>03/07/2016 00:47:19</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>03/07/2016 00:47:19</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff2">
-      <publishTime>03/07/2016 00:47:19</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-bold-webfont.eot">
-      <publishTime>02/19/2014 02:37:48</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-bold-webfont.svg">
-      <publishTime>02/19/2014 02:37:48</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-bold-webfont.ttf">
-      <publishTime>02/19/2014 02:37:48</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-bold-webfont.woff">
-      <publishTime>02/19/2014 02:37:48</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-condbold-webfont.eot">
-      <publishTime>02/19/2014 02:07:42</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-condbold-webfont.svg">
-      <publishTime>02/19/2014 02:07:42</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-condbold-webfont.ttf">
-      <publishTime>02/19/2014 02:07:42</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-condbold-webfont.woff">
-      <publishTime>02/19/2014 02:07:42</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-italic-webfont.eot">
-      <publishTime>02/19/2014 04:04:22</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-italic-webfont.svg">
-      <publishTime>02/19/2014 04:04:22</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-italic-webfont.ttf">
-      <publishTime>02/19/2014 04:04:22</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-italic-webfont.woff">
-      <publishTime>02/19/2014 04:04:22</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-light-webfont.eot">
-      <publishTime>03/14/2014 15:21:04</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-light-webfont.svg">
-      <publishTime>01/30/1980 00:00:00</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-light-webfont.ttf">
-      <publishTime>01/30/1980 00:00:00</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-light-webfont.woff">
-      <publishTime>01/30/1980 00:00:00</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-regular-webfont.eot">
-      <publishTime>02/19/2014 03:59:22</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-regular-webfont.svg">
-      <publishTime>02/19/2014 03:59:22</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-regular-webfont.ttf">
-      <publishTime>02/19/2014 03:59:22</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-regular-webfont.woff">
-      <publishTime>02/19/2014 03:59:22</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-semibolditalic-webfont.eot">
-      <publishTime>02/04/1980 00:00:00</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-semibolditalic-webfont.svg">
-      <publishTime>02/07/1980 00:00:00</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-semibolditalic-webfont.ttf">
-      <publishTime>02/07/1980 00:00:00</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-semibolditalic-webfont.woff">
-      <publishTime>02/07/1980 00:00:00</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-semibold_0-webfont.eot">
-      <publishTime>02/24/2014 03:55:42</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-semibold_0-webfont.svg">
-      <publishTime>02/24/2014 03:55:42</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-semibold_0-webfont.ttf">
-      <publishTime>02/24/2014 03:55:42</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="fonts/opensans-semibold_0-webfont.woff">
-      <publishTime>02/24/2014 03:55:42</publishTime>
+      <publishTime>06/17/2016 23:24:25</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>03/07/2016 12:13:29</publishTime>
@@ -3598,6 +3862,102 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="images/tankmodels/2/CylVert_NoData.png">
       <publishTime>05/12/2016 23:04:29</publishTime>
     </File>
+    <File Include="images/tankmodels/3/CylHoriz-blue-10.png">
+      <publishTime>06/20/2016 00:16:55</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-blue-100.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-blue-20.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-blue-30.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-blue-40.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-blue-50.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-blue-60.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-blue-70.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-blue-80.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-blue-90.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-empty.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-measure.png">
+      <publishTime>05/04/2016 17:22:10</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-orange-10.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-orange-100.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-orange-20.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-orange-30.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-orange-40.png">
+      <publishTime>06/20/2016 00:16:56</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-orange-50.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-orange-60.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-orange-70.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-orange-80.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-orange-90.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-red-10.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-red-100.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-red-20.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-red-30.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-red-40.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-red-50.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-red-60.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-red-70.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-red-80.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/3/CylHoriz-red-90.png">
+      <publishTime>06/20/2016 00:16:57</publishTime>
+    </File>
     <File Include="images/tankmodels/3/CylHoriz_0.png">
       <publishTime>05/06/2016 22:07:07</publishTime>
     </File>
@@ -3636,6 +3996,102 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="images/tankmodels/3/CylHoriz_NoData.png">
       <publishTime>05/12/2016 23:05:20</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-blue-10.png">
+      <publishTime>06/20/2016 00:17:05</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-blue-100.png">
+      <publishTime>06/20/2016 00:17:06</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-blue-20.png">
+      <publishTime>06/20/2016 00:17:06</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-blue-30.png">
+      <publishTime>06/20/2016 00:17:06</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-blue-40.png">
+      <publishTime>06/20/2016 00:17:06</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-blue-50.png">
+      <publishTime>06/20/2016 00:17:06</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-blue-60.png">
+      <publishTime>06/20/2016 00:17:06</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-blue-70.png">
+      <publishTime>06/20/2016 00:17:06</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-blue-80.png">
+      <publishTime>06/20/2016 00:17:06</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-blue-90.png">
+      <publishTime>06/20/2016 00:17:06</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-empty.png">
+      <publishTime>06/20/2016 00:17:06</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-measure.png">
+      <publishTime>05/04/2016 17:22:11</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-orange-10.png">
+      <publishTime>06/20/2016 00:17:06</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-orange-100.png">
+      <publishTime>06/20/2016 00:17:06</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-orange-20.png">
+      <publishTime>06/20/2016 00:17:06</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-orange-30.png">
+      <publishTime>06/20/2016 00:17:06</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-orange-40.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-orange-50.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-orange-60.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-orange-70.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-orange-80.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-orange-90.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-red-10.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-red-100.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-red-20.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-red-30.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-red-40.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-red-50.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-red-60.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-red-70.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-red-80.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
+    </File>
+    <File Include="images/tankmodels/4/StadiumVert-red-90.png">
+      <publishTime>06/20/2016 00:17:07</publishTime>
     </File>
     <File Include="images/tankmodels/4/StadiumVert_0.png">
       <publishTime>05/06/2016 22:05:37</publishTime>
@@ -3971,7 +4427,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/11/2016 22:26:55</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>05/16/2016 01:22:16</publishTime>
+      <publishTime>06/18/2016 00:55:34</publishTime>
     </File>
     <File Include="Scripts/angular-animate.js">
       <publishTime>04/22/2016 13:48:05</publishTime>
@@ -4199,16 +4655,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2016 12:03:13</publishTime>
     </File>
     <File Include="Scripts/app.js">
-      <publishTime>06/08/2016 00:34:12</publishTime>
+      <publishTime>06/17/2016 23:21:20</publishTime>
     </File>
     <File Include="Scripts/app/dashboard.js">
       <publishTime>06/05/2016 21:17:03</publishTime>
     </File>
     <File Include="Scripts/app/fasttracker.js">
-      <publishTime>04/21/2016 01:11:22</publishTime>
+      <publishTime>06/19/2016 01:24:50</publishTime>
     </File>
     <File Include="Scripts/app/sensor.js">
-      <publishTime>05/19/2016 13:04:35</publishTime>
+      <publishTime>06/19/2016 19:30:34</publishTime>
     </File>
     <File Include="Scripts/app/sensorgroup.js">
       <publishTime>05/08/2016 21:00:24</publishTime>
@@ -4226,10 +4682,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/15/2016 22:53:17</publishTime>
     </File>
     <File Include="Scripts/app/trigger.js">
-      <publishTime>05/12/2016 01:34:56</publishTime>
+      <publishTime>06/19/2016 19:38:19</publishTime>
     </File>
     <File Include="Scripts/app/utils.js">
-      <publishTime>05/09/2016 15:02:39</publishTime>
+      <publishTime>06/17/2016 21:41:22</publishTime>
     </File>
     <File Include="Scripts/bootstrap-notify.js">
       <publishTime>03/23/2016 23:44:28</publishTime>
@@ -4242,6 +4698,21 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/bootstrap.min.js">
       <publishTime>03/07/2016 00:47:19</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/bootstrap-datepicker.js">
+      <publishTime>06/18/2016 00:55:28</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/bootstrap-notify.js">
+      <publishTime>03/23/2016 23:44:28</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/bootstrap-notify.min.js">
+      <publishTime>03/23/2016 23:44:28</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/bootstrap.js">
+      <publishTime>06/17/2016 22:07:46</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/bootstrap.min.js">
+      <publishTime>06/17/2016 22:07:40</publishTime>
     </File>
     <File Include="Scripts/d3/d3.js">
       <publishTime>05/16/2016 01:22:16</publishTime>
@@ -4364,6 +4835,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:45</publishTime>
     </File>
     <File Include="Scripts/gridmvc.min.js">
+      <publishTime>03/10/2016 22:54:45</publishTime>
+    </File>
+    <File Include="Scripts/gridmvc/gridmvc.js">
+      <publishTime>03/10/2016 22:54:45</publishTime>
+    </File>
+    <File Include="Scripts/gridmvc/gridmvc.lang.ru.js">
+      <publishTime>03/10/2016 22:54:45</publishTime>
+    </File>
+    <File Include="Scripts/gridmvc/gridmvc.min.js">
       <publishTime>03/10/2016 22:54:45</publishTime>
     </File>
     <File Include="Scripts/highcharts/adapters/standalone-framework.js">
@@ -6670,6 +7150,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/i18n/angular-locale_zu.js">
       <publishTime>04/22/2016 13:46:55</publishTime>
     </File>
+    <File Include="Scripts/inputmask/inputmask.date.extensions.js">
+      <publishTime>04/22/2016 13:48:34</publishTime>
+    </File>
+    <File Include="Scripts/inputmask/inputmask.extensions.js">
+      <publishTime>04/22/2016 13:48:31</publishTime>
+    </File>
+    <File Include="Scripts/inputmask/inputmask.js">
+      <publishTime>04/22/2016 13:48:29</publishTime>
+    </File>
+    <File Include="Scripts/inputmask/inputmask.numeric.extensions.js">
+      <publishTime>04/22/2016 13:48:26</publishTime>
+    </File>
+    <File Include="Scripts/inputmask/inputmask.phone.extensions.js">
+      <publishTime>04/22/2016 13:48:24</publishTime>
+    </File>
+    <File Include="Scripts/inputmask/inputmask.regex.extensions.js">
+      <publishTime>04/22/2016 13:48:22</publishTime>
+    </File>
     <File Include="Scripts/jquery-2.2.1.js">
       <publishTime>03/07/2016 00:47:19</publishTime>
     </File>
@@ -6687,6 +7185,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/jquery-2.2.3.min.map">
       <publishTime>04/22/2016 13:48:12</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.0.0.js">
+      <publishTime>06/17/2016 22:07:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.0.0.min.js">
+      <publishTime>06/17/2016 22:07:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.0.0.min.map">
+      <publishTime>06/17/2016 22:07:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.0.0.slim.js">
+      <publishTime>06/17/2016 22:07:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.0.0.slim.min.js">
+      <publishTime>06/17/2016 22:07:28</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.0.0.slim.min.map">
+      <publishTime>06/17/2016 22:07:28</publishTime>
     </File>
     <File Include="Scripts/jquery-ui-1.11.4.js">
       <publishTime>03/30/2016 03:59:39</publishTime>
@@ -6742,11 +7258,65 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
       <publishTime>03/07/2016 00:39:36</publishTime>
     </File>
+    <File Include="Scripts/jquery/jquery-3.0.0.js">
+      <publishTime>06/17/2016 22:07:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery-3.0.0.min.js">
+      <publishTime>06/17/2016 22:07:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery-3.0.0.min.map">
+      <publishTime>06/17/2016 22:07:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery-3.0.0.slim.js">
+      <publishTime>06/17/2016 22:07:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery-3.0.0.slim.min.js">
+      <publishTime>06/17/2016 22:07:28</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery-3.0.0.slim.min.map">
+      <publishTime>06/17/2016 22:07:28</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery-ui-1.11.4.js">
+      <publishTime>03/30/2016 03:59:39</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery-ui-1.11.4.min.js">
+      <publishTime>03/30/2016 03:59:38</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery.dd.js">
+      <publishTime>03/18/2016 09:01:02</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery.dd.min.js">
+      <publishTime>03/18/2016 08:59:50</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery.inputmask.js">
+      <publishTime>04/22/2016 13:48:19</publishTime>
+    </File>
     <File Include="Scripts/jquery/jquery.mask.js">
       <publishTime>03/19/2016 21:03:48</publishTime>
     </File>
     <File Include="Scripts/jquery/jquery.mask.min.js">
       <publishTime>03/19/2016 21:03:48</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery.slimscroll.js">
+      <publishTime>03/07/2016 19:08:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery.slimscroll.min.js">
+      <publishTime>03/07/2016 19:08:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery.sparkline.min.js">
+      <publishTime>03/23/2016 23:52:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery.validate.js">
+      <publishTime>04/22/2016 13:48:40</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery.validate.min.js">
+      <publishTime>04/22/2016 13:48:37</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery.validate.unobtrusive.js">
+      <publishTime>03/07/2016 00:39:36</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery.validate.unobtrusive.min.js">
+      <publishTime>03/07/2016 00:39:36</publishTime>
     </File>
     <File Include="Scripts/jqwidgets/globalization/globalize.culture.cs-CZ.js">
       <publishTime>04/18/2016 09:34:58</publishTime>
@@ -8066,7 +8636,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/22/2016 13:46:54</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>06/15/2016 15:34:37</publishTime>
+      <publishTime>06/20/2016 01:29:40</publishTime>
     </File>
     <File Include="Views/Account/ChangePassword.cshtml">
       <publishTime>05/25/2016 20:10:14</publishTime>
@@ -8147,7 +8717,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 18:59:48</publishTime>
     </File>
     <File Include="Views/Shared/_ExternalMaster.cshtml">
-      <publishTime>05/07/2016 23:40:54</publishTime>
+      <publishTime>06/20/2016 02:28:03</publishTime>
     </File>
     <File Include="Views/Shared/_Footer.cshtml">
       <publishTime>05/13/2016 20:27:08</publishTime>
@@ -8159,7 +8729,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:45</publishTime>
     </File>
     <File Include="Views/Shared/_Internal.cshtml">
-      <publishTime>06/08/2016 00:28:19</publishTime>
+      <publishTime>06/20/2016 02:27:49</publishTime>
     </File>
     <File Include="Views/Shared/_InternalNoLeftMenu.cshtml">
       <publishTime>05/13/2016 20:30:04</publishTime>
@@ -8174,10 +8744,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:32:23</publishTime>
     </File>
     <File Include="Views/Shared/_MenuLeft.cshtml">
-      <publishTime>06/10/2016 21:42:51</publishTime>
+      <publishTime>06/18/2016 23:30:00</publishTime>
     </File>
     <File Include="Views/Shared/_MenuTop.cshtml">
-      <publishTime>06/06/2016 01:28:47</publishTime>
+      <publishTime>06/17/2016 18:14:32</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>04/15/2016 11:13:16</publishTime>
@@ -8186,7 +8756,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 01:07:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/17/2016 00:10:10</publishTime>
+      <publishTime>06/20/2016 01:01:52</publishTime>
     </File>
   </ItemGroup>
 </Project>

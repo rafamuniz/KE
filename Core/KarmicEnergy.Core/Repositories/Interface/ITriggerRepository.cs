@@ -6,7 +6,8 @@ namespace KarmicEnergy.Core.Repositories
 {
     public interface ITriggerRepository : IKERepositoryBase<Trigger>
     {
-        List<Trigger> GetsBySite(Guid siteId);
+        List<Trigger> GetsAllBySite(Guid siteId);
+        List<Trigger> GetsBySite(Guid siteId, Int32 quantity = 5);
         List<Trigger> GetsByTank(Guid tankId);
     }
 }

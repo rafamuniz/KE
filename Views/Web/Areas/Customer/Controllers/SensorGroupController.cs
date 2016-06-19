@@ -204,7 +204,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult GetsSensorByTankId(Guid tankId)
         {
-            var sensors = LoadSensors(CustomerId, tankId);
+            var sensors = LoadTankSensors(CustomerId, tankId);
             SelectList obgSensors = new SelectList(sensors, "Id", "Name", 0);
             return Json(obgSensors, JsonRequestBehavior.AllowGet);
         }

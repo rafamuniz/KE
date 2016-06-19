@@ -35,7 +35,7 @@ namespace KarmicEnergy.Web.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("IdentityConnection", throwIfV1Schema: false)
+            : base("KEConnection", throwIfV1Schema: false)
         {
             Database.SetInitializer(new DatabaseCreateIfNotExists());
         }

@@ -34,11 +34,11 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
                 var baseurl = "/images/tankmodels/";
       
                 if (!WaterVolumePercentage.HasValue)
-                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "NoData").Replace("-{color}", ""));
+                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "nodata").Replace("-{color}", ""));
 
                 if (WaterVolumePercentage <= 0)
                 {
-                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "Empty").Replace("{color}", TankColor));
+                    return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage.Replace("{info}", "empty").Replace("-{color}", ""));
                 }
                 else if (WaterVolumePercentage > 0 && WaterVolumePercentage < 20)
                 {

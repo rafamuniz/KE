@@ -110,6 +110,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 triggerViewModel = TriggerViewModel.Map(trigger);
                 if (alarm != null)
                 {
+                    triggerViewModel.AlarmId = alarm.Id;
                     triggerViewModel.HasAlarm = true;
                 }
 
@@ -128,6 +129,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 {
                     waterQualityViewModel.TemperatureAmbientLastEventValue = Decimal.Parse(ambient.Value);
                     waterQualityViewModel.TemperatureAmbientLastEventDate = ambient.EventDate;
+                    waterQualityViewModel.TemperatureAmbientSymbol = ambient.SensorItem.Unit.Symbol;
                 }
             }
 
@@ -138,6 +140,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 {
                     waterQualityViewModel.PHLastEventValue = Decimal.Parse(ph.Value);
                     waterQualityViewModel.PHLastEventDate = ph.EventDate;
+                    waterQualityViewModel.PHSymbol = ph.SensorItem.Unit.Symbol;
                 }
             }
 

@@ -10,7 +10,7 @@
     ViewBag.Title = "SITE";
 }
 
-@Styles.Render("~/Content/grid")
+@Styles.Render("~/Content/gridmvccss")
 
 <div class="pull-right">
     @Html.NoEncodeActionLink("<span>CREATE</span>", "Add new Site", "Create", "Site", routeValues: new { area = "Customer" }, htmlAttributes: new { @class = "btn" })
@@ -49,5 +49,5 @@
 }).WithPaging(10).Sortable(true).Filterable(true).WithMultipleFilters()
 
 @section Scripts {
-    @Scripts.Render("~/bundles/grid")
+    @Scripts.Render("~/bundles/gridmvc")
 }

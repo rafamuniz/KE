@@ -10,7 +10,7 @@
     ViewBag.Title = "Tank Report";
 }
 
-@Styles.Render("~/Content/grid")
+@Styles.Render("~/Content/gridmvccss")
 
 <div class="row" style="margin-bottom: 20px;">
     <div class="form-group">
@@ -61,7 +61,8 @@
 }).WithPaging(10).Sortable(true).Filterable().WithMultipleFilters()*@
 
 @section Scripts {
-    @Scripts.Render("~/bundles/grid")
+    @Scripts.Render("~/bundles/gridmvc")
+
     <script type="text/javascript">
         $(function () {
             showLoading();

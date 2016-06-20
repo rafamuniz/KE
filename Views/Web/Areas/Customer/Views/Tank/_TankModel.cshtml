@@ -12,7 +12,7 @@
             @Html.LabelFor(m => m.WaterVolumeCapacity, new { @class = "control-label" })
         </div>
         <div class="col-md-10">
-            @Html.EditorFor(m => m.WaterVolumeCapacity, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", id = "waterVolumeCapacity" } })
+            @Html.EditorFor(m => m.WaterVolumeCapacity, new { htmlAttributes = new { @class = "form-control", id = "waterVolumeCapacity" } })
             @Html.ValidationMessageFor(m => m.WaterVolumeCapacity, "", new { @class = "text-danger" })
         </div>
     </div>

@@ -2930,6 +2930,10 @@ p {
     border-color: #eed3d7;
 }
 
+.alert-danger span{
+    color: #A94442;
+}
+
 .alert-warning {
     border-color: #e08e0b;
 }

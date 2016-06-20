@@ -19,36 +19,39 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
         #region Property
         public Decimal? ChloridesLastEventValue { get; set; }
         public Decimal? ChloridesLastEventDate { get; set; }
+        public String ChloridesSymbol { get; set; }
 
         public Decimal? PHLastEventValue { get; set; }
         public DateTime? PHLastEventDate { get; set; }
+        public String PHSymbol { get; set; }
 
         public Decimal? TemperatureAmbientLastEventValue { get; set; }
         public DateTime? TemperatureAmbientLastEventDate { get; set; }
+        public String TemperatureAmbientSymbol { get; set; }
 
         #endregion Property        
 
         #region Map
 
-        public static List<WaterQualityViewModel> Map(List<Core.Entities.Alarm> entities)
-        {
-            List<WaterQualityViewModel> vms = new List<WaterQualityViewModel>();
+        //public static List<WaterQualityViewModel> Map(List<Core.Entities.Alarm> entities)
+        //{
+        //    List<WaterQualityViewModel> vms = new List<WaterQualityViewModel>();
 
-            if (entities != null && entities.Any())
-            {
-                entities.ForEach(c => vms.Add(WaterQualityViewModel.Map(c)));
-            }
+        //    if (entities != null && entities.Any())
+        //    {
+        //        entities.ForEach(c => vms.Add(WaterQualityViewModel.Map(c)));
+        //    }
 
-            return vms;
-        }
+        //    return vms;
+        //}
 
-        public static WaterQualityViewModel Map(Core.Entities.Alarm entity)
-        {
-            Mapper.CreateMap<Core.Entities.Alarm, WaterQualityViewModel>();
-            var viewModel = Mapper.Map<Core.Entities.Alarm, WaterQualityViewModel>(entity);
+        //public static WaterQualityViewModel Map(Core.Entities.Alarm entity)
+        //{
+        //    Mapper.CreateMap<Core.Entities.Alarm, WaterQualityViewModel>();
+        //    var viewModel = Mapper.Map<Core.Entities.Alarm, WaterQualityViewModel>(entity);
 
-            return viewModel;
-        }
+        //    return viewModel;
+        //}
 
         #endregion Map      
     }

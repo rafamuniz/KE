@@ -28,6 +28,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
 
+        public Guid AlarmId { get; set; }
         public Boolean HasAlarm { get; set; }
 
         #endregion Property        

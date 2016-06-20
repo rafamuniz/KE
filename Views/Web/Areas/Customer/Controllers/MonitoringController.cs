@@ -193,7 +193,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.AlarmRepository.Update(alarm);
                 KEUnitOfWork.Complete();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Alarms");
             }
             catch (Exception ex)
             {
@@ -235,7 +235,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.AlarmRepository.Update(alarm);
                 KEUnitOfWork.Complete();
 
-                return View();
+                return RedirectToAction("Alarms");
             }
             catch (Exception ex)
             {

@@ -10,7 +10,7 @@
         ViewBag.Title = "Stick Conversion";
     }
 
-    @Styles.Render("~/Content/grid")
+    @Styles.Render("~/Content/gridmvccss")
 
     <div class="pull-right">
         @Html.NoEncodeActionLink("<span>CREATE</span>", "Add new Stick Conversion", "Create", "StickConversion", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "btn" })
@@ -45,5 +45,5 @@
 }).WithPaging(10).Sortable(true).Filterable().WithMultipleFilters()
 
     @section Scripts {
-        @Scripts.Render("~/bundles/grid")
+        @Scripts.Render("~/bundles/gridmvc")
     }

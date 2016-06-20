@@ -11,7 +11,7 @@
     ViewBag.Title = "Sensor Group - Create";
 }
 
-@Styles.Render("~/Content/grid")
+@Styles.Render("~/Content/gridmvccss")
 
 @using (Html.BeginForm("Add", "SensorGroup", new { area = "Customer" }, FormMethod.Post, new { id = "formCreateTank", @class = "form-horizontal", role = "form" }))
 {
@@ -113,6 +113,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/grid")
+    @Scripts.Render("~/bundles/gridmvc")
+
     <script src="~/Scripts/app/sensorgroup.js"></script>
 }

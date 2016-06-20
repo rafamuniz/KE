@@ -37,7 +37,9 @@ function notifiyError(message) {
     $.notify({
         message: message
     }, {
-        type: 'danger'
+        type: 'danger',
+         autoHide: false,
+         clickToHide: false
     });
 }
 

@@ -10,7 +10,7 @@
     ViewBag.Title = "Sensor";
 }
 
-@Styles.Render("~/Content/grid")
+@Styles.Render("~/Content/gridmvccss")
 
 <div class="pull-right">
     @Html.NoEncodeActionLink("<span>CREATE</span>", "Add new Sensor", "Create", "Sensor", routeValues: new { area = "Customer" }, htmlAttributes: new { @class = "btn" })
@@ -42,5 +42,5 @@
 }).WithPaging(10).Sortable(true).Filterable().WithMultipleFilters()
 
 @section Scripts {
-    @Scripts.Render("~/bundles/grid")
+    @Scripts.Render("~/bundles/gridmvc")
 }

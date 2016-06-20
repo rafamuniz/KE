@@ -45,7 +45,7 @@ namespace KarmicEnergy.Web
             bundles.Add(new ScriptBundle("~/bundles/sparkline").Include(
                      "~/Scripts/jquery/jquery.sparkline.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/grid").Include(
+            bundles.Add(new ScriptBundle("~/bundles/gridmvc").Include(
                       "~/Scripts/gridmvc/gridmvc.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery-mask").Include(
@@ -87,8 +87,11 @@ namespace KarmicEnergy.Web
                         "~/Content/fonts.css",
                         "~/Content/site.css"));
 
-            bundles.Add(new StyleBundle("~/Content/grid").Include(
+            bundles.Add(new StyleBundle("~/Content/gridmvccss").Include(
                         "~/Content/gridmvc/Gridmvc.css"));
+
+            bundles.Add(new StyleBundle("~/Content/gridmvc-datepicker").Include(
+                        "~/Content/gridmvc/gridmvc.datepicker.min.css"));
 
             #endregion Style
 

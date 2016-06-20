@@ -65,20 +65,57 @@
     }
 </div>
 
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-back">
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        <span class="text-bold" style="text-align: left !important;">Alarms</span>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-back" style="height: 100%;">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="margin-top: 5px;">
+        <span class="text-bold" style="text-align: left !important; display: table-cell; vertical-align: middle;">Alarms</span>
     </div>
 
-    @if (Model.Triggers.Any())
-    {
-        foreach (var trigger in Model.Triggers)
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+
+        @if (Model.Triggers.Any())
         {
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                <span>@trigger.ItemName</span>
-            </div>
+            @Html.Raw("<table><tr>")
+
+            foreach (var trigger in Model.Triggers)
+            {
+                @Html.Raw("<td>")
+
+                if (trigger.HasAlarm)
+                {
+                    @Html.Raw("<a href='/Customer/Monitoring/AlarmById/?alarmId=" + @trigger.AlarmId + "'>")
+                }
+
+                @Html.Hidden(trigger.Id.ToString())
+
+                <table>
+                    <tr>
+                        <td style="padding-right: 10px; padding-left: 20px;">
+                            <span>@trigger.ItemName</span>
+                        </td>
+                        <td>
+                            @if (trigger.HasAlarm)
+                            {
+                                <img src="~/images/ball-red.png" />
+                            }
+                            else
+                            {
+                                <img src="~/images/ball-green.png" />
+                            }
+                        </td>
+                    </tr>
+                </table>
+
+                if (trigger.HasAlarm)
+                {
+                    @Html.Raw("</a>")
+                }
+
+                @Html.Raw("</td>")
+            }
+
+            @Html.Raw("</tr></table>")
         }
-    }
+    </div>
 </div>
 
 <div class="form-group" style="margin-top:15px;">
@@ -88,73 +125,79 @@
         </div>
 
         @if (Model.Tanks.Any())
+        {
+            var count = 1;
+
+            foreach (var tank in Model.Tanks)
             {
-            <div class="row" style="margin: 0px !important;">
-                @foreach (var tank in Model.Tanks)
+                String color_box = String.Empty;
+                String icon_alarm = String.Empty;
+
+                if (tank.HasAlarmCritical)
                 {
-                    String color_box = String.Empty;
-                    String icon_alarm = String.Empty;
+                    color_box = "box_watervolumepercentage blue";
+                    icon_alarm = "alarm_critical.png";
+                }
+                else if (tank.HasAlarmHigh)
+                {
+                    color_box = "box_watervolumepercentage blue";
+                    icon_alarm = "alarm_high.png";
+                }
+                else if (tank.HasAlarmMedium)
+                {
+                    color_box = "box_watervolumepercentage blue";
+                    icon_alarm = "alarm_medium.png";
+                }
+                else if (tank.HasAlarmLow)
+                {
+                    color_box = "box_watervolumepercentage blue";
+                    icon_alarm = "alarm_low.png";
+                }
+                else if (tank.HasAlarmInfo)
+                {
+                    color_box = "box_watervolumepercentage blue";
+                    icon_alarm = "alarm_info.png";
+                }
+                else
+                {
+                    color_box = "box_watervolumepercentage blue";
+                    icon_alarm = "alarm_no.png";
+                }
 
-                    if (tank.HasAlarmCritical)
-                    {
-                        color_box = "box_watervolumepercentage red";
-                        icon_alarm = "alarm_critical.png";
-                    }
-                    else if (tank.HasAlarmHigh)
-                    {
-                        color_box = "box_watervolumepercentage orange";
-                        icon_alarm = "alarm_high.png";
-                    }
-                    else if (tank.HasAlarmMedium)
-                    {
-                        color_box = "box_watervolumepercentage yellow";
-                        icon_alarm = "alarm_medium.png";
-                    }
-                    else if (tank.HasAlarmLow)
-                    {
-                        color_box = "box_watervolumepercentage gray";
-                        icon_alarm = "alarm_low.png";
-                    }
-                    else if (tank.HasAlarmInfo)
-                    {
-                        color_box = "box_watervolumepercentage white";
-                        icon_alarm = "alarm_info.png";
-                    }
-                    else
-                    {
-                        color_box = "box_watervolumepercentage blue";
-                        icon_alarm = "alarm_no.png";
-                    }
+                if (count == 1)
+                {
+                    @Html.Raw("<div class='row' style='margin-bottom: 20px;'>")
+                }
 
-                    @*int idx = Model.Tanks.FindIndex(x => x.Id == tank.Id);
-                        if (idx == 0 || idx % 5 == 0)
-                        {
-                        @Html.Raw("<div class='row'>
-                            ");
-                            }*@
-
-                    <div id="tank_@tank.Id" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        @Html.Hidden("tankId", @tank.Id)
-                        <div class="row">
-                            <img src="@tank.UrlImageTankModel" style="width: 100px; height: 100px; display: block; margin-left: auto; margin-right: auto;" />
-                        </div>
-                        <div class="row" style="text-align: center;">
-                            <span>@tank.Name</span>
-                        </div>
-
-                        @{
-                            var waterVolumePercentage = @tank.WaterVolumePercentage.HasValue ? @tank.WaterVolumePercentage.ToString() + " %" : "0 %";
-                        }
-
-                        <div class="row" style="text-align: center;">
-                            <span class="center-block box_watervolumepercentage @color_box">@waterVolumePercentage</span>
-                        </div>
+                <div id="tank_@tank.Id" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    @Html.Hidden("tankId", @tank.Id)
+                    <div class="row">
+                        <img src="@tank.UrlImageTankModel" style="width: 100px; height: 100px; display: block; margin-left: auto; margin-right: auto;" />
+                    </div>
+                    <div class="row" style="text-align: center;">
+                        <span>@tank.Name</span>
                     </div>
 
+                    @{
+                        var waterVolumePercentage = @tank.WaterVolumePercentage.HasValue ? @tank.WaterVolumePercentage.ToString() + " %" : "0 %";
+                    }
 
+                    <div class="row" style="text-align: center;">
+                        <span class="center-block box_watervolumepercentage @color_box">@waterVolumePercentage</span>
+                    </div>
+                </div>
+
+                        if (count == 6)
+                        {
+                            count = 1;
+                            @Html.Raw("</div>")
+                                }
+                                else
+                                {
+                                    count++;
+                                }
                             }
-            </div>
-                            }
+                        }
     </div>
 </div>
 
@@ -165,19 +208,31 @@
                 <h2>WATER QUALITY</h2>
             </div>
 
-            <div style="margin-bottom: 20px;">
-                <div class="text-left text-bold"><span>Chlorides</span></div>
-                <div class="text-right"><span>@Model.WaterQuality.ChloridesLastEventValue</span></div>
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-xs-16 col-sm-6 col-md-6 col-lg-6 text-left text-bold">
+                    <span>Chlorides</span>
+                </div>
+                <div class="col-xs-16 col-sm-6 col-md-6 col-lg-6 text-right">
+                    <span>@Model.WaterQuality.ChloridesLastEventValue</span>
+                </div>
             </div>
 
-            <div style="margin-bottom: 20px;">
-                <div class="text-left text-bold"><span>pH A</span></div>
-                <div class="text-right"><span>@Model.WaterQuality.PHLastEventValue</span></div>
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-xs-16 col-sm-6 col-md-6 col-lg-6 text-left text-bold">
+                    <span>pH A</span>
+                </div>
+                <div class="col-xs-16 col-sm-6 col-md-6 col-lg-6 text-right">
+                    <span>@Model.WaterQuality.PHLastEventValue</span>
+                </div>
             </div>
 
-            <div style="margin-bottom: 20px;">
-                <div class="text-left text-bold"><span>Temperature A</span></div>
-                <div class="text-right"><span>@Model.WaterQuality.TemperatureAmbientLastEventValue</span></div>
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-xs-16 col-sm-6 col-md-6 col-lg-6 text-left text-bold">
+                    <span>Temperature A</span>
+                </div>
+                <div class="col-xs-16 col-sm-6 col-md-6 col-lg-6 text-right">
+                    <span>@Model.WaterQuality.TemperatureAmbientLastEventValue @Model.WaterQuality.TemperatureAmbientSymbol</span>
+                </div>
             </div>
         </div>
     </div>
@@ -197,19 +252,19 @@
                 {
                     if (count == 1)
                     {
-                        @Html.Raw("<div class='row'>");
+                        @Html.Raw("<div class='row'>")
                     }
 
                     <div id="flowmeter_@idx" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     </div>
-                    <script type="text/javascript">
-                        generateFlowMeter('@idx', @fm.RateFlow, @fm.Totalizer);
-                    </script>
+                        <script type="text/javascript">
+                            generateFlowMeter('@idx', @fm.RateFlow, @fm.Totalizer);
+                        </script>
 
                     if (count == 2)
                     {
                         count = 1;
-                        @Html.Raw("</div>");
+                        @Html.Raw("</div>")
                     }
                     else
                     {

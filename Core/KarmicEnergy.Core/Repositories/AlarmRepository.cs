@@ -31,7 +31,9 @@ namespace KarmicEnergy.Core.Repositories
             alarms.AddRange(alarmsTank);
             alarms.AddRange(alarmsSite);
 
-            return alarms;
+            var a = alarms.Distinct();
+
+            return a.ToList();
         }
 
         public List<Alarm> GetsActiveBySite(Guid siteId)

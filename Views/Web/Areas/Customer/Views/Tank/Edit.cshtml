@@ -108,6 +108,24 @@
     </div>
 }
 
+@{
+    var height = @Model.Height.HasValue ? @Model.Height.Value : 0;
+    var width = @Model.Width.HasValue ? @Model.Width.Value : 0;
+    var length = @Model.Length.HasValue ? @Model.Length.Value : 0;
+
+    var faceLength = @Model.FaceLength.HasValue ? @Model.FaceLength.Value : 0;
+    var bottomWidth = @Model.BottomWidth.HasValue ? @Model.BottomWidth.Value : 0;
+
+    var dimension1 = @Model.Dimension1.HasValue ? @Model.Dimension1.Value : 0;
+    var dimension2 = @Model.Dimension2.HasValue ? @Model.Dimension2.Value : 0;
+    var dimension3 = @Model.Dimension3.HasValue ? @Model.Dimension3.Value : 0;
+
+    var waterVolumeCapacity = @Model.WaterVolumeCapacity.HasValue ? @Model.WaterVolumeCapacity.Value : 0;
+
+    var minimumDistance = @Model.MinimumDistance.HasValue ? Model.MinimumDistance.Value : 0;
+    var maximumDistance = @Model.MaximumDistance.HasValue ? Model.MaximumDistance.Value : 0;
+}
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
@@ -116,21 +134,20 @@
     <script type="text/javascript">
         $(function () {
             var tank = {};
-            tank.Height = @Model.Height;
-            tank.Width = @Model.Width;
-            tank.Length = @Model.Length;
-            @*if (@Model.FaceLength != null){
-                tank.FaceLength = @Model.FaceLength;
-            }
-            else
-                tank.FaceLength = 0;
-            tank.BottomWidth = @Model.BottomWidth;*@
-            tank.WaterVolumeCapacity = @Model.WaterVolumeCapacity;
-            @*tank.Dimension1 = @Model.Dimension1;
-            tank.Dimension2 = @Model.Dimension2;
-            tank.Dimension3 = @Model.Dimension3;*@
-            tank.MinimumDistance = @Model.MinimumDistance;
-            tank.MaximumDistance = @Model.MaximumDistance;
+            tank.Height = @height;
+            tank.Width = @width;
+            tank.Length = @length;
+            tank.FaceLength = @faceLength;
+            tank.BottomWidth = @bottomWidth;
+
+            tank.Dimension1 = @dimension1;
+            tank.Dimension2 = @dimension2;
+            tank.Dimension3 = @dimension3;
+
+            tank.WaterVolumeCapacity = @waterVolumeCapacity;
+
+            tank.MinimumDistance = @minimumDistance;
+            tank.MaximumDistance = @maximumDistance;
 
             getTankModel(tank);
         });

@@ -29,6 +29,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 viewModels = ListViewModel.Map(groups);
             }
 
+            AddLog("Navigated to Sensor Group View", LogTypeEnum.Info);
+
             return View(viewModels);
         }
 

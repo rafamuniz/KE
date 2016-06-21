@@ -10,7 +10,7 @@
     ViewBag.Title = "User";
 }
 
-<link href="~/Content/Gridmvc.css" rel="stylesheet" />
+@Styles.Render("~/Content/gridmvccss")
 
 <div class="pull-right">
     @Html.NoEncodeActionLink("<span>CREATE</span>", "Add new User", "Create", "User", routeValues: null, htmlAttributes: new { @class = "btn" })
@@ -19,16 +19,20 @@
 @Html.Grid(Model).Columns(columns =>
 {
     columns.Add(c => c.Name).Titled("Name")
-    .Filterable(true);
+        .Sortable(true)
+        .Filterable(true);
 
     columns.Add(c => c.UserName).Titled("UserName")
-     .Filterable(true);
+        .Sortable(true)
+        .Filterable(true);
 
     columns.Add(c => c.Email).Titled("Email")
-         .Filterable(true);
+        .Sortable(true)
+        .Filterable(true);
 
     columns.Add(c => c.Role).Titled("Role")
-       .Filterable(true);
+        .Sortable(true)
+        .Filterable(true);
 
     columns.Add()
     .Encoded(false)
@@ -48,7 +52,7 @@
      .SetWidth(30)
      .RenderValueAs(o => @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-trash'></span>", "Delete", "Delete", "User", routeValues: new { id = o.Id, area = "Admin" }, htmlAttributes: new { data_modal = "", @class = "btn btn-default", onclick = "return confirm('Are you sure you wish to delete this registry?');" }));
 
-}).WithPaging(10).Sortable(true).Filterable().WithMultipleFilters()
+}).WithPaging(10).Sortable(true).Filterable(true).WithMultipleFilters()
 
 @section Scripts {
     @Scripts.Render("~/bundles/gridmvc")

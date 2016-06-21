@@ -28,6 +28,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 viewModels = ListViewModel.Map(tanks);
             }
 
+            AddLog("Navigated to Tank View", LogTypeEnum.Info);
             return View(viewModels);
         }
         #endregion Index

@@ -1,5 +1,8 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
+using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Repositories
 {
@@ -11,6 +14,11 @@ namespace KarmicEnergy.Core.Repositories
         {
 
         }
-        #endregion Constructor              
+        #endregion Constructor      
+
+        public List<Log> GetsByUser(Guid userId)
+        {
+            return base.Find(x => x.UserId == userId && x.DeletedDate == null).OrderByDescending(d => d.CreatedDate).ToList();
+        }        
     }
 }

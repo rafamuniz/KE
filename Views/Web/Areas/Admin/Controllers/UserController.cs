@@ -3,7 +3,6 @@ using KarmicEnergy.Web.Controllers;
 using KarmicEnergy.Web.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -226,11 +225,12 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                     return View();
                 }
 
-                KEUnitOfWork.UserRepository.Remove(userKE);
                 var result = await UserManager.DeleteAsync(user);
 
                 if (result.Succeeded)
                 {
+                    userKE.DeletedDate = DateTime.UtcNow;
+                    KEUnitOfWork.UserRepository.Update(userKE);
                     KEUnitOfWork.Complete();
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

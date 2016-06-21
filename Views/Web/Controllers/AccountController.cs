@@ -127,19 +127,6 @@ namespace KarmicEnergy.Web.Controllers
         [Authorize]
         public ActionResult Profile()
         {
-            //// Role Customer
-            //if (UserManager.IsInRole(UserId, "Customer"))
-            //{
-            //    var customer = KEUnitOfWork.CustomerRepository.Get(Guid.Parse(UserId));
-            //    name = customer.Name;
-            //    email = customer.Email;
-            //}
-            //else // Role Customer User
-            //{
-            //    var customerUser = KEUnitOfWork.CustomerUserRepository.Get(Guid.Parse(UserId));
-            //    name = customerUser.Name;
-            //    email = customerUser.Email;
-            //}
             var user = AppUser;
             ProfileViewModel viewModel = new ProfileViewModel()
             {
@@ -172,27 +159,34 @@ namespace KarmicEnergy.Web.Controllers
 
             user.Photo = viewModel.PhotoFile.ToByte();
             user.Email = viewModel.Email;
+            user.Name = viewModel.Name;
             var result = await UserManager.UpdateAsync(user);
 
             if (result.Succeeded)
             {
-                //// Role Customer
-                //if (UserManager.IsInRole(UserId, "Customer"))
-                //{
-                //    var customer = KEUnitOfWork.CustomerRepository.Get(Guid.Parse(UserId));
-                //    customer.Email = viewModel.Email;
-                //    customer.Name = viewModel.Name;
-                //    KEUnitOfWork.CustomerRepository.Add(customer);
-                //}
-                //else // Role Customer User
-                //{
-                //    var customerUser = KEUnitOfWork.CustomerUserRepository.Get(Guid.Parse(UserId));
-                //    customerUser.Email = viewModel.Email;
-                //    customerUser.Name = viewModel.Name;
-                //    KEUnitOfWork.CustomerUserRepository.Update(customerUser);
-                //}
+                // Role Customer
+                if (UserManager.IsInRole(UserId, "Customer"))
+                {
+                    var customer = KEUnitOfWork.CustomerRepository.Get(Guid.Parse(UserId));
+                    customer.Address.Email = viewModel.Email;
+                    KEUnitOfWork.CustomerRepository.Update(customer);
+                }
+                else if (UserManager.IsInRole(UserId, "General Manager") ||
+                        UserManager.IsInRole(UserId, "Supervisor") ||
+                        UserManager.IsInRole(UserId, "Operator"))
+                {
+                    var customerUser = KEUnitOfWork.CustomerUserRepository.Get(Guid.Parse(UserId));
+                    customerUser.Address.Email = viewModel.Email;
+                    KEUnitOfWork.CustomerUserRepository.Update(customerUser);
+                }
+                else
+                {
+                    var userKE = KEUnitOfWork.UserRepository.Get(Guid.Parse(UserId));
+                    userKE.Address.Email = viewModel.Email;
+                    KEUnitOfWork.UserRepository.Update(userKE);
+                }
 
-                //KEUnitOfWork.Complete();
+                KEUnitOfWork.Complete();
 
                 return View(viewModel);
             }
@@ -245,8 +239,7 @@ namespace KarmicEnergy.Web.Controllers
         }
 
         #endregion Change Password
-
-
+        
         //
         // POST: /Account/ExternalLogin
         [HttpPost]

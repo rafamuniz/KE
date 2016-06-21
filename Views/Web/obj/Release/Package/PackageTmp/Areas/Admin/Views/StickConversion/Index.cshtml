@@ -1,34 +1,38 @@
 ﻿@using KarmicEnergy.Web.Areas.Admin.ViewModels.StickConversion
-    @using Munizoft.Extensions
-    @using Munizoft.MVC.Helpers
-    @using GridMvc.Html
+@using Munizoft.Extensions
+@using Munizoft.MVC.Helpers
+@using GridMvc.Html
 
-    @model List<ListViewModel>
+@model List<ListViewModel>
 
-    @{
-        Layout = "~/Views/Shared/_Internal.cshtml";
-        ViewBag.Title = "Stick Conversion";
-    }
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Stick Conversion";
+}
 
-    @Styles.Render("~/Content/gridmvccss")
+@Styles.Render("~/Content/gridmvccss")
 
-    <div class="pull-right">
-        @Html.NoEncodeActionLink("<span>CREATE</span>", "Add new Stick Conversion", "Create", "StickConversion", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "btn" })
-    </div>
+<div class="pull-right">
+    @Html.NoEncodeActionLink("<span>CREATE</span>", "Add new Stick Conversion", "Create", "StickConversion", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "btn" })
+</div>
 
-    @Html.Grid(Model).Columns(columns =>
+@Html.Grid(Model).Columns(columns =>
 {
     columns.Add(c => c.Name).Titled("Name")
-         .Filterable(true);
+        .Sortable(true)
+        .Filterable(true);
 
     columns.Add(c => c.FromUnit).Titled("From Unit")
-     .Filterable(true);
+        .Sortable(true)
+        .Filterable(true);
 
     columns.Add(c => c.ToUnit).Titled("To Unit")
-     .Filterable(true);
+        .Sortable(true)
+        .Filterable(true);
 
     columns.Add(c => c.Status).Titled("Status")
-     .Filterable(true);
+        .Sortable(true)
+        .Filterable(true);
 
     columns.Add()
      .Encoded(false)
@@ -42,8 +46,8 @@
      .SetWidth(30)
      .RenderValueAs(o => @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-trash'></span>", "Delete", "Delete", "StickConversion", routeValues: new { id = o.Id, area = "Admin" }, htmlAttributes: new { data_modal = "", @class = "btn btn-default", onclick = "return confirm('Are you sure you wish to delete this registry?');" }));
 
-}).WithPaging(10).Sortable(true).Filterable().WithMultipleFilters()
+}).WithPaging(10).Sortable(true).Filterable(true).WithMultipleFilters()
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/gridmvc")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/gridmvc")
+}

@@ -18,7 +18,7 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.TankModel
             get
             {
                 String urlBase = "/images/tankmodels/";
-                return String.Format("{0}/{1}/{2}", urlBase, Id, ImageFileName.Replace("{info}", "measure"));
+                return String.Format("{0}/{1}/{2}", urlBase, Id, ImageFileName.Replace("{info}", "measure").Replace("-{color}", ""));
             }
 
             private set { }

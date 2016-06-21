@@ -35,6 +35,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             viewModel.Sensors = sensorViewModels;
             LoadSites();
+
+            AddLog("Navigated to Sensor View", LogTypeEnum.Info);
             return View("Index", viewModel);
         }
 

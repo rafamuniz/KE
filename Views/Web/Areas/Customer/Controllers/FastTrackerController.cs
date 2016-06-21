@@ -31,7 +31,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 LoadFlowMeters(viewModel);
             }
 
-            AddLog("Navigate to Fast Tracker View", LogTypeEnum.Info);
+            AddLog("Navigated to Fast Tracker View", LogTypeEnum.Info);
             return View(viewModel);
         }
 

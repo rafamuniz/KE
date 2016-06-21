@@ -17,6 +17,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             List<Site> entities = LoadSites();
             var viewModels = ListViewModel.Map(entities);
+            AddLog("Navigated to Site View", LogTypeEnum.Info);
             return View(viewModels);
         }
 

@@ -30,6 +30,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 viewModels = ListViewModel.Map(events);
             }
 
+            AddLog("Navigated to Monitoring View", LogTypeEnum.Info);
+
             return View(viewModels);
         }
 

@@ -21,6 +21,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             List<Contact> entities = KEUnitOfWork.ContactRepository.GetsByCustomerId(CustomerId).ToList();
             var viewModels = ListViewModel.Map(entities);
 
+            AddLog("Navigated to Contact View", LogTypeEnum.Info);
             return View(viewModels);
         }
         #endregion Index

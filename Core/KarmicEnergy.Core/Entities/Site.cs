@@ -18,6 +18,11 @@ namespace KarmicEnergy.Core.Entities
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public String Name { get; set; }
 
+        [Column("Reference", TypeName = "NVARCHAR")]
+        [StringLength(8)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public String Reference { get; set; }
+
         [Column("IPAddress", TypeName = "NVARCHAR")]
         [StringLength(64)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]

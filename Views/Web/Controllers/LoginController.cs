@@ -24,8 +24,15 @@ namespace KarmicEnergy.Web.Controllers
 
         [AllowAnonymous]
         public ActionResult Index()
+        {            
+            return View();
+        }
+
+        [AllowAnonymous]
+        [ActionName("IndexURL")]
+        public ActionResult Index(String url)
         {
-            ViewBag.ReturnUrl = "/Home";
+            ViewBag.ReturnUrl = url;
             return View();
         }
 

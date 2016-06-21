@@ -26,6 +26,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 viewModel.SiteId = SiteId;
             }
 
+            AddLog("Navigated to Tank Dashboard View", LogTypeEnum.Info);
             return View(viewModel);
         }
 

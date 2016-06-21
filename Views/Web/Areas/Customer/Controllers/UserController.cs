@@ -33,6 +33,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 vm.Role = roles.Single();
             }
 
+            AddLog("Navigated to User View", LogTypeEnum.Info);
+
             return View(viewModels);
         }
         #endregion Index

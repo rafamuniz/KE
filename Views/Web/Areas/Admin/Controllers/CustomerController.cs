@@ -154,7 +154,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Customer");
+                    return RedirectToAction("Index", "Customer", new { area = "Admin" });
                 }
 
                 AddErrors(result);
@@ -189,11 +189,20 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                     return View();
                 }
 
-                KEUnitOfWork.CustomerRepository.Remove(customer);
                 var result = await UserManager.DeleteAsync(user);
 
                 if (result.Succeeded)
                 {
+                    customer.DeletedDate = DateTime.UtcNow;
+
+                    foreach (var u in customer.Users)
+                    {
+                        u.DeletedDate = DateTime.UtcNow;
+                        var userAccount = await UserManager.FindByIdAsync(u.Id.ToString());
+                        var resultUserAccount = await UserManager.DeleteAsync(userAccount);
+                    }
+
+                    KEUnitOfWork.CustomerRepository.Update(customer);
                     KEUnitOfWork.Complete();
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -202,7 +211,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Customer");
+                    return RedirectToAction("Index", "Customer", new { area = "Admin" });
                 }
 
                 AddErrors(result);

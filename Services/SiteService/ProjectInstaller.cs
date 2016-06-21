@@ -21,5 +21,10 @@ namespace KarmicEnergy.Service
         {
             new ServiceController(serviceInstaller1.ServiceName).Start();
         }
+
+        private void serviceProcessInstaller1_AfterInstall(object sender, InstallEventArgs e)
+        {
+
+        }
     }
 }

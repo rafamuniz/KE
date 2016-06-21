@@ -30,7 +30,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 viewModels = ListViewModel.Map(triggers);
             }
 
-            AddLog("Navigate to Trigger View", LogTypeEnum.Info);
+            AddLog("Navigated to Trigger View", LogTypeEnum.Info);
             return View(viewModels);
         }
         #endregion Index

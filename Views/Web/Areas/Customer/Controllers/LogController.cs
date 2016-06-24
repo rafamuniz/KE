@@ -35,7 +35,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 foreach (var vm in viewModels.Where(x => x.UserId.HasValue))
                 {
                     var u = UserManager.FindById(vm.UserId.Value.ToString());
-                    vm.Username = u.UserName;
+                    if (u != null)
+                        vm.Username = u.UserName;
                 }
             }
 

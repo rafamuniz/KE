@@ -133,6 +133,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Customer/Views/SensorGroup/Index.cshtml">
       <publishTime>06/20/2016 14:07:16</publishTime>
     </File>
+    <File Include="Areas/Customer/Views/Shared/_TankSpotGPS.cshtml">
+      <publishTime>06/01/2016 13:03:52</publishTime>
+    </File>
     <File Include="Areas/Customer/Views/Site/Create.cshtml">
       <publishTime>06/01/2016 13:04:06</publishTime>
     </File>
@@ -144,6 +147,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Areas/Customer/Views/Site/Report.cshtml">
       <publishTime>05/15/2016 00:53:14</publishTime>
+    </File>
+    <File Include="Areas/Customer/Views/Site/Sensor/Create.cshtml">
+      <publishTime>06/24/2016 20:42:05</publishTime>
+    </File>
+    <File Include="Areas/Customer/Views/Site/Sensor/Edit.cshtml">
+      <publishTime>06/24/2016 20:42:05</publishTime>
+    </File>
+    <File Include="Areas/Customer/Views/Site/Sensor/Index.cshtml">
+      <publishTime>06/24/2016 20:42:05</publishTime>
+    </File>
+    <File Include="Areas/Customer/Views/Site/Sensor/Site.cshtml">
+      <publishTime>06/24/2016 20:42:05</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Create.cshtml">
       <publishTime>05/25/2016 14:36:15</publishTime>
@@ -159,6 +174,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Areas/Customer/Views/Tank/Index.cshtml">
       <publishTime>06/20/2016 14:07:22</publishTime>
+    </File>
+    <File Include="Areas/Customer/Views/Tank/Sensor/Create.cshtml">
+      <publishTime>06/24/2016 20:41:19</publishTime>
+    </File>
+    <File Include="Areas/Customer/Views/Tank/Sensor/Edit.cshtml">
+      <publishTime>06/24/2016 20:41:19</publishTime>
+    </File>
+    <File Include="Areas/Customer/Views/Tank/Sensor/Index.cshtml">
+      <publishTime>06/24/2016 20:41:19</publishTime>
+    </File>
+    <File Include="Areas/Customer/Views/Tank/Sensor/Site.cshtml">
+      <publishTime>06/24/2016 20:41:19</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/_TankData.cshtml">
       <publishTime>05/25/2016 15:49:19</publishTime>
@@ -218,13 +245,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>06/21/2016 14:26:56</publishTime>
+      <publishTime>06/24/2016 22:41:46</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>06/21/2016 18:48:40</publishTime>
+      <publishTime>06/24/2016 22:41:54</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -4411,8 +4438,104 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="images/tankmodels/6/CubeHoriz_nodata.png">
       <publishTime>05/12/2016 23:06:46</publishTime>
     </File>
+    <File Include="images/tankmodels/7/FracFA1-blue-10.png">
+      <publishTime>06/22/2016 21:56:57</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-blue-100.png">
+      <publishTime>06/22/2016 21:56:58</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-blue-20.png">
+      <publishTime>06/22/2016 21:56:58</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-blue-30.png">
+      <publishTime>06/22/2016 21:56:58</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-blue-40.png">
+      <publishTime>06/22/2016 21:56:58</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-blue-50.png">
+      <publishTime>06/22/2016 21:56:58</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-blue-60.png">
+      <publishTime>06/22/2016 21:56:58</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-blue-70.png">
+      <publishTime>06/22/2016 21:56:58</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-blue-80.png">
+      <publishTime>06/22/2016 21:56:58</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-blue-90.png">
+      <publishTime>06/22/2016 21:56:58</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-empty.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
     <File Include="images/tankmodels/7/FracFA1-measure.png">
       <publishTime>05/04/2016 17:22:10</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-nodata.png">
+      <publishTime>06/23/2016 22:57:43</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-orange-10.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-orange-100.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-orange-20.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-orange-30.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-orange-40.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-orange-50.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-orange-60.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-orange-70.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-orange-80.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-orange-90.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-red-10.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-red-100.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-red-20.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-red-30.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-red-40.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-red-50.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-red-60.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-red-70.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-red-80.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
+    </File>
+    <File Include="images/tankmodels/7/FracFA1-red-90.png">
+      <publishTime>06/22/2016 21:56:59</publishTime>
     </File>
     <File Include="images/tankmodels/7/FracFA1_0.png">
       <publishTime>05/06/2016 22:06:19</publishTime>
@@ -8942,7 +9065,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/20/2016 13:42:23</publishTime>
     </File>
     <File Include="Views/Account/ChangePassword.cshtml">
-      <publishTime>05/25/2016 20:10:14</publishTime>
+      <publishTime>06/21/2016 20:31:53</publishTime>
     </File>
     <File Include="Views/Account/ConfirmEmail.cshtml">
       <publishTime>03/07/2016 00:39:38</publishTime>
@@ -8957,7 +9080,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 00:39:38</publishTime>
     </File>
     <File Include="Views/Account/Profile.cshtml">
-      <publishTime>05/07/2016 23:39:49</publishTime>
+      <publishTime>06/21/2016 20:34:10</publishTime>
     </File>
     <File Include="Views/Account/Register.cshtml">
       <publishTime>03/07/2016 00:39:38</publishTime>
@@ -9059,7 +9182,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 01:07:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/21/2016 14:27:19</publishTime>
+      <publishTime>06/24/2016 22:42:18</publishTime>
     </File>
   </ItemGroup>
 </Project>

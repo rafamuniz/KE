@@ -141,10 +141,9 @@ namespace SiteService
                 else if (sensor.TankId.HasValue)
                     site = sensor.Tank.Site;
 
-                String command = String.Format("!{0}*M{1}~", sensor.Reference, site.Id);
+                String command = String.Format(GetAppConfigValue("Sensor:Command"), sensor.Reference, site.Reference);
                 serialPort = CreatePortWithSettings();
                 Logger.WriteLog(String.Format("Serial Port: {0} - {1} - {2} - {3} - {4} - {5}", serialPort.PortName, serialPort.BaudRate, serialPort.Parity, serialPort.DataBits, serialPort.StopBits, serialPort.ReadTimeout));
-
 
 #if (!DEBUG)
                 serialPort.Open();
@@ -213,7 +212,6 @@ namespace SiteService
                 String sensorCalculatedValue = String.Empty;
 
                 SensorItem sensorItem = KEUnitOfWork.SensorItemRepository.Find(x => x.Item.Code == itemCode && x.SensorId == sensor.Id).Single();
-
                 SensorItemEvent lastEvent = KEUnitOfWork.SensorItemEventRepository.Find(x => x.SensorItemId == sensorItem.Id).OrderByDescending(o => o.RowVersion).Single();
 
                 if (lastEvent == null || lastEvent.Value != sensorValue)
@@ -222,13 +220,19 @@ namespace SiteService
                     {
                         var tank = sensorItem.Sensor.Tank;
                         sensorCalculatedValue = tank.CalculateWaterRemaining(Decimal.Parse(sensorValue)).ToString();
+
+                        // Calculate Water Volume
+                        SensorItemEvent SensorItemEventWaterVolume = new SensorItemEvent()
+                        {
+                            SensorItemId = sensorItem.Id,
+                            Value = sensorCalculatedValue
+                        };
                     }
 
                     SensorItemEvent SensorItemEvent = new SensorItemEvent()
                     {
                         SensorItemId = sensorItem.Id,
-                        Value = sensorValue,
-                        CalculatedValue = sensorCalculatedValue
+                        Value = sensorValue
                     };
 
                     KEUnitOfWork.SensorItemEventRepository.Add(SensorItemEvent);

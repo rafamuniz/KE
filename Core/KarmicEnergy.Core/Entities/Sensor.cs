@@ -54,16 +54,6 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion SensorType
 
-        #region Tank
-
-        [Column("TankId", TypeName = "UNIQUEIDENTIFIER")]        
-        public Guid? TankId { get; set; }
-
-        [ForeignKey("TankId")]
-        public virtual Tank Tank { get; set; }
-
-        #endregion Tank
-
         #region Site
 
         [Column("SiteId", TypeName = "UNIQUEIDENTIFIER")]
@@ -73,6 +63,26 @@ namespace KarmicEnergy.Core.Entities
         public virtual Site Site { get; set; }
 
         #endregion Site
+
+        #region Pond
+
+        [Column("PondId", TypeName = "UNIQUEIDENTIFIER")]
+        public Guid? PondId { get; set; }
+
+        [ForeignKey("PondId")]
+        public virtual Pond Pond { get; set; }
+
+        #endregion Pond
+
+        #region Tank
+
+        [Column("TankId", TypeName = "UNIQUEIDENTIFIER")]
+        public Guid? TankId { get; set; }
+
+        [ForeignKey("TankId")]
+        public virtual Tank Tank { get; set; }
+
+        #endregion Tank
 
         #region SensorItems        
 
@@ -86,5 +96,28 @@ namespace KarmicEnergy.Core.Entities
                 return true;
             return false;
         }
+
+        public Boolean IsSite()
+        {
+            if (SiteId.HasValue && SiteId != default(Guid) &&
+                !TankId.HasValue)
+                return true;
+            return false;
+        }
+
+        public Boolean IsPond()
+        {
+            if (PondId.HasValue && PondId != default(Guid))
+                return true;
+            return false;
+        }
+
+        public Boolean IsTank()
+        {
+            if (TankId.HasValue && TankId != default(Guid))
+                return true;
+            return false;
+        }
+
     }
 }

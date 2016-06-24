@@ -80,12 +80,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     if (KEUnitOfWork.SensorRepository.HasSensorTank(tank.Id))
                     {
                         // Water Volume
-                        if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.Range))
+                        if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.WaterVolume))
                         {
-                            var waterVolume = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tank.Id, ItemEnum.Range);
+                            var waterVolume = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tank.Id, ItemEnum.WaterVolume);
                             if (waterVolume != null)
                             {
-                                tankViewModel.WaterVolumeLastValue = Decimal.Parse(waterVolume.CalculatedValue);
+                                tankViewModel.WaterVolumeLastValue = Decimal.Parse(waterVolume.Value);
                                 tankViewModel.WaterVolumeLastEventDate = waterVolume.EventDate;
                             }
                         }
@@ -256,13 +256,13 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     tankViewModel.WaterVolumeCapacity = tank.WaterVolumeCapacity;
 
                     if (KEUnitOfWork.SensorRepository.HasSensorTank(tank.Id) &&
-                        KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.Range))
+                        KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.WaterVolume))
                     {
-                        var waterVolumesLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tank.Id, ItemEnum.Range);
+                        var waterVolumesLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tank.Id, ItemEnum.WaterVolume);
 
                         if (waterVolumesLastEvent != null)
                         {
-                            tankViewModel.WaterVolumeLastValue = Decimal.Parse(waterVolumesLastEvent.CalculatedValue);
+                            tankViewModel.WaterVolumeLastValue = Decimal.Parse(waterVolumesLastEvent.Value);
                             tankViewModel.WaterVolumeLastEventDate = waterVolumesLastEvent.EventDate;
                         }
                     }
@@ -279,9 +279,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             TankViewModel viewModel = new TankViewModel();
 
             if (KEUnitOfWork.SensorRepository.HasSensorTank(tankId) &&
-                 KEUnitOfWork.SensorItemRepository.HasSensorItem(tankId, ItemEnum.Range))
+                 KEUnitOfWork.SensorItemRepository.HasSensorItem(tankId, ItemEnum.WaterVolume))
             {
-                var waterInfos = KEUnitOfWork.SensorItemEventRepository.GetsByTankIdAndByItem(tankId, ItemEnum.Range, 5);
+                var waterInfos = KEUnitOfWork.SensorItemEventRepository.GetsByTankIdAndByItem(tankId, ItemEnum.WaterVolume, 5);
 
                 if (waterInfos.Any())
                 {
@@ -294,7 +294,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                         WaterVolumeViewModel wvi = new WaterVolumeViewModel()
                         {
                             EventDate = wi.EventDate,
-                            WaterVolume = Decimal.Parse(wi.CalculatedValue)
+                            WaterVolume = Decimal.Parse(wi.Value)
                         };
 
                         viewModel.WaterVolumes.Add(wvi);

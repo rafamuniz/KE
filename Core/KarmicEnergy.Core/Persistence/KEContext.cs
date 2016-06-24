@@ -64,6 +64,8 @@ namespace KarmicEnergy.Core.Persistence
         public IDbSet<CustomerUserSite> CustomerUserSites { get; set; }
 
         public IDbSet<Site> Sites { get; set; }
+        public IDbSet<Pond> Ponds { get; set; }
+
         public IDbSet<Tank> Tanks { get; set; }
         public IDbSet<TankModel> TankModels { get; set; }
         public IDbSet<Sensor> Sensors { get; set; }

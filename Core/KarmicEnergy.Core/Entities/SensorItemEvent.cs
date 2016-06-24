@@ -17,9 +17,9 @@ namespace KarmicEnergy.Core.Entities
         [StringLength(256)]
         public String Value { get; set; } = String.Empty;
 
-        [Column("CalculatedValue", TypeName = "NVARCHAR")]
-        [StringLength(256)]
-        public String CalculatedValue { get; set; }
+        //[Column("CalculatedValue", TypeName = "NVARCHAR")]
+        //[StringLength(256)]
+        //public String CalculatedValue { get; set; }
 
         [Column("EventDate", TypeName = "DATETIME")]
         [Required]
@@ -42,6 +42,9 @@ namespace KarmicEnergy.Core.Entities
 
         [Column("SensorItemEventId", TypeName = "UNIQUEIDENTIFIER")]
         public Guid? SensorItemEventId { get; set; }
+
+        [ForeignKey("SensorItemEventId")]
+        public virtual SensorItemEvent SensorItemEventChild { get; set; }
 
         #endregion Event
 

@@ -329,6 +329,7 @@
     <Compile Include="Areas\Customer\ViewModels\Trigger\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\User\ChangePasswordViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\User\SiteViewModel.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Extensions\ImageSelectExtensions.cs" />
@@ -382,6 +383,7 @@
     <Compile Include="Areas\Admin\ViewModels\Customer\ListViewModel.cs" />
     <Compile Include="ViewModels\Account\ProfileViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Log\ListViewModel.cs" />
     <Compile Include="ViewModels\NotificationViewModel.cs" />
     <Compile Include="ViewModels\AlarmViewModel.cs" />
     <Compile Include="ViewModels\AddressViewModel.cs" />
@@ -2267,6 +2269,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Address.cshtml" />
     <Content Include="Views\Shared\_InternalNoLeftMenu.cshtml" />
+    <Content Include="Views\Log\Index.cshtml" />
     <None Include="Web.AWS.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

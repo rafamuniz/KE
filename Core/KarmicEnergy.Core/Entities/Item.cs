@@ -61,22 +61,27 @@ namespace KarmicEnergy.Core.Entities
         {
             List<Item> entities = new List<Item>()
             {
+                // KE Depth
                 new Item() { Id = (Int32)ItemEnum.Range, Code = "R", Name = "Range", SensorTypeId = (Int16)SensorTypeEnum.KEDepth, UnitTypeId = (Int16)UnitTypeEnum.Length },
-                //new Item() { Id = (Int32)ItemEnum.WaterVolume, Code = "WV", Name = "Water Volume", SensorTypeId = (Int16)SensorTypeEnum.FlowMeter, UnitTypeId = (Int16)UnitTypeEnum.Volume },
+                new Item() { Id = (Int32)ItemEnum.WaterVolume, Code = "WV", Name = "Water Volume", SensorTypeId = (Int16)SensorTypeEnum.KEDepth, UnitTypeId = (Int16)UnitTypeEnum.Volume },
                 new Item() { Id = (Int32)ItemEnum.WaterTemperature, Code = "WT", Name = "Water Temperature", SensorTypeId = (Int16)SensorTypeEnum.KEDepth, UnitTypeId = (Int16)UnitTypeEnum.Temperature },
                 new Item() { Id = (Int32)ItemEnum.AmbientTemperature, Code= "AT", Name = "Ambient Temperature", SensorTypeId = (Int16)SensorTypeEnum.KEDepth, UnitTypeId = (Int16)UnitTypeEnum.Temperature },
                 new Item() { Id = (Int32)ItemEnum.Voltage, Code= "V", Name = "Voltage", SensorTypeId = (Int16)SensorTypeEnum.KEDepth, UnitTypeId = (Int16)UnitTypeEnum.Energy },
 
+                // FlowMeter
                 new Item() { Id = (Int32)ItemEnum.RateFlow, Code= "RF", Name = "Rate of Flow", SensorTypeId = (Int16)SensorTypeEnum.FlowMeter, UnitTypeId = (Int16)UnitTypeEnum.Volume},
                 new Item() { Id = (Int32)ItemEnum.Totalizer, Code= "T", Name = "Totalizer", SensorTypeId = (Int16)SensorTypeEnum.FlowMeter, UnitTypeId = (Int16)UnitTypeEnum.Volume },
                 new Item() { Id = (Int32)ItemEnum.VoltageFlowMeter, Code= "V", Name = "Voltage", SensorTypeId = (Int16)SensorTypeEnum.FlowMeter, UnitTypeId = (Int16)UnitTypeEnum.Energy },
 
+                // PH
                 new Item() { Id = (Int32)ItemEnum.PH, Code= "PH", Name = "PH", SensorTypeId = (Int16)SensorTypeEnum.PHMeter, UnitTypeId = (Int16)UnitTypeEnum.PH },
                 new Item() { Id = (Int32)ItemEnum.VoltagePHMeter, Code= "V", Name = "Voltage", SensorTypeId = (Int16)SensorTypeEnum.PHMeter, UnitTypeId = (Int16)UnitTypeEnum.Energy },
 
+                // Gas Sensor
                 new Item() { Id = (Int32)ItemEnum.GasLevel, Code= "GL", Name = "Gas Level", SensorTypeId = (Int16)SensorTypeEnum.GasSensor, UnitTypeId = (Int16)UnitTypeEnum.UnitConcentration },
                 new Item() { Id = (Int32)ItemEnum.VoltageGasSensor, Code= "V", Name = "Voltage", SensorTypeId = (Int16)SensorTypeEnum.GasSensor, UnitTypeId = (Int16)UnitTypeEnum.Energy },
-
+                
+                // Salinity Sensor
                 new Item() { Id = (Int32)ItemEnum.Salinity, Code= "S", Name = "Salinity ", SensorTypeId = (Int16)SensorTypeEnum.SalinitySensor, UnitTypeId = (Int16)UnitTypeEnum.UnitConcentration },
                 new Item() { Id = (Int32)ItemEnum.VoltageSalinity, Code= "V", Name = "Voltage", SensorTypeId = (Int16)SensorTypeEnum.SalinitySensor, UnitTypeId = (Int16)UnitTypeEnum.Energy }
             };

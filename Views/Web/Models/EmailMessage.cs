@@ -5,6 +5,6 @@ namespace KarmicEnergy.Web.Models
 {
     public class EmailMessage : IdentityMessage
     {
-        public String TemplateId { get; set; }
+        public String DestinationName { get; set; }
     }
 }

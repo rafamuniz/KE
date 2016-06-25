@@ -98,6 +98,9 @@ namespace KarmicEnergy.Core.Persistence
         
         public IDbSet<Log> Logs { get; set; }
         public IDbSet<LogType> LogTypes { get; set; }
+
+        public IDbSet<Notification> Notifications { get; set; }
+        public IDbSet<NotificationType> NotificationTypes { get; set; }
         #endregion DbSet
     }
 }

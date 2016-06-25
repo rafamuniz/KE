@@ -8,6 +8,6 @@ namespace KarmicEnergy.Web.ViewModels.Account
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        public String Email { get; set; }
+        public String Username { get; set; }
     }
 }

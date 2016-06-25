@@ -68,6 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AlarmHistory.cs" />
+    <Compile Include="Entities\NotificationType.cs" />
+    <Compile Include="Entities\Notification.cs" />
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\CustomerUserSite.cs" />
@@ -104,9 +106,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201606241228054_AWS.cs" />
-    <Compile Include="Migrations\201606241228054_AWS.Designer.cs">
-      <DependentUpon>201606241228054_AWS.cs</DependentUpon>
+    <Compile Include="Migrations\201606251457051_Dev.cs" />
+    <Compile Include="Migrations\201606251457051_Dev.Designer.cs">
+      <DependentUpon>201606251457051_Dev.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
@@ -119,11 +121,13 @@
     <Compile Include="Repositories\AlarmHistoryRepository.cs" />
     <Compile Include="Repositories\CustomerUserSiteRepository.cs" />
     <Compile Include="Repositories\Interface\ICustomerUserSiteRepository.cs" />
+    <Compile Include="Repositories\Interface\INotificationRepository.cs" />
     <Compile Include="Repositories\Interface\IOperatorTypeRepository.cs" />
     <Compile Include="Repositories\Interface\IOperatorRepository.cs" />
     <Compile Include="Repositories\Interface\IPondRepository.cs" />
     <Compile Include="Repositories\OperatorTypeRepository.cs" />
     <Compile Include="Repositories\OperatorRepository.cs" />
+    <Compile Include="Repositories\NotificationRepository.cs" />
     <Compile Include="Repositories\PondRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\Interface\IAlarmHistoryRepository.cs" />
@@ -183,8 +187,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606241228054_AWS.resx">
-      <DependentUpon>201606241228054_AWS.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606251457051_Dev.resx">
+      <DependentUpon>201606251457051_Dev.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

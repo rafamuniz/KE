@@ -1,0 +1,116 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Site.Sensor
+@using Munizoft.Extensions
+@using MvcCheckBoxList.Model
+@using KarmicEnergy.Web.Extensions
+
+@model SensorEditViewModel
+
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Site - Sensor - Edit";
+}
+
+<div class="row">
+    @using (Html.BeginForm("SensorEdit", "Site", new { area = "Customer" }, FormMethod.Post, new { id = "formEditUser", @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            @if (!this.IsSite())
+            {
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite", onclick = "GetsTankBySite(this.value, 'ddlTank', '/Sensor/GetsTankBySite');" })
+                        @Html.ValidationMessageFor(m => m.SiteId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+            else
+            {
+                @Html.HiddenFor(m => m.SiteId)
+            }
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.DropDownListFor(m => m.SensorTypeId, new SelectList(ViewBag.SensorTypes, "Id", "Name"), "-- Please select a Sensor Type --", new { @class = "form-control selectpicker", @id = "ddlSensorType", onchange = "getsItemBySensorType(undefined);" })
+                    @Html.ValidationMessageFor(m => m.SensorTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<SensorEditViewModel>(m => m.Name) } })
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.Reference, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<SensorEditViewModel>(m => m.Reference) } })
+                    @Html.ValidationMessageFor(m => m.Reference, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.DropDownListFor(model => model.Status, new SelectList(ViewBag.Statuses, "Id", "Name", "A"), "-- Please select a Status --", new { @class = "form-control selectpicker", id = "ddlStatus" })
+                    @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6 col-xs-6 visible-lg-block">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 box-sub">
+                        <div class="title blue">
+                            <h2>ITEMS</h2>
+                        </div>
+
+                        <div id="divCheckboxlist" class="checkboxlist">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*@Html.Partial("_TankSpotGPS", new SpotGPSViewModel())*@
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center btn-submit">
+            <input type="submit" class="btn btn-default" value="SAVE">
+
+            @if (Model.SiteId != default(Guid))
+            {
+                <a class="btn" href="/Customer/Site/SensorIndex?SiteId=@Model.SiteId">Cancel</a>
+            }
+            else
+            {
+                <a class="btn" href="/Customer/Site/SensorIndex/">Cancel</a>
+            }
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/app/sensor.js"></script>
+
+    <script type="text/javascript">
+
+        var items = @Html.Raw(
+       Json.Encode(
+           (Model.Items).Select(m=> new
+           {
+               Id= m.Id,
+               Name=m.Name,
+               IsSelected= m.IsSelected,
+               UnitSelected = m.UnitSelected
+           })
+       )
+   );
+
+        getsItemBySensorTypeId(items);
+    </script>
+}

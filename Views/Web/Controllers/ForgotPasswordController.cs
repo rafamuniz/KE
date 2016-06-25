@@ -26,10 +26,10 @@ namespace KarmicEnergy.Web.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            String email = this.Request.QueryString["u"];
+            String username = this.Request.QueryString["u"];
             ForgotPasswordViewModel viewModel = new ForgotPasswordViewModel()
             {
-                Email = email
+                Username = username
             };
 
             return View(viewModel);
@@ -40,11 +40,11 @@ namespace KarmicEnergy.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByNameAsync(viewModel.Username);
                 if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
@@ -53,16 +53,11 @@ namespace KarmicEnergy.Web.Controllers
 
                 await SendEmailForgotPassword(user);
 
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                return RedirectToAction("Confirmation", "ForgotPassword");
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View(viewModel);
         }
 
         //
@@ -83,14 +78,12 @@ namespace KarmicEnergy.Web.Controllers
             String callbackUrl = url.Replace("{UserId}", user.Id).Replace("{Code}", code);
             String subject = "Forgot Password";
             String body = String.Format("Please confirm your account by clicking <a href='{0}'>here</a>", callbackUrl);
-            String templateId = "7f518da0-17af-46b4-b6cd-7b964b06df03";
 
             EmailMessage emailMessage = new EmailMessage()
             {
                 Body = body,
                 Subject = subject,
-                Destination = user.Email,
-                TemplateId = templateId
+                Destination = user.Email
             };
 
             await UserManager.EmailService.SendAsync(emailMessage);

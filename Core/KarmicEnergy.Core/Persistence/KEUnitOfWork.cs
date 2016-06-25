@@ -39,7 +39,6 @@ namespace KarmicEnergy.Core.Persistence
         private IOperatorRepository _OperatorRepository;
         private IOperatorTypeRepository _OperatorTypeRepository;
 
-
         private IAlarmRepository _AlarmRepository;
         private IAlarmHistoryRepository _AlarmHistoryRepository;
 
@@ -51,6 +50,8 @@ namespace KarmicEnergy.Core.Persistence
 
         private IStickConversionRepository _StickConversionRepository;
         private IStickConversionValueRepository _StickConversionValueRepository;
+
+        private INotificationRepository _NotificationRepository;
         #endregion Fields
 
         #region Constructor
@@ -243,6 +244,11 @@ namespace KarmicEnergy.Core.Persistence
         public IStickConversionValueRepository StickConversionValueRepository
         {
             get { return _StickConversionValueRepository ?? (_StickConversionValueRepository = new StickConversionValueRepository(_context)); }
+        }
+
+        public INotificationRepository NotificationRepository
+        {
+            get { return _NotificationRepository ?? (_NotificationRepository = new NotificationRepository(_context)); }
         }
     }
 }

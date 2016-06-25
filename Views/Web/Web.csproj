@@ -75,6 +75,14 @@
       <HintPath>..\..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AWSSDK.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AWSSDK.Core.3.1.7.0\lib\net45\AWSSDK.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AWSSDK.SimpleEmail, Version=3.1.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AWSSDK.SimpleEmail.3.1.4.0\lib\net45\AWSSDK.SimpleEmail.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
       <Private>True</Private>
@@ -301,6 +309,13 @@
     <Compile Include="Areas\Customer\ViewModels\Sensor\EditViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Site\Sensor\SensorCreateViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Site\Sensor\SensorEditViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Site\Sensor\SensorItemViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Site\Sensor\SensorListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Site\Sensor\SensorViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Site\Sensor\SpotGPSViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Site\Sensor\UnitViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Site\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Dashboard\SiteDashboardViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Site\SiteAddressViewModel.cs" />
@@ -1740,10 +1755,10 @@
     <Content Include="Areas\Customer\Views\Tank\Sensor\Edit.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\Sensor\Index.cshtml" />
     <Content Include="Areas\Customer\Views\Tank\Sensor\Site.cshtml" />
-    <Content Include="Areas\Customer\Views\Site\Sensor\Create.cshtml" />
-    <Content Include="Areas\Customer\Views\Site\Sensor\Edit.cshtml" />
-    <Content Include="Areas\Customer\Views\Site\Sensor\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Site\Sensor\Site.cshtml" />
+    <Content Include="Areas\Customer\Views\Site\SensorCreate.cshtml" />
+    <Content Include="Areas\Customer\Views\Site\SensorEdit.cshtml" />
+    <Content Include="Areas\Customer\Views\Site\SensorIndex.cshtml" />
+    <Content Include="Areas\Customer\Views\Site\SensorSite.cshtml" />
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Properties\PublishProfiles\ClickOnce.pubxml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />
@@ -2305,6 +2320,9 @@
     <EmbeddedResource Include="Migrations\201606170954057_Initial1.resx">
       <DependentUpon>201606170954057_Initial1.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\AWSSDK.SimpleEmail.3.1.4.0\analyzers\dotnet\cs\AWSSDK.SimpleEmail.CodeAnalysis.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

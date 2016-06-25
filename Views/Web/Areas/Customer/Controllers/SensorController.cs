@@ -396,7 +396,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
-        public ActionResult GetsItemBySensorTypeId(String sensorTypeId)
+        public ActionResult GetsItemBySensorType(String sensorTypeId)
         {
             List<ItemViewModel> viewModels = new List<ItemViewModel>();
             List<Item> items = KEUnitOfWork.ItemRepository.GetsBySensorTypeId(Int16.Parse(sensorTypeId));

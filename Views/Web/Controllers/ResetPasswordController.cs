@@ -19,8 +19,24 @@ namespace KarmicEnergy.Web.Controllers
         //
         // POST: /ResetPassword
         [AllowAnonymous]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
+            String uid = Request.QueryString["uid"];
+            String code = Request.QueryString["code"];
+
+            if (uid != null && code != null)
+            {
+                var user = await UserManager.FindByIdAsync(uid);
+
+                if (user != null)
+                {
+                    ResetPasswordViewModel viewModel = new ResetPasswordViewModel();
+                    viewModel.Email = user.Email;
+                    viewModel.Code = code;
+                    return View(viewModel);
+                }
+            }
+
             return View();
         }
 

@@ -126,13 +126,13 @@
                 <img src="/images/fast_track.png" alt="Monitoring" title="Monitoring">
                 <p>ALARMS</p>
             </a>
-        </li>
-
-        <li class="treeview @Html.MenuItemActive("Log", "Index", "Customer")">
-            <a href="/Customer/Log/Index">
-                <img src="/images/loga_sample.png" alt="logs" title="logs">
-                <p>LOGS</p>
-            </a>
-        </li>
+        </li>       
     }
+
+    <li class="treeview @Html.MenuItemActive("Log", "Index")">
+        <a href="/Log/Index">
+            <img src="/images/loga_sample.png" alt="logs" title="logs">
+            <p>LOGS</p>
+        </a>
+    </li>
 </ul>

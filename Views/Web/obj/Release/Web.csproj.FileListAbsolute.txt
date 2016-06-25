@@ -105,3 +105,9 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\We
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Release\KarmicEnergy.Web.Migrations.Initial.resources
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Release\KarmicEnergy.Web.Migrations.Initial1.resources
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Release\Web.csproj.GenerateResource.Cache
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\AWSSDK.Core.dll
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\AWSSDK.SimpleEmail.dll
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\AWSSDK.Core.pdb
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\AWSSDK.Core.xml
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\AWSSDK.SimpleEmail.pdb
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\AWSSDK.SimpleEmail.xml

@@ -1,4 +1,6 @@
-﻿using KarmicEnergy.Web.Models;
+﻿using Amazon.SimpleEmail;
+using Amazon.SimpleEmail.Model;
+using KarmicEnergy.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -6,6 +8,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using SendGrid;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
 using System.Net.Mail;
@@ -18,14 +21,53 @@ namespace KarmicEnergy.Web
     {
         public async Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            await configSendGridasync((EmailMessage)message);
+            await configAWSSESAsync((EmailMessage)message);
         }
 
         public async Task SendAsync(EmailMessage message)
         {
             // Plug in your email service here to send an email.
-            await configSendGridasync(message);
+            await configAWSSESAsync(message);
+        }
+
+        private async Task configAWSSESAsync(EmailMessage emailMessage)
+        {
+            String from = ConfigurationManager.AppSettings["EmailService:From"];
+            String smtpServer = ConfigurationManager.AppSettings["EmailService:SMTPServer"];
+            Int32 smtpPort = Int32.Parse(ConfigurationManager.AppSettings["EmailService:SMTPPort"].ToString());
+            String smtpUsername = ConfigurationManager.AppSettings["EmailService:SMTPUsername"];
+            String smtpPassword = ConfigurationManager.AppSettings["EmailService:SMTPPassword"];
+
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress(from, "KE Siteminder");
+            mailMessage.Subject = emailMessage.Subject;
+            mailMessage.Body = emailMessage.Body;
+            mailMessage.IsBodyHtml = true;
+
+            MailAddress mailTo = new MailAddress(emailMessage.Destination, emailMessage.DestinationName);
+            mailMessage.To.Add(mailTo);
+
+            // Create an SMTP client with the specified host name and port.
+            using (SmtpClient client = new SmtpClient(smtpServer, smtpPort))
+            {
+                // Create a network credential with your SMTP user name and password.
+                client.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+
+                // Use SSL when accessing Amazon SES. The SMTP session will begin on an unencrypted connection, and then 
+                // the client will issue a STARTTLS command to upgrade to an encrypted connection using SSL.
+                client.EnableSsl = true;
+
+                // Send the email. 
+                try
+                {
+                    //client.Send(from, emailMessage.Destination, emailMessage.Subject, emailMessage.Body);
+                    client.Send(mailMessage);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
         }
 
         private async Task configSendGridasync(EmailMessage message)

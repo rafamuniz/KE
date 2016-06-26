@@ -45,7 +45,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             ListViewModel viewModel = new ListViewModel();
 
-            List<Sensor> sensors = KEUnitOfWork.SensorRepository.GetsBySite(siteId).ToList();
+            List<Sensor> sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndSite(CustomerId, siteId).ToList();
 
             List<SensorViewModel> sensorViewModels = SensorViewModel.Map(sensors);
             viewModel.SiteId = siteId;

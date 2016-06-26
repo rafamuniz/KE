@@ -425,9 +425,16 @@ namespace KarmicEnergy.Web.Controllers
 
         protected List<Tank> LoadTanks(Guid customerId, Guid siteId)
         {
-            List<Tank> tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(customerId, siteId);
+            List<Tank> tanks = KEUnitOfWork.TankRepository.GetsByCustomerAndSite(customerId, siteId);
             ViewBag.Tanks = tanks;
             return tanks;
+        }
+
+        protected List<Pond> LoadPonds(Guid customerId, Guid pondId)
+        {
+            List<Pond> ponds = KEUnitOfWork.PondRepository.GetsByCustomerAndSite(customerId, pondId);
+            ViewBag.Ponds= ponds;
+            return ponds;
         }
 
         protected List<Sensor> LoadTankSensors(Guid customerId, Guid tankId)

@@ -7,7 +7,7 @@ namespace KarmicEnergy.Core.Repositories
     public interface ITankRepository : IKERepositoryBase<Tank>
     {
         List<Tank> GetsByCustomerId(Guid customerId);
-        List<Tank> GetsByCustomerIdAndSiteId(Guid customerId, Guid siteId);
+        List<Tank> GetsByCustomerAndSite(Guid customerId, Guid siteId);
         List<Models.TankModel> GetsWithLastMeasurement(Guid customerId);
     }
 }

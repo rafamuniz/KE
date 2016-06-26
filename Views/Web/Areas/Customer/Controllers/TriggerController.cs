@@ -447,7 +447,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult GetsSiteSensorBySite(Guid siteId)
         {
-            var sensors = KEUnitOfWork.SensorRepository.GetsBySite(siteId);
+            var sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndSite(CustomerId, siteId);
             SelectList objSensors = new SelectList(sensors, "Id", "Name", 0);
             return Json(objSensors, JsonRequestBehavior.AllowGet);
         }

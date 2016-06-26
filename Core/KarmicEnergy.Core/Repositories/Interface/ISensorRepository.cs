@@ -6,15 +6,18 @@ namespace KarmicEnergy.Core.Repositories
 {
     public interface ISensorRepository : IKERepositoryBase<Sensor>
     {
-        Boolean HasSensorTank(Guid tankId);
         Boolean HasSensorSite(Guid siteId);
+        Boolean HasSensorTank(Guid tankId);
+        Boolean HasSensorPond(Guid pondId);
 
-        List<Sensor> GetsByCustomer(Guid customerId);
-        List<Sensor> GetsByTank(Guid tankId);
-        List<Sensor> GetsByCustomerAndTank(Guid customerId, Guid tankId);
+        //List<Sensor> GetsByCustomer(Guid customerId);
+        //List<Sensor> GetsByTank(Guid tankId);
+        //List<Sensor> GetsByCustomerAndTank(Guid customerId, Guid tankId);
 
-        List<Sensor> GetsBySite(Guid siteId);
+        //List<Sensor> GetsBySite(Guid siteId);
         List<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId);
+        List<Sensor> GetsByCustomerAndTank(Guid customerId, Guid tankId);
+        List<Sensor> GetsByCustomerAndPond(Guid customerId, Guid pondId);
 
         List<Sensor> GetsBySiteAndSensorType(Guid siteId, SensorTypeEnum sensorType);
     }

@@ -1,17 +1,17 @@
-﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Pond
 @using System.Linq
 @using Munizoft.Extensions
 @using KarmicEnergy.Web.Extensions
 
-@model CreateViewModel
+@model SensorCreateViewModel
 
 @{
     Layout = "~/Views/Shared/_Internal.cshtml";
-    ViewBag.Title = "Sensor - Create";
+    ViewBag.Title = "Pond - Sensor - Create";
 }
 
 <div class="row">
-    @using (Html.BeginForm("Create", "Sensor", new { area = "Customer" }, FormMethod.Post, new { id = "form", @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("SensorCreate", "Pond", new { area = "Customer" }, FormMethod.Post, new { id = "form", @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
 
@@ -30,12 +30,12 @@
                 @Html.HiddenFor(m => m.SiteId)
             }
 
-            @if (Model.TankId.HasValue && Model.TankId.Value != default(Guid))
+            @if (Model.PondId.HasValue && Model.PondId.Value != default(Guid))
             {
                 <div class="form-group">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        @Html.DropDownListFor(m => m.TankId, new SelectList(ViewBag.Tanks, "Id", "Name"), "-- Please select a Tank --", new { @class = "form-control selectpicker", @id = "ddlTank" })
-                        @Html.ValidationMessageFor(m => m.TankId, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(m => m.PondId, new SelectList(ViewBag.Tanks, "Id", "Name"), "-- Please select a Pond --", new { @class = "form-control selectpicker", @id = "ddlPond" })
+                        @Html.ValidationMessageFor(m => m.PondId, "", new { @class = "text-danger" })
                     </div>
                 </div>
             }
@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            @Html.Partial("_TankSpotGPS", new SpotGPSViewModel())
+            @*@Html.Partial("_TankSpotGPS", new SpotGPSViewModel())*@
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center btn-submit">

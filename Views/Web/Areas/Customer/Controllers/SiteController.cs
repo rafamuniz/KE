@@ -1,6 +1,6 @@
 ﻿using KarmicEnergy.Core.Entities;
+using KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor;
 using KarmicEnergy.Web.Areas.Customer.ViewModels.Site;
-using KarmicEnergy.Web.Areas.Customer.ViewModels.Site.Sensor;
 using KarmicEnergy.Web.Controllers;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult Index()
         {
             List<Site> entities = LoadSites();
-            var viewModels = ListViewModel.Map(entities);
+            var viewModels = ViewModels.Site.ListViewModel.Map(entities);
             AddLog("Navigated to Site View", LogTypeEnum.Info);
             return View(viewModels);
         }
@@ -30,7 +30,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult Create()
         {
             LoadStatuses();
-            CreateViewModel viewModel = new CreateViewModel();
+            ViewModels.Site.CreateViewModel viewModel = new ViewModels.Site.CreateViewModel();
             return View(viewModel);
         }
 
@@ -39,7 +39,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
-        public ActionResult Create(CreateViewModel viewModel)
+        public ActionResult Create(ViewModels.Site.CreateViewModel viewModel)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             LoadStatuses();
-            EditViewModel viewModel = new EditViewModel();
+            ViewModels.Site.EditViewModel viewModel = new ViewModels.Site.EditViewModel();
             viewModel.Map(site);
             viewModel.Map(site.Address);
 
@@ -96,7 +96,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
-        public ActionResult Edit(EditViewModel viewModel)
+        public ActionResult Edit(ViewModels.Site.EditViewModel viewModel)
         {
             try
             {
@@ -161,7 +161,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult SensorIndex()
         {
-            SensorListViewModel viewModel = new SensorListViewModel();
+            ViewModels.Sensor.ListViewModel viewModel = new ViewModels.Sensor.ListViewModel();
             List<SensorViewModel> sensorViewModels = new List<SensorViewModel>();
             List<Sensor> sensors = null;
             Guid? siteId = null;
@@ -175,17 +175,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 }
             }
 
-            if (!IsSite && siteId.HasValue)
+            viewModel.SiteId = !IsSite && siteId.HasValue ? siteId.Value : SiteId;
+
+            if (viewModel.SiteId.HasValue)
             {
-                sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndSite(CustomerId, siteId.Value).ToList();
+                sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndSite(CustomerId, viewModel.SiteId.Value).ToList();
                 sensorViewModels = SensorViewModel.Map(sensors);
-                viewModel.SiteId = siteId.Value;
-            }
-            else
-            {
-                sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndSite(CustomerId, SiteId).ToList();
-                sensorViewModels = SensorViewModel.Map(sensors);
-                viewModel.SiteId = SiteId;
             }
 
             viewModel.Sensors = sensorViewModels;
@@ -201,18 +196,19 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult SensorCreate(Guid siteId)
         {
-            SensorCreateViewModel viewModel = new SensorCreateViewModel()
+            ViewModels.Sensor.CreateViewModel viewModel = new ViewModels.Sensor.CreateViewModel()
             {
                 SiteId = siteId
             };
 
+            AddLog("Navigated to Create Sensor of Site View", LogTypeEnum.Info);
             return View(LoadCreateViewModel(viewModel));
         }
 
-        private SensorCreateViewModel LoadCreateViewModel(SensorCreateViewModel viewModel)
+        private ViewModels.Sensor.CreateViewModel LoadCreateViewModel(ViewModels.Sensor.CreateViewModel viewModel)
         {
             if (viewModel == null)
-                viewModel = new SensorCreateViewModel();
+                viewModel = new ViewModels.Sensor.CreateViewModel();
 
             if (!IsSite)
             {
@@ -234,7 +230,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
-        public ActionResult SensorCreate(SensorCreateViewModel viewModel)
+        public ActionResult SensorCreate(ViewModels.Sensor.CreateViewModel viewModel)
         {
             try
             {
@@ -278,6 +274,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.SensorRepository.Add(sensor);
                 KEUnitOfWork.Complete();
 
+                AddLog("Created a Sensor of Site", LogTypeEnum.Info);
                 return RedirectToAction("SensorIndex", "Site", new { SiteId = sensor.SiteId });
             }
             catch (Exception ex)
@@ -288,7 +285,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return View(LoadCreateViewModel(viewModel));
         }
 
-        private Boolean IsValidateCreateItems(SensorCreateViewModel viewModel)
+        private Boolean IsValidateCreateItems(ViewModels.Sensor.CreateViewModel viewModel)
         {
             Boolean flag = true;
 
@@ -321,17 +318,17 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 return View("Index");
             }
 
-            SensorEditViewModel viewModel = new SensorEditViewModel();
-            viewModel = SensorEditViewModel.Map(sensor);
+            ViewModels.Sensor.EditViewModel viewModel = new ViewModels.Sensor.EditViewModel();
+            viewModel = ViewModels.Sensor.EditViewModel.Map(sensor);
 
             LoadEditViewModel(viewModel);
 
             var items = LoadItems();
-            viewModel.Items = SensorItemViewModel.Map(items);
+            viewModel.Items = ItemViewModel.Map(items);
 
             if (sensor.SensorItems.Any())
             {
-                List<SensorItemViewModel> selectedItems = new List<SensorItemViewModel>();
+                List<ItemViewModel> selectedItems = new List<ItemViewModel>();
 
                 foreach (var item in sensor.SensorItems)
                 {
@@ -346,6 +343,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 }
             }
 
+            AddLog("Navigated to Edit Sensor of Site View", LogTypeEnum.Info);
             return View(viewModel);
         }
 
@@ -354,7 +352,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
-        public ActionResult SensorEdit(SensorEditViewModel viewModel)
+        public ActionResult SensorEdit(ViewModels.Sensor.EditViewModel viewModel)
         {
             Sensor sensor = null;
 
@@ -420,7 +418,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.SensorRepository.Update(sensor);
                 KEUnitOfWork.Complete();
 
-                return RedirectToAction("Index", "Sensor", new { TankId = sensor.TankId });
+                AddLog("Updated a Sensor of Site", LogTypeEnum.Info);
+                return RedirectToAction("SensorIndex", "Site", new { SiteId = sensor.SiteId });
             }
             catch (Exception ex)
             {
@@ -432,14 +431,22 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return View(viewModel);
         }
 
-        private void LoadEditViewModel(SensorEditViewModel viewModel)
+        private void LoadEditViewModel(ViewModels.Sensor.EditViewModel viewModel)
         {
+            if (!IsSite)
+            {
+                LoadSites();
+            }
+            else
+            {
+                viewModel.SiteId = SiteId;
+            }
+
             LoadStatuses();
-            LoadTanks(CustomerId);
             LoadSensorTypes();
         }
 
-        private Boolean IsValidateEditItems(SensorEditViewModel viewModel)
+        private Boolean IsValidateEditItems(ViewModels.Sensor.EditViewModel viewModel)
         {
             Boolean flag = true;
 
@@ -476,7 +483,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             sensor.DeletedDate = DateTime.UtcNow;
-            
+
             foreach (var item in sensor.SensorItems)
             {
                 item.DeletedDate = DateTime.UtcNow;
@@ -485,7 +492,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             KEUnitOfWork.SensorRepository.Update(sensor);
             KEUnitOfWork.Complete();
 
-            return RedirectToAction("SensorIndex");
+            AddLog("Deleted a Sensor of Site", LogTypeEnum.Info);
+            return RedirectToAction("SensorIndex", "Site", new { SiteId = sensor.SiteId });
         }
 
         #endregion Delete

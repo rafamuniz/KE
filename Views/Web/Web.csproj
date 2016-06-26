@@ -298,6 +298,9 @@
     <Compile Include="Areas\Customer\ViewModels\Log\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\AlarmViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Pond\CreateViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Pond\EditViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Pond\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\GroupViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\SensorGroup\SensorGroupViewModel.cs" />
@@ -309,13 +312,6 @@
     <Compile Include="Areas\Customer\ViewModels\Sensor\EditViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Sensor\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\ListViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Site\Sensor\SensorCreateViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Site\Sensor\SensorEditViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Site\Sensor\SensorItemViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Site\Sensor\SensorListViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Site\Sensor\SensorViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Site\Sensor\SpotGPSViewModel.cs" />
-    <Compile Include="Areas\Customer\ViewModels\Site\Sensor\UnitViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Site\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Dashboard\SiteDashboardViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Site\SiteAddressViewModel.cs" />
@@ -1751,14 +1747,18 @@
     <Content Include="fonts\opensans-semibolditalic-webfont.ttf" />
     <Content Include="fonts\opensans-semibolditalic-webfont.woff" />
     <Content Include="Areas\Customer\Views\Log\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\Sensor\Create.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\Sensor\Edit.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\Sensor\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Tank\Sensor\Site.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\SensorCreate.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\SensorEdit.cshtml" />
+    <Content Include="Areas\Customer\Views\Tank\SensorIndex.cshtml" />
     <Content Include="Areas\Customer\Views\Site\SensorCreate.cshtml" />
     <Content Include="Areas\Customer\Views\Site\SensorEdit.cshtml" />
     <Content Include="Areas\Customer\Views\Site\SensorIndex.cshtml" />
-    <Content Include="Areas\Customer\Views\Site\SensorSite.cshtml" />
+    <Content Include="Areas\Customer\Views\Pond\Create.cshtml" />
+    <Content Include="Areas\Customer\Views\Pond\Edit.cshtml" />
+    <Content Include="Areas\Customer\Views\Pond\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Pond\SensorCreate.cshtml" />
+    <Content Include="Areas\Customer\Views\Pond\SensorEdit.cshtml" />
+    <Content Include="Areas\Customer\Views\Pond\SensorIndex.cshtml" />
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Properties\PublishProfiles\ClickOnce.pubxml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />
@@ -2291,10 +2291,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Customer\ViewModels\Pond\" />
     <Folder Include="Areas\Customer\ViewModels\Report\" />
     <Folder Include="Areas\Customer\ViewModels\Temp\" />
-    <Folder Include="Areas\Customer\Views\Pond\" />
     <Folder Include="Helpers\" />
     <Folder Include="images\geometries\" />
   </ItemGroup>

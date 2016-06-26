@@ -23,6 +23,9 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
         [Display(Name = "Tank")]
         public Guid? TankId { get; set; }
 
+        [Display(Name = "Pond")]
+        public Guid? PondId { get; set; }
+
         public List<SensorViewModel> Sensors { get; set; }
 
         #endregion Property

@@ -16,50 +16,78 @@ namespace KarmicEnergy.Core.Repositories
         }
         #endregion Constructor       
 
-        public Boolean HasSensorTank(Guid tankId)
-        {
-            return base.Find(x => x.TankId == tankId).Any();
-        }
-
         public Boolean HasSensorSite(Guid siteId)
         {
-            return base.Find(x => x.SiteId == siteId && x.TankId == null).Any();
+            return base.Find(x => x.SiteId == siteId && x.DeletedDate == null).Any();
         }
 
-        public List<Sensor> GetsByCustomer(Guid customerId)
+        public Boolean HasSensorTank(Guid tankId)
         {
-            return base.Find(x => x.Tank.Site.CustomerId == customerId && x.DeletedDate == null).ToList();
+            return base.Find(x => x.TankId == tankId && x.DeletedDate == null).Any();
         }
 
-        public List<Sensor> GetsByTank(Guid tankId)
+        public Boolean HasSensorPond(Guid pondId)
         {
-            return base.Find(x => x.TankId == tankId).ToList();
+            return base.Find(x => x.PondId == pondId && x.DeletedDate == null).Any();
         }
 
+        //public List<Sensor> GetsByCustomer(Guid customerId)
+        //{
+        //    return base.Find(x => x.Tank.Site.CustomerId == customerId && x.DeletedDate == null).ToList();
+        //}
+
+        //public List<Sensor> GetsByTank(Guid tankId)
+        //{
+        //    return base.Find(x => x.TankId == tankId).ToList();
+        //}
+
+        ///// <summary>
+        ///// Gets Sensor Site
+        ///// NOT Sensor Tank
+        ///// </summary>
+        ///// <param name="siteId"></param>
+        ///// <returns></returns>
+        //public List<Sensor> GetsBySite(Guid siteId)
+        //{
+        //    return base.Find(x => x.SiteId == siteId && x.TankId == null && x.DeletedDate == null).ToList();
+        //}
+
+        /// <summary>
+        /// Gets All Sensors that is installed in Site
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="siteId"></param>
+        /// <returns></returns>
+        public List<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId)
+        {
+            return base.Find(x => x.Site.CustomerId == customerId && x.SiteId == siteId && x.TankId == null && x.DeletedDate == null).ToList();
+        }
+
+        /// <summary>
+        /// Gets All Sensors that is installed in Tank
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="tankId"></param>
+        /// <returns></returns>
         public List<Sensor> GetsByCustomerAndTank(Guid customerId, Guid tankId)
         {
             return base.Find(x => x.Tank.Site.CustomerId == customerId && x.TankId == tankId && x.DeletedDate == null).ToList();
         }
 
         /// <summary>
-        /// Gets Sensor Site
-        /// NOT Sensor Tank
+        /// Gets All Sensors that is installed in Pond
         /// </summary>
-        /// <param name="siteId"></param>
+        /// <param name="customerId"></param>
+        /// <param name="pondId"></param>
         /// <returns></returns>
-        public List<Sensor> GetsBySite(Guid siteId)
+        public List<Sensor> GetsByCustomerAndPond(Guid customerId, Guid pondId)
         {
-            return base.Find(x => x.SiteId == siteId && x.TankId == null && x.DeletedDate == null).ToList();
-        }
-
-        public List<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId)
-        {
-            return base.Find(x => x.Tank.Site.CustomerId == customerId && x.SiteId == siteId && x.TankId == null && x.DeletedDate == null).ToList();
+            return base.Find(x => x.Pond.Site.CustomerId == customerId && x.PondId == pondId && x.DeletedDate == null).ToList();
         }
 
         public List<Sensor> GetsBySiteAndSensorType(Guid siteId, SensorTypeEnum sensorType)
         {
-            return base.Find(x => x.SensorTypeId == (Int16)sensorType && x.SiteId == siteId && x.TankId == null).ToList();
+            return base.Find(x => x.SensorTypeId == (Int16)sensorType && x.SiteId == siteId).ToList();
         }
     }
 }

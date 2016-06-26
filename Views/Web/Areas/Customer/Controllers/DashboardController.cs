@@ -47,7 +47,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             if (viewModel.SiteId.HasValue && viewModel.SiteId.Value != default(Guid))
             {
                 #region Tanks
-                var tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(CustomerId, viewModel.SiteId.Value);
+                var tanks = KEUnitOfWork.TankRepository.GetsByCustomerAndSite(CustomerId, viewModel.SiteId.Value);
 
                 if (tanks.Any())
                 {
@@ -188,7 +188,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         private void LoadTanks(SiteDashboardViewModel viewModel)
         {
-            var tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(CustomerId, viewModel.SiteId.Value);
+            var tanks = KEUnitOfWork.TankRepository.GetsByCustomerAndSite(CustomerId, viewModel.SiteId.Value);
 
             if (tanks.Any())
             {

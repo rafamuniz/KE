@@ -3,7 +3,7 @@ namespace KarmicEnergy.Core.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Dev : DbMigration
+    public partial class AWS : DbMigration
     {
         public override void Up()
         {
@@ -25,7 +25,7 @@ namespace KarmicEnergy.Core.Migrations
                         DeletedDate = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.NotificationTypes", t => t.NotificationTypeId, cascadeDelete: false)
+                .ForeignKey("dbo.NotificationTypes", t => t.NotificationTypeId, cascadeDelete: true)
                 .Index(t => t.NotificationTypeId);
             
             CreateTable(

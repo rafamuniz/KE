@@ -31,9 +31,14 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
         [Required]
         public String Status { get; set; }
 
+        [Display(Name = "Site")]
+        public Guid? SiteId { get; set; }
+
         [Display(Name = "Tank")]
-        [Required]
-        public Guid TankId { get; set; }
+        public Guid? TankId { get; set; }
+
+        [Display(Name = "Pond")]
+        public Guid? PondId { get; set; }
 
         [Display(Name = "Sensor Type")]
         [Required]

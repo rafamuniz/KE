@@ -7,11 +7,11 @@
 
 @{
     Layout = "~/Views/Shared/_Internal.cshtml";
-    ViewBag.Title = "Site - Sensor - Edit";
+    ViewBag.Title = "Tank - Sensor - Edit";
 }
 
 <div class="row">
-    @using (Html.BeginForm("SensorEdit", "Site", new { area = "Customer" }, FormMethod.Post, new { id = "formEditUser", @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("SensorEdit", "Tank", new { area = "Customer" }, FormMethod.Post, new { id = "formEditUser", @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(m => m.Id)
@@ -29,6 +29,16 @@
             else
             {
                 @Html.HiddenFor(m => m.SiteId)
+            }
+
+            @if (Model.TankId.HasValue && Model.TankId.Value != default(Guid))
+            {
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        @Html.DropDownListFor(m => m.TankId, new SelectList(ViewBag.Tanks, "Id", "Name"), "-- Please select a Tank --", new { @class = "form-control selectpicker", @id = "ddlTank" })
+                        @Html.ValidationMessageFor(m => m.TankId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             }
 
             <div class="form-group">
@@ -80,14 +90,13 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center btn-submit">
             <input type="submit" class="btn btn-default" value="SAVE">
-
-            @if (Model.SiteId != default(Guid))
+            @if (Request.QueryString["TankId"] != null)
             {
-                <a class="btn" href="/Customer/Site/SensorIndex?SiteId=@Model.SiteId">Cancel</a>
+                <a class="btn" href="/Customer/Tank/SensorIndex?TankId=@Request.QueryString["TankId"]">Cancel</a>
             }
             else
             {
-                <a class="btn" href="/Customer/Site/SensorIndex/">Cancel</a>
+                <a class="btn" href="/Customer/Tank/SensorIndex/">Cancel</a>
             }
         </div>
     }

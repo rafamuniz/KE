@@ -61,7 +61,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         private void LoadTanks(ListViewModel viewModel)
         {
-            var tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(CustomerId, viewModel.SiteId.Value);
+            var tanks = KEUnitOfWork.TankRepository.GetsByCustomerAndSite(CustomerId, viewModel.SiteId.Value);
 
             if (tanks.Any())
             {
@@ -239,7 +239,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         private void LoadTanksWithWaterVolume(ListViewModel viewModel)
         {
-            var tanks = KEUnitOfWork.TankRepository.GetsByCustomerIdAndSiteId(CustomerId, viewModel.SiteId.Value);
+            var tanks = KEUnitOfWork.TankRepository.GetsByCustomerAndSite(CustomerId, viewModel.SiteId.Value);
 
             if (tanks.Any())
             {

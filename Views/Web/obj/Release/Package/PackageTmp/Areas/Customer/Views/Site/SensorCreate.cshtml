@@ -1,9 +1,9 @@
-﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Site.Sensor
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
 @using System.Linq
 @using Munizoft.Extensions
 @using KarmicEnergy.Web.Extensions
 
-@model SensorCreateViewModel
+@model CreateViewModel
 
 @{
     Layout = "~/Views/Shared/_Internal.cshtml";
@@ -39,14 +39,14 @@
 
             <div class="form-group">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<SensorCreateViewModel>(m => m.Name) } })
+                    @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.Name) } })
                     @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    @Html.EditorFor(m => m.Reference, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<SensorCreateViewModel>(m => m.Reference) } })
+                    @Html.EditorFor(m => m.Reference, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.Reference) } })
                     @Html.ValidationMessageFor(m => m.Reference, "", new { @class = "text-danger" })
                 </div>
             </div>

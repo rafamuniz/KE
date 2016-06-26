@@ -95,11 +95,11 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
                 else if (HasAlarmHigh)
                     return "red";
                 else if (HasAlarmMedium)
-                    return "orange";
+                    return "red";
                 else if (HasAlarmLow)
-                    return "orange";
+                    return "red";
                 else if (HasAlarmInfo)
-                    return "blue";
+                    return "red";
                 else
                     return "blue";
             }

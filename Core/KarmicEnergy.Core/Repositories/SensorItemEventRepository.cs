@@ -26,6 +26,14 @@ namespace KarmicEnergy.Core.Repositories
             return Context.SensorItemEvents.Where(x => x.SensorItem.Sensor.TankId == tankId).ToList();
         }
 
+        public SensorItemEvent GetLastEventByPondAndItem(Guid pondId, ItemEnum item)
+        {
+            var lastEvent = Context.SensorItemEvents.Where(x => x.SensorItem.Sensor.PondId == pondId && x.SensorItem.ItemId == (int)item).OrderByDescending(d => d.EventDate);
+            if (!lastEvent.Any())
+                return null;
+
+            return lastEvent.AsEnumerable().FirstOrDefault();
+        }
 
         public SensorItemEvent GetLastEventByTankAndItem(Guid tankId, ItemEnum item)
         {

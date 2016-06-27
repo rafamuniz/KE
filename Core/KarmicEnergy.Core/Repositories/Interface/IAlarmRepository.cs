@@ -9,6 +9,7 @@ namespace KarmicEnergy.Core.Repositories
         List<Alarm> GetsActive();
         List<Alarm> GetsActiveByCustomer(Guid customerId);
         List<Alarm> GetsActiveBySite(Guid siteId);
+        List<Alarm> GetsActiveByPond(Guid pondId);
         List<Alarm> GetsActiveByTank(Guid tankId);
 
         List<Alarm> GetsBySite(Guid siteId);

@@ -25,6 +25,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             else // It is a site
             {
                 viewModel.SiteId = SiteId;
+                LoadPonds(viewModel);
                 LoadTanks(viewModel);
                 LoadTriggersBySite(viewModel);
                 LoadWaterQualityBySite(viewModel);
@@ -42,6 +43,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             if (viewModel.SiteId.HasValue && viewModel.SiteId != default(Guid))
             {
                 LoadSite(viewModel);
+                LoadPonds(viewModel);
                 LoadTanks(viewModel);
                 LoadTriggersBySite(viewModel);
                 LoadWaterQualityBySite(viewModel);
@@ -57,6 +59,43 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             var site = KEUnitOfWork.SiteRepository.Get(viewModel.SiteId.Value);
             viewModel.Longitude = site.Longitude;
             viewModel.Latitude = site.Latitude;
+        }
+
+        private void LoadPonds(ListViewModel viewModel)
+        {
+            var ponds = KEUnitOfWork.PondRepository.GetsByCustomerAndSite(CustomerId, viewModel.SiteId.Value);
+
+            if (ponds.Any())
+            {
+                foreach (var pond in ponds)
+                {
+                    PondViewModel pondViewModel = new PondViewModel();
+
+                    pondViewModel.Id = pond.Id;
+                    pondViewModel.Name = pond.Name;
+
+                    pondViewModel.WaterVolumeCapacity = pond.WaterVolumeCapacity;
+
+                    if (KEUnitOfWork.SensorRepository.HasSensorPond(pond.Id))
+                    {
+                        // Water Volume
+                        if (KEUnitOfWork.SensorItemRepository.HasPondSensorItem(pond.Id, ItemEnum.WaterVolume))
+                        {
+                            var waterVolume = KEUnitOfWork.SensorItemEventRepository.GetLastEventByPondAndItem(pond.Id, ItemEnum.WaterVolume);
+                            if (waterVolume != null)
+                            {
+                                pondViewModel.WaterVolumeLastValue = Decimal.Parse(waterVolume.Value);
+                                pondViewModel.WaterVolumeLastEventDate = waterVolume.EventDate;
+                            }
+                        }
+                    }
+
+                    // Alarms By Pond
+                    var alarms = KEUnitOfWork.AlarmRepository.GetsActiveByPond(pond.Id);
+                    pondViewModel.Alarms = AlarmViewModel.Map(alarms);
+                    viewModel.Ponds.Add(pondViewModel);
+                }
+            }
         }
 
         private void LoadTanks(ListViewModel viewModel)
@@ -80,7 +119,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     if (KEUnitOfWork.SensorRepository.HasSensorTank(tank.Id))
                     {
                         // Water Volume
-                        if (KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.WaterVolume))
+                        if (KEUnitOfWork.SensorItemRepository.HasTankSensorItem(tank.Id, ItemEnum.WaterVolume))
                         {
                             var waterVolume = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tank.Id, ItemEnum.WaterVolume);
                             if (waterVolume != null)
@@ -127,9 +166,22 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 var ambient = KEUnitOfWork.SensorItemEventRepository.GetLastEventBySiteAndItem(viewModel.SiteId.Value, ItemEnum.AmbientTemperature);
                 if (ambient != null)
                 {
+                    waterQualityViewModel.TemperatureAmbientLastEventId = ambient.Id;
                     waterQualityViewModel.TemperatureAmbientLastEventValue = Decimal.Parse(ambient.Value);
                     waterQualityViewModel.TemperatureAmbientLastEventDate = ambient.EventDate;
                     waterQualityViewModel.TemperatureAmbientSymbol = ambient.SensorItem.Unit.Symbol;
+                }
+            }
+
+            if (KEUnitOfWork.SensorItemRepository.HasSiteSensorItem(viewModel.SiteId.Value, ItemEnum.WaterTemperature))
+            {
+                var water = KEUnitOfWork.SensorItemEventRepository.GetLastEventBySiteAndItem(viewModel.SiteId.Value, ItemEnum.WaterTemperature);
+                if (water != null)
+                {
+                    waterQualityViewModel.TemperatureWaterLastEventId = water.Id;
+                    waterQualityViewModel.TemperatureWaterLastEventValue = Decimal.Parse(water.Value);
+                    waterQualityViewModel.TemperatureWaterLastEventDate = water.EventDate;
+                    waterQualityViewModel.TemperatureWaterSymbol = water.SensorItem.Unit.Symbol;
                 }
             }
 
@@ -138,6 +190,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 var ph = KEUnitOfWork.SensorItemEventRepository.GetLastEventBySiteAndItem(viewModel.SiteId.Value, ItemEnum.PH);
                 if (ph != null)
                 {
+                    waterQualityViewModel.PHLastEventId = ph.Id;
                     waterQualityViewModel.PHLastEventValue = Decimal.Parse(ph.Value);
                     waterQualityViewModel.PHLastEventDate = ph.EventDate;
                     waterQualityViewModel.PHSymbol = ph.SensorItem.Unit.Symbol;
@@ -256,7 +309,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     tankViewModel.WaterVolumeCapacity = tank.WaterVolumeCapacity;
 
                     if (KEUnitOfWork.SensorRepository.HasSensorTank(tank.Id) &&
-                        KEUnitOfWork.SensorItemRepository.HasSensorItem(tank.Id, ItemEnum.WaterVolume))
+                        KEUnitOfWork.SensorItemRepository.HasTankSensorItem(tank.Id, ItemEnum.WaterVolume))
                     {
                         var waterVolumesLastEvent = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tank.Id, ItemEnum.WaterVolume);
 
@@ -279,7 +332,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             TankViewModel viewModel = new TankViewModel();
 
             if (KEUnitOfWork.SensorRepository.HasSensorTank(tankId) &&
-                 KEUnitOfWork.SensorItemRepository.HasSensorItem(tankId, ItemEnum.WaterVolume))
+                 KEUnitOfWork.SensorItemRepository.HasTankSensorItem(tankId, ItemEnum.WaterVolume))
             {
                 var waterInfos = KEUnitOfWork.SensorItemEventRepository.GetsByTankIdAndByItem(tankId, ItemEnum.WaterVolume, 5);
 

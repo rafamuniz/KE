@@ -10,6 +10,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
         #region Constructor
         public ListViewModel()
         {
+            Ponds = new List<PondViewModel>();
             Tanks = new List<TankViewModel>();
             FlowMeters = new List<FlowMeterViewModel>();
             Triggers = new List<TriggerViewModel>();
@@ -26,6 +27,8 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
         public String Latitude { get; set; }
 
         public String Longitude { get; set; }
+
+        public List<PondViewModel> Ponds { get; set; }
 
         public List<TankViewModel> Tanks { get; set; }
 

@@ -40,42 +40,6 @@ namespace KarmicEnergy.Core.Entities
         [StringLength(64)]
         public String Longitude { get; set; }
 
-        [Column("Height", TypeName = "DECIMAL")]
-        public Decimal? Height { get; set; }
-
-        [Column("Width", TypeName = "DECIMAL")]
-        public Decimal? Width { get; set; }
-
-        [Column("Length", TypeName = "DECIMAL")]
-        public Decimal? Length { get; set; }
-
-        [Column("FaceLength", TypeName = "DECIMAL")]
-        public Decimal? FaceLength { get; set; }
-
-        [Column("BottomWidth", TypeName = "DECIMAL")]
-        public Decimal? BottomWidth { get; set; }
-
-        [Column("Radius", TypeName = "DECIMAL")]
-        public Decimal? Radius { get; set; }
-
-        [Column("Diagonal", TypeName = "DECIMAL")]
-        public Decimal? Diagonal { get; set; }
-
-        [Column("Dimension1", TypeName = "DECIMAL")]
-        public Decimal? Dimension1 { get; set; }
-
-        [Column("Dimension2", TypeName = "DECIMAL")]
-        public Decimal? Dimension2 { get; set; }
-
-        [Column("Dimension3", TypeName = "DECIMAL")]
-        public Decimal? Dimension3 { get; set; }
-
-        [Column("MinimumDistance", TypeName = "INT")]
-        public Int32? MinimumDistance { get; set; }
-
-        [Column("MaximumDistance", TypeName = "INT")]
-        public Int32? MaximumDistance { get; set; }
-
         #endregion Property
 
         #region Site
@@ -89,17 +53,6 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Site
 
-        #region TankModel
-
-        [Column("TankModelId", TypeName = "INT")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        public Int32 TankModelId { get; set; }
-
-        [ForeignKey("TankModelId")]
-        public virtual TankModel TankModel { get; set; }
-
-        #endregion TankModel
-        
         #region Sensors
 
         public virtual List<Sensor> Sensors { get; set; }

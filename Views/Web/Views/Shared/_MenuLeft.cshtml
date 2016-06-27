@@ -62,6 +62,13 @@
             </li>
         }
 
+        <li class="treeview @Html.MenuItemActive("Pond", "Customer")">
+            <a href="/Customer/Pond">
+                <img src="/images/my_tank.png" alt="ponds" title="ponds">
+                <p>POND</p>
+            </a>
+        </li>
+
         <li class="treeview @Html.MenuItemActive("Tank", "Customer")">
             <a href="/Customer/Tank">
                 <img src="/images/my_tank.png" alt="tanks" title="tanks">
@@ -126,7 +133,7 @@
                 <img src="/images/fast_track.png" alt="Monitoring" title="Monitoring">
                 <p>ALARMS</p>
             </a>
-        </li>       
+        </li>
     }
 
     <li class="treeview @Html.MenuItemActive("Log", "Index")">

@@ -2930,9 +2930,9 @@ p {
     border-color: #eed3d7;
 }
 
-.alert-danger span{
-    color: #A94442;
-}
+    .alert-danger span {
+        color: #A94442;
+    }
 
 .alert-warning {
     border-color: #e08e0b;
@@ -6649,7 +6649,6 @@ background-color: #1C2B39; #graph-draw .chart {
         font-size: 10px;
     }
 
-
 /*****************/
 /*    BLINK      */
 /*****************/
@@ -6803,6 +6802,86 @@ background-color: #1C2B39; #graph-draw .chart {
             vertical-align: top;
         }
 
+
+/****************/
+/* Fast Tracker */
+/****************/
+.img-pond {
+    width: 100%;
+    height: 200px;
+}
+
+.tank {
+}
+
+    .tank .tank-name {
+        text-align: center;
+    }
+
+        .tank .tank-name span {
+            color: #293745;
+            font-family: 'open_sansbold';
+            font-size: 20px;
+        }
+
+    .tank .tank-watervolume {
+        text-align: center;
+    }
+
+        .tank .tank-watervolume span {
+        }
+
+.pond {
+}
+
+    .pond .pond-name {
+        text-align: center;
+    }
+
+        .pond .pond-name span {
+            color: #293745;
+            font-family: 'open_sansbold';
+            font-size: 20px;
+        }
+        
+    .pond .pond-waterVolume {
+        height: 50px;
+        padding-left: 30px;
+    }
+
+        .pond .pond-waterVolume span {
+            color: #293745;
+            font-family: 'open_sansbold';
+            font-size: 25px;
+        }
+
+        .pond .pond-waterVolume label {
+            color: #293745;
+            font-family: 'open_sansbold';
+            font-size: 15px;
+        }
+
+    .pond .pond-watervolume-percentage {
+        text-align: center;
+    }
+
+        .pond .pond-watervolume-percentage span {
+        }
+
+@media (max-width: 991px) {
+    .img-pond {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+@media (max-width: 767px) {
+    .img-pond {
+        width: 100%;
+        height: 200px;
+    }
+}
+
 /************/
 /* Box Back */
 /************/
@@ -6847,11 +6926,11 @@ table.grid-table .grid-filter-btn span {
     border-color: #ddd;
 }
 
-.grid-dropdown{
+.grid-dropdown {
     background-color: #EEE;
 }
 
-table.grid-table .grid-filter-buttons{
+table.grid-table .grid-filter-buttons {
     text-align: center;
 }
 

@@ -6,8 +6,9 @@ namespace KarmicEnergy.Core.Repositories
 {
     public interface ISensorItemRepository : IKERepositoryBase<SensorItem>
     {
-        Boolean HasSensorItem(Guid tankId, ItemEnum item);
         Boolean HasSiteSensorItem(Guid siteId, ItemEnum item);
+        Boolean HasPondSensorItem(Guid pondId, ItemEnum item);
+        Boolean HasTankSensorItem(Guid tankId, ItemEnum item);
         Boolean HasSensorSensorItem(Guid sensorId, ItemEnum item);
 
         List<SensorItem> GetsBySiteAndItem(Guid siteId, ItemEnum item);

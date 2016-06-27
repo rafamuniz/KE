@@ -1,9 +1,9 @@
-﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Pond
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
 @using System.Linq
 @using Munizoft.Extensions
 @using KarmicEnergy.Web.Extensions
 
-@model SensorCreateViewModel
+@model CreateViewModel
 
 @{
     Layout = "~/Views/Shared/_Internal.cshtml";
@@ -34,7 +34,7 @@
             {
                 <div class="form-group">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        @Html.DropDownListFor(m => m.PondId, new SelectList(ViewBag.Tanks, "Id", "Name"), "-- Please select a Pond --", new { @class = "form-control selectpicker", @id = "ddlPond" })
+                        @Html.DropDownListFor(m => m.PondId, new SelectList(ViewBag.Ponds, "Id", "Name"), "-- Please select a Pond --", new { @class = "form-control selectpicker", @id = "ddlPond" })
                         @Html.ValidationMessageFor(m => m.PondId, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -42,7 +42,7 @@
 
             <div class="form-group">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    @Html.DropDownListFor(m => m.SensorTypeId, new SelectList(ViewBag.SensorTypes, "Id", "Name"), "-- Please select a Sensor Type --", new { @class = "form-control selectpicker", @id = "ddlSensorType", onchange = "getsItemBySensorTypeId(undefined);" })
+                    @Html.DropDownListFor(m => m.SensorTypeId, new SelectList(ViewBag.SensorTypes, "Id", "Name"), "-- Please select a Sensor Type --", new { @class = "form-control selectpicker", @id = "ddlSensorType", onchange = "getsItemBySensorType(undefined);" })
                     @Html.ValidationMessageFor(m => m.SensorTypeId, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -89,13 +89,13 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center btn-submit">
             <input type="submit" class="btn btn-default" value="SAVE">
-            @if (Request.QueryString["TankId"] != null)
+            @if (Model.PondId != default(Guid))
             {
-                <a class="btn" href="/Customer/Sensor/Index?TankId=@Request.QueryString["TankId"]">Cancel</a>
+                <a class="btn" href="/Customer/Pond/SensorIndex?PondId=@Model.PondId">Cancel</a>
             }
             else
             {
-                <a class="btn" href="/Customer/Sensor/">Cancel</a>
+                <a class="btn" href="/Customer/Pond/SensorIndex">Cancel</a>
             }
         </div>
     }
@@ -119,6 +119,6 @@
        )
    );
 
-        getsItemBySensorTypeId(items);
+        getsItemBySensorType(items);
     </script>
 }

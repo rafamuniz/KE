@@ -542,7 +542,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             KEUnitOfWork.Complete();
 
             AddLog("Deleted a Sensor of Tank", LogTypeEnum.Info);
-            return RedirectToAction("SensorIndex", "Tank", new { SiteId = sensor.SiteId });
+            return RedirectToAction("SensorIndex", "Tank", new { TankId = sensor.TankId });
         }
 
         #endregion Delete

@@ -9,7 +9,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Pond
         #region Constructor
         public EditViewModel()
         {
-  
+
         }
         #endregion Constructor
 
@@ -88,8 +88,8 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Pond
 
         public void MapVMToEntity(Core.Entities.Pond entity)
         {
-            Mapper.CreateMap<EditViewModel, Core.Entities.Pond>().ForMember(x => x.TankModel, opt => opt.Ignore());
-            Mapper.Map<EditViewModel, Core.Entities.Pond>(this, entity);            
+            Mapper.CreateMap<EditViewModel, Core.Entities.Pond>();
+            Mapper.Map<EditViewModel, Core.Entities.Pond>(this, entity);
         }
 
         #endregion Map

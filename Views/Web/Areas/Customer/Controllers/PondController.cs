@@ -106,7 +106,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             ViewModels.Pond.EditViewModel viewModel = InitEdit();
             viewModel.Map(pond);
-            
+
             return View(viewModel);
         }
 
@@ -289,7 +289,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 Sensor sensor = new Sensor()
                 {
                     Name = viewModel.Name,
-                    TankId = viewModel.TankId,
+                    PondId = viewModel.PondId,
                     SensorTypeId = viewModel.SensorTypeId,
                     Status = viewModel.Status,
                     Reference = viewModel.Reference
@@ -316,7 +316,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.Complete();
 
                 AddLog("Created a Sensor of Pond", LogTypeEnum.Info);
-                return RedirectToAction("SensorIndex", "Pond", new { TankId = sensor.TankId });
+                return RedirectToAction("SensorIndex", "Pond", new { PondId = sensor.PondId });
             }
             catch (Exception ex)
             {
@@ -362,7 +362,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             ViewModels.Sensor.EditViewModel viewModel = new ViewModels.Sensor.EditViewModel();
             viewModel = ViewModels.Sensor.EditViewModel.Map(sensor);
 
-            viewModel.SiteId = sensor.Tank.SiteId;
+            viewModel.SiteId = sensor.Pond.SiteId;
             LoadEditViewModel(viewModel);
 
             var items = LoadItems();
@@ -461,7 +461,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.Complete();
 
                 AddLog("Updated a Sensor of Pond", LogTypeEnum.Info);
-                return RedirectToAction("SensorIndex", "Pond", new { TankId = sensor.TankId });
+                return RedirectToAction("SensorIndex", "Pond", new { PondId = sensor.PondId });
             }
             catch (Exception ex)
             {
@@ -536,7 +536,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             KEUnitOfWork.Complete();
 
             AddLog("Deleted a Sensor of Pond", LogTypeEnum.Info);
-            return RedirectToAction("SensorIndex", "Pond", new { SiteId = sensor.SiteId });
+            return RedirectToAction("SensorIndex", "Pond", new { PondId = sensor.PondId });
         }
 
         #endregion Delete

@@ -31,6 +31,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult Create()
         {
             CreateViewModel viewModel = new CreateViewModel();
+            AddLog("Navigated to Create Contact View", LogTypeEnum.Info);
             return View(viewModel);
         }
 
@@ -57,6 +58,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                 KEUnitOfWork.ContactRepository.Add(contact);
                 KEUnitOfWork.Complete();
+
+                AddLog("Created a contact", LogTypeEnum.Info);
 
                 return RedirectToAction("Index", "Contact", new { area = "Customer" });
             }
@@ -88,6 +91,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                 // Address
                 viewModel.MapEntityToVM(contact.Address);
+                AddLog("Navigated to Edit Contact View", LogTypeEnum.Info);
 
                 return View(viewModel);
             }
@@ -127,6 +131,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.ContactRepository.Update(contact);
                 KEUnitOfWork.Complete();
 
+                AddLog("Updated a Contact", LogTypeEnum.Info);
+
                 return RedirectToAction("Index", "Contact", new { area = "Customer" });
             }
             catch (Exception ex)
@@ -157,8 +163,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                 contact.DeletedDate = DateTime.UtcNow;
                 KEUnitOfWork.ContactRepository.Update(contact);
-
                 KEUnitOfWork.Complete();
+
+                AddLog("Deleted a Contact", LogTypeEnum.Info);
 
                 return RedirectToAction("Index", "Contact", new { area = "Customer" });
             }

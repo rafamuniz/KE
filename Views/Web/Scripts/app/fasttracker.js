@@ -361,3 +361,30 @@ function generateWaterVolumeGraph(tankId) {
         }
     });
 }
+
+
+function generateTemperatureGraph(elementId, waterTemperature) {
+    if (waterTemperature != "" && waterTemperature != undefined) {
+        var majorTicks = { size: '10%', interval: 10 },
+            minorTicks = { size: '5%', interval: 2.5, style: { 'stroke-width': 1, stroke: '#AAAAAA' } },
+            labels = { interval: 10, position: 'far' };
+        var minTemp = waterTemperature > 0 ? 0 : 10;
+        var maxTemp = parseInt(waterTemperature * 1.2);
+
+        $('#' + elementId).jqxLinearGauge({
+            orientation: 'vertical',
+            labels: labels,
+            ticksMajor: majorTicks,
+            ticksMinor: minorTicks,
+            min: minTemp,
+            max: maxTemp,
+            value: waterTemperature,
+            pointer: { size: '6%' },
+            colorScheme: 'scheme05',
+            ranges: [
+            { startValue: -10, endValue: 10, style: { fill: '#FFF157', stroke: '#FFF157' } },
+            { startValue: 10, endValue: 35, style: { fill: '#FFA200', stroke: '#FFA200' } },
+            { startValue: 35, endValue: maxTemp, style: { fill: '#FF4800', stroke: '#FF4800' } }]
+        });
+    }
+}

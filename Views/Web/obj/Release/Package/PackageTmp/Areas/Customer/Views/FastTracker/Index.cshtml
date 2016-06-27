@@ -12,9 +12,14 @@
 @Scripts.Render("~/bundles/jqueryui")
 
 <script src="~/Scripts/app/utils.js"></script>
+
+<link href="~/Scripts/jqwidgets/styles/jqx.base.css" rel="stylesheet" />
+<script src="~/Scripts/jqwidgets/jqx-all.js"></script>
+
 <script src="~/Scripts/highcharts/highcharts.js"></script>
 <script src="~/Scripts/highcharts/highcharts-3d.js"></script>
 <script src="~/Scripts/highcharts/highcharts-more.js"></script>
+
 <script src="~/Scripts/app/dashboard.js"></script>
 
 <div class="row">
@@ -163,13 +168,13 @@
                         {
                             count = 1;
                             @Html.Raw("</div>")
+                                }
+                                else
+                                {
+                                    count++;
+                                }
+                            }
                         }
-                        else
-                        {
-                            count++;
-                        }
-                    }
-            }
     </div>
 </div>
 </div>
@@ -245,7 +250,7 @@
                     </div>
 
                     <script type="text/javascript">
-                            generateTemperatureGraph('graph-temperature-ambient-@Model.WaterQuality.TemperatureAmbientLastEventId', @waterTemperatureLastJS);
+                        generateTemperatureGraph('graph-temperature-ambient-@Model.WaterQuality.TemperatureAmbientLastEventId', @waterTemperatureLastJS);
                     </script>
 
                     <div class="row" style="margin-bottom: 20px;">
@@ -298,28 +303,31 @@
                 {
                     if (fm.RateFlow.HasValue)
                     {
-                        if (count == 1)
-                        {
-                            @Html.Raw("<div class='row'>")
-                        }
+                        @*if (count == 1)
+                            {
+                                @Html.Raw("<div class='row'>")
+                            }*@
 
-                        <div id="flowmeter_@idx" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class='row'>
+
+                            <div id="flowmeter_@fm.SensorId" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            </div>
+                            <script type="text/javascript">
+                                generateFlowMeter('@idx', @fm.RateFlow, @fm.Totalizer);
+                            </script>
+
                         </div>
-                                            <script type="text/javascript">
-                                                generateFlowMeter('@idx', @fm.RateFlow, @fm.Totalizer);
-                                            </script>
+                        //    if (count == 2)
+                        //{
+                        //    count = 1;
+                        //    @Html.Raw("</div>")
+                        //    }
+                        //else
+                        //{
+                        //    count++;
+                        //}
 
-                        if (count == 2)
-                        {
-                            count = 1;
-                            @Html.Raw("</div>")
-                        }
-                        else
-                        {
-                            count++;
-                        }
-
-                        idx++;
+                        //idx++;
                     }
                 }
             }
@@ -329,11 +337,11 @@
 
 @section Scripts {
     <script type="text/javascript">
-                            $(function () {
-                                $('#ddlSite').on('change', function (event) {
-                                    var form = $(event.target).parents('form');
-                                    form.submit();
-                                });
-                            });
+        $(function () {
+            $('#ddlSite').on('change', function (event) {
+                var form = $(event.target).parents('form');
+                form.submit();
+            });
+        });
     </script>
 }

@@ -110,6 +110,10 @@
     <Compile Include="Migrations\201606271215266_AWS.Designer.cs">
       <DependentUpon>201606271215266_AWS.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606271412294_AWS1.cs" />
+    <Compile Include="Migrations\201606271412294_AWS1.Designer.cs">
+      <DependentUpon>201606271412294_AWS1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
@@ -189,6 +193,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201606271215266_AWS.resx">
       <DependentUpon>201606271215266_AWS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606271412294_AWS1.resx">
+      <DependentUpon>201606271412294_AWS1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

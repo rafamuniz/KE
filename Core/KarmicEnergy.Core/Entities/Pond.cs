@@ -23,6 +23,11 @@ namespace KarmicEnergy.Core.Entities
         [MaxLength]
         public String Description { get; set; }
 
+        [Column("Reference", TypeName = "NVARCHAR")]
+        [StringLength(8)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public String Reference { get; set; }
+
         [Column("WaterVolumeCapacity", TypeName = "DECIMAL")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public Decimal WaterVolumeCapacity { get; set; }

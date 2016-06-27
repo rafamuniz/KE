@@ -1798,6 +1798,7 @@
     <Content Include="Areas\Customer\Views\Pond\SensorCreate.cshtml" />
     <Content Include="Areas\Customer\Views\Pond\SensorEdit.cshtml" />
     <Content Include="Areas\Customer\Views\Pond\SensorIndex.cshtml" />
+    <Content Include="Areas\Customer\Views\FastTracker\Tank.cshtml" />
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Properties\PublishProfiles\ClickOnce.pubxml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />

@@ -298,6 +298,13 @@
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Log\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\AlarmViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Monitoring\AlarmInfoViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Monitoring\AlarmDetailViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Monitoring\AlarmHistoryViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Monitoring\CommentViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Monitoring\ClearAlarmViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Monitoring\CreateCommentViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Monitoring\ListAlarmViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Pond\CreateViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Pond\EditViewModel.cs" />
@@ -465,6 +472,9 @@
     <Content Include="fonts\opensans-semibold_0-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\acknowledge-icon.png" />
+    <Content Include="images\acknowledge_16x16.png" />
+    <Content Include="images\alarm.png" />
     <Content Include="images\alarm_high.png" />
     <Content Include="images\alarm_low.png" />
     <Content Include="images\alarm_medium.png" />
@@ -1287,7 +1297,9 @@
     <Content Include="images\logo_sentence.png" />
     <Content Include="images\map_icon.png" />
     <Content Include="images\menu-highlight.png" />
+    <Content Include="images\monitoring.png" />
     <Content Include="images\my_tank.png" />
+    <Content Include="images\pond.png" />
     <Content Include="images\pond\FracPO1-blue-10.png" />
     <Content Include="images\pond\FracPO1-blue-100.png" />
     <Content Include="images\pond\FracPO1-blue-20.png" />
@@ -1594,6 +1606,9 @@
     <Content Include="images\tankmodels\8\FracPO1-red-90.png" />
     <Content Include="images\tank_white.png" />
     <Content Include="images\contacts.png" />
+    <Content Include="images\trigger-close.png" />
+    <Content Include="images\trigger-open.png" />
+    <Content Include="images\trigger.png" />
     <Content Include="images\users.png" />
     <Content Include="images\water-flow-idle.gif" />
     <Content Include="images\water-flow.gif" />
@@ -1799,6 +1814,10 @@
     <Content Include="Areas\Customer\Views\Pond\SensorEdit.cshtml" />
     <Content Include="Areas\Customer\Views\Pond\SensorIndex.cshtml" />
     <Content Include="Areas\Customer\Views\FastTracker\Tank.cshtml" />
+    <Content Include="Areas\Customer\Views\Monitoring\AlarmInfo.cshtml" />
+    <Content Include="Areas\Customer\Views\Monitoring\CreateComment.cshtml" />
+    <Content Include="Areas\Customer\Views\Monitoring\_AlarmDetail.cshtml" />
+    <Content Include="Areas\Customer\Views\Monitoring\AlarmClear.cshtml" />
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Properties\PublishProfiles\ClickOnce.pubxml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />

@@ -16,13 +16,13 @@ namespace KarmicEnergy.Core.Entities
         [Column("Value", TypeName = "NVARCHAR")]
         [StringLength(256)]
         public String Value { get; set; } = String.Empty;
-        
-        [Column("CalculatedValue", TypeName = "NVARCHAR")]
-        [StringLength(256)]
-        public String CalculatedValue { get; set; } = String.Empty;
 
         [Column("LastAckUserId", TypeName = "UNIQUEIDENTIFIER")]
         public Guid? LastAckUserId { get; set; }
+
+        [Column("LastAckUserName", TypeName = "NVARCHAR")]
+        [StringLength(256)]
+        public String LastAckUserName { get; set; }
 
         [Column("LastAckDate", TypeName = "DATETIME")]
         public DateTime? LastAckDate { get; set; }

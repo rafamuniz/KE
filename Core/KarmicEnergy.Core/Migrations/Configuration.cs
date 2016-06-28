@@ -18,6 +18,9 @@ namespace KarmicEnergy.Core.Migrations
         {
             try
             {
+                ActionType.Load()
+                    .ForEach(e => context.ActionTypes.AddOrUpdate(x => x.Id, e));
+
                 LogType.Load()
                     .ForEach(e => context.LogTypes.AddOrUpdate(x => x.Id, e));
 

@@ -14,5 +14,10 @@ namespace KarmicEnergy.Core.Repositories
 
         }
         #endregion Constructor    
+
+        public List<AlarmHistory> GetsByActionType(Guid triggerId, ActionTypeEnum actionType)
+        {
+            return Context.AlarmHistories.Where(x => x.ActionTypeId == (Int16)actionType && x.DeletedDate == null).ToList();
+        }
     }
 }

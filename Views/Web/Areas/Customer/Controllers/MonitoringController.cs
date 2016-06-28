@@ -18,17 +18,19 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult Index()
         {
             List<ListViewModel> viewModels = new List<ListViewModel>();
+            List<SensorItemEvent> events = new List<SensorItemEvent>();
 
             if (!IsSite)
             {
-                var events = KEUnitOfWork.SensorItemEventRepository.GetAllActive().ToList();
-                viewModels = ListViewModel.Map(events);
+                 events = KEUnitOfWork.SensorItemEventRepository.GetAllActive().ToList();                
             }
             else
             {
-                var events = KEUnitOfWork.SensorItemEventRepository.GetsBySite(SiteId);
-                viewModels = ListViewModel.Map(events);
+                events = KEUnitOfWork.SensorItemEventRepository.GetsBySite(SiteId);            
             }
+
+            var evts = events.Any() ? events.OrderByDescending(d => d.EventDate).ToList() : events;
+            viewModels = ListViewModel.Map(evts);
 
             AddLog("Navigated to Monitoring View", LogTypeEnum.Info);
 
@@ -39,23 +41,27 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult Site(Guid siteId)
         {
             List<ListViewModel> viewModels = new List<ListViewModel>();
-
-            //tankId
             var events = KEUnitOfWork.SensorItemEventRepository.GetsBySite(siteId).ToList();
             viewModels = ListViewModel.Map(events.OrderByDescending(x => x.EventDate).ToList());
-
             return View("Index", viewModels);
         }
+
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
+        public ActionResult Pond(Guid pondId)
+        {
+            List<ListViewModel> viewModels = new List<ListViewModel>();
+            var events = KEUnitOfWork.SensorItemEventRepository.GetsByPond(pondId).ToList();
+            viewModels = ListViewModel.Map(events.OrderByDescending(x => x.EventDate).ToList());
+            return View("Index", viewModels);
+        }
+
 
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult Tank(Guid tankId)
         {
             List<ListViewModel> viewModels = new List<ListViewModel>();
-
-            //tankId
-            var events = KEUnitOfWork.SensorItemEventRepository.GetAllActive().ToList();
+            var events = KEUnitOfWork.SensorItemEventRepository.GetsByTank(tankId).ToList();
             viewModels = ListViewModel.Map(events.OrderByDescending(x => x.EventDate).ToList());
-
             return View("Index", viewModels);
         }
 
@@ -63,10 +69,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult Event(Guid eventId)
         {
             List<ListViewModel> viewModels = new List<ListViewModel>();
-
             var evt = KEUnitOfWork.SensorItemEventRepository.Get(eventId);
             viewModels.Add(ListViewModel.Map(evt));
-
             return View("Index", viewModels);
         }
 
@@ -77,101 +81,64 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public async Task<ActionResult> Alarms()
         {
-            List<AlarmViewModel> viewModels = new List<AlarmViewModel>();
+            ListAlarmViewModel viewModel = new ListAlarmViewModel();
+            List<AlarmDetailViewModel> viewModels = new List<AlarmDetailViewModel>();
 
             if (!IsSite)
             {
-                var alarms = KEUnitOfWork.AlarmRepository.GetAllActive().ToList();
-                viewModels = AlarmViewModel.Map(alarms);
+                var alarms = KEUnitOfWork.AlarmRepository.GetsActiveByCustomer(CustomerId).ToList();
+                viewModels = AlarmDetailViewModel.Map(alarms);
             }
             else
             {
                 var alarms = KEUnitOfWork.AlarmRepository.GetsBySite(SiteId).ToList();
-                viewModels = AlarmViewModel.Map(alarms);
+                viewModels = AlarmDetailViewModel.Map(alarms);
             }
 
-            if (viewModels.Any())
-            {
-                foreach (var vm in viewModels.Where(x => x.AckUserId.HasValue))
-                {
-                    var user = await UserManager.FindByIdAsync(vm.AckUserId.Value.ToString());
-                    vm.AckUser = user.Name;
-                }
-            }
+            viewModel.Alarms = viewModels;
 
-            return View(viewModels);
+            return View(viewModel);
         }
 
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         [Route("alarm/site/{siteId?}")]
         public async Task<ActionResult> AlarmBySite(Guid siteId)
         {
-            List<AlarmViewModel> viewModels = new List<AlarmViewModel>();
-
+            ListAlarmViewModel viewModel = new ListAlarmViewModel();
+            List<AlarmDetailViewModel> viewModels = new List<AlarmDetailViewModel>();
             var alarms = KEUnitOfWork.AlarmRepository.GetsBySite(siteId);
-            viewModels = AlarmViewModel.Map(alarms.OrderByDescending(x => x.Trigger.SeverityId).ToList());
-
-            if (viewModels.Any())
-            {
-                foreach (var vm in viewModels.Where(x => x.AckUserId.HasValue))
-                {
-                    var user = await UserManager.FindByIdAsync(vm.AckUserId.Value.ToString());
-                    vm.AckUser = user.Name;
-                }
-            }
-
-            return View("Alarms", viewModels);
+            viewModels = AlarmDetailViewModel.Map(alarms.OrderByDescending(x => x.Trigger.SeverityId).ToList());
+            viewModel.Alarms = viewModels;
+            return View("Alarms", viewModel);
         }
 
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         [Route("alarm/tank/{tankId?}")]
         public async Task<ActionResult> AlarmByTank(Guid tankId)
         {
-            List<AlarmViewModel> viewModels = new List<AlarmViewModel>();
-
+            ListAlarmViewModel viewModel = new ListAlarmViewModel();
+            List<AlarmDetailViewModel> viewModels = new List<AlarmDetailViewModel>();
             var alarms = KEUnitOfWork.AlarmRepository.GetsByTank(tankId).ToList();
-            viewModels = AlarmViewModel.Map(alarms.OrderByDescending(x => x.Trigger.SeverityId).ToList());
-
-            if (viewModels.Any())
-            {
-                foreach (var vm in viewModels.Where(x => x.AckUserId.HasValue))
-                {
-                    var user = await UserManager.FindByIdAsync(vm.AckUserId.Value.ToString());
-                    vm.AckUser = user.Name;
-                }
-            }
-
-            return View("Alarms", viewModels);
+            viewModels = AlarmDetailViewModel.Map(alarms.OrderByDescending(x => x.Trigger.SeverityId).ToList());
+            viewModel.Alarms = viewModels;
+            return View("Alarms", viewModel);
         }
 
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public async Task<ActionResult> AlarmById(Guid alarmId)
         {
-            List<AlarmViewModel> viewModels = new List<AlarmViewModel>();
-
+            ListAlarmViewModel viewModel = new ListAlarmViewModel();
+            List<AlarmDetailViewModel> viewModels = new List<AlarmDetailViewModel>();
             var alarm = KEUnitOfWork.AlarmRepository.Get(alarmId);
-            viewModels.Add(AlarmViewModel.Map(alarm));
-
-            if (viewModels.Any())
-            {
-                foreach (var vm in viewModels.Where(x => x.AckUserId.HasValue))
-                {
-                    var user = await UserManager.FindByIdAsync(vm.AckUserId.Value.ToString());
-                    vm.AckUser = user.Name;
-                }
-            }
-
-            return View("Alarms", viewModels);
+            viewModels.Add(AlarmDetailViewModel.Map(alarm));
+            viewModel.Alarms = viewModels;
+            return View("Alarms", viewModel);
         }
 
         #endregion Alarms
 
         #region Ack
 
-        //
-        // POST: /Monitoring/Acknowledge
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult Acknowledge(Guid id)
         {
@@ -181,14 +148,15 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                 alarm.LastAckDate = DateTime.UtcNow;
                 alarm.LastAckUserId = Guid.Parse(UserId);
+                alarm.LastAckUserName = User.Identity.Name;
 
                 AlarmHistory alarmHistory = new AlarmHistory()
                 {
                     UserId = Guid.Parse(UserId),
-                    Action = "ACK",
+                    UserName = alarm.LastAckUserName,
+                    ActionTypeId = (Int16)ActionTypeEnum.Ack,
                     AlarmId = alarm.Id,
                     Value = alarm.Value,
-                    CalculatedValue = alarm.CalculatedValue
                 };
 
                 KEUnitOfWork.AlarmHistoryRepository.Add(alarmHistory);
@@ -205,32 +173,72 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return View();
         }
 
-        #endregion Ack
-
-        #region Clear Alarm
-
-        //
-        // POST: /Monitoring/Acknowledge
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
-        [Route("alarm/clear/{id?}")]
-        public ActionResult ClearAlarm(Guid id)
+        public async Task<ActionResult> AlarmACK(Guid id)
         {
             try
             {
                 var alarm = KEUnitOfWork.AlarmRepository.Get(id);
 
-                alarm.EndDate = DateTime.UtcNow;
-                
+                alarm.LastAckDate = DateTime.UtcNow;
+                alarm.LastAckUserId = Guid.Parse(UserId);
+                alarm.LastAckUserName = User.Identity.Name;
+
                 AlarmHistory alarmHistory = new AlarmHistory()
-                {                    
+                {
                     UserId = Guid.Parse(UserId),
-                    Action = "CLEAR",
-                    Message = "Alarm cleared",
+                    UserName = alarm.LastAckUserName,
+                    ActionTypeId = (Int16)ActionTypeEnum.Ack,
                     AlarmId = alarm.Id,
-                    Value = alarm.Value,
-                    CalculatedValue = alarm.CalculatedValue
+                    Value = alarm.Value
+                };
+
+                KEUnitOfWork.AlarmHistoryRepository.Add(alarmHistory);
+                KEUnitOfWork.AlarmRepository.Update(alarm);
+                KEUnitOfWork.Complete();
+
+                AlarmDetailViewModel viewModel = new AlarmDetailViewModel();
+                viewModel = AlarmDetailViewModel.Map(alarm);
+
+                return RedirectToAction("AlarmInfo/" + id);
+            }
+            catch (Exception ex)
+            {
+                AddErrors(ex);
+            }
+
+            return View();
+        }
+
+        #endregion Ack
+
+        #region Clear Alarm
+
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
+        public ActionResult AlarmClear(Guid id)
+        {
+            ClearAlarmViewModel viewModel = new ClearAlarmViewModel();
+            viewModel.AlarmId = id;
+            viewModel.Detail = GetAlarmDetail(id);
+            return View(viewModel);
+        }
+
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
+        public ActionResult Clear(ClearAlarmViewModel viewModel)
+        {
+            try
+            {
+                var alarm = KEUnitOfWork.AlarmRepository.Get(viewModel.AlarmId);
+
+                alarm.EndDate = DateTime.UtcNow;
+
+                AlarmHistory alarmHistory = new AlarmHistory()
+                {
+                    UserId = Guid.Parse(UserId),
+                    ActionTypeId = (Int16)ActionTypeEnum.Clear,
+                    Message = viewModel.Message,
+                    AlarmId = alarm.Id,
+                    Value = alarm.Value
                 };
 
                 KEUnitOfWork.AlarmHistoryRepository.Add(alarmHistory);
@@ -251,31 +259,38 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Comments
 
-        //
-        // POST: /Monitoring/AddComment
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
+        public ActionResult CreateComment(Guid id)
+        {
+            CreateCommentViewModel viewModel = new CreateCommentViewModel();
+            viewModel.AlarmId = id;
+            viewModel.Detail = GetAlarmDetail(id);
+            return View(viewModel);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
-        public ActionResult AddComment(Guid id, String message)
+        public ActionResult CreateComment(CreateCommentViewModel viewModel)
         {
             try
             {
-                var alarm = KEUnitOfWork.AlarmRepository.Get(id);
-                                
+                var alarm = KEUnitOfWork.AlarmRepository.Get(viewModel.AlarmId);
+
                 AlarmHistory alarmHistory = new AlarmHistory()
                 {
                     UserId = Guid.Parse(UserId),
-                    Action = "COMMENT",
-                    Message = message,
+                    UserName = User.Identity.Name,
+                    ActionTypeId = (Int16)ActionTypeEnum.Comment,
+                    Message = viewModel.Comment,
                     AlarmId = alarm.Id,
-                    Value = alarm.Value,
-                    CalculatedValue = alarm.CalculatedValue
+                    Value = alarm.Value
                 };
 
-                KEUnitOfWork.AlarmHistoryRepository.Add(alarmHistory);                
+                KEUnitOfWork.AlarmHistoryRepository.Add(alarmHistory);
                 KEUnitOfWork.Complete();
 
-                return View();
+                return RedirectToAction("AlarmInfo/" + alarm.Id);
             }
             catch (Exception ex)
             {
@@ -285,7 +300,50 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return View();
         }
 
+        private List<CommentViewModel> GetsComment(Guid triggerId)
+        {
+            List<CommentViewModel> viewModels = new List<CommentViewModel>();
+            var comments = KEUnitOfWork.AlarmHistoryRepository.GetsByActionType(triggerId, ActionTypeEnum.Comment);
+            var cs = comments.Any() ? comments.OrderByDescending(d => d.CreatedDate).ToList() : comments;
+            viewModels = CommentViewModel.Map(cs);
+            return viewModels;
+        }
+
         #endregion Comments
+
+        #region Detail
+
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
+        public ActionResult AlarmInfo(Guid id)
+        {
+            AlarmInfoViewModel viewModel = new AlarmInfoViewModel();
+            viewModel.Id = id;
+            viewModel.Detail = GetAlarmDetail(id);
+            viewModel.Comments = GetsComment(viewModel.Detail.TriggerId);
+            viewModel.Histories = GetsHistory(viewModel.Detail.TriggerId);
+
+            AddLog("Navigated to Alarm Info View", LogTypeEnum.Info);
+            return View(viewModel);
+        }
+
+        private AlarmDetailViewModel GetAlarmDetail(Guid alarmId)
+        {
+            AlarmDetailViewModel viewModel = new AlarmDetailViewModel();
+            var alarm = KEUnitOfWork.AlarmRepository.Get(alarmId);
+            viewModel = AlarmDetailViewModel.Map(alarm);
+            return viewModel;
+        }
+
+        private List<AlarmHistoryViewModel> GetsHistory(Guid triggerId)
+        {
+            List<AlarmHistoryViewModel> viewModels = new List<AlarmHistoryViewModel>();
+            var histories = KEUnitOfWork.AlarmRepository.GetsCloseByTrigger(triggerId);
+            var hs = histories.Any() ? histories.OrderByDescending(d => d.CreatedDate).ToList() : histories;
+            viewModels = AlarmHistoryViewModel.Map(histories);
+            return viewModels;
+        }
+
+        #endregion Detail
 
         [HttpGet]
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]

@@ -13,10 +13,6 @@ namespace KarmicEnergy.Core.Entities
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        [Column("Action", TypeName = "NVARCHAR")]
-        [StringLength(256)]
-        public String Action { get; set; } = String.Empty;
-
         [Column("Message", TypeName = "NVARCHAR")]
         [StringLength(4000)]
         public String Message { get; set; } = String.Empty;
@@ -25,13 +21,13 @@ namespace KarmicEnergy.Core.Entities
         [StringLength(256)]
         public String Value { get; set; } = String.Empty;
 
-        [Column("CalculatedValue", TypeName = "NVARCHAR")]
-        [StringLength(256)]
-        public String CalculatedValue { get; set; } = String.Empty;
-
         [Column("UserId", TypeName = "UNIQUEIDENTIFIER")]
         public Guid UserId { get; set; }
-                
+
+        [Column("UserName", TypeName = "NVARCHAR")]
+        [StringLength(256)]
+        public String UserName { get; set; }
+
         #endregion Property
 
         #region Alarm
@@ -40,5 +36,16 @@ namespace KarmicEnergy.Core.Entities
         public Guid AlarmId { get; set; }
 
         #endregion Alarm        
+
+        #region ActionType
+
+        [Column("ActionTypeId", TypeName = "SMALLINT")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public Int16 ActionTypeId { get; set; } = (Int16)ActionTypeEnum.Info;
+
+        [ForeignKey("ActionTypeId")]
+        public virtual ActionType ActionType { get; set; }
+
+        #endregion ActionType
     }
 }

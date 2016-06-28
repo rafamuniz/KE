@@ -25,11 +25,13 @@ namespace KarmicEnergy.Core.Repositories
         {
             List<Alarm> alarms = new List<Alarm>();
 
-            var alarmsTank = base.Find(x => x.Trigger.SensorItem.Sensor.Tank.Site.CustomerId == customerId && x.EndDate == null).ToList();
             var alarmsSite = base.Find(x => x.Trigger.SensorItem.Sensor.Site.CustomerId == customerId && x.EndDate == null).ToList();
+            var alarmsPond = base.Find(x => x.Trigger.SensorItem.Sensor.Pond.Site.CustomerId == customerId && x.EndDate == null).ToList();
+            var alarmsTank = base.Find(x => x.Trigger.SensorItem.Sensor.Tank.Site.CustomerId == customerId && x.EndDate == null).ToList();
 
-            alarms.AddRange(alarmsTank);
             alarms.AddRange(alarmsSite);
+            alarms.AddRange(alarmsPond);
+            alarms.AddRange(alarmsTank);
 
             var a = alarms.Distinct();
 
@@ -90,6 +92,16 @@ namespace KarmicEnergy.Core.Repositories
         public Alarm GetActiveByTrigger(Guid triggerId)
         {
             return base.Find(x => x.TriggerId == triggerId && x.EndDate == null).OrderByDescending(x => x.StartDate).SingleOrDefault();
+        }
+
+        /// <summary>
+        /// Get Alarm Active by TriggerId
+        /// </summary>
+        /// <param name="triggerId"></param>
+        /// <returns></returns>
+        public List<Alarm> GetsCloseByTrigger(Guid triggerId)
+        {
+            return base.Find(x => x.TriggerId == triggerId && x.EndDate != null).OrderByDescending(x => x.StartDate).ToList();
         }
     }
 }

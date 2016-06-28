@@ -22,6 +22,10 @@
             .Filterable(true);
     }
 
+    columns.Add(c => c.PondName).Titled("Pond")
+    .Sortable(true)
+    .Filterable(true);
+
     columns.Add(c => c.TankName).Titled("Tank")
         .Sortable(true)
         .Filterable(true);
@@ -37,8 +41,8 @@
     columns.Add(c => c.EventDateLocal).Titled("Date")
         .Sortable(true)
         .Filterable(true);
-       
-}).WithPaging(10).Sortable(true).Filterable().WithMultipleFilters()
+
+}).WithPaging(30).Sortable(true).Filterable().WithMultipleFilters()
 
 @section Scripts {
     @Scripts.Render("~/bundles/gridmvc")
@@ -46,12 +50,7 @@
     <script type="text/javascript">
         $(function () {
             showLoading();
-
-            $('#ddlSite').on('change', function (event) {
-                var form = $(event.target).parents('form');
-                form.submit();
-            });
-
+            
             hideLoading();
         });
     </script>

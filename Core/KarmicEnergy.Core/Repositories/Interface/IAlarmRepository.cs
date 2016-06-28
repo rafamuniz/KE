@@ -18,5 +18,6 @@ namespace KarmicEnergy.Core.Repositories
         Int32 GetTotalOpenByTankId(Guid tankId);
 
         Alarm GetActiveByTrigger(Guid triggerId);
+        List<Alarm> GetsCloseByTrigger(Guid triggerId);
     }
 }

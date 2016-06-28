@@ -630,6 +630,7 @@ p {
 
             .sidebar-menu > li > a > p {
                 text-transform: uppercase;
+                margin-top: 5px;
             }
 
             .sidebar-menu > li > a > .fa,
@@ -6213,7 +6214,7 @@ div.uploader {
 }
 
     .box-sub .title {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         min-height: 40px;
         padding: 10px 0;
     }
@@ -6843,7 +6844,7 @@ background-color: #1C2B39; #graph-draw .chart {
             font-family: 'open_sansbold';
             font-size: 20px;
         }
-        
+
     .pond .pond-waterVolume {
         height: 50px;
         padding-left: 30px;

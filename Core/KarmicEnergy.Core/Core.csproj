@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AlarmHistory.cs" />
+    <Compile Include="Entities\ActionType.cs" />
     <Compile Include="Entities\NotificationType.cs" />
     <Compile Include="Entities\Notification.cs" />
     <Compile Include="Entities\Contact.cs" />
@@ -106,13 +107,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201606271215266_AWS.cs" />
-    <Compile Include="Migrations\201606271215266_AWS.Designer.cs">
-      <DependentUpon>201606271215266_AWS.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606271412294_AWS1.cs" />
-    <Compile Include="Migrations\201606271412294_AWS1.Designer.cs">
-      <DependentUpon>201606271412294_AWS1.cs</DependentUpon>
+    <Compile Include="Migrations\201606281427195_AWS.cs" />
+    <Compile Include="Migrations\201606281427195_AWS.Designer.cs">
+      <DependentUpon>201606281427195_AWS.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TankModel.cs" />
@@ -191,11 +188,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606271215266_AWS.resx">
-      <DependentUpon>201606271215266_AWS.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606271412294_AWS1.resx">
-      <DependentUpon>201606271412294_AWS1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606281427195_AWS.resx">
+      <DependentUpon>201606281427195_AWS.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

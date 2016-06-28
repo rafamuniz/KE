@@ -19,31 +19,66 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
 
         public Guid Id { get; set; }
 
+        [Display(Name = "Site")]
         public Guid SiteId { get; set; }
+        [Display(Name = "Site")]
         public String SiteName { get; set; }
 
-        public Guid TankId { get; set; }
+        [Display(Name = "Pond")]
+        public Guid? PondId { get; set; }
+        [Display(Name = "Pond")]
+        public String PondName { get; set; }
+
+        [Display(Name = "Tank")]
+        public Guid? TankId { get; set; }
+        [Display(Name = "Tank")]
         public String TankName { get; set; }
 
+        [Display(Name = "Sensor")]
         public Guid SensorId { get; set; }
+        [Display(Name = "Sensor")]
         public String SensorName { get; set; }
 
+        [Display(Name = "Item")]
         public Int32 ItemId { get; set; }
+        [Display(Name = "Item")]
         public String ItemName { get; set; }
 
-        public DateTime? AckDate { get; set; }
-        public Guid? AckUserId { get; set; }
-        public String AckUser { get; set; }
+        [Display(Name = "Ack Last Date")]
+        public DateTime? AckLastDate { get; set; }
+        [Display(Name = "Ack Last Date")]
+        public DateTime? AckLastDateLocal
+        {
+            get
+            {
+                if (AckLastDate.HasValue)
+                    return AckLastDate.Value.ToLocalTime();
+                return null;
+            }
+            set { }
+        }
 
+        [Display(Name = "Last User")]
+        public Guid? AckLastUserId { get; set; }
+        [Display(Name = "Last User")]
+        public String AckLastUsername { get; set; }
+
+        [Display(Name = "Alarm Date")]
         public DateTime AlarmDate { get; set; }
+        [Display(Name = "Alarm Date")]
         public DateTime AlarmDateLocal
         {
             get { return AlarmDate.ToLocalTime(); }
             set { }
         }
 
+        [Display(Name = "Severity")]
         public Int16 SeverityId { get; set; }
+        [Display(Name = "Severity")]
         public String SeverityName { get; set; }
+
+        [Display(Name = "Value")]
+        public String Value { get; set; }
 
         #endregion Property
 
@@ -65,9 +100,15 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
         {
             Mapper.CreateMap<Core.Entities.Alarm, AlarmViewModel>();
             var viewModel = Mapper.Map<Core.Entities.Alarm, AlarmViewModel>(entity);
-
+                        
             viewModel.SiteId = entity.Trigger.SensorItem.Sensor.Tank != null ? entity.Trigger.SensorItem.Sensor.Tank.Site.Id : entity.Trigger.SensorItem.Sensor.Site.Id;
             viewModel.SiteName = entity.Trigger.SensorItem.Sensor.Tank != null ? entity.Trigger.SensorItem.Sensor.Tank.Site.Name : entity.Trigger.SensorItem.Sensor.Site.Name;
+
+            if (entity.Trigger.SensorItem.Sensor.Pond != null)
+            {
+                viewModel.PondId = entity.Trigger.SensorItem.Sensor.Pond.Id;
+                viewModel.PondName = entity.Trigger.SensorItem.Sensor.Pond.Name;
+            }
 
             if (entity.Trigger.SensorItem.Sensor.Tank != null)
             {
@@ -82,8 +123,9 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
             viewModel.ItemName = entity.Trigger.SensorItem.Item.Name;
 
             viewModel.AlarmDate = entity.StartDate;
-            viewModel.AckDate = entity.LastAckDate;
-            viewModel.AckUserId = entity.LastAckUserId;
+            viewModel.AckLastDate = entity.LastAckDate;
+            viewModel.AckLastUserId = entity.LastAckUserId;
+            viewModel.AckLastUsername = entity.LastAckUserName;
 
             viewModel.SeverityId = entity.Trigger.Severity.Id;
             viewModel.SeverityName = entity.Trigger.Severity.Name;

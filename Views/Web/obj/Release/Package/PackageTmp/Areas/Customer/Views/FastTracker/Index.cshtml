@@ -20,7 +20,7 @@
 <script src="~/Scripts/highcharts/highcharts-3d.js"></script>
 <script src="~/Scripts/highcharts/highcharts-more.js"></script>
 
-<script src="~/Scripts/app/dashboard.js"></script>
+<script src="~/Scripts/app/fasttracker.js"></script>
 
 <div class="row">
     @if (!this.IsSite())
@@ -234,37 +234,38 @@
             <div class="title blue">
                 <h2>WATER QUALITY</h2>
             </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-centered">
+                    @if (@Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue)
+                    {
+                        String waterTemperatureLastMeasurement = @Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue ? @Model.WaterQuality.TemperatureAmbientLastEventDate.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : String.Empty;
+                        String waterTemperatureLast = @Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue ? @Model.WaterQuality.TemperatureAmbientLastEventValue.Value.ToString() : String.Empty;
+                        String waterTemperatureLastJS = @Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue ? @Model.WaterQuality.TemperatureAmbientLastEventValue.Value.ToString() : "undefined";
 
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                @if (@Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue)
-                {
-                    String waterTemperatureLastMeasurement = @Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue ? @Model.WaterQuality.TemperatureAmbientLastEventDate.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : String.Empty;
-                    String waterTemperatureLast = @Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue ? @Model.WaterQuality.TemperatureAmbientLastEventValue.Value.ToString() : String.Empty;
-                    String waterTemperatureLastJS = @Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue ? @Model.WaterQuality.TemperatureAmbientLastEventValue.Value.ToString() : "undefined";
-
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center text-bold">
-                        <span>Temp Ambient</span>
-                    </div>
-
-                    <div id="graph-temperature-ambient-@Model.WaterQuality.TemperatureAmbientLastEventId" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    </div>
-
-                    <script type="text/javascript">
-                        generateTemperatureGraph('graph-temperature-ambient-@Model.WaterQuality.TemperatureAmbientLastEventId', @waterTemperatureLastJS);
-                    </script>
-
-                    <div class="row" style="margin-bottom: 20px;">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center text-bold">
-                            <span>@Model.WaterQuality.TemperatureAmbientLastEventValue @Model.WaterQuality.TemperatureAmbientSymbol</span>
+                        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center text-bold">
+                            <span>Temp Ambient</span>
                         </div>
-                    </div>
-                }
-            </div>
 
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                @if (@Model.WaterQuality.PHLastEventValue.HasValue)
-                {
-                }
+                        <div id="graph-temperature-ambient-@Model.WaterQuality.TemperatureAmbientLastEventId" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        </div>
+
+                        <script type="text/javascript">
+                            generateTemperatureGraph('graph-temperature-ambient-@Model.WaterQuality.TemperatureAmbientLastEventId', @waterTemperatureLastJS);
+                        </script>
+
+                        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 20px;">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center text-bold">
+                                <span>@Model.WaterQuality.TemperatureAmbientLastEventValue @Model.WaterQuality.TemperatureAmbientSymbol</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-centered">
+                    @if (@Model.WaterQuality.PHLastEventValue.HasValue)
+                    {
+                    }
+                </div>
             </div>
 
             @*<div class="row" style="margin-bottom: 20px;">

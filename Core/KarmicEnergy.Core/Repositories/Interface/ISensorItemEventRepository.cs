@@ -7,6 +7,7 @@ namespace KarmicEnergy.Core.Repositories
     public interface ISensorItemEventRepository : IKERepositoryBase<SensorItemEvent>
     {
         List<SensorItemEvent> GetsBySite(Guid siteId);
+        List<SensorItemEvent> GetsByPond(Guid pondId);
         List<SensorItemEvent> GetsByTank(Guid tankId);
         SensorItemEvent GetLastEventBySensorItem(Guid sensorItemId);
 

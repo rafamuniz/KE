@@ -22,7 +22,10 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
         public Guid SiteId { get; set; }
         public String SiteName { get; set; }
 
-        public Guid TankId { get; set; }
+        public Guid? PondId { get; set; }
+        public String PondName { get; set; }
+
+        public Guid? TankId { get; set; }
         public String TankName { get; set; }
 
         public Guid SensorId { get; set; }
@@ -62,11 +65,24 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
 
             viewModel.Id = entity.Id;
 
-            viewModel.SiteId = entity.SensorItem.Sensor.Tank != null ? entity.SensorItem.Sensor.Tank.Site.Id : entity.SensorItem.Sensor.Site.Id;
-            viewModel.SiteName = entity.SensorItem.Sensor.Tank != null ? entity.SensorItem.Sensor.Tank.Site.Name : entity.SensorItem.Sensor.Site.Name;
-
-            if (entity.SensorItem.Sensor.Tank != null)
+            if (entity.SensorItem.Sensor.Site != null)
             {
+                viewModel.SiteId = entity.SensorItem.Sensor.Site.Id;
+                viewModel.SiteName = entity.SensorItem.Sensor.Site.Name;
+            }
+            else if (entity.SensorItem.Sensor.Pond != null)
+            {
+                viewModel.SiteId = entity.SensorItem.Sensor.Pond.Site.Id;
+                viewModel.SiteName = entity.SensorItem.Sensor.Pond.Site.Name;
+
+                viewModel.PondId = entity.SensorItem.Sensor.Pond.Id;
+                viewModel.PondName = entity.SensorItem.Sensor.Pond.Name;
+            }
+            else if (entity.SensorItem.Sensor.Tank != null)
+            {
+                viewModel.SiteId = entity.SensorItem.Sensor.Tank.Site.Id;
+                viewModel.SiteName = entity.SensorItem.Sensor.Tank.Site.Name;
+
                 viewModel.TankId = entity.SensorItem.Sensor.Tank.Id;
                 viewModel.TankName = entity.SensorItem.Sensor.Tank.Name;
             }

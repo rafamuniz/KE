@@ -21,6 +21,11 @@ namespace KarmicEnergy.Core.Repositories
             return Context.SensorItemEvents.Where(x => x.SensorItem.Sensor.SiteId == siteId && x.SensorItem.Sensor.TankId == null).ToList();
         }
 
+        public List<SensorItemEvent> GetsByPond(Guid pondId)
+        {
+            return Context.SensorItemEvents.Where(x => x.SensorItem.Sensor.PondId == pondId).ToList();
+        }
+
         public List<SensorItemEvent> GetsByTank(Guid tankId)
         {
             return Context.SensorItemEvents.Where(x => x.SensorItem.Sensor.TankId == tankId).ToList();

@@ -31,6 +31,11 @@ namespace KarmicEnergy.Core.Repositories
             return base.Find(x => x.PondId == pondId && x.DeletedDate == null).Any();
         }
 
+        public List<Sensor> GetsActive()
+        {
+            return base.Find(x => x.Status == "A" && x.DeletedDate == null).ToList();
+        }
+
         //public List<Sensor> GetsByCustomer(Guid customerId)
         //{
         //    return base.Find(x => x.Tank.Site.CustomerId == customerId && x.DeletedDate == null).ToList();

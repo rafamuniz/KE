@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Reflection;
@@ -76,39 +77,21 @@ namespace SiteService
                 timer.Enabled = false;
                 KEUnitOfWork KEUnitOfWork = KEUnitOfWork.Create();
 
-                var sensors = KEUnitOfWork.SensorRepository.GetAllActive().ToList();
+                var sensors = KEUnitOfWork.SensorRepository.GetsActive().ToList();
 
                 if (sensors.Any())
                 {
-                    List<ManualResetEvent> handles = new List<ManualResetEvent>();
-
                     foreach (var sensor in sensors)
                     {
                         GetData(sensor);
-                        // Create an MRE for each thread.
-                        //var handle = new ManualResetEvent(false);
-
-                        // Store it for use below.
-                        //handles.Add(handle);
-
-                        //ThreadPool.QueueUserWorkItem(new WaitCallback(GetData), Tuple.Create(sensor, handle));
-
-                        //Thread _thread = new Thread(GetData);
-                        //_thread.Name = sensor.Name;
-                        //_thread.IsBackground = true;
-                        //_thread.Start();
                     }
-
-                    //WaitHandle.WaitAll(handles.ToArray());
                 }
 
                 Logger.WriteLog("Service has been done successfully");
-                //EventLog.WriteEntry("Service has been done successfully");
             }
             catch (Exception ex)
             {
                 Logger.WriteLog(ex.Message);
-                //EventLog.WriteEntry(ex.Message);
             }
             finally
             {
@@ -125,8 +108,6 @@ namespace SiteService
         //private void GetData(Object stateInfo)
         private void GetData(Sensor sensor)
         {
-            //var tuple = (Tuple<Sensor, ManualResetEvent>)stateInfo;
-            //Sensor sensor = tuple.Item1;
             Site site = null;
             SerialPort serialPort = null;
             String message = String.Empty;
@@ -138,6 +119,8 @@ namespace SiteService
 
                 if (sensor.SiteId.HasValue)
                     site = sensor.Site;
+                else if (sensor.PondId.HasValue)
+                    site = sensor.Pond.Site;
                 else if (sensor.TankId.HasValue)
                     site = sensor.Tank.Site;
 
@@ -152,13 +135,15 @@ namespace SiteService
                 message = "No response";
                 message = serialPort.ReadLine();
 
-#else
-                message = "!65001*R274~";
-#endif
-
-                if (message != "No response")
+#else                
+                //message = "!65003*R274WT78V4500T43534~";
+                message = GetAppConfigValue("ResponseSensor");
+#endif         
+                if (message != null &&
+                    message != "No response" &&
+                    message.TrimStart().TrimEnd().Trim() != String.Empty)
                 {
-                    SaveData(sensor, message);
+                    ProcessResponse(sensor, message);
                     String messageResponse = String.Format("{0} responds: {1}", sensor.Name, command);
                     //EventLog.WriteEntry(messageResponse, EventLogEntryType.Information);
                     Logger.WriteLog(messageResponse);
@@ -201,48 +186,177 @@ namespace SiteService
         /// </summary>
         /// <param name="sensor"></param>
         /// <param name="response"></param>
-        private void SaveData(Sensor sensor, String response)
+        private void ProcessResponse(Sensor sensor, String response)
         {
             try
             {
-                KEUnitOfWork KEUnitOfWork = KEUnitOfWork.Create();
+                Dictionary<String, String> items = new Dictionary<String, String>();
+                List<Char> responseList = response.ToList();
 
-                String itemCode = String.Empty;
-                String sensorValue = String.Empty;
-                String sensorCalculatedValue = String.Empty;
-
-                SensorItem sensorItem = KEUnitOfWork.SensorItemRepository.Find(x => x.Item.Code == itemCode && x.SensorId == sensor.Id).Single();
-                SensorItemEvent lastEvent = KEUnitOfWork.SensorItemEventRepository.Find(x => x.SensorItemId == sensorItem.Id).OrderByDescending(o => o.RowVersion).Single();
-
-                if (lastEvent == null || lastEvent.Value != sensorValue)
+                if (responseList.Any())
                 {
-                    if (itemCode == "R")
-                    {
-                        var tank = sensorItem.Sensor.Tank;
-                        sensorCalculatedValue = tank.CalculateWaterRemaining(Decimal.Parse(sensorValue)).ToString();
+                    Boolean flagSensorReference = false;
+                    Boolean flagItem = false;
+                    Boolean flagItemKey = false;
+                    Boolean flagItemValue = false;
+                    String sensorReference = String.Empty;
+                    String itemCode = String.Empty;
+                    String itemValue = String.Empty;
 
-                        // Calculate Water Volume
-                        SensorItemEvent SensorItemEventWaterVolume = new SensorItemEvent()
-                        {
-                            SensorItemId = sensorItem.Id,
-                            Value = sensorCalculatedValue
-                        };
+                    if (responseList[0] != '!')
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        responseList.RemoveAt(0);
+                        flagSensorReference = true;
                     }
 
-                    SensorItemEvent SensorItemEvent = new SensorItemEvent()
+                    foreach (var item in responseList)
                     {
-                        SensorItemId = sensorItem.Id,
-                        Value = sensorValue
-                    };
+                        if (Char.IsNumber(item) && flagSensorReference)
+                        {
+                            sensorReference += item;
+                        }
+                        else if (item == '*')
+                        {
+                            if (sensorReference != sensor.Reference)
+                                return;
 
-                    KEUnitOfWork.SensorItemEventRepository.Add(SensorItemEvent);
-                    KEUnitOfWork.Complete();
+                            flagSensorReference = false;
+                            flagItem = true;
+                        }
+                        else if (item == '~')
+                        {
+                            if (!items.ContainsKey(itemCode))
+                                items.Add(itemCode, itemValue);
+                            break;
+                        }
+                        else if (flagItem) // Process the Items
+                        {
+                            if (!Char.IsNumber(item)) // Item Key
+                            {
+                                flagItemKey = true;
+
+                                // Start new Item
+                                if (flagItemValue)
+                                {
+                                    if (!items.ContainsKey(itemCode))
+                                        items.Add(itemCode, itemValue);
+                                    itemCode = String.Empty;
+                                    itemValue = String.Empty;
+                                    flagItemValue = false;
+                                }
+
+                                itemCode += item;
+                            }
+                            else
+                            {
+                                flagItemKey = false;
+                                flagItemValue = true;
+                                itemValue += item;
+                            }
+                        }
+                    }
                 }
+
+                SaveData(sensor, items);
             }
             catch (Exception ex)
             {
                 Logger.WriteLog("Error: SaveData - " + ex.Message);
                 EventLog.WriteEntry("Error: SaveData - " + ex.Message);
+            }
+        }
+
+        private void SaveData(Sensor sensor, Dictionary<String, String> response)
+        {
+            if (response.Any())
+            {
+                KEUnitOfWork KEUnitOfWork = KEUnitOfWork.Create();
+
+                foreach (KeyValuePair<String, String> item in response)
+                {
+                    var key = item.Key;
+                    var value = item.Value; //FormatItemValue(key, item.Value);
+
+                    SensorItem sensorItem = KEUnitOfWork.SensorItemRepository.Find(x => x.Item.Code == key && x.SensorId == sensor.Id).SingleOrDefault();
+                    if (sensorItem != null)
+                    {
+                        SensorItemEvent lastEvent = KEUnitOfWork.SensorItemEventRepository.Find(x => x.SensorItemId == sensorItem.Id).OrderByDescending(o => o.EventDate).SingleOrDefault();
+
+                        if (lastEvent == null || lastEvent.Value != value)
+                        {
+                            Guid? sensorItemEventChild = null;
+
+                            if (key == "R" && sensor.SiteId == null) // Item Range and sensor is a pond or tank
+                            {
+                                String waterVolumeValue = String.Empty;
+
+                                if (sensor.TankId.HasValue)
+                                {
+                                    var tank = sensor.Tank;
+                                    //waterVolumeValue = tank.CalculateWaterRemaining(Decimal.Parse(sensorValue)).ToString();
+                                    waterVolumeValue = "100000";
+                                }
+                                else if (sensor.PondId.HasValue)
+                                {
+                                    var pond = sensor.Pond;
+                                    waterVolumeValue = "1000000";
+                                    //var waterVolumeValue = pond.CalculateWaterRemaining(Decimal.Parse(sensorValue)).ToString();
+                                }
+
+                                // Calculate Water Volume
+                                SensorItemEvent SensorItemEventWaterVolume = new SensorItemEvent()
+                                {
+                                    SensorItemId = sensorItem.Id,
+                                    Value = waterVolumeValue
+                                };
+
+                                KEUnitOfWork.SensorItemEventRepository.Add(SensorItemEventWaterVolume);
+                                KEUnitOfWork.Complete();
+                                sensorItemEventChild = SensorItemEventWaterVolume.Id;
+                            }
+
+                            SensorItemEvent SensorItemEvent = new SensorItemEvent()
+                            {
+                                SensorItemId = sensorItem.Id,
+                                Value = value,
+                                SensorItemEventId = sensorItemEventChild
+                            };
+
+                            KEUnitOfWork.SensorItemEventRepository.Add(SensorItemEvent);
+                            KEUnitOfWork.Complete();
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// AT
+        /// GL
+        /// PH
+        /// R
+        /// RF
+        /// S
+        /// T
+        /// V
+        /// WT
+        /// WV
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private String FormatItemValue(String key, String value)
+        {
+            switch (key)
+            {
+                case "V":
+                    return value.Insert(value.Length - 3, ".");
+                default:
+                    return value;
             }
         }
 
@@ -360,6 +474,13 @@ namespace SiteService
                 return null;
             else
                 return config.AppSettings.Settings[key].Value;
+        }
+
+        private List<String> ReadResponseSensorFile()
+        {
+            String pathFilename = String.Format("{0}\\{1}", AppDomain.CurrentDomain.BaseDirectory, GetAppConfigValue("PathFilename:ResponseSensor"));
+            String[] records = File.ReadAllLines(pathFilename);
+            return records.ToList();
         }
     }
 }

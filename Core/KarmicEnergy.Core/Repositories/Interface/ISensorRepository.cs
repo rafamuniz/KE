@@ -10,6 +10,7 @@ namespace KarmicEnergy.Core.Repositories
         Boolean HasSensorTank(Guid tankId);
         Boolean HasSensorPond(Guid pondId);
 
+        List<Sensor> GetsActive();
         //List<Sensor> GetsByCustomer(Guid customerId);
         //List<Sensor> GetsByTank(Guid tankId);
         //List<Sensor> GetsByCustomerAndTank(Guid customerId, Guid tankId);

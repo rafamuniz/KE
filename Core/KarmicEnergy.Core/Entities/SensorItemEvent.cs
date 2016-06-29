@@ -17,9 +17,44 @@ namespace KarmicEnergy.Core.Entities
         [StringLength(256)]
         public String Value { get; set; } = String.Empty;
 
-        //[Column("CalculatedValue", TypeName = "NVARCHAR")]
-        //[StringLength(256)]
-        //public String CalculatedValue { get; set; }
+        /// <summary>
+        /// AT
+        /// GL
+        /// PH
+        /// R
+        /// RF
+        /// S
+        /// T
+        /// V
+        /// WT
+        /// WV
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>  
+        [NotMapped]
+        public String ValueFormat
+        {
+            get
+            {
+                if (SensorItem != null)
+                {
+                    switch (SensorItem.ItemId)
+                    {
+                        case (Int16)ItemEnum.Voltage:
+                        case (Int16)ItemEnum.VoltageFlowMeter:
+                        case (Int16)ItemEnum.VoltageGasSensor:
+                        case (Int16)ItemEnum.VoltagePHMeter:
+                        case (Int16)ItemEnum.VoltageSalinity:
+                            return Value.Insert(Value.Length - 3, ".");
+                        default:
+                            return Value;
+                    }                    
+                }
+                return Value;
+            }
+            private set { }
+        }
 
         [Column("EventDate", TypeName = "DATETIME")]
         [Required]

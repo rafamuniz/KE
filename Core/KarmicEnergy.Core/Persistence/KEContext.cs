@@ -11,6 +11,8 @@ namespace KarmicEnergy.Core.Persistence
         public KEContext()
         : base("KEConnection")
         {
+            //this.Configuration.LazyLoadingEnabled = false;
+            //this.Configuration.ProxyCreationEnabled = false;
         }
 
         public KEContext(String nameOrConnectionString)

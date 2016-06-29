@@ -1,0 +1,104 @@
+30/06/16 00:16:45: Sensor Site 1 start collection
+30/06/16 00:16:45: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:16:51: Sensor Site 1 responds: !65001*M~
+30/06/16 00:16:51: Sensor Site 1 finish collection
+30/06/16 00:16:51: Sensor Site 1 stop collection
+30/06/16 00:16:51: Sensor Tank 1 start collection
+30/06/16 00:16:51: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:16:51: Sensor Tank 1 responds: !65002*M~
+30/06/16 00:16:51: Sensor Tank 1 finish collection
+30/06/16 00:16:51: Sensor Tank 1 stop collection
+30/06/16 00:16:51: Sensor Pond 1 start collection
+30/06/16 00:16:51: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:16:51: Sensor Pond 1 responds: !65003*M~
+30/06/16 00:16:51: Sensor Pond 1 finish collection
+30/06/16 00:16:51: Sensor Pond 1 stop collection
+30/06/16 00:16:51: Sensor Pond 2 start collection
+30/06/16 00:16:51: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:16:51: Sensor Pond 2 responds: !65004*M~
+30/06/16 00:16:51: Sensor Pond 2 finish collection
+30/06/16 00:16:51: Sensor Pond 2 stop collection
+30/06/16 00:16:51: Sensor Temp start collection
+30/06/16 00:16:51: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:16:51: Sensor Temp responds: !65005*M~
+30/06/16 00:16:51: Sensor Temp finish collection
+30/06/16 00:16:51: Sensor Temp stop collection
+30/06/16 00:16:51: Service has been done successfully
+30/06/16 00:16:56: Sensor Site 1 start collection
+30/06/16 00:16:56: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:16:56: Sensor Site 1 responds: !65001*M~
+30/06/16 00:16:56: Sensor Site 1 finish collection
+30/06/16 00:16:56: Sensor Site 1 stop collection
+30/06/16 00:16:56: Sensor Tank 1 start collection
+30/06/16 00:16:56: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:16:56: Sensor Tank 1 responds: !65002*M~
+30/06/16 00:16:56: Sensor Tank 1 finish collection
+30/06/16 00:16:56: Sensor Tank 1 stop collection
+30/06/16 00:16:56: Sensor Pond 1 start collection
+30/06/16 00:16:56: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:16:56: Sensor Pond 1 responds: !65003*M~
+30/06/16 00:16:56: Sensor Pond 1 finish collection
+30/06/16 00:16:56: Sensor Pond 1 stop collection
+30/06/16 00:16:56: Sensor Pond 2 start collection
+30/06/16 00:16:57: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:16:57: Sensor Pond 2 responds: !65004*M~
+30/06/16 00:16:57: Sensor Pond 2 finish collection
+30/06/16 00:16:57: Sensor Pond 2 stop collection
+30/06/16 00:16:57: Sensor Temp start collection
+30/06/16 00:16:57: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:16:57: Sensor Temp responds: !65005*M~
+30/06/16 00:16:57: Sensor Temp finish collection
+30/06/16 00:16:57: Sensor Temp stop collection
+30/06/16 00:16:57: Service has been done successfully
+30/06/16 00:17:02: Sensor Site 1 start collection
+30/06/16 00:17:02: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:17:02: Sensor Site 1 responds: !65001*M~
+30/06/16 00:17:02: Sensor Site 1 finish collection
+30/06/16 00:17:02: Sensor Site 1 stop collection
+30/06/16 00:17:02: Sensor Tank 1 start collection
+30/06/16 00:17:02: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:17:02: Sensor Tank 1 responds: !65002*M~
+30/06/16 00:17:02: Sensor Tank 1 finish collection
+30/06/16 00:17:02: Sensor Tank 1 stop collection
+30/06/16 00:17:02: Sensor Pond 1 start collection
+30/06/16 00:17:02: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:17:02: Sensor Pond 1 responds: !65003*M~
+30/06/16 00:17:02: Sensor Pond 1 finish collection
+30/06/16 00:17:02: Sensor Pond 1 stop collection
+30/06/16 00:17:02: Sensor Pond 2 start collection
+30/06/16 00:17:02: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:17:02: Sensor Pond 2 responds: !65004*M~
+30/06/16 00:17:02: Sensor Pond 2 finish collection
+30/06/16 00:17:02: Sensor Pond 2 stop collection
+30/06/16 00:17:02: Sensor Temp start collection
+30/06/16 00:17:02: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:17:02: Sensor Temp responds: !65005*M~
+30/06/16 00:17:02: Sensor Temp finish collection
+30/06/16 00:17:02: Sensor Temp stop collection
+30/06/16 00:17:02: Service has been done successfully
+30/06/16 00:17:07: Sensor Site 1 start collection
+30/06/16 00:17:07: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:17:07: Sensor Site 1 responds: !65001*M~
+30/06/16 00:17:07: Sensor Site 1 finish collection
+30/06/16 00:17:07: Sensor Site 1 stop collection
+30/06/16 00:17:07: Sensor Tank 1 start collection
+30/06/16 00:17:07: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:17:07: Sensor Tank 1 responds: !65002*M~
+30/06/16 00:17:07: Sensor Tank 1 finish collection
+30/06/16 00:17:07: Sensor Tank 1 stop collection
+30/06/16 00:17:07: Sensor Pond 1 start collection
+30/06/16 00:17:07: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:17:07: Sensor Pond 1 responds: !65003*M~
+30/06/16 00:17:07: Sensor Pond 1 finish collection
+30/06/16 00:17:07: Sensor Pond 1 stop collection
+30/06/16 00:17:07: Sensor Pond 2 start collection
+30/06/16 00:17:07: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:17:07: Sensor Pond 2 responds: !65004*M~
+30/06/16 00:17:07: Sensor Pond 2 finish collection
+30/06/16 00:17:07: Sensor Pond 2 stop collection
+30/06/16 00:17:07: Sensor Temp start collection
+30/06/16 00:17:07: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+30/06/16 00:17:07: Sensor Temp responds: !65005*M~
+30/06/16 00:17:07: Sensor Temp finish collection
+30/06/16 00:17:07: Sensor Temp stop collection
+30/06/16 00:17:07: Service has been done successfully

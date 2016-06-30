@@ -21,7 +21,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
 
         [Display(Name = "Id")]
         [Required]
-        public Guid Id{ get; set; }
+        public Guid Id { get; set; }
 
         [Display(Name = "Value")]
         [MaxLength(20)]
@@ -37,8 +37,10 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
         [Required]
         public Guid? SiteId { get; set; }
 
+        [Display(Name = "Pond")]
+        public Guid? PondId { get; set; }
+
         [Display(Name = "Tank")]
-        [Required]
         public Guid? TankId { get; set; }
 
         [Display(Name = "Sensor")]

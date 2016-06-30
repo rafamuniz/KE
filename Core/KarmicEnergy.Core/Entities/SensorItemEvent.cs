@@ -85,8 +85,8 @@ namespace KarmicEnergy.Core.Entities
 
         #region Alarm
 
-        [Column("CheckedAlarm", TypeName = "BIT")]
-        public Boolean CheckedAlarm { get; set; } = false;
+        [Column("CheckedAlarmDate", TypeName = "DATETIME")]
+        public DateTime? CheckedAlarmDate { get; set; }
 
         #endregion Alarm
     }

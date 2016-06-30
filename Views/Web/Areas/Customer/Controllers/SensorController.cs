@@ -80,6 +80,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 TankId = tankId
             };
 
+            AddLog("Navigate to Create Sensor View", LogTypeEnum.Info);
             return View(LoadCreateViewModel(viewModel));
         }
 
@@ -160,6 +161,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.SensorRepository.Add(sensor);
                 KEUnitOfWork.Complete();
 
+                AddLog("Sensor Created", LogTypeEnum.Info);
                 return RedirectToAction("Index", "Sensor", new { TankId = sensor.TankId });
             }
             catch (Exception ex)
@@ -227,6 +229,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 }
             }
 
+            AddLog("Navigate to Edit Sensor View", LogTypeEnum.Info);
             return View(viewModel);
         }
 
@@ -301,6 +304,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.SensorRepository.Update(sensor);
                 KEUnitOfWork.Complete();
 
+                AddLog("Sensor Updated", LogTypeEnum.Info);
                 return RedirectToAction("Index", "Sensor", new { TankId = sensor.TankId });
             }
             catch (Exception ex)
@@ -387,6 +391,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             KEUnitOfWork.SensorRepository.Update(sensor);
             KEUnitOfWork.Complete();
 
+            AddLog("Sensor Deleted", LogTypeEnum.Info);
             return RedirectToAction("Index");
         }
 

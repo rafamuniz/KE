@@ -25,6 +25,9 @@
          .Filterable(true);
     }
 
+    columns.Add(c => c.PondName).Titled("Pond")
+     .Filterable(true);
+
     columns.Add(c => c.TankName).Titled("Tank")
      .Filterable(true);
 

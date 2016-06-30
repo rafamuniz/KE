@@ -41,7 +41,7 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Property
 
-        #region Country
+        #region NotificationType
 
         [Column("NotificationTypeId", TypeName = "SMALLINT")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
@@ -50,6 +50,6 @@ namespace KarmicEnergy.Core.Entities
         [ForeignKey("NotificationTypeId")]
         public virtual NotificationType NotificationType { get; set; }
 
-        #endregion Country
+        #endregion NotificationType
     }
 }

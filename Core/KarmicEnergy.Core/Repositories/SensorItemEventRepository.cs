@@ -68,5 +68,14 @@ namespace KarmicEnergy.Core.Repositories
             var events = Context.SensorItemEvents.Where(x => x.SensorItem.Sensor.Tank.Id == tankId && x.SensorItem.ItemId == (Int32)item && x.Value != null).OrderBy(d => d.EventDate).Take(quantity);
             return events.ToList();
         }
+
+        /// <summary>
+        /// Gets Events to check alarm
+        /// </summary>
+        /// <returns></returns>
+        public List<SensorItemEvent> GetsToCheckAlarm()
+        {
+            return Context.SensorItemEvents.Where(x => x.CheckedAlarmDate == null).ToList();
+        }
     }
 }

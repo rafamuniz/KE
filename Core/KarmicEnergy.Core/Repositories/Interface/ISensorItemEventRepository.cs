@@ -16,5 +16,7 @@ namespace KarmicEnergy.Core.Repositories
         SensorItemEvent GetLastEventByTankAndItem(Guid tankId, ItemEnum item);
 
         List<SensorItemEvent> GetsByTankIdAndByItem(Guid tankId, ItemEnum item, Int32 quantity);
+
+        List<SensorItemEvent> GetsToCheckAlarm();
     }
 }

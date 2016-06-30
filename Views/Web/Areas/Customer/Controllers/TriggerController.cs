@@ -184,6 +184,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 return View("Index");
             }
 
+            AddLog("Navigate to Edit Trigger View", LogTypeEnum.Info);
             return View(await InitEdit(trigger));
         }
 
@@ -213,13 +214,17 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             // Sensors
-            if (viewModel.TankId.HasValue)
-            {
-                LoadTankSensors(CustomerId, viewModel.TankId.Value);
-            }
-            else if (viewModel.SiteId.HasValue)
+            if (viewModel.SiteId.HasValue)
             {
                 LoadSiteSensors(CustomerId, viewModel.SiteId.Value);
+            }
+            else if (viewModel.PondId.HasValue)
+            {
+                LoadPondSensors(CustomerId, viewModel.PondId.Value);
+            }
+            else if (viewModel.TankId.HasValue)
+            {
+                LoadTankSensors(CustomerId, viewModel.TankId.Value);
             }
 
             viewModel.SensorId = trigger.SensorItem.SensorId;
@@ -231,44 +236,86 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             viewModel.SensorItemId = trigger.SensorItem.Id;
-
+            
             // Contacts And Users
             List<Contact> contacts = LoadContacts(CustomerId);
             List<ContactViewModel> contactViewModels = ContactViewModel.Map(contacts);
             viewModel.Contacts = contactViewModels;
-
+            
             List<CustomerUser> customerUsers = LoadCustomerUsers(CustomerId);
             List<UserViewModel> customerUserViewModels = UserViewModel.Map(customerUsers);
-
             foreach (var cuvm in customerUserViewModels)
             {
                 var id = cuvm.Id.ToString();
                 ApplicationUser user = await UserManager.FindByIdAsync(id);
                 cuvm.Name = user.Name;
             }
-
             viewModel.Users = customerUserViewModels;
+
+            if (trigger.Contacts.Any())
+            {
+                foreach (var item in contacts)
+                {
+                    foreach (var avalItem in viewModel.Contacts)
+                    {
+                        if (item.Id == avalItem.Id)
+                        {
+                            avalItem.IsSelected = true;
+                        }
+                    }
+                }
+               
+                foreach (var item in customerUsers)
+                {
+                    foreach (var avalItem in viewModel.Users)
+                    {
+                        if (item.Id == avalItem.Id)
+                        {
+                            avalItem.IsSelected = true;
+                        }
+                    }
+                }
+            }
 
             if (viewModel.SensorItemId.HasValue)
             {
                 LoadSensorItems(viewModel.SensorId.Value);
             }
 
-            if (viewModel.Contacts.Any() && contactVM != null)
-            {
-                foreach (var contact in contactVM.Where(x => x.IsSelected == true))
-                {
-                    viewModel.Contacts.Where(x => x.Id == contact.Id).Single().IsSelected = true;
-                }
-            }
+            //if (trigger.Contacts.Any())
+            //{
+            //    List<ContactViewModel> contactViewModels = new List<ContactViewModel>();
+            //    List<UserViewModel> userViewModels = new List<UserViewModel>();
 
-            if (viewModel.Users.Any() && userVM != null)
-            {
-                foreach (var user in userVM.Where(x => x.IsSelected == true))
-                {
-                    viewModel.Users.Where(x => x.Id == user.Id).Single().IsSelected = true;
-                }
-            }
+            //    foreach (var item in trigger.Contacts)
+            //    {
+            //        foreach (var avalItem in viewModel.Items)
+            //        {
+            //            if (item.ItemId == avalItem.Id)
+            //            {
+            //                avalItem.IsSelected = true;
+            //                avalItem.UnitSelected = item.UnitId;
+            //            }
+            //        }
+            //    }
+            //}
+
+
+            //if (viewModel.Contacts.Any() && contactVM != null)
+            //{
+            //    foreach (var contact in contactVM.Where(x => x.IsSelected == true))
+            //    {
+            //        viewModel.Contacts.Where(x => x.Id == contact.Id).Single().IsSelected = true;
+            //    }
+            //}
+
+            //if (viewModel.Users.Any() && userVM != null)
+            //{
+            //    foreach (var user in userVM.Where(x => x.IsSelected == true))
+            //    {
+            //        viewModel.Users.Where(x => x.Id == user.Id).Single().IsSelected = true;
+            //    }
+            //}
 
             LoadOperators(OperatorTypeEnum.Relational);
             viewModel.OperatorId = trigger.OperatorId;
@@ -291,6 +338,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Edit(EditViewModel viewModel)
         {
+            Trigger trigger = null;
+
             try
             {
                 if (!ModelState.IsValid)
@@ -305,18 +354,76 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     return View(await InitEditSubmit(viewModel, null));
                 }
 
-                KEUnitOfWork.TriggerRepository.Get(viewModel.Id);
-                Trigger trigger = new Trigger()
-                {
-                    Status = viewModel.Status,
-                    SeverityId = viewModel.SeverityId,
-                    OperatorId = viewModel.OperatorId,
-                    SensorItemId = viewModel.SensorItemId.Value,
-                    Value = viewModel.Value,
-                };
+                trigger = KEUnitOfWork.TriggerRepository.Get(viewModel.Id);
 
-                trigger.Contacts.AddRange(viewModel.Contacts.Where(x => x.IsSelected == true).Select(s => new TriggerContact() { ContactId = s.Id }).ToList());
-                trigger.Contacts.AddRange(viewModel.Users.Where(x => x.IsSelected == true).Select(s => new TriggerContact() { UserId = s.Id }).ToList());
+                trigger.Id = viewModel.Id;
+                trigger.Status = viewModel.Status;
+                trigger.SeverityId = viewModel.SeverityId;
+                trigger.OperatorId = viewModel.OperatorId;
+                trigger.SensorItemId = viewModel.SensorItemId.Value;
+                trigger.Value = viewModel.Value;
+
+                if (viewModel.Contacts.Any())
+                {
+                    foreach (var item in viewModel.Contacts)
+                    {
+                        if (item.IsSelected)
+                        {
+                            var hasContact = trigger.Contacts.Where(x => x.Id == item.Id && x.DeletedDate == null).SingleOrDefault();
+
+                            if (hasContact == null) // ADD
+                            {
+                                TriggerContact triggerContact = new TriggerContact()
+                                {
+                                    //TriggerId = viewModel.Id,
+                                    ContactId = item.Id
+                                };
+
+                                trigger.Contacts.Add(triggerContact);
+                            }
+                        }
+                        else // DELETE
+                        {
+                            var hasContact = trigger.Contacts.Where(x => x.Id == item.Id && x.DeletedDate == null).SingleOrDefault();
+
+                            if (hasContact != null)
+                            {
+                                hasContact.DeletedDate = DateTime.UtcNow;
+                            }
+                        }
+                    }
+                }
+
+                if (viewModel.Users.Any())
+                {
+                    foreach (var item in viewModel.Users)
+                    {
+                        if (item.IsSelected)
+                        {
+                            var hasContact = trigger.Contacts.Where(x => x.Id == item.Id && x.DeletedDate == null).SingleOrDefault();
+
+                            if (hasContact == null) // ADD
+                            {
+                                TriggerContact triggerContact = new TriggerContact()
+                                {
+                                    //TriggerId = viewModel.Id,
+                                    UserId = item.Id
+                                };
+
+                                trigger.Contacts.Add(triggerContact);
+                            }
+                        }
+                        else // DELETE
+                        {
+                            var hasContact = trigger.Contacts.Where(x => x.Id == item.Id && x.DeletedDate == null).SingleOrDefault();
+
+                            if (hasContact != null)
+                            {
+                                hasContact.DeletedDate = DateTime.UtcNow;
+                            }
+                        }
+                    }
+                }
 
                 KEUnitOfWork.TriggerRepository.Update(trigger);
                 KEUnitOfWork.Complete();
@@ -351,7 +458,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             if (!IsSite)
             {
                 LoadSites();
-                viewModel.SiteId = trigger.SensorItem.Sensor.SiteId;
+                if (viewModel.SiteId.HasValue && trigger != null)
+                    viewModel.SiteId = trigger.SensorItem.Sensor.SiteId;
             }
             else
             {
@@ -359,7 +467,16 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 LoadTanks(CustomerId, SiteId);
             }
 
-            if (viewModel.TankId.HasValue)
+            // Sensors
+            if (viewModel.SiteId.HasValue)
+            {
+                LoadSiteSensors(CustomerId, viewModel.SiteId.Value);
+            }
+            else if (viewModel.PondId.HasValue)
+            {
+                LoadPondSensors(CustomerId, viewModel.PondId.Value);
+            }
+            else if (viewModel.TankId.HasValue)
             {
                 LoadTankSensors(CustomerId, viewModel.TankId.Value);
             }
@@ -436,6 +553,15 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
+        public ActionResult GetsPondBySite(Guid siteId)
+        {
+            var ponds = LoadPonds(CustomerId, siteId);
+            SelectList objPonds = new SelectList(ponds, "Id", "Name", 0);
+            return Json(objPonds, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult GetsTankBySite(Guid siteId)
         {
             var tanks = LoadTanks(CustomerId, siteId);
@@ -448,6 +574,24 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult GetsSiteSensorBySite(Guid siteId)
         {
             var sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndSite(CustomerId, siteId);
+            SelectList objSensors = new SelectList(sensors, "Id", "Name", 0);
+            return Json(objSensors, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
+        public ActionResult GetsSiteSensorByPond(Guid siteId)
+        {
+            var sensors = LoadSiteSensors(CustomerId, siteId);
+            SelectList objSensors = new SelectList(sensors, "Id", "Name", 0);
+            return Json(objSensors, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Customer, General Manager, Supervisor")]
+        public ActionResult GetsPondSensorByPond(Guid pondId)
+        {
+            var sensors = LoadPondSensors(CustomerId, pondId);
             SelectList objSensors = new SelectList(sensors, "Id", "Name", 0);
             return Json(objSensors, JsonRequestBehavior.AllowGet);
         }

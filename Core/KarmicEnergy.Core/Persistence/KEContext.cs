@@ -41,6 +41,9 @@ namespace KarmicEnergy.Core.Persistence
 
         private void CreateManyToMany(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Notification>().Property(p => p.Message).HasColumnType("NVARCHAR(MAX)");
+            modelBuilder.Entity<NotificationTemplate>().Property(p => p.Message).HasColumnType("NVARCHAR(MAX)");
+                        
             //modelBuilder.Entity<Sensor>()
             //  .HasMany<Item>(x => x.Items)
             //  .WithMany(s => s.Sensors)
@@ -102,8 +105,10 @@ namespace KarmicEnergy.Core.Persistence
         public IDbSet<Log> Logs { get; set; }
         public IDbSet<LogType> LogTypes { get; set; }
 
-        public IDbSet<Notification> Notifications { get; set; }
+        public IDbSet<NotificationTemplate> NotificationTemplates { get; set; }
         public IDbSet<NotificationType> NotificationTypes { get; set; }
+        public IDbSet<Notification> Notifications { get; set; }
+        
         #endregion DbSet
     }
 }

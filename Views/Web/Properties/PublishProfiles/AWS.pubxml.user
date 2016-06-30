@@ -254,13 +254,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/31/2016 20:43:30</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Trigger/Create.cshtml">
-      <publishTime>06/19/2016 19:47:39</publishTime>
+      <publishTime>07/01/2016 00:35:55</publishTime>
+    </File>
+    <File Include="Areas/Customer/Views/Trigger/CreateSite.cshtml">
+      <publishTime>06/30/2016 23:36:08</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Trigger/Edit.cshtml">
-      <publishTime>06/19/2016 20:54:24</publishTime>
+      <publishTime>07/01/2016 00:45:02</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Trigger/Index.cshtml">
-      <publishTime>06/20/2016 14:07:27</publishTime>
+      <publishTime>06/30/2016 22:45:26</publishTime>
     </File>
     <File Include="Areas/Customer/Views/User/ChangePassword.cshtml">
       <publishTime>05/25/2016 14:07:14</publishTime>
@@ -305,13 +308,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>06/29/2016 00:38:16</publishTime>
+      <publishTime>07/01/2016 02:05:01</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>06/29/2016 00:38:27</publishTime>
+      <publishTime>07/01/2016 02:05:12</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -5300,7 +5303,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/15/2016 22:53:17</publishTime>
     </File>
     <File Include="Scripts/app/trigger.js">
-      <publishTime>06/19/2016 19:38:19</publishTime>
+      <publishTime>06/30/2016 23:59:16</publishTime>
     </File>
     <File Include="Scripts/app/utils.js">
       <publishTime>06/21/2016 00:10:04</publishTime>

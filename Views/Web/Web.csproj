@@ -1818,6 +1818,7 @@
     <Content Include="Areas\Customer\Views\Monitoring\CreateComment.cshtml" />
     <Content Include="Areas\Customer\Views\Monitoring\_AlarmDetail.cshtml" />
     <Content Include="Areas\Customer\Views\Monitoring\AlarmClear.cshtml" />
+    <Content Include="Areas\Customer\Views\Trigger\CreateSite.cshtml" />
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
     <None Include="Properties\PublishProfiles\ClickOnce.pubxml" />
     <None Include="Properties\PublishProfiles\Prod.pubxml" />

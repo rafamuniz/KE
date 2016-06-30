@@ -436,6 +436,20 @@ namespace KarmicEnergy.Web.Controllers
             ViewBag.Ponds= ponds;
             return ponds;
         }
+        
+        protected List<Sensor> LoadSiteSensors(Guid customerId, Guid siteId)
+        {
+            List<Sensor> sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndSite(customerId, siteId);
+            ViewBag.Sensors = sensors;
+            return sensors;
+        }
+
+        protected List<Sensor> LoadPondSensors(Guid customerId, Guid pondId)
+        {
+            List<Sensor> sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndPond(customerId, pondId);
+            ViewBag.Sensors = sensors;
+            return sensors;
+        }
 
         protected List<Sensor> LoadTankSensors(Guid customerId, Guid tankId)
         {
@@ -443,14 +457,7 @@ namespace KarmicEnergy.Web.Controllers
             ViewBag.Sensors = sensors;
             return sensors;
         }
-
-        protected List<Sensor> LoadSiteSensors(Guid customerId, Guid siteId)
-        {
-            List<Sensor> sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndSite(customerId, siteId);
-            ViewBag.Sensors = sensors;
-            return sensors;
-        }
-        
+                
         protected List<SensorType> LoadSensorTypes()
         {
             List<SensorType> sensorTypes = KEUnitOfWork.SensorTypeRepository.GetAll().ToList();

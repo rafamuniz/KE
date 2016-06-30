@@ -37,8 +37,7 @@ namespace SiteService
             timer.Elapsed += SyncSensors_Tick;
             timer.Enabled = true;
             timer.AutoReset = false; // makes it fire only once
-            Logger.WriteLog("Service started");
-            //EventLog.WriteEntry("Service started");
+            Logger.WriteLog("Service started");            
         }
 
         public void OnDebug()
@@ -48,26 +47,17 @@ namespace SiteService
 
         protected override void OnStop()
         {
-            //_shutdownEvent.Set();
-            //if (!_thread.Join(3000))// give the thread 3 seconds to stop
-            //{
-            //    _thread.Abort();
-            //}
-            //ThreadPool.
-
             if (handles != null && handles.Any())
             {
                 WaitHandle.WaitAll(handles.ToArray());
 
                 foreach (var handle in handles)
                 {
-                    handle.Set();
-                    //handle.Close();                    
+                    handle.Set();         
                 }
             }
 
-            Logger.WriteLog("Service stopped");
-            //EventLog.WriteEntry("Service stopped");
+            Logger.WriteLog("Service stopped");            
         }
 
         private void SyncSensors_Tick(object sender, ElapsedEventArgs e)

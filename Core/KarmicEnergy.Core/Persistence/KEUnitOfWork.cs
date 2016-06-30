@@ -36,6 +36,7 @@ namespace KarmicEnergy.Core.Persistence
         private IItemRepository _ItemRepository;
 
         private ITriggerRepository _TriggerRepository;
+        private ITriggerContactRepository _TriggerContactRepository;
         private IOperatorRepository _OperatorRepository;
         private IOperatorTypeRepository _OperatorTypeRepository;
 
@@ -52,6 +53,7 @@ namespace KarmicEnergy.Core.Persistence
         private IStickConversionValueRepository _StickConversionValueRepository;
 
         private INotificationRepository _NotificationRepository;
+        private INotificationTemplateRepository _NotificationTemplateRepository;
         #endregion Fields
 
         #region Constructor
@@ -69,32 +71,6 @@ namespace KarmicEnergy.Core.Persistence
         }
 
         #endregion Constructor
-
-        //#region Disposable
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (!this.disposed)
-        //    {
-        //        if (disposing)
-        //        {
-        //            _context.Dispose();
-        //        }
-        //    }
-        //    this.disposed = true;
-        //}
-
-        //public override void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
-
-        //~KEUnitOfWork()
-        //{
-        //    Dispose(false);
-        //}
-        //#endregion Disposable
 
         public static KEUnitOfWork Create()
         {
@@ -196,6 +172,11 @@ namespace KarmicEnergy.Core.Persistence
             get { return _TriggerRepository ?? (_TriggerRepository = new TriggerRepository(_context)); }
         }
 
+        public ITriggerContactRepository TriggerContactRepository
+        {
+            get { return _TriggerContactRepository ?? (_TriggerContactRepository = new TriggerContactRepository(_context)); }
+        }
+
         public IOperatorRepository OperatorRepository
         {
             get { return _OperatorRepository ?? (_OperatorRepository = new OperatorRepository(_context)); }
@@ -244,6 +225,11 @@ namespace KarmicEnergy.Core.Persistence
         public IStickConversionValueRepository StickConversionValueRepository
         {
             get { return _StickConversionValueRepository ?? (_StickConversionValueRepository = new StickConversionValueRepository(_context)); }
+        }
+
+        public INotificationTemplateRepository NotificationTemplateRepository
+        {
+            get { return _NotificationTemplateRepository ?? (_NotificationTemplateRepository = new NotificationTemplateRepository(_context)); }
         }
 
         public INotificationRepository NotificationRepository

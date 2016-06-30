@@ -33,6 +33,9 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
         [Required]
         public Guid? SiteId { get; set; }
 
+        [Display(Name = "Pond")]
+        public Guid? PondId { get; set; }
+
         [Display(Name = "Tank")]
         public Guid? TankId { get; set; }
 

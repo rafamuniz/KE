@@ -84,7 +84,7 @@ namespace KarmicEnergy.Core.Entities
         {
             Decimal eventValue;
 
-            if (Decimal.TryParse(value, out eventValue))
+            if (!Decimal.TryParse(value, out eventValue))
             {
                 throw new ArgumentException("Event Value invalid");
             }

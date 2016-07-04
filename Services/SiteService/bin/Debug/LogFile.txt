@@ -102,3 +102,14 @@
 30/06/16 00:17:07: Sensor Temp finish collection
 30/06/16 00:17:07: Sensor Temp stop collection
 30/06/16 00:17:07: Service has been done successfully
+04/07/16 23:27:30: Service started
+04/07/16 23:27:52: Sensor Site 1 start collection
+04/07/16 23:27:52: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+04/07/16 23:29:42: Service started
+04/07/16 23:30:00: Sensor Site 1 start collection
+04/07/16 23:30:01: Serial Port: COM1 - 9600 - None - 8 - One - 5000
+04/07/16 23:30:16: Sensor Site 1 responds: !65001*M~
+04/07/16 23:30:16: Sensor Site 1 finish collection
+04/07/16 23:30:16: Sensor Site 1 stop collection
+04/07/16 23:30:16: Sensor Tank 1 start collection
+04/07/16 23:30:17: Serial Port: COM1 - 9600 - None - 8 - One - 5000

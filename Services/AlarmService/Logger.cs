@@ -25,5 +25,34 @@ namespace KarmicEnergy.Service
 
             }
         }
+
+        public static void WriteLog(String message, LogTypeEnum logType)
+        {
+            StreamWriter sw = null;
+
+            try
+            {
+                if (logType == LogTypeEnum.Error)
+                {
+
+                }
+
+                sw = new StreamWriter(String.Format("{0}\\{1}", AppDomain.CurrentDomain.BaseDirectory, "LogFile.txt"), true);
+                sw.WriteLine(String.Format("{0}: {1}", DateTime.Now, message));
+                sw.Flush();
+                sw.Close();
+            }
+            catch
+            {
+
+            }
+        }
+    }
+
+    public enum LogTypeEnum
+    {
+        Info,
+        Error,
+        Warning
     }
 }

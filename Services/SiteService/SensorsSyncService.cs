@@ -1,6 +1,7 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
 using KarmicEnergy.Service;
+using Munizoft.Util.WinServices;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -30,14 +31,14 @@ namespace SiteService
         protected override void OnStart(string[] args)
         {
             Double interval = 5000;
-            Double.TryParse(GetAppConfigValue("Interval"), out interval);
+            Double.TryParse(FileConfig.GetAppConfigValue("Interval"), out interval);
 
             timer = new System.Timers.Timer();
             timer.Interval = interval;
             timer.Elapsed += SyncSensors_Tick;
             timer.Enabled = true;
             timer.AutoReset = false; // makes it fire only once
-            Logger.WriteLog("Service started");            
+            Logger.WriteLog("Service started");
         }
 
         public void OnDebug()
@@ -53,11 +54,11 @@ namespace SiteService
 
                 foreach (var handle in handles)
                 {
-                    handle.Set();         
+                    handle.Set();
                 }
             }
 
-            Logger.WriteLog("Service stopped");            
+            Logger.WriteLog("Service stopped");
         }
 
         private void SyncSensors_Tick(object sender, ElapsedEventArgs e)
@@ -114,7 +115,7 @@ namespace SiteService
                 else if (sensor.TankId.HasValue)
                     site = sensor.Tank.Site;
 
-                String command = String.Format(GetAppConfigValue("Sensor:Command"), sensor.Reference, site.Reference);
+                String command = String.Format(FileConfig.GetAppConfigValue("Sensor:Command"), sensor.Reference, site.Reference);
                 serialPort = CreatePortWithSettings();
                 Logger.WriteLog(String.Format("Serial Port: {0} - {1} - {2} - {3} - {4} - {5}", serialPort.PortName, serialPort.BaudRate, serialPort.Parity, serialPort.DataBits, serialPort.StopBits, serialPort.ReadTimeout));
 
@@ -127,7 +128,7 @@ namespace SiteService
 
 #else                
                 //message = "!65003*R274WT78V4500T43534~";
-                message = GetAppConfigValue("ResponseSensor");
+                message = FileConfig.GetAppConfigValue("ResponseSensor");
 #endif         
                 if (message != null &&
                     message != "No response" &&
@@ -354,19 +355,19 @@ namespace SiteService
         {
             SerialPort serialPort = new SerialPort();
 
-            if (GetAppConfigValue("PortName") != null)
+            if (FileConfig.GetAppConfigValue("PortName") != null)
             {
-                serialPort.PortName = GetAppConfigValue("PortName").ToUpper();
+                serialPort.PortName = FileConfig.GetAppConfigValue("PortName").ToUpper();
             }
             else
             {
                 serialPort.PortName = "COM1";
             }
 
-            if (GetAppConfigValue("BaudRate") != null)
+            if (FileConfig.GetAppConfigValue("BaudRate") != null)
             {
                 Int32 baudRate = 9600;
-                Int32.TryParse(GetAppConfigValue("BaudRate"), out baudRate);
+                Int32.TryParse(FileConfig.GetAppConfigValue("BaudRate"), out baudRate);
                 serialPort.BaudRate = baudRate;
             }
             else
@@ -374,9 +375,9 @@ namespace SiteService
                 serialPort.BaudRate = 9600;
             }
 
-            if (GetAppConfigValue("Parity") != null)
+            if (FileConfig.GetAppConfigValue("Parity") != null)
             {
-                var parity = GetAppConfigValue("Parity").ToUpper();
+                var parity = FileConfig.GetAppConfigValue("Parity").ToUpper();
                 switch (parity)
                 {
                     case "EVEN":
@@ -404,10 +405,10 @@ namespace SiteService
                 serialPort.Parity = Parity.None;
             }
 
-            if (GetAppConfigValue("DataBits") != null)
+            if (FileConfig.GetAppConfigValue("DataBits") != null)
             {
                 Int32 dataBits = 8;
-                Int32.TryParse(GetAppConfigValue("DataBits"), out dataBits);
+                Int32.TryParse(FileConfig.GetAppConfigValue("DataBits"), out dataBits);
                 serialPort.DataBits = dataBits;
             }
             else
@@ -416,9 +417,9 @@ namespace SiteService
             }
 
 
-            if (GetAppConfigValue("StopBits") != null)
+            if (FileConfig.GetAppConfigValue("StopBits") != null)
             {
-                var stopBits = GetAppConfigValue("StopBits");
+                var stopBits = FileConfig.GetAppConfigValue("StopBits");
                 switch (stopBits)
                 {
                     case "0":
@@ -443,10 +444,10 @@ namespace SiteService
                 serialPort.StopBits = StopBits.One;
             }
 
-            if (GetAppConfigValue("ReadTimeout") != null)
+            if (FileConfig.GetAppConfigValue("ReadTimeout") != null)
             {
                 Int32 readtimeout = 5000;
-                Int32.TryParse(GetAppConfigValue("ReadTimeout"), out readtimeout);
+                Int32.TryParse(FileConfig.GetAppConfigValue("ReadTimeout"), out readtimeout);
                 serialPort.ReadTimeout = readtimeout;
             }
             else
@@ -457,18 +458,9 @@ namespace SiteService
             return serialPort;
         }
 
-        private String GetAppConfigValue(String key)
-        {
-            var config = ConfigurationManager.OpenExeConfiguration(Assembly.GetAssembly(typeof(Installer)).Location);
-            if (config.AppSettings.Settings[key] == null)
-                return null;
-            else
-                return config.AppSettings.Settings[key].Value;
-        }
-
         private List<String> ReadResponseSensorFile()
         {
-            String pathFilename = String.Format("{0}\\{1}", AppDomain.CurrentDomain.BaseDirectory, GetAppConfigValue("PathFilename:ResponseSensor"));
+            String pathFilename = String.Format("{0}\\{1}", AppDomain.CurrentDomain.BaseDirectory, FileConfig.GetAppConfigValue("PathFilename:ResponseSensor"));
             String[] records = File.ReadAllLines(pathFilename);
             return records.ToList();
         }

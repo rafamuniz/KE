@@ -17,3 +17,4 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\Kar
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\Debug\KarmicEnergy.Core.pdb
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\Debug\KarmicEnergy.Core.Migrations.AWS.resources
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\Debug\Core.csproj.GenerateResource.Cache
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Core\KarmicEnergy.Core\obj\Debug\Core.csprojResolveAssemblyReference.cache

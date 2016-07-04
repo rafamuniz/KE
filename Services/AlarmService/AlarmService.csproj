@@ -44,8 +44,9 @@
     <Reference Include="Munizoft.Core">
       <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Core\bin\Release\Munizoft.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Munizoft.Util">
-      <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Util\bin\Release\Munizoft.Util.dll</HintPath>
+    <Reference Include="Munizoft.Util, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Util\bin\Debug\Munizoft.Util.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

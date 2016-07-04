@@ -22,6 +22,12 @@
         "Entry"
         {
         "MsmKey" = "8:_09740BD3E525E64C02B543F562D5608A"
+        "OwnerKey" = "8:_D8C634A6003BF01AB5DBC7E0FF4C5979"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_09740BD3E525E64C02B543F562D5608A"
         "OwnerKey" = "8:_A5C7537B1EC8548BF6D5882CEADDE974"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -29,12 +35,6 @@
         {
         "MsmKey" = "8:_09740BD3E525E64C02B543F562D5608A"
         "OwnerKey" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_09740BD3E525E64C02B543F562D5608A"
-        "OwnerKey" = "8:_D8C634A6003BF01AB5DBC7E0FF4C5979"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -112,6 +112,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D8C634A6003BF01AB5DBC7E0FF4C5979"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -119,12 +125,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_A5C7537B1EC8548BF6D5882CEADDE974"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D8C634A6003BF01AB5DBC7E0FF4C5979"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -600,7 +600,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_D29A40BCFBC644C2B85DA86D9244DFCB"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder]\\KarmicEnergy\\SensorsSyncService"
+            "DefaultLocation" = "8:[ProgramFilesFolder]\\KarmicEnergy\\SensorEventsSyncService"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -625,9 +625,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Sensor Events Sync"
+        "ProductName" = "8:Sensor Events Sync Service"
         "ProductCode" = "8:{B5AD4D1B-8898-492C-8A28-D22FB0171DC9}"
-        "PackageCode" = "8:{D6384ABF-719E-4009-B278-CCBE69E496FF}"
+        "PackageCode" = "8:{8F3BAF5A-85C3-46D8-9EB3-D1E0F492A6BD}"
         "UpgradeCode" = "8:{E4333C61-0A12-4F27-AFD5-D29EB84EF0DA}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

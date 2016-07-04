@@ -1567,3 +1567,207 @@
 30/06/16 21:51:20: Service has been done successfully
 30/06/16 21:51:25: Service has been done successfully
 30/06/16 21:51:30: Service has been done successfully
+04/07/16 23:32:05: Service started
+04/07/16 23:32:33: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+04/07/16 23:33:19: ERROR - Event Value: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86 - Trigger: 8780651b-b53e-e611-8366-fcf8ae3592a5
+04/07/16 23:33:21: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+04/07/16 23:33:21: Service has been done successfully
+04/07/16 23:33:26: Service has been done successfully
+04/07/16 23:33:31: Service has been done successfully
+04/07/16 23:33:36: Service has been done successfully
+04/07/16 23:33:41: Service has been done successfully
+04/07/16 23:33:46: Service has been done successfully
+04/07/16 23:33:51: Service has been done successfully
+04/07/16 23:33:56: Service has been done successfully
+04/07/16 23:34:01: Service has been done successfully
+04/07/16 23:34:06: Service has been done successfully
+04/07/16 23:34:11: Service has been done successfully
+04/07/16 23:34:17: Service has been done successfully
+04/07/16 23:34:22: Service has been done successfully
+04/07/16 23:34:27: Service has been done successfully
+04/07/16 23:34:32: Service has been done successfully
+04/07/16 23:34:37: Service has been done successfully
+04/07/16 23:34:42: Service has been done successfully
+04/07/16 23:34:47: Service has been done successfully
+04/07/16 23:34:52: Service has been done successfully
+04/07/16 23:34:57: Service has been done successfully
+04/07/16 23:35:02: Service has been done successfully
+04/07/16 23:35:07: Service has been done successfully
+04/07/16 23:35:12: Service has been done successfully
+04/07/16 23:35:17: Service has been done successfully
+04/07/16 23:35:29: Service started
+04/07/16 23:35:48: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+04/07/16 23:39:03: ERROR - Event Value: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86 - Trigger: 8780651b-b53e-e611-8366-fcf8ae3592a5
+04/07/16 23:49:22: Service started
+04/07/16 23:49:46: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+04/07/16 23:50:02: ERROR - Event Value: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86 - Trigger: 8780651b-b53e-e611-8366-fcf8ae3592a5 - Object reference not set to an instance of an object.
+04/07/16 23:50:02: Service has been done successfully
+04/07/16 23:50:07: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+05/07/16 00:21:16: Service started
+05/07/16 00:21:33: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+05/07/16 00:22:44: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+05/07/16 00:22:44: Service has been done successfully
+05/07/16 00:22:49: Service has been done successfully
+05/07/16 00:22:54: Service has been done successfully
+05/07/16 00:22:59: Service has been done successfully
+05/07/16 00:23:04: Service has been done successfully
+05/07/16 00:23:09: Service has been done successfully
+05/07/16 00:23:14: Service has been done successfully
+05/07/16 00:23:20: Service has been done successfully
+05/07/16 00:23:25: Service has been done successfully
+05/07/16 00:23:30: Service has been done successfully
+05/07/16 00:23:35: Service has been done successfully
+05/07/16 00:23:40: Service has been done successfully
+05/07/16 00:23:45: Service has been done successfully
+05/07/16 00:23:50: Service has been done successfully
+05/07/16 00:23:55: Service has been done successfully
+05/07/16 00:24:00: Service has been done successfully
+05/07/16 00:24:05: Service has been done successfully
+05/07/16 00:24:10: Service has been done successfully
+05/07/16 00:24:15: Service has been done successfully
+05/07/16 00:24:20: Service has been done successfully
+05/07/16 00:24:25: Service has been done successfully
+05/07/16 00:24:30: Service has been done successfully
+05/07/16 00:24:36: Service has been done successfully
+05/07/16 00:24:41: Service has been done successfully
+05/07/16 00:24:46: Service has been done successfully
+05/07/16 00:24:51: Service has been done successfully
+05/07/16 00:24:56: Service has been done successfully
+05/07/16 00:25:01: Service has been done successfully
+05/07/16 00:25:06: Service has been done successfully
+05/07/16 00:25:11: Service has been done successfully
+05/07/16 00:25:16: Service has been done successfully
+05/07/16 00:25:21: Service has been done successfully
+05/07/16 00:25:26: Service has been done successfully
+05/07/16 00:25:31: Service has been done successfully
+05/07/16 00:25:36: Service has been done successfully
+05/07/16 00:25:41: Service has been done successfully
+05/07/16 00:25:46: Service has been done successfully
+05/07/16 00:25:51: Service has been done successfully
+05/07/16 00:25:56: Service has been done successfully
+05/07/16 00:26:01: Service has been done successfully
+05/07/16 00:26:06: Service has been done successfully
+05/07/16 00:26:11: Service has been done successfully
+05/07/16 00:26:16: Service has been done successfully
+05/07/16 00:26:21: Service has been done successfully
+05/07/16 00:26:26: Service has been done successfully
+05/07/16 00:26:31: Service has been done successfully
+05/07/16 00:26:37: Service has been done successfully
+05/07/16 00:26:42: Service has been done successfully
+05/07/16 00:26:47: Service has been done successfully
+05/07/16 00:26:52: Service has been done successfully
+05/07/16 00:26:57: Service has been done successfully
+05/07/16 00:27:02: Service has been done successfully
+05/07/16 00:27:07: Service has been done successfully
+05/07/16 00:27:12: Service has been done successfully
+05/07/16 00:27:17: Service has been done successfully
+05/07/16 00:27:22: Service has been done successfully
+05/07/16 00:27:27: Service has been done successfully
+05/07/16 00:27:32: Service has been done successfully
+05/07/16 00:27:37: Service has been done successfully
+05/07/16 00:27:42: Service has been done successfully
+05/07/16 00:27:47: Service has been done successfully
+05/07/16 00:27:52: Service has been done successfully
+05/07/16 00:27:57: Service has been done successfully
+05/07/16 00:28:02: Service has been done successfully
+05/07/16 00:28:07: Service has been done successfully
+05/07/16 00:28:12: Service has been done successfully
+05/07/16 00:28:17: Service has been done successfully
+05/07/16 00:28:22: Service has been done successfully
+05/07/16 00:28:27: Service has been done successfully
+05/07/16 00:28:33: Service has been done successfully
+05/07/16 00:28:38: Service has been done successfully
+05/07/16 00:28:43: Service has been done successfully
+05/07/16 00:28:48: Service has been done successfully
+05/07/16 00:28:53: Service has been done successfully
+05/07/16 00:28:58: Service has been done successfully
+05/07/16 00:29:03: Service has been done successfully
+05/07/16 00:29:08: Service has been done successfully
+05/07/16 00:29:13: Service has been done successfully
+05/07/16 00:29:18: Service has been done successfully
+05/07/16 00:29:23: Service has been done successfully
+05/07/16 00:29:28: Service has been done successfully
+05/07/16 00:29:33: Service has been done successfully
+05/07/16 00:29:38: Service has been done successfully
+05/07/16 00:29:43: Service has been done successfully
+05/07/16 00:29:48: Service has been done successfully
+05/07/16 00:38:12: Service started
+05/07/16 00:38:25: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+05/07/16 00:38:37: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+05/07/16 00:38:37: Service has been done successfully
+05/07/16 00:38:42: Service has been done successfully
+05/07/16 00:38:47: Service has been done successfully
+05/07/16 00:38:52: Service has been done successfully
+05/07/16 00:38:57: Service has been done successfully
+05/07/16 00:39:02: Service has been done successfully
+05/07/16 00:39:07: Service has been done successfully
+05/07/16 00:39:12: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+05/07/16 00:39:20: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+05/07/16 00:39:20: Service has been done successfully
+05/07/16 00:39:25: Service has been done successfully
+05/07/16 00:39:30: Service has been done successfully
+05/07/16 00:39:35: Service has been done successfully
+05/07/16 00:39:40: Service has been done successfully
+05/07/16 00:39:45: Service has been done successfully
+05/07/16 00:39:50: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+05/07/16 00:40:03: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+05/07/16 00:40:03: Service has been done successfully
+05/07/16 00:40:08: Service has been done successfully
+05/07/16 00:40:13: Service has been done successfully
+05/07/16 00:40:18: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+05/07/16 00:41:41: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+05/07/16 00:41:41: Service has been done successfully
+05/07/16 00:41:46: Service has been done successfully
+05/07/16 00:41:51: Service has been done successfully
+05/07/16 00:41:56: Service has been done successfully
+05/07/16 00:42:01: Service has been done successfully
+05/07/16 00:42:06: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+05/07/16 00:42:20: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+05/07/16 00:42:20: Service has been done successfully
+05/07/16 00:42:25: Service has been done successfully
+05/07/16 00:42:30: Service has been done successfully
+05/07/16 00:42:35: Service has been done successfully
+05/07/16 00:42:40: Service has been done successfully
+05/07/16 00:42:45: Service has been done successfully
+05/07/16 00:42:51: Service has been done successfully
+05/07/16 00:42:56: Service has been done successfully
+05/07/16 00:43:01: Service has been done successfully
+05/07/16 00:43:06: Service has been done successfully
+05/07/16 00:43:11: Service has been done successfully
+05/07/16 00:43:16: Service has been done successfully
+05/07/16 00:43:21: Service has been done successfully
+05/07/16 00:43:26: Service has been done successfully
+05/07/16 00:43:31: Service has been done successfully
+05/07/16 00:43:36: Service has been done successfully
+05/07/16 00:43:41: Service has been done successfully
+05/07/16 00:43:46: Service has been done successfully
+05/07/16 00:43:51: Service has been done successfully
+05/07/16 00:43:56: Service has been done successfully
+05/07/16 00:44:01: Service has been done successfully
+05/07/16 00:44:06: Service has been done successfully
+05/07/16 00:44:11: Service has been done successfully
+05/07/16 00:44:16: Service has been done successfully
+05/07/16 00:44:21: Service has been done successfully
+05/07/16 00:44:26: Service has been done successfully
+05/07/16 00:44:31: Service has been done successfully
+05/07/16 00:44:36: Service has been done successfully
+05/07/16 00:44:41: Service has been done successfully
+05/07/16 00:44:46: Service has been done successfully
+05/07/16 00:44:51: Service has been done successfully
+05/07/16 00:44:56: Service has been done successfully
+05/07/16 00:45:01: Service has been done successfully
+05/07/16 00:45:06: Service has been done successfully
+05/07/16 00:45:11: Service has been done successfully
+05/07/16 00:45:17: Service has been done successfully
+05/07/16 00:45:22: Service has been done successfully
+05/07/16 00:45:27: Service has been done successfully
+05/07/16 00:45:32: Service has been done successfully
+05/07/16 00:45:37: Service has been done successfully
+05/07/16 00:45:42: Service has been done successfully
+05/07/16 00:45:47: Service has been done successfully
+05/07/16 00:45:52: Service has been done successfully
+05/07/16 00:45:57: Service has been done successfully
+05/07/16 00:46:02: Service has been done successfully
+05/07/16 00:46:07: Service has been done successfully
+05/07/16 00:46:12: Service has been done successfully
+05/07/16 00:46:17: Service has been done successfully

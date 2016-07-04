@@ -1,6 +1,8 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
 using KarmicEnergy.Service;
+using Munizoft.Util.Converters;
+using Munizoft.Util.WinServices;
 using System;
 using System.Configuration;
 using System.Linq;
@@ -22,7 +24,7 @@ namespace AlarmService
         protected override void OnStart(string[] args)
         {
             Double interval = 5000;
-            Double.TryParse(GetAppConfigValue("Interval"), out interval);
+            Double.TryParse(FileConfig.GetAppConfigValue("Interval"), out interval);
 
             timer = new System.Timers.Timer();
             timer.Interval = interval;
@@ -53,12 +55,19 @@ namespace AlarmService
                 {
                     foreach (var evt in events)
                     {
-                        Logger.WriteLog(String.Format("Start - Check Event has alarm: {0} - {1}", evt.Id, evt.Value));
-                        CheckAlarm(evt);
-                        evt.CheckedAlarmDate = DateTime.UtcNow;
-                        KEUnitOfWork.SensorItemEventRepository.Update(evt);
-                        KEUnitOfWork.Complete();
-                        Logger.WriteLog(String.Format("End - Check Event has alarm: {0} - {1}", evt.Id, evt.Value));
+                        try
+                        {
+                            Logger.WriteLog(String.Format("Start - Check Event has alarm: {0} - {1}", evt.Id, evt.Value));
+                            CheckAlarm(evt);
+                            evt.CheckedAlarmDate = DateTime.UtcNow;
+                            KEUnitOfWork.SensorItemEventRepository.Update(evt);
+                            KEUnitOfWork.Complete();
+                            Logger.WriteLog(String.Format("End - Check Event has alarm: {0} - {1}", evt.Id, evt.Value));
+                        }
+                        catch
+                        {
+
+                        }
                     }
                 }
 
@@ -82,9 +91,9 @@ namespace AlarmService
             foreach (var trigger in triggers)
             {
                 try
-                {
-
-                    if (trigger.IsAlarm(sensorItemEvent.Value))
+                {                    
+                    String value = sensorItemEvent.ConverterItemUnit();
+                    if (trigger.IsAlarm(value))
                     {
                         Alarm alarm = new Alarm()
                         {
@@ -98,7 +107,8 @@ namespace AlarmService
                 }
                 catch (Exception ex)
                 {
-                    Logger.WriteLog(String.Format("ERROR - Event Value: {0} - {1} - Trigger: {2}", sensorItemEvent.Id, sensorItemEvent.Value, trigger.Id));
+                    Logger.WriteLog(String.Format("ERROR - Event Value: {0} - {1} - Trigger: {2} - {3}", sensorItemEvent.Id, sensorItemEvent.Value, trigger.Id, ex.Message), KarmicEnergy.Service.LogTypeEnum.Error);
+                    throw ex;
                 }
             }
 
@@ -117,15 +127,6 @@ namespace AlarmService
             }
 
             KEUnitOfWork.Complete();
-        }
-
-        private String GetAppConfigValue(String key)
-        {
-            var config = ConfigurationManager.OpenExeConfiguration(Assembly.GetAssembly(typeof(Installer)).Location);
-            if (config.AppSettings.Settings[key] == null)
-                return null;
-            else
-                return config.AppSettings.Settings[key].Value;
         }
     }
 }

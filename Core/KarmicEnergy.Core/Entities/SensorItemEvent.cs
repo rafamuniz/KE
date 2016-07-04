@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Munizoft.Util.Converters;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -49,7 +50,7 @@ namespace KarmicEnergy.Core.Entities
                             return Value.Insert(Value.Length - 3, ".");
                         default:
                             return Value;
-                    }                    
+                    }
                 }
                 return Value;
             }
@@ -89,5 +90,40 @@ namespace KarmicEnergy.Core.Entities
         public DateTime? CheckedAlarmDate { get; set; }
 
         #endregion Alarm
+
+        #region functions
+        
+        public String ConverterItemUnit()
+        {
+            // Temperature - Default Temperatrure - Farenheit
+            if (this.SensorItem.Unit.UnitTypeId == (Int16)UnitTypeEnum.Temperature)
+            {
+                Double tempVaue;
+                if (Double.TryParse(this.Value, out tempVaue))
+                {
+                    // From Fahrenheit To
+                    switch (this.SensorItem.Unit.Name.ToUpper())
+                    {
+                        case "KELVIN":
+                            return TemperatureUnit.FahrenheitToKelvin(tempVaue).ToString();
+                        case "CELSIUS":
+                            return TemperatureUnit.FahrenheitToCelsius(tempVaue).ToString();
+                        default:
+                            return this.Value;
+                    }
+                }
+                else
+                    throw new Exception("Error convert temperature");
+            }
+            // Volume
+            else if (this.SensorItem.Unit.UnitTypeId == (Int16)UnitTypeEnum.Volume)
+            {
+
+            }
+
+            return this.Value;
+        }
+
+        #endregion functions
     }
 }

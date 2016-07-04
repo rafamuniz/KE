@@ -16,3 +16,5 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\bin\Debug\System.Web.Mvc.xml
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\obj\Debug\AlarmService.exe
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\obj\Debug\AlarmService.pdb
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\obj\Debug\KarmicEnergy.Service.Installer.resources
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\obj\Debug\AlarmService.csproj.GenerateResource.Cache

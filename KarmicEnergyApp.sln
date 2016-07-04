@@ -29,6 +29,12 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AlarmServiceSetup", "Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmService", "Services\AlarmService\AlarmService.csproj", "{59C119D8-8C1A-4481-B7AC-3C7F2C800952}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assests", "Assests", "{C0F350AE-2E45-4AEA-A262-0A6A3393DF45}"
+	ProjectSection(SolutionItems) = preProject
+		..\Docs\Images\banner_setup.jpg = ..\Docs\Images\banner_setup.jpg
+		Views\Web\images\logo_mini.ico = Views\Web\images\logo_mini.ico
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AWS|Any CPU = AWS|Any CPU
@@ -74,6 +80,7 @@ Global
 		{E0865D1E-DFA1-4D89-BD77-41B1044F577C}.Release|Any CPU.Build.0 = Development
 		{58134A14-83D4-44D4-B0BC-6FC3165A3935}.AWS|Any CPU.ActiveCfg = Release
 		{58134A14-83D4-44D4-B0BC-6FC3165A3935}.Debug|Any CPU.ActiveCfg = Debug
+		{58134A14-83D4-44D4-B0BC-6FC3165A3935}.Debug|Any CPU.Build.0 = Debug
 		{58134A14-83D4-44D4-B0BC-6FC3165A3935}.Release|Any CPU.ActiveCfg = Release
 		{59C119D8-8C1A-4481-B7AC-3C7F2C800952}.AWS|Any CPU.ActiveCfg = Release|Any CPU
 		{59C119D8-8C1A-4481-B7AC-3C7F2C800952}.AWS|Any CPU.Build.0 = Release|Any CPU

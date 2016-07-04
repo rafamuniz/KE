@@ -66,18 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SetupInstaller.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="SetupInstaller.Designer.cs">
-      <DependentUpon>SetupInstaller.cs</DependentUpon>
-    </Compile>
     <Compile Include="Logger.cs" />
-    <Compile Include="ProjectInstaller.cs">
+    <Compile Include="Installer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ProjectInstaller.Designer.cs">
-      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    <Compile Include="Installer.Designer.cs">
+      <DependentUpon>Installer.cs</DependentUpon>
     </Compile>
     <Compile Include="SensorsSyncService.cs">
       <SubType>Component</SubType>
@@ -102,8 +96,8 @@
     <EmbeddedResource Include="SensorsSyncService.resx">
       <DependentUpon>SensorsSyncService.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProjectInstaller.resx">
-      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    <EmbeddedResource Include="Installer.resx">
+      <DependentUpon>Installer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

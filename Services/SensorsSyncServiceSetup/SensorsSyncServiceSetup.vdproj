@@ -28,61 +28,67 @@
         "Entry"
         {
         "MsmKey" = "8:_09740BD3E525E64C02B543F562D5608A"
-        "OwnerKey" = "8:_522451FB5B0D42159212EEB36D8D7E50"
+        "OwnerKey" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_09740BD3E525E64C02B543F562D5608A"
-        "OwnerKey" = "8:_FBAB1AA1C446AB51569B43513DDA7DFD"
+        "OwnerKey" = "8:_D8C634A6003BF01AB5DBC7E0FF4C5979"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_522451FB5B0D42159212EEB36D8D7E50"
+        "MsmKey" = "8:_336082CFEA8944C1AE7C5D5E6F6F930C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_39F48C02622D4BA89849AD09ADC62464"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_586321AC2C71898E12492449C2EDBB6C"
-        "OwnerKey" = "8:_522451FB5B0D42159212EEB36D8D7E50"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A54D39F8903A448BA28E9BB7134671D7"
-        "OwnerKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_A5C7537B1EC8548BF6D5882CEADDE974"
-        "OwnerKey" = "8:_522451FB5B0D42159212EEB36D8D7E50"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_AA87DB81493446DA81D7778A32C87FC1"
-        "OwnerKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_B210EDE0E24EAAE15A4699FDDA11A6D7"
-        "OwnerKey" = "8:_522451FB5B0D42159212EEB36D8D7E50"
+        "OwnerKey" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_D2F7533960D57B3577D16B0D90C0123F"
-        "OwnerKey" = "8:_522451FB5B0D42159212EEB36D8D7E50"
+        "OwnerKey" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_D2F7533960D57B3577D16B0D90C0123F"
-        "OwnerKey" = "8:_FBAB1AA1C446AB51569B43513DDA7DFD"
+        "OwnerKey" = "8:_D8C634A6003BF01AB5DBC7E0FF4C5979"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D8C634A6003BF01AB5DBC7E0FF4C5979"
+        "OwnerKey" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -94,19 +100,19 @@
         "Entry"
         {
         "MsmKey" = "8:_F6CB41F78F564BE1164D93D905EEE0DA"
-        "OwnerKey" = "8:_522451FB5B0D42159212EEB36D8D7E50"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FBAB1AA1C446AB51569B43513DDA7DFD"
-        "OwnerKey" = "8:_522451FB5B0D42159212EEB36D8D7E50"
+        "OwnerKey" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_522451FB5B0D42159212EEB36D8D7E50"
+        "OwnerKey" = "8:_B210EDE0E24EAAE15A4699FDDA11A6D7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -118,7 +124,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FBAB1AA1C446AB51569B43513DDA7DFD"
+        "OwnerKey" = "8:_D8C634A6003BF01AB5DBC7E0FF4C5979"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -143,12 +149,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_09740BD3E525E64C02B543F562D5608A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B210EDE0E24EAAE15A4699FDDA11A6D7"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -223,45 +223,59 @@
     {
         "CustomAction"
         {
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_2011EDA8E78A4567AF26A7CA9262061A"
-            {
-            "Name" = "8:Primary output from SensorsSyncService (Active)"
-            "Condition" = "8:"
-            "Object" = "8:_522451FB5B0D42159212EEB36D8D7E50"
-            "FileType" = "3:2"
-            "InstallAction" = "3:4"
-            "Arguments" = "8:"
-            "EntryPoint" = "8:"
-            "Sequence" = "3:1"
-            "Identifier" = "8:_08D2398D_D782_4302_AAA0_5C232BE573A6"
-            "InstallerClass" = "11:TRUE"
-            "CustomActionData" = "8:"
-            }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_668DCCFC222B4E51B2C5E417E43FDE85"
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_0E92B7A86F334684A8B44006741E686F"
             {
             "Name" = "8:Primary output from SensorEventsSyncService (Active)"
             "Condition" = "8:"
-            "Object" = "8:_522451FB5B0D42159212EEB36D8D7E50"
+            "Object" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
+            "FileType" = "3:2"
+            "InstallAction" = "3:3"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_06A390A4_08E7_4293_AFC5_952896B348B1"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_C7F9A1F3E662413FBFA0DA6F33C429A3"
+            {
+            "Name" = "8:Primary output from SensorEventsSyncService (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
             "FileType" = "3:2"
             "InstallAction" = "3:2"
             "Arguments" = "8:"
             "EntryPoint" = "8:"
             "Sequence" = "3:1"
-            "Identifier" = "8:_448729A3_CB59_4151_BE77_749DBCB4D7A0"
+            "Identifier" = "8:_BE4C6D58_BA1D_4469_892D_14F61052AB86"
             "InstallerClass" = "11:TRUE"
             "CustomActionData" = "8:/SITEID=\"[SITEID]\" /INTERVAL=\"[INTERVAL]\" /PORTNAME=\"[PORTNAME]\" /BAUDRATE=\"[BAUDRATE]\" /PARITY=\"[PARITY]\" /DATABITS=\"[DATABITS]\" /STOPBITS=\"[STOPBITS]\" /READTIMEOUT=\"[READTIMEOUT]\" /SERVER=\"[SERVER]\" /DATABASENAME=\"[DATABASENAME]\" /USERNAME=\"[USERNAME]\" /PASSWORD=\"[PASSWORD]\""
             }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_B4CA339A638B4F49884C3049E11C79A8"
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_EECA1AA815DC41FB89D406BBC561A25E"
             {
-            "Name" = "8:Primary output from SensorsSyncService (Active)"
+            "Name" = "8:Primary output from SensorEventsSyncService (Active)"
             "Condition" = "8:"
-            "Object" = "8:_522451FB5B0D42159212EEB36D8D7E50"
+            "Object" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
             "FileType" = "3:2"
             "InstallAction" = "3:1"
             "Arguments" = "8:"
             "EntryPoint" = "8:"
             "Sequence" = "3:1"
-            "Identifier" = "8:_73479999_DE9D_4ECF_AE12_19330BB8FE69"
+            "Identifier" = "8:_94A58381_DAB2_4A9E_B52C_48A3A699443B"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_F981F292D52C4F13B24160BF58D45D33"
+            {
+            "Name" = "8:Primary output from SensorEventsSyncService (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_DBE86C94AFF44F8E81DF80C5220C467B"
+            "FileType" = "3:2"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_B991F62E_78ED_4336_B1FC_A03BEB4CF550"
             "InstallerClass" = "11:TRUE"
             "CustomActionData" = "8:"
             }
@@ -319,6 +333,46 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_336082CFEA8944C1AE7C5D5E6F6F930C"
+            {
+            "SourcePath" = "8:..\\..\\Views\\Web\\images\\banner_setup.jpg"
+            "TargetName" = "8:banner_setup.jpg"
+            "Tag" = "8:"
+            "Folder" = "8:_4D677E381552438DB326E9789CF6D368"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_39F48C02622D4BA89849AD09ADC62464"
+            {
+            "SourcePath" = "8:..\\..\\Views\\Web\\images\\logo_mini.ico"
+            "TargetName" = "8:logo_mini.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_4D677E381552438DB326E9789CF6D368"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_586321AC2C71898E12492449C2EDBB6C"
             {
             "AssemblyRegister" = "3:1"
@@ -350,26 +404,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A54D39F8903A448BA28E9BB7134671D7"
-            {
-            "SourcePath" = "8:..\\..\\..\\Docs\\Images\\banner_setup.jpg"
-            "TargetName" = "8:banner_setup.jpg"
-            "Tag" = "8:"
-            "Folder" = "8:_D29A40BCFBC644C2B85DA86D9244DFCB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A5C7537B1EC8548BF6D5882CEADDE974"
             {
             "AssemblyRegister" = "3:1"
@@ -399,26 +433,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AA87DB81493446DA81D7778A32C87FC1"
-            {
-            "SourcePath" = "8:C:\\Program Files (x86)\\KarmicEnergy\\SensorsSyncService\\logo_mini.ico"
-            "TargetName" = "8:logo_mini.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_D29A40BCFBC644C2B85DA86D9244DFCB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B210EDE0E24EAAE15A4699FDDA11A6D7"
@@ -483,6 +497,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D8C634A6003BF01AB5DBC7E0FF4C5979"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:KarmicEnergy.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_D8C634A6003BF01AB5DBC7E0FF4C5979"
+                    {
+                    "Name" = "8:KarmicEnergy.Core.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:KarmicEnergy.Core.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_D29A40BCFBC644C2B85DA86D9244DFCB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F6CB41F78F564BE1164D93D905EEE0DA"
             {
             "AssemblyRegister" = "3:1"
@@ -514,37 +559,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FBAB1AA1C446AB51569B43513DDA7DFD"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:KarmicEnergy.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_FBAB1AA1C446AB51569B43513DDA7DFD"
-                    {
-                    "Name" = "8:KarmicEnergy.Core.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:KarmicEnergy.Core.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_D29A40BCFBC644C2B85DA86D9244DFCB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
         }
         "FileType"
         {
@@ -558,6 +572,17 @@
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:DesktopFolder"
+                "Folders"
+                {
+                }
+            }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_4D677E381552438DB326E9789CF6D368"
+            {
+            "Name" = "8:#1910"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:CommonFilesFolder"
                 "Folders"
                 {
                 }
@@ -602,7 +627,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Sensor Events Sync"
         "ProductCode" = "8:{B5AD4D1B-8898-492C-8A28-D22FB0171DC9}"
-        "PackageCode" = "8:{A15EB7A7-AD78-40FC-AF39-776810825022}"
+        "PackageCode" = "8:{D6384ABF-719E-4009-B278-CCBE69E496FF}"
         "UpgradeCode" = "8:{E4333C61-0A12-4F27-AFD5-D29EB84EF0DA}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -613,13 +638,13 @@
         "Manufacturer" = "8:Karmic Energy"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:SensorsSyncServiceSetup"
+        "Title" = "8:Sensors Sync Service"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Rafael Muniz"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:http://www.karmicenergy.com"
-        "ARPPRODUCTICON" = "8:_AA87DB81493446DA81D7778A32C87FC1"
+        "ARPPRODUCTICON" = "8:_39F48C02622D4BA89849AD09ADC62464"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -750,7 +775,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_A54D39F8903A448BA28E9BB7134671D7"
+                            "Value" = "8:_336082CFEA8944C1AE7C5D5E6F6F930C"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
@@ -795,7 +820,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_A54D39F8903A448BA28E9BB7134671D7"
+                            "Value" = "8:_336082CFEA8944C1AE7C5D5E6F6F930C"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -844,7 +869,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_A54D39F8903A448BA28E9BB7134671D7"
+                            "Value" = "8:_336082CFEA8944C1AE7C5D5E6F6F930C"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -867,7 +892,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_A54D39F8903A448BA28E9BB7134671D7"
+                            "Value" = "8:_336082CFEA8944C1AE7C5D5E6F6F930C"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -905,7 +930,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_A54D39F8903A448BA28E9BB7134671D7"
+                            "Value" = "8:_336082CFEA8944C1AE7C5D5E6F6F930C"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
@@ -956,7 +981,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_A54D39F8903A448BA28E9BB7134671D7"
+                            "Value" = "8:_336082CFEA8944C1AE7C5D5E6F6F930C"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "UpdateText"
@@ -1001,7 +1026,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_A54D39F8903A448BA28E9BB7134671D7"
+                            "Value" = "8:_336082CFEA8944C1AE7C5D5E6F6F930C"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1033,7 +1058,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_A54D39F8903A448BA28E9BB7134671D7"
+                            "Value" = "8:_336082CFEA8944C1AE7C5D5E6F6F930C"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "BannerText"
@@ -1272,185 +1297,6 @@
                             }
                         }
                     }
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_B9AE0A289CB4419B8E7D497033F9D4CF"
-                    {
-                    "Sequence" = "3:300"
-                    "DisplayName" = "8:RadioButtons   (4 buttons)"
-                    "UseDynamicProperties" = "11:TRUE"
-                    "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdCustom4ButtonDlg.wid"
-                        "Properties"
-                        {
-                            "BannerBitmap"
-                            {
-                            "Name" = "8:BannerBitmap"
-                            "DisplayName" = "8:#1001"
-                            "Description" = "8:#1101"
-                            "Type" = "3:8"
-                            "ContextData" = "8:Bitmap"
-                            "Attributes" = "3:4"
-                            "Setting" = "3:2"
-                            "Value" = "8:_A54D39F8903A448BA28E9BB7134671D7"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "BannerText"
-                            {
-                            "Name" = "8:BannerText"
-                            "DisplayName" = "8:#1014"
-                            "Description" = "8:#1114"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:Sensor Communication Configuration"
-                            "DefaultValue" = "8:#1214"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "BodyText"
-                            {
-                            "Name" = "8:BodyText"
-                            "DisplayName" = "8:#1015"
-                            "Description" = "8:#1115"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:Port Name: (COMPort)"
-                            "DefaultValue" = "8:#1215"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Button1Label"
-                            {
-                            "Name" = "8:Button1Label"
-                            "DisplayName" = "8:#1022"
-                            "Description" = "8:#1122"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:COM1"
-                            "DefaultValue" = "8:#1222"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Button1Value"
-                            {
-                            "Name" = "8:Button1Value"
-                            "DisplayName" = "8:#1018"
-                            "Description" = "8:#1118"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:COM1"
-                            "DefaultValue" = "8:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Button2Label"
-                            {
-                            "Name" = "8:Button2Label"
-                            "DisplayName" = "8:#1023"
-                            "Description" = "8:#1123"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:COM2"
-                            "DefaultValue" = "8:#1223"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Button2Value"
-                            {
-                            "Name" = "8:Button2Value"
-                            "DisplayName" = "8:#1019"
-                            "Description" = "8:#1119"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:COM2"
-                            "DefaultValue" = "8:2"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Button3Label"
-                            {
-                            "Name" = "8:Button3Label"
-                            "DisplayName" = "8:#1024"
-                            "Description" = "8:#1124"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:COM3"
-                            "DefaultValue" = "8:#1224"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Button3Value"
-                            {
-                            "Name" = "8:Button3Value"
-                            "DisplayName" = "8:#1020"
-                            "Description" = "8:#1120"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:COM3"
-                            "DefaultValue" = "8:3"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Button4Label"
-                            {
-                            "Name" = "8:Button4Label"
-                            "DisplayName" = "8:#1025"
-                            "Description" = "8:#1125"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:COM4"
-                            "DefaultValue" = "8:#1225"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "Button4Value"
-                            {
-                            "Name" = "8:Button4Value"
-                            "DisplayName" = "8:#1021"
-                            "Description" = "8:#1121"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:COM4"
-                            "DefaultValue" = "8:4"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "ButtonProperty"
-                            {
-                            "Name" = "8:ButtonProperty"
-                            "DisplayName" = "8:#1017"
-                            "Description" = "8:#1117"
-                            "Type" = "3:14"
-                            "ContextData" = "8:Public"
-                            "Attributes" = "3:2"
-                            "Setting" = "3:2"
-                            "Value" = "8:PORTNAME"
-                            "DefaultValue" = "8:BUTTON4"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "DefaultValue"
-                            {
-                            "Name" = "8:DefaultValue"
-                            "DisplayName" = "8:#1016"
-                            "Description" = "8:#1116"
-                            "Type" = "3:3"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:2"
-                            "Value" = "8:COM1"
-                            "DefaultValue" = "8:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                        }
-                    }
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_C7ED88550AA74F279D09A7906300491C"
                     {
                     "Sequence" = "3:310"
@@ -1469,7 +1315,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_A54D39F8903A448BA28E9BB7134671D7"
+                            "Value" = "8:_336082CFEA8944C1AE7C5D5E6F6F930C"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "BannerText"
@@ -1726,7 +1572,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_A54D39F8903A448BA28E9BB7134671D7"
+                            "Value" = "8:_336082CFEA8944C1AE7C5D5E6F6F930C"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "InstallAllUsersVisible"
@@ -1740,6 +1586,185 @@
                             "Setting" = "3:0"
                             "Value" = "3:1"
                             "DefaultValue" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_DE23AD4FB9374D14BD31802D0592DDAD"
+                    {
+                    "Sequence" = "3:210"
+                    "DisplayName" = "8:RadioButtons   (4 buttons)"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdCustom4ButtonDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:2"
+                            "Value" = "8:_336082CFEA8944C1AE7C5D5E6F6F930C"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "BannerText"
+                            {
+                            "Name" = "8:BannerText"
+                            "DisplayName" = "8:#1014"
+                            "Description" = "8:#1114"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:Sensor Communication Configuration"
+                            "DefaultValue" = "8:#1214"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "BodyText"
+                            {
+                            "Name" = "8:BodyText"
+                            "DisplayName" = "8:#1015"
+                            "Description" = "8:#1115"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:Port Name: (COMPort)"
+                            "DefaultValue" = "8:#1215"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Button1Label"
+                            {
+                            "Name" = "8:Button1Label"
+                            "DisplayName" = "8:#1022"
+                            "Description" = "8:#1122"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:COM1"
+                            "DefaultValue" = "8:#1222"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Button1Value"
+                            {
+                            "Name" = "8:Button1Value"
+                            "DisplayName" = "8:#1018"
+                            "Description" = "8:#1118"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:COM1"
+                            "DefaultValue" = "8:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Button2Label"
+                            {
+                            "Name" = "8:Button2Label"
+                            "DisplayName" = "8:#1023"
+                            "Description" = "8:#1123"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:COM2"
+                            "DefaultValue" = "8:#1223"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Button2Value"
+                            {
+                            "Name" = "8:Button2Value"
+                            "DisplayName" = "8:#1019"
+                            "Description" = "8:#1119"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:COM2"
+                            "DefaultValue" = "8:2"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Button3Label"
+                            {
+                            "Name" = "8:Button3Label"
+                            "DisplayName" = "8:#1024"
+                            "Description" = "8:#1124"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:COM3"
+                            "DefaultValue" = "8:#1224"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Button3Value"
+                            {
+                            "Name" = "8:Button3Value"
+                            "DisplayName" = "8:#1020"
+                            "Description" = "8:#1120"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:COM3"
+                            "DefaultValue" = "8:3"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Button4Label"
+                            {
+                            "Name" = "8:Button4Label"
+                            "DisplayName" = "8:#1025"
+                            "Description" = "8:#1125"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:COM4"
+                            "DefaultValue" = "8:#1225"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Button4Value"
+                            {
+                            "Name" = "8:Button4Value"
+                            "DisplayName" = "8:#1021"
+                            "Description" = "8:#1121"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:COM4"
+                            "DefaultValue" = "8:4"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "ButtonProperty"
+                            {
+                            "Name" = "8:ButtonProperty"
+                            "DisplayName" = "8:#1017"
+                            "Description" = "8:#1117"
+                            "Type" = "3:14"
+                            "ContextData" = "8:Public"
+                            "Attributes" = "3:2"
+                            "Setting" = "3:2"
+                            "Value" = "8:PORTNAME"
+                            "DefaultValue" = "8:BUTTON4"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "DefaultValue"
+                            {
+                            "Name" = "8:DefaultValue"
+                            "DisplayName" = "8:#1016"
+                            "Description" = "8:#1116"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:COM1"
+                            "DefaultValue" = "8:1"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1762,7 +1787,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_A54D39F8903A448BA28E9BB7134671D7"
+                            "Value" = "8:_336082CFEA8944C1AE7C5D5E6F6F930C"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -1785,7 +1810,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_A54D39F8903A448BA28E9BB7134671D7"
+                            "Value" = "8:_336082CFEA8944C1AE7C5D5E6F6F930C"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -1824,9 +1849,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_522451FB5B0D42159212EEB36D8D7E50"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_DBE86C94AFF44F8E81DF80C5220C467B"
             {
-            "SourcePath" = "8:..\\SiteService\\obj\\Release\\KESensorsSync.exe"
+            "SourcePath" = "8:..\\SiteService\\obj\\Debug\\KESensorsSync.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_D29A40BCFBC644C2B85DA86D9244DFCB"

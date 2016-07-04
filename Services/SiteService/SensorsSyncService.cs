@@ -459,7 +459,7 @@ namespace SiteService
 
         private String GetAppConfigValue(String key)
         {
-            var config = ConfigurationManager.OpenExeConfiguration(Assembly.GetAssembly(typeof(ProjectInstaller)).Location);
+            var config = ConfigurationManager.OpenExeConfiguration(Assembly.GetAssembly(typeof(Installer)).Location);
             if (config.AppSettings.Settings[key] == null)
                 return null;
             else

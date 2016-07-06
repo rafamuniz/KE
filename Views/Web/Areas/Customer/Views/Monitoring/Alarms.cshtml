@@ -37,6 +37,10 @@
         .Sortable(true)
         .Filterable(true);
 
+    columns.Add(c => c.Value).Titled("Value")
+        .Sortable(true)
+        .Filterable(true);
+
     columns.Add(c => c.SeverityName).Titled("Severity")
         .Sortable(true)
         .Filterable(true);

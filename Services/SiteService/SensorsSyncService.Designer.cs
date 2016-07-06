@@ -1,4 +1,4 @@
-﻿namespace SiteService
+﻿namespace KarmicEnergy.Services
 {
     partial class SensorsSyncService
     {

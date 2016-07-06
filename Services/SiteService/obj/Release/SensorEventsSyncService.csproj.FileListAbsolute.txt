@@ -1,6 +1,3 @@
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Release\KESensorsSync.exe.config
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Release\KESensorsSync.exe
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Release\KESensorsSync.pdb
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Release\EntityFramework.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Release\EntityFramework.SqlServer.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Release\KarmicEnergy.Core.dll
@@ -14,8 +11,11 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Release\Munizoft.Util.pdb
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Release\System.Web.Mvc.xml
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\obj\Release\SensorEventsSyncService.csprojResolveAssemblyReference.cache
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\obj\Release\SiteService.SensorsSyncService.resources
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\obj\Release\SensorEventsSyncService.csproj.GenerateResource.Cache
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\obj\Release\KESensorsSync.exe
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\obj\Release\KESensorsSync.pdb
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\obj\Release\KarmicEnergy.Service.Installer.resources
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\obj\Release\KarmicEnergy.Services.SensorsSyncService.resources
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Release\KarmicEnergy.Services.exe.config
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Release\KarmicEnergy.Services.exe
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\bin\Release\KarmicEnergy.Services.pdb
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\obj\Release\KarmicEnergy.Services.exe
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\SiteService\obj\Release\KarmicEnergy.Services.pdb

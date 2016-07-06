@@ -42,6 +42,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
             set { }
         }
 
+        public String Value { get; set; }
         #endregion Property
 
         #region Map
@@ -94,6 +95,8 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
             viewModel.ItemName = entity.SensorItem.Item.Name;
 
             viewModel.EventDate = entity.EventDate;
+
+            viewModel.Value = String.Format("{0} {1}", entity.ConverterItemUnit(), entity.SensorItem.Unit.Symbol);
 
             return viewModel;
         }

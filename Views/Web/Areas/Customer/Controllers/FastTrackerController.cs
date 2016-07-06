@@ -84,7 +84,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                             var waterVolume = KEUnitOfWork.SensorItemEventRepository.GetLastEventByPondAndItem(pond.Id, ItemEnum.WaterVolume);
                             if (waterVolume != null)
                             {
-                                pondViewModel.WaterVolumeLastValue = Decimal.Parse(waterVolume.Value);
+                                pondViewModel.WaterVolumeLastValue = Decimal.Parse(waterVolume.ConverterItemUnit());  //Decimal.Parse(waterVolume.Value);
                                 pondViewModel.WaterVolumeLastEventDate = waterVolume.EventDate;
                             }
                         }
@@ -124,7 +124,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                             var waterVolume = KEUnitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tank.Id, ItemEnum.WaterVolume);
                             if (waterVolume != null)
                             {
-                                tankViewModel.WaterVolumeLastValue = Decimal.Parse(waterVolume.Value);
+                                tankViewModel.WaterVolumeLastValue = Decimal.Parse(waterVolume.ConverterItemUnit()); //Decimal.Parse(waterVolume.Value);
                                 tankViewModel.WaterVolumeLastEventDate = waterVolume.EventDate;
                             }
                         }
@@ -167,7 +167,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 if (ambient != null)
                 {
                     waterQualityViewModel.TemperatureAmbientLastEventId = ambient.Id;
-                    waterQualityViewModel.TemperatureAmbientLastEventValue = Decimal.Parse(ambient.Value);
+                    waterQualityViewModel.TemperatureAmbientLastEventValue = Decimal.Parse(ambient.ConverterItemUnit()); //Decimal.Parse(ambient.Value);
                     waterQualityViewModel.TemperatureAmbientLastEventDate = ambient.EventDate;
                     waterQualityViewModel.TemperatureAmbientSymbol = ambient.SensorItem.Unit.Symbol;
                 }
@@ -179,7 +179,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 if (water != null)
                 {
                     waterQualityViewModel.TemperatureWaterLastEventId = water.Id;
-                    waterQualityViewModel.TemperatureWaterLastEventValue = Decimal.Parse(water.Value);
+                    waterQualityViewModel.TemperatureWaterLastEventValue = Decimal.Parse(water.ConverterItemUnit()); //Decimal.Parse(water.Value);
                     waterQualityViewModel.TemperatureWaterLastEventDate = water.EventDate;
                     waterQualityViewModel.TemperatureWaterSymbol = water.SensorItem.Unit.Symbol;
                 }
@@ -191,7 +191,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 if (ph != null)
                 {
                     waterQualityViewModel.PHLastEventId = ph.Id;
-                    waterQualityViewModel.PHLastEventValue = Decimal.Parse(ph.Value);
+                    waterQualityViewModel.PHLastEventValue = Decimal.Parse(ph.ConverterItemUnit()); //Decimal.Parse(ph.Value);
                     waterQualityViewModel.PHLastEventDate = ph.EventDate;
                     waterQualityViewModel.PHSymbol = ph.SensorItem.Unit.Symbol;
                 }
@@ -230,7 +230,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                         var rateFlow = KEUnitOfWork.SensorItemEventRepository.GetLastEventBySensorItem(sensorItem.Id);
                         if (rateFlow != null)
                         {
-                            flowMeterViewModel.RateFlow = Decimal.Parse(rateFlow.Value);
+                            flowMeterViewModel.RateFlow = Decimal.Parse(rateFlow.ConverterItemUnit()); //Decimal.Parse(rateFlow.Value);
                             flowMeterViewModel.RateFlowLastMeasurement = rateFlow.EventDate;
                         }
                     }
@@ -241,7 +241,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                         var totalizer = KEUnitOfWork.SensorItemEventRepository.GetLastEventBySensorItem(sensorItem.Id);
                         if (totalizer != null)
                         {
-                            flowMeterViewModel.Totalizer = Int32.Parse(totalizer.Value);
+                            flowMeterViewModel.Totalizer = Int32.Parse(totalizer.ConverterItemUnit()); //Int32.Parse(totalizer.Value);
                             flowMeterViewModel.TotalizerLastMeasurement = totalizer.EventDate;
                         }
                     }

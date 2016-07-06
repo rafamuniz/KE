@@ -254,6 +254,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\ScheduleTask.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\StickConversionController.cs" />
@@ -408,6 +409,8 @@
     <Compile Include="ViewModels\AddressViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Notifications\Email\AlarmEmail.html" />
+    <Content Include="App_Data\Notifications\Email\ResetPassword.html" />
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
@@ -2350,7 +2353,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Customer\ViewModels\Report\" />
     <Folder Include="Areas\Customer\ViewModels\Temp\" />
     <Folder Include="Helpers\" />
@@ -2358,12 +2360,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Core\KarmicEnergy.Core\Core.csproj">
-      <Project>{f4765a8a-4d17-4e1b-9116-f736e42a2ebb}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\app\dashboard.js" />
@@ -2381,6 +2377,16 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\AWSSDK.SimpleEmail.3.1.4.0\analyzers\dotnet\cs\AWSSDK.SimpleEmail.CodeAnalysis.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\KarmicEnergy.Core\Core.csproj">
+      <Project>{f4765a8a-4d17-4e1b-9116-f736e42a2ebb}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\KarmicEnergy.Util\Util.csproj">
+      <Project>{519e28a2-6b4d-4ce3-a05e-748e71c8b125}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

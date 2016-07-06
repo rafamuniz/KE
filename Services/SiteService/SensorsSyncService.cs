@@ -4,17 +4,15 @@ using KarmicEnergy.Service;
 using Munizoft.Util.WinServices;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
-using System.Reflection;
 using System.ServiceProcess;
 using System.Threading;
 using System.Timers;
 
-namespace SiteService
+namespace KarmicEnergy.Services
 {
     public partial class SensorsSyncService : ServiceBase
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{59C119D8-8C1A-4481-B7AC-3C7F2C800952}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KarmicEnergy.Service</RootNamespace>
-    <AssemblyName>AlarmService</AssemblyName>
+    <RootNamespace>KarmicEnergy.Services</RootNamespace>
+    <AssemblyName>KarmicEnergy.Services</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,6 +43,9 @@
     </Reference>
     <Reference Include="Munizoft.Core">
       <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Core\bin\Release\Munizoft.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Munizoft.Extensions">
+      <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Extensions\bin\Debug\Munizoft.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Munizoft.Util, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -81,19 +84,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Core\KarmicEnergy.Core\Core.csproj">
-      <Project>{f4765a8a-4d17-4e1b-9116-f736e42a2ebb}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Installer.resx">
       <DependentUpon>Installer.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\KarmicEnergy.Core\Core.csproj">
+      <Project>{f4765a8a-4d17-4e1b-9116-f736e42a2ebb}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\KarmicEnergy.Util\Util.csproj">
+      <Project>{519e28a2-6b4d-4ce3-a05e-748e71c8b125}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

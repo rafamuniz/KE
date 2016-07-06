@@ -1,4 +1,4 @@
-﻿namespace AlarmService
+﻿namespace KarmicEnergy.Services
 {
     partial class AlarmService
     {

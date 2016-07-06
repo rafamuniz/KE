@@ -38,6 +38,10 @@
         .Sortable(true)
         .Filterable(true);
 
+    columns.Add(c => c.Value).Titled("Value")
+    .Sortable(true)
+    .Filterable(true);
+
     columns.Add(c => c.EventDateLocal).Titled("Date")
         .Sortable(true)
         .Filterable(true);

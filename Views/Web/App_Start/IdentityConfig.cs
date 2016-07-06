@@ -1,14 +1,10 @@
-﻿using Amazon.SimpleEmail;
-using Amazon.SimpleEmail.Model;
-using KarmicEnergy.Web.Models;
+﻿using KarmicEnergy.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using SendGrid;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
 using System.Net.Mail;

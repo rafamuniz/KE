@@ -7,6 +7,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Http;
 using KarmicEnergy.Web.App_Start;
+using KarmicEnergy.Core.Jobs;
 
 namespace KarmicEnergy.Web
 {
@@ -19,6 +20,7 @@ namespace KarmicEnergy.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             GlobalConfiguration.Configure(WebApiConfig.Register);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            JobScheduler.RegisterJobs();
         }
     }
 }

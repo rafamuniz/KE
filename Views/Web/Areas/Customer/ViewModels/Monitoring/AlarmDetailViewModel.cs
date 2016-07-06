@@ -103,7 +103,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
         {
             Mapper.CreateMap<Core.Entities.Alarm, AlarmDetailViewModel>();
             var viewModel = Mapper.Map<Core.Entities.Alarm, AlarmDetailViewModel>(entity);
-                        
+
             viewModel.SiteId = entity.Trigger.SensorItem.Sensor.Tank != null ? entity.Trigger.SensorItem.Sensor.Tank.Site.Id : entity.Trigger.SensorItem.Sensor.Site.Id;
             viewModel.SiteName = entity.Trigger.SensorItem.Sensor.Tank != null ? entity.Trigger.SensorItem.Sensor.Tank.Site.Name : entity.Trigger.SensorItem.Sensor.Site.Name;
 
@@ -132,6 +132,8 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
 
             viewModel.SeverityId = entity.Trigger.Severity.Id;
             viewModel.SeverityName = entity.Trigger.Severity.Name;
+
+            viewModel.Value = String.Format("{0} {1}", entity.ConverterItemUnit(), entity.Trigger.SensorItem.Unit.Symbol);
 
             return viewModel;
         }

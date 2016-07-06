@@ -10,6 +10,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/CDM+fNWZUG1jM0lBCRXDgAAAAACAAAAAAAQZgAAAAEAACAAAACemzZTNN/GqMFxa32EbPKl7kkmnKEBjeyUFbHdZUgfMwAAAAAOgAAAAAIAACAAAABR9P/kBK99ARgZ/WRHi3UqmQEZra1pAMFuw1yu66zyFSAAAABWbptTVBq5RF0zzh3I/4dr3Ea4X3ufhS1eN69d2m/Jn0AAAAAZ8wJGGHKsfiN+ah2rMj3J0bZmRNkGmhb/rBUQUIWlRLKEBD0S1xouP3vCNDQCkxlVzi1TS7ovgjBynSfV9y1o</EncryptedPassword>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="App_Data/Notifications/Email/AlarmEmail.html">
+      <publishTime>07/06/2016 09:08:06</publishTime>
+    </File>
+    <File Include="App_Data/Notifications/Email/ResetPassword.html">
+      <publishTime>07/02/2016 14:12:18</publishTime>
+    </File>
     <File Include="Areas/Admin/Views/Customer/ChangePassword.cshtml">
       <publishTime>05/25/2016 19:51:54</publishTime>
     </File>
@@ -110,13 +116,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/28/2016 23:05:15</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Monitoring/Alarms.cshtml">
-      <publishTime>06/28/2016 23:02:03</publishTime>
+      <publishTime>07/07/2016 00:14:09</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Monitoring/CreateComment.cshtml">
       <publishTime>06/28/2016 22:18:41</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Monitoring/Index.cshtml">
-      <publishTime>06/29/2016 00:21:04</publishTime>
+      <publishTime>07/07/2016 00:10:45</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Monitoring/_AlarmDetail.cshtml">
       <publishTime>06/28/2016 21:54:30</publishTime>
@@ -298,6 +304,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/AWSSDK.SimpleEmail.dll">
       <publishTime>06/14/2016 15:53:40</publishTime>
     </File>
+    <File Include="bin/Common.Logging.Core.dll">
+      <publishTime>01/10/2015 21:28:30</publishTime>
+    </File>
+    <File Include="bin/Common.Logging.dll">
+      <publishTime>01/10/2015 21:28:30</publishTime>
+    </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/07/2016 00:39:39</publishTime>
     </File>
@@ -308,13 +320,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>07/01/2016 02:05:01</publishTime>
+      <publishTime>07/07/2016 00:45:39</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
     </File>
+    <File Include="bin/KarmicEnergy.Util.dll">
+      <publishTime>07/06/2016 15:51:37</publishTime>
+    </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>07/01/2016 02:05:12</publishTime>
+      <publishTime>07/07/2016 00:46:01</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -368,7 +383,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/18/2016 23:02:41</publishTime>
     </File>
     <File Include="bin/Munizoft.Extensions.dll">
-      <publishTime>04/28/2016 21:29:26</publishTime>
+      <publishTime>07/06/2016 21:44:38</publishTime>
     </File>
     <File Include="bin/Munizoft.Extensions.pdb">
       <publishTime>04/12/2016 15:49:14</publishTime>
@@ -383,7 +398,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/28/2016 11:31:32</publishTime>
     </File>
     <File Include="bin/Munizoft.Util.dll">
-      <publishTime>05/22/2016 01:15:40</publishTime>
+      <publishTime>07/05/2016 00:58:12</publishTime>
     </File>
     <File Include="bin/MvcCheckBoxList.dll">
       <publishTime>04/12/2016 00:30:35</publishTime>
@@ -393,6 +408,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>03/07/2016 00:39:42</publishTime>
+    </File>
+    <File Include="bin/Quartz.dll">
+      <publishTime>07/09/2015 08:36:22</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>05/13/2016 17:51:30</publishTime>
@@ -9383,7 +9401,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 01:07:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/26/2016 02:08:18</publishTime>
+      <publishTime>07/07/2016 00:46:49</publishTime>
     </File>
   </ItemGroup>
 </Project>

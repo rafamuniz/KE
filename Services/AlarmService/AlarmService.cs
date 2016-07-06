@@ -1,16 +1,15 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
 using KarmicEnergy.Service;
-using Munizoft.Util.Converters;
 using Munizoft.Util.WinServices;
+using Munizoft.Extensions;
 using System;
-using System.Configuration;
+using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.ServiceProcess;
 using System.Timers;
 
-namespace AlarmService
+namespace KarmicEnergy.Services
 {
     public partial class AlarmService : ServiceBase
     {
@@ -91,10 +90,22 @@ namespace AlarmService
             foreach (var trigger in triggers)
             {
                 try
-                {                    
+                {
                     String value = sensorItemEvent.ConverterItemUnit();
                     if (trigger.IsAlarm(value))
                     {
+                        if (trigger.HasAlarm) // Normalized
+                        {
+                            var alarms = KEUnitOfWork.AlarmRepository.Find(x => x.TriggerId == trigger.Id && x.EndDate == null);
+
+                            foreach (var a in alarms)
+                            {
+                                a.EndDate = DateTime.UtcNow;
+                            }
+
+                            KEUnitOfWork.AlarmRepository.UpdateRange(alarms);
+                        }
+
                         Alarm alarm = new Alarm()
                         {
                             TriggerId = trigger.Id,
@@ -103,6 +114,19 @@ namespace AlarmService
                         };
 
                         KEUnitOfWork.AlarmRepository.Add(alarm);
+                        SendNotificationAlarm(trigger, sensorItemEvent, value);
+                    }
+                    else if (trigger.HasAlarm) // Normalized
+                    {
+                        var alarms = KEUnitOfWork.AlarmRepository.Find(x => x.TriggerId == trigger.Id && x.EndDate == null);
+
+                        foreach (var a in alarms)
+                        {
+                            a.EndDate = DateTime.UtcNow;
+                        }
+
+                        KEUnitOfWork.AlarmRepository.UpdateRange(alarms);
+                        SendNotificationAlarmNormalized(trigger, sensorItemEvent);
                     }
                 }
                 catch (Exception ex)
@@ -115,15 +139,114 @@ namespace AlarmService
             KEUnitOfWork.Complete();
         }
 
-        private void SendNotification(Trigger trigger, SensorItemEvent sensorItemEvent)
+        private void SendNotificationAlarm(Trigger trigger, SensorItemEvent sensorItemEvent, String value)
+        {
+            KEUnitOfWork KEUnitOfWork = KEUnitOfWork.Create();
+            var templateName = FileConfig.GetAppConfigValue("Email:TemplateAlarm");
+            var template = KEUnitOfWork.NotificationTemplateRepository.Find(x => x.Name == templateName && x.NotificationTypeId == (Int16)NotificationTypeEnum.Email).SingleOrDefault();
+            var triggerContacts = KEUnitOfWork.TriggerContactRepository.GetsByTrigger(trigger.Id);
+
+            String message = MountEmailBody(trigger, sensorItemEvent, value, template);
+
+            foreach (var triggerContact in triggerContacts)
+            {
+                String email = String.Empty;
+
+                if (triggerContact.UserId.HasValue)
+                {
+                    var user = KEUnitOfWork.CustomerUserRepository.Get(triggerContact.UserId.Value);
+                    email = user.Address.Email;
+                }
+                else
+                {
+                    var contact = KEUnitOfWork.ContactRepository.Get(triggerContact.ContactId.Value);
+                    email = contact.Address.Email;
+                }
+
+                Notification notification = new Notification()
+                {
+                    To = email,
+                    From = FileConfig.GetAppConfigValue("Email:From"),
+                    NotificationTypeId = (Int16)NotificationTypeEnum.Email,
+                    Subject = "Alarm",
+                    Message = message
+                };
+
+                KEUnitOfWork.NotificationRepository.Add(notification);
+            }
+
+            KEUnitOfWork.Complete();
+        }
+
+        private static string MountEmailBody(Trigger trigger, SensorItemEvent sensorItemEvent, string value, NotificationTemplate template)
+        {
+            // Replace Data
+            Dictionary<String, String> replacments = new Dictionary<string, string>();
+
+            if (trigger.SensorItem.Sensor.PondId.HasValue)
+            {
+                replacments.Add("[PONDNAME]", trigger.SensorItem.Sensor.Pond.Name);
+                replacments.Add("[SITENAME]", trigger.SensorItem.Sensor.Pond.Site.Name);
+            }
+            else
+            {
+                replacments.Add("[PONDNAME]", String.Empty);
+            }
+
+            if (trigger.SensorItem.Sensor.TankId.HasValue)
+            {
+                replacments.Add("[TANKNAME]", trigger.SensorItem.Sensor.Tank.Name);
+                replacments.Add("[SITENAME]", trigger.SensorItem.Sensor.Tank.Site.Name);
+            }
+            else
+            {
+                replacments.Add("[TANKNAME]", String.Empty);
+            }
+
+            if (trigger.SensorItem.Sensor.SiteId.HasValue)
+            {
+                replacments.Add("[SITENAME]", trigger.SensorItem.Sensor.Site.Name);
+            }
+
+            replacments.Add("[SENSORNAME]", trigger.SensorItem.Sensor.Name);
+            replacments.Add("[ITEMNAME]", trigger.SensorItem.Item.Name);
+            replacments.Add("[VALUE]", String.Format("{0} {1}", value, trigger.SensorItem.Unit.Symbol));
+            replacments.Add("[STARTDATE]", sensorItemEvent.EventDate.ToLocalTime().ToString());
+
+            var message = template.Message.Replace(replacments);
+            return message;
+        }
+
+        private void SendNotificationAlarmNormalized(Trigger trigger, SensorItemEvent sensorItemEvent)
         {
             KEUnitOfWork KEUnitOfWork = KEUnitOfWork.Create();
 
-            var contacts = KEUnitOfWork.TriggerContactRepository.GetsByTrigger(trigger.Id);
+            var triggerContacts = KEUnitOfWork.TriggerContactRepository.GetsByTrigger(trigger.Id);
 
-            foreach (var contact in contacts)
+            foreach (var triggerContact in triggerContacts)
             {
-                //contact.
+                String email = String.Empty;
+
+                if (triggerContact.UserId.HasValue)
+                {
+                    var user = KEUnitOfWork.CustomerUserRepository.Get(triggerContact.UserId.Value);
+                    email = user.Address.Email;
+                }
+                else
+                {
+                    var contact = KEUnitOfWork.ContactRepository.Get(triggerContact.ContactId.Value);
+                    email = contact.Address.Email;
+                }
+
+                Notification notification = new Notification()
+                {
+                    To = email,
+                    From = FileConfig.GetAppConfigValue("Email:From"),
+                    NotificationTypeId = (Int16)NotificationTypeEnum.Email,
+                    Subject = "Normalized"
+                };
+
+                KEUnitOfWork.NotificationRepository.Add(notification);
             }
 
             KEUnitOfWork.Complete();

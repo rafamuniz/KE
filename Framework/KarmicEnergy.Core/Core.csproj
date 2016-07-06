@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F4765A8A-4D17-4E1B-9116-F736E42A2EBB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KarmicEnergy.Core</RootNamespace>
+    <AssemblyName>KarmicEnergy.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AWS|AnyCPU'">
+    <OutputPath>bin\AWS\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Munizoft.Core">
+      <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Core\bin\Debug\Munizoft.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Munizoft.Extensions">
+      <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Extensions\obj\Debug\Munizoft.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Munizoft.Util">
+      <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Util\bin\Debug\Munizoft.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz, Version=2.3.3.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Quartz.2.3.3\lib\net40\Quartz.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\AlarmHistory.cs" />
+    <Compile Include="Entities\ActionType.cs" />
+    <Compile Include="Entities\NotificationTemplate.cs" />
+    <Compile Include="Entities\NotificationType.cs" />
+    <Compile Include="Entities\Notification.cs" />
+    <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\City.cs" />
+    <Compile Include="Entities\CustomerUserSite.cs" />
+    <Compile Include="Entities\LogType.cs" />
+    <Compile Include="Entities\OperatorType.cs" />
+    <Compile Include="Entities\Operator.cs" />
+    <Compile Include="Entities\Pond.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\CustomerUserSetting.cs" />
+    <Compile Include="Entities\CustomerSetting.cs" />
+    <Compile Include="Entities\Geometry.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Address.cs" />
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\Alarm.cs" />
+    <Compile Include="Entities\StickConversionValue.cs" />
+    <Compile Include="Entities\StickConversion.cs" />
+    <Compile Include="Entities\Log.cs" />
+    <Compile Include="Entities\Group.cs" />
+    <Compile Include="Entities\SensorGroup.cs" />
+    <Compile Include="Entities\SensorItem.cs" />
+    <Compile Include="Entities\TriggerContact.cs" />
+    <Compile Include="Entities\UnitType.cs" />
+    <Compile Include="Entities\Unit.cs" />
+    <Compile Include="Entities\Trigger.cs" />
+    <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\Status.cs" />
+    <Compile Include="Entities\Severity.cs" />
+    <Compile Include="Entities\SensorType.cs" />
+    <Compile Include="Entities\SensorItemEvent.cs" />
+    <Compile Include="Entities\Sensor.cs" />
+    <Compile Include="Entities\TankModel.cs" />
+    <Compile Include="Entities\Tank.cs" />
+    <Compile Include="Entities\Site.cs" />
+    <Compile Include="Entities\CustomerUser.cs" />
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Jobs\NotificationTemplateJob.cs" />
+    <Compile Include="Jobs\NotificationJob.cs" />
+    <Compile Include="Jobs\JobScheduler.cs" />
+    <Compile Include="Migrations\201607052320001_Dev.cs" />
+    <Compile Include="Migrations\201607052320001_Dev.Designer.cs">
+      <DependentUpon>201607052320001_Dev.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607060457267_Dev1.cs" />
+    <Compile Include="Migrations\201607060457267_Dev1.Designer.cs">
+      <DependentUpon>201607060457267_Dev1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607061047087_Dev2.cs" />
+    <Compile Include="Migrations\201607061047087_Dev2.Designer.cs">
+      <DependentUpon>201607061047087_Dev2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607061135207_Dev3.cs" />
+    <Compile Include="Migrations\201607061135207_Dev3.Designer.cs">
+      <DependentUpon>201607061135207_Dev3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Persistence\IKEUnitOfWork.cs" />
+    <Compile Include="Persistence\KEContext.cs" />
+    <Compile Include="Persistence\KEUnitOfWork.cs" />
+    <Compile Include="Persistence\KEUnitOfWorkBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AddressRepository.cs" />
+    <Compile Include="Repositories\AlarmHistoryRepository.cs" />
+    <Compile Include="Repositories\CustomerUserSiteRepository.cs" />
+    <Compile Include="Repositories\Interface\ICustomerUserSiteRepository.cs" />
+    <Compile Include="Repositories\Interface\INotificationTemplateRepository.cs" />
+    <Compile Include="Repositories\Interface\INotificationRepository.cs" />
+    <Compile Include="Repositories\Interface\IOperatorTypeRepository.cs" />
+    <Compile Include="Repositories\Interface\IOperatorRepository.cs" />
+    <Compile Include="Repositories\Interface\IPondRepository.cs" />
+    <Compile Include="Repositories\Interface\ITriggerContactRepository.cs" />
+    <Compile Include="Repositories\NotificationTemplateRepository.cs" />
+    <Compile Include="Repositories\OperatorTypeRepository.cs" />
+    <Compile Include="Repositories\OperatorRepository.cs" />
+    <Compile Include="Repositories\NotificationRepository.cs" />
+    <Compile Include="Repositories\PondRepository.cs" />
+    <Compile Include="Repositories\TriggerContactRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\Interface\IAlarmHistoryRepository.cs" />
+    <Compile Include="Repositories\Interface\IUserRepository.cs" />
+    <Compile Include="Repositories\Interface\IStickConversionValueRepository.cs" />
+    <Compile Include="Repositories\Interface\IStickConversionRepository.cs" />
+    <Compile Include="Repositories\Interface\IUnitRepository.cs" />
+    <Compile Include="Repositories\Interface\ILogRepository.cs" />
+    <Compile Include="Repositories\Interface\ISensorGroupRepository.cs" />
+    <Compile Include="Repositories\Interface\IGroupRepository.cs" />
+    <Compile Include="Repositories\StickConversionValueRepository.cs" />
+    <Compile Include="Repositories\StickConversionRepository.cs" />
+    <Compile Include="Repositories\UnitRepository.cs" />
+    <Compile Include="Repositories\LogRepository.cs" />
+    <Compile Include="Repositories\SensorGroupRepository.cs" />
+    <Compile Include="Repositories\GroupRepository.cs" />
+    <Compile Include="Repositories\KERepositoryBase.cs" />
+    <Compile Include="Repositories\CustomerUserSettingRepository.cs" />
+    <Compile Include="Repositories\CustomerSettingRepository.cs" />
+    <Compile Include="Repositories\Interface\IAddressRepository.cs" />
+    <Compile Include="Repositories\Interface\ICustomerUserSettingRepository.cs" />
+    <Compile Include="Repositories\Interface\ICustomerSettingRepository.cs" />
+    <Compile Include="Repositories\Interface\IContactRepository.cs" />
+    <Compile Include="Repositories\Interface\IItemRepository.cs" />
+    <Compile Include="Repositories\Interface\ISensorItemRepository.cs" />
+    <Compile Include="Repositories\Interface\ISeverityRepository.cs" />
+    <Compile Include="Repositories\ContactRepository.cs" />
+    <Compile Include="Repositories\Interface\IKERepositoryBase.cs" />
+    <Compile Include="Repositories\ItemRepository.cs" />
+    <Compile Include="Repositories\SensorItemRepository.cs" />
+    <Compile Include="Repositories\SeverityRepository.cs" />
+    <Compile Include="Repositories\Interface\IAlarmRepository.cs" />
+    <Compile Include="Repositories\Interface\ISensorItemEventRepository.cs" />
+    <Compile Include="Repositories\AlarmRepository.cs" />
+    <Compile Include="Repositories\SensorItemEventRepository.cs" />
+    <Compile Include="Repositories\CountryRepository.cs" />
+    <Compile Include="Repositories\Interface\ICountryRepository.cs" />
+    <Compile Include="Repositories\Interface\ITriggerRepository.cs" />
+    <Compile Include="Repositories\Interface\ISensorTypeRepository.cs" />
+    <Compile Include="Repositories\Interface\ITankModelRepository.cs" />
+    <Compile Include="Repositories\Interface\ISensorRepository.cs" />
+    <Compile Include="Repositories\Interface\ITankRepository.cs" />
+    <Compile Include="Repositories\TriggerRepository.cs" />
+    <Compile Include="Repositories\SensorTypeRepository.cs" />
+    <Compile Include="Repositories\TankModelRepository.cs" />
+    <Compile Include="Repositories\SensorRepository.cs" />
+    <Compile Include="Repositories\TankRepository.cs" />
+    <Compile Include="Repositories\SiteRepository.cs" />
+    <Compile Include="Repositories\CustomerUserRepository.cs" />
+    <Compile Include="Repositories\Interface\ISiteRepository.cs" />
+    <Compile Include="Repositories\Interface\ICustomerUserRepository.cs" />
+    <Compile Include="Repositories\Interface\ICustomerRepository.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201607052320001_Dev.resx">
+      <DependentUpon>201607052320001_Dev.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607060457267_Dev1.resx">
+      <DependentUpon>201607060457267_Dev1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607061047087_Dev2.resx">
+      <DependentUpon>201607061047087_Dev2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607061135207_Dev3.resx">
+      <DependentUpon>201607061135207_Dev3.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KarmicEnergy.Util\Util.csproj">
+      <Project>{519E28A2-6B4D-4CE3-A05E-748E71C8B125}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

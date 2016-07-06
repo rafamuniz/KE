@@ -1771,3 +1771,268 @@
 05/07/16 00:46:07: Service has been done successfully
 05/07/16 00:46:12: Service has been done successfully
 05/07/16 00:46:17: Service has been done successfully
+06/07/16 21:02:42: Service started
+06/07/16 21:02:57: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:02:58: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:02:58: Service has been done successfully
+06/07/16 21:03:03: Service has been done successfully
+06/07/16 21:03:08: Service has been done successfully
+06/07/16 21:03:13: Service has been done successfully
+06/07/16 21:03:18: Service has been done successfully
+06/07/16 21:03:24: Service has been done successfully
+06/07/16 21:03:29: Service has been done successfully
+06/07/16 21:03:34: Service has been done successfully
+06/07/16 21:03:39: Service has been done successfully
+06/07/16 21:03:44: Service has been done successfully
+06/07/16 21:03:49: Service has been done successfully
+06/07/16 21:03:54: Service has been done successfully
+06/07/16 21:03:59: Service has been done successfully
+06/07/16 21:04:04: Service has been done successfully
+06/07/16 21:04:09: Service has been done successfully
+06/07/16 21:04:20: Service started
+06/07/16 21:04:30: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:04:48: Service has been done successfully
+06/07/16 21:04:53: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 30
+06/07/16 21:04:53: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 30
+06/07/16 21:04:53: Service has been done successfully
+06/07/16 21:04:58: Service has been done successfully
+06/07/16 21:05:03: Service has been done successfully
+06/07/16 21:05:08: Service has been done successfully
+06/07/16 21:05:13: Service has been done successfully
+06/07/16 21:05:18: Service has been done successfully
+06/07/16 21:05:23: Service has been done successfully
+06/07/16 21:05:28: Service has been done successfully
+06/07/16 21:05:33: Service has been done successfully
+06/07/16 21:05:38: Service has been done successfully
+06/07/16 21:05:43: Service has been done successfully
+06/07/16 21:05:48: Service has been done successfully
+06/07/16 21:05:53: Service has been done successfully
+06/07/16 21:05:58: Service has been done successfully
+06/07/16 21:06:04: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 30
+06/07/16 21:06:04: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 30
+06/07/16 21:06:04: Service has been done successfully
+06/07/16 21:06:09: Service has been done successfully
+06/07/16 21:06:14: Service has been done successfully
+06/07/16 21:06:19: Service has been done successfully
+06/07/16 21:06:24: Service has been done successfully
+06/07/16 21:06:29: Service has been done successfully
+06/07/16 21:06:34: Service has been done successfully
+06/07/16 21:06:39: Service has been done successfully
+06/07/16 21:06:44: Service has been done successfully
+06/07/16 21:06:49: Service has been done successfully
+06/07/16 21:06:54: Service has been done successfully
+06/07/16 21:06:59: Service has been done successfully
+06/07/16 21:07:04: Service has been done successfully
+06/07/16 21:07:09: Service has been done successfully
+06/07/16 21:07:14: Service has been done successfully
+06/07/16 21:07:19: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 40
+06/07/16 21:07:20: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 40
+06/07/16 21:07:20: Service has been done successfully
+06/07/16 21:07:25: Service has been done successfully
+06/07/16 21:07:30: Service has been done successfully
+06/07/16 21:07:35: Service has been done successfully
+06/07/16 21:07:40: Service has been done successfully
+06/07/16 21:07:45: Service has been done successfully
+06/07/16 21:07:50: Service has been done successfully
+06/07/16 21:07:55: Service has been done successfully
+06/07/16 21:08:00: Service has been done successfully
+06/07/16 21:08:05: Service has been done successfully
+06/07/16 21:08:10: Service has been done successfully
+06/07/16 21:08:15: Service has been done successfully
+06/07/16 21:08:20: Service has been done successfully
+06/07/16 21:08:25: Service has been done successfully
+06/07/16 21:08:30: Service has been done successfully
+06/07/16 21:08:35: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 40
+06/07/16 21:08:35: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 40
+06/07/16 21:08:35: Service has been done successfully
+06/07/16 21:08:40: Service has been done successfully
+06/07/16 21:08:45: Service has been done successfully
+06/07/16 21:08:50: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 40
+06/07/16 21:09:10: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 40
+06/07/16 21:09:10: Service has been done successfully
+06/07/16 21:09:15: Service has been done successfully
+06/07/16 21:09:20: Service has been done successfully
+06/07/16 21:09:25: Service has been done successfully
+06/07/16 21:09:30: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:09:47: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:09:47: Service has been done successfully
+06/07/16 21:09:52: Service has been done successfully
+06/07/16 21:09:57: Service has been done successfully
+06/07/16 21:10:02: Service has been done successfully
+06/07/16 21:10:07: Service has been done successfully
+06/07/16 21:10:12: Service has been done successfully
+06/07/16 21:10:17: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:11:29: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:11:29: Service has been done successfully
+06/07/16 21:11:34: Service has been done successfully
+06/07/16 21:11:39: Service has been done successfully
+06/07/16 21:11:44: Service has been done successfully
+06/07/16 21:11:49: Service has been done successfully
+06/07/16 21:11:54: Service has been done successfully
+06/07/16 21:11:59: Service has been done successfully
+06/07/16 21:12:04: Service has been done successfully
+06/07/16 21:12:09: Service has been done successfully
+06/07/16 21:12:14: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:15:28: Service started
+06/07/16 21:15:36: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:17:02: Service started
+06/07/16 21:17:12: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:18:16: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:18:16: Service has been done successfully
+06/07/16 21:18:21: Service has been done successfully
+06/07/16 21:18:26: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:19:22: Service started
+06/07/16 21:19:31: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:19:57: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:19:57: Service has been done successfully
+06/07/16 21:20:02: Service has been done successfully
+06/07/16 21:20:07: Service has been done successfully
+06/07/16 21:20:12: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:22:37: Service started
+06/07/16 21:22:47: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:24:13: Service started
+06/07/16 21:24:23: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:25:35: Service started
+06/07/16 21:25:45: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:30:56: Service started
+06/07/16 21:31:06: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:31:12: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:31:17: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:31:23: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:31:28: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:31:34: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:31:39: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:31:45: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:31:50: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:31:56: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:32:01: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:32:12: Service started
+06/07/16 21:32:22: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:32:27: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:32:33: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:32:38: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:32:44: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:32:49: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:32:54: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:33:00: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:33:05: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:33:11: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:33:16: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:33:22: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:33:27: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:33:33: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:33:38: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:33:44: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:33:49: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:33:55: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:34:00: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:34:06: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:34:12: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:34:18: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:34:23: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:34:29: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:34:34: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:34:40: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:34:45: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:34:51: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:34:56: The model backing the 'KEContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+06/07/16 21:35:56: Service started
+06/07/16 21:36:05: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:37:01: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:37:01: Service has been done successfully
+06/07/16 21:37:06: Service has been done successfully
+06/07/16 21:37:11: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:39:48: Service started
+06/07/16 21:39:58: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:40:39: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 21:40:39: Service has been done successfully
+06/07/16 21:40:44: Service has been done successfully
+06/07/16 21:40:49: Service has been done successfully
+06/07/16 21:40:54: Service has been done successfully
+06/07/16 21:40:59: Service has been done successfully
+06/07/16 21:41:04: Service has been done successfully
+06/07/16 21:41:09: Service has been done successfully
+06/07/16 21:41:14: Service has been done successfully
+06/07/16 21:41:19: Service has been done successfully
+06/07/16 21:41:24: Service has been done successfully
+06/07/16 21:41:29: Service has been done successfully
+06/07/16 21:41:34: Service has been done successfully
+06/07/16 21:41:39: Service has been done successfully
+06/07/16 21:41:44: Service has been done successfully
+06/07/16 21:41:49: Service has been done successfully
+06/07/16 21:41:54: Service has been done successfully
+06/07/16 21:41:59: Service has been done successfully
+06/07/16 21:42:04: Service has been done successfully
+06/07/16 21:42:09: Service has been done successfully
+06/07/16 21:42:14: Service has been done successfully
+06/07/16 21:42:19: Service has been done successfully
+06/07/16 22:16:18: Service started
+06/07/16 22:16:28: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:17:29: Service started
+06/07/16 22:17:39: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:17:59: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:17:59: Service has been done successfully
+06/07/16 22:18:04: Service has been done successfully
+06/07/16 22:18:09: Service has been done successfully
+06/07/16 22:18:14: Service has been done successfully
+06/07/16 22:37:25: Service started
+06/07/16 22:37:35: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:37:37: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:37:37: Service has been done successfully
+06/07/16 22:37:42: Service has been done successfully
+06/07/16 22:37:47: Service has been done successfully
+06/07/16 22:37:52: Service has been done successfully
+06/07/16 22:37:57: Service has been done successfully
+06/07/16 22:38:02: Service has been done successfully
+06/07/16 22:38:07: Service has been done successfully
+06/07/16 22:38:12: Service has been done successfully
+06/07/16 22:38:17: Service has been done successfully
+06/07/16 22:38:22: Service has been done successfully
+06/07/16 22:38:27: Service has been done successfully
+06/07/16 22:38:32: Service has been done successfully
+06/07/16 22:38:37: Service has been done successfully
+06/07/16 22:38:42: Service has been done successfully
+06/07/16 22:38:47: Service has been done successfully
+06/07/16 22:38:52: Service has been done successfully
+06/07/16 22:38:57: Service has been done successfully
+06/07/16 22:39:02: Service has been done successfully
+06/07/16 22:39:07: Service has been done successfully
+06/07/16 22:39:12: Service has been done successfully
+06/07/16 22:39:17: Service has been done successfully
+06/07/16 22:39:22: Service has been done successfully
+06/07/16 22:41:31: Service started
+06/07/16 22:41:40: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:41:55: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:41:55: Service has been done successfully
+06/07/16 22:42:00: Service has been done successfully
+06/07/16 22:42:05: Service has been done successfully
+06/07/16 22:42:10: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:42:19: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:42:19: Service has been done successfully
+06/07/16 22:42:24: Service has been done successfully
+06/07/16 22:42:29: Service has been done successfully
+06/07/16 22:42:34: Service has been done successfully
+06/07/16 22:42:39: Service has been done successfully
+06/07/16 22:42:44: Service has been done successfully
+06/07/16 22:42:49: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:43:24: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:43:24: Service has been done successfully
+06/07/16 22:43:29: Service has been done successfully
+06/07/16 22:43:34: Service has been done successfully
+06/07/16 22:43:39: Service has been done successfully
+06/07/16 22:43:44: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:43:56: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:43:56: Service has been done successfully
+06/07/16 22:44:01: Service has been done successfully
+06/07/16 22:44:06: Service has been done successfully
+06/07/16 22:44:12: Service has been done successfully
+06/07/16 22:44:17: Start - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:44:45: End - Check Event has alarm: 80d2fa41-e941-e611-8367-fcf8ae3592a5 - 86
+06/07/16 22:44:45: Service has been done successfully
+06/07/16 22:44:50: Service has been done successfully
+06/07/16 22:44:55: Service has been done successfully
+06/07/16 22:45:00: Service has been done successfully
+06/07/16 22:45:05: Service has been done successfully
+06/07/16 22:45:10: Service has been done successfully
+06/07/16 22:45:15: Service has been done successfully
+06/07/16 22:45:20: Service has been done successfully

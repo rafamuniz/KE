@@ -62,3 +62,4 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framewor
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\bin\Release\System.Web.Mvc.xml
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\KarmicEnergy.Core.Migrations.Dev2.resources
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\KarmicEnergy.Core.Migrations.Dev3.resources
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\KarmicEnergy.Core.Migrations.Dev4.resources

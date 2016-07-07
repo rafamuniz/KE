@@ -141,6 +141,10 @@
     <Compile Include="Migrations\201607061135207_Dev3.Designer.cs">
       <DependentUpon>201607061135207_Dev3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607071511565_Dev4.cs" />
+    <Compile Include="Migrations\201607071511565_Dev4.Designer.cs">
+      <DependentUpon>201607071511565_Dev4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
     <Compile Include="Persistence\KEContext.cs" />
@@ -235,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607061135207_Dev3.resx">
       <DependentUpon>201607061135207_Dev3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607071511565_Dev4.resx">
+      <DependentUpon>201607071511565_Dev4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

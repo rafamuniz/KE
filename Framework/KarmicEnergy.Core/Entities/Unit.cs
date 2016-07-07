@@ -53,7 +53,7 @@ namespace KarmicEnergy.Core.Entities
             List<Unit> entities = new List<Unit>()
             {
                 new Unit() { Id = 1, Name = "Gallon", NamePlural = "Gallons", Symbol = "gal", UnitTypeId = (int)UnitTypeEnum.Volume },
-                new Unit() { Id = 2, Name = "Barrel", NamePlural = "Barrels", Symbol = "B", UnitTypeId = (int)UnitTypeEnum.Volume },
+                new Unit() { Id = 2, Name = "Barrel", NamePlural = "Barrels", Symbol = "BBL", UnitTypeId = (int)UnitTypeEnum.Volume },
                 new Unit() { Id = 3, Name = "Liter", NamePlural = "Liters", Symbol = "l", UnitTypeId = (int)UnitTypeEnum.Volume },
                 new Unit() { Id = 4, Name = "Celsius", NamePlural = "Celsius", Symbol = "°C", UnitTypeId = (int)UnitTypeEnum.Temperature },
                 new Unit() { Id = 5, Name = "Kelvin", NamePlural = "Kelvin", Symbol = "°K", UnitTypeId = (int)UnitTypeEnum.Temperature },

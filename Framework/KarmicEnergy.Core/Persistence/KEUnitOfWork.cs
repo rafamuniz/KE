@@ -6,7 +6,9 @@ namespace KarmicEnergy.Core.Persistence
 {
     public class KEUnitOfWork : KEUnitOfWorkBase<KEContext>, IDisposable
     {
-        #region Fields             
+        #region Fields     
+        private IDataSyncRepository _DataSyncRepository;
+
         private ILogRepository _LogRepository;
 
         private IAddressRepository _AddressRepository;
@@ -75,6 +77,11 @@ namespace KarmicEnergy.Core.Persistence
         public static KEUnitOfWork Create()
         {
             return new KEUnitOfWork();
+        }
+
+        public IDataSyncRepository DataSyncRepository
+        {
+            get { return _DataSyncRepository ?? (_DataSyncRepository = new DataSyncRepository(_context)); }
         }
 
         public ILogRepository LogRepository

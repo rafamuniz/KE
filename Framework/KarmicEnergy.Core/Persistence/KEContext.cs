@@ -57,6 +57,8 @@ namespace KarmicEnergy.Core.Persistence
 
         #region DbSet
 
+        public IDbSet<DataSync> DataSyncs { get; set; }
+        
         public IDbSet<Address> Addresses { get; set; }
         public IDbSet<Contact> Contacts { get; set; }
         public IDbSet<Customer> Customers { get; set; }

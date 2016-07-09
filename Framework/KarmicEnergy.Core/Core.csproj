@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="Entities\AlarmHistory.cs" />
     <Compile Include="Entities\ActionType.cs" />
+    <Compile Include="Entities\DataSync.cs" />
     <Compile Include="Entities\NotificationTemplate.cs" />
     <Compile Include="Entities\NotificationType.cs" />
     <Compile Include="Entities\Notification.cs" />
@@ -122,29 +123,10 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Jobs\DataSyncJob.cs" />
     <Compile Include="Jobs\NotificationTemplateJob.cs" />
     <Compile Include="Jobs\NotificationJob.cs" />
     <Compile Include="Jobs\JobScheduler.cs" />
-    <Compile Include="Migrations\201607052320001_Dev.cs" />
-    <Compile Include="Migrations\201607052320001_Dev.Designer.cs">
-      <DependentUpon>201607052320001_Dev.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607060457267_Dev1.cs" />
-    <Compile Include="Migrations\201607060457267_Dev1.Designer.cs">
-      <DependentUpon>201607060457267_Dev1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607061047087_Dev2.cs" />
-    <Compile Include="Migrations\201607061047087_Dev2.Designer.cs">
-      <DependentUpon>201607061047087_Dev2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607061135207_Dev3.cs" />
-    <Compile Include="Migrations\201607061135207_Dev3.Designer.cs">
-      <DependentUpon>201607061135207_Dev3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607071511565_Dev4.cs" />
-    <Compile Include="Migrations\201607071511565_Dev4.Designer.cs">
-      <DependentUpon>201607071511565_Dev4.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
     <Compile Include="Persistence\KEContext.cs" />
@@ -155,6 +137,7 @@
     <Compile Include="Repositories\AlarmHistoryRepository.cs" />
     <Compile Include="Repositories\CustomerUserSiteRepository.cs" />
     <Compile Include="Repositories\Interface\ICustomerUserSiteRepository.cs" />
+    <Compile Include="Repositories\Interface\IDataSyncRepository.cs" />
     <Compile Include="Repositories\Interface\INotificationTemplateRepository.cs" />
     <Compile Include="Repositories\Interface\INotificationRepository.cs" />
     <Compile Include="Repositories\Interface\IOperatorTypeRepository.cs" />
@@ -166,6 +149,7 @@
     <Compile Include="Repositories\OperatorRepository.cs" />
     <Compile Include="Repositories\NotificationRepository.cs" />
     <Compile Include="Repositories\PondRepository.cs" />
+    <Compile Include="Repositories\DataSyncRepository.cs" />
     <Compile Include="Repositories\TriggerContactRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\Interface\IAlarmHistoryRepository.cs" />
@@ -226,23 +210,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607052320001_Dev.resx">
-      <DependentUpon>201607052320001_Dev.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607060457267_Dev1.resx">
-      <DependentUpon>201607060457267_Dev1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607061047087_Dev2.resx">
-      <DependentUpon>201607061047087_Dev2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607061135207_Dev3.resx">
-      <DependentUpon>201607061135207_Dev3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607071511565_Dev4.resx">
-      <DependentUpon>201607071511565_Dev4.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KarmicEnergy.Util\Util.csproj">

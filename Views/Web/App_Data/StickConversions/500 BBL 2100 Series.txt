@@ -1,0 +1,4 @@
+{
+  "ToValue": "Foo",
+  "FromValue": "Fighter", 
+}

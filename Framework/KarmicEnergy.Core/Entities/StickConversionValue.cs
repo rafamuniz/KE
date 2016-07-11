@@ -36,5 +36,29 @@ namespace KarmicEnergy.Core.Entities
         public virtual StickConversion StickConversion { get; set; }
 
         #endregion Unit
+
+        #region Load
+
+        public static List<StickConversionValue> Load(List<StickConversion> stickConversions)
+        {
+            List<StickConversionValue> entities = new List<StickConversionValue>();
+
+            foreach (var sc in stickConversions)
+            {
+                entities.AddRange(CreateList(sc));
+            }
+
+            return entities;
+        }
+
+        public static List<StickConversionValue> CreateList(StickConversion entity)
+        {
+
+            entity
+
+
+            return entities;
+        }
+        #endregion Load
     }
 }

@@ -72,6 +72,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -127,7 +130,13 @@
     <Compile Include="Jobs\NotificationTemplateJob.cs" />
     <Compile Include="Jobs\NotificationJob.cs" />
     <Compile Include="Jobs\JobScheduler.cs" />
+    <Compile Include="Jobs\Sync.cs" />
+    <Compile Include="Migrations\201607111121548_Initial.cs" />
+    <Compile Include="Migrations\201607111121548_Initial.Designer.cs">
+      <DependentUpon>201607111121548_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Persistence\DatabaseCreateIfNotExists.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
     <Compile Include="Persistence\KEContext.cs" />
     <Compile Include="Persistence\KEUnitOfWork.cs" />
@@ -216,6 +225,14 @@
       <Project>{519E28A2-6B4D-4CE3-A05E-748E71C8B125}</Project>
       <Name>Util</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201607111121548_Initial.resx">
+      <DependentUpon>201607111121548_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

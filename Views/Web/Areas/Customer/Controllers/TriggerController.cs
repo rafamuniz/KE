@@ -1,7 +1,7 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger;
 using KarmicEnergy.Web.Controllers;
-using KarmicEnergy.Web.Models;
+using KarmicEnergy.Web.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

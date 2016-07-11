@@ -1,4 +1,6 @@
-﻿using KarmicEnergy.Web.Models;
+﻿using KarmicEnergy.Web.Entities;
+using KarmicEnergy.Web.Models;
+using KarmicEnergy.Web.Persistence;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -125,7 +127,7 @@ namespace KarmicEnergy.Web
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
@@ -184,7 +186,7 @@ namespace KarmicEnergy.Web
 
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
         {
-            var roleStore = new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>());
+            var roleStore = new RoleStore<IdentityRole>(context.Get<ApplicationContext>());
             return new ApplicationRoleManager(roleStore);
         }
     }

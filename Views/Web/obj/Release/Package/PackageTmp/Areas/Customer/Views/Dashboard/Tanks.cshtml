@@ -1,0 +1,87 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard    
+@using KarmicEnergy.Web.Extensions
+
+@model TankDashboardViewModel
+
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Tank - Dashboard";
+}
+
+<script type="text/javascript">
+    $(function () {
+        showLoading();
+    });
+</script>
+
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/moment")
+<link href="~/Scripts/jqwidgets/styles/jqx.base.css" rel="stylesheet" />
+<script src="~/Scripts/jqwidgets/jqx-all.js"></script>
+<script src="~/Scripts/app/utils.js"></script>
+<script src="~/Scripts/highcharts/highcharts.js"></script>
+<script src="~/Scripts/highcharts/highcharts-3d.js"></script>
+<script src="~/Scripts/highcharts/highcharts-more.js"></script>
+<script src="~/Scripts/app/dashboard.js"></script>
+
+@if (!this.IsSite())
+{
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="form-group">
+            <div class="col-md-12">
+                @using (Html.BeginForm("SiteTankSelected", "Dashboard", new { }, FormMethod.Post, new { }))
+                {
+                    @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    @Html.HiddenFor(m => m.SiteId)
+}
+
+<div id="tanks">
+    @{
+        Int32 counter = 0;
+    }
+
+    @if (Model != null && Model.Tanks != null && Model.Tanks.Any())
+    {
+        foreach (var tank in Model.Tanks)
+        {
+            //List<String> colors = new List<string>() { "green", "blue", "orange" };
+            //tank.Color = colors.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+
+            if (@counter % 2 == 0)
+            {
+                @Html.Raw("<div class='row'>")
+            }
+
+            <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6">
+                @Html.Partial("_TankData", @tank)
+            </div>
+
+            if (counter % 2 == 1)
+            {
+                @Html.Raw("</div>")
+            }
+
+            counter++;
+        }
+    }
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('#ddlSite').on('change', function (event) {
+                var form = $(event.target).parents('form');
+                form.submit();
+            });
+        });
+
+        hideLoading();
+    </script>
+}

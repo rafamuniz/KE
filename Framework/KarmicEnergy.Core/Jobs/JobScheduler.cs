@@ -9,20 +9,20 @@ namespace KarmicEnergy.Core.Jobs
         {
             IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
 
-            #region DataSync Job
-            IJobDetail dataSyncJob = JobBuilder.Create<DataSyncJob>().Build();
+            //#region DataSync Job
+            //IJobDetail dataSyncJob = JobBuilder.Create<DataSyncJob>().Build();
 
-            ITrigger dataSyncTrigger = TriggerBuilder.Create()
-                .StartNow()
-                .WithIdentity("DataSyncJob")
-                .WithSimpleSchedule(x => x
-                    .WithIntervalInHours(1)
-                    .RepeatForever()
-                    .WithRepeatCount(1))
-                .Build();
+            //ITrigger dataSyncTrigger = TriggerBuilder.Create()
+            //    .StartNow()
+            //    .WithIdentity("DataSyncJob")
+            //    .WithSimpleSchedule(x => x
+            //        .WithIntervalInHours(1)
+            //        .RepeatForever()
+            //        .WithRepeatCount(1))
+            //    .Build();
 
-            scheduler.ScheduleJob(dataSyncJob, dataSyncTrigger);
-            #endregion DataSync Job
+            //scheduler.ScheduleJob(dataSyncJob, dataSyncTrigger);
+            //#endregion DataSync Job
 
             #region Notification Job
             IJobDetail notificationJob = JobBuilder.Create<NotificationJob>().Build();

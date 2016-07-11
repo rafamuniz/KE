@@ -1,20 +1,21 @@
+using KarmicEnergy.Core.Entities;
+using KarmicEnergy.Core.Persistence;
+using System;
+using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
+
 namespace KarmicEnergy.Core.Migrations
 {
-    using Entities;
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Data.Entity.Validation;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<KarmicEnergy.Core.Persistence.KEContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<KEContext>
     {
         public Configuration()
-        {
-            AutomaticMigrationsEnabled = false;
+        {            
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = false;
+            ContextKey = "KEContext";
         }
 
-        protected override void Seed(KarmicEnergy.Core.Persistence.KEContext context)
+        protected override void Seed(KEContext context)
         {
             try
             {
@@ -61,6 +62,7 @@ namespace KarmicEnergy.Core.Migrations
                     .ForEach(e => context.Items.AddOrUpdate(x => x.Id, e));
 
                 context.SaveChanges();
+                base.Seed(context);
             }
             catch (DbEntityValidationException e)
             {

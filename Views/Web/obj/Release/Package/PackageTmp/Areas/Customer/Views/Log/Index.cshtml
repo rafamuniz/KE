@@ -1,0 +1,41 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Log
+@using Munizoft.Extensions
+@using Munizoft.MVC.Helpers
+@using KarmicEnergy.Web.Extensions
+@using GridMvc.Html
+
+@model List<ListViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Log";
+}
+
+@Styles.Render("~/Content/gridmvccss")
+
+@Html.Grid(Model).Columns(columns =>
+{
+    if (!this.IsSite())
+    {
+        columns.Add(c => c.SiteName).Titled("Site")
+            .Sortable(true)
+            .Filterable(true);
+    }
+
+    columns.Add(c => c.Username).Titled("User")
+        .Sortable(true)
+        .Filterable(true);
+        
+    columns.Add(c => c.Message).Titled("Message")
+        .Sortable(true)
+        .Filterable(true);
+
+    columns.Add(c => c.LogDateLocal).Titled("Date")
+        .Sortable(true)
+        .Filterable(true);
+       
+}).WithPaging(10).Sortable(true).Filterable().WithMultipleFilters()
+
+@section Scripts {
+    @Scripts.Render("~/bundles/gridmvc")
+}

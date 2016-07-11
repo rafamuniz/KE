@@ -1,5 +1,6 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
+using KarmicEnergy.Web.Entities;
 using KarmicEnergy.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;

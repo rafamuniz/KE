@@ -1,13 +1,11 @@
-﻿using KarmicEnergy.Web.Models;
+﻿using KarmicEnergy.Web.Entities;
+using KarmicEnergy.Web.Models;
 using KarmicEnergy.Web.ViewModels.Account;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
+using Munizoft.Extensions;
 using System;
 using System.Configuration;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using Munizoft.Extensions;
 
 namespace KarmicEnergy.Web.Controllers
 {

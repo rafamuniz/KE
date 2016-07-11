@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using KarmicEnergy.Web.Entities;
 using KarmicEnergy.Web.Models;
 using KarmicEnergy.Web.ViewModels;
 using System;

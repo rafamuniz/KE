@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Linq;
 using System;
+using KarmicEnergy.Core.Jobs;
 
 namespace KarmicEnergy.Web.Controllers
 {
@@ -42,6 +43,15 @@ namespace KarmicEnergy.Web.Controllers
             }
 
             return Json(notificationViewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize()]
+        public ActionResult Sync()
+        {
+            Sync sync = new Sync();
+            sync.Execute();
+
+            return View("Index");
         }
     }
 }

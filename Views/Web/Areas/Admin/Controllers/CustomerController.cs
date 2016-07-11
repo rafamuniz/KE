@@ -1,5 +1,6 @@
 ﻿using KarmicEnergy.Web.Areas.Admin.ViewModels.Customer;
 using KarmicEnergy.Web.Controllers;
+using KarmicEnergy.Web.Entities;
 using KarmicEnergy.Web.Models;
 using System;
 using System.Collections.Generic;

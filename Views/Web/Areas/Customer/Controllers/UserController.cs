@@ -1,10 +1,9 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Web.Areas.Customer.ViewModels.User;
 using KarmicEnergy.Web.Controllers;
-using KarmicEnergy.Web.Models;
+using KarmicEnergy.Web.Entities;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;

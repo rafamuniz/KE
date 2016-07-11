@@ -1,0 +1,62 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
+    @using Munizoft.Extensions
+    @using Munizoft.MVC.Helpers
+    @using KarmicEnergy.Web.Extensions
+    @using GridMvc.Html
+
+    @model List<ListViewModel>
+
+    @{
+        Layout = "~/Views/Shared/_Internal.cshtml";
+        ViewBag.Title = "Trigger";
+    }
+
+    @Styles.Render("~/Content/gridmvccss")
+
+    <div class="pull-right">
+        @Html.NoEncodeActionLink("<span>CREATE</span>", "Add new Trigger", "Create", "Trigger", routeValues: new { area = "Customer" }, htmlAttributes: new { @class = "btn" })
+    </div>
+
+    @Html.Grid(Model).Columns(columns =>
+{
+    if (!this.IsSite())
+    {
+        columns.Add(c => c.SiteName).Titled("Site")
+         .Filterable(true);
+    }
+
+    columns.Add(c => c.PondName).Titled("Pond")
+     .Filterable(true);
+
+    columns.Add(c => c.TankName).Titled("Tank")
+     .Filterable(true);
+
+    columns.Add(c => c.SensorName).Titled("Sensor")
+     .Filterable(true);
+
+    columns.Add(c => c.ItemName).Titled("Item")
+        .Filterable(true);
+
+    columns.Add(c => c.Expression).Titled("Expression")
+        .Filterable(true);
+
+    columns.Add(c => c.Status).Titled("Status")
+        .Filterable(true);
+
+    columns.Add()
+     .Encoded(false)
+     .Sanitized(false)
+     .SetWidth(30)
+     .RenderValueAs(o => @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-pencil'></span>", "Edit", "Edit", "Trigger", routeValues: new { id = o.Id, area = "Customer" }, htmlAttributes: new { data_modal = "", @class = "btn btn-default" }));
+
+    columns.Add()
+     .Encoded(false)
+     .Sanitized(false)
+     .SetWidth(30)
+     .RenderValueAs(o => @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-trash'></span>", "Delete", "Delete", "Trigger", routeValues: new { id = o.Id, area = "Customer" }, htmlAttributes: new { data_modal = "", @class = "btn btn-default", onclick = "return confirm('Are you sure you wish to delete this registry?');" }));
+
+}).WithPaging(10).Sortable(true).Filterable().WithMultipleFilters()
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/gridmvc")
+    }

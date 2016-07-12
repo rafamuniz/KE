@@ -15,7 +15,7 @@ namespace KarmicEnergy.Core.Persistence
             //this.Configuration.LazyLoadingEnabled = false;
             //this.Configuration.ProxyCreationEnabled = false;
             Database.SetInitializer(new DatabaseCreateIfNotExists());
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<KEContext, Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<KEContext, Configuration>());
         }
 
         public KEContext(String nameOrConnectionString)

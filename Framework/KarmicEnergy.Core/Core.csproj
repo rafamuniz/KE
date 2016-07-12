@@ -139,7 +139,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\AlarmHistoryRepository.cs" />
+    <Compile Include="Repositories\ActionTypeRepository.cs" />
     <Compile Include="Repositories\CustomerUserSiteRepository.cs" />
+    <Compile Include="Repositories\Interface\IActionTypeRepository.cs" />
     <Compile Include="Repositories\Interface\ICustomerUserSiteRepository.cs" />
     <Compile Include="Repositories\Interface\IDataSyncRepository.cs" />
     <Compile Include="Repositories\Interface\INotificationTemplateRepository.cs" />
@@ -147,6 +149,11 @@
     <Compile Include="Repositories\Interface\IOperatorTypeRepository.cs" />
     <Compile Include="Repositories\Interface\IOperatorRepository.cs" />
     <Compile Include="Repositories\Interface\IPondRepository.cs" />
+    <Compile Include="Repositories\Interface\IGeometryRepository.cs" />
+    <Compile Include="Repositories\Interface\ICityRepository.cs" />
+    <Compile Include="Repositories\Interface\ILogTypeRepository.cs" />
+    <Compile Include="Repositories\Interface\INotificationTypeRepository.cs" />
+    <Compile Include="Repositories\Interface\IUnitTypeRepository.cs" />
     <Compile Include="Repositories\Interface\ITriggerContactRepository.cs" />
     <Compile Include="Repositories\NotificationTemplateRepository.cs" />
     <Compile Include="Repositories\OperatorTypeRepository.cs" />
@@ -155,6 +162,11 @@
     <Compile Include="Repositories\PondRepository.cs" />
     <Compile Include="Repositories\DataSyncRepository.cs" />
     <Compile Include="Repositories\TriggerContactRepository.cs" />
+    <Compile Include="Repositories\NotificationTypeRepository.cs" />
+    <Compile Include="Repositories\LogTypeRepository.cs" />
+    <Compile Include="Repositories\CityRepository.cs" />
+    <Compile Include="Repositories\GeometryRepository.cs" />
+    <Compile Include="Repositories\UnitTypeRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\Interface\IAlarmHistoryRepository.cs" />
     <Compile Include="Repositories\Interface\IUserRepository.cs" />

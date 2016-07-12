@@ -18,7 +18,7 @@ namespace KarmicEnergy.Web.ApiControllers
         protected KEUnitOfWork KEUnitOfWork
         {
             get
-            {
+            {                
                 return _KEUnitOfWork ?? new KEUnitOfWork();
             }
             set

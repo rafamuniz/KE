@@ -8,5 +8,6 @@ namespace KarmicEnergy.Core.Repositories
         where TEntity : class, new()
     {
         IEnumerable<TEntity> GetAllActive();
+        void Sync(List<TEntity> entities);
     }
 }

@@ -1,9 +1,11 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using Munizoft.Extensions;
 using System.Net.Http;
 
 namespace KarmicEnergy.Web.Jobs
@@ -50,6 +52,14 @@ namespace KarmicEnergy.Web.Jobs
             }
             else // Site
             {
+                #region Get
+
+                String ip = ConfigurationManager.AppSettings["Master:IP"];
+
+                ActionType(siteConfig, ip, DateTime.UtcNow);
+
+                #endregion Get
+
                 // Address
                 // Users
                 // CustomerUsers
@@ -66,6 +76,48 @@ namespace KarmicEnergy.Web.Jobs
 
 
             }
+        }
+
+        private DateTime? ActionType(String siteId, String ip, DateTime lastSync)
+        {
+            TimeSpan span = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc));
+            double unixTime = span.TotalSeconds;
+
+            // WebAPI            
+            String url = String.Format("http://{0}/{1}/{2}", ip, "sync/ActionType/", siteId);
+
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    //var response = client.GetStringAsync(url).Result;
+                    //List<ActionType> actionTypes = JsonConvert.DeserializeObject<List<ActionType>>(response);
+
+                    KEUnitOfWork KE = KEUnitOfWork.Create();
+                    var actionTypes = KE.ActionTypeRepository.GetAll().ToList();
+                    
+                    if (actionTypes.Any())
+                    {
+                        KEUnitOfWork KEUnitOfWork = KEUnitOfWork.Create();
+
+                        foreach (var actionType in actionTypes)
+                        {
+                            var at = KEUnitOfWork.ActionTypeRepository.Find(x => x.Id == actionType.Id);
+                            if (at == null)
+                                KEUnitOfWork.ActionTypeRepository.Add(actionType);
+                            else
+                                KEUnitOfWork.ActionTypeRepository.Update(actionType);
+                        }
+
+                        KEUnitOfWork.Complete();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return null;
         }
 
         private DateTime? Address(Site site, DataSync lastSync)

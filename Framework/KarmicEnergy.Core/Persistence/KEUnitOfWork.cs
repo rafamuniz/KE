@@ -8,10 +8,14 @@ namespace KarmicEnergy.Core.Persistence
     {
         #region Fields     
         private IDataSyncRepository _DataSyncRepository;
-
+                
         private ILogRepository _LogRepository;
+        private ILogTypeRepository _LogTypeRepository;
+        private IActionTypeRepository _ActionTypeRepository;
 
         private IAddressRepository _AddressRepository;
+        private ICityRepository _CityRepository;
+        private ICountryRepository _CountryRepository;
 
         private ICustomerRepository _CustomerRepository;
         private ICustomerUserRepository _CustomerUserRepository;
@@ -20,42 +24,43 @@ namespace KarmicEnergy.Core.Persistence
 
         private IUserRepository _UserRepository;
 
+        private IContactRepository _ContactRepository;
+
         private ISiteRepository _SiteRepository;
 
         private IPondRepository _PondRepository;
 
         private ITankRepository _TankRepository;
         private ITankModelRepository _TankModelRepository;
+        private IGeometryRepository _GeometryRepository;
 
         private ISensorRepository _SensorRepository;
         private ISensorItemRepository _SensorItemRepository;
         private ISensorTypeRepository _SensorTypeRepository;
+        private ISensorItemEventRepository _SensorItemEventRepository;
+        private IItemRepository _ItemRepository;
+
         private ISensorGroupRepository _SensorGroupRepository;
         private IGroupRepository _GroupRepository;
-
-        private ISensorItemEventRepository _SensorItemEventRepository;
-
-        private IItemRepository _ItemRepository;
 
         private ITriggerRepository _TriggerRepository;
         private ITriggerContactRepository _TriggerContactRepository;
         private IOperatorRepository _OperatorRepository;
         private IOperatorTypeRepository _OperatorTypeRepository;
+        private ISeverityRepository _SeverityRepository;
 
         private IAlarmRepository _AlarmRepository;
         private IAlarmHistoryRepository _AlarmHistoryRepository;
-
-        private IContactRepository _ContactRepository;
-        private ICountryRepository _CountryRepository;
-        private ISeverityRepository _SeverityRepository;
-
+        
         private IUnitRepository _UnitRepository;
+        private IUnitTypeRepository _UnitTypeRepository;
 
         private IStickConversionRepository _StickConversionRepository;
         private IStickConversionValueRepository _StickConversionValueRepository;
 
         private INotificationRepository _NotificationRepository;
         private INotificationTemplateRepository _NotificationTemplateRepository;
+        private INotificationTypeRepository _NotificationTypeRepository;
         #endregion Fields
 
         #region Constructor
@@ -77,6 +82,36 @@ namespace KarmicEnergy.Core.Persistence
         public static KEUnitOfWork Create()
         {
             return new KEUnitOfWork();
+        }
+
+        public IActionTypeRepository ActionTypeRepository
+        {
+            get { return _ActionTypeRepository ?? (_ActionTypeRepository = new ActionTypeRepository(_context)); }
+        }
+
+        public IUnitTypeRepository UnitTypeRepository
+        {
+            get { return _UnitTypeRepository ?? (_UnitTypeRepository = new UnitTypeRepository(_context)); }
+        }
+
+        public IGeometryRepository GeometryRepository
+        {
+            get { return _GeometryRepository ?? (_GeometryRepository = new GeometryRepository(_context)); }
+        }
+
+        public ICityRepository CityRepository
+        {
+            get { return _CityRepository ?? (_CityRepository = new CityRepository(_context)); }
+        }
+
+        public ILogTypeRepository LogTypeRepository
+        {
+            get { return _LogTypeRepository ?? (_LogTypeRepository = new LogTypeRepository(_context)); }
+        }
+
+        public INotificationTypeRepository NotificationTypeRepository
+        {
+            get { return _NotificationTypeRepository ?? (_NotificationTypeRepository = new NotificationTypeRepository(_context)); }
         }
 
         public IDataSyncRepository DataSyncRepository

@@ -177,34 +177,37 @@
                         }
     </div>
 </div>
-</div>
 
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:15px; margin: 0px; padding-left: 0px; padding-right: 0px;">
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0px;">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
-            <div class="title blue">
-                <h2>PONDS</h2>
-            </div>
+@if (Model.Ponds.Any() || Model.FlowMeters.Any())
+{
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:15px; margin: 0px; ">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0px;">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
+                    <div class="title blue">
+                        <h2>PONDS</h2>
+                    </div>
 
-            @if (Model.Ponds.Any())
-            {
-                foreach (var pond in Model.Ponds)
+
+                    @if (Model.Ponds.Any())
                 {
+                    foreach (var pond in Model.Ponds)
+                    {
                     <div class="row">
                         <div id="pond_@pond.Id" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pond">
 
                             @Html.Hidden("pondId", @pond.Id)
 
                             @{
-                                var blinkStyle = @pond.TotalAlarms > 0 ? "blink" : "";
+                                        var blinkStyle = @pond.TotalAlarms > 0 ? "blink" : "";
                             }
 
                             <div class="pull-right pond-waterVolume">
                                 @if (@pond.WaterVolumeLastValue.HasValue)
-                                {
-                                    <span>@pond.WaterVolumeLastValue</span>
-                                    <label>Gallons Remaining</label>
-                                }
+                                        {
+                                        <span>@pond.WaterVolumeLastValue</span>
+                                        <label>Gallons Remaining</label>
+                                        }
                             </div>
 
                             <div class="@blinkStyle">
@@ -216,7 +219,7 @@
                             </div>
 
                             @{
-                                var waterVolumePercentage = @pond.WaterVolumePercentage.HasValue ? @pond.WaterVolumePercentage.ToString() + " %" : "0 %";
+                                        var waterVolumePercentage = @pond.WaterVolumePercentage.HasValue ? @pond.WaterVolumePercentage.ToString() + " %" : "0 %";
                             }
 
                             <div class="pond-watervolume-percentage">
@@ -224,117 +227,119 @@
                             </div>
                         </div>
                     </div>
-                                    }
-                                }
-        </div>
-    </div>
-
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
-            <div class="title blue">
-                <h2>WATER QUALITY</h2>
-            </div>
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-centered">
-                    @if (@Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue)
-                    {
-                        String waterTemperatureLastMeasurement = @Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue ? @Model.WaterQuality.TemperatureAmbientLastEventDate.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : String.Empty;
-                        String waterTemperatureLast = @Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue ? @Model.WaterQuality.TemperatureAmbientLastEventValue.Value.ToString() : String.Empty;
-                        String waterTemperatureLastJS = @Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue ? @Model.WaterQuality.TemperatureAmbientLastEventValue.Value.ToString() : "undefined";
-
-                        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center text-bold">
-                            <span>Temp Ambient</span>
-                        </div>
-
-                        <div id="graph-temperature-ambient-@Model.WaterQuality.TemperatureAmbientLastEventId" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        </div>
-
-                        <script type="text/javascript">
-                            generateTemperatureGraph('graph-temperature-ambient-@Model.WaterQuality.TemperatureAmbientLastEventId', @waterTemperatureLastJS);
-                        </script>
-
-                        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 20px;">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center text-bold">
-                                <span>@Model.WaterQuality.TemperatureAmbientLastEventValue @Model.WaterQuality.TemperatureAmbientSymbol</span>
-                            </div>
-                        </div>
-                    }
-                </div>
-
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-centered">
-                    @if (@Model.WaterQuality.PHLastEventValue.HasValue)
-                    {
-                    }
+                                            }
+                                        }
                 </div>
             </div>
 
-            @*<div class="row" style="margin-bottom: 20px;">
-                    <div class="col-xs-16 col-sm-6 col-md-6 col-lg-6 text-left text-bold">
-                        <span>Chlorides</span>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
+                    <div class="title blue">
+                        <h2>WATER QUALITY</h2>
                     </div>
-                    <div class="col-xs-16 col-sm-6 col-md-6 col-lg-6 text-right">
-                        <span>@Model.WaterQuality.ChloridesLastEventValue</span>
-                    </div>
-                </div>*@
-
-            @*<div class="row" style="margin-bottom: 20px;">
-                    <div class="col-xs-16 col-sm-6 col-md-6 col-lg-6 text-left text-bold">
-                        <span>pH A</span>
-                    </div>
-                    <div class="col-xs-16 col-sm-6 col-md-6 col-lg-6 text-right">
-                        <span>@Model.WaterQuality.PHLastEventValue</span>
-                    </div>
-                </div>*@
-        </div>
-
-    </div>
-
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0px;">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
-            <div class="title blue">
-                <h2>WT FLOW</h2>
-            </div>
-
-            @if (Model.FlowMeters.Any())
-            {
-                var count = 1;
-                var idx = 0;
-
-                foreach (var fm in Model.FlowMeters)
-                {
-                    if (fm.RateFlow.HasValue)
-                    {
-                        @*if (count == 1)
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-centered">
+                            @if (@Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue)
                             {
-                                @Html.Raw("<div class='row'>")
-                            }*@
+                                String waterTemperatureLastMeasurement = @Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue ? @Model.WaterQuality.TemperatureAmbientLastEventDate.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : String.Empty;
+                                String waterTemperatureLast = @Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue ? @Model.WaterQuality.TemperatureAmbientLastEventValue.Value.ToString() : String.Empty;
+                                String waterTemperatureLastJS = @Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue ? @Model.WaterQuality.TemperatureAmbientLastEventValue.Value.ToString() : "undefined";
 
-                        <div class='row'>
-
-                            <div id="flowmeter_@fm.SensorId" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center text-bold">
+                                <span>Temp Ambient</span>
                             </div>
+
+                            <div id="graph-temperature-ambient-@Model.WaterQuality.TemperatureAmbientLastEventId" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            </div>
+
                             <script type="text/javascript">
-                                generateFlowMeter('@idx', @fm.RateFlow, @fm.Totalizer);
+                                    generateTemperatureGraph('graph-temperature-ambient-@Model.WaterQuality.TemperatureAmbientLastEventId', @waterTemperatureLastJS);
                             </script>
 
+                            <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 20px;">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center text-bold">
+                                    <span>@Model.WaterQuality.TemperatureAmbientLastEventValue @Model.WaterQuality.TemperatureAmbientSymbol</span>
+                                </div>
+                            </div>
+                            }
                         </div>
-                        //    if (count == 2)
-                        //{
-                        //    count = 1;
-                        //    @Html.Raw("</div>")
-                        //    }
-                        //else
-                        //{
-                        //    count++;
-                        //}
 
-                        //idx++;
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-centered">
+                            @if (@Model.WaterQuality.PHLastEventValue.HasValue)
+                            {
+                            }
+                        </div>
+                    </div>
+
+                    @*<div class="row" style="margin-bottom: 20px;">
+                            <div class="col-xs-16 col-sm-6 col-md-6 col-lg-6 text-left text-bold">
+                                <span>Chlorides</span>
+                            </div>
+                            <div class="col-xs-16 col-sm-6 col-md-6 col-lg-6 text-right">
+                                <span>@Model.WaterQuality.ChloridesLastEventValue</span>
+                            </div>
+                        </div>*@
+
+                    @*<div class="row" style="margin-bottom: 20px;">
+                            <div class="col-xs-16 col-sm-6 col-md-6 col-lg-6 text-left text-bold">
+                                <span>pH A</span>
+                            </div>
+                            <div class="col-xs-16 col-sm-6 col-md-6 col-lg-6 text-right">
+                                <span>@Model.WaterQuality.PHLastEventValue</span>
+                            </div>
+                        </div>*@
+                </div>
+
+            </div>
+
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="padding: 0px;">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
+                    <div class="title blue">
+                        <h2>WT FLOW</h2>
+                    </div>
+
+                    @if (Model.FlowMeters.Any())
+                {
+                    var count = 1;
+                    var idx = 0;
+
+                    foreach (var fm in Model.FlowMeters)
+                    {
+                        if (fm.RateFlow.HasValue)
+                        {
+                    @*if (count == 1)
+                        {
+                            @Html.Raw("<div class='row'>")
+                        }*@
+
+                    <div class='row'>
+
+                        <div id="flowmeter_@fm.SensorId" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        </div>
+                        <script type="text/javascript">
+                                        generateFlowMeter('@idx', @fm.RateFlow, @fm.Totalizer);
+                        </script>
+
+                    </div>
+                                //    if (count == 2)
+                                //{
+                                //    count = 1;
+                                //    @Html.Raw("</div>")
+                                //    }
+                                //else
+                                //{
+                                //    count++;
+                                //}
+
+                                //idx++;
+                            }
+                        }
                     }
-                }
-            }
+                </div>
+            </div>
         </div>
     </div>
-</div>
+                                }
 
 @section Scripts {
     <script type="text/javascript">

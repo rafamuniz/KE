@@ -57,7 +57,7 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framewor
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\bin\Release\System.Net.Http.Formatting.xml
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\bin\Release\System.Web.Mvc.xml
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\Core.csprojResolveAssemblyReference.cache
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\KarmicEnergy.Core.Migrations.Dev.resources
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\Core.csproj.GenerateResource.Cache
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\KarmicEnergy.Core.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\KarmicEnergy.Core.pdb
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\KarmicEnergy.Core.Migrations.Initial.resources

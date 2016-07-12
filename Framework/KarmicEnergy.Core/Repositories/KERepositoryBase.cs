@@ -29,5 +29,14 @@ namespace KarmicEnergy.Core.Repositories
             entity.LastModifiedDate = DateTime.UtcNow;
             base.Update(entity);
         }
+        
+        public void Sync(List<TEntity> entities)
+        {
+            //foreach (var entity in entities)
+            //{
+            //    _entities;
+            //    entity.
+            //}            
+        }                
     }
 }

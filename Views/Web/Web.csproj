@@ -374,11 +374,11 @@
     <Compile Include="Installer.Designer.cs">
       <DependentUpon>Installer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Jobs\DataSyncJob.cs" />
-    <Compile Include="Jobs\JobScheduler.cs" />
-    <Compile Include="Jobs\NotificationJob.cs" />
-    <Compile Include="Jobs\NotificationTemplateJob.cs" />
-    <Compile Include="Jobs\Sync.cs" />
+    <Compile Include="Infrastructure\Jobs\DataSyncJob.cs" />
+    <Compile Include="Infrastructure\Jobs\JobScheduler.cs" />
+    <Compile Include="Infrastructure\Jobs\NotificationJob.cs" />
+    <Compile Include="Infrastructure\Jobs\NotificationTemplateJob.cs" />
+    <Compile Include="Infrastructure\Jobs\Sync.cs" />
     <Compile Include="Migrations\201607110758384_Initial.cs" />
     <Compile Include="Migrations\201607110758384_Initial.Designer.cs">
       <DependentUpon>201607110758384_Initial.cs</DependentUpon>

@@ -53,11 +53,11 @@ namespace KarmicEnergy.Core.Entities
 
         public static List<StickConversionValue> CreateList(StickConversion entity)
         {
+            //entity
 
-            entity
 
-
-            return entities;
+            //return entities;
+            return new List<StickConversionValue>();
         }
         #endregion Load
     }

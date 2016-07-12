@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Notifications\SMSService.cs" />
     <Compile Include="Notifications\EmailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

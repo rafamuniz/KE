@@ -126,11 +126,6 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Jobs\DataSyncJob.cs" />
-    <Compile Include="Jobs\NotificationTemplateJob.cs" />
-    <Compile Include="Jobs\NotificationJob.cs" />
-    <Compile Include="Jobs\JobScheduler.cs" />
-    <Compile Include="Jobs\Sync.cs" />
     <Compile Include="Migrations\201607111121548_Initial.cs" />
     <Compile Include="Migrations\201607111121548_Initial.Designer.cs">
       <DependentUpon>201607111121548_Initial.cs</DependentUpon>

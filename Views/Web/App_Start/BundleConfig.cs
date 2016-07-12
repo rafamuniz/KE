@@ -10,7 +10,7 @@ namespace KarmicEnergy.Web
         {
             #region Scripts
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery/jquery-{version}.js"));
+                        "~/Scripts/jquery/jquery-2.2.4.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery/jquery-ui-{version}.js"));

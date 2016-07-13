@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,7 +27,7 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Property
 
-        #region Load
+        #region Functions
 
         public static List<LogType> Load()
         {
@@ -41,7 +40,16 @@ namespace KarmicEnergy.Core.Entities
 
             return entities;
         }
-        #endregion Load
+
+        public void Update(LogType entity)
+        {
+            this.Name = entity.Name;          
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 
     public enum LogTypeEnum : short

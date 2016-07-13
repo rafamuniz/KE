@@ -149,7 +149,20 @@ namespace KarmicEnergy.Core.Entities
                     throw new ArgumentException("Value wrong");
             }
         }
-
+                
+        public void Update(Trigger entity)
+        {
+            this.Status = entity.Status;
+            this.Value = entity.Value;
+            this.SensorItemId = entity.SensorItemId;
+            this.SeverityId = entity.SeverityId;
+            this.OperatorId = entity.OperatorId;
+            
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        
         #endregion Functions
     }
 }

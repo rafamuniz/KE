@@ -55,7 +55,7 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Sensor Type
 
-        #region Load
+        #region Functions
 
         public static List<Item> Load()
         {
@@ -88,7 +88,21 @@ namespace KarmicEnergy.Core.Entities
 
             return entities;
         }
-        #endregion Load
+
+        public void Update(Item entity)
+        {
+            this.Code = entity.Code;
+            this.Name = entity.Name;
+            this.Status = entity.Status;
+
+            this.UnitTypeId = entity.UnitTypeId;
+            this.SensorTypeId = entity.SensorTypeId;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions        
     }
 
     public enum ItemEnum : int

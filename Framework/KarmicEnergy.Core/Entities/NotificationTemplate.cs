@@ -39,7 +39,7 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Property
 
-        #region Load
+        #region Functions
 
         public static List<NotificationTemplate> Load()
         {
@@ -52,6 +52,18 @@ namespace KarmicEnergy.Core.Entities
 
             return entities;
         }
-        #endregion Load
+        public void Update(NotificationTemplate entity)
+        {
+            this.Name = entity.Name;
+            this.Subject = entity.Subject;
+
+            this.Message = entity.Message;
+            this.NotificationTypeId = entity.NotificationTypeId;
+            
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 }

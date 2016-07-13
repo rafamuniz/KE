@@ -44,5 +44,21 @@ namespace KarmicEnergy.Core.Entities
         public Guid? UserId { get; set; }
 
         #endregion User 
+
+        #region Functions
+        public void Update(TriggerContact entity)
+        {
+            this.Status = entity.Status;
+
+            this.TriggerId = entity.TriggerId;
+            this.ContactId = entity.ContactId;
+            this.UserId = entity.UserId;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+
+        #endregion Functions
     }
 }

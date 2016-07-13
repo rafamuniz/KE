@@ -59,6 +59,15 @@ namespace KarmicEnergy.Core.Entities
             //return entities;
             return new List<StickConversionValue>();
         }
-        #endregion Load
+
+        public void Update(StickConversionValue entity)
+        {
+            this.FromValue = entity.FromValue;
+            this.ToValue = entity.ToValue;            
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 }

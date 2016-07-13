@@ -37,5 +37,16 @@ namespace KarmicEnergy.Core.Entities
         public virtual IList<CustomerUser> Users { get; set; }
 
         #endregion CustomerUsers
+
+        #region Functions
+        public void Update(Customer entity)
+        {            
+            this.AddressId = entity.AddressId;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 }

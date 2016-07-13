@@ -48,5 +48,19 @@ namespace KarmicEnergy.Core.Entities
         public virtual Group Group { get; set; }
 
         #endregion Group                
+
+        #region Functions 
+        public void Update(SensorGroup entity)
+        {
+            this.Weight = entity.Weight;
+            
+            this.SensorId = entity.SensorId;
+            this.GroupId = entity.GroupId;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions 
     }
 }

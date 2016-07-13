@@ -30,5 +30,16 @@ namespace KarmicEnergy.Core.Entities
         public virtual Country Country { get; set; }
 
         #endregion Country
+
+        #region Functions
+        public void Update(City entity)
+        {
+            this.Name = entity.Name;
+            this.CountryId = entity.CountryId;
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 }

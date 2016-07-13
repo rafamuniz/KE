@@ -124,6 +124,18 @@ namespace KarmicEnergy.Core.Entities
             return this.Value;
         }
 
+        public void Update(SensorItemEvent entity)
+        {
+            this.EventDate = entity.EventDate;
+            this.Value = entity.Value;
+            this.SensorItemId = entity.SensorItemId;
+            this.SensorItemEventId = entity.SensorItemEventId;
+            this.CheckedAlarmDate = entity.CheckedAlarmDate;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
         #endregion functions
     }
 }

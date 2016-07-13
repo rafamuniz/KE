@@ -67,7 +67,7 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Property
 
-        #region Load
+        #region Functions
 
         public static List<Geometry> Load()
         {
@@ -84,7 +84,32 @@ namespace KarmicEnergy.Core.Entities
 
             return entities;
         }
-        #endregion Load 
+        public void Update(Geometry entity)
+        {
+            this.Name = entity.Name;
+
+            this.FormulaVolume = entity.FormulaVolume;
+
+            this.HasBottomWidth = entity.HasBottomWidth;
+            this.HasDiagonal = entity.HasDiagonal;
+            this.HasDimension1 = entity.HasDimension1;
+            this.HasDimension2 = entity.HasDimension2;
+            this.HasDimension3 = entity.HasDimension3;
+            this.HasFaceLength = entity.HasFaceLength;
+            this.HasHeight = entity.HasHeight;
+            this.HasLength = entity.HasLength;
+            this.HasRadius = entity.HasRadius;
+            this.HasWidth = entity.HasWidth;
+            
+            this.DimensionTitle1 = entity.DimensionTitle1;
+            this.DimensionTitle2 = entity.DimensionTitle2;
+            this.DimensionTitle3 = entity.DimensionTitle3;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 
     public enum GeometryEnum : short

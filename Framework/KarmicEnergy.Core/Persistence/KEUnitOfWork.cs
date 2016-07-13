@@ -18,6 +18,7 @@ namespace KarmicEnergy.Core.Persistence
         private ICountryRepository _CountryRepository;
 
         private ICustomerRepository _CustomerRepository;
+        private ICustomerSettingRepository _CustomerSettingRepository;
         private ICustomerUserRepository _CustomerUserRepository;
         private ICustomerUserSettingRepository _CustomerUserSettingRepository;
         private ICustomerUserSiteRepository _CustomerUserSiteRepository;
@@ -137,6 +138,11 @@ namespace KarmicEnergy.Core.Persistence
         public ICustomerRepository CustomerRepository
         {
             get { return _CustomerRepository ?? (_CustomerRepository = new CustomerRepository(_context)); }
+        }
+        
+        public ICustomerSettingRepository CustomerSettingRepository
+        {
+            get { return _CustomerSettingRepository ?? (_CustomerSettingRepository = new CustomerSettingRepository(_context)); }
         }
 
         public IUserRepository UserRepository

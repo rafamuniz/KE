@@ -23,5 +23,17 @@ namespace KarmicEnergy.Core.Entities
         public String IconFilename { get; set; }
 
         #endregion Property
+
+        #region Functions
+        public void Update(Country entity)
+        {
+            this.Name = entity.Name;
+            this.IconFilename = entity.IconFilename;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 }

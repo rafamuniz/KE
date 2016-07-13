@@ -27,7 +27,7 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Property
 
-        #region Load
+        #region Functions
 
         public static List<NotificationType> Load()
         {
@@ -39,7 +39,15 @@ namespace KarmicEnergy.Core.Entities
 
             return entities;
         }
-        #endregion Load
+
+        public void Update(NotificationType entity)
+        {
+            this.Name = entity.Name;           
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 
     public enum NotificationTypeEnum : short

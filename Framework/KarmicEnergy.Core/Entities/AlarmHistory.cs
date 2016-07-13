@@ -47,5 +47,23 @@ namespace KarmicEnergy.Core.Entities
         public virtual ActionType ActionType { get; set; }
 
         #endregion ActionType
+
+        #region functions
+        public void Update(AlarmHistory entity)
+        {
+            this.AlarmId = entity.AlarmId;
+            this.ActionTypeId = entity.ActionTypeId;
+
+            this.Message = entity.Message;
+            this.Value = entity.Value;
+            this.UserName = entity.UserName;
+            this.UserId = entity.UserId;
+ 
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+
+        #endregion functions
     }
 }

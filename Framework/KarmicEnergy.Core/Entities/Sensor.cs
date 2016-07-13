@@ -90,6 +90,7 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion SensorItems
 
+        #region Functions 
         public Boolean HasSensorItem()
         {
             if (SensorItems.Count > 0)
@@ -118,6 +119,24 @@ namespace KarmicEnergy.Core.Entities
                 return true;
             return false;
         }
+
+        public void Update(Sensor entity)
+        {
+            this.Name = entity.Name;
+            this.SpotGPS = entity.SpotGPS;
+            this.Reference = entity.Reference;
+            this.Status = entity.Status;
+
+            this.SensorTypeId = entity.SensorTypeId;
+            this.SiteId = entity.SiteId;
+            this.PondId = entity.PondId;
+            this.TankId = entity.TankId;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions 
 
     }
 }

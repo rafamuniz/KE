@@ -38,7 +38,7 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion OperatorType
 
-        #region Load
+        #region Functions
 
         public static List<Operator> Load()
         {
@@ -58,6 +58,17 @@ namespace KarmicEnergy.Core.Entities
 
             return entities;
         }
-        #endregion Load
+        public void Update(Operator entity)
+        {
+            this.Name = entity.Name;
+            this.Symbol = entity.Symbol;
+            this.Description = entity.Description;
+            this.OperatorTypeId = entity.OperatorTypeId;
+                      
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 }

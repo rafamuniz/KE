@@ -24,5 +24,17 @@ namespace KarmicEnergy.Core.Entities
         public virtual Address Address { get; set; }
 
         #endregion Address        
+
+        #region Functions
+              
+        public void Update(User entity)
+        {
+            this.AddressId = entity.AddressId;
+           
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 }

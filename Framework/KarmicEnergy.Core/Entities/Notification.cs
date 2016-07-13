@@ -25,10 +25,10 @@ namespace KarmicEnergy.Core.Entities
         [StringLength(128)]
         public String Subject { get; set; }
 
-        [Column("Message", TypeName = "NTEXT")]        
+        [Column("Message", TypeName = "NTEXT")]
         public String Message { get; set; }
 
-        [Column("ErrorMessage", TypeName = "NTEXT")]        
+        [Column("ErrorMessage", TypeName = "NTEXT")]
         public String ErrorMessage { get; set; }
 
         [Column("IsSentSuccess", TypeName = "DATETIME")]
@@ -46,5 +46,22 @@ namespace KarmicEnergy.Core.Entities
         public virtual NotificationType NotificationType { get; set; }
 
         #endregion NotificationType
+
+        #region Functions
+        public void Update(Notification entity)
+        {
+            this.ErrorMessage = entity.ErrorMessage;
+            this.From = entity.From;
+            this.Message = entity.Message;
+            this.NotificationTypeId = entity.NotificationTypeId;
+            this.SentSuccessDate = entity.SentSuccessDate;
+            this.Subject = entity.Subject;
+            this.To = entity.To;
+            
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 }

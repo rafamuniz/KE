@@ -44,7 +44,17 @@ namespace KarmicEnergy.Core.Entities
 
             return entities;
         }
-        #endregion Load
+
+        public void Update(UnitType entity)
+        {
+            this.Name = entity.Name;
+            this.Status = entity.Status;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 
     public enum UnitTypeEnum : int

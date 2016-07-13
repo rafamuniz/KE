@@ -79,7 +79,7 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Geometry  
 
-        #region Load
+        #region Functions
 
         public static List<TankModel> Load()
         {
@@ -97,7 +97,29 @@ namespace KarmicEnergy.Core.Entities
 
             return entities;
         }
-        #endregion Load      
+        public void Update(TankModel entity)
+        {
+            this.Name = entity.Name;
+            this.BottomWidth = entity.BottomWidth;
+            this.Diagonal = entity.Diagonal;
+            this.DimensionValue1 = entity.DimensionValue1;
+            this.DimensionValue2 = entity.DimensionValue2;
+            this.DimensionValue3 = entity.DimensionValue3;
+            this.FaceLength = entity.FaceLength;
+            this.GeometryId = entity.GeometryId;
+            this.Height = entity.Height;
+            this.ImageFilename = entity.ImageFilename;
+            this.Length = entity.Length;
+            this.Radius = entity.Radius;
+            this.Status = entity.Status;
+            this.Width = entity.Width;
+            this.WaterVolumeCapacity = entity.WaterVolumeCapacity;
+            
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions    
 
         //public Decimal CalculateWaterCapacity()
         //{

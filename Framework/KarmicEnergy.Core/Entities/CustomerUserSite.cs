@@ -33,5 +33,17 @@ namespace KarmicEnergy.Core.Entities
         public virtual Site Site { get; set; }
 
         #endregion Site
+
+        #region Functions
+        public void Update(CustomerUserSite entity)
+        {
+            this.CustomerUserId = entity.CustomerUserId;
+            this.SiteId = entity.SiteId;
+            
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 }

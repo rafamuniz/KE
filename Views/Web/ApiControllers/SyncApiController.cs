@@ -13,27 +13,12 @@ namespace KarmicEnergy.Web.ApiControllers
         #region Common
 
         [HttpGet]
-        [Route("sync/actiontype/", Name = "GetsActionType")]
-        public IHttpActionResult GetsActionType()
+        [Route("sync/actiontype/{siteId}/{lastSyncDate}", Name = "GetsActionType")]
+        public IHttpActionResult GetsActionType(Guid siteId, DateTime lastSyncDate)
         {
             try
             {
-                var entities = KEUnitOfWork.ActionTypeRepository.GetAll().ToList();
-                return Ok(entities);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-        }
-
-        [HttpGet]
-        [Route("sync/operatortype/{siteId}/{lastSyncDate}", Name = "GetsOperatorType")]
-        public IHttpActionResult GetsOperatorType(String siteId, DateTime lastSyncDate)
-        {
-            try
-            {
-                var entities = KEUnitOfWork.OperatorTypeRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                var entities = KEUnitOfWork.ActionTypeRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
                 return Ok(entities);
             }
             catch (Exception ex)
@@ -44,7 +29,7 @@ namespace KarmicEnergy.Web.ApiControllers
 
         [HttpGet]
         [Route("sync/sensortype/{siteId}/{lastSyncDate}", Name = "GetsSensorType")]
-        public IHttpActionResult GetsSensorType(String siteId, DateTime lastSyncDate)
+        public IHttpActionResult GetsSensorType(Guid siteId, DateTime lastSyncDate)
         {
             try
             {
@@ -76,8 +61,38 @@ namespace KarmicEnergy.Web.ApiControllers
         }
 
         [HttpGet]
+        [Route("sync/notificationtype/{siteId}/{lastSyncDate}", Name = "GetsNotificationType")]
+        public IHttpActionResult GetsNotificationType(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.NotificationTypeRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("sync/operatortype/{siteId}/{lastSyncDate}", Name = "GetsOperatorType")]
+        public IHttpActionResult GetsOperatorType(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.OperatorTypeRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
         [Route("sync/unittype/{siteId}/{lastSyncDate}", Name = "GetsUnitType")]
-        public IHttpActionResult GetsUnitType(String siteId, DateTime lastSyncDate)
+        public IHttpActionResult GetsUnitType(Guid siteId, DateTime lastSyncDate)
         {
             try
             {
@@ -91,8 +106,23 @@ namespace KarmicEnergy.Web.ApiControllers
         }
 
         [HttpGet]
+        [Route("sync/unit/{siteId}/{lastSyncDate}", Name = "GetsUnit")]
+        public IHttpActionResult GetsUnit(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.UnitRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
         [Route("sync/stickconversion/{siteId}/{lastSyncDate}", Name = "GetsStickConversion")]
-        public IHttpActionResult GetsStickConversion(String siteId, DateTime lastSyncDate)
+        public IHttpActionResult GetsStickConversion(Guid siteId, DateTime lastSyncDate)
         {
             try
             {
@@ -126,8 +156,42 @@ namespace KarmicEnergy.Web.ApiControllers
         }
 
         [HttpGet]
+        [Route("sync/stickconversionvalue/{siteId}/{lastSyncDate}", Name = "GetsStickConversionValue")]
+        public IHttpActionResult GetsStickConversionValue(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                List<StickConversionValue> stickConversionValues = new List<StickConversionValue>();
+                var entities = KEUnitOfWork.StickConversionValueRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+
+                foreach (var entity in entities)
+                {
+                    StickConversionValue stickConversionValue = new StickConversionValue()
+                    {
+                        Id = entity.Id,
+                        FromValue = entity.FromValue,
+                        ToValue = entity.ToValue,
+                        StickConversionId = entity.StickConversionId,
+                        CreatedDate = entity.CreatedDate,
+                        DeletedDate = entity.DeletedDate,
+                        LastModifiedDate = entity.LastModifiedDate,
+                        RowVersion = entity.RowVersion
+                    };
+
+                    stickConversionValues.Add(stickConversionValue);
+                }
+
+                return Ok(stickConversionValues);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
         [Route("sync/geometry/{siteId}/{lastSyncDate}", Name = "GetsGeometry")]
-        public IHttpActionResult GetsGeometry(String siteId, DateTime lastSyncDate)
+        public IHttpActionResult GetsGeometry(Guid siteId, DateTime lastSyncDate)
         {
             try
             {
@@ -141,53 +205,8 @@ namespace KarmicEnergy.Web.ApiControllers
         }
 
         [HttpGet]
-        [Route("sync/severity/{siteId}/{lastSyncDate}", Name = "GetsSeverity")]
-        public IHttpActionResult GetsSeverity(String siteId, DateTime lastSyncDate)
-        {
-            try
-            {
-                var entities = KEUnitOfWork.SeverityRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
-                return Ok(entities);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-        }
-
-        [HttpGet]
-        [Route("sync/city/{siteId}/{lastSyncDate}", Name = "GetsCity")]
-        public IHttpActionResult GetsCity(String siteId, DateTime lastSyncDate)
-        {
-            try
-            {
-                var entities = KEUnitOfWork.CityRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
-                return Ok(entities);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-        }
-
-        [HttpGet]
-        [Route("sync/country/{siteId}/{lastSyncDate}", Name = "GetsCountry")]
-        public IHttpActionResult GetsCountry(String siteId, DateTime lastSyncDate)
-        {
-            try
-            {
-                var entities = KEUnitOfWork.CountryRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
-                return Ok(entities);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-        }
-
-        [HttpGet]
         [Route("sync/logtype/{siteId}/{lastSyncDate}", Name = "GetsLogType")]
-        public IHttpActionResult GetsLogType(String siteId, DateTime lastSyncDate)
+        public IHttpActionResult GetsLogType(Guid siteId, DateTime lastSyncDate)
         {
             try
             {
@@ -201,12 +220,12 @@ namespace KarmicEnergy.Web.ApiControllers
         }
 
         [HttpGet]
-        [Route("sync/notificationtype/{siteId}/{lastSyncDate}", Name = "GetsNotificationType")]
-        public IHttpActionResult GetsNotificationType(String siteId, DateTime lastSyncDate)
+        [Route("sync/log/{siteId}/{lastSyncDate}", Name = "GetsLog")]
+        public IHttpActionResult GetsLog(Guid siteId, DateTime lastSyncDate)
         {
             try
             {
-                var entities = KEUnitOfWork.NotificationTypeRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                var entities = KEUnitOfWork.LogRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
                 return Ok(entities);
             }
             catch (Exception ex)
@@ -215,9 +234,80 @@ namespace KarmicEnergy.Web.ApiControllers
             }
         }
 
-        //NotificationTemplates(lastSync);
-        //Units(lastSync);
-        //StickConversionValues(lastSync);
+        [HttpGet]
+        [Route("sync/notificationtemplate/{siteId}/{lastSyncDate}", Name = "GetsNotificationTemplate")]
+        public IHttpActionResult GetsNotificationTemplate(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.NotificationTemplateRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("sync/severity/{siteId}/{lastSyncDate}", Name = "GetsSeverity")]
+        public IHttpActionResult GetsSeverity(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.SeverityRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("sync/tankmodel/{siteId}/{lastSyncDate}", Name = "GetsTankModel")]
+        public IHttpActionResult GetsTankModel(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.TankModelRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("sync/country/{siteId}/{lastSyncDate}", Name = "GetsCountry")]
+        public IHttpActionResult GetsCountry(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.CountryRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("sync/city/{siteId}/{lastSyncDate}", Name = "GetsCity")]
+        public IHttpActionResult GetsCity(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.CityRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
 
         #endregion Common
 
@@ -257,14 +347,13 @@ namespace KarmicEnergy.Web.ApiControllers
         #region Address
 
         [HttpGet]
-        [Route("sync/addresses/{siteId}", Name = "SyncAddressess")]
-        public IHttpActionResult SyncAddressess(String siteId, List<Address> addresses)
+        [Route("sync/address/{siteId}/{lastSyncDate}", Name = "GetsAddress")]
+        public IHttpActionResult GetsAddress(String siteId, DateTime lastSyncDate)
         {
             try
             {
-                KEUnitOfWork.AddressRepository.AddOrUpdateRange(addresses);
-                KEUnitOfWork.Complete();
-                return Ok();
+                var entities = KEUnitOfWork.AddressRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                return Ok(entities);
             }
             catch (Exception ex)
             {
@@ -273,6 +362,25 @@ namespace KarmicEnergy.Web.ApiControllers
         }
 
         #endregion Address
+
+        #region Customer
+
+        [HttpGet]
+        [Route("sync/customer/{siteId}/{lastSyncDate}", Name = "GetsCustomer")]
+        public IHttpActionResult GetsCustomer(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.SiteRepository.Find(x => x.Id == siteId && x.LastModifiedDate > lastSyncDate).SingleOrDefault().Customer;
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion Customer
 
         #region Tank
         #endregion Tank

@@ -63,5 +63,25 @@ namespace KarmicEnergy.Core.Entities
         public virtual List<Sensor> Sensors { get; set; }
 
         #endregion Sensors
+
+        #region Functions 
+        public void Update(Pond entity)
+        {
+            this.Name = entity.Name;
+            this.Description = entity.Description;
+            this.Reference = entity.Reference;
+            this.Status = entity.Status;
+            this.Longitude = entity.Longitude;
+            this.Latitude = entity.Latitude;
+
+            this.WaterVolumeCapacity = entity.WaterVolumeCapacity;
+
+            this.SiteId = entity.SiteId;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions 
     }
 }

@@ -52,5 +52,20 @@ namespace KarmicEnergy.Core.Entities
         public virtual Unit Unit { get; set; }
 
         #endregion Unit
+
+        #region Functions 
+        public void Update(SensorItem entity)
+        {
+            this.Status = entity.Status;
+
+            this.SensorId = entity.SensorId;
+            this.ItemId = entity.ItemId;
+            this.UnitId = entity.UnitId;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 }

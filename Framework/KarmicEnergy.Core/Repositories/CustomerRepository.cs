@@ -1,5 +1,7 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
+using System;
+using System.Linq;
 
 namespace KarmicEnergy.Core.Repositories
 {
@@ -12,5 +14,6 @@ namespace KarmicEnergy.Core.Repositories
 
         }
         #endregion Constructor
+        
     }
 }

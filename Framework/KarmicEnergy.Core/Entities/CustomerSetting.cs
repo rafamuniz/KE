@@ -34,5 +34,18 @@ namespace KarmicEnergy.Core.Entities
         public virtual Customer Customer { get; set; }
 
         #endregion Customer
+        
+        #region Functions
+        public void Update(CustomerSetting entity)
+        {
+            this.CustomerId = entity.CustomerId;
+            this.Key = entity.Key;
+            this.Value = entity.Value;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 }

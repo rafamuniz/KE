@@ -55,5 +55,21 @@ namespace KarmicEnergy.Core.Entities
         public virtual LogType LogType { get; set; }
 
         #endregion LogType
+
+        #region Functions
+
+        public void Update(Log entity)
+        {
+            this.CustomerId = entity.CustomerId;
+            this.SiteId = entity.SiteId;
+            this.UserId = entity.UserId;
+            this.Message = entity.Message;
+            this.LogTypeId = entity.LogTypeId;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 }

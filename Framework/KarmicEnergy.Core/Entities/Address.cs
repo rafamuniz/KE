@@ -76,5 +76,26 @@ namespace KarmicEnergy.Core.Entities
         //public virtual Customer Customer { get; set; }
 
         //public virtual CustomerUser CustomerUser { get; set; }
+
+        #region Functions
+        public void Update(Address entity)
+        {
+            this.AddressLine1 = entity.AddressLine1;
+            this.AddressLine2 = entity.AddressLine2;
+            this.City = entity.City;
+            this.Country = entity.Country;
+            this.Email = entity.Email;
+            this.MobileNumberCountryCode = entity.MobileNumberCountryCode;
+            this.MobileNumber = entity.MobileNumber;
+            this.PhoneNumberCountryCode = entity.PhoneNumberCountryCode;
+            this.PhoneNumber = entity.PhoneNumber;
+            this.State = entity.State;
+            this.ZipCode = entity.ZipCode;
+            
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 }

@@ -20,7 +20,7 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Property        
 
-        #region Load
+        #region Functions
 
         public static List<Severity> Load()
         {
@@ -35,7 +35,17 @@ namespace KarmicEnergy.Core.Entities
 
             return entities;
         }
-        #endregion Load
+
+        public void Update(Severity entity)
+        {
+            this.Name = entity.Name;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+
+        #endregion Functions
     }
 
     public enum SeverityEnum : short

@@ -46,7 +46,7 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion UnitType
 
-        #region Load
+        #region Functions
 
         public static List<Unit> Load()
         {
@@ -72,6 +72,19 @@ namespace KarmicEnergy.Core.Entities
 
             return entities;
         }
-        #endregion Load
+        public void Update(Unit entity)
+        {
+            this.Name = entity.Name;
+            this.NamePlural = entity.NamePlural;
+            this.Symbol = entity.Symbol;
+            this.Status = entity.Status;
+            this.NamePlural = entity.NamePlural;
+            this.UnitTypeId = entity.UnitTypeId;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions
     }
 }

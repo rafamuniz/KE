@@ -121,6 +121,7 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion Sensors
 
+        #region Functions   
         public Decimal CalculateWaterCapacity()
         {
             if (this.TankModelId != default(Int32))
@@ -271,5 +272,40 @@ namespace KarmicEnergy.Core.Entities
 
             return Length.Value * Width.Value * height;
         }
+
+        public void Update(Tank entity)
+        {
+            this.Name = entity.Name;
+            this.Description = entity.Description;
+            this.Reference = entity.Reference;
+            this.Status = entity.Status;
+            this.Longitude = entity.Longitude;
+            this.Latitude = entity.Latitude;
+            
+            this.Height = entity.Height;            
+            this.Length = entity.Length;
+            this.Width = entity.Width;
+
+            this.BottomWidth = entity.BottomWidth;
+            this.FaceLength = entity.FaceLength;
+            this.Radius = entity.Radius;
+            this.Diagonal = entity.Diagonal;
+            this.Dimension1 = entity.Dimension1;
+            this.Dimension2 = entity.Dimension2;
+            this.Dimension3 = entity.Dimension3;
+
+            this.MinimumDistance = entity.MinimumDistance;
+            this.MaximumDistance = entity.MaximumDistance;
+            this.WaterVolumeCapacity = entity.WaterVolumeCapacity;
+            
+            this.SiteId = entity.SiteId;
+            this.TankModelId = entity.TankModelId;
+            this.StickConversionId = entity.StickConversionId;
+
+            this.CreatedDate = entity.CreatedDate;
+            this.LastModifiedDate = entity.LastModifiedDate;
+            this.DeletedDate = entity.DeletedDate;
+        }
+        #endregion Functions   
     }
 }

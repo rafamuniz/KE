@@ -7,10 +7,17 @@ namespace KarmicEnergy.Core.Entities
     [Table("Cities", Schema = "dbo")]
     public class City : BaseEntity
     {
+        #region Constructor
+        public City()
+        {
+            this.Id = Guid.NewGuid();
+        }
+        #endregion Constructor
+
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         [Column("Name", TypeName = "NVARCHAR")]

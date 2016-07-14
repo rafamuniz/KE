@@ -1,0 +1,166 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
+@using Munizoft.Extensions
+@using Munizoft.MVC.Helpers
+@using KarmicEnergy.Web.Extensions
+
+@model CreateViewModel
+
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Trigger - Site - Create";
+}
+
+@using (Html.BeginForm("SiteCreate", "Trigger", new { area = "Customer" }, FormMethod.Post, new { id = "form", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            @if (!this.IsSite())
+            {
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        @Html.DropDownListFor(model => model.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", id = "ddlSite", onclick = "GetsPondAndTankSensorBySite(this.value, 'ddlSite', 'ddlPond', 'ddlTank', 'ddlSensor');" })
+                        @Html.ValidationMessageFor(m => m.SiteId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+            else
+            {
+                @Html.HiddenFor(m => m.SiteId)
+            }
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @if (Model.SiteId.HasValue)
+                    {
+                        @Html.DropDownListFor(model => model.SensorId, new SelectList(ViewBag.Sensors, "Id", "Name"), "-- Please select a Sensor --", new { @class = "form-control selectpicker", id = "ddlSensor", onclick = "GetsSensorItemBySensor(this.value, 'ddlSensorItem');" })
+                    }
+                    else
+                    {
+                        <select id="ddlSensor" name="SensorId" class="form-control selectpicker" disabled onclick="GetsSensorItemBySensor(this.value, 'ddlSensorItem');">
+                            <option value="">-- Please select a Sensor --</option>
+                        </select>
+                    }
+                    @Html.ValidationMessageFor(m => m.SensorId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @if (Model.SensorId.HasValue)
+                    {
+                        @Html.DropDownListFor(model => model.SensorItemId, new SelectList(ViewBag.SensorItems, "Id", "Item.Name"), "-- Please select an Item --", new { @class = "form-control selectpicker", id = "ddlSensorItem", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.SensorItemId) })
+                    }
+                    else
+                    {
+                        <select id="ddlSensorItem" name="SensorItemId" class="form-control selectpicker" disabled>
+                            <option value="">-- Please select an Item --</option>
+                        </select>
+                    }
+                    @Html.ValidationMessageFor(m => m.SensorItemId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            @Html.DropDownListFor(model => model.OperatorId, new SelectList(ViewBag.Operators, "Id", "Name"), "-- Please select an Operator --", new { @class = "form-control selectpicker", id = "ddlOperator", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.OperatorId) })
+                            @Html.ValidationMessageFor(m => m.OperatorId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            @Html.EditorFor(m => m.Value, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.Value) } })
+                            @Html.ValidationMessageFor(m => m.Value, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.DropDownListFor(model => model.SeverityId, new SelectList(ViewBag.Severities, "Id", "Name"), "-- Please select a Severity --", new { @class = "form-control selectpicker", id = "ddlSeverity", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.SeverityId) })
+                    @Html.ValidationMessageFor(m => m.SeverityId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.DropDownListFor(model => model.Status, new SelectList(ViewBag.Statuses, "Id", "Name", "A"), "-- Please select a Status --", new { @class = "form-control selectpicker", id = "ddlStatus" })
+                    @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 box-sub">
+                        <div class="title blue">
+                            <h2>CONTACTS</h2>
+                        </div>
+
+                        <div class="body checkboxlist">
+                            @if (Model.Contacts.Any())
+                            {
+                                for (int i = 0; i < Model.Contacts.Count; i++)
+                                {
+                                    String chk = Model.Contacts[i].IsSelected == true ? "checked" : String.Empty;
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <input name="Contacts[@i].Id" type="hidden" value="@Model.Contacts[i].Id">
+                                            <input name="Contacts[@i].Name" type="hidden" value="@Model.Contacts[i].Name">
+                                            <input type="checkbox" style="vertical-align: 3px;" id="chkContacts_@Model.Contacts[i].Id" name="Contacts[@i].IsSelected" value="true" @chk /><label for="chkContacts_@Model.Contacts[i].Id">@Model.Contacts[i].Name</label>                                                                                       <input name="Contacts[@i].Name" type="hidden" value="@Model.Contacts[i].Name">
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 box-sub">
+                        <div class="title blue">
+                            <h2>USERS</h2>
+                        </div>
+
+                        <div class="body checkboxlist">
+                            @if (Model.Users.Any())
+                            {
+                                for (int i = 0; i < Model.Users.Count; i++)
+                                {
+                                    String chk = Model.Users[i].IsSelected == true ? "checked" : String.Empty;
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <input name="Users[@i].Id" type="hidden" value="@Model.Users[i].Id">
+                                            <input name="Users[@i].Name" type="hidden" value="@Model.Users[i].Name">
+                                            <input type="checkbox" style="vertical-align: 3px;" id="chkUsers_@Model.Users[i].Id" name="Users[@i].IsSelected" value="true" @chk /><label for="chkUsers_@Model.Users[i].Id">@Model.Users[i].Name</label>                                                                                        <input name="Users[@i].Name" type="hidden" value="@Model.Users[i].Name">
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center btn-submit">
+        <input type="submit" class="btn btn-default" value="SAVE">
+        <a class="btn" href='/Customer/Trigger/Site/?SiteId=@Model.SiteId.Value'>Cancel</a>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/app/trigger.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+        })
+    </script>
+}

@@ -152,7 +152,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
 
         public static TankViewModel Map(Core.Entities.Tank entity)
         {
-            Mapper.CreateMap<Core.Entities.Tank, TankViewModel>();
+     
             return Mapper.Map<Core.Entities.Tank, TankViewModel>(entity);
         }
 

@@ -7,10 +7,17 @@ namespace KarmicEnergy.Core.Entities
     [Table("AlarmHistories", Schema = "dbo")]
     public class AlarmHistory : BaseEntity
     {
+        #region Constructor
+        public AlarmHistory()
+        {
+            this.Id = Guid.NewGuid();
+        }
+        #endregion Constructor
+
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         [Column("Message", TypeName = "NVARCHAR")]

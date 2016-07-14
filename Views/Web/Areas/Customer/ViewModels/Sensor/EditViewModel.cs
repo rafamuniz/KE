@@ -54,8 +54,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
         #region Map
 
         public static EditViewModel Map(Core.Entities.Sensor entity)
-        {
-            Mapper.CreateMap<Core.Entities.Sensor, EditViewModel>();
+        {            
             return Mapper.Map<Core.Entities.Sensor, EditViewModel>(entity);
         }
 

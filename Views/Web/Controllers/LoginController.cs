@@ -67,6 +67,7 @@ namespace KarmicEnergy.Web.Controllers
             }
             catch(Exception ex)
             {
+                AddErrors(ex);
                 return View("Index", viewModel);
             }
         }

@@ -67,12 +67,6 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
 
         #region Map
 
-        public Core.Entities.Tank Map()
-        {
-            Mapper.CreateMap<EditViewModel, Core.Entities.Tank>();
-            return Mapper.Map<EditViewModel, Core.Entities.Tank>(this);
-        }
-
         #endregion Map
     }
 }

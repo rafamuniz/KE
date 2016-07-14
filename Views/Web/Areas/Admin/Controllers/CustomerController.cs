@@ -40,49 +40,47 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         {
             ApplicationUser user = null;
 
-            try
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    return View(viewModel);
-                }
+                return View(viewModel);
+            }
 
-                user = new ApplicationUser { UserName = viewModel.UserName, Email = viewModel.Address.Email, Name = viewModel.Name };
-                var result = await UserManager.CreateAsync(user, viewModel.Password);
+            user = new ApplicationUser { UserName = viewModel.UserName, Email = viewModel.Address.Email, Name = viewModel.Name };
+            var result = await UserManager.CreateAsync(user, viewModel.Password);
+
+            if (result.Succeeded)
+            {
+                result = await UserManager.AddToRoleAsync(user.Id, "Customer");
 
                 if (result.Succeeded)
                 {
-                    result = await UserManager.AddToRoleAsync(user.Id, "Customer");
-
-                    if (result.Succeeded)
+                    try
                     {
                         Core.Entities.Customer customer = viewModel.Map();
                         customer.Id = Guid.Parse(user.Id);
 
                         Core.Entities.Address address = viewModel.MapAddress();
+                        address.Id = Guid.NewGuid();
                         customer.Address = address;
+                        customer.AddressId = address.Id;
 
                         KEUnitOfWork.CustomerRepository.Add(customer);
                         KEUnitOfWork.Complete();
 
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
                         return RedirectToAction("Index", "Customer", new { area = "Admin" });
                     }
+                    catch (Exception ex)
+                    {
+                        if (user != null)
+                            await UserManager.DeleteAsync(user);
+
+                        AddErrors(ex);
+                    }
                 }
-
-                AddErrors(result);
             }
-            catch (Exception ex)
+            else
             {
-                if (user != null)
-                    await UserManager.DeleteAsync(user);
-
-                AddErrors(ex);
+                AddErrors(result);
             }
 
             return View(viewModel);
@@ -142,29 +140,19 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                 if (result.Succeeded)
                 {
                     Core.Entities.Address address = viewModel.MapAddress(customer.Address);
-                    //address.Id = customer.Address.Id;
-                    //address.RowVersion = customer.Address.RowVersion;
 
                     KEUnitOfWork.AddressRepository.Update(address);
-                    //KEUnitOfWork.CustomerRepository.Update(customer);
                     KEUnitOfWork.Complete();
-
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     return RedirectToAction("Index", "Customer", new { area = "Admin" });
                 }
-
-                AddErrors(result);
+                else
+                {
+                    AddErrors(result);
+                }
             }
             catch (Exception ex)
             {
-                if (user != null)
-                    await UserManager.DeleteAsync(user);
-
                 AddErrors(ex);
             }
 
@@ -254,8 +242,10 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                 {
                     return RedirectToAction("Index", "Customer", new { area = "Admin" });
                 }
-
-                AddErrors(result);
+                else
+                {
+                    AddErrors(result);
+                }
             }
             catch (Exception ex)
             {

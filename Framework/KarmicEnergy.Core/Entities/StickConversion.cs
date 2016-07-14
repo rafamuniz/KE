@@ -8,11 +8,18 @@ namespace KarmicEnergy.Core.Entities
     [Table("StickConversions", Schema = "dbo")]
     public class StickConversion : BaseEntity
     {
+        #region Constructor
+        public StickConversion()
+        {
+            this.Id = Guid.NewGuid();
+        }
+        #endregion Constructor
+
         #region Property
 
-        [Key, Column("Id", Order = 1, TypeName = "INT")]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public Int32 Id { get; set; }
+        [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.None)]
+        public Guid Id { get; set; }
 
         [Column("Name", TypeName = "NVARCHAR")]
         [StringLength(128)]
@@ -54,13 +61,13 @@ namespace KarmicEnergy.Core.Entities
         {
             List<StickConversion> entities = new List<StickConversion>()
             {
-                new StickConversion() { Id = 1, Name = "500 BBL 2100 Series", FromUnitId = 7, ToUnitId = 2 },
-                new StickConversion() { Id = 2, Name = "500 BBL FT Frac Tank", FromUnitId = 7, ToUnitId = 2 },
-                new StickConversion() { Id = 3, Name = "500 BBL H Frac Tank", FromUnitId = 7, ToUnitId = 2 },
-                new StickConversion() { Id = 4, Name = "510 BBL N Frac Tank", FromUnitId = 7, ToUnitId = 2 },
-                new StickConversion() { Id = 5, Name = "500 BBL S Frac Tank", FromUnitId = 7, ToUnitId = 2 },
-                new StickConversion() { Id = 6, Name = "500 BBL W Frac Tank", FromUnitId = 7, ToUnitId = 2 },
-                new StickConversion() { Id = 7, Name = "Flowback Tanks", FromUnitId = 7, ToUnitId = 2 },
+                new StickConversion() { Id = Guid.NewGuid(), Name = "500 BBL 2100 Series", FromUnitId = 7, ToUnitId = 2 },
+                new StickConversion() { Id = Guid.NewGuid(), Name = "500 BBL FT Frac Tank", FromUnitId = 7, ToUnitId = 2 },
+                new StickConversion() { Id = Guid.NewGuid(), Name = "500 BBL H Frac Tank", FromUnitId = 7, ToUnitId = 2 },
+                new StickConversion() { Id = Guid.NewGuid(), Name = "510 BBL N Frac Tank", FromUnitId = 7, ToUnitId = 2 },
+                new StickConversion() { Id = Guid.NewGuid(), Name = "500 BBL S Frac Tank", FromUnitId = 7, ToUnitId = 2 },
+                new StickConversion() { Id = Guid.NewGuid(), Name = "500 BBL W Frac Tank", FromUnitId = 7, ToUnitId = 2 },
+                new StickConversion() { Id = Guid.NewGuid(), Name = "Flowback Tanks", FromUnitId = 7, ToUnitId = 2 },
             };
 
             return entities;

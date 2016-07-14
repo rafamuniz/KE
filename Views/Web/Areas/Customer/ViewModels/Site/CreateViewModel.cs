@@ -23,6 +23,11 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Site
         [Required]
         public String Name { get; set; }
 
+        [Display(Name = "Reference")]
+        [Required]
+        [MaxLength(8)]
+        public String Reference { get; set; }
+
         [Display(Name = "IP")]
         [Required]
         [RegularExpression(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$")]
@@ -47,19 +52,16 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Site
 
         public Core.Entities.Site Map()
         {
-            Mapper.CreateMap<CreateViewModel, Core.Entities.Site>().ForMember(x => x.Address, opt => opt.Ignore());
             return Mapper.Map<CreateViewModel, Core.Entities.Site>(this);
         }
 
         public static CreateViewModel Map(Core.Entities.Address entity)
         {
-            Mapper.CreateMap<Core.Entities.Address, CreateViewModel>();
             return Mapper.Map<Core.Entities.Address, CreateViewModel>(entity);
         }
 
         public Core.Entities.Address MapAddress()
         {
-            Mapper.CreateMap<SiteAddressViewModel, Core.Entities.Address>();
             return Mapper.Map<SiteAddressViewModel, Core.Entities.Address>(this.Address);
         }
 

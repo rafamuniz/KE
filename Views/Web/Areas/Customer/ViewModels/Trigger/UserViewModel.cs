@@ -32,8 +32,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
         }
 
         public static UserViewModel Map(Core.Entities.CustomerUser entity)
-        {
-            Mapper.CreateMap<Core.Entities.CustomerUser, UserViewModel>();
+        {            
             return Mapper.Map<Core.Entities.CustomerUser, UserViewModel>(entity);
         }
 

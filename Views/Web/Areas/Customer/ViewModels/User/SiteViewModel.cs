@@ -32,8 +32,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
         }
         
         public static SiteViewModel Map(Core.Entities.Site entity)
-        {
-            Mapper.CreateMap<Core.Entities.Site, SiteViewModel>();
+        {            
             return Mapper.Map<Core.Entities.Site, SiteViewModel>(entity);
         }
 

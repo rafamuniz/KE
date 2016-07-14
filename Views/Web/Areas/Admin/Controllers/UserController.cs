@@ -16,7 +16,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         [Authorize(Roles = "SuperAdmin, Admin")]
         public async Task<ActionResult> Index()
         {
-            List<ApplicationUser> users = GetUsersInRoles("Admin", "Operator");
+            List<ApplicationUser> users = GetUsersInRoles("SuperAdmin", "Admin", "User");
             var viewModels = ListViewModel.Map(users);
 
             foreach (var vm in viewModels)
@@ -49,50 +49,48 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         {
             ApplicationUser user = null;
 
-            try
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    LoadAdminRoles();
-                    return View(viewModel);
-                }
+                LoadAdminRoles();
+                return View(viewModel);
+            }
 
-                user = new ApplicationUser { UserName = viewModel.UserName, Email = viewModel.Address.Email, Name = viewModel.Name };
-                var result = await UserManager.CreateAsync(user, viewModel.Password);
+            user = new ApplicationUser { UserName = viewModel.UserName, Email = viewModel.Address.Email, Name = viewModel.Name };
+            var result = await UserManager.CreateAsync(user, viewModel.Password);
+
+            if (result.Succeeded)
+            {
+                result = await UserManager.AddToRoleAsync(user.Id, viewModel.Role);
 
                 if (result.Succeeded)
                 {
-                    result = await UserManager.AddToRoleAsync(user.Id, viewModel.Role);
-
-                    if (result.Succeeded)
+                    try
                     {
                         Core.Entities.User userKE = viewModel.Map();
                         userKE.Id = Guid.Parse(user.Id);
 
                         Core.Entities.Address address = viewModel.MapAddress();
+                        address.Id = Guid.NewGuid();
                         userKE.Address = address;
+                        userKE.AddressId = address.Id;
 
                         KEUnitOfWork.UserRepository.Add(userKE);
                         KEUnitOfWork.Complete();
 
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
                         return RedirectToAction("Index", "User", new { area = "Admin" });
                     }
+                    catch (Exception ex)
+                    {
+                        if (user != null)
+                            await UserManager.DeleteAsync(user);
+
+                        AddErrors(ex);
+                    }
                 }
-
-                AddErrors(result);
             }
-            catch (Exception ex)
+            else
             {
-                if (user != null)
-                    await UserManager.DeleteAsync(user);
-
-                AddErrors(ex);
+                AddErrors(result);
             }
 
             LoadAdminRoles();
@@ -132,69 +130,53 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         {
             ApplicationUser user = null;
 
-            try
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    LoadAdminRoles();
-                    return View(viewModel);
-                }
+                LoadAdminRoles();
+                return View(viewModel);
+            }
 
-                user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
-                var userKE = KEUnitOfWork.UserRepository.Get(viewModel.Id);
+            user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
+            var userKE = KEUnitOfWork.UserRepository.Get(viewModel.Id);
 
-                if (user == null || userKE == null)
-                {
-                    AddErrors("User does not exist");
-                    LoadAdminRoles();
-                    return View();
-                }
+            if (user == null || userKE == null)
+            {
+                AddErrors("User does not exist");
+                LoadAdminRoles();
+                return View();
+            }
 
-                user.Name = viewModel.Name;
-                user.Email = viewModel.Address.Email;
-                var result = await UserManager.UpdateAsync(user);
+            user.Name = viewModel.Name;
+            user.Email = viewModel.Address.Email;
+            var result = await UserManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                var roles = await UserManager.GetRolesAsync(user.Id);
+                result = await UserManager.RemoveFromRolesAsync(user.Id, roles.ToArray());
 
                 if (result.Succeeded)
                 {
-                    var roles = await UserManager.GetRolesAsync(user.Id);
-                    result = await UserManager.RemoveFromRolesAsync(user.Id, roles.ToArray());
+                    result = await UserManager.AddToRoleAsync(user.Id, viewModel.Role);
 
                     if (result.Succeeded)
                     {
-                        result = await UserManager.AddToRoleAsync(user.Id, viewModel.Role);
+                        Core.Entities.Address address = viewModel.MapAddress(userKE.Address);
 
-                        if (result.Succeeded)
-                        {
-                            Core.Entities.Address address = viewModel.MapAddress(userKE.Address);
-                            //address.Id = customer.Address.Id;
-                            //address.RowVersion = customer.Address.RowVersion;
+                        KEUnitOfWork.AddressRepository.Update(address);
+                        KEUnitOfWork.Complete();
 
-                            KEUnitOfWork.AddressRepository.Update(address);
-                            //KEUnitOfWork.CustomerRepository.Update(customer);
-                            KEUnitOfWork.Complete();
-
-                            // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                            // Send an email with this link
-                            // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                            // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                            // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                            return RedirectToAction("Index", "User", new { area = "Admin" });
-                        }
+                        return RedirectToAction("Index", "User", new { area = "Admin" });
                     }
                 }
-
+            }
+            else
+            {
                 AddErrors(result);
             }
-            catch (Exception ex)
-            {
-                if (user != null)
-                    await UserManager.DeleteAsync(user);
 
-                AddErrors(ex);
-            }
             LoadAdminRoles();
-            return View();
+            return View(viewModel);
         }
         #endregion Edit
 
@@ -217,7 +199,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                 }
 
                 var roleSuperAdmin = RoleManager.FindByNameAsync("SuperAdmin");
-
+                
                 // Dont delete SuperAdmin
                 if (user.Roles.Where(x => x.RoleId == roleSuperAdmin.Result.Id).Any())
                 {
@@ -230,19 +212,16 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                 if (result.Succeeded)
                 {
                     userKE.DeletedDate = DateTime.UtcNow;
+
                     KEUnitOfWork.UserRepository.Update(userKE);
                     KEUnitOfWork.Complete();
 
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
                     return RedirectToAction("Index", "User", new { area = "Admin" });
                 }
-
-                AddErrors(result);
+                else
+                {
+                    AddErrors(result);
+                }
             }
             catch (Exception ex)
             {
@@ -280,6 +259,10 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "User", new { area = "Admin" });
+                }
+                else
+                {
+                    AddErrors(result);
                 }
             }
             catch (Exception ex)

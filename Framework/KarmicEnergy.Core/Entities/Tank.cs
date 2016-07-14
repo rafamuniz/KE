@@ -8,10 +8,17 @@ namespace KarmicEnergy.Core.Entities
     [Table("Tanks", Schema = "dbo")]
     public class Tank : BaseEntity
     {
+        #region Constructor
+        public Tank()
+        {
+            this.Id = Guid.NewGuid();
+        }
+        #endregion Constructor
+
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         [Column("Name", TypeName = "NVARCHAR")]
@@ -107,8 +114,8 @@ namespace KarmicEnergy.Core.Entities
 
         #region StickConversion
 
-        [Column("StickConversionId", TypeName = "INT")]
-        public Int32? StickConversionId { get; set; }
+        [Column("StickConversionId", TypeName = "UNIQUEIDENTIFIER")]
+        public Guid? StickConversionId { get; set; }
 
         [ForeignKey("StickConversionId")]
         public virtual StickConversion StickConversion { get; set; }

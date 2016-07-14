@@ -23,9 +23,13 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             {
                 logs = KEUnitOfWork.LogRepository.GetsByUser(Guid.Parse(UserId)).ToList();
             }
+            else if (IsSite)
+            {
+                logs = KEUnitOfWork.LogRepository.GetsBySite(SiteId);
+            }
             else
             {
-                logs = KEUnitOfWork.LogRepository.GetAll().ToList();
+                logs = KEUnitOfWork.LogRepository.GetsByCustomer(CustomerId);
             }
 
             var viewModels = ListViewModel.Map(logs);

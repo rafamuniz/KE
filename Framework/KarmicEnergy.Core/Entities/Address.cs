@@ -7,10 +7,17 @@ namespace KarmicEnergy.Core.Entities
     [Table("Addresses", Schema = "dbo")]
     public class Address : BaseEntity
     {
+        #region Constructor
+        public Address()
+        {
+            this.Id = Guid.NewGuid();
+        }
+        #endregion Constructor
+
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         [Column("Email", TypeName = "NVARCHAR")]
@@ -91,7 +98,7 @@ namespace KarmicEnergy.Core.Entities
             this.PhoneNumber = entity.PhoneNumber;
             this.State = entity.State;
             this.ZipCode = entity.ZipCode;
-            
+
             this.CreatedDate = entity.CreatedDate;
             this.LastModifiedDate = entity.LastModifiedDate;
             this.DeletedDate = entity.DeletedDate;

@@ -30,13 +30,11 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Contact
 
         public Core.Entities.Contact Map()
         {
-            Mapper.CreateMap<CreateViewModel, Core.Entities.Contact>().ForMember(x => x.Address, opt => opt.Ignore());
             return Mapper.Map<CreateViewModel, Core.Entities.Contact>(this);
         }
 
         public Core.Entities.Address MapAddress()
-        {
-            Mapper.CreateMap<AddressViewModel, Core.Entities.Address>();
+        {           
             return Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address);
         }
 

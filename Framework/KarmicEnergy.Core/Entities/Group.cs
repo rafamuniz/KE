@@ -11,6 +11,7 @@ namespace KarmicEnergy.Core.Entities
         #region Constructor
         public Group()
         {
+            this.Id = Guid.NewGuid();
             SensorGroups = new List<SensorGroup>();
         }
         #endregion Constructor
@@ -18,7 +19,7 @@ namespace KarmicEnergy.Core.Entities
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         #endregion Property

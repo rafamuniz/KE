@@ -51,8 +51,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Pond
         #region Map
 
         public Core.Entities.Pond Map()
-        {
-            Mapper.CreateMap<CreateViewModel, Core.Entities.Pond>();
+        {            
             return Mapper.Map<CreateViewModel, Core.Entities.Pond>(this);
         }
 

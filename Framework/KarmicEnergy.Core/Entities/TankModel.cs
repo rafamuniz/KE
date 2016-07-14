@@ -9,10 +9,17 @@ namespace KarmicEnergy.Core.Entities
     [Table("TankModels", Schema = "dbo")]
     public class TankModel : BaseEntity
     {
+        #region Constructor
+        public TankModel()
+        {
+        
+        }
+        #endregion Constructor
+
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "INT")]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.None)]
         public Int32 Id { get; set; }
 
         [Column("Name", TypeName = "NVARCHAR")]

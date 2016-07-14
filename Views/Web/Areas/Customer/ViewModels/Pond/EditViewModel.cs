@@ -52,13 +52,11 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Pond
 
         public void Map(Core.Entities.Pond entity)
         {
-            Mapper.CreateMap<Core.Entities.Pond, EditViewModel>();
             Mapper.Map<Core.Entities.Pond, EditViewModel>(entity, this);
         }
 
         public void MapVMToEntity(Core.Entities.Pond entity)
         {
-            Mapper.CreateMap<EditViewModel, Core.Entities.Pond>();
             Mapper.Map<EditViewModel, Core.Entities.Pond>(this, entity);
         }
 

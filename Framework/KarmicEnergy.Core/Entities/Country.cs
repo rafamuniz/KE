@@ -7,6 +7,13 @@ namespace KarmicEnergy.Core.Entities
     [Table("Countries", Schema = "dbo")]
     public class Country : BaseEntity
     {
+        #region Constructor
+        public Country()
+        {
+   
+        }
+        #endregion Constructor
+
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "SMALLINT")]

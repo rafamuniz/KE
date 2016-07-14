@@ -41,26 +41,16 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
 
         public static EditViewModel Map(Core.Entities.CustomerUser entity)
         {
-            //.ForMember(x => x.Address, opt => opt.Ignore());
-            Mapper.CreateMap<Core.Entities.CustomerUser, EditViewModel>();
             return Mapper.Map<Core.Entities.CustomerUser, EditViewModel>(entity);
-        }
-
-        public static EditViewModel Map(Core.Entities.Address entity)
-        {
-            Mapper.CreateMap<Core.Entities.Address, EditViewModel>();
-            return Mapper.Map<Core.Entities.Address, EditViewModel>(entity);
         }
 
         public AddressViewModel MapAddress(Core.Entities.Address entity)
         {
-            Mapper.CreateMap<Core.Entities.Address, AddressViewModel>();
             return Mapper.Map<Core.Entities.Address, AddressViewModel>(entity, this.Address);
         }
 
         public Core.Entities.Address MapAddressVMToEntity(Core.Entities.Address entity)
-        {
-            Mapper.CreateMap<AddressViewModel, Core.Entities.Address>();
+        {         
             return Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address, entity);
         }
 
@@ -104,11 +94,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
                         entities.Add(entity);
                     }
                 }
-            }
-
-
-
-           
+            }           
 
             return entities;
         }

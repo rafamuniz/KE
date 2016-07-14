@@ -32,8 +32,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Site
         }
 
         public static ListViewModel Map(Core.Entities.Site entity)
-        {
-            Mapper.CreateMap<Core.Entities.Site, ListViewModel>();
+        {            
             return Mapper.Map<Core.Entities.Site, ListViewModel>(entity);
         }
 

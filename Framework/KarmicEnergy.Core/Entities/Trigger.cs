@@ -12,6 +12,7 @@ namespace KarmicEnergy.Core.Entities
         #region Constructor
         public Trigger()
         {
+            this.Id = Guid.NewGuid();
             Contacts = new List<TriggerContact>();
         }
 
@@ -20,20 +21,12 @@ namespace KarmicEnergy.Core.Entities
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         [Column("Value", TypeName = "NVARCHAR")]
         [StringLength(256)]
         public String Value { get; set; }
-
-        //[Column("MinValue", TypeName = "NVARCHAR")]
-        //[StringLength(256)]
-        //public String MinValue { get; set; }
-
-        //[Column("MaxValue", TypeName = "NVARCHAR")]
-        //[StringLength(256)]
-        //public String MaxValue { get; set; }
 
         [Column("Status", TypeName = "CHAR")]
         [StringLength(1)]

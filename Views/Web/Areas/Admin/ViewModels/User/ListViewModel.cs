@@ -50,13 +50,11 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.User
 
         public static ListViewModel Map(ApplicationUser entity)
         {
-            Mapper.CreateMap<ApplicationUser, ListViewModel>();
             return Mapper.Map<ApplicationUser, ListViewModel>(entity);
         }
 
         public static ListViewModel Map(Core.Entities.Customer entity)
         {
-            Mapper.CreateMap<Core.Entities.Customer, ListViewModel>();
             return Mapper.Map<Core.Entities.Customer, ListViewModel>(entity);
         }
 

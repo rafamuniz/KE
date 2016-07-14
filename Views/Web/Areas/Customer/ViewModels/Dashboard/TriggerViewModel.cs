@@ -42,7 +42,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
 
         public static TriggerViewModel Map(Core.Entities.Trigger entity)
         {
-            Mapper.CreateMap<Core.Entities.Trigger, TriggerViewModel>();
+   
             var viewModel = Mapper.Map<Core.Entities.Trigger, TriggerViewModel>(entity);
 
             viewModel.Name = entity.SensorItem.Item.Name;

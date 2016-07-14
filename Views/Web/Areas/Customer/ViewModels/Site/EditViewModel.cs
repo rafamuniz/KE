@@ -17,12 +17,18 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Site
         #endregion Constructor
 
         #region Property
+
         [Required]
         public Guid Id { get; set; }
 
         [Display(Name = "Name")]
         [Required]
         public String Name { get; set; }
+
+        [Display(Name = "Reference")]
+        [Required]
+        [MaxLength(8)]
+        public String Reference { get; set; }
 
         [Display(Name = "IP Address")]
         [Required]
@@ -41,32 +47,29 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Site
 
         [IgnoreMap]
         public SiteAddressViewModel Address { get; set; }
+
         #endregion Property
 
         #region Map
 
-        public void Map(Core.Entities.Site entity)
+        public void MapEntityToVM(Core.Entities.Site entity)
         {
-            Mapper.CreateMap<Core.Entities.Site, EditViewModel>();
             Mapper.Map<Core.Entities.Site, EditViewModel>(entity, this);
         }
 
-        public void Map(Core.Entities.Address entity)
+        public void MapEntityToVM(Core.Entities.Address entity)
         {
-            Mapper.CreateMap<Core.Entities.Address, SiteAddressViewModel>();
             Mapper.Map<Core.Entities.Address, SiteAddressViewModel>(entity, this.Address);
         }
 
         public void MapVMToEntity(Core.Entities.Site entity)
         {
-            Mapper.CreateMap<Core.Entities.Site, EditViewModel>();
-            Mapper.Map<Core.Entities.Site, EditViewModel>(entity, this);
+            Mapper.Map<EditViewModel, Core.Entities.Site>(this, entity);
         }
 
         public void MapVMToEntity(Core.Entities.Address entity)
         {
-            Mapper.CreateMap<Core.Entities.Address, SiteAddressViewModel>();
-            Mapper.Map<Core.Entities.Address, SiteAddressViewModel>(entity, this.Address);
+            Mapper.Map<SiteAddressViewModel, Core.Entities.Address>(this.Address, entity);
         }
 
         #endregion Map

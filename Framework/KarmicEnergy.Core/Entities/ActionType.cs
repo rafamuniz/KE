@@ -19,7 +19,7 @@ namespace KarmicEnergy.Core.Entities
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "SMALLINT")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Int16 Id { get; set; }
 
         [Column("Name", TypeName = "NVARCHAR")]

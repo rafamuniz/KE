@@ -140,7 +140,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         private void LoadTriggersBySite(ListViewModel viewModel)
         {
-            var triggers = KEUnitOfWork.TriggerRepository.GetsBySite(viewModel.SiteId.Value, 5);
+            var triggers = KEUnitOfWork.TriggerRepository.GetsBySiteAndQuantity(viewModel.SiteId.Value, 5);
 
             foreach (var trigger in triggers)
             {

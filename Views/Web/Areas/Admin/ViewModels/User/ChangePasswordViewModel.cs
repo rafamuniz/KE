@@ -30,8 +30,7 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.User
         #region Map
 
         public static ChangePasswordViewModel Map(ApplicationUser entity)
-        {
-            Mapper.CreateMap<ApplicationUser, ChangePasswordViewModel>();
+        {        
             return Mapper.Map<ApplicationUser, ChangePasswordViewModel>(entity);
         }
 

@@ -10,7 +10,7 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.StickConversion
         #region Property
 
         [Required]
-        public Int32 Id { get; set; }
+        public Guid Id { get; set; }
 
         [Display(Name = "Name")]
         [Required]
@@ -33,8 +33,7 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.StickConversion
         #region Map
 
         public static EditViewModel Map(Core.Entities.StickConversion entity)
-        {
-            Mapper.CreateMap<Core.Entities.StickConversion, EditViewModel>();
+        {        
             return Mapper.Map<Core.Entities.StickConversion, EditViewModel>(entity);
         }
 

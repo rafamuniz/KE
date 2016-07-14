@@ -42,8 +42,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
         }
 
         public static SiteDashboardViewModel Map(Core.Entities.Site entity)
-        {
-            Mapper.CreateMap<Core.Entities.Site, SiteDashboardViewModel>();
+        {            
             return Mapper.Map<Core.Entities.Site, SiteDashboardViewModel>(entity);
         }
 

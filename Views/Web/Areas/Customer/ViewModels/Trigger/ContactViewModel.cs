@@ -32,8 +32,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
         }
 
         public static ContactViewModel Map(Core.Entities.Contact entity)
-        {
-            Mapper.CreateMap<Core.Entities.Contact, ContactViewModel>();
+        {            
             return Mapper.Map<Core.Entities.Contact, ContactViewModel>(entity);
         }
 

@@ -60,8 +60,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
         }
 
         public static ListViewModel Map(Core.Entities.SensorItemEvent entity)
-        {
-            Mapper.CreateMap<Core.Entities.SensorItemEvent, ListViewModel>();
+        {            
             var viewModel = Mapper.Map<Core.Entities.SensorItemEvent, ListViewModel>(entity);
 
             viewModel.Id = entity.Id;

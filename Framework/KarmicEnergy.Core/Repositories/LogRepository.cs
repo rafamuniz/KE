@@ -15,6 +15,16 @@ namespace KarmicEnergy.Core.Repositories
 
         }
         #endregion Constructor      
+        
+        public List<Log> GetsByCustomer(Guid customerId)
+        {
+            return base.Find(x => x.CustomerId == customerId && x.DeletedDate == null).OrderByDescending(d => d.CreatedDate).ToList();
+        }
+        
+        public List<Log> GetsBySite(Guid siteId)
+        {
+            return base.Find(x => x.SiteId == siteId && x.DeletedDate == null).OrderByDescending(d => d.CreatedDate).ToList();
+        }
 
         public List<Log> GetsByUser(Guid userId)
         {

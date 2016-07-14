@@ -36,8 +36,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
         }
 
         public static ListAlarmViewModel Map(Core.Entities.Alarm entity)
-        {
-            Mapper.CreateMap<Core.Entities.Alarm, ListAlarmViewModel>();
+        {            
             var viewModel = Mapper.Map<Core.Entities.Alarm, ListAlarmViewModel>(entity);
             
             return viewModel;

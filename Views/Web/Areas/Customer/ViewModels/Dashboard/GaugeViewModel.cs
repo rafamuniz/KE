@@ -80,7 +80,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
 
         public static GaugeViewModel Map(Core.Entities.Tank entity)
         {
-            Mapper.CreateMap<Core.Entities.Tank, GaugeViewModel>();
+        
             return Mapper.Map<Core.Entities.Tank, GaugeViewModel>(entity);
         }
 

@@ -42,8 +42,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
         }
 
         public static ListViewModel Map(Core.Entities.Tank entity)
-        {
-            Mapper.CreateMap<Core.Entities.Tank, ListViewModel>();
+        {            
             var viewModel = Mapper.Map<Core.Entities.Tank, ListViewModel>(entity);
             viewModel.SiteId = entity.SiteId;
             viewModel.SiteName = entity.Site.Name;

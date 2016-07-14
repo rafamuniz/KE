@@ -75,10 +75,10 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
         public Decimal? Dimension3 { get; set; }
 
         [Display(Name = "Minimum Distance")]
-        public Decimal? MinimumDistance { get; set; }
+        public Int32? MinimumDistance { get; set; }
 
         [Display(Name = "Maximum Distance")]
-        public Decimal? MaximumDistance { get; set; }
+        public Int32? MaximumDistance { get; set; }
 
         [Display(Name = "Water Volume Capacity")]
         public Decimal? WaterVolumeCapacity { get; set; }
@@ -95,13 +95,11 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
 
         public void Map(Core.Entities.Tank entity)
         {
-            Mapper.CreateMap<Core.Entities.Tank, EditViewModel>().ForMember(x => x.TankModel, opt => opt.Ignore());
             Mapper.Map<Core.Entities.Tank, EditViewModel>(entity, this);
         }
 
         public void MapVMToEntity(Core.Entities.Tank entity)
         {
-            Mapper.CreateMap<EditViewModel, Core.Entities.Tank>().ForMember(x => x.TankModel, opt => opt.Ignore());
             Mapper.Map<EditViewModel, Core.Entities.Tank>(this, entity);
 
             entity.Height = this.TankModel.Height;
@@ -109,17 +107,19 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
             entity.Length = this.TankModel.Length;
             entity.FaceLength = this.TankModel.FaceLength;
             entity.BottomWidth = this.TankModel.BottomWidth;
+
             entity.Dimension1 = this.TankModel.Dimension1;
             entity.Dimension2 = this.TankModel.Dimension2;
             entity.Dimension3 = this.TankModel.Dimension3;
-            //entity.MinimumDistance = this.TankModel.MinimumDistance;
-            //entity.MaximumDistance = this.TankModel.MaximumDistance;
+
+            entity.MinimumDistance = this.TankModel.MinimumDistance;
+            entity.MaximumDistance = this.TankModel.MaximumDistance;
+
             entity.WaterVolumeCapacity = this.TankModel.WaterVolumeCapacity.HasValue ? this.TankModel.WaterVolumeCapacity.Value : 0;
         }
 
         public TankModelViewModel Map(Core.Entities.TankModel entity)
         {
-            Mapper.CreateMap<Core.Entities.TankModel, TankModelViewModel>();
             var viewModel = Mapper.Map<Core.Entities.TankModel, TankModelViewModel>(entity, this.TankModel);
 
             this.TankModel.Height = this.Height;
@@ -127,11 +127,14 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
             this.TankModel.Length = this.Length;
             this.TankModel.FaceLength = this.FaceLength;
             this.TankModel.BottomWidth = this.BottomWidth;
+            
             this.TankModel.Dimension1 = this.Dimension1;
             this.TankModel.Dimension2 = this.Dimension2;
             this.TankModel.Dimension3 = this.Dimension3;
-            this.TankModel.MinimumDistance = this.MinimumDistance;
-            this.TankModel.MaximumDistance = this.MaximumDistance;
+
+            this.TankModel.MinimumDistance = this.MinimumDistance.HasValue ? this.MinimumDistance.Value : 0;
+            this.TankModel.MaximumDistance = this.MaximumDistance.HasValue ? this.MaximumDistance.Value : 0;
+
             this.TankModel.WaterVolumeCapacity = this.WaterVolumeCapacity;
 
             return viewModel;

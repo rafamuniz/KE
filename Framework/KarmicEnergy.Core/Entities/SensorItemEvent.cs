@@ -8,10 +8,17 @@ namespace KarmicEnergy.Core.Entities
     [Table("SensorItemEvents", Schema = "dbo")]
     public class SensorItemEvent : BaseEntity
     {
+        #region Constructor
+        public SensorItemEvent()
+        {
+            this.Id = Guid.NewGuid();
+        }
+        #endregion Constructor
+
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         [Column("Value", TypeName = "NVARCHAR")]

@@ -55,18 +55,6 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
 
         #region Map
 
-        public Core.Entities.CustomerUser Map()
-        {
-            Mapper.CreateMap<CreateViewModel, Core.Entities.CustomerUser>().ForMember(x => x.Address, opt => opt.Ignore());
-            return Mapper.Map<CreateViewModel, Core.Entities.CustomerUser>(this);
-        }
-
-        public static CreateViewModel Map(Core.Entities.Address entity)
-        {
-            Mapper.CreateMap<Core.Entities.Address, CreateViewModel>();
-            return Mapper.Map<Core.Entities.Address, CreateViewModel>(entity);
-        }
-
         public List<Core.Entities.CustomerUserSite> MapSites()
         {
             List<Core.Entities.CustomerUserSite> entities = new List<Core.Entities.CustomerUserSite>();
@@ -88,7 +76,6 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
 
         public Core.Entities.Address MapAddress()
         {
-            Mapper.CreateMap<AddressViewModel, Core.Entities.Address>();
             return Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address);
         }
 

@@ -140,7 +140,10 @@ namespace KarmicEnergy.Web.Controllers
                 else
                 {
                     var customerUser = KEUnitOfWork.CustomerUserRepository.Get(Guid.Parse(userId));
-                    return customerUser.CustomerId;
+                    if (customerUser != null)
+                        return customerUser.CustomerId;
+                    else
+                        return Guid.Empty;
                 }
             }
         }
@@ -163,7 +166,9 @@ namespace KarmicEnergy.Web.Controllers
         protected void AddLog(String message, LogTypeEnum type = LogTypeEnum.Error)
         {
             var siteId = SiteId == Guid.Empty ? (Guid?)null : SiteId;
-            Log log = new Log() { LogTypeId = (Int16)type, Message = message, CustomerId = CustomerId, SiteId = siteId, UserId = Guid.Parse(UserId) };
+            var customerId = CustomerId == Guid.Empty ? (Guid?)null : CustomerId;
+
+            Log log = new Log() { LogTypeId = (Int16)type, Message = message, CustomerId = customerId, SiteId = siteId, UserId = Guid.Parse(UserId) };
             KEUnitOfWork.LogRepository.Add(log);
             KEUnitOfWork.Complete();
         }
@@ -360,7 +365,7 @@ namespace KarmicEnergy.Web.Controllers
 
         protected List<Contact> LoadContacts(Guid customerId)
         {
-            List<Contact> contacts = KEUnitOfWork.ContactRepository.GetsByCustomerId(customerId);
+            List<Contact> contacts = KEUnitOfWork.ContactRepository.GetsByCustomer(customerId);
             ViewBag.Contacts = contacts;
             return contacts;
         }
@@ -431,13 +436,13 @@ namespace KarmicEnergy.Web.Controllers
             return tanks;
         }
 
-        protected List<Pond> LoadPonds(Guid customerId, Guid pondId)
+        protected List<Pond> LoadPonds(Guid customerId, Guid siteId)
         {
-            List<Pond> ponds = KEUnitOfWork.PondRepository.GetsByCustomerAndSite(customerId, pondId);
-            ViewBag.Ponds= ponds;
+            List<Pond> ponds = KEUnitOfWork.PondRepository.GetsByCustomerAndSite(customerId, siteId);
+            ViewBag.Ponds = ponds;
             return ponds;
         }
-        
+
         protected List<Sensor> LoadSiteSensors(Guid customerId, Guid siteId)
         {
             List<Sensor> sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndSite(customerId, siteId);
@@ -458,7 +463,7 @@ namespace KarmicEnergy.Web.Controllers
             ViewBag.Sensors = sensors;
             return sensors;
         }
-                
+
         protected List<SensorType> LoadSensorTypes()
         {
             List<SensorType> sensorTypes = KEUnitOfWork.SensorTypeRepository.GetAll().ToList();

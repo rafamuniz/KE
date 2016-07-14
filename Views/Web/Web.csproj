@@ -71,8 +71,8 @@
       <HintPath>..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=5.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="AWSSDK.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
@@ -263,6 +263,8 @@
     <Compile Include="ApiControllers\SyncApiController.cs" />
     <Compile Include="ApiControllers\InternalApiController.cs" />
     <Compile Include="ApiControllers\Models\SensorAlarm.cs" />
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
+    <Compile Include="App_Start\Bootstrapper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -356,18 +358,36 @@
     <Compile Include="Areas\Customer\ViewModels\Tank\TankWaterCapacityViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\EditViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\CustomerUserViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Trigger\TriggerViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\UserViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\CreateViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\ContactViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\User\ChangePasswordViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\User\SiteViewModel.cs" />
-    <Compile Include="Controllers\LogController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LogController.cs" />
     <Compile Include="Controllers\ResetPasswordController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Extensions\ImageSelectExtensions.cs" />
     <Compile Include="Extensions\KEExtension.cs" />
+    <Compile Include="Infrastructure\Mappings\Admin\LogProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Customer\FastTrackerProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Customer\DashboardProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Customer\MonitoringProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Customer\UserProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Customer\SensorGroupProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Customer\TriggerProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Customer\SensorProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Customer\SiteProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Customer\PondProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Customer\TankProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Customer\LogProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Admin\TankModelProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Admin\UserProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Customer\ContactProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Admin\StickConversionProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Admin\CustomerProfile.cs" />
     <Compile Include="Installer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -379,10 +399,6 @@
     <Compile Include="Infrastructure\Jobs\NotificationJob.cs" />
     <Compile Include="Infrastructure\Jobs\NotificationTemplateJob.cs" />
     <Compile Include="Infrastructure\Jobs\Sync.cs" />
-    <Compile Include="Migrations\201607110758384_Initial.cs" />
-    <Compile Include="Migrations\201607110758384_Initial.Designer.cs">
-      <DependentUpon>201607110758384_Initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\AdminRole.cs" />
@@ -419,7 +435,7 @@
     <Compile Include="Areas\Admin\ViewModels\Customer\ListViewModel.cs" />
     <Compile Include="ViewModels\Account\ProfileViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
-    <Compile Include="ViewModels\Log\ListViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Log\ListViewModel.cs" />
     <Compile Include="ViewModels\NotificationViewModel.cs" />
     <Compile Include="ViewModels\AlarmViewModel.cs" />
     <Compile Include="ViewModels\AddressViewModel.cs" />
@@ -1625,6 +1641,7 @@
     <Content Include="images\tankmodels\8\FracPO1-red-90.png" />
     <Content Include="images\tank_white.png" />
     <Content Include="images\contacts.png" />
+    <Content Include="images\trigger-20x20.png" />
     <Content Include="images\trigger-close.png" />
     <Content Include="images\trigger-open.png" />
     <Content Include="images\trigger.png" />
@@ -1837,7 +1854,15 @@
     <Content Include="Areas\Customer\Views\Monitoring\CreateComment.cshtml" />
     <Content Include="Areas\Customer\Views\Monitoring\_AlarmDetail.cshtml" />
     <Content Include="Areas\Customer\Views\Monitoring\AlarmClear.cshtml" />
-    <Content Include="Areas\Customer\Views\Trigger\CreateSite.cshtml" />
+    <Content Include="Areas\Customer\Views\Trigger\SiteCreate.cshtml" />
+    <Content Include="Areas\Customer\Views\Trigger\Site.cshtml" />
+    <Content Include="Areas\Customer\Views\Trigger\Pond.cshtml" />
+    <Content Include="Areas\Customer\Views\Trigger\Tank.cshtml" />
+    <Content Include="Areas\Customer\Views\Trigger\PondCreate.cshtml" />
+    <Content Include="Areas\Customer\Views\Trigger\TankCreate.cshtml" />
+    <Content Include="Areas\Customer\Views\Trigger\SiteEdit.cshtml" />
+    <Content Include="Areas\Customer\Views\Trigger\TankEdit.cshtml" />
+    <Content Include="Areas\Customer\Views\Trigger\PondEdit.cshtml" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2370,7 +2395,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Address.cshtml" />
     <Content Include="Views\Shared\_InternalNoLeftMenu.cshtml" />
-    <Content Include="Views\Log\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Log\Index.cshtml" />
     <None Include="Web.AWS.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2403,11 +2428,6 @@
       <Project>{519e28a2-6b4d-4ce3-a05e-748e71c8b125}</Project>
       <Name>Util</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607110758384_Initial.resx">
-      <DependentUpon>201607110758384_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

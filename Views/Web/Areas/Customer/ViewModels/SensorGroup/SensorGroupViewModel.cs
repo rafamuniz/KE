@@ -51,7 +51,6 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup
 
         public static SensorGroupViewModel Map(Core.Entities.SensorGroup entity)
         {
-            Mapper.CreateMap<Core.Entities.SensorGroup, SensorGroupViewModel>();
             var viewModel = Mapper.Map<Core.Entities.SensorGroup, SensorGroupViewModel>(entity);
             viewModel.Id = entity.Id;
             viewModel.SiteId = entity.Sensor.Tank.Site.Id;

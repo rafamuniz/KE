@@ -54,8 +54,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Log
         }
 
         public static ListViewModel Map(Core.Entities.Log entity)
-        {
-            Mapper.CreateMap<Core.Entities.Log, ListViewModel>();
+        {         
             var viewModel = Mapper.Map<Core.Entities.Log, ListViewModel>(entity);
 
             viewModel.CustomerId = entity.CustomerId.HasValue ? entity.CustomerId.Value : Guid.Empty;

@@ -18,6 +18,9 @@ namespace KarmicEnergy.Web
             GlobalConfiguration.Configure(WebApiConfig.Register);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             JobScheduler.RegisterJobs();
+
+            // Automapper configurations
+            Bootstrapper.Run();
         }
     }
 }

@@ -24,18 +24,18 @@ namespace KarmicEnergy.Core.Entities
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public String FromValue { get; set; }
 
-        #endregion Property      
+        #region StickConversion
 
-        #region Unit
-
-        [Column("StickConversionId", TypeName = "INT")]
+        [Column("StickConversionId", TypeName = "UNIQUEIDENTIFIER")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        public Int32 StickConversionId { get; set; }
+        public Guid StickConversionId { get; set; }
 
         [ForeignKey("StickConversionId")]
         public virtual StickConversion StickConversion { get; set; }
 
-        #endregion Unit
+        #endregion StickConversion
+
+        #endregion Property      
 
         #region Load
 
@@ -63,7 +63,7 @@ namespace KarmicEnergy.Core.Entities
         public void Update(StickConversionValue entity)
         {
             this.FromValue = entity.FromValue;
-            this.ToValue = entity.ToValue;            
+            this.ToValue = entity.ToValue;
             this.CreatedDate = entity.CreatedDate;
             this.LastModifiedDate = entity.LastModifiedDate;
             this.DeletedDate = entity.DeletedDate;

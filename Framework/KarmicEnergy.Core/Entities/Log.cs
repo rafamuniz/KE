@@ -12,14 +12,14 @@ namespace KarmicEnergy.Core.Entities
         #region Constructor
         public Log()
         {
-
+            this.Id = Guid.NewGuid();
         }
         #endregion Constructor
 
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         [Column("Message", TypeName = "NVARCHAR")]

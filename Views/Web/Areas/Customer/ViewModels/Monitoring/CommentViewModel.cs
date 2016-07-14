@@ -49,8 +49,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
         }
 
         public static CommentViewModel Map(Core.Entities.AlarmHistory entity)
-        {
-            Mapper.CreateMap<Core.Entities.AlarmHistory, CommentViewModel>();
+        {            
             var viewModel = Mapper.Map<Core.Entities.AlarmHistory, CommentViewModel>(entity);
                         
             viewModel.UserId = entity.UserId;

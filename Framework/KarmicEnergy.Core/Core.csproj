@@ -126,9 +126,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201607111121548_Initial.cs" />
-    <Compile Include="Migrations\201607111121548_Initial.Designer.cs">
-      <DependentUpon>201607111121548_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201607140249533_Dev.cs" />
+    <Compile Include="Migrations\201607140249533_Dev.Designer.cs">
+      <DependentUpon>201607140249533_Dev.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\DatabaseCreateIfNotExists.cs" />
@@ -231,11 +231,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607111121548_Initial.resx">
-      <DependentUpon>201607111121548_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607140249533_Dev.resx">
+      <DependentUpon>201607140249533_Dev.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -31,6 +31,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             LoadStatuses();
             ViewModels.Site.CreateViewModel viewModel = new ViewModels.Site.CreateViewModel();
+            AddLog("Navigated to Creat Site View", LogTypeEnum.Info);
             return View(viewModel);
         }
 
@@ -53,11 +54,14 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 site.CustomerId = CustomerId;
 
                 Core.Entities.Address address = viewModel.MapAddress();
+                address.Id = Guid.NewGuid();
                 site.Address = address;
+                site.AddressId = address.Id;
 
                 KEUnitOfWork.SiteRepository.Add(site);
                 KEUnitOfWork.Complete();
-
+                                
+                AddLog("Site Created", LogTypeEnum.Info);
                 return RedirectToAction("Index", "Site", new { area = "Customer" });
             }
             catch (Exception ex)
@@ -85,9 +89,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             LoadStatuses();
             ViewModels.Site.EditViewModel viewModel = new ViewModels.Site.EditViewModel();
-            viewModel.Map(site);
-            viewModel.Map(site.Address);
+            viewModel.MapEntityToVM(site);
+            viewModel.MapEntityToVM(site.Address);
 
+            AddLog("Navigated to Edit Site View", LogTypeEnum.Info);
             return View(viewModel);
         }
 
@@ -121,7 +126,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.SiteRepository.Update(site);
                 KEUnitOfWork.Complete();
 
-                return RedirectToAction("Index", "Site");
+                AddLog("Site Updated", LogTypeEnum.Info);
+                return RedirectToAction("Index", "Site", new { area = "Customer" });
             }
             catch (Exception ex)
             {
@@ -152,6 +158,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             KEUnitOfWork.SiteRepository.Update(site);
             KEUnitOfWork.Complete();
 
+            AddLog("Site Deleted", LogTypeEnum.Info);
             return RedirectToAction("Index", "Site");
         }
         #endregion Delete
@@ -274,7 +281,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.SensorRepository.Add(sensor);
                 KEUnitOfWork.Complete();
 
-                AddLog("Created a Sensor of Site", LogTypeEnum.Info);
+                AddLog("Sensor of Site Created", LogTypeEnum.Info);
                 return RedirectToAction("SensorIndex", "Site", new { SiteId = sensor.SiteId });
             }
             catch (Exception ex)
@@ -418,7 +425,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 KEUnitOfWork.SensorRepository.Update(sensor);
                 KEUnitOfWork.Complete();
 
-                AddLog("Updated a Sensor of Site", LogTypeEnum.Info);
+                AddLog("Sensor of Site Updated", LogTypeEnum.Info);
                 return RedirectToAction("SensorIndex", "Site", new { SiteId = sensor.SiteId });
             }
             catch (Exception ex)
@@ -492,7 +499,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             KEUnitOfWork.SensorRepository.Update(sensor);
             KEUnitOfWork.Complete();
 
-            AddLog("Deleted a Sensor of Site", LogTypeEnum.Info);
+            AddLog("Sensor of Site Deleted", LogTypeEnum.Info);
             return RedirectToAction("SensorIndex", "Site", new { SiteId = sensor.SiteId });
         }
 

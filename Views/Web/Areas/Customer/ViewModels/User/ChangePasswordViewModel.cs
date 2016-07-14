@@ -28,12 +28,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
         #endregion Property
 
         #region Map
-
-        public static ChangePasswordViewModel Map(ApplicationUser entity)
-        {
-            Mapper.CreateMap<ApplicationUser, ChangePasswordViewModel>();
-            return Mapper.Map<ApplicationUser, ChangePasswordViewModel>(entity);
-        }
+        
 
         #endregion Map
     }

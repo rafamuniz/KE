@@ -41,8 +41,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
         }
 
         public static ItemViewModel Map(Core.Entities.Item entity)
-        {
-            Mapper.CreateMap<Core.Entities.Item, ItemViewModel>();
+        {      
             return Mapper.Map<Core.Entities.Item, ItemViewModel>(entity);
         }
 

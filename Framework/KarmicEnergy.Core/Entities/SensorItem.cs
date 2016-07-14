@@ -7,10 +7,17 @@ namespace KarmicEnergy.Core.Entities
     [Table("SensorItems", Schema = "dbo")]
     public class SensorItem : BaseEntity
     {
+        #region Constructor
+        public SensorItem()
+        {
+            this.Id = Guid.NewGuid();
+        }
+        #endregion Constructor
+
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         [Column("Status", TypeName = "CHAR")]

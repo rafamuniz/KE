@@ -16,57 +16,66 @@ namespace KarmicEnergy.Web.Jobs
 
         public void Execute()
         {
-            KEUnitOfWork = KEUnitOfWork.Create();
-            String siteConfig = ConfigurationManager.AppSettings["Site:Id"].ToString();
-
-            if (!String.IsNullOrEmpty(siteConfig)) // Site
+            try
             {
-                #region Get
+                KEUnitOfWork = KEUnitOfWork.Create();
+                String siteConfig = ConfigurationManager.AppSettings["Site:Id"].ToString();
 
-                var lastDataSync = KEUnitOfWork.DataSyncRepository.GetAll().OrderByDescending(x => x.SyncDate).LastOrDefault();
-                List<DateTime> dates = new List<DateTime>();
-                DateTime lastDateTime = DateTime.MinValue;
-                String ip = ConfigurationManager.AppSettings["Master:IP"];
-
-                if (lastDataSync == null)
-                    lastDateTime = DateTime.MinValue;
-
-                dates.Add(ActionType(siteConfig, ip, lastDateTime));
-                dates.Add(SensorType(siteConfig, ip, lastDateTime));
-                dates.Add(NotificationType(siteConfig, ip, lastDateTime));
-                dates.Add(OperatorType(siteConfig, ip, lastDateTime));
-                dates.Add(UnitType(siteConfig, ip, lastDateTime));
-                dates.Add(Unit(siteConfig, ip, lastDateTime));
-                dates.Add(StickConversion(siteConfig, ip, lastDateTime));
-                dates.Add(StickConversionValue(siteConfig, ip, lastDateTime));
-                dates.Add(Geometry(siteConfig, ip, lastDateTime));
-                dates.Add(LogType(siteConfig, ip, lastDateTime));
-                dates.Add(Log(siteConfig, ip, lastDateTime));
-                dates.Add(NotificationTemplate(siteConfig, ip, lastDateTime));
-                dates.Add(Severity(siteConfig, ip, lastDateTime));
-                dates.Add(TankModel(siteConfig, ip, lastDateTime));
-                dates.Add(Country(siteConfig, ip, lastDateTime));
-                dates.Add(City(siteConfig, ip, lastDateTime));
-
-                Address(siteConfig, ip, lastDateTime);
-                Customer(siteConfig, ip, lastDateTime);
-
-                DataSync dataSync = new DataSync()
+                if (!String.IsNullOrEmpty(siteConfig)) // Site
                 {
-                    SiteId = Guid.Parse(siteConfig),
-                    SyncDate = dates.Max<DateTime>()
-                };
+                    #region Get
 
-                KEUnitOfWork.DataSyncRepository.Add(dataSync);
-                KEUnitOfWork.Complete();
+                    var lastDataSync = KEUnitOfWork.DataSyncRepository.GetAll().OrderByDescending(x => x.SyncDate).LastOrDefault();
+                    List<DateTime> dates = new List<DateTime>();
+                    DateTime lastDateTime = DateTime.MinValue;
+                    String ip = ConfigurationManager.AppSettings["Master:Url"];
 
-                #endregion Get
+                    if (lastDataSync == null)
+                        lastDateTime = DateTime.MinValue;
+
+                    dates.Add(ActionType(siteConfig, ip, lastDateTime));
+                    dates.Add(SensorType(siteConfig, ip, lastDateTime));
+                    dates.Add(NotificationType(siteConfig, ip, lastDateTime));
+                    dates.Add(OperatorType(siteConfig, ip, lastDateTime));
+                    dates.Add(UnitType(siteConfig, ip, lastDateTime));
+                    dates.Add(Unit(siteConfig, ip, lastDateTime));
+                    dates.Add(StickConversion(siteConfig, ip, lastDateTime));
+                    dates.Add(StickConversionValue(siteConfig, ip, lastDateTime));
+                    dates.Add(Geometry(siteConfig, ip, lastDateTime));
+                    dates.Add(LogType(siteConfig, ip, lastDateTime));                   
+                    dates.Add(NotificationTemplate(siteConfig, ip, lastDateTime));
+                    dates.Add(Severity(siteConfig, ip, lastDateTime));
+                    dates.Add(TankModel(siteConfig, ip, lastDateTime));
+                    dates.Add(Country(siteConfig, ip, lastDateTime));
+                    dates.Add(City(siteConfig, ip, lastDateTime));
+
+                    dates.Add(Address(siteConfig, ip, lastDateTime));
+                    dates.Add(Customer(siteConfig, ip, lastDateTime));
+
+                    DataSync dataSync = new DataSync()
+                    {
+                        SiteId = Guid.Parse(siteConfig),
+                        SyncDate = dates.Max<DateTime>()
+                    };
+
+
+                    //dates.Add(Log(siteConfig, ip, lastDateTime));
+
+                    KEUnitOfWork.DataSyncRepository.Add(dataSync);
+                    KEUnitOfWork.Complete();
+
+                    #endregion Get
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
             }
         }
 
         private DateTime ActionType(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/ActionType/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/ActionType/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<ActionType> entities = Gets<ActionType>(url);
 
             if (entities.Any())
@@ -94,7 +103,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime SensorType(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/SensorType/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/SensorType/", siteId, lastSync.ToString("yyyy-MM-dd"));
 
             List<SensorType> entities = Gets<SensorType>(url);
 
@@ -123,7 +132,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime NotificationType(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/NotificationType/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/NotificationType/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<NotificationType> entities = Gets<NotificationType>(url);
 
             if (entities.Any())
@@ -151,7 +160,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime OperatorType(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/OperatorType/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/OperatorType/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<OperatorType> entities = Gets<OperatorType>(url);
 
             if (entities.Any())
@@ -179,7 +188,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Operator(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Operator/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Operator/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Operator> entities = Gets<Operator>(url);
 
             if (entities.Any())
@@ -207,7 +216,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime UnitType(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/UnitType/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/UnitType/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<UnitType> entities = Gets<UnitType>(url);
 
             if (entities.Any())
@@ -235,7 +244,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Unit(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Unit/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Unit/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Unit> entities = Gets<Unit>(url);
 
             if (entities.Any())
@@ -263,7 +272,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime StickConversion(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/StickConversion/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/StickConversion/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<StickConversion> entities = Gets<StickConversion>(url);
 
             if (entities.Any())
@@ -291,7 +300,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime StickConversionValue(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/StickConversionValue/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/StickConversionValue/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<StickConversionValue> entities = Gets<StickConversionValue>(url);
 
             if (entities.Any())
@@ -319,7 +328,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Geometry(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Geometry/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Geometry/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Geometry> entities = Gets<Geometry>(url);
 
             if (entities.Any())
@@ -347,7 +356,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime LogType(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/LogType/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/LogType/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<LogType> entities = Gets<LogType>(url);
 
             if (entities.Any())
@@ -375,7 +384,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Log(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Log/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Log/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Log> entities = Gets<Log>(url);
 
             if (entities.Any())
@@ -403,7 +412,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime NotificationTemplate(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/NotificationTemplate/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/NotificationTemplate/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<NotificationTemplate> entities = Gets<NotificationTemplate>(url);
 
             if (entities.Any())
@@ -431,7 +440,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Severity(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Severity/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Severity/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Severity> entities = Gets<Severity>(url);
 
             if (entities.Any())
@@ -459,7 +468,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime TankModel(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/TankModel/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/TankModel/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<TankModel> entities = Gets<TankModel>(url);
 
             if (entities.Any())
@@ -487,7 +496,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Country(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Country/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Country/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Country> entities = Gets<Country>(url);
 
             if (entities.Any())
@@ -515,7 +524,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime City(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/City/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/City/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<City> entities = Gets<City>(url);
 
             if (entities.Any())
@@ -543,7 +552,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Address(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Address/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Address/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Address> entities = Gets<Address>(url);
 
             if (entities.Any())
@@ -571,7 +580,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Item(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Item/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Item/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Item> entities = Gets<Item>(url);
 
             if (entities.Any())
@@ -599,7 +608,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Notification(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Notification/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Notification/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Notification> entities = Gets<Notification>(url);
 
             if (entities.Any())
@@ -627,7 +636,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Alarm(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Alarm/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Alarm/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Alarm> entities = Gets<Alarm>(url);
 
             if (entities.Any())
@@ -655,7 +664,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime AlarmHistory(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/AlarmHistory/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/AlarmHistory/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<AlarmHistory> entities = Gets<AlarmHistory>(url);
 
             if (entities.Any())
@@ -683,7 +692,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Contact(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Contact/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Contact/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Contact> entities = Gets<Contact>(url);
 
             if (entities.Any())
@@ -711,7 +720,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Customer(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Customer/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Customer/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Customer> entities = Gets<Customer>(url);
 
             if (entities.Any())
@@ -739,7 +748,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime CustomerSetting(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/CustomerSetting/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/CustomerSetting/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<CustomerSetting> entities = Gets<CustomerSetting>(url);
 
             if (entities.Any())
@@ -767,7 +776,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime CustomerUser(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/CustomerUser/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/CustomerUser/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<CustomerUser> entities = Gets<CustomerUser>(url);
 
             if (entities.Any())
@@ -795,7 +804,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime CustomerUserSetting(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/CustomerUserSetting/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/CustomerUserSetting/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<CustomerUserSetting> entities = Gets<CustomerUserSetting>(url);
 
             if (entities.Any())
@@ -823,7 +832,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime CustomerUserSite(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/CustomerUserSite/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/CustomerUserSite/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<CustomerUserSite> entities = Gets<CustomerUserSite>(url);
 
             if (entities.Any())
@@ -851,7 +860,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Trigger(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Trigger/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Trigger/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Trigger> entities = Gets<Trigger>(url);
 
             if (entities.Any())
@@ -879,7 +888,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime TriggerContact(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/TriggerContact/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/TriggerContact/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<TriggerContact> entities = Gets<TriggerContact>(url);
 
             if (entities.Any())
@@ -907,7 +916,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime User(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/User/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/User/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<User> entities = Gets<User>(url);
 
             if (entities.Any())
@@ -935,7 +944,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Site(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Site/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Site/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Site> entities = Gets<Site>(url);
 
             if (entities.Any())
@@ -963,7 +972,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Tank(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Tank/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Tank/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Tank> entities = Gets<Tank>(url);
 
             if (entities.Any())
@@ -991,7 +1000,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Pond(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Pond/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Pond/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Pond> entities = Gets<Pond>(url);
 
             if (entities.Any())
@@ -1019,7 +1028,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Sensor(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Sensor/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Sensor/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Sensor> entities = Gets<Sensor>(url);
 
             if (entities.Any())
@@ -1047,7 +1056,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime Group(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/Group/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Group/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<Group> entities = Gets<Group>(url);
 
             if (entities.Any())
@@ -1075,7 +1084,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime SensorGroup(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/SensorGroup/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/SensorGroup/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<SensorGroup> entities = Gets<SensorGroup>(url);
 
             if (entities.Any())
@@ -1103,7 +1112,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime SensorItem(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/SensorItem/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/SensorItem/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<SensorItem> entities = Gets<SensorItem>(url);
 
             if (entities.Any())
@@ -1133,7 +1142,7 @@ namespace KarmicEnergy.Web.Jobs
 
         private DateTime SensorItemEvent(String siteId, String ip, DateTime lastSync)
         {
-            String url = String.Format("http://{0}/{1}/{2}/{3}", ip, "sync/SensorItemEvent/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/SensorItemEvent/", siteId, lastSync.ToString("yyyy-MM-dd"));
             List<SensorItemEvent> entities = Gets<SensorItemEvent>(url);
 
             if (entities.Any())

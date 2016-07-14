@@ -20,7 +20,7 @@ namespace KarmicEnergy.Core.Migrations
             try
             {
                 StickConversion.Load()
-                   .ForEach(e => context.StickConversions.AddOrUpdate(x => x.Id, e));
+                   .ForEach(e => context.StickConversions.AddOrUpdate(x => x.Name, e));
 
                 NotificationType.Load()
                    .ForEach(e => context.NotificationTypes.AddOrUpdate(x => x.Id, e));

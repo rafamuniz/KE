@@ -48,12 +48,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.SensorGroup
         #endregion Property
 
         #region Map
-
-        public Core.Entities.SensorGroup Map()
-        {
-            Mapper.CreateMap<CreateViewModel, Core.Entities.Contact>();
-            return Mapper.Map<CreateViewModel, Core.Entities.SensorGroup>(this);
-        }
+        
 
         #endregion Map
     }

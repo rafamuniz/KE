@@ -8,6 +8,16 @@ namespace KarmicEnergy.Core.Entities
     [Table("CustomerUsers", Schema = "dbo")]
     public class CustomerUser : BaseEntity
     {
+        #region Constructor
+        public CustomerUser()
+        {
+            this.Id = Guid.NewGuid();
+            Sites = new List<CustomerUserSite>();
+            Settings = new List<CustomerUserSetting>();
+
+        }
+        #endregion Constructor
+
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
@@ -54,7 +64,7 @@ namespace KarmicEnergy.Core.Entities
         {
             this.CustomerId = entity.CustomerId;
             this.AddressId = entity.AddressId;
-            
+
             this.CreatedDate = entity.CreatedDate;
             this.LastModifiedDate = entity.LastModifiedDate;
             this.DeletedDate = entity.DeletedDate;

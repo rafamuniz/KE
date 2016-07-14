@@ -8,10 +8,17 @@ namespace KarmicEnergy.Core.Entities
     [Table("Contacts", Schema = "dbo")]
     public class Contact : BaseEntity
     {
+        #region Constructor
+        public Contact()
+        {
+            this.Id = Guid.NewGuid();
+        }
+        #endregion Constructor
+
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         [Column("Name", TypeName = "NVARCHAR")]

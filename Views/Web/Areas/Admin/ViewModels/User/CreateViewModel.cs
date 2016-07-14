@@ -7,6 +7,13 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.User
 {
     public class CreateViewModel
     {
+        #region Contructor
+        public CreateViewModel()
+        {
+            this.Address = new AddressViewModel();
+        }
+        #endregion Contructor
+
         #region Property
         [Display(Name = "Name")]
         [Required]
@@ -39,13 +46,12 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.User
 
         public Core.Entities.User Map()
         {
-            Mapper.CreateMap<CreateViewModel, Core.Entities.User>().ForMember(x => x.Address, opt => opt.Ignore());
             return Mapper.Map<CreateViewModel, Core.Entities.User>(this);
         }
 
         public Core.Entities.Address MapAddress()
         {
-            Mapper.CreateMap<AddressViewModel, Core.Entities.Address>();
+
             return Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address);
         }
 

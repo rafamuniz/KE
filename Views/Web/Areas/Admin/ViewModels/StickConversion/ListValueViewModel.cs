@@ -8,7 +8,7 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.StickConversion
     public class ListValueViewModel
     {
         #region Property
-        public Int32 Id { get; set; }
+        public Guid Id { get; set; }
 
         public String Name { get; set; }
 
@@ -36,7 +36,7 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.StickConversion
 
         public static ListViewModel Map(Core.Entities.StickConversion entity)
         {
-            Mapper.CreateMap<Core.Entities.StickConversion, ListViewModel>();
+         
             var viewModel = Mapper.Map<Core.Entities.StickConversion, ListViewModel>(entity);
             viewModel.ToUnit = entity.ToUnit.Name;
             viewModel.FromUnit = entity.FromUnit.Name;

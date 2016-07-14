@@ -31,7 +31,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Contact
 
         public static ListViewModel Map(Core.Entities.Contact entity)
         {
-            Mapper.CreateMap<Core.Entities.Contact, ListViewModel>();
+         
             return Mapper.Map<Core.Entities.Contact, ListViewModel>(entity);
         }
 

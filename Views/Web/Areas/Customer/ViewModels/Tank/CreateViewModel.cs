@@ -95,8 +95,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
         #region Map
 
         public Core.Entities.Tank Map()
-        {
-            Mapper.CreateMap<CreateViewModel, Core.Entities.Tank>();
+        {            
             return Mapper.Map<CreateViewModel, Core.Entities.Tank>(this);
         }
 

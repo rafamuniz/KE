@@ -8,10 +8,17 @@ namespace KarmicEnergy.Core.Entities
     [Table("Alarms", Schema = "dbo")]
     public class Alarm : BaseEntity
     {
+        #region Constructor
+        public Alarm()
+        {
+            this.Id = Guid.NewGuid();
+        }
+        #endregion Constructor
+
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         [Column("Value", TypeName = "NVARCHAR")]

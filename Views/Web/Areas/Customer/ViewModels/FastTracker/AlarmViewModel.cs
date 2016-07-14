@@ -47,8 +47,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
         }
 
         public static AlarmViewModel Map(Core.Entities.Alarm entity)
-        {
-            Mapper.CreateMap<Core.Entities.Alarm, AlarmViewModel>();
+        {            
             var viewModel = Mapper.Map<Core.Entities.Alarm, AlarmViewModel>(entity);
 
             viewModel.Id = entity.Id;

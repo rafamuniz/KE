@@ -100,8 +100,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
         }
 
         public static AlarmDetailViewModel Map(Core.Entities.Alarm entity)
-        {
-            Mapper.CreateMap<Core.Entities.Alarm, AlarmDetailViewModel>();
+        {            
             var viewModel = Mapper.Map<Core.Entities.Alarm, AlarmDetailViewModel>(entity);
 
             viewModel.SiteId = entity.Trigger.SensorItem.Sensor.Tank != null ? entity.Trigger.SensorItem.Sensor.Tank.Site.Id : entity.Trigger.SensorItem.Sensor.Site.Id;

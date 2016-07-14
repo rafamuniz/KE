@@ -41,28 +41,9 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
         #endregion Property
 
         #region Map
-
-        //public static List<ListViewModel> Map(List<Core.Entities.Tank> entities)
-        //{
-        //    List<ListViewModel> vms = new List<ListViewModel>();
-
-        //    if (entities != null && entities.Any())
-        //    {
-        //        entities.ForEach(c => vms.Add(ListViewModel.Map(c)));
-        //    }
-
-        //    return vms;
-        //}
-
-        //public static ListViewModel Map(Core.Entities.Site entity)
-        //{
-        //    Mapper.CreateMap<Core.Entities.Site, ListViewModel>();
-        //    return Mapper.Map<Core.Entities.Site, ListViewModel>(entity);
-        //}
-
+        
         public ListViewModel Map(Core.Entities.Site entity)
-        {
-            Mapper.CreateMap<Core.Entities.Site, ListViewModel>();
+        {            
             var viewModel = Mapper.Map<Core.Entities.Site, ListViewModel>(entity);
 
             viewModel.Latitude = entity.Latitude;

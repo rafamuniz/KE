@@ -41,7 +41,6 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
 
         public static TankDashboardViewModel Map(Core.Entities.Tank entity)
         {
-            Mapper.CreateMap<Core.Entities.Tank, TankDashboardViewModel>();
             return Mapper.Map<Core.Entities.Tank, TankDashboardViewModel>(entity);
         }
 

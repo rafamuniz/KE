@@ -40,7 +40,7 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.TankModel
             //    ImageFileName = entity.ImageFilename
             //};
             //return viewModel;
-            Mapper.CreateMap<Core.Entities.TankModel, EditViewModel>();
+       
             return Mapper.Map<Core.Entities.TankModel, EditViewModel>(entity);
         }
 

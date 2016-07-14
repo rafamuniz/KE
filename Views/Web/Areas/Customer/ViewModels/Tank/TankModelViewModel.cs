@@ -41,11 +41,11 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
 
         [Display(Name = "Minimum Distance")]
         [Required]
-        public Decimal? MinimumDistance { get; set; }
+        public Int32 MinimumDistance { get; set; }
 
         [Display(Name = "Maximum Distance")]
         [Required]
-        public Decimal? MaximumDistance { get; set; }
+        public Int32 MaximumDistance { get; set; }
 
         [Display(Name = "Water Volume Capacity", ShortName = "WVC")]
         public Decimal? WaterVolumeCapacity { get; set; }
@@ -55,8 +55,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Tank
         #region Map
 
         public Core.Entities.TankModel Map()
-        {
-            Mapper.CreateMap<TankModelViewModel, Core.Entities.TankModel>();
+        {         
             return Mapper.Map<TankModelViewModel, Core.Entities.TankModel>(this);
         }
 

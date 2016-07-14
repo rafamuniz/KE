@@ -55,17 +55,16 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
         [Required]
         public Int16 OperatorId { get; set; }
 
-        public IList<ContactViewModel> Contacts { get; set; }
+        public List<ContactViewModel> Contacts { get; set; }
 
-        public IList<UserViewModel> Users { get; set; }
+        public List<UserViewModel> Users { get; set; }
 
         #endregion Property
 
         #region Map
 
         public Core.Entities.Tank Map()
-        {
-            Mapper.CreateMap<CreateViewModel, Core.Entities.Tank>();
+        {            
             return Mapper.Map<CreateViewModel, Core.Entities.Tank>(this);
         }
 

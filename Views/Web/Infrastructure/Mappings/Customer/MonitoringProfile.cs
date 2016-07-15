@@ -13,6 +13,8 @@ namespace KarmicEnergy.Web.Infrastructure.Mappings.Customer
             #endregion ViewModel To Entity
 
             #region Entity To ViewModel 
+                        
+            this.CreateMap<Core.Entities.SensorItemEvent, EventDetailViewModel>();
 
             this.CreateMap<Core.Entities.AlarmHistory, CommentViewModel>();
             this.CreateMap<Core.Entities.Alarm, AlarmDetailViewModel>();

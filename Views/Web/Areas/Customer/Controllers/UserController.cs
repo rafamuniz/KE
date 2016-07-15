@@ -247,10 +247,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                                 customerUser.Sites.Add(new CustomerUserSite { SiteId = SiteId });
                             }
 
-                            customerUser.Address = address;
-                            //KEUnitOfWork.AddressRepository.Update(address);
+                            customerUser.Address = address;                          
                             KEUnitOfWork.CustomerUserRepository.Update(customerUser);
                             KEUnitOfWork.Complete();
+
                             AddLog("User Updated", LogTypeEnum.Info);
                             return RedirectToAction("Index", "User", new { area = "Customer" });
                         }

@@ -313,6 +313,7 @@
     <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Log\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Monitoring\EventDetailViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\AlarmViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\AlarmInfoViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\AlarmDetailViewModel.cs" />
@@ -1863,6 +1864,7 @@
     <Content Include="Areas\Customer\Views\Trigger\SiteEdit.cshtml" />
     <Content Include="Areas\Customer\Views\Trigger\TankEdit.cshtml" />
     <Content Include="Areas\Customer\Views\Trigger\PondEdit.cshtml" />
+    <Content Include="Areas\Customer\Views\Monitoring\Detail.cshtml" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>

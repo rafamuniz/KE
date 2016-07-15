@@ -22,11 +22,11 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             if (!IsSite)
             {
-                 events = KEUnitOfWork.SensorItemEventRepository.GetAllActive().ToList();                
+                events = KEUnitOfWork.SensorItemEventRepository.GetAllActive().ToList();
             }
             else
             {
-                events = KEUnitOfWork.SensorItemEventRepository.GetsBySite(SiteId);            
+                events = KEUnitOfWork.SensorItemEventRepository.GetsBySite(SiteId);
             }
 
             var evts = events.Any() ? events.OrderByDescending(d => d.EventDate).ToList() : events;
@@ -72,6 +72,15 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             var evt = KEUnitOfWork.SensorItemEventRepository.Get(eventId);
             viewModels.Add(ListViewModel.Map(evt));
             return View("Index", viewModels);
+        }
+
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
+        public ActionResult Detail(Guid id)
+        {
+            EventDetailViewModel viewModel = new EventDetailViewModel();
+            var entity = KEUnitOfWork.SensorItemEventRepository.Get(id);
+            viewModel.Map(entity);
+            return View(viewModel);
         }
 
         #endregion Index

@@ -1,4 +1,5 @@
-﻿using KarmicEnergy.Web.ViewModels;
+﻿using AutoMapper;
+using KarmicEnergy.Web.ViewModels;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -39,5 +40,14 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Site
         public override String ZipCode { get; set; }
 
         #endregion Property
+
+        #region Map
+
+        public Core.Entities.Address Map(Core.Entities.Address entity)
+        {
+            return Mapper.Map<SiteAddressViewModel, Core.Entities.Address>(this, entity);
+        }
+
+        #endregion Map
     }
 }

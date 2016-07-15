@@ -15,6 +15,7 @@ namespace KarmicEnergy.Web.Infrastructure.Mappings.Customer
 
             this.CreateMap<TankViewModel, Core.Entities.Site>();
             this.CreateMap<SiteAddressViewModel, Core.Entities.Site>();
+            this.CreateMap<SiteAddressViewModel, Core.Entities.Address>();
 
             #endregion ViewModel To Entity
 
@@ -26,6 +27,7 @@ namespace KarmicEnergy.Web.Infrastructure.Mappings.Customer
 
             this.CreateMap<Core.Entities.Site, TankViewModel>();
             this.CreateMap<Core.Entities.Site, SiteAddressViewModel>();
+            this.CreateMap<Core.Entities.Address, SiteAddressViewModel>();
 
             #endregion Entity To ViewModel 
         }

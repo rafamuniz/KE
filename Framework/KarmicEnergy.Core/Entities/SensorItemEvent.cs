@@ -1,5 +1,6 @@
 ﻿using Munizoft.Util.Converters;
 using System;
+using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -125,7 +126,48 @@ namespace KarmicEnergy.Core.Entities
             // Volume
             else if (this.SensorItem.Unit.UnitTypeId == (Int16)UnitTypeEnum.Volume)
             {
+                if (this.SensorItem.Sensor.PondId.HasValue) // POND
+                {
+                    return PondVolumeCapactiy();
+                }
+                else if (this.SensorItem.Sensor.TankId.HasValue) // TANK
+                {
+                    return TankVolumeCapactiy();
+                }
+                else // SITE
+                {
+                    return this.Value;
+                }
+            }
 
+            return this.Value;
+        }
+
+        private String PondVolumeCapactiy()
+        {
+            return this.Value;
+        }
+
+        private String TankVolumeCapactiy()
+        {
+            var tank = this.SensorItem.Sensor.Tank;
+            if (tank.StickConversionId.HasValue)// STICK CONVERSION
+            {
+                var values = this.SensorItem.Sensor.Tank.StickConversion.StickConversionValues;
+
+                var stv = values.Where(x => x.FromValue == this.Value);
+
+                if (stv.Any())
+                    return stv.SingleOrDefault().ToValue;
+                return this.Value;
+            }
+            else
+            {
+                Int32 range;
+                if (Int32.TryParse(this.Value, out range))
+                {
+                    return tank.CalculateWaterRemaining(range).ToString();
+                }
             }
 
             return this.Value;

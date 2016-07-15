@@ -3,7 +3,7 @@ namespace KarmicEnergy.Core.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Dev : DbMigration
+    public partial class AWS : DbMigration
     {
         public override void Up()
         {

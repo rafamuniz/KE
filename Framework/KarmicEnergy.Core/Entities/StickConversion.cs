@@ -53,6 +53,12 @@ namespace KarmicEnergy.Core.Entities
 
         #endregion To Unit
 
+        #region Stick Conversion Value
+
+        public virtual IList<StickConversionValue> StickConversionValues { get; set; }
+
+        #endregion Stick Conversion Value
+
         #endregion Property    
 
         #region Functions

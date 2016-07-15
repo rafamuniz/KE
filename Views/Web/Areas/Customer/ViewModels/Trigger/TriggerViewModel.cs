@@ -23,7 +23,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger
         public String Status { get; set; }
 
         [Display(Name = "Site")]
-        public Guid SiteId { get; set; }
+        public Guid? SiteId { get; set; }
 
         [Display(Name = "Site")]
         public String SiteName { get; set; }

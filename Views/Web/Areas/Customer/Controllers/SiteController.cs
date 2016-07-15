@@ -1,6 +1,5 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor;
-using KarmicEnergy.Web.Areas.Customer.ViewModels.Site;
 using KarmicEnergy.Web.Controllers;
 using System;
 using System.Collections.Generic;
@@ -60,7 +59,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                 KEUnitOfWork.SiteRepository.Add(site);
                 KEUnitOfWork.Complete();
-                                
+
                 AddLog("Site Created", LogTypeEnum.Info);
                 return RedirectToAction("Index", "Site", new { area = "Customer" });
             }
@@ -120,10 +119,14 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     return View("Index");
                 }
 
-                viewModel.MapVMToEntity(site);
-                viewModel.MapVMToEntity(site.Address);
+                //viewModel.MapVMToEntity(site);
+                //viewModel.MapVMToEntity(site.Address);
 
-                KEUnitOfWork.SiteRepository.Update(site);
+                Core.Entities.Address address = viewModel.Address.Map(site.Address);
+                Core.Entities.Site s = viewModel.Map(site);
+                site.Address = address;
+
+                KEUnitOfWork.SiteRepository.Update(s);
                 KEUnitOfWork.Complete();
 
                 AddLog("Site Updated", LogTypeEnum.Info);

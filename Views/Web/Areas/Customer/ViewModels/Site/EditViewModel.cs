@@ -45,12 +45,17 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Site
         [Display(Name = "Longitude")]
         public String Longitude { get; set; }
 
-        [IgnoreMap]
+        //[IgnoreMap]
         public SiteAddressViewModel Address { get; set; }
 
         #endregion Property
 
         #region Map
+
+        public Core.Entities.Site Map(Core.Entities.Site entity)
+        {
+            return Mapper.Map<EditViewModel, Core.Entities.Site>(this, entity);
+        }
 
         public void MapEntityToVM(Core.Entities.Site entity)
         {

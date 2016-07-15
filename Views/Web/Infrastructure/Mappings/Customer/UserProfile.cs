@@ -25,6 +25,8 @@ namespace KarmicEnergy.Web.Infrastructure.Mappings.Customer
             this.CreateMap<Core.Entities.CustomerUser, CreateViewModel>();
             this.CreateMap<Core.Entities.CustomerUser, EditViewModel>();
 
+            this.CreateMap<Core.Entities.Site, SiteViewModel>();
+
             #endregion Entity To ViewModel 
         }
     }

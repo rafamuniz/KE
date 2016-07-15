@@ -225,7 +225,7 @@ namespace KarmicEnergy.Core.Entities
             return 0;
         }
 
-        public Decimal CalculateWaterRemaining(Decimal height)
+        public Decimal CalculateWaterRemaining(Decimal range)
         {
             if (this.TankModelId != default(Int32))
             {
@@ -233,20 +233,20 @@ namespace KarmicEnergy.Core.Entities
                 {
                     // set @cubicunits = @length * @width * @height
                     case (Int32)TankModelEnum.CubeHorizontal:
-                        return this.Length.Value * this.Width.Value * height;
+                        return this.Length.Value * this.Width.Value * range;
 
                     case (Int32)TankModelEnum.HorizontalRoundTank:
-                        return Length.Value * Width.Value * height;
+                        return Length.Value * Width.Value * range;
 
                     case (Int32)TankModelEnum.VerticalRoundTank:
-                        return Length.Value * Width.Value * height;
+                        return Length.Value * Width.Value * range;
 
                     // set @area1 = @height * @dim4
                     // set @area2 = PI() * power((@height / 2), 2)
                     // set @cubicunits = (@area1 + @area2) * @length
                     case (Int32)TankModelEnum.HorizontalStadium:
-                        var areaHS1 = height * Dimension1;
-                        var areaHS2 = Math.PI * Math.Pow((Double)(height / 2), 2);
+                        var areaHS1 = range * Dimension1;
+                        var areaHS2 = Math.PI * Math.Pow((Double)(range / 2), 2);
                         var cubicHS = (areaHS1 + (Decimal)areaHS2) * Length;
                         return cubicHS.Value;
 
@@ -256,13 +256,13 @@ namespace KarmicEnergy.Core.Entities
                     case (Int32)TankModelEnum.VerticalStadium:
                         var areaVS1 = Length * Width;
                         var areaVS2 = Math.PI * Math.Pow((double)(Width / 2), 2);
-                        var cubicVS = (areaVS1 + (Decimal)areaVS2) * height;
+                        var cubicVS = (areaVS1 + (Decimal)areaVS2) * range;
                         return cubicVS.Value;
 
                     // set @area = PI() * (@height / 2) * (@width / 2)
                     // set @cubicunits = @area * @length
                     case (Int32)TankModelEnum.StandardTanker:
-                        var areaST = Math.PI * Math.Pow((double)(height / 2), (Double)(Width / 2));
+                        var areaST = Math.PI * Math.Pow((double)(range / 2), (Double)(Width / 2));
                         var cubicST = (Decimal)areaST * Length;
                         return cubicST.Value;
 
@@ -273,11 +273,11 @@ namespace KarmicEnergy.Core.Entities
                         return 21000;
 
                     default:
-                        return Length.Value * Width.Value * height;
+                        return Length.Value * Width.Value * range;
                 }
             }
 
-            return Length.Value * Width.Value * height;
+            return Length.Value * Width.Value * range;
         }
 
         public void Update(Tank entity)

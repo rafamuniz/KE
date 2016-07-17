@@ -1,5 +1,6 @@
 ﻿using KarmicEnergy.Core.Persistence;
 using Munizoft.Core.Repositories;
+using System;
 using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Repositories
@@ -8,6 +9,7 @@ namespace KarmicEnergy.Core.Repositories
         where TEntity : class, new()
     {
         IEnumerable<TEntity> GetAllActive();
-        void Sync(List<TEntity> entities);
+        void SaveSync(List<TEntity> entities);
+        IEnumerable<TEntity> GetsBySiteToSync(Guid siteId, DateTime lastSyncDate);
     }
 }

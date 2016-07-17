@@ -61,21 +61,6 @@ namespace KarmicEnergy.Web.ApiControllers
         }
 
         [HttpGet]
-        [Route("sync/notificationtype/{siteId}/{lastSyncDate}", Name = "GetsNotificationType")]
-        public IHttpActionResult GetsNotificationType(Guid siteId, DateTime lastSyncDate)
-        {
-            try
-            {
-                var entities = KEUnitOfWork.NotificationTypeRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
-                return Ok(entities);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-        }
-
-        [HttpGet]
         [Route("sync/operatortype/{siteId}/{lastSyncDate}", Name = "GetsOperatorType")]
         public IHttpActionResult GetsOperatorType(Guid siteId, DateTime lastSyncDate)
         {
@@ -97,6 +82,66 @@ namespace KarmicEnergy.Web.ApiControllers
             try
             {
                 var entities = KEUnitOfWork.UnitTypeRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("sync/notificationtype/{siteId}/{lastSyncDate}", Name = "GetsNotificationType")]
+        public IHttpActionResult GetsNotificationType(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.NotificationTypeRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("sync/logtype/{siteId}/{lastSyncDate}", Name = "GetsLogType")]
+        public IHttpActionResult GetsLogType(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.LogTypeRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("sync/geometry/{siteId}/{lastSyncDate}", Name = "GetsGeometry")]
+        public IHttpActionResult GetsGeometry(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.GeometryRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("sync/severity/{siteId}/{lastSyncDate}", Name = "GetsSeverity")]
+        public IHttpActionResult GetsSeverity(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.SeverityRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
                 return Ok(entities);
             }
             catch (Exception ex)
@@ -190,36 +235,6 @@ namespace KarmicEnergy.Web.ApiControllers
         }
 
         [HttpGet]
-        [Route("sync/geometry/{siteId}/{lastSyncDate}", Name = "GetsGeometry")]
-        public IHttpActionResult GetsGeometry(Guid siteId, DateTime lastSyncDate)
-        {
-            try
-            {
-                var entities = KEUnitOfWork.GeometryRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
-                return Ok(entities);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-        }
-
-        [HttpGet]
-        [Route("sync/logtype/{siteId}/{lastSyncDate}", Name = "GetsLogType")]
-        public IHttpActionResult GetsLogType(Guid siteId, DateTime lastSyncDate)
-        {
-            try
-            {
-                var entities = KEUnitOfWork.LogTypeRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
-                return Ok(entities);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-        }
-
-        [HttpGet]
         [Route("sync/log/{siteId}/{lastSyncDate}", Name = "GetsLog")]
         public IHttpActionResult GetsLog(Guid siteId, DateTime lastSyncDate)
         {
@@ -240,23 +255,21 @@ namespace KarmicEnergy.Web.ApiControllers
         {
             try
             {
+                List<NotificationTemplate> notificationTemplates = new List<NotificationTemplate>();
                 var entities = KEUnitOfWork.NotificationTemplateRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
-                return Ok(entities);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-        }
 
-        [HttpGet]
-        [Route("sync/severity/{siteId}/{lastSyncDate}", Name = "GetsSeverity")]
-        public IHttpActionResult GetsSeverity(Guid siteId, DateTime lastSyncDate)
-        {
-            try
-            {
-                var entities = KEUnitOfWork.SeverityRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
-                return Ok(entities);
+                foreach (var entity in entities)
+                {
+                    NotificationTemplate notificationTemplate = new NotificationTemplate()
+                    {
+                        Id = entity.Id
+                    };
+
+                    notificationTemplate.Update(entity);
+                    notificationTemplates.Add(notificationTemplate);
+                }
+
+                return Ok(notificationTemplates);
             }
             catch (Exception ex)
             {
@@ -270,8 +283,20 @@ namespace KarmicEnergy.Web.ApiControllers
         {
             try
             {
+                List<TankModel> tankModels = new List<TankModel>();
                 var entities = KEUnitOfWork.TankModelRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
-                return Ok(entities);
+
+                foreach (var entity in entities)
+                {
+                    TankModel tankModel = new TankModel()
+                    {
+                        Id = entity.Id
+                    };
+
+                    tankModel.Update(entity);
+                    tankModels.Add(tankModel);
+                }
+                return Ok(tankModels);
             }
             catch (Exception ex)
             {
@@ -308,7 +333,22 @@ namespace KarmicEnergy.Web.ApiControllers
                 return InternalServerError(ex);
             }
         }
-
+        
+        [HttpGet]
+        [Route("sync/Item/{siteId}/{lastSyncDate}", Name = "GetsSensor")]
+        public IHttpActionResult GetsItem(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.ItemRepository.GetsBySiteToSync(siteId, lastSyncDate);
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+                
         #endregion Common
 
         #region User
@@ -348,11 +388,11 @@ namespace KarmicEnergy.Web.ApiControllers
 
         [HttpGet]
         [Route("sync/address/{siteId}/{lastSyncDate}", Name = "GetsAddress")]
-        public IHttpActionResult GetsAddress(String siteId, DateTime lastSyncDate)
+        public IHttpActionResult GetsAddress(Guid siteId, DateTime lastSyncDate)
         {
             try
             {
-                var entities = KEUnitOfWork.AddressRepository.Find(x => x.LastModifiedDate > lastSyncDate).ToList();
+                var entities = KEUnitOfWork.AddressRepository.GetsBySiteToSync(siteId, lastSyncDate);
                 return Ok(entities);
             }
             catch (Exception ex)
@@ -371,7 +411,7 @@ namespace KarmicEnergy.Web.ApiControllers
         {
             try
             {
-                var entities = KEUnitOfWork.SiteRepository.Find(x => x.Id == siteId && x.LastModifiedDate > lastSyncDate).SingleOrDefault().Customer;
+                var entities = KEUnitOfWork.CustomerRepository.GetsBySiteToSync(siteId, lastSyncDate);
                 return Ok(entities);
             }
             catch (Exception ex)
@@ -382,8 +422,232 @@ namespace KarmicEnergy.Web.ApiControllers
 
         #endregion Customer
 
+        #region CustomerUser
+
+        [HttpGet]
+        [Route("sync/CustomerUser/{siteId}/{lastSyncDate}", Name = "GetsCustomerUser")]
+        public IHttpActionResult GetsCustomerUser(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.CustomerUserRepository.GetsBySiteToSync(siteId, lastSyncDate);
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion CustomerUser               
+
+        #region CustomerUserSetting
+
+        [HttpGet]
+        [Route("sync/CustomerUserSetting/{siteId}/{lastSyncDate}", Name = "GetsCustomerUserSetting")]
+        public IHttpActionResult GetsCustomerUserSetting(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.CustomerUserSettingRepository.GetsBySiteToSync(siteId, lastSyncDate);
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion CustomerUserSetting               
+
+        #region CustomerUserSite
+
+        [HttpGet]
+        [Route("sync/CustomerUserSite/{siteId}/{lastSyncDate}", Name = "GetsCustomerUserSite")]
+        public IHttpActionResult GetsCustomerUserSite(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.CustomerUserSiteRepository.GetsBySiteToSync(siteId, lastSyncDate);
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion CustomerUserSite
+
+        #region Site
+
+        [HttpGet]
+        [Route("sync/site/{siteId}/{lastSyncDate}", Name = "GetsSite")]
+        public IHttpActionResult GetsSite(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.SiteRepository.GetsBySiteToSync(siteId, lastSyncDate);
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion Site
+
         #region Tank
+
+        [HttpGet]
+        [Route("sync/tank/{siteId}/{lastSyncDate}", Name = "GetsTank")]
+        public IHttpActionResult GetsTank(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.TankRepository.GetsBySiteToSync(siteId, lastSyncDate);
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
         #endregion Tank
 
+        #region Pond
+
+        [HttpGet]
+        [Route("sync/pond/{siteId}/{lastSyncDate}", Name = "GetsPond")]
+        public IHttpActionResult GetsPond(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.PondRepository.GetsBySiteToSync(siteId, lastSyncDate);
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion Pond               
+
+        #region Sensor
+
+        [HttpGet]
+        [Route("sync/Sensor/{siteId}/{lastSyncDate}", Name = "GetsSensor")]
+        public IHttpActionResult GetsSensor(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.SensorRepository.GetsBySiteToSync(siteId, lastSyncDate);
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion Sensor               
+
+        #region SensorItem
+
+        [HttpGet]
+        [Route("sync/SensorItem/{siteId}/{lastSyncDate}", Name = "GetsSensor")]
+        public IHttpActionResult GetsSensorItem(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.SensorItemRepository.GetsBySiteToSync(siteId, lastSyncDate);
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion SensorItem               
+
+        #region Trigger
+
+        [HttpGet]
+        [Route("sync/Trigger/{siteId}/{lastSyncDate}", Name = "GetsTrigger")]
+        public IHttpActionResult GetsTrigger(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.TriggerRepository.GetsBySiteToSync(siteId, lastSyncDate);
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion Trigger               
+
+        #region TriggerContact
+
+        [HttpGet]
+        [Route("sync/TriggerContact/{siteId}/{lastSyncDate}", Name = "GetsTriggerContact")]
+        public IHttpActionResult GetsTriggerContact(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.TriggerContactRepository.GetsBySiteToSync(siteId, lastSyncDate);
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion TriggerContact               
+
+        #region Group
+
+        [HttpGet]
+        [Route("sync/Group/{siteId}/{lastSyncDate}", Name = "GetsGroup")]
+        public IHttpActionResult GetsGroup(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.GroupRepository.GetsBySiteToSync(siteId, lastSyncDate);
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion Group
+
+        #region GroupSensor
+
+        [HttpGet]
+        [Route("sync/SensorGroup/{siteId}/{lastSyncDate}", Name = "GetsSensorGroup")]
+        public IHttpActionResult GetsSensorGroup(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.SensorGroupRepository.GetsBySiteToSync(siteId, lastSyncDate);
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion GroupSensor
     }
 }

@@ -77,5 +77,20 @@ namespace KarmicEnergy.Core.Repositories
         {
             return Context.SensorItemEvents.Where(x => x.CheckedAlarmDate == null).ToList();
         }
+
+        public override IEnumerable<SensorItemEvent> GetsBySiteToSync(Guid siteId, DateTime lastSyncDate)
+        {
+            List<SensorItemEvent> entities = new List<SensorItemEvent>();
+
+            var sites = base.Find(x => x.SensorItem.Sensor.SiteId == siteId && x.LastModifiedDate > lastSyncDate).ToList();
+            var ponds = base.Find(x => x.SensorItem.Sensor.Pond.SiteId == siteId && x.LastModifiedDate > lastSyncDate).ToList();
+            var tanks = base.Find(x => x.SensorItem.Sensor.Tank.SiteId == siteId && x.LastModifiedDate > lastSyncDate).ToList();
+
+            entities.AddRange(sites);
+            entities.AddRange(ponds);
+            entities.AddRange(tanks);
+
+            return entities.AsEnumerable();
+        }
     }
 }

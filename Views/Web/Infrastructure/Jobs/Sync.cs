@@ -42,22 +42,40 @@ namespace KarmicEnergy.Web.Jobs
                     dates.Add(StickConversion(siteConfig, ip, lastDateTime));
                     dates.Add(StickConversionValue(siteConfig, ip, lastDateTime));
                     dates.Add(Geometry(siteConfig, ip, lastDateTime));
-                    dates.Add(LogType(siteConfig, ip, lastDateTime));                   
-                    dates.Add(NotificationTemplate(siteConfig, ip, lastDateTime));
+                    dates.Add(LogType(siteConfig, ip, lastDateTime));
                     dates.Add(Severity(siteConfig, ip, lastDateTime));
-                    dates.Add(TankModel(siteConfig, ip, lastDateTime));
                     dates.Add(Country(siteConfig, ip, lastDateTime));
                     dates.Add(City(siteConfig, ip, lastDateTime));
 
+                    dates.Add(NotificationTemplate(siteConfig, ip, lastDateTime));
+                    dates.Add(TankModel(siteConfig, ip, lastDateTime));
+                    dates.Add(Operator(siteConfig, ip, lastDateTime));
+                    dates.Add(Notification(siteConfig, ip, lastDateTime));
+                    dates.Add(Item(siteConfig, ip, lastDateTime));
+
                     dates.Add(Address(siteConfig, ip, lastDateTime));
                     dates.Add(Customer(siteConfig, ip, lastDateTime));
+                    dates.Add(Site(siteConfig, ip, lastDateTime));
+                    dates.Add(Pond(siteConfig, ip, lastDateTime));
+                    dates.Add(Tank(siteConfig, ip, lastDateTime));
+                    dates.Add(Sensor(siteConfig, ip, lastDateTime));
+                    dates.Add(SensorItem(siteConfig, ip, lastDateTime));
+                    dates.Add(Trigger(siteConfig, ip, lastDateTime));
+                    dates.Add(TriggerContact(siteConfig, ip, lastDateTime));
+
+                    dates.Add(CustomerSetting(siteConfig, ip, lastDateTime));
+                    dates.Add(CustomerUser(siteConfig, ip, lastDateTime));
+                    dates.Add(CustomerUserSetting(siteConfig, ip, lastDateTime));
+                    dates.Add(CustomerUserSite(siteConfig, ip, lastDateTime));
+
+                    dates.Add(Group(siteConfig, ip, lastDateTime));
+                    dates.Add(SensorGroup(siteConfig, ip, lastDateTime));
 
                     DataSync dataSync = new DataSync()
                     {
                         SiteId = Guid.Parse(siteConfig),
                         SyncDate = dates.Max<DateTime>()
                     };
-
 
                     //dates.Add(Log(siteConfig, ip, lastDateTime));
 
@@ -67,7 +85,7 @@ namespace KarmicEnergy.Web.Jobs
                     #endregion Get
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -802,34 +820,6 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime CustomerUserSetting(String siteId, String ip, DateTime lastSync)
-        {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/CustomerUserSetting/", siteId, lastSync.ToString("yyyy-MM-dd"));
-            List<CustomerUserSetting> entities = Gets<CustomerUserSetting>(url);
-
-            if (entities.Any())
-            {
-                foreach (var e in entities)
-                {
-                    var entity = KEUnitOfWork.CustomerUserSettingRepository.Get(e.Id);
-                    if (entity == null)
-                    {
-                        KEUnitOfWork.CustomerUserSettingRepository.Add(e);
-                    }
-                    else
-                    {
-                        entity.Update(e);
-                        KEUnitOfWork.CustomerUserSettingRepository.Update(entity);
-                    }
-                }
-
-                KEUnitOfWork.Complete();
-                return entities.Max(x => x.LastModifiedDate);
-            }
-
-            return lastSync;
-        }
-
         private DateTime CustomerUserSite(String siteId, String ip, DateTime lastSync)
         {
             String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/CustomerUserSite/", siteId, lastSync.ToString("yyyy-MM-dd"));
@@ -848,6 +838,34 @@ namespace KarmicEnergy.Web.Jobs
                     {
                         entity.Update(e);
                         KEUnitOfWork.CustomerUserSiteRepository.Update(entity);
+                    }
+                }
+
+                KEUnitOfWork.Complete();
+                return entities.Max(x => x.LastModifiedDate);
+            }
+
+            return lastSync;
+        }
+
+        private DateTime CustomerUserSetting(String siteId, String ip, DateTime lastSync)
+        {
+            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/CustomerUserSetting/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            List<CustomerUserSetting> entities = Gets<CustomerUserSetting>(url);
+
+            if (entities.Any())
+            {
+                foreach (var e in entities)
+                {
+                    var entity = KEUnitOfWork.CustomerUserSettingRepository.Get(e.Id);
+                    if (entity == null)
+                    {
+                        KEUnitOfWork.CustomerUserSettingRepository.Add(e);
+                    }
+                    else
+                    {
+                        entity.Update(e);
+                        KEUnitOfWork.CustomerUserSettingRepository.Update(entity);
                     }
                 }
 

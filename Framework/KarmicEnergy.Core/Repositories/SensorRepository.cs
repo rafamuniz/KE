@@ -35,28 +35,7 @@ namespace KarmicEnergy.Core.Repositories
         {
             return base.Find(x => x.Status == "A" && x.DeletedDate == null).ToList();
         }
-
-        //public List<Sensor> GetsByCustomer(Guid customerId)
-        //{
-        //    return base.Find(x => x.Tank.Site.CustomerId == customerId && x.DeletedDate == null).ToList();
-        //}
-
-        //public List<Sensor> GetsByTank(Guid tankId)
-        //{
-        //    return base.Find(x => x.TankId == tankId).ToList();
-        //}
-
-        ///// <summary>
-        ///// Gets Sensor Site
-        ///// NOT Sensor Tank
-        ///// </summary>
-        ///// <param name="siteId"></param>
-        ///// <returns></returns>
-        //public List<Sensor> GetsBySite(Guid siteId)
-        //{
-        //    return base.Find(x => x.SiteId == siteId && x.TankId == null && x.DeletedDate == null).ToList();
-        //}
-
+        
         /// <summary>
         /// Gets All Sensors that is installed in Site
         /// </summary>
@@ -93,6 +72,33 @@ namespace KarmicEnergy.Core.Repositories
         public List<Sensor> GetsBySiteAndSensorType(Guid siteId, SensorTypeEnum sensorType)
         {
             return base.Find(x => x.SensorTypeId == (Int16)sensorType && x.SiteId == siteId).ToList();
+        }
+
+        public override IEnumerable<Sensor> GetsBySiteToSync(Guid siteId, DateTime lastSyncDate)
+        {
+            List<Sensor> entities = new List<Sensor>();
+            List<Sensor> sensors = new List<Sensor>();
+
+            var sites = base.Find(x => x.SiteId == siteId && x.LastModifiedDate > lastSyncDate).ToList();
+            var ponds = base.Find(x => x.Pond.SiteId == siteId && x.LastModifiedDate > lastSyncDate).ToList();
+            var tanks = base.Find(x => x.Tank.SiteId == siteId && x.LastModifiedDate > lastSyncDate).ToList();
+
+            entities.AddRange(sites);
+            entities.AddRange(ponds);
+            entities.AddRange(tanks);
+            
+            foreach (var entity in entities)
+            {
+                Sensor sensor = new Sensor()
+                {
+                    Id = entity.Id
+                };
+
+                sensor.Update(entity);
+                sensors.Add(sensor);
+            }
+
+            return sensors.AsEnumerable();
         }
     }
 }

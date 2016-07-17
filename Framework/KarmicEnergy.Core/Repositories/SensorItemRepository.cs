@@ -50,5 +50,20 @@ namespace KarmicEnergy.Core.Repositories
         {
             return base.Find(x => x.SensorId == sensorId && x.DeletedDate == null && x.ItemId == (Int32)item).SingleOrDefault();
         }
+
+        public override IEnumerable<SensorItem> GetsBySiteToSync(Guid siteId, DateTime lastSyncDate)
+        {
+            List<SensorItem> entities = new List<SensorItem>();
+
+            var sites = base.Find(x => x.Sensor.SiteId == siteId && x.LastModifiedDate > lastSyncDate).ToList();
+            var ponds = base.Find(x => x.Sensor.Pond.SiteId == siteId && x.LastModifiedDate > lastSyncDate).ToList();
+            var tanks = base.Find(x => x.Sensor.Tank.SiteId == siteId && x.LastModifiedDate > lastSyncDate).ToList();
+
+            entities.AddRange(sites);
+            entities.AddRange(ponds);
+            entities.AddRange(tanks);
+
+            return entities.AsEnumerable();
+        }
     }
 }

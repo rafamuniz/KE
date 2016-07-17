@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using Munizoft.Extensions;
 using System.Net.Http;
 
 namespace KarmicEnergy.Web.Jobs
@@ -49,8 +48,8 @@ namespace KarmicEnergy.Web.Jobs
 
                     dates.Add(NotificationTemplate(siteConfig, ip, lastDateTime));
                     dates.Add(TankModel(siteConfig, ip, lastDateTime));
-                    dates.Add(Operator(siteConfig, ip, lastDateTime));
-                    dates.Add(Notification(siteConfig, ip, lastDateTime));
+                    //dates.Add(Operator(siteConfig, ip, lastDateTime));
+                    //dates.Add(Notification(siteConfig, ip, lastDateTime));
                     dates.Add(Item(siteConfig, ip, lastDateTime));
 
                     dates.Add(Address(siteConfig, ip, lastDateTime));

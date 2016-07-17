@@ -3,7 +3,6 @@ using KarmicEnergy.Core.Persistence;
 using Munizoft.Core.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace KarmicEnergy.Core.Repositories

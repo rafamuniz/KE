@@ -2,8 +2,8 @@
 using KarmicEnergy.Core.Persistence;
 using KarmicEnergy.Web.Entities;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 
 namespace KarmicEnergy.Web.ApiControllers
@@ -333,9 +333,9 @@ namespace KarmicEnergy.Web.ApiControllers
                 return InternalServerError(ex);
             }
         }
-        
+
         [HttpGet]
-        [Route("sync/Item/{siteId}/{lastSyncDate}", Name = "GetsSensor")]
+        [Route("sync/Item/{siteId}/{lastSyncDate}", Name = "GetsItem")]
         public IHttpActionResult GetsItem(Guid siteId, DateTime lastSyncDate)
         {
             try
@@ -348,7 +348,7 @@ namespace KarmicEnergy.Web.ApiControllers
                 return InternalServerError(ex);
             }
         }
-                
+
         #endregion Common
 
         #region User
@@ -558,7 +558,7 @@ namespace KarmicEnergy.Web.ApiControllers
         #region SensorItem
 
         [HttpGet]
-        [Route("sync/SensorItem/{siteId}/{lastSyncDate}", Name = "GetsSensor")]
+        [Route("sync/SensorItem/{siteId}/{lastSyncDate}", Name = "GetsSensorItem")]
         public IHttpActionResult GetsSensorItem(Guid siteId, DateTime lastSyncDate)
         {
             try

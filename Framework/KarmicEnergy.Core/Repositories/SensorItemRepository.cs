@@ -15,7 +15,7 @@ namespace KarmicEnergy.Core.Repositories
 
         }
         #endregion Constructor 
-        
+
         public Boolean HasSiteSensorItem(Guid siteId, ItemEnum item)
         {
             return base.Find(x => x.Sensor.SiteId == siteId && x.ItemId == (Int32)item && x.DeletedDate == null).Any();
@@ -53,6 +53,8 @@ namespace KarmicEnergy.Core.Repositories
 
         public override IEnumerable<SensorItem> GetsBySiteToSync(Guid siteId, DateTime lastSyncDate)
         {
+
+            List<SensorItem> sensorItems = new List<SensorItem>();
             List<SensorItem> entities = new List<SensorItem>();
 
             var sites = base.Find(x => x.Sensor.SiteId == siteId && x.LastModifiedDate > lastSyncDate).ToList();
@@ -63,7 +65,18 @@ namespace KarmicEnergy.Core.Repositories
             entities.AddRange(ponds);
             entities.AddRange(tanks);
 
-            return entities.AsEnumerable();
+            foreach (var entity in entities)
+            {
+                SensorItem sensorItem = new SensorItem()
+                {
+                    Id = entity.Id
+                };
+
+                sensorItem.Update(entity);
+                sensorItems.Add(sensorItem);
+            }
+
+            return sensorItems.AsEnumerable();
         }
     }
 }

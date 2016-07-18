@@ -25,15 +25,11 @@ namespace KarmicEnergy.Core.Repositories
         {
             return base.Find(x => x.Site.CustomerId == customerId && x.SiteId == siteId && x.Status == "A" && x.DeletedDate == null).ToList();
         }
-        
+
         public override IEnumerable<Tank> GetsBySiteToSync(Guid siteId, DateTime lastSyncDate)
         {
             List<Tank> tanks = new List<Tank>();
-            var entities = (from t in Context.Tanks
-                            join s in Context.Sites on t.SiteId equals s.Id
-                            where s.LastModifiedDate > lastSyncDate &&
-                                  s.Id == siteId
-                            select t).ToList();
+            var entities = base.Find(x => x.SiteId == siteId && x.LastModifiedDate > lastSyncDate).ToList();
 
             foreach (var entity in entities)
             {

@@ -353,7 +353,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>07/18/2016 01:27:09</publishTime>
+      <publishTime>07/18/2016 23:41:35</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
@@ -362,7 +362,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/13/2016 00:18:34</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>07/18/2016 01:27:24</publishTime>
+      <publishTime>07/18/2016 23:41:45</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>

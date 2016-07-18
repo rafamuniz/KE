@@ -75,6 +75,7 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -126,9 +127,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201607151316352_AWS.cs" />
-    <Compile Include="Migrations\201607151316352_AWS.Designer.cs">
-      <DependentUpon>201607151316352_AWS.cs</DependentUpon>
+    <Compile Include="Migrations\201607181238355_Dev.cs" />
+    <Compile Include="Migrations\201607181238355_Dev.Designer.cs">
+      <DependentUpon>201607181238355_Dev.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\DatabaseCreateIfNotExists.cs" />
@@ -231,8 +232,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607151316352_AWS.resx">
-      <DependentUpon>201607151316352_AWS.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607181238355_Dev.resx">
+      <DependentUpon>201607181238355_Dev.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

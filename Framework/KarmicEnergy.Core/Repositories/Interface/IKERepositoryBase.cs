@@ -9,6 +9,7 @@ namespace KarmicEnergy.Core.Repositories
         where TEntity : class, new()
     {
         IEnumerable<TEntity> GetAllActive();
+        void UpdateWithoutDate(TEntity entity);
         void SaveSync(List<TEntity> entities);
         IEnumerable<TEntity> GetsBySiteToSync(Guid siteId, DateTime lastSyncDate);
     }

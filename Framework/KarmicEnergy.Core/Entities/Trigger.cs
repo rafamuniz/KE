@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace KarmicEnergy.Core.Entities
 {
@@ -68,12 +69,17 @@ namespace KarmicEnergy.Core.Entities
         public virtual List<Alarm> Alarms { get; set; }
 
         [NotMapped]
+        [IgnoreDataMember]
         public Boolean HasAlarm
         {
             get
             {
-                return Alarms.Where(x => x.EndDate == null).Any();
+                if (Alarms.Any())
+                    return Alarms.Where(x => x.EndDate == null).Any();
+                else
+                    return false;
             }
+            set { }
         }
 
         #endregion Alarms  
@@ -142,7 +148,7 @@ namespace KarmicEnergy.Core.Entities
                     throw new ArgumentException("Value wrong");
             }
         }
-                
+
         public void Update(Trigger entity)
         {
             this.Status = entity.Status;
@@ -150,12 +156,12 @@ namespace KarmicEnergy.Core.Entities
             this.SensorItemId = entity.SensorItemId;
             this.SeverityId = entity.SeverityId;
             this.OperatorId = entity.OperatorId;
-            
+
             this.CreatedDate = entity.CreatedDate;
             this.LastModifiedDate = entity.LastModifiedDate;
             this.DeletedDate = entity.DeletedDate;
         }
-        
+
         #endregion Functions
     }
 }

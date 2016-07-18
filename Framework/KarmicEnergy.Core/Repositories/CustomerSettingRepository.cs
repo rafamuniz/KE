@@ -25,5 +25,30 @@ namespace KarmicEnergy.Core.Repositories
         {
             return base.Find(x => x.CustomerId == customerId).ToList();
         }
+
+        public override IEnumerable<CustomerSetting> GetsBySiteToSync(Guid siteId, DateTime lastSyncDate)
+        {
+            List<CustomerSetting> customerSettings = new List<CustomerSetting>();
+            var entities = (from cus in Context.CustomerSettings
+                            join cu in Context.Customers on cus.CustomerId equals cu.Id into Customers
+                            from c1 in Customers
+                            join s in Context.Sites on c1.Id equals s.CustomerId
+                            where cus.LastModifiedDate > lastSyncDate &&
+                                  s.Id == siteId
+                            select cus).ToList();
+
+            foreach (var entity in entities)
+            {
+                CustomerSetting customerSetting = new CustomerSetting()
+                {
+                    Id = entity.Id
+                };
+
+                customerSetting.Update(entity);
+                customerSettings.Add(customerSetting);
+            }
+
+            return customerSettings;
+        }
     }
 }

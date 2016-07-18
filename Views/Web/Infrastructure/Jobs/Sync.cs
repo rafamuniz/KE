@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Net.Http;
 
@@ -13,75 +14,32 @@ namespace KarmicEnergy.Web.Jobs
     {
         private KEUnitOfWork KEUnitOfWork;
 
+        public String SiteId
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["Site:Id"].ToString();
+            }
+        }
+
+        public String MasterUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["Master:Url"].ToString();
+            }
+        }
+
         public void Execute()
         {
             try
             {
                 KEUnitOfWork = KEUnitOfWork.Create();
-                String siteConfig = ConfigurationManager.AppSettings["Site:Id"].ToString();
 
-                if (!String.IsNullOrEmpty(siteConfig)) // Site
+                if (!String.IsNullOrEmpty(SiteId)) // Site
                 {
-                    #region Get
-
-                    var lastDataSync = KEUnitOfWork.DataSyncRepository.GetAll().OrderByDescending(x => x.SyncDate).LastOrDefault();
-                    List<DateTime> dates = new List<DateTime>();
-                    DateTime lastDateTime = DateTime.MinValue;
-                    String ip = ConfigurationManager.AppSettings["Master:Url"];
-
-                    if (lastDataSync == null)
-                        lastDateTime = DateTime.MinValue;
-
-                    dates.Add(ActionType(siteConfig, ip, lastDateTime));
-                    dates.Add(SensorType(siteConfig, ip, lastDateTime));
-                    dates.Add(NotificationType(siteConfig, ip, lastDateTime));
-                    dates.Add(OperatorType(siteConfig, ip, lastDateTime));
-                    dates.Add(UnitType(siteConfig, ip, lastDateTime));
-                    dates.Add(Unit(siteConfig, ip, lastDateTime));
-                    dates.Add(StickConversion(siteConfig, ip, lastDateTime));
-                    dates.Add(StickConversionValue(siteConfig, ip, lastDateTime));
-                    dates.Add(Geometry(siteConfig, ip, lastDateTime));
-                    dates.Add(LogType(siteConfig, ip, lastDateTime));
-                    dates.Add(Severity(siteConfig, ip, lastDateTime));
-                    dates.Add(Country(siteConfig, ip, lastDateTime));
-                    dates.Add(City(siteConfig, ip, lastDateTime));
-
-                    dates.Add(NotificationTemplate(siteConfig, ip, lastDateTime));
-                    dates.Add(TankModel(siteConfig, ip, lastDateTime));
-                    //dates.Add(Operator(siteConfig, ip, lastDateTime));
-                    //dates.Add(Notification(siteConfig, ip, lastDateTime));
-                    dates.Add(Item(siteConfig, ip, lastDateTime));
-
-                    dates.Add(Address(siteConfig, ip, lastDateTime));
-                    dates.Add(Customer(siteConfig, ip, lastDateTime));
-                    dates.Add(Site(siteConfig, ip, lastDateTime));
-                    dates.Add(Pond(siteConfig, ip, lastDateTime));
-                    dates.Add(Tank(siteConfig, ip, lastDateTime));
-                    dates.Add(Sensor(siteConfig, ip, lastDateTime));
-                    dates.Add(SensorItem(siteConfig, ip, lastDateTime));
-                    dates.Add(Trigger(siteConfig, ip, lastDateTime));
-                    dates.Add(TriggerContact(siteConfig, ip, lastDateTime));
-
-                    dates.Add(CustomerSetting(siteConfig, ip, lastDateTime));
-                    dates.Add(CustomerUser(siteConfig, ip, lastDateTime));
-                    dates.Add(CustomerUserSetting(siteConfig, ip, lastDateTime));
-                    dates.Add(CustomerUserSite(siteConfig, ip, lastDateTime));
-
-                    dates.Add(Group(siteConfig, ip, lastDateTime));
-                    dates.Add(SensorGroup(siteConfig, ip, lastDateTime));
-
-                    DataSync dataSync = new DataSync()
-                    {
-                        SiteId = Guid.Parse(siteConfig),
-                        SyncDate = dates.Max<DateTime>()
-                    };
-
-                    //dates.Add(Log(siteConfig, ip, lastDateTime));
-
-                    KEUnitOfWork.DataSyncRepository.Add(dataSync);
-                    KEUnitOfWork.Complete();
-
-                    #endregion Get
+                    Get();
+                    Send();
                 }
             }
             catch (Exception ex)
@@ -90,9 +48,70 @@ namespace KarmicEnergy.Web.Jobs
             }
         }
 
-        private DateTime ActionType(String siteId, String ip, DateTime lastSync)
+        #region Get
+
+        private void Get()
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/ActionType/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            DateTime startDate = DateTime.UtcNow;
+            var lastDataSync = KEUnitOfWork.DataSyncRepository.Find(x => x.Action == "GET").OrderByDescending(x => x.SyncDate).LastOrDefault();
+            List<DateTime> dates = new List<DateTime>();
+            DateTime lastDateTime = DateTime.MinValue;
+
+            if (lastDataSync != null)
+                lastDateTime = lastDataSync.SyncDate;
+
+            dates.Add(GetActionType(lastDateTime));
+            dates.Add(GetSensorType(lastDateTime));
+            dates.Add(GetNotificationType(lastDateTime));
+            dates.Add(GetOperatorType(lastDateTime));
+            dates.Add(GetUnitType(lastDateTime));
+            dates.Add(GetUnit(lastDateTime));
+            dates.Add(GetStickConversion(lastDateTime));
+            dates.Add(GetStickConversionValue(lastDateTime));
+            dates.Add(GetGeometry(lastDateTime));
+            dates.Add(GetLogType(lastDateTime));
+            dates.Add(GetSeverity(lastDateTime));
+            dates.Add(GetCountry(lastDateTime));
+            dates.Add(GetCity(lastDateTime));
+
+            dates.Add(GetNotificationTemplate(lastDateTime));
+            dates.Add(GetTankModel(lastDateTime));
+            dates.Add(GetItem(lastDateTime));
+
+            dates.Add(GetAddress(lastDateTime));
+            dates.Add(GetCustomer(lastDateTime));
+            dates.Add(GetSite(lastDateTime));
+            dates.Add(GetPond(lastDateTime));
+            dates.Add(GetTank(lastDateTime));
+            dates.Add(GetSensor(lastDateTime));
+            dates.Add(GetSensorItem(lastDateTime));
+            dates.Add(GetTrigger(lastDateTime));
+            dates.Add(GetTriggerContact(lastDateTime));
+
+            dates.Add(GetCustomerSetting(lastDateTime));
+            dates.Add(GetCustomerUser(lastDateTime));
+            dates.Add(GetCustomerUserSetting(lastDateTime));
+            dates.Add(GetCustomerUserSite(lastDateTime));
+
+            dates.Add(GetGroup(lastDateTime));
+            dates.Add(GetSensorGroup(lastDateTime));
+
+            DataSync dataSync = new DataSync()
+            {
+                Action = "GET",
+                StartDate = startDate,
+                EndDate = DateTime.UtcNow,
+                SiteId = Guid.Parse(SiteId),
+                SyncDate = dates.Any() ? dates.Max<DateTime>() : (DateTime)SqlDateTime.MinValue
+            };
+
+            KEUnitOfWork.DataSyncRepository.Add(dataSync);
+            KEUnitOfWork.Complete();
+        }
+
+        private DateTime GetActionType(DateTime lastSync)
+        {
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/ActionType/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<ActionType> entities = Gets<ActionType>(url);
 
             if (entities.Any())
@@ -107,7 +126,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.ActionTypeRepository.Update(entity);
+                        KEUnitOfWork.ActionTypeRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -118,9 +137,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime SensorType(String siteId, String ip, DateTime lastSync)
+        private DateTime GetSensorType(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/SensorType/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/SensorType/", SiteId, lastSync.ToString("yyyy-MM-dd"));
 
             List<SensorType> entities = Gets<SensorType>(url);
 
@@ -136,7 +155,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.SensorTypeRepository.Update(entity);
+                        KEUnitOfWork.SensorTypeRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -147,9 +166,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime NotificationType(String siteId, String ip, DateTime lastSync)
+        private DateTime GetNotificationType(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/NotificationType/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/NotificationType/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<NotificationType> entities = Gets<NotificationType>(url);
 
             if (entities.Any())
@@ -164,7 +183,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.NotificationTypeRepository.Update(entity);
+                        KEUnitOfWork.NotificationTypeRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -175,9 +194,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime OperatorType(String siteId, String ip, DateTime lastSync)
+        private DateTime GetOperatorType(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/OperatorType/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/OperatorType/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<OperatorType> entities = Gets<OperatorType>(url);
 
             if (entities.Any())
@@ -192,7 +211,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.OperatorTypeRepository.Update(entity);
+                        KEUnitOfWork.OperatorTypeRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -203,9 +222,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Operator(String siteId, String ip, DateTime lastSync)
+        private DateTime GetOperator(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Operator/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Operator/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Operator> entities = Gets<Operator>(url);
 
             if (entities.Any())
@@ -220,7 +239,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.OperatorRepository.Update(entity);
+                        KEUnitOfWork.OperatorRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -231,9 +250,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime UnitType(String siteId, String ip, DateTime lastSync)
+        private DateTime GetUnitType(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/UnitType/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/UnitType/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<UnitType> entities = Gets<UnitType>(url);
 
             if (entities.Any())
@@ -248,7 +267,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.UnitTypeRepository.Update(entity);
+                        KEUnitOfWork.UnitTypeRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -259,9 +278,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Unit(String siteId, String ip, DateTime lastSync)
+        private DateTime GetUnit(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Unit/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Unit/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Unit> entities = Gets<Unit>(url);
 
             if (entities.Any())
@@ -276,7 +295,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.UnitRepository.Update(entity);
+                        KEUnitOfWork.UnitRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -287,9 +306,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime StickConversion(String siteId, String ip, DateTime lastSync)
+        private DateTime GetStickConversion(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/StickConversion/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/StickConversion/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<StickConversion> entities = Gets<StickConversion>(url);
 
             if (entities.Any())
@@ -304,7 +323,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.StickConversionRepository.Update(entity);
+                        KEUnitOfWork.StickConversionRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -315,9 +334,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime StickConversionValue(String siteId, String ip, DateTime lastSync)
+        private DateTime GetStickConversionValue(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/StickConversionValue/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/StickConversionValue/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<StickConversionValue> entities = Gets<StickConversionValue>(url);
 
             if (entities.Any())
@@ -332,7 +351,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.StickConversionValueRepository.Update(entity);
+                        KEUnitOfWork.StickConversionValueRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -343,9 +362,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Geometry(String siteId, String ip, DateTime lastSync)
+        private DateTime GetGeometry(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Geometry/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Geometry/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Geometry> entities = Gets<Geometry>(url);
 
             if (entities.Any())
@@ -360,7 +379,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.GeometryRepository.Update(entity);
+                        KEUnitOfWork.GeometryRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -371,9 +390,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime LogType(String siteId, String ip, DateTime lastSync)
+        private DateTime GetLogType(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/LogType/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/LogType/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<LogType> entities = Gets<LogType>(url);
 
             if (entities.Any())
@@ -388,7 +407,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.LogTypeRepository.Update(entity);
+                        KEUnitOfWork.LogTypeRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -399,9 +418,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Log(String siteId, String ip, DateTime lastSync)
+        private DateTime GetLog(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Log/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Log/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Log> entities = Gets<Log>(url);
 
             if (entities.Any())
@@ -416,7 +435,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.LogRepository.Update(entity);
+                        KEUnitOfWork.LogRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -427,9 +446,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime NotificationTemplate(String siteId, String ip, DateTime lastSync)
+        private DateTime GetNotificationTemplate(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/NotificationTemplate/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/NotificationTemplate/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<NotificationTemplate> entities = Gets<NotificationTemplate>(url);
 
             if (entities.Any())
@@ -444,7 +463,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.NotificationTemplateRepository.Update(entity);
+                        KEUnitOfWork.NotificationTemplateRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -455,9 +474,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Severity(String siteId, String ip, DateTime lastSync)
+        private DateTime GetSeverity(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Severity/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Severity/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Severity> entities = Gets<Severity>(url);
 
             if (entities.Any())
@@ -472,7 +491,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.SeverityRepository.Update(entity);
+                        KEUnitOfWork.SeverityRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -483,9 +502,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime TankModel(String siteId, String ip, DateTime lastSync)
+        private DateTime GetTankModel(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/TankModel/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/TankModel/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<TankModel> entities = Gets<TankModel>(url);
 
             if (entities.Any())
@@ -500,7 +519,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.TankModelRepository.Update(entity);
+                        KEUnitOfWork.TankModelRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -511,9 +530,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Country(String siteId, String ip, DateTime lastSync)
+        private DateTime GetCountry(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Country/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Country/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Country> entities = Gets<Country>(url);
 
             if (entities.Any())
@@ -528,7 +547,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.CountryRepository.Update(entity);
+                        KEUnitOfWork.CountryRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -539,9 +558,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime City(String siteId, String ip, DateTime lastSync)
+        private DateTime GetCity(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/City/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/City/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<City> entities = Gets<City>(url);
 
             if (entities.Any())
@@ -556,7 +575,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.CityRepository.Update(entity);
+                        KEUnitOfWork.CityRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -567,9 +586,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Address(String siteId, String ip, DateTime lastSync)
+        private DateTime GetAddress(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Address/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Address/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Address> entities = Gets<Address>(url);
 
             if (entities.Any())
@@ -584,7 +603,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.AddressRepository.Update(entity);
+                        KEUnitOfWork.AddressRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -595,9 +614,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Item(String siteId, String ip, DateTime lastSync)
+        private DateTime GetItem(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Item/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Item/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Item> entities = Gets<Item>(url);
 
             if (entities.Any())
@@ -612,7 +631,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.ItemRepository.Update(entity);
+                        KEUnitOfWork.ItemRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -623,9 +642,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Notification(String siteId, String ip, DateTime lastSync)
+        private DateTime GetNotification(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Notification/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Notification/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Notification> entities = Gets<Notification>(url);
 
             if (entities.Any())
@@ -640,7 +659,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.NotificationRepository.Update(entity);
+                        KEUnitOfWork.NotificationRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -651,9 +670,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Alarm(String siteId, String ip, DateTime lastSync)
+        private DateTime GetAlarm(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Alarm/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Alarm/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Alarm> entities = Gets<Alarm>(url);
 
             if (entities.Any())
@@ -668,7 +687,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.AlarmRepository.Update(entity);
+                        KEUnitOfWork.AlarmRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -679,9 +698,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime AlarmHistory(String siteId, String ip, DateTime lastSync)
+        private DateTime GetAlarmHistory(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/AlarmHistory/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/AlarmHistory/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<AlarmHistory> entities = Gets<AlarmHistory>(url);
 
             if (entities.Any())
@@ -696,7 +715,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.AlarmHistoryRepository.Update(entity);
+                        KEUnitOfWork.AlarmHistoryRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -707,9 +726,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Contact(String siteId, String ip, DateTime lastSync)
+        private DateTime GetContact(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Contact/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Contact/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Contact> entities = Gets<Contact>(url);
 
             if (entities.Any())
@@ -724,7 +743,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.ContactRepository.Update(entity);
+                        KEUnitOfWork.ContactRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -735,9 +754,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Customer(String siteId, String ip, DateTime lastSync)
+        private DateTime GetCustomer(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Customer/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Customer/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Customer> entities = Gets<Customer>(url);
 
             if (entities.Any())
@@ -752,7 +771,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.CustomerRepository.Update(entity);
+                        KEUnitOfWork.CustomerRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -763,9 +782,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime CustomerSetting(String siteId, String ip, DateTime lastSync)
+        private DateTime GetCustomerSetting(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/CustomerSetting/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/CustomerSetting/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<CustomerSetting> entities = Gets<CustomerSetting>(url);
 
             if (entities.Any())
@@ -780,7 +799,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.CustomerSettingRepository.Update(entity);
+                        KEUnitOfWork.CustomerSettingRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -791,9 +810,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime CustomerUser(String siteId, String ip, DateTime lastSync)
+        private DateTime GetCustomerUser(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/CustomerUser/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/CustomerUser/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<CustomerUser> entities = Gets<CustomerUser>(url);
 
             if (entities.Any())
@@ -808,7 +827,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.CustomerUserRepository.Update(entity);
+                        KEUnitOfWork.CustomerUserRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -819,9 +838,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime CustomerUserSite(String siteId, String ip, DateTime lastSync)
+        private DateTime GetCustomerUserSite(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/CustomerUserSite/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/CustomerUserSite/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<CustomerUserSite> entities = Gets<CustomerUserSite>(url);
 
             if (entities.Any())
@@ -836,7 +855,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.CustomerUserSiteRepository.Update(entity);
+                        KEUnitOfWork.CustomerUserSiteRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -847,9 +866,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime CustomerUserSetting(String siteId, String ip, DateTime lastSync)
+        private DateTime GetCustomerUserSetting(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/CustomerUserSetting/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/CustomerUserSetting/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<CustomerUserSetting> entities = Gets<CustomerUserSetting>(url);
 
             if (entities.Any())
@@ -864,7 +883,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.CustomerUserSettingRepository.Update(entity);
+                        KEUnitOfWork.CustomerUserSettingRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -875,9 +894,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Trigger(String siteId, String ip, DateTime lastSync)
+        private DateTime GetTrigger(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Trigger/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Trigger/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Trigger> entities = Gets<Trigger>(url);
 
             if (entities.Any())
@@ -892,7 +911,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.TriggerRepository.Update(entity);
+                        KEUnitOfWork.TriggerRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -903,9 +922,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime TriggerContact(String siteId, String ip, DateTime lastSync)
+        private DateTime GetTriggerContact(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/TriggerContact/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/TriggerContact/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<TriggerContact> entities = Gets<TriggerContact>(url);
 
             if (entities.Any())
@@ -920,7 +939,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.TriggerContactRepository.Update(entity);
+                        KEUnitOfWork.TriggerContactRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -931,9 +950,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime User(String siteId, String ip, DateTime lastSync)
+        private DateTime GetUser(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/User/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/User/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<User> entities = Gets<User>(url);
 
             if (entities.Any())
@@ -948,7 +967,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.UserRepository.Update(entity);
+                        KEUnitOfWork.UserRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -959,9 +978,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Site(String siteId, String ip, DateTime lastSync)
+        private DateTime GetSite(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Site/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Site/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Site> entities = Gets<Site>(url);
 
             if (entities.Any())
@@ -976,7 +995,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.SiteRepository.Update(entity);
+                        KEUnitOfWork.SiteRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -987,9 +1006,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Tank(String siteId, String ip, DateTime lastSync)
+        private DateTime GetTank(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Tank/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Tank/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Tank> entities = Gets<Tank>(url);
 
             if (entities.Any())
@@ -1004,7 +1023,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.TankRepository.Update(entity);
+                        KEUnitOfWork.TankRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -1015,9 +1034,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Pond(String siteId, String ip, DateTime lastSync)
+        private DateTime GetPond(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Pond/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Pond/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Pond> entities = Gets<Pond>(url);
 
             if (entities.Any())
@@ -1032,7 +1051,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.PondRepository.Update(entity);
+                        KEUnitOfWork.PondRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -1043,9 +1062,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Sensor(String siteId, String ip, DateTime lastSync)
+        private DateTime GetSensor(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Sensor/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Sensor/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Sensor> entities = Gets<Sensor>(url);
 
             if (entities.Any())
@@ -1060,7 +1079,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.SensorRepository.Update(entity);
+                        KEUnitOfWork.SensorRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -1071,9 +1090,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime Group(String siteId, String ip, DateTime lastSync)
+        private DateTime GetGroup(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/Group/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/Group/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<Group> entities = Gets<Group>(url);
 
             if (entities.Any())
@@ -1088,7 +1107,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.GroupRepository.Update(entity);
+                        KEUnitOfWork.GroupRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -1099,9 +1118,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime SensorGroup(String siteId, String ip, DateTime lastSync)
+        private DateTime GetSensorGroup(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/SensorGroup/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/SensorGroup/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<SensorGroup> entities = Gets<SensorGroup>(url);
 
             if (entities.Any())
@@ -1116,7 +1135,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.SensorGroupRepository.Update(entity);
+                        KEUnitOfWork.SensorGroupRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -1127,9 +1146,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime SensorItem(String siteId, String ip, DateTime lastSync)
+        private DateTime GetSensorItem(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/SensorItem/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/SensorItem/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<SensorItem> entities = Gets<SensorItem>(url);
 
             if (entities.Any())
@@ -1146,7 +1165,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.SensorItemRepository.Update(entity);
+                        KEUnitOfWork.SensorItemRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -1157,9 +1176,9 @@ namespace KarmicEnergy.Web.Jobs
             return lastSync;
         }
 
-        private DateTime SensorItemEvent(String siteId, String ip, DateTime lastSync)
+        private DateTime GetSensorItemEvent(DateTime lastSync)
         {
-            String url = String.Format("{0}/{1}/{2}/{3}", ip, "sync/SensorItemEvent/", siteId, lastSync.ToString("yyyy-MM-dd"));
+            String url = String.Format("{0}/{1}/{2}/{3}", MasterUrl, "sync/SensorItemEvent/", SiteId, lastSync.ToString("yyyy-MM-dd"));
             List<SensorItemEvent> entities = Gets<SensorItemEvent>(url);
 
             if (entities.Any())
@@ -1174,7 +1193,7 @@ namespace KarmicEnergy.Web.Jobs
                     else
                     {
                         entity.Update(e);
-                        KEUnitOfWork.SensorItemEventRepository.Update(entity);
+                        KEUnitOfWork.SensorItemEventRepository.UpdateWithoutDate(entity);
                     }
                 }
 
@@ -1197,5 +1216,51 @@ namespace KarmicEnergy.Web.Jobs
 
             return entities;
         }
+        #endregion Get
+
+        #region Send
+
+        private void Send()
+        {
+            DateTime startDate = DateTime.UtcNow;
+            var lastDataSync = KEUnitOfWork.DataSyncRepository.Find(x => x.Action == "SEND").OrderByDescending(x => x.SyncDate).LastOrDefault();
+            List<DateTime> dates = new List<DateTime>();
+            DateTime lastDateTime = DateTime.MinValue;
+
+            if (lastDataSync != null)
+                lastDateTime = lastDataSync.SyncDate;
+
+            //dates.Add(SendAddress(lastDateTime));
+            //dates.Add(SendCustomer(lastDateTime));
+            //dates.Add(SendSite(lastDateTime));
+            //dates.Add(SendPond(lastDateTime));
+            //dates.Add(SendTank(lastDateTime));
+            //dates.Add(SendSensor(lastDateTime));
+            //dates.Add(SendSensorItem(lastDateTime));
+            //dates.Add(SendTrigger(lastDateTime));
+            //dates.Add(SendTriggerContact(lastDateTime));
+
+            //dates.Add(SendCustomerSetting(lastDateTime));
+            //dates.Add(SendCustomerUser(lastDateTime));
+            //dates.Add(SendCustomerUserSetting(lastDateTime));
+            //dates.Add(SendCustomerUserSite(lastDateTime));
+
+            //dates.Add(SendGroup(lastDateTime));
+            //dates.Add(SendSensorGroup(lastDateTime));
+
+            DataSync dataSync = new DataSync()
+            {
+                Action = "SEND",
+                StartDate = startDate,
+                EndDate = DateTime.UtcNow,
+                SiteId = Guid.Parse(SiteId),
+                SyncDate = dates.Any() ? dates.Max<DateTime>() : (DateTime)SqlDateTime.MinValue
+            };
+
+            KEUnitOfWork.DataSyncRepository.Add(dataSync);
+            KEUnitOfWork.Complete();
+        }
+
+        #endregion Send
     }
 }

@@ -1,8 +1,8 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KarmicEnergy.Core.Repositories
 {
@@ -18,7 +18,7 @@ namespace KarmicEnergy.Core.Repositories
 
         public List<TriggerContact> GetsByTrigger(Guid triggerId)
         {
-            return base.Find(x => x.TriggerId == triggerId && x.Status == "A" && x.DeletedDate == null).ToList();            
+            return base.Find(x => x.TriggerId == triggerId && x.Status == "A" && x.DeletedDate == null).ToList();
         }
 
         public override IEnumerable<TriggerContact> GetsBySiteToSync(Guid siteId, DateTime lastSyncDate)
@@ -27,13 +27,12 @@ namespace KarmicEnergy.Core.Repositories
             List<TriggerContact> entities = new List<TriggerContact>();
 
             var sites = (from tc in Context.TriggerContacts
-                            join t in Context.Triggers on tc.TriggerId equals t.Id
-                            join si in Context.SensorItems on t.SensorItemId equals si.Id
-                            join se in Context.Sensors on si.SensorId equals se.Id
-                            join s in Context.Sites on se.SiteId equals s.Id
-                            where tc.LastModifiedDate > lastSyncDate &&
-                                  s.Id == siteId
-                            select tc).ToList();
+                         join t in Context.Triggers on tc.TriggerId equals t.Id
+                         join si in Context.SensorItems on t.SensorItemId equals si.Id
+                         join se in Context.Sensors on si.SensorId equals se.Id
+                         where tc.LastModifiedDate > lastSyncDate &&
+                               se.SiteId == siteId
+                         select tc).ToList();
 
             // Pond
             var ponds = (from tc in Context.TriggerContacts
@@ -41,9 +40,8 @@ namespace KarmicEnergy.Core.Repositories
                          join si in Context.SensorItems on t.SensorItemId equals si.Id
                          join se in Context.Sensors on si.SensorId equals se.Id
                          join p in Context.Ponds on se.PondId equals p.Id
-                         join s in Context.Sites on se.SiteId equals s.Id
                          where tc.LastModifiedDate > lastSyncDate &&
-                               s.Id == siteId
+                               p.SiteId == siteId
                          select tc).ToList();
 
             // Tank
@@ -52,9 +50,8 @@ namespace KarmicEnergy.Core.Repositories
                          join si in Context.SensorItems on t.SensorItemId equals si.Id
                          join se in Context.Sensors on si.SensorId equals se.Id
                          join tk in Context.Tanks on se.TankId equals tk.Id
-                         join s in Context.Sites on se.SiteId equals s.Id
                          where tc.LastModifiedDate > lastSyncDate &&
-                               s.Id == siteId
+                               tk.SiteId == siteId
                          select tc).ToList();
 
             entities.AddRange(sites);

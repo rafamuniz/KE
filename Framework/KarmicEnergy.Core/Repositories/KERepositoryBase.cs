@@ -29,6 +29,16 @@ namespace KarmicEnergy.Core.Repositories
             base.Update(entity);
         }
 
+
+        /// <summary>
+        /// Update Entity but not update the proprety LastModifiedDate
+        /// </summary>
+        /// <param name="entity"></param>
+        public void UpdateWithoutDate(TEntity entity)
+        {
+            base.Update(entity);
+        }
+
         public virtual void SaveSync(List<TEntity> entities)
         {
             this.AddOrUpdateRange(entities);

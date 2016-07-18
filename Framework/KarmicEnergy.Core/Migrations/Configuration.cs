@@ -9,7 +9,7 @@ namespace KarmicEnergy.Core.Migrations
     internal sealed class Configuration : DbMigrationsConfiguration<KEContext>
     {
         public Configuration()
-        {            
+        {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = false;
             ContextKey = "KEContext";

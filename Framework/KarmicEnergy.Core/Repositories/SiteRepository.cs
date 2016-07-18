@@ -24,10 +24,7 @@ namespace KarmicEnergy.Core.Repositories
         public override IEnumerable<Site> GetsBySiteToSync(Guid siteId, DateTime lastSyncDate)
         {
             List<Site> sites = new List<Site>();
-            var entities = (from s in Context.Sites
-                            where s.LastModifiedDate > lastSyncDate &&
-                                  s.Id == siteId
-                            select s).ToList();
+            var entities = base.Find(x => x.Id == siteId && x.LastModifiedDate > lastSyncDate).ToList();
 
             foreach (var entity in entities)
             {

@@ -1,8 +1,7 @@
 namespace KarmicEnergy.Core.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AWS : DbMigration
     {
         public override void Up()
@@ -10,96 +9,96 @@ namespace KarmicEnergy.Core.Migrations
             CreateTable(
                 "dbo.ActionTypes",
                 c => new
-                    {
-                        Id = c.Short(nullable: false),
-                        Name = c.String(maxLength: 16),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Short(nullable: false),
+                    Name = c.String(maxLength: 16),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.Addresses",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Email = c.String(maxLength: 256),
-                        PhoneNumberCountryCode = c.String(maxLength: 3),
-                        PhoneNumber = c.String(maxLength: 16),
-                        MobileNumberCountryCode = c.String(maxLength: 3),
-                        MobileNumber = c.String(maxLength: 16),
-                        AddressLine1 = c.String(maxLength: 256),
-                        AddressLine2 = c.String(maxLength: 256),
-                        City = c.String(maxLength: 128),
-                        State = c.String(maxLength: 64),
-                        Country = c.String(maxLength: 64),
-                        ZipCode = c.String(maxLength: 16),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Email = c.String(maxLength: 256),
+                    PhoneNumberCountryCode = c.String(maxLength: 3),
+                    PhoneNumber = c.String(maxLength: 16),
+                    MobileNumberCountryCode = c.String(maxLength: 3),
+                    MobileNumber = c.String(maxLength: 16),
+                    AddressLine1 = c.String(maxLength: 256),
+                    AddressLine2 = c.String(maxLength: 256),
+                    City = c.String(maxLength: 128),
+                    State = c.String(maxLength: 64),
+                    Country = c.String(maxLength: 64),
+                    ZipCode = c.String(maxLength: 16),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.AlarmHistories",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Message = c.String(maxLength: 4000),
-                        Value = c.String(maxLength: 256),
-                        UserId = c.Guid(nullable: false),
-                        UserName = c.String(maxLength: 256),
-                        AlarmId = c.Guid(nullable: false),
-                        ActionTypeId = c.Short(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Message = c.String(maxLength: 4000),
+                    Value = c.String(maxLength: 256),
+                    UserId = c.Guid(nullable: false),
+                    UserName = c.String(maxLength: 256),
+                    AlarmId = c.Guid(nullable: false),
+                    ActionTypeId = c.Short(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ActionTypes", t => t.ActionTypeId, cascadeDelete: false)
                 .Index(t => t.ActionTypeId);
-            
+
             CreateTable(
                 "dbo.Alarms",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Value = c.String(maxLength: 256),
-                        LastAckUserId = c.Guid(),
-                        LastAckUserName = c.String(maxLength: 256),
-                        LastAckDate = c.DateTime(),
-                        StartDate = c.DateTime(nullable: false),
-                        EndDate = c.DateTime(),
-                        SensorItemEventId = c.Guid(nullable: false),
-                        TriggerId = c.Guid(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Value = c.String(maxLength: 256),
+                    LastAckUserId = c.Guid(),
+                    LastAckUserName = c.String(maxLength: 256),
+                    LastAckDate = c.DateTime(),
+                    StartDate = c.DateTime(nullable: false),
+                    EndDate = c.DateTime(),
+                    SensorItemEventId = c.Guid(nullable: false),
+                    TriggerId = c.Guid(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Triggers", t => t.TriggerId, cascadeDelete: false)
                 .Index(t => t.TriggerId);
-            
+
             CreateTable(
                 "dbo.Triggers",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Value = c.String(maxLength: 256),
-                        Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
-                        SensorItemId = c.Guid(nullable: false),
-                        SeverityId = c.Short(nullable: false),
-                        OperatorId = c.Short(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Value = c.String(maxLength: 256),
+                    Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
+                    SensorItemId = c.Guid(nullable: false),
+                    SeverityId = c.Short(nullable: false),
+                    OperatorId = c.Short(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Operators", t => t.OperatorId, cascadeDelete: false)
                 .ForeignKey("dbo.SensorItems", t => t.SensorItemId, cascadeDelete: false)
@@ -107,70 +106,70 @@ namespace KarmicEnergy.Core.Migrations
                 .Index(t => t.SensorItemId)
                 .Index(t => t.SeverityId)
                 .Index(t => t.OperatorId);
-            
+
             CreateTable(
                 "dbo.TriggerContacts",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
-                        TriggerId = c.Guid(nullable: false),
-                        ContactId = c.Guid(),
-                        UserId = c.Guid(),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
+                    TriggerId = c.Guid(nullable: false),
+                    ContactId = c.Guid(),
+                    UserId = c.Guid(),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Triggers", t => t.TriggerId, cascadeDelete: false)
                 .Index(t => t.TriggerId);
-            
+
             CreateTable(
                 "dbo.Operators",
                 c => new
-                    {
-                        Id = c.Short(nullable: false, identity: true),
-                        Name = c.String(maxLength: 32),
-                        Symbol = c.String(maxLength: 16),
-                        Description = c.String(maxLength: 512),
-                        OperatorTypeId = c.Short(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Short(nullable: false, identity: true),
+                    Name = c.String(maxLength: 32),
+                    Symbol = c.String(maxLength: 16),
+                    Description = c.String(maxLength: 512),
+                    OperatorTypeId = c.Short(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.OperatorTypes", t => t.OperatorTypeId, cascadeDelete: false)
                 .Index(t => t.OperatorTypeId);
-            
+
             CreateTable(
                 "dbo.OperatorTypes",
                 c => new
-                    {
-                        Id = c.Short(nullable: false),
-                        Name = c.String(maxLength: 32),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Short(nullable: false),
+                    Name = c.String(maxLength: 32),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.SensorItems",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
-                        SensorId = c.Guid(nullable: false),
-                        ItemId = c.Int(nullable: false),
-                        UnitId = c.Short(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
+                    SensorId = c.Guid(nullable: false),
+                    ItemId = c.Int(nullable: false),
+                    UnitId = c.Short(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Items", t => t.ItemId, cascadeDelete: false)
                 .ForeignKey("dbo.Sensors", t => t.SensorId, cascadeDelete: false)
@@ -178,74 +177,74 @@ namespace KarmicEnergy.Core.Migrations
                 .Index(t => t.SensorId)
                 .Index(t => t.ItemId)
                 .Index(t => t.UnitId);
-            
+
             CreateTable(
                 "dbo.Items",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Code = c.String(nullable: false, maxLength: 5),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
-                        UnitTypeId = c.Short(nullable: false),
-                        SensorTypeId = c.Short(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    Code = c.String(nullable: false, maxLength: 5),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
+                    UnitTypeId = c.Short(nullable: false),
+                    SensorTypeId = c.Short(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.SensorTypes", t => t.SensorTypeId, cascadeDelete: false)
                 .ForeignKey("dbo.UnitTypes", t => t.UnitTypeId, cascadeDelete: false)
                 .Index(t => t.UnitTypeId)
                 .Index(t => t.SensorTypeId);
-            
+
             CreateTable(
                 "dbo.SensorTypes",
                 c => new
-                    {
-                        Id = c.Short(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Short(nullable: false, identity: true),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.UnitTypes",
                 c => new
-                    {
-                        Id = c.Short(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Short(nullable: false, identity: true),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.Sensors",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        Reference = c.String(nullable: false, maxLength: 8),
-                        Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
-                        SpotGPS = c.String(maxLength: 128),
-                        SensorTypeId = c.Short(nullable: false),
-                        SiteId = c.Guid(),
-                        PondId = c.Guid(),
-                        TankId = c.Guid(),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    Reference = c.String(nullable: false, maxLength: 8),
+                    Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
+                    SpotGPS = c.String(maxLength: 128),
+                    SensorTypeId = c.Short(nullable: false),
+                    SiteId = c.Guid(),
+                    PondId = c.Guid(),
+                    TankId = c.Guid(),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Ponds", t => t.PondId)
                 .ForeignKey("dbo.SensorTypes", t => t.SensorTypeId, cascadeDelete: false)
@@ -255,170 +254,170 @@ namespace KarmicEnergy.Core.Migrations
                 .Index(t => t.SiteId)
                 .Index(t => t.PondId)
                 .Index(t => t.TankId);
-            
+
             CreateTable(
                 "dbo.Ponds",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        Description = c.String(maxLength: 4000),
-                        Reference = c.String(nullable: false, maxLength: 8),
-                        WaterVolumeCapacity = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
-                        Latitude = c.String(maxLength: 64),
-                        Longitude = c.String(maxLength: 64),
-                        SiteId = c.Guid(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    Description = c.String(maxLength: 4000),
+                    Reference = c.String(nullable: false, maxLength: 8),
+                    WaterVolumeCapacity = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
+                    Latitude = c.String(maxLength: 64),
+                    Longitude = c.String(maxLength: 64),
+                    SiteId = c.Guid(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Sites", t => t.SiteId, cascadeDelete: false)
                 .Index(t => t.SiteId);
-            
+
             CreateTable(
                 "dbo.Sites",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        Reference = c.String(nullable: false, maxLength: 8),
-                        IPAddress = c.String(nullable: false, maxLength: 64),
-                        Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
-                        Latitude = c.String(maxLength: 64),
-                        Longitude = c.String(maxLength: 64),
-                        CustomerId = c.Guid(nullable: false),
-                        AddressId = c.Guid(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    Reference = c.String(nullable: false, maxLength: 8),
+                    IPAddress = c.String(nullable: false, maxLength: 64),
+                    Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
+                    Latitude = c.String(maxLength: 64),
+                    Longitude = c.String(maxLength: 64),
+                    CustomerId = c.Guid(nullable: false),
+                    AddressId = c.Guid(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Addresses", t => t.AddressId, cascadeDelete: false)
                 .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: false)
                 .Index(t => t.CustomerId)
                 .Index(t => t.AddressId);
-            
+
             CreateTable(
                 "dbo.Customers",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        AddressId = c.Guid(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    AddressId = c.Guid(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Addresses", t => t.AddressId, cascadeDelete: false)
                 .Index(t => t.AddressId);
-            
+
             CreateTable(
                 "dbo.CustomerSettings",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Key = c.String(nullable: false, maxLength: 128),
-                        Value = c.String(nullable: false),
-                        CustomerId = c.Guid(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Key = c.String(nullable: false, maxLength: 128),
+                    Value = c.String(nullable: false),
+                    CustomerId = c.Guid(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: false)
                 .Index(t => t.CustomerId);
-            
+
             CreateTable(
                 "dbo.CustomerUsers",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        CustomerId = c.Guid(nullable: false),
-                        AddressId = c.Guid(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    CustomerId = c.Guid(nullable: false),
+                    AddressId = c.Guid(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Addresses", t => t.AddressId, cascadeDelete: false)
                 .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: false)
                 .Index(t => t.CustomerId)
                 .Index(t => t.AddressId);
-            
+
             CreateTable(
                 "dbo.CustomerUserSettings",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Key = c.String(nullable: false, maxLength: 128),
-                        Value = c.String(nullable: false),
-                        CustomerUserId = c.Guid(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Key = c.String(nullable: false, maxLength: 128),
+                    Value = c.String(nullable: false),
+                    CustomerUserId = c.Guid(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.CustomerUsers", t => t.CustomerUserId, cascadeDelete: false)
                 .Index(t => t.CustomerUserId);
-            
+
             CreateTable(
                 "dbo.CustomerUserSites",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        CustomerUserId = c.Guid(nullable: false),
-                        SiteId = c.Guid(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    CustomerUserId = c.Guid(nullable: false),
+                    SiteId = c.Guid(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Sites", t => t.SiteId, cascadeDelete: false)
                 .ForeignKey("dbo.CustomerUsers", t => t.CustomerUserId, cascadeDelete: false)
                 .Index(t => t.CustomerUserId)
                 .Index(t => t.SiteId);
-            
+
             CreateTable(
                 "dbo.Tanks",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        Description = c.String(maxLength: 4000),
-                        WaterVolumeCapacity = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Reference = c.String(nullable: false, maxLength: 8),
-                        Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
-                        Latitude = c.String(maxLength: 64),
-                        Longitude = c.String(maxLength: 64),
-                        Height = c.Decimal(precision: 18, scale: 2),
-                        Width = c.Decimal(precision: 18, scale: 2),
-                        Length = c.Decimal(precision: 18, scale: 2),
-                        FaceLength = c.Decimal(precision: 18, scale: 2),
-                        BottomWidth = c.Decimal(precision: 18, scale: 2),
-                        Radius = c.Decimal(precision: 18, scale: 2),
-                        Diagonal = c.Decimal(precision: 18, scale: 2),
-                        Dimension1 = c.Decimal(precision: 18, scale: 2),
-                        Dimension2 = c.Decimal(precision: 18, scale: 2),
-                        Dimension3 = c.Decimal(precision: 18, scale: 2),
-                        MinimumDistance = c.Int(),
-                        MaximumDistance = c.Int(),
-                        SiteId = c.Guid(nullable: false),
-                        TankModelId = c.Int(nullable: false),
-                        StickConversionId = c.Guid(),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    Description = c.String(maxLength: 4000),
+                    WaterVolumeCapacity = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    Reference = c.String(nullable: false, maxLength: 8),
+                    Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
+                    Latitude = c.String(maxLength: 64),
+                    Longitude = c.String(maxLength: 64),
+                    Height = c.Decimal(precision: 18, scale: 2),
+                    Width = c.Decimal(precision: 18, scale: 2),
+                    Length = c.Decimal(precision: 18, scale: 2),
+                    FaceLength = c.Decimal(precision: 18, scale: 2),
+                    BottomWidth = c.Decimal(precision: 18, scale: 2),
+                    Radius = c.Decimal(precision: 18, scale: 2),
+                    Diagonal = c.Decimal(precision: 18, scale: 2),
+                    Dimension1 = c.Decimal(precision: 18, scale: 2),
+                    Dimension2 = c.Decimal(precision: 18, scale: 2),
+                    Dimension3 = c.Decimal(precision: 18, scale: 2),
+                    MinimumDistance = c.Int(),
+                    MaximumDistance = c.Int(),
+                    SiteId = c.Guid(nullable: false),
+                    TankModelId = c.Int(nullable: false),
+                    StickConversionId = c.Guid(),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Sites", t => t.SiteId, cascadeDelete: false)
                 .ForeignKey("dbo.StickConversions", t => t.StickConversionId)
@@ -426,228 +425,228 @@ namespace KarmicEnergy.Core.Migrations
                 .Index(t => t.SiteId)
                 .Index(t => t.TankModelId)
                 .Index(t => t.StickConversionId);
-            
+
             CreateTable(
                 "dbo.StickConversions",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
-                        FromUnitId = c.Short(nullable: false),
-                        ToUnitId = c.Short(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
+                    FromUnitId = c.Short(nullable: false),
+                    ToUnitId = c.Short(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Units", t => t.FromUnitId, cascadeDelete: false)
                 .ForeignKey("dbo.Units", t => t.ToUnitId, cascadeDelete: false)
                 .Index(t => t.FromUnitId)
                 .Index(t => t.ToUnitId);
-            
+
             CreateTable(
                 "dbo.Units",
                 c => new
-                    {
-                        Id = c.Short(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        NamePlural = c.String(nullable: false, maxLength: 128),
-                        Symbol = c.String(nullable: false, maxLength: 8),
-                        Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
-                        UnitTypeId = c.Short(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Short(nullable: false, identity: true),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    NamePlural = c.String(nullable: false, maxLength: 128),
+                    Symbol = c.String(nullable: false, maxLength: 8),
+                    Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
+                    UnitTypeId = c.Short(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.UnitTypes", t => t.UnitTypeId, cascadeDelete: false)
                 .Index(t => t.UnitTypeId);
-            
+
             CreateTable(
                 "dbo.TankModels",
                 c => new
-                    {
-                        Id = c.Int(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        ImageFileName = c.String(maxLength: 256),
-                        Image = c.Binary(),
-                        Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
-                        Height = c.Decimal(precision: 18, scale: 2),
-                        Width = c.Decimal(precision: 18, scale: 2),
-                        Length = c.Decimal(precision: 18, scale: 2),
-                        FaceLength = c.Decimal(precision: 18, scale: 2),
-                        BottomWidth = c.Decimal(precision: 18, scale: 2),
-                        Radius = c.Decimal(precision: 18, scale: 2),
-                        Diagonal = c.Decimal(precision: 18, scale: 2),
-                        DimensionValue1 = c.Decimal(precision: 18, scale: 2),
-                        DimensionValue2 = c.Decimal(precision: 18, scale: 2),
-                        DimensionValue3 = c.Decimal(precision: 18, scale: 2),
-                        WaterVolumeCapacity = c.Double(),
-                        GeometryId = c.Short(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Int(nullable: false),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    ImageFileName = c.String(maxLength: 256),
+                    Image = c.Binary(),
+                    Status = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
+                    Height = c.Decimal(precision: 18, scale: 2),
+                    Width = c.Decimal(precision: 18, scale: 2),
+                    Length = c.Decimal(precision: 18, scale: 2),
+                    FaceLength = c.Decimal(precision: 18, scale: 2),
+                    BottomWidth = c.Decimal(precision: 18, scale: 2),
+                    Radius = c.Decimal(precision: 18, scale: 2),
+                    Diagonal = c.Decimal(precision: 18, scale: 2),
+                    DimensionValue1 = c.Decimal(precision: 18, scale: 2),
+                    DimensionValue2 = c.Decimal(precision: 18, scale: 2),
+                    DimensionValue3 = c.Decimal(precision: 18, scale: 2),
+                    WaterVolumeCapacity = c.Double(),
+                    GeometryId = c.Short(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Geometries", t => t.GeometryId, cascadeDelete: false)
                 .Index(t => t.GeometryId);
-            
+
             CreateTable(
                 "dbo.Geometries",
                 c => new
-                    {
-                        Id = c.Short(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        HasHeight = c.Boolean(nullable: false),
-                        HasWidth = c.Boolean(nullable: false),
-                        HasLength = c.Boolean(nullable: false),
-                        HasFaceLength = c.Boolean(nullable: false),
-                        HasBottomWidth = c.Boolean(nullable: false),
-                        HasRadius = c.Boolean(nullable: false),
-                        HasDiagonal = c.Boolean(nullable: false),
-                        HasDimension1 = c.Boolean(nullable: false),
-                        DimensionTitle1 = c.String(maxLength: 32),
-                        HasDimension2 = c.Boolean(nullable: false),
-                        DimensionTitle2 = c.String(maxLength: 32),
-                        HasDimension3 = c.Boolean(nullable: false),
-                        DimensionTitle3 = c.String(maxLength: 32),
-                        FormulaVolume = c.String(maxLength: 128),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Short(nullable: false, identity: true),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    HasHeight = c.Boolean(nullable: false),
+                    HasWidth = c.Boolean(nullable: false),
+                    HasLength = c.Boolean(nullable: false),
+                    HasFaceLength = c.Boolean(nullable: false),
+                    HasBottomWidth = c.Boolean(nullable: false),
+                    HasRadius = c.Boolean(nullable: false),
+                    HasDiagonal = c.Boolean(nullable: false),
+                    HasDimension1 = c.Boolean(nullable: false),
+                    DimensionTitle1 = c.String(maxLength: 32),
+                    HasDimension2 = c.Boolean(nullable: false),
+                    DimensionTitle2 = c.String(maxLength: 32),
+                    HasDimension3 = c.Boolean(nullable: false),
+                    DimensionTitle3 = c.String(maxLength: 32),
+                    FormulaVolume = c.String(maxLength: 128),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.Severities",
                 c => new
-                    {
-                        Id = c.Short(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Short(nullable: false, identity: true),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.Cities",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        CountryId = c.Short(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    CountryId = c.Short(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Countries", t => t.CountryId, cascadeDelete: false)
                 .Index(t => t.CountryId);
-            
+
             CreateTable(
                 "dbo.Countries",
                 c => new
-                    {
-                        Id = c.Short(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        IconFilename = c.String(nullable: false, maxLength: 128),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Short(nullable: false, identity: true),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    IconFilename = c.String(nullable: false, maxLength: 128),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.Contacts",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 128),
-                        CustomerId = c.Guid(nullable: false),
-                        AddressId = c.Guid(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Name = c.String(nullable: false, maxLength: 128),
+                    CustomerId = c.Guid(nullable: false),
+                    AddressId = c.Guid(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Addresses", t => t.AddressId, cascadeDelete: false)
                 .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: false)
                 .Index(t => t.CustomerId)
                 .Index(t => t.AddressId);
-            
+
             CreateTable(
                 "dbo.DataSyncs",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        SiteId = c.Guid(nullable: false),
-                        SyncDate = c.DateTime(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    SiteId = c.Guid(nullable: false),
+                    SyncDate = c.DateTime(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.Groups",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        SiteId = c.Guid(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    SiteId = c.Guid(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Sites", t => t.SiteId, cascadeDelete: false)
                 .Index(t => t.SiteId);
-            
+
             CreateTable(
                 "dbo.SensorGroups",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Weight = c.Int(nullable: false),
-                        SensorId = c.Guid(nullable: false),
-                        GroupId = c.Guid(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Weight = c.Int(nullable: false),
+                    SensorId = c.Guid(nullable: false),
+                    GroupId = c.Guid(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Groups", t => t.GroupId, cascadeDelete: false)
                 .ForeignKey("dbo.Sensors", t => t.SensorId, cascadeDelete: false)
                 .Index(t => t.SensorId)
                 .Index(t => t.GroupId);
-            
+
             CreateTable(
                 "dbo.Logs",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Message = c.String(maxLength: 4000),
-                        CustomerId = c.Guid(),
-                        UserId = c.Guid(),
-                        SiteId = c.Guid(),
-                        LogTypeId = c.Short(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Message = c.String(maxLength: 4000),
+                    CustomerId = c.Guid(),
+                    UserId = c.Guid(),
+                    SiteId = c.Guid(),
+                    LogTypeId = c.Short(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Customers", t => t.CustomerId)
                 .ForeignKey("dbo.LogTypes", t => t.LogTypeId, cascadeDelete: false)
@@ -655,127 +654,127 @@ namespace KarmicEnergy.Core.Migrations
                 .Index(t => t.CustomerId)
                 .Index(t => t.SiteId)
                 .Index(t => t.LogTypeId);
-            
+
             CreateTable(
                 "dbo.LogTypes",
                 c => new
-                    {
-                        Id = c.Short(nullable: false),
-                        Name = c.String(maxLength: 16),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Short(nullable: false),
+                    Name = c.String(maxLength: 16),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.Notifications",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        From = c.String(maxLength: 256),
-                        To = c.String(maxLength: 4000),
-                        Subject = c.String(maxLength: 128),
-                        Message = c.String(),
-                        ErrorMessage = c.String(storeType: "ntext"),
-                        IsSentSuccess = c.DateTime(),
-                        NotificationTypeId = c.Short(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    From = c.String(maxLength: 256),
+                    To = c.String(maxLength: 4000),
+                    Subject = c.String(maxLength: 128),
+                    Message = c.String(),
+                    ErrorMessage = c.String(storeType: "ntext"),
+                    IsSentSuccess = c.DateTime(),
+                    NotificationTypeId = c.Short(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.NotificationTypes", t => t.NotificationTypeId, cascadeDelete: false)
                 .Index(t => t.NotificationTypeId);
-            
+
             CreateTable(
                 "dbo.NotificationTypes",
                 c => new
-                    {
-                        Id = c.Short(nullable: false),
-                        Name = c.String(maxLength: 16),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Short(nullable: false),
+                    Name = c.String(maxLength: 16),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.NotificationTemplates",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Name = c.String(maxLength: 64),
-                        Subject = c.String(maxLength: 128),
-                        Message = c.String(),
-                        NotificationTypeId = c.Short(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Name = c.String(maxLength: 64),
+                    Subject = c.String(maxLength: 128),
+                    Message = c.String(),
+                    NotificationTypeId = c.Short(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.NotificationTypes", t => t.NotificationTypeId, cascadeDelete: false)
                 .Index(t => t.NotificationTypeId);
-            
+
             CreateTable(
                 "dbo.SensorItemEvents",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Value = c.String(maxLength: 256),
-                        EventDate = c.DateTime(nullable: false),
-                        SensorItemId = c.Guid(nullable: false),
-                        SensorItemEventId = c.Guid(),
-                        CheckedAlarmDate = c.DateTime(),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    Value = c.String(maxLength: 256),
+                    EventDate = c.DateTime(nullable: false),
+                    SensorItemId = c.Guid(nullable: false),
+                    SensorItemEventId = c.Guid(),
+                    CheckedAlarmDate = c.DateTime(),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.SensorItems", t => t.SensorItemId, cascadeDelete: false)
                 .ForeignKey("dbo.SensorItemEvents", t => t.SensorItemEventId)
                 .Index(t => t.SensorItemId)
                 .Index(t => t.SensorItemEventId);
-            
+
             CreateTable(
                 "dbo.StickConversionValues",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        ToValue = c.String(nullable: false, maxLength: 128),
-                        FromValue = c.String(nullable: false, maxLength: 128),
-                        StickConversionId = c.Guid(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    ToValue = c.String(nullable: false, maxLength: 128),
+                    FromValue = c.String(nullable: false, maxLength: 128),
+                    StickConversionId = c.Guid(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.StickConversions", t => t.StickConversionId, cascadeDelete: false)
                 .Index(t => t.StickConversionId);
-            
+
             CreateTable(
                 "dbo.Users",
                 c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        AddressId = c.Guid(nullable: false),
-                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastModifiedDate = c.DateTime(nullable: false),
-                        DeletedDate = c.DateTime(),
-                    })
+                {
+                    Id = c.Guid(nullable: false),
+                    AddressId = c.Guid(nullable: false),
+                    RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                    CreatedDate = c.DateTime(nullable: false),
+                    LastModifiedDate = c.DateTime(nullable: false),
+                    DeletedDate = c.DateTime(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Addresses", t => t.AddressId, cascadeDelete: false)
                 .Index(t => t.AddressId);
-            
+
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Users", "AddressId", "dbo.Addresses");

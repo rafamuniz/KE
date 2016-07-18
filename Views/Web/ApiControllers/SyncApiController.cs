@@ -422,6 +422,25 @@ namespace KarmicEnergy.Web.ApiControllers
 
         #endregion Customer
 
+        #region CustomerSetting
+
+        [HttpGet]
+        [Route("sync/CustomerSetting/{siteId}/{lastSyncDate}", Name = "GetsCustomerSetting")]
+        public IHttpActionResult GetsCustomerSetting(Guid siteId, DateTime lastSyncDate)
+        {
+            try
+            {
+                var entities = KEUnitOfWork.CustomerSettingRepository.GetsBySiteToSync(siteId, lastSyncDate);
+                return Ok(entities);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion CustomerSetting
+
         #region CustomerUser
 
         [HttpGet]

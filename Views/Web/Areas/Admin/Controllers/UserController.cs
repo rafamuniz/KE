@@ -199,7 +199,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                 }
 
                 var roleSuperAdmin = RoleManager.FindByNameAsync("SuperAdmin");
-                
+
                 // Dont delete SuperAdmin
                 if (user.Roles.Where(x => x.RoleId == roleSuperAdmin.Result.Id).Any())
                 {
@@ -207,12 +207,12 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                     return View();
                 }
 
+                user.DeletedDate = DateTime.UtcNow;
                 var result = await UserManager.DeleteAsync(user);
 
                 if (result.Succeeded)
                 {
                     userKE.DeletedDate = DateTime.UtcNow;
-
                     KEUnitOfWork.UserRepository.Update(userKE);
                     KEUnitOfWork.Complete();
 
@@ -258,7 +258,14 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "User", new { area = "Admin" });
+                    var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
+                    user.LastModifiedDate = DateTime.UtcNow;
+
+                    var userResult = await UserManager.UpdateAsync(user);
+                    if (userResult.Succeeded)
+                    {
+                        return RedirectToAction("Index", "User", new { area = "Admin" });
+                    }
                 }
                 else
                 {

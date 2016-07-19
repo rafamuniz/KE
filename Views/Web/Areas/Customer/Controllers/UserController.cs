@@ -247,7 +247,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                                 customerUser.Sites.Add(new CustomerUserSite { SiteId = SiteId });
                             }
 
-                            customerUser.Address = address;                          
+                            customerUser.Address = address;
                             KEUnitOfWork.CustomerUserRepository.Update(customerUser);
                             KEUnitOfWork.Complete();
 
@@ -308,6 +308,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             KEUnitOfWork.CustomerUserRepository.Remove(customerUser);
 
             var user = UserManager.FindByIdAsync(customerUser.Id.ToString()).Result;
+
+            user.DeletedDate = DateTime.UtcNow;
             var result = await UserManager.DeleteAsync(user);
 
             if (result.Succeeded)
@@ -351,8 +353,15 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                 if (result.Succeeded)
                 {
-                    AddLog("User Password changed", LogTypeEnum.Info);
-                    return RedirectToAction("Index", "User", new { area = "Customer" });
+                    var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
+                    user.LastModifiedDate = DateTime.UtcNow;
+
+                    var userResult = await UserManager.UpdateAsync(user);
+                    if (userResult.Succeeded)
+                    {
+                        AddLog("User Password changed", LogTypeEnum.Info);
+                        return RedirectToAction("Index", "User", new { area = "Customer" });
+                    }
                 }
             }
             catch (Exception ex)

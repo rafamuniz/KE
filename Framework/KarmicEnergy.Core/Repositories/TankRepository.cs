@@ -23,7 +23,7 @@ namespace KarmicEnergy.Core.Repositories
 
         public List<Tank> GetsByCustomerAndSite(Guid customerId, Guid siteId)
         {
-            return base.Find(x => x.Site.CustomerId == customerId && x.SiteId == siteId && x.Status == "A" && x.DeletedDate == null).ToList();
+            return base.Find(x => x.Site.CustomerId == customerId && x.SiteId == siteId && x.DeletedDate == null).ToList();
         }
 
         public override IEnumerable<Tank> GetsBySiteToSync(Guid siteId, DateTime lastSyncDate)

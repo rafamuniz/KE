@@ -18,15 +18,14 @@ namespace KarmicEnergy.Web.ApiControllers
         protected KEUnitOfWork KEUnitOfWork
         {
             get
-            {                
-                return _KEUnitOfWork ?? new KEUnitOfWork();
+            {
+                return _KEUnitOfWork ?? new KEUnitOfWork(false);
             }
             set
             {
                 _KEUnitOfWork = value;
             }
         }
-
         protected IOwinContext Context
         {
             get

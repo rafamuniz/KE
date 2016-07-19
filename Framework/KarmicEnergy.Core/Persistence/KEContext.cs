@@ -1,5 +1,4 @@
 ﻿using KarmicEnergy.Core.Entities;
-using KarmicEnergy.Core.Migrations;
 using System;
 using System.Data.Entity;
 
@@ -18,9 +17,25 @@ namespace KarmicEnergy.Core.Persistence
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<KEContext, Configuration>());
         }
 
+        public KEContext(Boolean enablelazyLoading = true)
+            : base("KEConnection")
+        {
+            this.Configuration.LazyLoadingEnabled = enablelazyLoading;
+
+            //this.Configuration.ProxyCreationEnabled = false;
+            Database.SetInitializer(new DatabaseCreateIfNotExists());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<KEContext, Configuration>());
+        }
+
         public KEContext(String nameOrConnectionString)
             : base(nameOrConnectionString)
         {
+        }
+
+        public KEContext(String nameOrConnectionString, Boolean enablelazyLoading = true)
+         : base(nameOrConnectionString)
+        {
+            this.Configuration.LazyLoadingEnabled = enablelazyLoading;
         }
         #endregion Constructor
 

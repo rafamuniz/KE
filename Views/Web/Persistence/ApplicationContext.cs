@@ -1,14 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using KarmicEnergy.Web.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using KarmicEnergy.Web.Entities;
 
 namespace KarmicEnergy.Web.Persistence
 {
@@ -16,7 +8,7 @@ namespace KarmicEnergy.Web.Persistence
     {
         public ApplicationContext()
             : base("KEConnection", throwIfV1Schema: false)
-        {            
+        {
             Database.SetInitializer(new DatabaseCreateIfNotExists());
         }
 

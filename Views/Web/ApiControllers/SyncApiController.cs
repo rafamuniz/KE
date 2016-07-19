@@ -1,8 +1,12 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
 using KarmicEnergy.Web.Entities;
+using KarmicEnergy.Web.Persistence;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Web.Http;
 
@@ -10,6 +14,8 @@ namespace KarmicEnergy.Web.ApiControllers
 {
     public class SyncApiController : ApiControllerBase
     {
+        #region Get
+
         #region Common
 
         [HttpGet]
@@ -354,27 +360,37 @@ namespace KarmicEnergy.Web.ApiControllers
         #region User
 
         [HttpGet]
-        [Route("sync/users/{siteId}", Name = "SyncUsers")]
-        public IHttpActionResult SyncUsers(String siteId, List<ApplicationUser> users)
+        [Route("sync/user/{siteId}/{lastSyncDate}", Name = "GetsUser")]
+        public IHttpActionResult GetsUser(Guid siteId, DateTime lastSyncDate)
         {
+            List<Guid> ids = new List<Guid>();
+            List<ApplicationUser> entities = new List<ApplicationUser>();
+
             try
             {
-                foreach (var user in users)
+                DateTime minDate = (DateTime)SqlDateTime.MinValue;
+                var customers = KEUnitOfWork.CustomerRepository.GetsBySiteToSync(siteId, minDate).ToList();
+                var customerUsers = KEUnitOfWork.CustomerUserRepository.GetsBySiteToSync(siteId, minDate).ToList();
+
+                customers.ForEach(x => ids.Add(x.Id));
+                customerUsers.ForEach(x => ids.Add(x.Id));
+
+                if (ids != null && ids.Any())
                 {
-                    //UserManager.RemoveFromRolesAsync(user.Id, user.Roles.)
-                    //user.Roles.Remove();
-                    foreach (var role in user.Roles)
+                    var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(ApplicationContext.Create()));
+
+                    foreach (var id in ids)
                     {
-                        //  UserManager.IsInRoleAsync();
-
-                        //foreach (var role in user.Roles)
-                        //{
-
-                        //}
+                        var user = userManager.FindById(id.ToString());
+                        if (user.LastModifiedDate > lastSyncDate)
+                        {
+                            user.RoleNames = userManager.GetRoles(id.ToString());
+                            entities.Add(user);
+                        }
                     }
                 }
 
-                return Ok();
+                return Ok(entities);
             }
             catch (Exception ex)
             {
@@ -668,5 +684,508 @@ namespace KarmicEnergy.Web.ApiControllers
         }
 
         #endregion GroupSensor
+
+        #endregion Get
+
+        #region Post
+
+        #region User
+
+        [HttpPost]
+        [Route("sync/user/post/{siteId}", Name = "PostsUser")]
+        public IHttpActionResult PostsUser(Guid siteId, List<ApplicationUser> entities)
+        {
+            try
+            {
+                if (entities != null && entities.Any())
+                {
+                    foreach (var e in entities)
+                    {
+                        var entity = UserManager.FindById(e.UserName);
+                        if (entity == null)
+                        {
+                            UserManager.Create<ApplicationUser, String>(e);
+                        }
+                        else
+                        {
+                            UserManager.Update<ApplicationUser, String>(entity);
+                        }
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion User
+
+        #region Address
+
+        [HttpPost]
+        [Route("sync/address/post/{siteId}", Name = "PostsAddress")]
+        public IHttpActionResult PostsAddress(Guid siteId, List<Address> entities)
+        {
+            try
+            {
+                if (entities != null && entities.Any())
+                {
+                    using (var ke = KEUnitOfWork.Create(false))
+                    {
+                        foreach (var e in entities)
+                        {
+                            var entity = ke.AddressRepository.Get(e.Id);
+                            if (entity == null)
+                            {
+                                ke.AddressRepository.Add(e);
+                            }
+                            else
+                            {
+                                entity.Update(e);
+                                ke.AddressRepository.UpdateWithoutDate(entity);
+                            }
+                        }
+
+                        ke.Complete();
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion Address
+
+        #region CustomerUser
+
+        [HttpPost]
+        [Route("sync/CustomerUser/post/{siteId}", Name = "PostsCustomerUser")]
+        public IHttpActionResult PostsCustomerUser(Guid siteId, List<CustomerUser> entities)
+        {
+            try
+            {
+                if (entities != null && entities.Any())
+                {
+                    using (var ke = KEUnitOfWork.Create(false))
+                    {
+                        foreach (var e in entities)
+                        {
+                            var entity = ke.CustomerUserRepository.Get(e.Id);
+                            if (entity == null)
+                            {
+                                ke.CustomerUserRepository.Add(e);
+                            }
+                            else
+                            {
+                                entity.Update(e);
+                                ke.CustomerUserRepository.UpdateWithoutDate(entity);
+                            }
+                        }
+
+                        ke.Complete();
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion CustomerUser
+
+        #region Contact
+
+        [HttpPost]
+        [Route("sync/Contact/post/{siteId}", Name = "PostsContact")]
+        public IHttpActionResult PostsContact(Guid siteId, List<Contact> entities)
+        {
+            try
+            {
+                if (entities != null && entities.Any())
+                {
+                    using (var ke = KEUnitOfWork.Create(false))
+                    {
+                        foreach (var e in entities)
+                        {
+                            var entity = ke.ContactRepository.Get(e.Id);
+                            if (entity == null)
+                            {
+                                ke.ContactRepository.Add(e);
+                            }
+                            else
+                            {
+                                entity.Update(e);
+                                ke.ContactRepository.UpdateWithoutDate(entity);
+                            }
+                        }
+
+                        ke.Complete();
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion Contact
+
+        #region Pond
+        [HttpPost]
+        [Route("sync/pond/post/{siteId}", Name = "PostsPond")]
+        public IHttpActionResult PostsPond(Guid siteId, List<Pond> entities)
+        {
+            try
+            {
+                if (entities != null && entities.Any())
+                {
+                    using (var ke = KEUnitOfWork.Create(false))
+                    {
+                        foreach (var e in entities)
+                        {
+                            var entity = ke.PondRepository.Get(e.Id);
+                            if (entity == null)
+                            {
+                                ke.PondRepository.Add(e);
+                            }
+                            else
+                            {
+                                entity.Update(e);
+                                ke.PondRepository.UpdateWithoutDate(entity);
+                            }
+                        }
+
+                        ke.Complete();
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        #endregion Pond
+
+        #region Tank
+        [HttpPost]
+        [Route("sync/Tank/post/{siteId}", Name = "PostsTank")]
+        public IHttpActionResult PostsTank(Guid siteId, List<Tank> entities)
+        {
+            try
+            {
+                if (entities != null && entities.Any())
+                {
+                    using (var ke = KEUnitOfWork.Create(false))
+                    {
+                        foreach (var e in entities)
+                        {
+                            var entity = ke.TankRepository.Get(e.Id);
+                            if (entity == null)
+                            {
+                                ke.TankRepository.Add(e);
+                            }
+                            else
+                            {
+                                entity.Update(e);
+                                ke.TankRepository.UpdateWithoutDate(entity);
+                            }
+                        }
+
+                        ke.Complete();
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        #endregion Tank
+
+        #region Sensor
+        [HttpPost]
+        [Route("sync/Sensor/post/{siteId}", Name = "PostsSensor")]
+        public IHttpActionResult PostsSensor(Guid siteId, List<Sensor> entities)
+        {
+            try
+            {
+                if (entities != null && entities.Any())
+                {
+                    using (var ke = KEUnitOfWork.Create(false))
+                    {
+                        foreach (var e in entities)
+                        {
+                            var entity = ke.SensorRepository.Get(e.Id);
+                            if (entity == null)
+                            {
+                                ke.SensorRepository.Add(e);
+                            }
+                            else
+                            {
+                                entity.Update(e);
+                                ke.SensorRepository.UpdateWithoutDate(entity);
+                            }
+                        }
+
+                        ke.Complete();
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        #endregion Sensor
+
+        #region SensorItem
+        [HttpPost]
+        [Route("sync/SensorItem/post/{siteId}", Name = "PostsSensorItem")]
+        public IHttpActionResult PostsSensorItem(Guid siteId, List<SensorItem> entities)
+        {
+            try
+            {
+                if (entities != null && entities.Any())
+                {
+                    using (var ke = KEUnitOfWork.Create(false))
+                    {
+                        foreach (var e in entities)
+                        {
+                            var entity = ke.SensorItemRepository.Get(e.Id);
+                            if (entity == null)
+                            {
+                                ke.SensorItemRepository.Add(e);
+                            }
+                            else
+                            {
+                                entity.Update(e);
+                                ke.SensorItemRepository.UpdateWithoutDate(entity);
+                            }
+                        }
+
+                        ke.Complete();
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        #endregion SensorItem
+
+        #region SensorItemEvent
+        [HttpPost]
+        [Route("sync/SensorItemEvent/post/{siteId}", Name = "PostsSensorItemEvent")]
+        public IHttpActionResult PostsSensorItemEvent(Guid siteId, List<SensorItemEvent> entities)
+        {
+            try
+            {
+                if (entities != null && entities.Any())
+                {
+                    using (var ke = KEUnitOfWork.Create(false))
+                    {
+                        foreach (var e in entities)
+                        {
+                            var entity = ke.SensorItemEventRepository.Get(e.Id);
+                            if (entity == null)
+                            {
+                                ke.SensorItemEventRepository.Add(e);
+                            }
+                            else
+                            {
+                                entity.Update(e);
+                                ke.SensorItemEventRepository.UpdateWithoutDate(entity);
+                            }
+                        }
+
+                        ke.Complete();
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        #endregion SensorItemEvent
+
+        #region Trigger
+        [HttpPost]
+        [Route("sync/Trigger/post/{siteId}", Name = "PostsTrigger")]
+        public IHttpActionResult PostsTrigger(Guid siteId, List<Trigger> entities)
+        {
+            try
+            {
+                if (entities != null && entities.Any())
+                {
+                    using (var ke = KEUnitOfWork.Create(false))
+                    {
+                        foreach (var e in entities)
+                        {
+                            var entity = ke.TriggerRepository.Get(e.Id);
+                            if (entity == null)
+                            {
+                                ke.TriggerRepository.Add(e);
+                            }
+                            else
+                            {
+                                entity.Update(e);
+                                ke.TriggerRepository.UpdateWithoutDate(entity);
+                            }
+                        }
+
+                        ke.Complete();
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        #endregion Trigger
+
+        #region TriggerContact
+        [HttpPost]
+        [Route("sync/TriggerContact/post/{siteId}", Name = "PostsTriggerContact")]
+        public IHttpActionResult PostsTriggerContact(Guid siteId, List<TriggerContact> entities)
+        {
+            try
+            {
+                if (entities != null && entities.Any())
+                {
+                    using (var ke = KEUnitOfWork.Create(false))
+                    {
+                        foreach (var e in entities)
+                        {
+                            var entity = ke.TriggerContactRepository.Get(e.Id);
+                            if (entity == null)
+                            {
+                                ke.TriggerContactRepository.Add(e);
+                            }
+                            else
+                            {
+                                entity.Update(e);
+                                ke.TriggerContactRepository.UpdateWithoutDate(entity);
+                            }
+                        }
+
+                        ke.Complete();
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        #endregion TriggerContact
+
+        #region Alarm
+        [HttpPost]
+        [Route("sync/Alarm/post/{siteId}", Name = "PostsAlarm")]
+        public IHttpActionResult PostsAlarm(Guid siteId, List<Alarm> entities)
+        {
+            try
+            {
+                if (entities != null && entities.Any())
+                {
+                    using (var ke = KEUnitOfWork.Create(false))
+                    {
+                        foreach (var e in entities)
+                        {
+                            var entity = ke.AlarmRepository.Get(e.Id);
+                            if (entity == null)
+                            {
+                                ke.AlarmRepository.Add(e);
+                            }
+                            else
+                            {
+                                entity.Update(e);
+                                ke.AlarmRepository.UpdateWithoutDate(entity);
+                            }
+                        }
+
+                        ke.Complete();
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        #endregion Alarm
+
+        #region AlarmHistory
+        [HttpPost]
+        [Route("sync/AlarmHistory/post/{siteId}", Name = "PostsAlarmHistory")]
+        public IHttpActionResult PostsAlarmHistory(Guid siteId, List<AlarmHistory> entities)
+        {
+            try
+            {
+                if (entities != null && entities.Any())
+                {
+                    using (var ke = KEUnitOfWork.Create(false))
+                    {
+                        foreach (var e in entities)
+                        {
+                            var entity = ke.AlarmHistoryRepository.Get(e.Id);
+                            if (entity == null)
+                            {
+                                ke.AlarmHistoryRepository.Add(e);
+                            }
+                            else
+                            {
+                                entity.Update(e);
+                                ke.AlarmHistoryRepository.UpdateWithoutDate(entity);
+                            }
+                        }
+
+                        ke.Complete();
+                    }
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        #endregion AlarmHistory
+
+        #endregion Post
     }
 }

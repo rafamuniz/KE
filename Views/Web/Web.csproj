@@ -400,6 +400,10 @@
     <Compile Include="Infrastructure\Jobs\NotificationJob.cs" />
     <Compile Include="Infrastructure\Jobs\NotificationTemplateJob.cs" />
     <Compile Include="Infrastructure\Jobs\Sync.cs" />
+    <Compile Include="Migrations\201607191334293_Initial.cs" />
+    <Compile Include="Migrations\201607191334293_Initial.Designer.cs">
+      <DependentUpon>201607191334293_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\AdminRole.cs" />
@@ -2430,6 +2434,11 @@
       <Project>{519e28a2-6b4d-4ce3-a05e-748e71c8b125}</Project>
       <Name>Util</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201607191334293_Initial.resx">
+      <DependentUpon>201607191334293_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

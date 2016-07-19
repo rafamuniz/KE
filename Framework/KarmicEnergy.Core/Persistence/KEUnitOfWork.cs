@@ -1,5 +1,4 @@
 ﻿using KarmicEnergy.Core.Repositories;
-using Munizoft.Core.Persistence;
 using System;
 
 namespace KarmicEnergy.Core.Persistence
@@ -8,7 +7,7 @@ namespace KarmicEnergy.Core.Persistence
     {
         #region Fields     
         private IDataSyncRepository _DataSyncRepository;
-                
+
         private ILogRepository _LogRepository;
         private ILogTypeRepository _LogTypeRepository;
         private IActionTypeRepository _ActionTypeRepository;
@@ -52,7 +51,7 @@ namespace KarmicEnergy.Core.Persistence
 
         private IAlarmRepository _AlarmRepository;
         private IAlarmHistoryRepository _AlarmHistoryRepository;
-        
+
         private IUnitRepository _UnitRepository;
         private IUnitTypeRepository _UnitTypeRepository;
 
@@ -78,11 +77,28 @@ namespace KarmicEnergy.Core.Persistence
 
         }
 
+        public KEUnitOfWork(Boolean enablelazyLoading = true)
+            : base(new KEContext(enablelazyLoading))
+        {
+
+        }
+
+        public KEUnitOfWork(String connectionString, Boolean enablelazyLoading = true)
+          : base(new KEContext(connectionString, enablelazyLoading))
+        {
+
+        }
+
         #endregion Constructor
 
         public static KEUnitOfWork Create()
         {
             return new KEUnitOfWork();
+        }
+
+        public static KEUnitOfWork Create(Boolean enablelazyLoading = true)
+        {
+            return new KEUnitOfWork(enablelazyLoading);
         }
 
         public IActionTypeRepository ActionTypeRepository
@@ -139,7 +155,7 @@ namespace KarmicEnergy.Core.Persistence
         {
             get { return _CustomerRepository ?? (_CustomerRepository = new CustomerRepository(_context)); }
         }
-        
+
         public ICustomerSettingRepository CustomerSettingRepository
         {
             get { return _CustomerSettingRepository ?? (_CustomerSettingRepository = new CustomerSettingRepository(_context)); }

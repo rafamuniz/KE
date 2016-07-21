@@ -13,12 +13,13 @@ namespace KarmicEnergy.Web.App_Start
             //LoadCustomMappings(types);
 
             Mapper.Initialize(config =>
-            {             
+            {
                 config.AddProfile<CustomerProfile>();
                 config.AddProfile<StickConversionProfile>();
                 config.AddProfile<TankModelProfile>();
                 config.AddProfile<Infrastructure.Mappings.Admin.LogProfile>();
                 config.AddProfile<Infrastructure.Mappings.Admin.UserProfile>();
+                config.AddProfile<Infrastructure.Mappings.Admin.SyncProfile>();
 
                 config.AddProfile<ContactProfile>();
                 config.AddProfile<DashboardProfile>();

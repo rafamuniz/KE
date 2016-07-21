@@ -8,7 +8,8 @@ namespace KarmicEnergy.Web.Jobs
 
         public void Execute(IJobExecutionContext context)
         {
-
+            SyncData syncData = new SyncData();
+            syncData.Execute();
         }
     }
 }

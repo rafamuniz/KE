@@ -127,5 +127,15 @@
                 <p>LOGS</p>
             </a>
         </li>
-    }    
+    }
+
+    @if (this.HasRoles("SuperAdmin", "Admin") && this.IsSite())
+    {
+        <li class="treeview @Html.MenuItemActive("Sync", "Admin")">
+            <a href="/Admin/Sync">
+                <img src="/images/sync.png" alt="sync" title="sync">
+                <p>SYNC</p>
+            </a>
+        </li>
+    }
 </ul>

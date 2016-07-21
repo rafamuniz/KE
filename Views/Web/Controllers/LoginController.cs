@@ -2,7 +2,6 @@
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace KarmicEnergy.Web.Controllers
@@ -24,7 +23,7 @@ namespace KarmicEnergy.Web.Controllers
 
         [AllowAnonymous]
         public ActionResult Index()
-        {            
+        {
             return View();
         }
 
@@ -54,22 +53,41 @@ namespace KarmicEnergy.Web.Controllers
                 switch (result)
                 {
                     case SignInStatus.Success:
-                        return RedirectToLocal(ReturnUrl);
+                        return Success(viewModel.Email, ReturnUrl);
                     case SignInStatus.LockedOut:
                         return View("Lockout");
                     case SignInStatus.RequiresVerification:
                         return RedirectToAction("SendCode", new { ReturnUrl = ReturnUrl, RememberMe = viewModel.RememberMe });
                     case SignInStatus.Failure:
                     default:
-                        ModelState.AddModelError("", "Invalid email or password");
+                        AddErrors("Invalid email or/and password");
+                        //ModelState.AddModelError("", "Invalid email or password");
                         return View("Index", viewModel);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 AddErrors(ex);
-                return View("Index", viewModel);
             }
+
+            return View("Index", viewModel);
+        }
+
+        private ActionResult Success(String username, String url)
+        {
+            if (IsSite)
+            {
+                return RedirectToLocal("/Customer/FastTracker");
+                //var user = UserManager.FindByNameAsync(username);
+
+                //// check If user is a customer
+                //if (user != null)
+                //{
+
+                //}
+            }
+
+            return RedirectToLocal(url);
         }
     }
 }

@@ -1119,7 +1119,8 @@ p {
 .nav > .dropdown > a:hover,
 .nav > .dropdown > a:active,
 .nav > .dropdown > a:focus {
-    color: #fff;
+    /*color: #fff;*/
+    color: rgba(255, 255, 255, 0.8);
     background: #00ADBD;
     border-radius: .25rem;
 }
@@ -1131,8 +1132,11 @@ p {
 }
 
     .nav > .dropdown > a {
-        color: #fff;
+        color: rgba(255, 255, 255, 0.8);
     }
+
+.nav .open > a, .nav .open > a:focus, .nav .open > a:hover {
+}
 
 .user-menu {
     background-color: #0D161E;

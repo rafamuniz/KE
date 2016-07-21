@@ -12,7 +12,6 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -95,10 +94,10 @@ namespace KarmicEnergy.Web.Controllers
             {
                 String siteId = ConfigurationManager.AppSettings["Site:Id"];
 
-                if (siteId.Trim() == String.Empty)
-                    return false;
-                else
+                Guid id;
+                if (!String.IsNullOrEmpty(siteId) && Guid.TryParse(siteId, out id))
                     return true;
+                return false;
             }
         }
 

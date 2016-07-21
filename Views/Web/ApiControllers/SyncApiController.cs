@@ -699,16 +699,38 @@ namespace KarmicEnergy.Web.ApiControllers
             {
                 if (entities != null && entities.Any())
                 {
+                    var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(ApplicationContext.Create()));
+
                     foreach (var e in entities)
                     {
-                        var entity = UserManager.FindById(e.UserName);
-                        if (entity == null)
+                        var entity = userManager.FindByName(e.UserName);
+
+                        if (entity == null) // ADD
                         {
-                            UserManager.Create<ApplicationUser, String>(e);
+                            e.Roles.Clear();
+                            userManager.Create(e);
+
+                            // Add Roles
+                            foreach (var role in e.RoleNames)
+                            {
+                                userManager.AddToRole(e.Id, role);
+                            }
                         }
-                        else
+                        else if (entity != null && e.LastModifiedDate > entity.LastModifiedDate)
                         {
-                            UserManager.Update<ApplicationUser, String>(entity);
+                            entity.Update(e);
+                            userManager.Update(entity);
+
+                            // Roles
+                            foreach (var role in entity.Roles)
+                            {
+                                userManager.RemoveFromRole(entity.Id, role.RoleId);
+                            }
+                            // Add Roles
+                            foreach (var role in e.RoleNames)
+                            {
+                                userManager.AddToRole(entity.Id, role);
+                            }
                         }
                     }
                 }

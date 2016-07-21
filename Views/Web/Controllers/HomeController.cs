@@ -1,5 +1,4 @@
 ﻿using KarmicEnergy.Core.Entities;
-using KarmicEnergy.Web.Jobs;
 using KarmicEnergy.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -43,15 +42,6 @@ namespace KarmicEnergy.Web.Controllers
             }
 
             return Json(notificationViewModel, JsonRequestBehavior.AllowGet);
-        }
-
-        [Authorize()]
-        public ActionResult Sync()
-        {
-            Sync sync = new Sync();
-            sync.Execute();
-
-            return View("Index");
         }
     }
 }

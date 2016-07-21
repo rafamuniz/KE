@@ -1,5 +1,7 @@
 ﻿using Quartz;
 using Quartz.Impl;
+using System;
+using System.Configuration;
 
 namespace KarmicEnergy.Web.Jobs
 {
@@ -9,29 +11,33 @@ namespace KarmicEnergy.Web.Jobs
         {
             IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
 
-            //#region DataSync Job
-            //IJobDetail dataSyncJob = JobBuilder.Create<DataSyncJob>().Build();
+            #region DataSync Job
+            var syncDataMin = Int32.Parse(ConfigurationManager.AppSettings["Sync:Data"].ToString());
 
-            //ITrigger dataSyncTrigger = TriggerBuilder.Create()
-            //    .StartNow()
-            //    .WithIdentity("DataSyncJob")
-            //    .WithSimpleSchedule(x => x
-            //        .WithIntervalInHours(1)
-            //        .RepeatForever()
-            //        .WithRepeatCount(1))
-            //    .Build();
+            IJobDetail dataSyncJob = JobBuilder.Create<DataSyncJob>().Build();
 
-            //scheduler.ScheduleJob(dataSyncJob, dataSyncTrigger);
-            //#endregion DataSync Job
+            ITrigger dataSyncTrigger = TriggerBuilder.Create()
+                .StartNow()
+                .WithIdentity("DataSyncJob")
+                .WithSimpleSchedule(x => x
+                    .WithIntervalInMinutes(syncDataMin)
+                    .RepeatForever()
+                    .WithRepeatCount(1))
+                .Build();
+
+            scheduler.ScheduleJob(dataSyncJob, dataSyncTrigger);
+            #endregion DataSync Job
 
             #region Notification Job
+            var syncNotificationMin = Int32.Parse(ConfigurationManager.AppSettings["Sync:Data"].ToString());
+
             IJobDetail notificationJob = JobBuilder.Create<NotificationJob>().Build();
 
             ITrigger notificationTrigger = TriggerBuilder.Create()
                 .StartNow()
-                .WithIdentity("NotificationJob")      
+                .WithIdentity("NotificationJob")
                 .WithSimpleSchedule(x => x
-                    .WithIntervalInMinutes(5)
+                    .WithIntervalInMinutes(syncNotificationMin)
                     .RepeatForever()
                     .WithRepeatCount(1))
                 .Build();
@@ -46,7 +52,7 @@ namespace KarmicEnergy.Web.Jobs
                 .StartNow()
                 .WithIdentity("NotificationTemplateJob")
                 .WithSimpleSchedule(x => x
-                    .WithIntervalInMinutes(10)
+                    .WithIntervalInHours(1)
                     .RepeatForever()
                     .WithRepeatCount(1))
                 .Build();

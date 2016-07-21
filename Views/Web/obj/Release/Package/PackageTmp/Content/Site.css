@@ -616,6 +616,11 @@ p {
             /*background-image: url(../images/menu-highlight.png);*/
             background-position: right center;
             background-repeat: no-repeat;
+            color: #00ADBD;
+        }
+
+        .sidebar-menu > li > a:hover {
+            color: #00ADBD;
         }
 
         .sidebar-menu > li.active {
@@ -1114,7 +1119,8 @@ p {
 .nav > .dropdown > a:hover,
 .nav > .dropdown > a:active,
 .nav > .dropdown > a:focus {
-    color: #fff;
+    /*color: #fff;*/
+    color: rgba(255, 255, 255, 0.8);
     background: #00ADBD;
     border-radius: .25rem;
 }
@@ -1126,8 +1132,11 @@ p {
 }
 
     .nav > .dropdown > a {
-        color: #fff;
+        color: rgba(255, 255, 255, 0.8);
     }
+
+.nav .open > a, .nav .open > a:focus, .nav .open > a:hover {
+}
 
 .user-menu {
     background-color: #0D161E;

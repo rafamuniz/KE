@@ -3,8 +3,6 @@ using KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger;
 using Munizoft.MVC.Helpers;
 using System;
 using System.Configuration;
-using System.Data.Entity.Infrastructure;
-using System.Linq.Expressions;
 using System.Web.Mvc;
 
 namespace KarmicEnergy.Web.Extensions
@@ -14,11 +12,10 @@ namespace KarmicEnergy.Web.Extensions
         public static Boolean IsSite(this WebViewPage page)
         {
             String siteId = ConfigurationManager.AppSettings["Site:Id"];
-
-            if (siteId.Trim() == String.Empty)
-                return false;
-            else
+            Guid id;
+            if (!String.IsNullOrEmpty(siteId) && Guid.TryParse(siteId, out id))
                 return true;
+            return false;
         }
 
         public static MvcHtmlString SensorEditButton(this HtmlHelper htmlHelper, SensorViewModel viewModel)

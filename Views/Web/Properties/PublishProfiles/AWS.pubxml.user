@@ -43,6 +43,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Admin/Views/StickConversion/Values.cshtml">
       <publishTime>05/08/2016 01:00:17</publishTime>
     </File>
+    <File Include="Areas/Admin/Views/Sync/Index.cshtml">
+      <publishTime>07/20/2016 20:21:31</publishTime>
+    </File>
     <File Include="Areas/Admin/Views/TankModel/Create.cshtml">
       <publishTime>05/25/2016 19:39:16</publishTime>
     </File>
@@ -257,7 +260,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/25/2016 15:49:19</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/_TankModel.cshtml">
-      <publishTime>06/20/2016 19:46:17</publishTime>
+      <publishTime>07/20/2016 17:41:05</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/_Trigger.cshtml">
       <publishTime>05/12/2016 00:52:16</publishTime>
@@ -353,7 +356,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>07/19/2016 22:57:28</publishTime>
+      <publishTime>07/20/2016 14:03:24</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
@@ -362,7 +365,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/13/2016 00:18:34</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>07/19/2016 23:20:37</publishTime>
+      <publishTime>07/20/2016 21:09:07</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -866,7 +869,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:39:49</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>07/19/2016 23:19:46</publishTime>
+      <publishTime>07/20/2016 21:24:36</publishTime>
     </File>
     <File Include="Content/themes/base/accordion.css">
       <publishTime>03/30/2016 03:59:42</publishTime>
@@ -1131,6 +1134,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="images/ball-red.png">
       <publishTime>06/20/2016 22:08:11</publishTime>
+    </File>
+    <File Include="images/banner_setup.jpg">
+      <publishTime>05/26/2016 10:46:34</publishTime>
     </File>
     <File Include="images/barrel.png">
       <publishTime>02/03/2016 11:28:08</publishTime>
@@ -3816,6 +3822,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="images/stick_conversion.png">
       <publishTime>05/18/2016 22:47:32</publishTime>
+    </File>
+    <File Include="images/sync.png">
+      <publishTime>07/20/2016 20:03:01</publishTime>
     </File>
     <File Include="images/tank-gauge.png">
       <publishTime>02/25/2016 17:13:54</publishTime>
@@ -9389,7 +9398,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/25/2016 23:51:09</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>07/09/2016 21:22:39</publishTime>
+      <publishTime>07/20/2016 18:33:14</publishTime>
     </File>
     <File Include="Views/Log/Index.cshtml">
       <publishTime>06/25/2016 14:01:36</publishTime>
@@ -9461,7 +9470,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:32:23</publishTime>
     </File>
     <File Include="Views/Shared/_MenuLeft.cshtml">
-      <publishTime>07/14/2016 20:15:48</publishTime>
+      <publishTime>07/20/2016 19:19:56</publishTime>
     </File>
     <File Include="Views/Shared/_MenuTop.cshtml">
       <publishTime>06/17/2016 18:14:32</publishTime>
@@ -9473,7 +9482,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 01:07:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/19/2016 22:58:31</publishTime>
+      <publishTime>07/20/2016 20:28:10</publishTime>
     </File>
   </ItemGroup>
 </Project>

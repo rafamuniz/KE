@@ -1,9 +1,6 @@
-﻿@{
-    Layout = "~/Views/Shared/_Internal.cshtml";
+﻿@using Munizoft.MVC.Extensions
+@using KarmicEnergy.Web.Extensions
+
+@{
     ViewBag.Title = "Home";
 }
-
-
-<div class="pull-right">
-    @Html.NoEncodeActionLink("<span>SYNC</span>", "Sync", "Sync", "Home", routeValues: new { area = "" }, htmlAttributes: new { @class = "btn" })
-</div>

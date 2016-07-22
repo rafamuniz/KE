@@ -64,7 +64,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 
         #region Edit
         [Authorize(Roles = "SuperAdmin, Admin, Operator")]
-        public ActionResult Edit(Int32 id)
+        public ActionResult Edit(Guid id)
         {
             StickConversion stickConversion = KEUnitOfWork.StickConversionRepository.Get(id);
             var viewModel = EditViewModel.Map(stickConversion);

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Web;
 
 namespace KarmicEnergy.Web.Areas.Admin.ViewModels.StickConversion
 {
@@ -33,7 +32,7 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.StickConversion
         #region Map
 
         public static EditViewModel Map(Core.Entities.StickConversion entity)
-        {           
+        {
             return Mapper.Map<Core.Entities.StickConversion, EditViewModel>(entity);
         }
 

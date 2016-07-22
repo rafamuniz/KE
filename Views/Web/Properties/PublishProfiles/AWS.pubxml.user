@@ -17,13 +17,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/02/2016 14:12:18</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Customer/ChangePassword.cshtml">
-      <publishTime>05/25/2016 19:51:54</publishTime>
+      <publishTime>07/22/2016 15:48:05</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Customer/Create.cshtml">
-      <publishTime>06/01/2016 13:03:22</publishTime>
+      <publishTime>07/22/2016 15:44:50</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Customer/Edit.cshtml">
-      <publishTime>06/01/2016 13:03:31</publishTime>
+      <publishTime>07/22/2016 15:48:05</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Customer/Index.cshtml">
       <publishTime>06/21/2016 13:52:16</publishTime>
@@ -32,37 +32,37 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/14/2016 16:26:59</publishTime>
     </File>
     <File Include="Areas/Admin/Views/StickConversion/Create.cshtml">
-      <publishTime>05/25/2016 19:44:51</publishTime>
+      <publishTime>07/22/2016 15:48:05</publishTime>
     </File>
     <File Include="Areas/Admin/Views/StickConversion/Edit.cshtml">
-      <publishTime>05/25/2016 19:39:01</publishTime>
+      <publishTime>07/22/2016 15:48:05</publishTime>
     </File>
     <File Include="Areas/Admin/Views/StickConversion/Index.cshtml">
       <publishTime>06/21/2016 13:56:50</publishTime>
     </File>
     <File Include="Areas/Admin/Views/StickConversion/Values.cshtml">
-      <publishTime>05/08/2016 01:00:17</publishTime>
+      <publishTime>07/22/2016 15:48:05</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Sync/Index.cshtml">
       <publishTime>07/20/2016 20:21:31</publishTime>
     </File>
     <File Include="Areas/Admin/Views/TankModel/Create.cshtml">
-      <publishTime>05/25/2016 19:39:16</publishTime>
+      <publishTime>07/22/2016 15:48:05</publishTime>
     </File>
     <File Include="Areas/Admin/Views/TankModel/Edit.cshtml">
-      <publishTime>05/25/2016 19:45:36</publishTime>
+      <publishTime>07/22/2016 15:48:05</publishTime>
     </File>
     <File Include="Areas/Admin/Views/TankModel/Index.cshtml">
       <publishTime>06/21/2016 13:56:07</publishTime>
     </File>
     <File Include="Areas/Admin/Views/User/ChangePassword.cshtml">
-      <publishTime>05/25/2016 19:51:49</publishTime>
+      <publishTime>07/22/2016 15:48:05</publishTime>
     </File>
     <File Include="Areas/Admin/Views/User/Create.cshtml">
-      <publishTime>07/14/2016 17:19:35</publishTime>
+      <publishTime>07/22/2016 15:48:05</publishTime>
     </File>
     <File Include="Areas/Admin/Views/User/Edit.cshtml">
-      <publishTime>06/01/2016 13:03:37</publishTime>
+      <publishTime>07/22/2016 15:48:05</publishTime>
     </File>
     <File Include="Areas/Admin/Views/User/Index.cshtml">
       <publishTime>06/21/2016 13:51:27</publishTime>
@@ -74,10 +74,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 13:18:59</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Contact/Create.cshtml">
-      <publishTime>06/01/2016 13:03:40</publishTime>
+      <publishTime>07/22/2016 15:48:05</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Contact/Edit.cshtml">
-      <publishTime>06/01/2016 13:03:48</publishTime>
+      <publishTime>07/22/2016 15:48:05</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Contact/Index.cshtml">
       <publishTime>06/20/2016 14:06:46</publishTime>
@@ -116,16 +116,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/20/2016 14:06:55</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Monitoring/AlarmClear.cshtml">
-      <publishTime>06/29/2016 00:05:15</publishTime>
+      <publishTime>07/22/2016 15:48:05</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Monitoring/AlarmInfo.cshtml">
-      <publishTime>06/28/2016 23:05:15</publishTime>
+      <publishTime>07/22/2016 15:46:29</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Monitoring/Alarms.cshtml">
       <publishTime>07/07/2016 00:14:09</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Monitoring/CreateComment.cshtml">
-      <publishTime>06/28/2016 22:18:41</publishTime>
+      <publishTime>07/22/2016 15:48:04</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Monitoring/Detail.cshtml">
       <publishTime>07/16/2016 00:44:39</publishTime>
@@ -137,19 +137,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/28/2016 21:54:30</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Pond/Create.cshtml">
-      <publishTime>06/28/2016 00:07:26</publishTime>
+      <publishTime>07/22/2016 15:48:04</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Pond/Edit.cshtml">
-      <publishTime>06/28/2016 00:07:30</publishTime>
+      <publishTime>07/22/2016 15:48:04</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Pond/Index.cshtml">
       <publishTime>07/15/2016 00:31:58</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Pond/SensorCreate.cshtml">
-      <publishTime>06/27/2016 15:50:59</publishTime>
+      <publishTime>07/22/2016 15:48:04</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Pond/SensorEdit.cshtml">
-      <publishTime>06/27/2016 16:35:28</publishTime>
+      <publishTime>07/22/2016 15:48:04</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Pond/SensorIndex.cshtml">
       <publishTime>06/27/2016 15:28:07</publishTime>
@@ -158,10 +158,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/20/2016 14:07:03</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Sensor/Create.cshtml">
-      <publishTime>06/19/2016 19:30:24</publishTime>
+      <publishTime>07/22/2016 15:46:59</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Sensor/Edit.cshtml">
-      <publishTime>06/01/2016 13:03:59</publishTime>
+      <publishTime>07/22/2016 15:48:04</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Sensor/Index.cshtml">
       <publishTime>07/15/2016 11:31:58</publishTime>
@@ -173,7 +173,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/01/2016 13:03:52</publishTime>
     </File>
     <File Include="Areas/Customer/Views/SensorGroup/Create.cshtml">
-      <publishTime>06/20/2016 14:07:12</publishTime>
+      <publishTime>07/22/2016 15:47:14</publishTime>
     </File>
     <File Include="Areas/Customer/Views/SensorGroup/Edit.cshtml">
       <publishTime>04/24/2016 21:47:19</publishTime>
@@ -185,10 +185,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/01/2016 13:03:52</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Site/Create.cshtml">
-      <publishTime>07/14/2016 19:58:46</publishTime>
+      <publishTime>07/22/2016 15:48:04</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Site/Edit.cshtml">
-      <publishTime>07/14/2016 20:06:02</publishTime>
+      <publishTime>07/22/2016 15:48:04</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Site/Index.cshtml">
       <publishTime>07/15/2016 00:31:24</publishTime>
@@ -209,10 +209,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/24/2016 20:42:05</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Site/SensorCreate.cshtml">
-      <publishTime>06/26/2016 23:17:30</publishTime>
+      <publishTime>07/22/2016 15:47:26</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Site/SensorEdit.cshtml">
-      <publishTime>06/26/2016 23:53:31</publishTime>
+      <publishTime>07/22/2016 15:47:34</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Site/SensorIndex.cshtml">
       <publishTime>06/26/2016 23:46:49</publishTime>
@@ -221,13 +221,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/24/2016 20:42:05</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Create.cshtml">
-      <publishTime>05/25/2016 14:36:15</publishTime>
+      <publishTime>07/22/2016 15:47:39</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Dashboard.cshtml">
       <publishTime>05/03/2016 02:06:19</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Edit.cshtml">
-      <publishTime>06/21/2016 18:43:08</publishTime>
+      <publishTime>07/22/2016 15:47:42</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/Gauge.cshtml">
       <publishTime>05/13/2016 15:22:54</publishTime>
@@ -248,10 +248,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/24/2016 20:41:19</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/SensorCreate.cshtml">
-      <publishTime>06/27/2016 15:50:53</publishTime>
+      <publishTime>07/22/2016 15:47:47</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/SensorEdit.cshtml">
-      <publishTime>06/27/2016 00:56:21</publishTime>
+      <publishTime>07/22/2016 15:47:51</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/SensorIndex.cshtml">
       <publishTime>06/27/2016 00:22:51</publishTime>
@@ -311,10 +311,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/25/2016 14:07:14</publishTime>
     </File>
     <File Include="Areas/Customer/Views/User/Create.cshtml">
-      <publishTime>06/07/2016 11:44:14</publishTime>
+      <publishTime>07/22/2016 15:47:54</publishTime>
     </File>
     <File Include="Areas/Customer/Views/User/Edit.cshtml">
-      <publishTime>06/07/2016 20:37:57</publishTime>
+      <publishTime>07/22/2016 15:47:58</publishTime>
     </File>
     <File Include="Areas/Customer/Views/User/Index.cshtml">
       <publishTime>06/20/2016 14:05:16</publishTime>
@@ -356,16 +356,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>07/20/2016 14:03:24</publishTime>
+      <publishTime>07/22/2016 15:28:21</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Util.dll">
-      <publishTime>07/13/2016 00:18:34</publishTime>
+      <publishTime>07/22/2016 15:28:19</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>07/20/2016 21:09:07</publishTime>
+      <publishTime>07/22/2016 15:49:19</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -5101,6 +5101,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="images/users.png">
       <publishTime>02/03/2016 11:28:08</publishTime>
     </File>
+    <File Include="images/users_white.png">
+      <publishTime>07/20/2016 21:16:59</publishTime>
+    </File>
     <File Include="images/water-flow-idle.gif">
       <publishTime>05/11/2016 22:26:55</publishTime>
     </File>
@@ -9470,7 +9473,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:32:23</publishTime>
     </File>
     <File Include="Views/Shared/_MenuLeft.cshtml">
-      <publishTime>07/20/2016 19:19:56</publishTime>
+      <publishTime>07/22/2016 15:44:10</publishTime>
     </File>
     <File Include="Views/Shared/_MenuTop.cshtml">
       <publishTime>06/17/2016 18:14:32</publishTime>
@@ -9482,7 +9485,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 01:07:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/20/2016 20:28:10</publishTime>
+      <publishTime>07/22/2016 15:49:27</publishTime>
     </File>
   </ItemGroup>
 </Project>

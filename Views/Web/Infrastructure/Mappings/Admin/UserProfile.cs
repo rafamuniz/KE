@@ -9,8 +9,8 @@ namespace KarmicEnergy.Web.Infrastructure.Mappings.Admin
             #region ViewModel To Entity
 
             this.CreateMap<ListViewModel, Core.Entities.User>();
-            this.CreateMap<CreateViewModel, Core.Entities.User>();//.ForMember(x => x.Address, opt => opt.Ignore());
-            this.CreateMap<EditViewModel, Core.Entities.User>();//.ForMember(x => x.Address, opt => opt.Ignore());
+            this.CreateMap<CreateViewModel, Core.Entities.User>();
+            this.CreateMap<EditViewModel, Core.Entities.User>();
             this.CreateMap<ChangePasswordViewModel, Core.Entities.User>();
 
             this.CreateMap<EditViewModel, Web.Entities.ApplicationUser>();
@@ -24,6 +24,7 @@ namespace KarmicEnergy.Web.Infrastructure.Mappings.Admin
             this.CreateMap<Core.Entities.User, EditViewModel>();
             this.CreateMap<Core.Entities.User, ChangePasswordViewModel>();
 
+            this.CreateMap<Web.Entities.ApplicationUser, EditViewModel>();
             this.CreateMap<Web.Entities.ApplicationUser, ListViewModel>();
 
             #endregion Entity To ViewModel 

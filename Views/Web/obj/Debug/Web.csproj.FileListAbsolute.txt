@@ -121,3 +121,6 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\We
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Debug\Web.csproj.GenerateResource.Cache
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Debug\KarmicEnergy.Web.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Debug\KarmicEnergy.Web.pdb
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\Microsoft.Web.Infrastructure.dll
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\WebGrease.dll
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Debug\KarmicEnergy.Web.Installer.resources

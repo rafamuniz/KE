@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using KarmicEnergy.Web.Entities;
-using KarmicEnergy.Web.Models;
 using KarmicEnergy.Web.ViewModels;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -28,7 +27,8 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.User
         [Required]
         [Display(Name = "Role")]
         public String Role { get; set; }
-        
+
+        [IgnoreMap]
         public AddressViewModel Address { get; set; }
 
         #endregion Property
@@ -37,18 +37,17 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.User
 
         public static EditViewModel Map(ApplicationUser entity)
         {
-    
+
             return Mapper.Map<ApplicationUser, EditViewModel>(entity);
         }
 
-        public static AddressViewModel Map(Core.Entities.Address entity)
+        public AddressViewModel Map(Core.Entities.Address entity)
         {
-            
-            return Mapper.Map<Core.Entities.Address, AddressViewModel>(entity);
+            return Mapper.Map<Core.Entities.Address, AddressViewModel>(entity, this.Address);
         }
 
         public Core.Entities.Address MapAddress(Core.Entities.Address entity)
-        {      
+        {
             return Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address, entity);
         }
 

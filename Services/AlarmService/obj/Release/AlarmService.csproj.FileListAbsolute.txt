@@ -18,15 +18,6 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\bin\Release\KarmicEnergy.Services.pdb
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\obj\Release\KarmicEnergy.Services.exe
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\obj\Release\KarmicEnergy.Services.pdb
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\bin\Release\Quartz.dll
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\bin\Release\Common.Logging.Core.dll
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\bin\Release\Common.Logging.dll
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\bin\Release\Quartz.pdb
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\bin\Release\Quartz.xml
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\bin\Release\Common.Logging.Core.pdb
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\bin\Release\Common.Logging.Core.xml
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\bin\Release\Common.Logging.pdb
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\bin\Release\Common.Logging.xml
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\bin\Release\KarmicEnergy.Util.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\bin\Release\Munizoft.Extensions.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Services\AlarmService\bin\Release\KarmicEnergy.Util.pdb

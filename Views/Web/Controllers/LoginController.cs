@@ -77,14 +77,7 @@ namespace KarmicEnergy.Web.Controllers
         {
             if (IsSite)
             {
-                return RedirectToLocal("/Customer/FastTracker");
-                //var user = UserManager.FindByNameAsync(username);
-
-                //// check If user is a customer
-                //if (user != null)
-                //{
-
-                //}
+                return RedirectToLocal("~/Customer/FastTracker");
             }
 
             return RedirectToLocal(url);

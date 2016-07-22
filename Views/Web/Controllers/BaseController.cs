@@ -138,9 +138,15 @@ namespace KarmicEnergy.Web.Controllers
                 }
                 else
                 {
-                    var customerUser = KEUnitOfWork.CustomerUserRepository.Get(Guid.Parse(userId));
-                    if (customerUser != null)
-                        return customerUser.CustomerId;
+                    Guid id;
+                    if (Guid.TryParse(userId, out id))
+                    {
+                        var customerUser = KEUnitOfWork.CustomerUserRepository.Get(id);
+                        if (customerUser != null)
+                            return customerUser.CustomerId;
+                        else
+                            return Guid.Empty;
+                    }
                     else
                         return Guid.Empty;
                 }
@@ -276,6 +282,7 @@ namespace KarmicEnergy.Web.Controllers
         {
             List<AdminRole> roles = new List<AdminRole>()
             {
+                new AdminRole() { Id = "SuperAdmin", Name = "Super Admin" },
                 new AdminRole() { Id = "Admin", Name = "Admin" },
                 new AdminRole() { Id = "User", Name = "User" }
             };

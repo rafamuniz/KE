@@ -35,6 +35,7 @@
                 <button type="submit" class="btn-login">Login</button>
             </div>
         }
+
         <div class="pull-right">
             <a id="ForgotPassword" name="ForgotPassword">I forgot my password</a>
         </div>
@@ -49,7 +50,7 @@
             var email = $('#Email').val();
 
             if (email != "") {
-                var value = "/ForgotPassword?u=" + email;
+                var value = "~/ForgotPassword?u=" + email;
                 $('#ForgotPassword').attr('href', value);
             }
         });

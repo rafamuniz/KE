@@ -81,11 +81,11 @@
                 <input type="submit" class="btn btn-default" value="SAVE">
                 @if (Model.SiteId != default(Guid))
                 {
-                <a class="btn" href="/Customer/Site/SensorIndex?SiteId=@Model.SiteId">Cancel</a>
+                <a class="btn" href="~/Customer/Site/SensorIndex?SiteId=@Model.SiteId">Cancel</a>
                 }
                 else
                 {
-                <a class="btn" href="/Customer/Site/SensorIndex">Cancel</a>
+                <a class="btn" href="~/Customer/Site/SensorIndex">Cancel</a>
                 }
             </div>
     }

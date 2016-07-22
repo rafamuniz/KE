@@ -46,7 +46,7 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.TankModel
 
         public static ListViewModel Map(Core.Entities.TankModel entity)
         {
-         
+
             return Mapper.Map<Core.Entities.TankModel, ListViewModel>(entity);
         }
 

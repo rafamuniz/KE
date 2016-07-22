@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
@@ -36,13 +35,6 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
 
                 if (!WaterVolumePercentage.HasValue)
                     return String.Format("{0}/{1}/{2}", baseurl, TankModelId, TankModelImage == null ? String.Empty : TankModelImage.Replace("{info}", "NoData"));
-                
-                //Int32 volume = 0;
-
-                //if (Int32.TryParse(WaterVolumePercentage.ToString(), out volume))
-                //{
-                //    var rnd = Math.Round(WaterVolumePercentage.Value);
-                //}
 
                 var percentage = (Int16)WaterVolumePercentage;
 
@@ -152,7 +144,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
 
         public static TankViewModel Map(Core.Entities.Tank entity)
         {
-     
+
             return Mapper.Map<Core.Entities.Tank, TankViewModel>(entity);
         }
 

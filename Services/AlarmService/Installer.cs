@@ -31,7 +31,7 @@ namespace KarmicEnergy.Service
             }
             catch (Exception e)
             {
-                MessageBox.Show("Falha ao atualizar o arquivo de configuração da aplicação: " + e.Message);
+                MessageBox.Show(e.Message);
                 base.Rollback(savedState);
             }
         }

@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Configuration;
 using System.Configuration.Install;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+using System.Reflection;
+using System.Web.Configuration;
 using System.Windows.Forms;
 
 namespace KarmicEnergy.Web
@@ -20,155 +16,85 @@ namespace KarmicEnergy.Web
             InitializeComponent();
         }
 
-        public override void Install(System.Collections.IDictionary stateSaver)
+        private void AddConfigurationFileDetails()
         {
-            base.Install(stateSaver);
+            string configFile = string.Concat(Assembly.GetExecutingAssembly().Location, "Web.config");
+            int index = configFile.IndexOf("bin");
+            configFile = configFile.Substring(0, index);
+
+            VirtualDirectoryMapping vdm = new VirtualDirectoryMapping(configFile, true);
+            WebConfigurationFileMap wcfm = new WebConfigurationFileMap();
+            wcfm.VirtualDirectories.Add("/", vdm);
+
+            #region ConnectionStrings
+
+            string server = Context.Parameters["SERVER"];
+            string databasename = Context.Parameters["DATABASENAME"];
+            string username = Context.Parameters["USERNAME"];
+            string password = Context.Parameters["PASSWORD"];
+
+            String dataSource = String.Format("Data Source={0};Initial Catalog={1};User={2};password={3};Integrated Security=false;", server, databasename, username, password);
+
+            Configuration webConfig = WebConfigurationManager.OpenMappedWebConfiguration(wcfm, "/");
+            webConfig.ConnectionStrings.ConnectionStrings.Clear();
+
+            ConnectionStringSettings connectionString = webConfig.ConnectionStrings.ConnectionStrings["KEConnection"];
+            connectionString = new ConnectionStringSettings("KEConnection", dataSource, "System.Data.SqlClient");
+            webConfig.ConnectionStrings.ConnectionStrings.Add(connectionString);
+
+            #endregion ConnectionStrings
+
+            #region AppSettings
+            string siteId = Context.Parameters["SITEID"];
+            string masterURL = Context.Parameters["MASTERURL"];
+
+            var settings = webConfig.AppSettings.Settings;
+
+            if (settings["Site:Id"] == null)
+            {
+                webConfig.AppSettings.Settings.Add("Site:Id", siteId);
+            }
+            else
+            {
+                webConfig.AppSettings.Settings["Site:Id"].Value = siteId;
+            }
+
+            if (settings["Master:Url"] == null)
+            {
+                webConfig.AppSettings.Settings.Add("Master:Url", masterURL);
+            }
+            else
+            {
+                webConfig.AppSettings.Settings["Master:Url"].Value = masterURL;
+            }
+
+            if (settings["Notification:PathTemplate"] == null)
+            {
+                webConfig.AppSettings.Settings.Add("Notification:PathTemplate", String.Format("{0}\\App_Data\\Notifications", configFile));
+            }
+            else
+            {
+                webConfig.AppSettings.Settings["Notification:PathTemplate"].Value = String.Format("{0}\\App_Data\\Notifications", configFile);
+            }
+
+            #endregion AppSettings
+
+            webConfig.Save();
+
+            ConfigurationManager.RefreshSection("connectionStrings");
+            ConfigurationManager.RefreshSection("appSettings");
         }
 
-        public override void Commit(IDictionary savedState)
+        private void Installer_AfterInstall(object sender, InstallEventArgs e)
         {
-            base.Commit(savedState);
-
             try
             {
                 AddConfigurationFileDetails();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show("Falha ao atualizar o arquivo de configuração da aplicação: " + e.Message);
-                base.Rollback(savedState);
-            }
-        }
-
-        public override void Rollback(IDictionary savedState)
-        {
-            base.Rollback(savedState);
-        }
-
-        public override void Uninstall(IDictionary savedState)
-        {
-            base.Uninstall(savedState);
-        }
-
-        /// <summary>
-        /// /SITEID="[SITEID]" /INTERVAL="[INTERVAL]" /PORTNAME="[PORTNAME]" /BAUDRATE="[BAUDRATE]" /PARITY="[PARITY]" /DATABITS="[DATABITS]" /STOPBITS="[STOPBITS]" /READTIMEOUT="[READTIMEOUT]"
-        /// </summary>
-        private void showParameters()
-        {
-            StringBuilder sb = new StringBuilder();
-            StringDictionary myStringDictionary = this.Context.Parameters;
-
-            if (this.Context.Parameters.Count > 0)
-            {
-                foreach (string myString in this.Context.Parameters.Keys)
-                {
-                    sb.AppendFormat("String={0} Value= {1}\n", myString,
-                    this.Context.Parameters[myString]);
-                }
-            }
-        }
-
-        private void AddConfigurationFileDetails()
-        {
-            try
-            {
-                // APP SETTINGS
-                string siteId = Context.Parameters["SITEID"];
-
-                // CONNECTION STRING
-                string server = Context.Parameters["SERVER"];
-                string databasename = Context.Parameters["DATABASENAME"];
-                string username = Context.Parameters["USERNAME"];
-                string password = Context.Parameters["PASSWORD"];
-
-                // Get the path to the executable file that is being installed on the target computer  
-                string assemblypath = Context.Parameters["assemblypath"];
-                string configPath = assemblypath + ".config";
-
-                // Write the path to the app.config file  
-                XmlDocument doc = new XmlDocument();
-                doc.Load(configPath);
-
-                //MessageBox.Show(appConfigPath);
-
-                XmlNode configuration = null;
-                foreach (XmlNode node in doc.ChildNodes)
-                    if (node.Name == "configuration")
-                        configuration = node;
-
-                if (configuration != null)
-                {
-                    //MessageBox.Show("configuration != null");  
-                    // Get the ‘appSettings’ node  
-                    XmlNode settingNode = null;
-                    XmlNode connectionNode = null;
-                    foreach (XmlNode node in configuration.ChildNodes)
-                    {
-                        if (node.Name == "appSettings")
-                            settingNode = node;
-
-                        if (node.Name == "connectionStrings")
-                            connectionNode = node;
-                    }
-
-                    if (settingNode != null)
-                    {
-                        //MessageBox.Show("settingNode != null");  
-                        //Reassign values in the config file  
-                        foreach (XmlNode node in settingNode.ChildNodes)
-                        {
-                            //MessageBox.Show("node.Value = " + node.Value);
-                            if (node.Attributes == null)
-                                continue;
-
-                            XmlAttribute attribute = node.Attributes["value"];
-
-                            if (node.Attributes["key"] != null)
-                            {
-                                switch (node.Attributes["key"].Value)
-                                {
-                                    case "Site:Id":
-                                        attribute.Value = siteId;
-                                        break;
-                                }
-                            }
-                        }
-                    }
-
-                    if (connectionNode != null)
-                    {
-                        //MessageBox.Show("connectionNode != null");  
-                        //Reassign values in the config file  
-                        foreach (XmlNode node in connectionNode.ChildNodes)
-                        {
-                            //MessageBox.Show("node.Value = " + node.Value);
-                            if (node.Attributes == null)
-                                continue;
-
-                            XmlAttribute attribute = node.Attributes["connectionString"];
-
-                            String configurationString = String.Format("Data Source={0};Initial Catalog={1};User={2};password={3};Integrated Security=false;", server, databasename, username, password);
-
-                            if (node.Attributes["name"] != null &&
-                                node.Attributes["name"].Value == "KEConnection")
-                            {
-                                attribute.Value = configurationString;
-                            }
-
-                            if (node.Attributes["name"] != null &&
-                               node.Attributes["name"].Value == "IdentityConnection")
-                            {
-                                attribute.Value = configurationString;
-                            }
-                        }
-                    }
-
-                    doc.Save(configPath);
-                }
-            }
-            catch
-            {
-                throw;
+                Rollback(e.SavedState);
+                MessageBox.Show("AfterInstall: " + ex.Message);
             }
         }
     }

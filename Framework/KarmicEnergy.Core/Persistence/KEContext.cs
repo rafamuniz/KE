@@ -11,20 +11,14 @@ namespace KarmicEnergy.Core.Persistence
         public KEContext()
         : base("KEConnection")
         {
-            //this.Configuration.LazyLoadingEnabled = false;
-            //this.Configuration.ProxyCreationEnabled = false;
             Database.SetInitializer(new DatabaseCreateIfNotExists());
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<KEContext, Configuration>());
         }
 
         public KEContext(Boolean enablelazyLoading = true)
             : base("KEConnection")
         {
             this.Configuration.LazyLoadingEnabled = enablelazyLoading;
-
-            //this.Configuration.ProxyCreationEnabled = false;
             Database.SetInitializer(new DatabaseCreateIfNotExists());
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<KEContext, Configuration>());
         }
 
         public KEContext(String nameOrConnectionString)
@@ -39,39 +33,18 @@ namespace KarmicEnergy.Core.Persistence
         }
         #endregion Constructor
 
+        #region Functions
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<TankModel>().Property(x => x.Image).HasColumnType("VARBINARY(MAX)");
             modelBuilder.Entity<CustomerSetting>().Property(x => x.Value).HasColumnType("NVARCHAR(MAX)");
             modelBuilder.Entity<CustomerUserSetting>().Property(x => x.Value).HasColumnType("NVARCHAR(MAX)");
-
-            //modelBuilder.Entity<CustomerUser>()
-            //        .HasRequired<Contact>(p => p.Contact)
-            //        .WithMany(r=>r.CustomerUsers)                 
-            //        .HasForeignKey(l => l.ContactId)
-            //        .WillCascadeOnDelete(false);
-
-            //modelBuilder.HasDefaultSchema("security");
-            CreateManyToMany(modelBuilder);
-        }
-
-        private void CreateManyToMany(DbModelBuilder modelBuilder)
-        {
             modelBuilder.Entity<Notification>().Property(p => p.Message).HasColumnType("NVARCHAR(MAX)");
             modelBuilder.Entity<NotificationTemplate>().Property(p => p.Message).HasColumnType("NVARCHAR(MAX)");
 
-            //modelBuilder.Entity<Sensor>()
-            //  .HasMany<Item>(x => x.Items)
-            //  .WithMany(s => s.Sensors)
-            //  .Map(cs =>
-            //  {
-            //      cs.MapLeftKey("SensorId");
-            //      cs.MapRightKey("ItemId");
-            //      cs.ToTable("SensorItems");
-            //  });
+            base.OnModelCreating(modelBuilder);
         }
+        #endregion Functions
 
         #region DbSet
 

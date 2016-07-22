@@ -7,6 +7,19 @@ namespace KarmicEnergy.Core.Entities
     [Table("Users", Schema = "dbo")]
     public class User : BaseEntity
     {
+        #region Constructor
+        public User()
+        {
+
+
+        }
+
+        public User(Guid id)
+        {
+            this.Id = id;
+        }
+        #endregion Constructor
+
         #region Property
 
         [Key, Column("Id", Order = 1, TypeName = "UNIQUEIDENTIFIER")]
@@ -26,11 +39,11 @@ namespace KarmicEnergy.Core.Entities
         #endregion Address        
 
         #region Functions
-              
+
         public void Update(User entity)
         {
             this.AddressId = entity.AddressId;
-           
+
             this.CreatedDate = entity.CreatedDate;
             this.LastModifiedDate = entity.LastModifiedDate;
             this.DeletedDate = entity.DeletedDate;

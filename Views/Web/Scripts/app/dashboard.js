@@ -116,7 +116,7 @@ function generateTemperatureGraph(tankId, waterTemperature) {
 
 function generateLastFlowMeter(tankId) {
     $.ajax({
-        url: getUrlBase() + "/Customer/Dashboard/GetLastFlowMeter/",
+        url: getUrlBase() + "~/Customer/Dashboard/GetLastFlowMeter/",
         type: "GET",
         dataType: "JSON",
         data: { TankId: tankId },

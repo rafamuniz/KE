@@ -87,7 +87,7 @@
 
                 if (trigger.HasAlarm)
                 {
-                    @Html.Raw("<a href='/Customer/Monitoring/AlarmById/?alarmId=" + @trigger.AlarmId + "'>")
+                    @Html.Raw("<a href='~/Customer/Monitoring/AlarmById/?alarmId=" + @trigger.AlarmId + "'>")
                 }
 
                 @Html.Hidden(trigger.Id.ToString())

@@ -1,6 +1,7 @@
 ﻿using KarmicEnergy.Web.Areas.Admin.ViewModels.User;
 using KarmicEnergy.Web.Controllers;
 using KarmicEnergy.Web.Entities;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -101,23 +102,28 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
 
         #region Edit
         [Authorize(Roles = "SuperAdmin, Admin")]
-        public async Task<ActionResult> Edit(Guid id)
+        public ActionResult Edit(Guid id)
         {
-            LoadAdminRoles();
-            var user = await UserManager.FindByIdAsync(id.ToString());
+            var user = UserManager.FindById(id.ToString());
             var userKE = KEUnitOfWork.UserRepository.Get(id);
 
             if (user == null || userKE == null)
             {
+                LoadAdminRoles();
                 AddErrors("User does not exist");
                 return View();
             }
 
             EditViewModel viewModel = EditViewModel.Map(user);
-            viewModel.Address = EditViewModel.Map(userKE.Address);
-            var roles = await UserManager.GetRolesAsync(user.Id);
-            viewModel.Role = roles.Single();
 
+            // Address            
+            viewModel.Map(userKE.Address);
+
+            var roles = UserManager.GetRoles(user.Id);
+            viewModel.Role = roles.Single();
+            LoadAdminRoles();
+
+            //AddLog("Navigated to User Edit View", LogTypeEnum.Info);
             return View(viewModel);
         }
 
@@ -126,58 +132,64 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "SuperAdmin, Admin")]
-        public async Task<ActionResult> Edit(EditViewModel viewModel)
+        public ActionResult Edit(EditViewModel viewModel)
         {
-            ApplicationUser user = null;
-
-            if (!ModelState.IsValid)
+            try
             {
-                LoadAdminRoles();
-                return View(viewModel);
-            }
+                if (!ModelState.IsValid)
+                {
+                    LoadAdminRoles();
+                    return View(viewModel);
+                }
 
-            user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
-            var userKE = KEUnitOfWork.UserRepository.Get(viewModel.Id);
+                var user = UserManager.FindById(viewModel.Id.ToString());
+                var userKE = KEUnitOfWork.UserRepository.Get(viewModel.Id);
 
-            if (user == null || userKE == null)
-            {
-                AddErrors("User does not exist");
-                LoadAdminRoles();
-                return View();
-            }
+                if (user == null || userKE == null)
+                {
+                    LoadAdminRoles();
+                    AddErrors("User does not exist");
+                    return View();
+                }
 
-            user.Name = viewModel.Name;
-            user.Email = viewModel.Address.Email;
-            var result = await UserManager.UpdateAsync(user);
-
-            if (result.Succeeded)
-            {
-                var roles = await UserManager.GetRolesAsync(user.Id);
-                result = await UserManager.RemoveFromRolesAsync(user.Id, roles.ToArray());
+                user.Name = viewModel.Name;
+                user.Email = viewModel.Address.Email;
+                var result = UserManager.Update(user);
 
                 if (result.Succeeded)
                 {
-                    result = await UserManager.AddToRoleAsync(user.Id, viewModel.Role);
+                    var roles = UserManager.GetRoles(user.Id);
+                    result = UserManager.RemoveFromRoles(user.Id, roles.ToArray());
 
                     if (result.Succeeded)
                     {
-                        Core.Entities.Address address = viewModel.MapAddress(userKE.Address);
+                        result = UserManager.AddToRole(user.Id, viewModel.Role);
 
-                        KEUnitOfWork.AddressRepository.Update(address);
-                        KEUnitOfWork.Complete();
+                        if (result.Succeeded)
+                        {
+                            Core.Entities.Address address = viewModel.MapAddress(userKE.Address);
 
-                        return RedirectToAction("Index", "User", new { area = "Admin" });
+                            KEUnitOfWork.AddressRepository.Update(address);
+                            KEUnitOfWork.Complete();
+
+                            return RedirectToAction("Index", "User", new { area = "Admin" });
+                        }
                     }
                 }
+                else
+                {
+                    AddErrors(result);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                AddErrors(result);
+                AddErrors(ex);
             }
 
             LoadAdminRoles();
             return View(viewModel);
         }
+
         #endregion Edit
 
         #region Delete

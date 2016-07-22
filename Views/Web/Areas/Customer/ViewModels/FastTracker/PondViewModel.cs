@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using KarmicEnergy.Core.Entities;
+using System;
 using System.Collections.Generic;
-using KarmicEnergy.Core.Entities;
+using System.Linq;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
 {

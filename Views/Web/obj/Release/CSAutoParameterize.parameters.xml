@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="KEConnection-Web.config Connection String" description="KEConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=ke.ce9jjpa1tybs.us-west-2.rds.amazonaws.com;Initial Catalog=KE;User=karmicenergy;password=Kedatab10$;Integrated Security=false;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="M:\\OneDrive\\Muniz\\Clients\\PrecisionFrac\\Projects\\KarmicEnergyApp\\Source\\Views\\Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='KEConnection']/@connectionString" />
-  </parameter>
-</parameters>

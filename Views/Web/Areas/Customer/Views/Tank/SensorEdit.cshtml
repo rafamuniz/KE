@@ -92,11 +92,11 @@
             <input type="submit" class="btn btn-default" value="SAVE">
             @if (Request.QueryString["TankId"] != null)
             {
-                <a class="btn" href="/Customer/Tank/SensorIndex?TankId=@Request.QueryString["TankId"]">Cancel</a>
+                <a class="btn" href="~/Customer/Tank/SensorIndex?TankId=@Request.QueryString["TankId"]">Cancel</a>
             }
             else
             {
-                <a class="btn" href="/Customer/Tank/SensorIndex/">Cancel</a>
+                <a class="btn" href="~/Customer/Tank/SensorIndex/">Cancel</a>
             }
         </div>
     }

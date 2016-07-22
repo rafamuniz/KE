@@ -28,7 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            // 
+            // Installer
+            // 
+            this.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.Installer_AfterInstall);
+
         }
 
         #endregion

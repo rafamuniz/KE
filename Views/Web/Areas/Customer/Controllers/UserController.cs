@@ -139,8 +139,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             if (customerUser == null)
             {
+                LoadCustomerRoles();
                 AddErrors("User does not exist");
-                return View("Index");
+                return View();
             }
 
             EditViewModel viewModel = EditViewModel.Map(customerUser);

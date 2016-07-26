@@ -316,24 +316,6 @@ namespace KarmicEnergy.Web.Controllers
             return statuses;
         }
 
-        //protected IList<ImageSelectListItem> LoadTankModels()
-        //{
-        //    IList<TankModel> tankModels = KEUnitOfWork.TankModelRepository.GetAll().ToList();
-        //    IList<ImageSelectListItem> imagesSelect = new List<ImageSelectListItem>();
-
-        //    foreach (var tm in tankModels)
-        //    {
-        //        ImageSelectListItem item = new ImageSelectListItem();
-        //        item.Text = tm.Name;
-        //        item.Value = tm.Id.ToString();
-        //        item.ImageFileName = tm.ImageFilename;
-        //        imagesSelect.Add(item);
-        //    }
-
-        //    ViewBag.TankModels = imagesSelect;
-        //    return imagesSelect;
-        //}
-
         protected List<Operator> LoadOperators(OperatorTypeEnum type)
         {
             List<Operator> operators = KEUnitOfWork.OperatorRepository.GetsByOperatorType(type).ToList();
@@ -492,13 +474,5 @@ namespace KarmicEnergy.Web.Controllers
             var usersInRole = UserManager.Users.Where(u => u.Roles.Select(r => r.RoleId).Contains(role.Id)).ToList();
             return usersInRole;
         }
-
-        //public List<ApplicationUser> GetUsersInRole(string roleName)
-        //{
-        //    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
-        //    var role = roleManager.FindByName(roleName).Users.First();
-        //    var usersInRole = Users.Where(u => u.Roles.Select(r => r.RoleId).Contains(role.RoleId)).ToList();
-        //    return usersInRole;
-        //}
     }
 }

@@ -51,6 +51,7 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\We
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\Microsoft.Owin.Security.OAuth.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\Microsoft.Owin.Security.Twitter.dll
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\Microsoft.Web.Infrastructure.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\Munizoft.Core.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\Munizoft.Extensions.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\Munizoft.MVC.dll
@@ -72,6 +73,7 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\We
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\System.Web.WebPages.Deployment.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\System.Web.WebPages.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\System.Web.WebPages.Razor.dll
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\WebGrease.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\KarmicEnergy.Core.pdb
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\KarmicEnergy.Util.pdb
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\Antlr3.Runtime.pdb
@@ -122,5 +124,3 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\We
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Release\Web.csproj.GenerateResource.Cache
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Release\KarmicEnergy.Web.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\obj\Release\KarmicEnergy.Web.pdb
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\Microsoft.Web.Infrastructure.dll
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\Web\bin\WebGrease.dll

@@ -1,0 +1,2 @@
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\WebsiteSetup\bin\Debug\Siteminder.msi
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\WebsiteSetup\bin\Debug\Siteminder.wixpdb

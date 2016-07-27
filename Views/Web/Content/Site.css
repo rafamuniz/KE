@@ -612,8 +612,7 @@ p {
     }
 
         .sidebar-menu > li:hover {
-            background-color: #CFCFCF;
-            /*background-image: url(../images/menu-highlight.png);*/
+            background-color: #CCFFFF;            
             background-position: right center;
             background-repeat: no-repeat;
             color: #00ADBD;

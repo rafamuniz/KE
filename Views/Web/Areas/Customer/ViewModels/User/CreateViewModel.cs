@@ -13,7 +13,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
         public CreateViewModel()
         {
             Address = new AddressViewModel();
-            Sites = new List<SiteViewModel>();
+            User = new UserViewModel();
         }
 
         #endregion Constructor
@@ -25,29 +25,10 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
         public String Name { get; set; }
 
         [Required]
-        [Display(Name = "Username")]
-        [EmailAddress]
-        public String Username { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Display(Name = "Password")]
-        public String Password { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm Password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public String PasswordConfirm { get; set; }
-
-        [Required]
         [Display(Name = "Role")]
         public String Role { get; set; }
 
-        [Required]
-        [Display(Name = "Sites")]
-        public List<SiteViewModel> Sites { get; set; }
+        public UserViewModel User { get; set; }
 
         public AddressViewModel Address { get; set; }
 
@@ -55,28 +36,14 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
 
         #region Map
 
-        public List<Core.Entities.CustomerUserSite> MapSites()
-        {
-            List<Core.Entities.CustomerUserSite> entities = new List<Core.Entities.CustomerUserSite>();
-
-            if (this.Sites.Any())
-            {
-                foreach (var item in this.Sites)
-                {
-                    if (item.IsSelected)
-                    {
-                        Core.Entities.CustomerUserSite entity = new Core.Entities.CustomerUserSite() { SiteId = item.Id };
-                        entities.Add(entity);
-                    }
-                }
-            }
-
-            return entities;
-        }
-
         public Core.Entities.Address MapAddress()
         {
             return Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address);
+        }
+
+        public Core.Entities.Contact Map()
+        {
+            return Mapper.Map<CreateViewModel, Core.Entities.Contact>(this);
         }
 
         #endregion Map

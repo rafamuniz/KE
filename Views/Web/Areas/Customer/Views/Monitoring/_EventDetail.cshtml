@@ -1,0 +1,60 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
+@using Munizoft.Extensions
+@using Munizoft.MVC.Helpers
+@using KarmicEnergy.Web.Extensions
+
+@model EventDetailViewModel
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 row">
+            @Html.LabelFor(m => m.SiteName)
+            <div class="form-group row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.SiteName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                </div>
+            </div>
+
+            @if (Model.PondId.HasValue)
+            {
+                @Html.LabelFor(m => m.PondName)
+                <div class="form-group row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        @Html.EditorFor(m => m.PondName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                    </div>
+                </div>
+            }
+
+            @if (Model.TankId.HasValue)
+            {
+                @Html.LabelFor(m => m.TankName)
+                <div class="form-group row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        @Html.EditorFor(m => m.TankName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                    </div>
+                </div>
+            }
+
+            @Html.LabelFor(m => m.SensorName)
+            <div class="form-group row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.SensorName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                </div>
+            </div>
+
+            @Html.LabelFor(m => m.ItemName)
+            <div class="form-group row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.ItemName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                </div>
+            </div>
+
+            @Html.LabelFor(m => m.Value)
+            <div class="form-group row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.Value, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

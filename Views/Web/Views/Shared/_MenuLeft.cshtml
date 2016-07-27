@@ -58,12 +58,12 @@
             </a>
         </li>
 
-        <li class="treeview @Html.MenuItemActive("Contact", "Customer")">
+        @*<li class="treeview @Html.MenuItemActive("Contact", "Customer")">
             <a href="~/Customer/Contact">
                 <img src="~/images/contacts.png" alt="contacts" title="contacts">
                 <p>CONTACTS</p>
             </a>
-        </li>
+        </li>*@
 
         if (!this.IsSite())
         {
@@ -96,12 +96,12 @@
             </a>
         </li>
 
-        <li class="treeview @Html.MenuItemActive("Trigger", "Customer")">
+        @*<li class="treeview @Html.MenuItemActive("Trigger", "Customer")">
             <a href="~/Customer/Trigger">
                 <img src="~/images/trigger.png" alt="trigger" title="trigger">
                 <p>TRIGGERS</p>
             </a>
-        </li>
+        </li>*@
     }
 
     @if (this.HasRoles("Customer", "General Manager", "Supervisor", "Operator"))

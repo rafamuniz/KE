@@ -12,6 +12,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     [Authorize]
     public class MonitoringController : BaseController
     {
+        #region Event
+
         #region Index
 
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
@@ -54,8 +56,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             viewModels = ListViewModel.Map(events.OrderByDescending(x => x.EventDate).ToList());
             return View("Index", viewModels);
         }
-
-
+        
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult Tank(Guid tankId)
         {
@@ -64,7 +65,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             viewModels = ListViewModel.Map(events.OrderByDescending(x => x.EventDate).ToList());
             return View("Index", viewModels);
         }
-
+        
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult Event(Guid eventId)
         {
@@ -74,16 +75,40 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return View("Index", viewModels);
         }
 
+        #endregion Index
+
+        #region Detail
+
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
-        public ActionResult Detail(Guid id)
+        public ActionResult Info(Guid id)
         {
-            EventDetailViewModel viewModel = new EventDetailViewModel();
-            var entity = KEUnitOfWork.SensorItemEventRepository.Get(id);
-            viewModel.Map(entity);
+            EventInfoViewModel viewModel = new EventInfoViewModel();
+            viewModel.Id = id;
+            viewModel.Detail = GetEventDetail(id);
+            //viewModel.arl = GetsComment(viewModel.Detail.TriggerId);
+                       
             return View(viewModel);
         }
 
-        #endregion Index
+        private EventDetailViewModel GetEventDetail(Guid eventId)
+        {            
+            var evt = KEUnitOfWork.SensorItemEventRepository.Get(eventId);
+            var viewModel = EventDetailViewModel.Map(evt);
+            return viewModel;
+        }
+
+        //private List<EventAlarmViewModel> GetsAlarm(Guid triggerId)
+        //{
+        //    List<AlarmHistoryViewModel> viewModels = new List<AlarmHistoryViewModel>();
+        //    var histories = KEUnitOfWork.AlarmRepository.GetsCloseByTrigger(triggerId);
+        //    var hs = histories.Any() ? histories.OrderByDescending(d => d.CreatedDate).ToList() : histories;
+        //    viewModels = AlarmHistoryViewModel.Map(histories);
+        //    return viewModels;
+        //}
+
+        #endregion Detail
+
+        #endregion Event
 
         #region Alarm
 
@@ -143,8 +168,6 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             viewModel.Alarms = viewModels;
             return View("Alarms", viewModel);
         }
-
-        #endregion Alarms
 
         #region Ack
 
@@ -354,6 +377,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #endregion Detail
 
+        #endregion Alarms
+        
         [HttpGet]
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsTankBySiteId(Guid siteId)

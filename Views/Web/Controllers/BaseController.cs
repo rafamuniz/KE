@@ -171,9 +171,16 @@ namespace KarmicEnergy.Web.Controllers
         protected void AddLog(String message, LogTypeEnum type = LogTypeEnum.Error)
         {
             var siteId = SiteId == Guid.Empty ? (Guid?)null : SiteId;
-            var customerId = CustomerId == Guid.Empty ? (Guid?)null : CustomerId;
+            Guid? customerId = null;
+            Guid? userId = null;
 
-            Log log = new Log() { LogTypeId = (Int16)type, Message = message, CustomerId = customerId, SiteId = siteId, UserId = Guid.Parse(UserId) };
+            if (!String.IsNullOrEmpty(UserId))
+            {
+                customerId = CustomerId == Guid.Empty ? (Guid?)null : CustomerId;
+                userId = Guid.Parse(UserId);
+            }
+
+            Log log = new Log() { LogTypeId = (Int16)type, Message = message, CustomerId = customerId, SiteId = siteId, UserId = userId };
             KEUnitOfWork.LogRepository.Add(log);
             KEUnitOfWork.Complete();
         }
@@ -297,7 +304,8 @@ namespace KarmicEnergy.Web.Controllers
             {
                 new CustomerRole() { Id = "General Manager", Name = "General Manager" },
                 new CustomerRole() { Id = "Supervisor", Name = "Supervisor" },
-                new CustomerRole() { Id = "Operator", Name = "Operator" }
+                new CustomerRole() { Id = "Operator", Name = "Operator" },
+                new CustomerRole() { Id = "Contact", Name = "Contact" }
             };
 
             ViewBag.CustomerRoles = roles;

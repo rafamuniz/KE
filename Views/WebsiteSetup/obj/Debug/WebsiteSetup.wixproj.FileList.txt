@@ -1,0 +1,8 @@
+obj\Debug\Product.wixobj
+obj\Debug\StandardUI.wixobj
+obj\Debug\pth87818FF22B112F23A733F01D189C23AC\_Web.wixobj
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\WebsiteSetup\bin\Debug\Siteminder.msi
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Views\WebsiteSetup\bin\Debug\Siteminder.wixpdb
+obj\Debug\WebsiteSetup.wixproj.BindContentsFileListnull.txt
+obj\Debug\WebsiteSetup.wixproj.BindOutputsFileListnull.txt
+obj\Debug\WebsiteSetup.wixproj.BindBuiltOutputsFileListnull.txt

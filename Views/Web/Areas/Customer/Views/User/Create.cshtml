@@ -24,54 +24,22 @@
 
             <div class="form-group">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    @Html.EditorFor(m => m.Username, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.Username) } })
-                    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.Password) } })
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    @Html.EditorFor(m => m.PasswordConfirm, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.PasswordConfirm) } })
-                    @Html.ValidationMessageFor(m => m.PasswordConfirm, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    @Html.DropDownListFor(model => model.Role, new SelectList(ViewBag.CustomerRoles, "Id", "Name"), "-- Please select a Role--", new { @class = "form-control selectpicker", id = "ddlRole" })
+                    @Html.DropDownListFor(model => model.Role, new SelectList(ViewBag.CustomerRoles, "Id", "Name"), "-- Please select a Role--", new { @class = "form-control selectpicker", id = "ddlRole", onchange = "showFields();" })
                     @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            @if (Model.Sites.Any() && !this.IsSite())
+            @if (Model.Role == "Contact" || String.IsNullOrEmpty(Model.Role))
             {
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 box-sub">
-                    <div class="title blue">
-                        <h2>SITES</h2>
-                    </div>
+                @Html.Raw("<div id='divUser' style='display: none;'>")
+            }
+            else
+            {
+                @Html.Raw("<div id='divUser'>")
+            }
 
-                    <div id="divCheckboxlist" class="checkboxlist">
-                        @for (int i = 0; i < Model.Sites.Count; i++)
-                        {
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                    @Html.CheckBoxFor(m => Model.Sites[i].IsSelected, new { id = "chk_" + @Model.Sites[i].Id, style = "vertical-align: 3px;" })
-                                    @Html.LabelFor(m => Model.Sites[i].Name, Model.Sites[i].Name, new { @for = "chk_" + @Model.Sites[i].Id })
-                                    @Html.HiddenFor(m => Model.Sites[i].Id)
-                                    @Html.HiddenFor(m => Model.Sites[i].Name)
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            }           
+            @Html.Partial("_User", Model.User, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "User" } })
+            @Html.Raw("</div>")
         </div>
 
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -92,4 +60,15 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        function showFields() {
+            if ($("#ddlRole").val() != "Contact") {
+                $("#divUser").show();
+            }
+            else {
+                $("#divUser").hide();
+            }
+        }
+    </script>
 }

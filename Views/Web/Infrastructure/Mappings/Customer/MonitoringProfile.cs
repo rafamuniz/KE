@@ -13,7 +13,8 @@ namespace KarmicEnergy.Web.Infrastructure.Mappings.Customer
             #endregion ViewModel To Entity
 
             #region Entity To ViewModel 
-                        
+
+            this.CreateMap<Core.Entities.SensorItemEvent, EventInfoViewModel>();
             this.CreateMap<Core.Entities.SensorItemEvent, EventDetailViewModel>();
 
             this.CreateMap<Core.Entities.AlarmHistory, CommentViewModel>();
@@ -29,7 +30,7 @@ namespace KarmicEnergy.Web.Infrastructure.Mappings.Customer
             this.CreateMap<Core.Entities.Alarm, Areas.Customer.ViewModels.FastTracker.AlarmViewModel>();
             this.CreateMap<Core.Entities.Alarm, Areas.Customer.ViewModels.Monitoring.AlarmViewModel>();
             this.CreateMap<Core.Entities.SensorItemEvent, ListViewModel>();
-
+                                   
             #endregion Entity To ViewModel 
         }
     }

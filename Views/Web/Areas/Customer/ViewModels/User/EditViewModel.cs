@@ -12,8 +12,9 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
         #region Constructor
         public EditViewModel()
         {
-            Address = new AddressViewModel();
+            //User = new UserViewModel();
             Sites = new List<SiteViewModel>();
+            Address = new AddressViewModel();
         }
 
         #endregion Constructor
@@ -28,12 +29,16 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
         [Required]
         [Display(Name = "Role")]
         public String Role { get; set; }
+        
+        [Required]
+        [Display(Name = "Sites")]
+        public List<SiteViewModel> Sites { get; set; }
+
+        //[IgnoreMap]
+        //public UserViewModel User { get; set; }
 
         [IgnoreMap]
         public AddressViewModel Address { get; set; }
-
-        [IgnoreMap]
-        public List<SiteViewModel> Sites { get; set; }
 
         #endregion Property
 
@@ -44,14 +49,50 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
             return Mapper.Map<Core.Entities.CustomerUser, EditViewModel>(entity);
         }
 
+        public static EditViewModel Map(Core.Entities.Contact entity)
+        {
+            var viewModel = Mapper.Map<Core.Entities.Contact, EditViewModel>(entity);
+            viewModel.Role = "Contact";
+            return viewModel;
+        }
+
         public AddressViewModel MapAddress(Core.Entities.Address entity)
         {
             return Mapper.Map<Core.Entities.Address, AddressViewModel>(entity, this.Address);
         }
 
         public Core.Entities.Address MapAddressVMToEntity(Core.Entities.Address entity)
-        {         
+        {
             return Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address, entity);
+        }
+
+        public void MapVMToEntity(Core.Entities.Contact entity)
+        {
+            Mapper.Map<EditViewModel, Core.Entities.Contact>(this, entity);
+        }
+
+        public void MapVMToEntity(Core.Entities.Address entity)
+        {
+            Mapper.Map<AddressViewModel, Core.Entities.Address>(this.Address, entity);
+        }
+
+        public List<Core.Entities.CustomerUserSite> MapSites()
+        {
+            List<Core.Entities.CustomerUserSite> entities = new List<Core.Entities.CustomerUserSite>();
+
+            if (this.Sites.Any())
+            {
+                foreach (var item in this.Sites)
+                {
+                    if (item.IsSelected)
+                    {
+                        Core.Entities.CustomerUserSite entity = new Core.Entities.CustomerUserSite() { SiteId = item.Id };
+                        entities.Add(entity);
+                    }
+                }
+            }
+
+            return entities;
         }
 
         public List<SiteViewModel> MapSites(List<Core.Entities.Site> sites, IList<Core.Entities.CustomerUserSite> userSites)
@@ -80,24 +121,6 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
             return viewModels;
         }
 
-        public List<Core.Entities.CustomerUserSite> MapSites()
-        {
-            List<Core.Entities.CustomerUserSite> entities = new List<Core.Entities.CustomerUserSite>();
-
-            if (this.Sites.Any())
-            {
-                foreach (var item in this.Sites)
-                {
-                    if (item.IsSelected)
-                    {
-                        Core.Entities.CustomerUserSite entity = new Core.Entities.CustomerUserSite() { SiteId = item.Id };
-                        entities.Add(entity);
-                    }
-                }
-            }           
-
-            return entities;
-        }
         #endregion Map
     }
 }

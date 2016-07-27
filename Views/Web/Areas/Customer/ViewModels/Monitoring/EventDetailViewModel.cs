@@ -54,7 +54,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
 
         #region Map
         
-        public EventDetailViewModel Map(Core.Entities.SensorItemEvent entity)
+        public static EventDetailViewModel Map(Core.Entities.SensorItemEvent entity)
         {
             var viewModel = Mapper.Map<Core.Entities.SensorItemEvent, EventDetailViewModel>(entity);
 

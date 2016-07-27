@@ -1,0 +1,8 @@
+<myprerequisites>
+  <ProjectProperties ProjectName="WebsiteSetup" BuildLocation="PackagesDir" BuildDirectory="C:\Program Files (x86)\Microsoft Visual Studio 14.0\SDK\Bootstrapper\Packages\" DefaultLanguage="en" />
+  <UIPackage ProductName="" ProductCode="">
+    <UIChecks />
+    <Relationships />
+    <CustomSchedules />
+  </UIPackage>
+</myprerequisites>

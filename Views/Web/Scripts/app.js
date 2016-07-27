@@ -737,6 +737,7 @@ function _init() {
  * ----------------------- 
  */
 function showNotications() {
+    var url = getUrlBase();
     $.ajax({
         url: getUrlBase() + "/Home/GetsAlarm/",
         type: "GET",

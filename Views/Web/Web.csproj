@@ -117,7 +117,8 @@
       <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Core\bin\Debug\Munizoft.Core.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Munizoft.Extensions">
+    <Reference Include="Munizoft.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Extensions\bin\Debug\Munizoft.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Munizoft.MVC">
@@ -306,6 +307,7 @@
     <Compile Include="Areas\Admin\ViewModels\User\ChangePasswordViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\User\ListViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\User\EditViewModel.cs" />
+    <Compile Include="Areas\Customer\Controllers\MapController.cs" />
     <Compile Include="Areas\Customer\Controllers\MonitoringController.cs" />
     <Compile Include="Areas\Customer\Controllers\LogController.cs" />
     <Compile Include="Areas\Customer\Controllers\SensorGroupController.cs" />
@@ -328,6 +330,7 @@
     <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Log\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Monitoring\EventInfoViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\EventDetailViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\AlarmViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\AlarmInfoViewModel.cs" />
@@ -380,6 +383,7 @@
     <Compile Include="Areas\Customer\ViewModels\Trigger\ContactViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Trigger\ListViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\User\ChangePasswordViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\User\UserViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\User\SiteViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\LogController.cs" />
     <Compile Include="Controllers\ResetPasswordController.cs" />
@@ -1940,6 +1944,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\Customer\Views\Monitoring\_EventDetail.cshtml" />
+    <Content Include="Areas\Customer\Views\User\_User.cshtml" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2490,6 +2496,7 @@
     <Folder Include="App_Data\StickConversions\" />
     <Folder Include="Areas\Customer\ViewModels\Report\" />
     <Folder Include="Areas\Customer\ViewModels\Temp\" />
+    <Folder Include="Areas\Customer\Views\Map\" />
     <Folder Include="Helpers\" />
     <Folder Include="images\geometries\" />
   </ItemGroup>
@@ -2551,7 +2558,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51696</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:51696/KE</IISUrl>
+          <IISUrl>http://localhost:51696</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Munizoft.Extensions;
 
 namespace KarmicEnergy.Web.Areas.Customer.Controllers
 {
@@ -17,8 +18,11 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Index()
         {
-            List<CustomerUser> entities = KEUnitOfWork.CustomerUserRepository.GetsByCustomer(CustomerId).ToList();
-            var viewModels = ListViewModel.Map(entities);
+            List<ListViewModel> viewModels = new List<ListViewModel>();
+            List<CustomerUser> customerUsers = KEUnitOfWork.CustomerUserRepository.GetsByCustomer(CustomerId).ToList();
+            List<Contact> contacts = KEUnitOfWork.ContactRepository.GetsByCustomer(CustomerId).ToList();
+
+            viewModels.AddRange(ListViewModel.Map(customerUsers));
 
             foreach (var vm in viewModels)
             {
@@ -34,6 +38,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     vm.Role = roles.Single();
                 }
             }
+
+            viewModels.AddRange(ListViewModel.Map(contacts));
 
             AddLog("Navigated to User View", LogTypeEnum.Info);
             return View(viewModels);
@@ -56,57 +62,91 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Create(CreateViewModel viewModel)
         {
-            ApplicationUser user = null;
+            Core.Entities.Address address = viewModel.MapAddress();
+            address.Id = Guid.NewGuid();
 
-            if (!ModelState.IsValid)
+            if (viewModel.Role != "Contact")
             {
-                return View(LoadCreate(viewModel));
-            }
+                if (!ModelState.IsValid)
+                {
+                    return View(LoadCreate(viewModel));
+                }
 
-            user = new ApplicationUser { UserName = viewModel.Username, Email = viewModel.Address.Email, Name = viewModel.Name };
-            var result = await UserManager.CreateAsync(user, viewModel.Password);
-
-            if (result.Succeeded)
-            {
-                result = await UserManager.AddToRoleAsync(user.Id, viewModel.Role);
+                ApplicationUser user = new ApplicationUser { UserName = viewModel.User.Username, Email = viewModel.Address.Email, Name = viewModel.Name };
+                var result = await UserManager.CreateAsync(user, viewModel.User.Password);
 
                 if (result.Succeeded)
                 {
-                    try
+                    result = await UserManager.AddToRoleAsync(user.Id, viewModel.Role);
+
+                    if (result.Succeeded)
                     {
-                        CustomerUser customerUser = new CustomerUser() { Id = Guid.Parse(user.Id), CustomerId = CustomerId };
-
-                        if (!IsSite)
+                        try
                         {
-                            customerUser.Sites = viewModel.MapSites();
+                            CustomerUser customerUser = new CustomerUser() { Id = Guid.Parse(user.Id), CustomerId = CustomerId };
+                            customerUser.AddressId = address.Id;
+                            customerUser.Address = address;
+
+                            KEUnitOfWork.CustomerUserRepository.Add(customerUser);
+                            KEUnitOfWork.Complete();
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            customerUser.Sites.Add(new CustomerUserSite { SiteId = SiteId });
+                            if (user != null)
+                                await UserManager.DeleteAsync(user);
+
+                            AddErrors(ex);
+                            return View(LoadCreate(viewModel));
                         }
-
-                        Core.Entities.Address address = viewModel.MapAddress();
-                        address.Id = Guid.NewGuid();
-                        customerUser.AddressId = address.Id;
-                        customerUser.Address = address;
-
-                        KEUnitOfWork.CustomerUserRepository.Add(customerUser);
-                        KEUnitOfWork.Complete();
-                        AddLog("User Created", LogTypeEnum.Info);
-                        return RedirectToAction("Index", "User", new { area = "Customer" });
-                    }
-                    catch (Exception ex)
-                    {
-                        if (user != null)
-                            await UserManager.DeleteAsync(user);
-
-                        AddErrors(ex);
                     }
                 }
+                else
+                {
+                    AddErrors(result);
+                    return View(LoadCreate(viewModel));
+                }
+            }
+            else if (viewModel.Role == "Contact")
+            {
+                try
+                {
+                    var userModelState = ModelState.Where(x => x.Key.StartsWith("User.")).ToList();
+
+                    foreach (var ums in userModelState)
+                    {
+                        ModelState[ums.Key].Errors.Clear();
+                    }
+
+                    if (!ModelState.IsValid)
+                    {
+                        return View(LoadCreate(viewModel));
+                    }
+
+                    Core.Entities.Contact contact = viewModel.Map();
+                    contact.Id = Guid.NewGuid();
+                    contact.CustomerId = CustomerId;
+
+                    contact.Address = address;
+                    contact.AddressId = address.Id;
+
+                    KEUnitOfWork.ContactRepository.Add(contact);
+                    KEUnitOfWork.Complete();
+                }
+                catch (Exception ex)
+                {
+                    AddErrors(ex);
+                    return View(LoadCreate(viewModel));
+                }
+            }
+            else
+            {
+                ModelState.Clear();
+                AddErrors("Role is required");
+                return View(LoadCreate(viewModel));
             }
 
-            AddErrors(result);
-            return View(LoadCreate(viewModel));
+            AddLog("User Created", LogTypeEnum.Info);
+            return RedirectToAction("Index", "User", new { area = "Customer" });
         }
 
         private CreateViewModel LoadCreate(CreateViewModel viewModel)
@@ -119,11 +159,26 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             if (!IsSite)
             {
                 List<Site> sites = LoadSites();
-                viewModel.Sites = SiteViewModel.Map(sites);
+                List<SiteViewModel> siteSelected = new List<SiteViewModel>();
+
+                if (viewModel.User.Sites.Any())
+                {
+                    siteSelected = viewModel.User.Sites;
+                }
+
+                viewModel.User.Sites = SiteViewModel.Map(sites);
+
+                foreach (var ss in siteSelected)
+                {
+                    if (ss.IsSelected)
+                    {
+                        viewModel.User.Sites.Where(x => x.Id == ss.Id).SingleOrDefault().IsSelected = true;
+                    }
+                }
             }
             else
             {
-                viewModel.Sites.Add(new SiteViewModel() { Id = SiteId });
+                viewModel.User.Sites.Add(new SiteViewModel() { Id = SiteId });
             }
 
             return viewModel;
@@ -136,30 +191,49 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public async Task<ActionResult> Edit(Guid id)
         {
             var customerUser = KEUnitOfWork.CustomerUserRepository.Get(id);
+            var contact = KEUnitOfWork.ContactRepository.Get(id);
 
-            if (customerUser == null)
+            if (customerUser == null && contact == null)
             {
                 LoadCustomerRoles();
                 AddErrors("User does not exist");
-                return View();
+                return View("Index");
             }
 
-            EditViewModel viewModel = EditViewModel.Map(customerUser);
-            var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
-            viewModel.Name = user.Name;
+            EditViewModel viewModel = new EditViewModel();
 
-            var roles = await UserManager.GetRolesAsync(viewModel.Id.ToString());
-            viewModel.Role = roles.Single();
+            if (customerUser != null)
+            {
+                viewModel = EditViewModel.Map(customerUser);
+                var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
+                viewModel.Name = user.Name;
 
-            // Address            
-            viewModel.MapAddress(customerUser.Address);
+                var roles = await UserManager.GetRolesAsync(viewModel.Id.ToString());
+                viewModel.Role = roles.Single();
+
+                // Address            
+                viewModel.MapAddress(customerUser.Address);
+            }
+            else
+            {
+                viewModel = EditViewModel.Map(contact);
+                // Address            
+                viewModel.MapAddress(contact.Address);
+            }
 
             LoadCustomerRoles();
 
             if (!IsSite)
             {
                 List<Site> sites = LoadSites();
-                viewModel.MapSites(sites, customerUser.Sites.Where(x => x.DeletedDate == null).ToList());
+                if (customerUser != null)
+                {
+                    viewModel.MapSites(sites, customerUser.Sites.Where(x => x.DeletedDate == null).ToList());
+                }
+                else
+                {
+                    viewModel.Sites = SiteViewModel.Map(sites);
+                }
             }
             else
             {
@@ -179,94 +253,146 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    LoadCustomerRoles();
-                    return View(viewModel);
-                }
-
                 var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
                 var customerUser = KEUnitOfWork.CustomerUserRepository.Get(viewModel.Id);
+                var contact = KEUnitOfWork.ContactRepository.Get(viewModel.Id);
 
-                if (customerUser == null || user == null)
+                if ((customerUser == null || user == null) && contact == null)
                 {
                     LoadCustomerRoles();
                     AddErrors("User does not exist");
-                    return View("Index");
+                    return View(viewModel);
                 }
 
-                user.Name = viewModel.Name;
-                user.Email = viewModel.Address.Email;
-                var result = await UserManager.UpdateAsync(user);
-
-                if (result.Succeeded)
+                if (user != null && viewModel.Role != "Contact") // User - Dont change Role
                 {
-                    var roles = await UserManager.GetRolesAsync(user.Id);
-                    result = await UserManager.RemoveFromRolesAsync(user.Id, roles.ToArray());
-
-                    if (result.Succeeded)
+                    if (!ModelState.IsValid)
                     {
-                        result = await UserManager.AddToRoleAsync(user.Id, viewModel.Role);
-
-                        if (result.Succeeded)
-                        {
-                            Core.Entities.Address address = viewModel.MapAddressVMToEntity(customerUser.Address);
-
-                            if (!IsSite)
-                            {
-                                if (viewModel.Sites.Any())
-                                {
-                                    foreach (var item in viewModel.Sites)
-                                    {
-                                        var siteItem = customerUser.Sites.Where(x => x.SiteId == item.Id && x.DeletedDate == null).SingleOrDefault();
-
-                                        if (item.IsSelected)
-                                        {
-                                            if (siteItem == null) // ADD
-                                            {
-                                                CustomerUserSite customerUserSite = new CustomerUserSite()
-                                                {
-                                                    CustomerUserId = customerUser.Id,
-                                                    SiteId = item.Id
-                                                };
-
-                                                customerUser.Sites.Add(customerUserSite);
-                                            }
-                                        }
-                                        else // DELETE
-                                        {
-                                            if (siteItem != null)
-                                            {
-                                                siteItem.DeletedDate = DateTime.UtcNow;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                customerUser.Sites.Add(new CustomerUserSite { SiteId = SiteId });
-                            }
-
-                            customerUser.Address = address;
-                            KEUnitOfWork.CustomerUserRepository.Update(customerUser);
-                            KEUnitOfWork.Complete();
-
-                            AddLog("User Updated", LogTypeEnum.Info);
-                            return RedirectToAction("Index", "User", new { area = "Customer" });
-                        }
+                        LoadCustomerRoles();
+                        return View(viewModel);
                     }
-                }
 
-                AddErrors(result);
+                    await UpdateUser(viewModel, user, customerUser);
+                }
+                else if (contact != null && viewModel.Role == "Contact") // Contact - Dont change Role
+                {
+                    var userModelState = ModelState.Where(x => x.Key.StartsWith("User.")).ToList();
+
+                    foreach (var ums in userModelState)
+                    {
+                        ModelState[ums.Key].Errors.Clear();
+                    }
+
+                    if (!ModelState.IsValid)
+                    {
+                        LoadCustomerRoles();
+                        return View(viewModel);
+                    }
+
+                    UpdateContact(viewModel, contact);
+                }
+                else if (user != null && viewModel.Role == "Contact") // User - change Role
+                {
+                    await UpdateUserToContact(viewModel, user, customerUser);
+                }
+                else if (contact != null && viewModel.Role != "Contact") // Contact - change Role
+                {
+                    UpdateContactToUser(viewModel, contact);
+                }
             }
             catch (Exception ex)
             {
                 AddErrors(ex);
+                LoadCustomerRoles();
+                return View(viewModel);
             }
 
-            LoadCustomerRoles();
-            return View(viewModel);
+            AddLog("User Updated", LogTypeEnum.Info);
+            return RedirectToAction("Index", "User", new { area = "Customer" });
+        }
+
+        private async Task UpdateUser(EditViewModel viewModel, ApplicationUser user, CustomerUser customerUser)
+        {
+            user.Name = viewModel.Name;
+            user.Email = viewModel.Address.Email;
+            var result = await UserManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                var roles = await UserManager.GetRolesAsync(user.Id);
+                result = await UserManager.RemoveFromRolesAsync(user.Id, roles.ToArray());
+
+                if (result.Succeeded)
+                {
+                    result = await UserManager.AddToRoleAsync(user.Id, viewModel.Role);
+
+                    if (result.Succeeded)
+                    {
+                        Core.Entities.Address address = viewModel.MapAddressVMToEntity(customerUser.Address);
+
+                        if (!IsSite)
+                        {
+                            if (viewModel.Sites.Any())
+                            {
+                                foreach (var item in viewModel.Sites)
+                                {
+                                    var siteItem = customerUser.Sites.Where(x => x.SiteId == item.Id && x.DeletedDate == null).SingleOrDefault();
+
+                                    if (item.IsSelected)
+                                    {
+                                        if (siteItem == null) // ADD
+                                        {
+                                            CustomerUserSite customerUserSite = new CustomerUserSite()
+                                            {
+                                                CustomerUserId = customerUser.Id,
+                                                SiteId = item.Id
+                                            };
+
+                                            customerUser.Sites.Add(customerUserSite);
+                                        }
+                                    }
+                                    else // DELETE
+                                    {
+                                        if (siteItem != null)
+                                        {
+                                            siteItem.DeletedDate = DateTime.UtcNow;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            customerUser.Sites.Add(new CustomerUserSite { SiteId = SiteId });
+                        }
+
+                        customerUser.Address = address;
+                        KEUnitOfWork.CustomerUserRepository.Update(customerUser);
+                        KEUnitOfWork.Complete();
+                    }
+                }
+            }
+        }
+
+        private async Task UpdateUserToContact(EditViewModel viewModel, ApplicationUser user, CustomerUser customerUser)
+        {
+        }
+
+        private void UpdateContact(EditViewModel viewModel, Contact contact)
+        {
+            contact.Name = viewModel.Name;
+
+            Byte[] rowVersion = contact.Address.RowVersion;
+            viewModel.MapVMToEntity(contact);
+            viewModel.MapVMToEntity(contact.Address);
+            contact.Address.RowVersion = rowVersion;
+
+            KEUnitOfWork.ContactRepository.Update(contact);
+            KEUnitOfWork.Complete();
+        }
+
+        private void UpdateContactToUser(EditViewModel viewModel, Contact contact)
+        {
         }
 
         private EditViewModel LoadEdit(EditViewModel viewModel, CustomerUser customerUser)
@@ -298,30 +424,43 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public async Task<ActionResult> Delete(Guid id)
         {
             var customerUser = KEUnitOfWork.CustomerUserRepository.Get(id);
+            var contact = KEUnitOfWork.ContactRepository.Get(id);
 
-            if (customerUser == null)
+            if (customerUser == null && contact == null)
             {
                 LoadCustomerRoles();
-                AddErrors("Customer does not exist");
+                AddErrors("User does not exist");
                 return View("Index");
             }
 
-            KEUnitOfWork.CustomerUserRepository.Remove(customerUser);
-
-            var user = UserManager.FindByIdAsync(customerUser.Id.ToString()).Result;
-
-            user.DeletedDate = DateTime.UtcNow;
-            var result = await UserManager.DeleteAsync(user);
-
-            if (result.Succeeded)
+            if (customerUser != null)
             {
+                var user = UserManager.FindByIdAsync(customerUser.Id.ToString()).Result;
+
+                user.DeletedDate = DateTime.UtcNow;
+                var result = await UserManager.DeleteAsync(user);
+
+                if (result.Succeeded)
+                {
+                    customerUser.DeletedDate = DateTime.UtcNow;
+                    KEUnitOfWork.CustomerUserRepository.Update(customerUser);
+                    KEUnitOfWork.Complete();
+
+                    AddLog("User Deleted", LogTypeEnum.Info);
+                    return RedirectToAction("Index", "User", new { area = "Customer" });
+                }
+
+                AddErrors(result);
+            }
+            else
+            {
+                contact.DeletedDate = DateTime.UtcNow;
+                KEUnitOfWork.ContactRepository.Update(contact);
                 KEUnitOfWork.Complete();
 
                 AddLog("User Deleted", LogTypeEnum.Info);
                 return RedirectToAction("Index", "User", new { area = "Customer" });
             }
-
-            AddErrors(result);
 
             return View("Index");
         }

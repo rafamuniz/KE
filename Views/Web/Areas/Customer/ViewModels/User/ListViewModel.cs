@@ -61,14 +61,35 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
             return vms;
         }
 
+        public static List<ListViewModel> Map(List<Core.Entities.Contact> entities)
+        {
+            List<ListViewModel> vms = new List<ListViewModel>();
+
+            if (entities != null && entities.Any())
+            {
+                entities.ForEach(c => vms.Add(ListViewModel.Map(c)));
+            }
+
+            return vms;
+        }
+
         public static ListViewModel Map(ApplicationUser entity)
-        {            
+        {
             return Mapper.Map<ApplicationUser, ListViewModel>(entity);
         }
 
         public static ListViewModel Map(Core.Entities.CustomerUser entity)
-        {            
+        {
             return Mapper.Map<Core.Entities.CustomerUser, ListViewModel>(entity);
+        }
+
+        public static ListViewModel Map(Core.Entities.Contact entity)
+        {
+            var viewModel = Mapper.Map<Core.Entities.Contact, ListViewModel>(entity);
+
+            viewModel.Role = "Contact";
+
+            return viewModel;
         }
 
         #endregion Map

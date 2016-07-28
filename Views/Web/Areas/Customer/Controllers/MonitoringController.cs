@@ -56,7 +56,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             viewModels = ListViewModel.Map(events.OrderByDescending(x => x.EventDate).ToList());
             return View("Index", viewModels);
         }
-        
+
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult Tank(Guid tankId)
         {
@@ -65,7 +65,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             viewModels = ListViewModel.Map(events.OrderByDescending(x => x.EventDate).ToList());
             return View("Index", viewModels);
         }
-        
+
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult Event(Guid eventId)
         {
@@ -77,7 +77,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #endregion Index
 
-        #region Detail
+        #region Info
 
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult Info(Guid id)
@@ -85,28 +85,28 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             EventInfoViewModel viewModel = new EventInfoViewModel();
             viewModel.Id = id;
             viewModel.Detail = GetEventDetail(id);
-            //viewModel.arl = GetsComment(viewModel.Detail.TriggerId);
-                       
+            viewModel.Histories = GetsHistory(id);
             return View(viewModel);
         }
 
         private EventDetailViewModel GetEventDetail(Guid eventId)
-        {            
+        {
+            EventDetailViewModel eventDetailViewModel = new EventDetailViewModel();
             var evt = KEUnitOfWork.SensorItemEventRepository.Get(eventId);
-            var viewModel = EventDetailViewModel.Map(evt);
-            return viewModel;
+            eventDetailViewModel.Map(evt);
+            return eventDetailViewModel;
         }
 
-        //private List<EventAlarmViewModel> GetsAlarm(Guid triggerId)
-        //{
-        //    List<AlarmHistoryViewModel> viewModels = new List<AlarmHistoryViewModel>();
-        //    var histories = KEUnitOfWork.AlarmRepository.GetsCloseByTrigger(triggerId);
-        //    var hs = histories.Any() ? histories.OrderByDescending(d => d.CreatedDate).ToList() : histories;
-        //    viewModels = AlarmHistoryViewModel.Map(histories);
-        //    return viewModels;
-        //}
+        private List<EventDetailViewModel> GetsHistory(Guid eventId)
+        {
+            List<EventDetailViewModel> viewModels = new List<EventDetailViewModel>();
+            var evt = KEUnitOfWork.SensorItemEventRepository.Get(eventId);
+            var events = KEUnitOfWork.SensorItemEventRepository.GetsBySensorItemAndQuantity(evt.SensorItemId);
+            var evts = events.Where(x => x.Id != eventId);
+            return EventDetailViewModel.Map(evts);
+        }
 
-        #endregion Detail
+        #endregion Info
 
         #endregion Event
 
@@ -352,7 +352,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             viewModel.Id = id;
             viewModel.Detail = GetAlarmDetail(id);
             viewModel.Comments = GetsComment(viewModel.Detail.TriggerId);
-            viewModel.Histories = GetsHistory(viewModel.Detail.TriggerId);
+            viewModel.Histories = GetsAlarmHistory(viewModel.Detail.TriggerId);
 
             AddLog("Navigated to Alarm Info View", LogTypeEnum.Info);
             return View(viewModel);
@@ -366,7 +366,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return viewModel;
         }
 
-        private List<AlarmHistoryViewModel> GetsHistory(Guid triggerId)
+        private List<AlarmHistoryViewModel> GetsAlarmHistory(Guid triggerId)
         {
             List<AlarmHistoryViewModel> viewModels = new List<AlarmHistoryViewModel>();
             var histories = KEUnitOfWork.AlarmRepository.GetsCloseByTrigger(triggerId);
@@ -378,7 +378,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #endregion Detail
 
         #endregion Alarms
-        
+
         [HttpGet]
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsTankBySiteId(Guid siteId)

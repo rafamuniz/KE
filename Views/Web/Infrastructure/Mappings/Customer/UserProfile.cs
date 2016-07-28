@@ -1,6 +1,8 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Web.Areas.Customer.ViewModels.User;
+using KarmicEnergy.Web.Entities;
 using KarmicEnergy.Web.ViewModels;
+using Munizoft.Extensions;
 
 namespace KarmicEnergy.Web.Infrastructure.Mappings.Customer
 {
@@ -31,12 +33,17 @@ namespace KarmicEnergy.Web.Infrastructure.Mappings.Customer
             this.CreateMap<Core.Entities.CustomerUser, CreateViewModel>();
             this.CreateMap<Core.Entities.Contact, ListViewModel>();
 
-            this.CreateMap<Core.Entities.CustomerUser, EditViewModel>();
+            this.CreateMap<Core.Entities.CustomerUser, EditViewModel>()
+                .ForMember(x => x.Address, opt => opt.Ignore())
+                .ForMember(x => x.Sites, opt => opt.Ignore());
+
+            this.CreateMap<ApplicationUser, EditViewModel>();
+
             this.CreateMap<Core.Entities.Contact, EditViewModel>();
 
             this.CreateMap<Core.Entities.Site, SiteViewModel>();
             this.CreateMap<Core.Entities.CustomerUserSite, SiteViewModel>();
-            
+
             #endregion Entity To ViewModel 
         }
     }

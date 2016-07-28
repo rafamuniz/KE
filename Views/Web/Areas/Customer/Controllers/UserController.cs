@@ -187,57 +187,58 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         #endregion Create
 
         #region Edit
+
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Edit(Guid id)
         {
-            var customerUser = KEUnitOfWork.CustomerUserRepository.Get(id);
-            var contact = KEUnitOfWork.ContactRepository.Get(id);
-
-            if (customerUser == null && contact == null)
-            {
-                LoadCustomerRoles();
-                AddErrors("User does not exist");
-                return View("Index");
-            }
-
             EditViewModel viewModel = new EditViewModel();
 
-            if (customerUser != null)
+            using (var unitOfWork = Core.Persistence.KEUnitOfWork.Create())
             {
-                viewModel = EditViewModel.Map(customerUser);
-                var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
-                viewModel.Name = user.Name;
+                var customerUser = unitOfWork.CustomerUserRepository.Get(id);
+                var contact = unitOfWork.ContactRepository.Get(id);
 
-                var roles = await UserManager.GetRolesAsync(viewModel.Id.ToString());
-                viewModel.Role = roles.Single();
-
-                // Address            
-                viewModel.MapAddress(customerUser.Address);
-            }
-            else
-            {
-                viewModel = EditViewModel.Map(contact);
-                // Address            
-                viewModel.MapAddress(contact.Address);
-            }
-
-            LoadCustomerRoles();
-
-            if (!IsSite)
-            {
-                List<Site> sites = LoadSites();
-                if (customerUser != null)
+                if (customerUser == null && contact == null)
                 {
-                    viewModel.MapSites(sites, customerUser.Sites.Where(x => x.DeletedDate == null).ToList());
+                    return View("Index");
                 }
-                else
+
+                if (customerUser != null) // CustomerUser
                 {
-                    viewModel.Sites = SiteViewModel.Map(sites);
+                    viewModel.Map(customerUser);
+                    var user = await UserManager.FindByIdAsync(viewModel.Id.ToString());
+                    viewModel.Map(user);
+
+                    var roles = await UserManager.GetRolesAsync(viewModel.Id.ToString());
+                    viewModel.Role = roles.Single();
+
+                    // Address            
+                    viewModel.MapAddress(customerUser.Address);
+                    LoadCustomerRolesWithoutContact();
+
+                    if (!IsSite)
+                    {
+                        List<Site> sites = LoadSites();
+                        if (customerUser != null)
+                        {
+                            viewModel.MapSites(sites, customerUser.Sites.Where(x => x.DeletedDate == null).ToList());
+                        }
+                        else
+                        {
+                            viewModel.Sites = SiteViewModel.Map(sites);
+                        }
+                    }
+                    else
+                    {
+                        viewModel.Sites.Add(new SiteViewModel() { Id = SiteId });
+                    }
                 }
-            }
-            else
-            {
-                viewModel.Sites.Add(new SiteViewModel() { Id = SiteId });
+                else // Contact
+                {
+                    viewModel = EditViewModel.Map(contact);
+                    // Address            
+                    viewModel.MapAddress(contact.Address);
+                }
             }
 
             AddLog("Navigated to User Edit View", LogTypeEnum.Info);
@@ -259,7 +260,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                 if ((customerUser == null || user == null) && contact == null)
                 {
-                    LoadCustomerRoles();
+                    InitEditView(viewModel, customerUser);
                     AddErrors("User does not exist");
                     return View(viewModel);
                 }
@@ -395,12 +396,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
         }
 
-        private EditViewModel LoadEdit(EditViewModel viewModel, CustomerUser customerUser)
+        private EditViewModel InitEditView(EditViewModel viewModel, CustomerUser customerUser)
         {
-            if (viewModel == null)
-                viewModel = new EditViewModel();
-
-            LoadCustomerRoles();
+            LoadCustomerRolesWithoutContact();
 
             if (!IsSite)
             {
@@ -414,6 +412,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             return viewModel;
         }
+
         #endregion Edit
 
         #region Delete

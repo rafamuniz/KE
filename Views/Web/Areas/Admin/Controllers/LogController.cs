@@ -40,7 +40,6 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                 }
             }
 
-            AddLog("Navigated to Log View", LogTypeEnum.Info);
             return View(viewModels);
         }
 

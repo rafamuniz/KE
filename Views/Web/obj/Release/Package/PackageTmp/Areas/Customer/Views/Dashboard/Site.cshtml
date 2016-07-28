@@ -1,0 +1,202 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Dashboard
+@using KarmicEnergy.Web.Extensions
+
+@model SiteDashboardViewModel
+
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Site - Report";
+}
+
+@Scripts.Render("~/bundles/moment")
+@Scripts.Render("~/bundles/jqueryui")
+
+<script src="~/Scripts/app/utils.js"></script>
+<script src="~/Scripts/highcharts/highcharts.js"></script>
+<script src="~/Scripts/highcharts/highcharts-3d.js"></script>
+<script src="~/Scripts/highcharts/highcharts-more.js"></script>
+<script src="~/Scripts/app/dashboard.js"></script>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        @if (!this.IsSite())
+        {
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @using (Html.BeginForm("SiteSiteSelected", "Dashboard", new { }, FormMethod.Post, new { }))
+                        {
+                            @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(m => m.SiteId)
+        }
+    </div>
+</div>
+
+<div style="margin-left: 15px; margin-right: 15px;">
+    @if (this.IsSite() || (Model.SiteId.HasValue && Model.SiteId != default(Guid)))
+    {
+        <div id="flowmeters" class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
+                <div class="title blue">
+                    <h2>FLOW METERS</h2>
+                </div>
+
+                <div class="row row-centered">
+
+                    @if (Model.FlowMeters.Any())
+                    {
+                        Int32 idFlowMeter = 0;
+
+                        foreach (var flowMeter in Model.FlowMeters)
+                        {
+                            if (flowMeter.RateFlow.HasValue && flowMeter.Totalizer.HasValue)
+                            {
+                                <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3 flow-meter">
+                                    <div id="flowmeter_@idFlowMeter">
+                                    </div>
+                                    <script type="text/javascript">
+                                        generateFlowMeter(@idFlowMeter, @flowMeter.RateFlow.Value, @flowMeter.Totalizer.Value);
+                                    </script>
+                                </div>
+                            }
+
+                            idFlowMeter++;
+                        }
+                    }
+                    @*else
+                        {
+                        <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 flow-meter">
+                            <div id="flowmeter_none">
+                            </div>
+                            <script type="text/javascript">
+                                        generateFlowMeter('none', 0, 0);
+                            </script>
+                        </div>
+                        }*@
+                </div>
+            </div>
+        </div>
+
+        <div id="tanks" class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
+                <div class="title blue">
+                    <h2>TANKS</h2>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    @if (Model != null && Model.Tanks.Any())
+                    {
+                        foreach (var tank in Model.Tanks)
+                        {
+                            String color_box = String.Empty;
+                            String icon_alarm = String.Empty;
+                            String color_progress = String.Empty;
+                            Int16? waterPerc = null;
+
+                            if (tank.WaterVolumePercentage.HasValue)
+                            {
+                                waterPerc = (Int16)tank.WaterVolumePercentage.Value;
+
+                                if (waterPerc.Value > 0 && waterPerc.Value <= 15)
+                                {
+                                    color_box = "box_watervolumepercentage_red";
+                                    color_progress = "progress-bar-red";
+                                }
+                                else if (waterPerc.Value > 15 && waterPerc.Value <= 75)
+                                {
+                                    color_box = "box_watervolumepercentage_yellow";
+                                    color_progress = "progress-bar-yellow";
+                                }
+                                else if (waterPerc.Value > 75)
+                                {
+                                    color_box = "box_watervolumepercentage_green";
+                                    color_progress = "progress-bar-green";
+                                }
+                            }
+                            else
+                            {
+                                color_box = "box_watervolumepercentage_gray";
+                                color_progress = "progress-bar-gray";
+                            }
+
+                            if (tank.HasAlarmHigh)
+                            {
+                                icon_alarm = "alarm_high.png";
+                            }
+                            else if (tank.HasAlarmMedium)
+                            {
+                                icon_alarm = "alarm_medium.png";
+                            }
+                            else if (tank.HasAlarmLow)
+                            {
+                                icon_alarm = "alarm_low.png";
+                            }
+
+                            <div class="row">
+                                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                    @if (tank.Alarms.HasValue && tank.Alarms > 0)
+                                    {
+                                        <a href="@Url.Action("Tank", "Monitoring", new { area = "Customer", tankId = tank.Id })">
+                                            <img style="width:20px; height:20px;" src="~/images/@icon_alarm" />
+                                        </a>
+                                    }
+                                </div>
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                    <input type="hidden" value="@tank.Id" />
+                                    <a href="@Url.Action("Gauge", "Dashboard", new { area = "Customer", tankId = tank.Id })">
+                                        <span>@tank.Name</span>
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                    <div class="progress-group">
+                                        <div class="clearfix" style="text-align: center; overflow: hidden;">
+                                            <span class="pull-left">0 %</span>
+
+                                            @{
+                                                String labelWaterPercentage = "";
+                                                if (@waterPerc.HasValue)
+                                                {
+                                                    labelWaterPercentage = String.Format("{0} %", @waterPerc.Value);
+                                                }
+                                                else { labelWaterPercentage = "NO DATA"; }
+
+                                                String labelWaterVolumeCapacityAndLast = "";
+                                                labelWaterVolumeCapacityAndLast = String.Format("{0} / {1}", @tank.WaterVolumeLastValue.HasValue ? @tank.WaterVolumeLastValue.Value : 0, @tank.WaterVolumeCapacity);
+                                            }
+
+                                            <span class="center-block box_watervolumepercentage @color_box">@labelWaterPercentage</span>
+                                            <span class="center-block box_watervolumepercentage @color_box">@labelWaterVolumeCapacityAndLast</span>
+                                            <span class="pull-right">100 %</span>
+                                        </div>
+                                        <div class="progress sm box_watervolumepercentage_gray">
+                                            <div class="progress-bar @color_progress" style="width: @waterPerc%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                                    }
+                                                }
+                </div>
+            </div>
+        </div>
+                                                }
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('#ddlSite').on('change', function (event) {
+                var form = $(event.target).parents('form');
+                form.submit();
+            });
+        });
+    </script>
+}

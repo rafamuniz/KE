@@ -1,0 +1,64 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
+@using Munizoft.Extensions
+@using Munizoft.MVC.Helpers
+@using KarmicEnergy.Web.Extensions
+@using GridMvc.Html
+
+@model EventInfoViewModel
+
+@{
+    ViewBag.Title = "Event - Info";
+}
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
+    <div class="title blue">
+        <h2>Detail</h2>
+    </div>
+
+    @Html.Partial("_EventDetail", Model.Detail)
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
+    <div class="title blue">
+        <h2>History</h2>
+    </div>
+
+    @Html.Grid(Model.Histories).Columns(columns =>
+{
+    if (!this.IsSite())
+    {
+        columns.Add(c => c.SiteName).Titled("Site")
+            .Sortable(true)
+            .Filterable(true);
+    }
+
+    columns.Add(c => c.PondName).Titled("Pond")
+    .Sortable(true)
+    .Filterable(true);
+
+    columns.Add(c => c.TankName).Titled("Tank")
+        .Sortable(true)
+        .Filterable(true);
+
+    columns.Add(c => c.SensorName).Titled("Sensor")
+        .Sortable(true)
+        .Filterable(true);
+
+    columns.Add(c => c.ItemName).Titled("Item")
+        .Sortable(true)
+        .Filterable(true);
+
+    columns.Add(c => c.Value).Titled("Value")
+    .Sortable(true)
+    .Filterable(true);
+
+    columns.Add(c => c.EventDateLocal).Titled("Date")
+        .Sortable(true)
+        .Filterable(true);
+
+}).WithPaging(20).Sortable(true).Filterable().WithMultipleFilters()
+
+</div>
+
+@section Scripts {
+}

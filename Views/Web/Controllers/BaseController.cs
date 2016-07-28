@@ -184,6 +184,7 @@ namespace KarmicEnergy.Web.Controllers
             KEUnitOfWork.LogRepository.Add(log);
             KEUnitOfWork.Complete();
         }
+        
         #endregion Log
 
         #region Errors
@@ -306,6 +307,19 @@ namespace KarmicEnergy.Web.Controllers
                 new CustomerRole() { Id = "Supervisor", Name = "Supervisor" },
                 new CustomerRole() { Id = "Operator", Name = "Operator" },
                 new CustomerRole() { Id = "Contact", Name = "Contact" }
+            };
+
+            ViewBag.CustomerRoles = roles;
+            return roles;
+        }
+
+        protected List<CustomerRole> LoadCustomerRolesWithoutContact()
+        {
+            List<CustomerRole> roles = new List<CustomerRole>()
+            {
+                new CustomerRole() { Id = "General Manager", Name = "General Manager" },
+                new CustomerRole() { Id = "Supervisor", Name = "Supervisor" },
+                new CustomerRole() { Id = "Operator", Name = "Operator" },
             };
 
             ViewBag.CustomerRoles = roles;

@@ -1,0 +1,42 @@
+﻿@using KarmicEnergy.Web.ViewModels.Account
+@using Munizoft.Extensions
+
+@model ResetPasswordViewModel
+
+@{
+    Layout = "~/Views/Shared/_ExternalMaster.cshtml";
+    ViewBag.Title = "Reset Password";
+}
+
+<div class="login-box-body">
+
+    @using (Html.BeginForm("ResetPassword", "ResetPassword", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        
+        @Html.HiddenFor(model => model.Code)
+
+        <div class="has-feedback">
+            @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "input-login", placeholder = AttributeExtension.GetDisplayAttributeNameValue<ResetPasswordViewModel>(m => m.Email) } })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="has-feedback">
+            @Html.PasswordFor(m => m.Password, new { @class = "input-login", placeholder = AttributeExtension.GetDisplayAttributeNameValue<ResetPasswordViewModel>(m => m.Password) })            
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="has-feedback">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input-login", placeholder = AttributeExtension.GetDisplayAttributeNameValue<ResetPasswordViewModel>(m => m.ConfirmPassword) })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="has-feedback">
+            <button type="submit" class="btn-login">Reset</button>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

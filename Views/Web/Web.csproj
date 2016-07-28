@@ -1934,7 +1934,7 @@
     <Content Include="Areas\Customer\Views\Trigger\SiteEdit.cshtml" />
     <Content Include="Areas\Customer\Views\Trigger\TankEdit.cshtml" />
     <Content Include="Areas\Customer\Views\Trigger\PondEdit.cshtml" />
-    <Content Include="Areas\Customer\Views\Monitoring\Detail.cshtml" />
+    <Content Include="Areas\Customer\Views\Monitoring\Info.cshtml" />
     <Content Include="Areas\Admin\Views\Sync\Index.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -1950,8 +1950,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\AWS.pubxml" />
-    <None Include="Properties\PublishProfiles\ClickOnce.pubxml" />
-    <None Include="Properties\PublishProfiles\Prod.pubxml" />
     <Content Include="Scripts\d3\README.md" />
     <Content Include="Scripts\d3\LICENSE" />
     <Content Include="Scripts\d3\CHANGES.md" />
@@ -2558,7 +2556,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51696</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:51696</IISUrl>
+          <IISUrl>http://localhost:51696/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

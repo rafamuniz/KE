@@ -1,0 +1,61 @@
+﻿@using KarmicEnergy.Web.ViewModels.Account
+@using Munizoft.Extensions
+
+@model ProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+@using (Html.BeginForm("Profile", "Account", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<ProfileViewModel>(m => m.Name) } })
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<ProfileViewModel>(m => m.Email) } })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        </div>
+    </div>
+
+    @*<div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-10 form-group">
+                <div class="panel_main user_picture">
+                    <img class="user_image_background" src="data:image;base64,@System.Convert.ToBase64String(@Model.Photo)">
+                    <div>
+                        <form class="add_files_form middle tooltip" data-tooltip="edit" method="post" enctype="multipart/form-data" action="io-ajax/user-add-photo.php">
+                            <div class="uploader">
+                                <input class="add_photo uniformed" type="file" name="file_ico" size="20" data-filenameclass="hidden" data-filebuttonhtml="<i class='icon-pencil add_files_button'></i>"><span class="hidden" style="-webkit-user-select: none;">No file selected</span><span class="action" style="-webkit-user-select: none;"><i class="icon-pencil add_files_button"></i></span>
+                            </div>
+                        </form>
+                        <i class="tooltip icon-remove-sign delete_photo" data-tooltip="remove"></i>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 btn-submit text-center">
+        <input type="submit" class="btn btn-default" value="SAVE">
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -11,7 +11,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
         #region Constructor
         public EventInfoViewModel()
         {
-            Histories = new List<AlarmViewModel>();
+            Histories = new List<EventDetailViewModel>();
         }
         #endregion Constructor
 
@@ -19,8 +19,8 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
 
         public Guid Id { get; set; }
         public EventDetailViewModel Detail { get; set; }
-        public List<AlarmViewModel> Histories { get; set; }
-        
+        public List<EventDetailViewModel> Histories { get; set; }
+
         #endregion Property
 
         #region Map
@@ -38,7 +38,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
         }
 
         public static EventInfoViewModel Map(Core.Entities.SensorItemEvent entity)
-        {         
+        {
             var viewModel = Mapper.Map<Core.Entities.SensorItemEvent, EventInfoViewModel>(entity);
 
             return viewModel;

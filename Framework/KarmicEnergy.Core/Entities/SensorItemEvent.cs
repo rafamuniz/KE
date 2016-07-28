@@ -145,7 +145,7 @@ namespace KarmicEnergy.Core.Entities
 
         private String PondVolumeCapactiy()
         {
-            return this.Value;
+            return this.Value;  
         }
 
         private String TankVolumeCapactiy()

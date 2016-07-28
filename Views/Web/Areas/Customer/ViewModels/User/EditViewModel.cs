@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using KarmicEnergy.Web.Entities;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
 {
@@ -29,7 +30,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
         [Required]
         [Display(Name = "Role")]
         public String Role { get; set; }
-        
+
         [Required]
         [Display(Name = "Sites")]
         public List<SiteViewModel> Sites { get; set; }
@@ -44,9 +45,19 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
 
         #region Map
 
-        public static EditViewModel Map(Core.Entities.CustomerUser entity)
+        //public static EditViewModel Map(Core.Entities.CustomerUser entity)
+        //{
+        //    return Mapper.Map<Core.Entities.CustomerUser, EditViewModel>(entity);
+        //}
+
+        public void Map(Core.Entities.CustomerUser entity)
         {
-            return Mapper.Map<Core.Entities.CustomerUser, EditViewModel>(entity);
+            Mapper.Map<Core.Entities.CustomerUser, EditViewModel>(entity, this);
+        }
+
+        public void Map(ApplicationUser entity)
+        {
+            Mapper.Map<ApplicationUser, EditViewModel>(entity, this);
         }
 
         public static EditViewModel Map(Core.Entities.Contact entity)
@@ -105,12 +116,9 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.User
                 {
                     SiteViewModel viewModel = new SiteViewModel() { Id = s.Id, Name = s.Name };
 
-                    foreach (var us in userSites)
+                    if (userSites.Where(x => x.SiteId == s.Id).Any())
                     {
-                        if (s.Id == us.SiteId)
-                        {
-                            viewModel.IsSelected = true;
-                        }
+                        viewModel.IsSelected = true;
                     }
 
                     viewModels.Add(viewModel);

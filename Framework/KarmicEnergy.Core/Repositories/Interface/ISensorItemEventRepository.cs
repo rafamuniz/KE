@@ -10,6 +10,7 @@ namespace KarmicEnergy.Core.Repositories
         List<SensorItemEvent> GetsByPond(Guid pondId);
         List<SensorItemEvent> GetsByTank(Guid tankId);
         SensorItemEvent GetLastEventBySensorItem(Guid sensorItemId);
+        IEnumerable<SensorItemEvent> GetsBySensorItemAndQuantity(Guid sensorItemId, Int32 quantity = 5);
 
         SensorItemEvent GetLastEventBySiteAndItem(Guid siteId, ItemEnum item);
         SensorItemEvent GetLastEventByPondAndItem(Guid pondId, ItemEnum item);

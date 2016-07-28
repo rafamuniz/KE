@@ -1,0 +1,45 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring
+@using Munizoft.Extensions
+@using Munizoft.MVC.Helpers
+@using KarmicEnergy.Web.Extensions
+
+@model ClearAlarmViewModel
+
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Alarm - Clear";
+}
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-sub">
+    <div class="title blue">
+        <h2>Detail</h2>
+    </div>
+    @Html.Partial("_AlarmDetail", Model.Detail)
+</div>
+
+@using (Html.BeginForm("Clear", "Monitoring", new { area = "Customer" }, FormMethod.Post, new { id = "form", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.AlarmId)
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.LabelFor(m => m.Message)
+                    @Html.TextAreaFor(m => m.Message, new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<ClearAlarmViewModel>(m => m.Message) })
+                    @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center btn-submit">
+        <input type="submit" class="btn btn-default" value="SAVE">
+        <a class="btn" href="~/Customer/Monitoring/AlarmInfo/@Model.AlarmId">Cancel</a>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

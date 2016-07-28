@@ -1,0 +1,49 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.User
+@using Munizoft.Extensions
+@using KarmicEnergy.Web.Extensions
+
+@model UserViewModel
+
+<div class="form-group">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        @Html.EditorFor(m => m.Username, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.User.Username) } })
+        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.User.Password) } })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        @Html.EditorFor(m => m.PasswordConfirm, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<CreateViewModel>(m => m.User.PasswordConfirm) } })
+        @Html.ValidationMessageFor(m => m.PasswordConfirm, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+@if (Model.Sites.Any() && !this.IsSite())
+{
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 box-sub">
+        <div class="title blue">
+            <h2>SITES</h2>
+        </div>
+
+        <div id="divCheckboxlist" class="checkboxlist">
+            @for (int i = 0; i < Model.Sites.Count; i++)
+            {
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        @Html.CheckBoxFor(m => Model.Sites[i].IsSelected, new { id = "chk_" + @Model.Sites[i].Id, style = "vertical-align: 3px;" })
+                        @Html.LabelFor(m => Model.Sites[i].Name, Model.Sites[i].Name, new { @for = "chk_" + @Model.Sites[i].Id })
+                        @Html.HiddenFor(m => Model.Sites[i].Id)
+                        @Html.HiddenFor(m => Model.Sites[i].Name)
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

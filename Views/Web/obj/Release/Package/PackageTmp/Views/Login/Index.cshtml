@@ -1,0 +1,58 @@
+﻿@using KarmicEnergy.Web.ViewModels.Account
+@using Munizoft.Extensions
+
+@model LoginViewModel
+
+@{
+    Layout = "~/Views/Shared/_LoginMaster.cshtml";
+    ViewBag.Title = "Login";
+}
+
+<div class="login-box">
+    <div class="login-logo">
+        <a href="http://www.karmicenergy.com">
+            <img src="~/images/logo.png">
+        </a>
+    </div>
+
+    <div class="login-box-body">
+        @using (Html.BeginForm("Login", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "formLogin", @class = "form-horizontal", role = "form" }))
+            {
+            @Html.AntiForgeryToken()
+            @Html.Partial("_Error")
+
+            <div class="has-feedback">
+                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "input-login", id = "Email", name = "Email", placeholder = AttributeExtension.GetDisplayAttributeNameValue<LoginViewModel>(m => m.Email) } })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="has-feedback">
+                @Html.PasswordFor(m => m.Password, new { @class = "input-login", placeholder = AttributeExtension.GetDisplayAttributeNameValue<LoginViewModel>(m => m.Password) })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="has-feedback">
+                <button type="submit" class="btn-login">Login</button>
+            </div>
+        }
+
+        <div class="pull-right">
+            <a id="ForgotPassword" name="ForgotPassword">I forgot my password</a>
+        </div>
+    </div><!-- /.login-box-body -->
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $('#Email').change(function () {
+            var email = $('#Email').val();
+
+            if (email != "") {
+                var value = "~/ForgotPassword?u=" + email;
+                $('#ForgotPassword').attr('href', value);
+            }
+        });
+    </script>
+}

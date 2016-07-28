@@ -1,0 +1,58 @@
+﻿@using KarmicEnergy.Web.Areas.Admin.ViewModels.StickConversion
+@using Munizoft.Extensions
+
+@model EditViewModel
+
+@{
+    Layout = "~/Views/Shared/_Internal.cshtml";
+    ViewBag.Title = "Stick Conversion - Edit";
+}
+
+@using (Html.BeginForm("Edit", "StickConversion", new { area = "Admin" }, FormMethod.Post, new { id = "form", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="row">
+
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", placeholder = AttributeExtension.GetDisplayAttributeNameValue<EditViewModel>(m => m.Name) } })
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.DropDownListFor(model => model.FromUnitId, new SelectList(ViewBag.Units, "Id", "Name"), "-- Please select an Unit --", new { @class = "form-control selectpicker", id = "ddlStatus" })
+                    @Html.ValidationMessageFor(m => m.FromUnitId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.DropDownListFor(model => model.ToUnitId, new SelectList(ViewBag.Units, "Id", "Name"), "-- Please select an Unit --", new { @class = "form-control selectpicker", id = "ddlStatus" })
+                    @Html.ValidationMessageFor(m => m.ToUnitId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    @Html.DropDownListFor(model => model.Status, new SelectList(ViewBag.Statuses, "Id", "Name", "A"), "-- Please select a Status--", new { @class = "form-control selectpicker", id = "ddlStatus" })
+                    @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 btn-submit text-center">
+        <input type="submit" class="btn btn-default" value="SAVE">
+        <a class="btn" href="~/Admin/StickConverion/">Cancel</a>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

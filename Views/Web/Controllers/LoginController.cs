@@ -3,6 +3,9 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Microsoft.Owin.Extensions;
+using Microsoft.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace KarmicEnergy.Web.Controllers
 {
@@ -60,8 +63,7 @@ namespace KarmicEnergy.Web.Controllers
                         return RedirectToAction("SendCode", new { ReturnUrl = ReturnUrl, RememberMe = viewModel.RememberMe });
                     case SignInStatus.Failure:
                     default:
-                        AddErrors("Invalid email or/and password");
-                        //ModelState.AddModelError("", "Invalid email or password");
+                        ModelState.AddModelError("", "Invalid email or password");
                         return View("Index", viewModel);
                 }
             }
@@ -75,7 +77,13 @@ namespace KarmicEnergy.Web.Controllers
 
         private ActionResult Success(String username, String url)
         {
-            if (IsSite)
+            var user = UserManager.FindByName(username);
+            var roles = UserManager.GetRoles(user.Id);
+
+            if (IsSite && (roles.Contains("Customer") ||
+                roles.Contains("General Manager") ||
+                roles.Contains("Supervisor") ||
+                roles.Contains("Operator")))
             {
                 return RedirectToLocal("~/Customer/FastTracker");
             }

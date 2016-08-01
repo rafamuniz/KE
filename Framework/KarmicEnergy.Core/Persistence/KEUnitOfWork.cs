@@ -3,7 +3,7 @@ using System;
 
 namespace KarmicEnergy.Core.Persistence
 {
-    public class KEUnitOfWork : KEUnitOfWorkBase<KEContext>, IDisposable
+    public class KEUnitOfWork : KEUnitOfWorkBase<KEContext>, IKEUnitOfWork, IDisposable
     {
         #region Fields     
         private IDataSyncRepository _DataSyncRepository;

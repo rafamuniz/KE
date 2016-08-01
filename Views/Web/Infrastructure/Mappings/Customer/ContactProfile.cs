@@ -19,7 +19,7 @@ namespace KarmicEnergy.Web.Infrastructure.Mappings.Customer
 
             this.CreateMap<Core.Entities.Contact, ListViewModel>();
             this.CreateMap<Core.Entities.Contact, CreateViewModel>();
-            this.CreateMap<Core.Entities.Contact, EditViewModel>();//.ForMember(x => x.Address, opt => opt.Ignore());            
+            this.CreateMap<Core.Entities.Contact, EditViewModel>();
                         
             #endregion Entity To ViewModel 
         }

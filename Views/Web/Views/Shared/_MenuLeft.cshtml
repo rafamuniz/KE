@@ -59,28 +59,28 @@
         </li>
 
         @*<li class="treeview @Html.MenuItemActive("Contact", "Customer")">
-            <a href="~/Customer/Contact">
-                <img src="~/images/contacts.png" alt="contacts" title="contacts">
-                <p>CONTACTS</p>
-            </a>
-        </li>*@
-
-        if (!this.IsSite())
-        {
-            <li class="treeview @Html.MenuItemActive("Site", "Customer")">
-                <a href="~/Customer/Site">
-                    <img src="~/images/sites.png" alt="sites" title="sites">
-                    <p>SITES</p>
+                <a href="~/Customer/Contact">
+                    <img src="~/images/contacts.png" alt="contacts" title="contacts">
+                    <p>CONTACTS</p>
                 </a>
-            </li>
-        }
+            </li>*@
 
-        <li class="treeview @Html.MenuItemActive("Pond", "Customer")">
-            <a href="~/Customer/Pond">
-                <img src="~/images/pond.png" alt="ponds" title="ponds">
-                <p>PONDS</p>
+    if (!this.IsSite())
+    {
+        <li class="treeview @Html.MenuItemActive("Site", "Customer")">
+            <a href="~/Customer/Site">
+                <img src="~/images/sites.png" alt="sites" title="sites">
+                <p>SITES</p>
             </a>
         </li>
+    }
+
+    <li class="treeview @Html.MenuItemActive("Pond", "Customer")">
+        <a href="~/Customer/Pond">
+            <img src="~/images/pond.png" alt="ponds" title="ponds">
+            <p>PONDS</p>
+        </a>
+    </li>
 
         <li class="treeview @Html.MenuItemActive("Tank", "Customer")">
             <a href="~/Customer/Tank">
@@ -97,15 +97,22 @@
         </li>
 
         @*<li class="treeview @Html.MenuItemActive("Trigger", "Customer")">
-            <a href="~/Customer/Trigger">
-                <img src="~/images/trigger.png" alt="trigger" title="trigger">
-                <p>TRIGGERS</p>
-            </a>
-        </li>*@
+                <a href="~/Customer/Trigger">
+                    <img src="~/images/trigger.png" alt="trigger" title="trigger">
+                    <p>TRIGGERS</p>
+                </a>
+            </li>*@
     }
 
     @if (this.HasRoles("Customer", "General Manager", "Supervisor", "Operator"))
     {
+        <li class="treeview @Html.MenuItemActive("Map", "Customer")">     
+            <a href="~/Customer/Map">
+                <img src="~/images/loga_sample.png" alt="map" title="map">
+                <p>MAP</p>
+            </a>
+        </li>
+
         <li class="treeview @Html.MenuItemActive("FastTracker", "Customer")">
             <a href="~/Customer/FastTracker">
                 <img src="~/images/fast_track.png" alt="fast_track" title="fast_track">

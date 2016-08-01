@@ -56,7 +56,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Munizoft.Core">
-      <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Core\bin\Debug\Munizoft.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Core\bin\Release\Munizoft.Core.dll</HintPath>
     </Reference>
     <Reference Include="Munizoft.Extensions">
       <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Extensions\obj\Debug\Munizoft.Extensions.dll</HintPath>
@@ -220,6 +220,9 @@
     <Compile Include="Repositories\Interface\ICustomerUserRepository.cs" />
     <Compile Include="Repositories\Interface\ICustomerRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Services\Interface\ISiteService.cs" />
+    <Compile Include="Services\KEServiceBase.cs" />
+    <Compile Include="Services\SiteService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -231,9 +234,7 @@
       <Name>Util</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607200402059_Dev.resx">
       <DependentUpon>201607200402059_Dev.cs</DependentUpon>

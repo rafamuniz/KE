@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using KarmicEnergy.Web.Infrastructure.Mappings;
 using KarmicEnergy.Web.Infrastructure.Mappings.Admin;
 using KarmicEnergy.Web.Infrastructure.Mappings.Customer;
 
@@ -14,6 +15,8 @@ namespace KarmicEnergy.Web.App_Start
 
             Mapper.Initialize(config =>
             {
+                config.AddProfile<SharedProfile>();
+
                 config.AddProfile<CustomerProfile>();
                 config.AddProfile<StickConversionProfile>();
                 config.AddProfile<TankModelProfile>();
@@ -22,6 +25,7 @@ namespace KarmicEnergy.Web.App_Start
                 config.AddProfile<Infrastructure.Mappings.Admin.SyncProfile>();
 
                 config.AddProfile<ContactProfile>();
+                config.AddProfile<MapProfile>();
                 config.AddProfile<DashboardProfile>();
                 config.AddProfile<FastTrackerProfile>();
                 config.AddProfile<Infrastructure.Mappings.Customer.LogProfile>();

@@ -115,6 +115,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Customer/Views/Log/Index.cshtml">
       <publishTime>06/20/2016 14:06:55</publishTime>
     </File>
+    <File Include="Areas/Customer/Views/Map/Index.cshtml">
+      <publishTime>08/02/2016 00:55:07</publishTime>
+    </File>
     <File Include="Areas/Customer/Views/Monitoring/AlarmClear.cshtml">
       <publishTime>07/22/2016 15:48:05</publishTime>
     </File>
@@ -332,7 +335,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 00:49:06</publishTime>
     </File>
     <File Include="Areas/Customer/Views/_ViewStart.cshtml">
-      <publishTime>03/11/2016 00:32:24</publishTime>
+      <publishTime>08/01/2016 21:41:06</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>03/07/2016 00:47:16</publishTime>
@@ -365,7 +368,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>07/28/2016 22:19:59</publishTime>
+      <publishTime>08/02/2016 01:21:39</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
@@ -374,7 +377,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/26/2016 14:49:04</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>07/29/2016 00:51:35</publishTime>
+      <publishTime>08/02/2016 01:41:12</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -422,7 +425,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 00:39:35</publishTime>
     </File>
     <File Include="bin/Munizoft.Core.dll">
-      <publishTime>07/11/2016 13:58:47</publishTime>
+      <publishTime>07/30/2016 00:40:10</publishTime>
     </File>
     <File Include="bin/Munizoft.Core.pdb">
       <publishTime>04/18/2016 23:02:41</publishTime>
@@ -9349,6 +9352,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jqwidgets/styles/jqx.windowsphone.css">
       <publishTime>04/18/2016 09:34:59</publishTime>
     </File>
+    <File Include="Scripts/maps.js">
+      <publishTime>08/02/2016 01:16:36</publishTime>
+    </File>
     <File Include="Scripts/modernizr-2.8.3.js">
       <publishTime>03/07/2016 00:47:21</publishTime>
     </File>
@@ -9410,7 +9416,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/22/2016 13:46:54</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>07/22/2016 22:34:47</publishTime>
+      <publishTime>08/02/2016 00:49:19</publishTime>
     </File>
     <File Include="Views/Account/ChangePassword.cshtml">
       <publishTime>06/21/2016 20:31:53</publishTime>
@@ -9521,7 +9527,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:32:23</publishTime>
     </File>
     <File Include="Views/Shared/_MenuLeft.cshtml">
-      <publishTime>07/27/2016 19:58:22</publishTime>
+      <publishTime>08/02/2016 01:21:04</publishTime>
     </File>
     <File Include="Views/Shared/_MenuTop.cshtml">
       <publishTime>07/22/2016 16:03:25</publishTime>
@@ -9533,7 +9539,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 01:07:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/29/2016 00:27:37</publishTime>
+      <publishTime>08/02/2016 01:41:25</publishTime>
     </File>
   </ItemGroup>
 </Project>

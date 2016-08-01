@@ -330,6 +330,7 @@
     <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Log\ListViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Map\IndexViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\EventInfoViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\EventDetailViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Monitoring\AlarmViewModel.cs" />
@@ -395,7 +396,9 @@
     <Compile Include="Infrastructure\Mappings\Admin\LogProfile.cs" />
     <Compile Include="Infrastructure\Mappings\Customer\FastTrackerProfile.cs" />
     <Compile Include="Infrastructure\Mappings\Customer\DashboardProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\SharedProfile.cs" />
     <Compile Include="Infrastructure\Mappings\Customer\MonitoringProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\Customer\MapProfile.cs" />
     <Compile Include="Infrastructure\Mappings\Customer\UserProfile.cs" />
     <Compile Include="Infrastructure\Mappings\Customer\SensorGroupProfile.cs" />
     <Compile Include="Infrastructure\Mappings\Customer\TriggerProfile.cs" />
@@ -464,6 +467,7 @@
     <Compile Include="ViewModels\NotificationViewModel.cs" />
     <Compile Include="ViewModels\AlarmViewModel.cs" />
     <Compile Include="ViewModels\AddressViewModel.cs" />
+    <Compile Include="ViewModels\Shared\SiteViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Notifications\Email\AlarmEmail.html" />
@@ -1946,6 +1950,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Areas\Customer\Views\Monitoring\_EventDetail.cshtml" />
     <Content Include="Areas\Customer\Views\User\_User.cshtml" />
+    <Content Include="Areas\Customer\Views\Map\Index.cshtml" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2416,6 +2421,7 @@
     <Content Include="Scripts\jqwidgets\styles\jqx.ui-sunny.css" />
     <Content Include="Scripts\jqwidgets\styles\jqx.web.css" />
     <Content Include="Scripts\jqwidgets\styles\jqx.windowsphone.css" />
+    <Content Include="Scripts\maps.js" />
     <Content Include="Scripts\modernizr\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -2494,7 +2500,6 @@
     <Folder Include="App_Data\StickConversions\" />
     <Folder Include="Areas\Customer\ViewModels\Report\" />
     <Folder Include="Areas\Customer\ViewModels\Temp\" />
-    <Folder Include="Areas\Customer\Views\Map\" />
     <Folder Include="Helpers\" />
     <Folder Include="images\geometries\" />
   </ItemGroup>

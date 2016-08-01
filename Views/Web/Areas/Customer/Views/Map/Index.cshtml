@@ -1,0 +1,53 @@
+﻿@using KarmicEnergy.Web.Areas.Customer.ViewModels.Map
+@using Munizoft.Extensions
+@using Munizoft.MVC.Helpers
+@using KarmicEnergy.Web.Extensions
+
+@model IndexViewModel
+
+@{
+    ViewBag.Title = "Map";
+}
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCitW5WPs5Xig_7Tju0jNRbZI9jk6gDeFo"></script>
+<script src="~/Scripts/maps.js"></script>
+
+@if (!this.IsSite())
+{
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="form-group">
+            <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+                @using (Html.BeginForm("SiteSelected", "Map", new { }, FormMethod.Post, new { }))
+                {
+                    @Html.DropDownListFor(m => m.SiteId, new SelectList(Model.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    @Html.HiddenFor(m => m.SiteId)
+}
+
+<div id="map" class="col-sm-12 col-xs-12 col-md-12 col-lg-12" style="height: 500px;">
+</div>
+
+<script type="text/javascript">
+    initMap(@Model.Latitude, @Model.Longitude);
+</script>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            showLoading();
+
+            $('#ddlSite').on('change', function (event) {
+                var form = $(event.target).parents('form');
+                form.submit();
+            });
+
+            hideLoading();
+        });
+    </script>
+}

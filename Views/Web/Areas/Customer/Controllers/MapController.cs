@@ -35,7 +35,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             ISiteService siteService = new SiteService(KEUnitOfWork);
 
             if (!IsSite)
-            {   
+            {
                 var sites = siteService.GetsByCustomer(CustomerId);
                 viewModel.Sites = SiteViewModel.Map(sites);
             }
@@ -60,10 +60,33 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             var sites = siteService.GetsByCustomer(CustomerId);
             viewModel.Sites = SiteViewModel.Map(sites);
-            
+            viewModel.SiteId = siteId;
             return View("Index", viewModel);
         }
 
         #endregion Index       
+
+        #region Json
+
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
+        public ActionResult GetPonds(Guid siteId)
+        {
+            using (var unitOfWork = KEUnitOfWork.Create(false))
+            {
+                var ponds = unitOfWork.PondRepository.GetsByCustomerAndSite(CustomerId, siteId);
+                return Json(ponds, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
+        public ActionResult GetTanks(Guid siteId)
+        {
+            using (var unitOfWork = KEUnitOfWork.Create(false))
+            {
+                var tanks = unitOfWork.TankRepository.GetsByCustomerAndSite(CustomerId, siteId);
+                return Json(tanks, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion Json
     }
 }

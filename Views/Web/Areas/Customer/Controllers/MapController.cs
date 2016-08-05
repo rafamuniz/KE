@@ -87,6 +87,16 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 return Json(tanks, JsonRequestBehavior.AllowGet);
             }
         }
+
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
+        public ActionResult GetSensors(Guid siteId)
+        {
+            using (var unitOfWork = KEUnitOfWork.Create(false))
+            {
+                var sensors = unitOfWork.SensorRepository.GetsByCustomerAndSite(CustomerId, siteId);
+                return Json(sensors, JsonRequestBehavior.AllowGet);
+            }
+        }
         #endregion Json
     }
 }

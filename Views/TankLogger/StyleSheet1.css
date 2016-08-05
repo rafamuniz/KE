@@ -1,0 +1,91 @@
+﻿body {
+}
+
+img {
+    margin: 20px;
+    transition: all 400ms; 
+}
+
+.bodystyle
+{
+    margin-bottom:auto; 
+    margin-top:auto;
+    margin-right:auto;
+    margin-left:auto;
+    padding:0,0,0,0;
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size:14px; 
+    color:#767676;
+    background-color:white;
+}
+.formstyle
+{
+    margin-bottom:auto; 
+    margin-top:auto;
+    margin-right:auto;
+    margin-left:auto;
+    padding:0,0,0,0;
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size:14px; 
+    color:#767676;
+    background-color:#white;
+}
+
+.formstyle table {
+    padding: 0,0,0,0;
+    margin-left: 0;
+    width:100%;
+    background-color:white;
+    text-align: left;
+}
+
+.splashstyle table {
+    margin-bottom:auto; 
+    margin-top:auto;
+    margin-right:auto;
+    margin-left:auto;
+    padding: 0,0,0,0;
+    background-color:white;
+    text-align: left;
+    vertical-align:middle;
+    
+}
+.treestyle {
+    padding: 0,0,0,0;
+    margin: 0,0,0,0;
+    text-align:left;
+}
+
+.nopad table {
+    margin: 0,0,0,0;
+    padding: 0px 0px 0px 0px;
+    width:100%;
+
+}
+
+.formstyle td {
+    vertical-align:top;
+    text-align: left;
+}
+
+
+.auto-style3 {
+    text-align: left;
+}
+.auto-style4 {
+    text-align: center;
+}
+ 
+.hidden {display:none;}
+
+.VertMid {
+    vertical-align:middle;
+}
+
+.HeaderBars {
+    text-align:center; 
+    background-color:#00adbd; 
+    color:#1b2a39;
+    vertical-align:middle;
+}
+

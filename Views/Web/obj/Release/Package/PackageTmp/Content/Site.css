@@ -612,7 +612,7 @@ p {
     }
 
         .sidebar-menu > li:hover {
-            background-color: #CCFFFF;            
+            background-color: #CCFFFF;
             background-position: right center;
             background-repeat: no-repeat;
             color: #00ADBD;
@@ -6954,3 +6954,27 @@ table.grid-table tr.grid-row-selected td {
     background: #00ADBD !important;
     color: white;
 }
+
+/************/
+/*    MAP   */
+/************/
+
+.popup {
+    background-color: #EEE;
+    border-color: #DDD;
+}
+
+    .popup .title {
+        min-height: 21px;
+        min-width: 150px;
+        max-width: 287px;
+        word-wrap: break-word;
+        text-align: left;
+    }
+
+    .popup .body {
+        
+    }
+/************/
+/*    MAP   */
+/************/

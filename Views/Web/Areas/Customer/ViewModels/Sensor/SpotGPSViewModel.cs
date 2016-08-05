@@ -1,16 +1,22 @@
-﻿using Munizoft.MVC.Helpers.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.Configuration;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
 {
     public class SpotGPSViewModel
     {
         #region Property
+
+        [Display(Name = "FindMeSpot")]
+        public String FindMeSpotUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["FindMeSpot:Url"];
+            }
+        }
+
         [Display(Name = "Spot ID")]
         public String SpotId { get; set; }
 

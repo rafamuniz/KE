@@ -1,0 +1,14 @@
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteViewer\obj\Debug\FracSiteViewer.Form1.resources
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteViewer\obj\Debug\FracSiteViewer.Resources.resources
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteViewer\obj\Debug\FracSiteViewer.vbproj.GenerateResource.Cache
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteViewer\bin\Debug\FracSiteViewer.exe.config
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteViewer\bin\Debug\FracSiteViewer.exe
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteViewer\bin\Debug\FracSiteViewer.pdb
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteViewer\bin\Debug\FracSiteViewer.xml
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteViewer\obj\Debug\FracSiteViewer.exe
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteViewer\obj\Debug\FracSiteViewer.xml
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteViewer\obj\Debug\FracSiteViewer.pdb
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Docs\FracSiteService\FracSiteViewer\bin\Debug\FracSiteViewer.exe.config
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Docs\FracSiteService\FracSiteViewer\obj\Debug\FracSiteViewer.exe
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Docs\FracSiteService\FracSiteViewer\obj\Debug\FracSiteViewer.xml
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Docs\FracSiteService\FracSiteViewer\obj\Debug\FracSiteViewer.pdb

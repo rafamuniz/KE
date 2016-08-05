@@ -1,0 +1,91 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="tanklogger.master.vb" Inherits="tanklogger.tanklogger" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="StyleSheet1.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" class="formstyle" runat="server" >
+        <table class="formstyle" >
+            <tr>
+                <td >
+                    <table class="formstyle" >
+                        <tr>
+                            <td >
+                                <img alt="" width="600" src="images/logoheader1.png" />
+                            </td>
+                            <td style="text-align:left;">
+                                <div id="divLoggedOut" runat="server">
+                                    <table class="nopad" style="text-align:left;"  >
+                                        <tr>
+                                            <td>Email:</td>
+                                            <td><asp:TextBox ID="tbEmail" runat="server" width="75px" TextMode="SingleLine"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Password:</td>
+                                            <td><asp:TextBox ID="tbPwd" runat="server"  width="75px" TextMode="Password"></asp:TextBox></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><asp:Button ID="btnLogin" runat="server" Text="Login" /></td>
+                                        </tr>
+                                    </table><br />
+                                </div>
+                                <div id="divLoggedIn" runat="server">
+                                    <table class="nopad" style="text-align:left;" >
+                                        <tr>
+                                            <td >
+                                                <asp:Label ID="lbuserid" runat="server" CssClass="VertMid" ></asp:Label>
+                                                <asp:ImageButton ID="btnSettings" runat="server" height="30"  src="images/settings.png" class="VertMid"/>
+                                                <asp:Button ID="btnLogoff" runat="server" Text="Logoff" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>(if this is not you click <asp:LinkButton ID="lbLogoff" runat="server">here</asp:LinkButton>)</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <asp:Label ID="lblMsg" runat="server"></asp:Label>
+                                <br />
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="formstyle" >
+                        <tr>
+                            <td style="text-align:left;">
+                                <div id="divadmin" runat="server" visible="false">
+                                    <asp:LinkButton ID="btnCusts" runat="server" text="Customers"/>&nbsp
+                                    <asp:linkbutton ID="btnSites" runat="server" Text="Sites" />&nbsp
+                                    <asp:LinkButton ID="btnUsers" runat="server" text="Users"/>&nbsp
+                                </div>
+                            </td>
+                            <td style="text-align:right;">
+                                <div id="divuser" runat="server">
+                                    <asp:LinkButton ID="btnFastTracker" runat="server" Text="Fast Tracker"/>&nbsp
+                                    <asp:LinkButton ID="btnViewTanks" runat="server" text="My Tanks"/>&nbsp
+                                    <asp:LinkButton ID="btnViewReport" runat="server" text="My Tank Report"/>&nbsp
+                                    <asp:LinkButton ID="btnLogtank" runat="server" text="Log a Sample"/>&nbsp
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+       
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style4">Copyright 2014 - All Rights Reserved.</td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,12 @@
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteService\bin\Debug\FracSiteService.exe.config
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteService\bin\Debug\FracSiteService.exe
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteService\bin\Debug\FracSiteService.pdb
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteService\bin\Debug\FracSiteService.xml
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteService\obj\Debug\FracSiteService.FracSiteService.resources
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteService\obj\Debug\FracSiteService.Resources.resources
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteService\obj\Debug\FracSiteService.ProjectInstaller.resources
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteService\obj\Debug\FracSiteService.vbproj.GenerateResource.Cache
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteService\obj\Debug\FracSiteService.exe
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteService\obj\Debug\FracSiteService.xml
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteService\obj\Debug\FracSiteService.pdb
+C:\Users\Fred\documents\visual studio 2013\Projects\FracSiteService\FracSiteService\obj\Debug\FracSiteService.vbprojResolveAssemblyReference.cache

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+FracSiteService
+</name>
+</assembly>
+<members>
+<member name="P:FracSiteService.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:FracSiteService.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:FracSiteService.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:FracSiteService.localloggingservice.Service1.#ctor">
+	<remarks/>
+</member><member name="E:FracSiteService.localloggingservice.Service1.writetanklogCompleted">
+	<remarks/>
+</member><member name="M:FracSiteService.localloggingservice.Service1.writetanklog(System.String)">
+	<remarks/>
+</member><member name="M:FracSiteService.localloggingservice.Service1.writetanklogAsync(System.String)">
+	<remarks/>
+</member><member name="M:FracSiteService.localloggingservice.Service1.writetanklogAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FracSiteService.localloggingservice.Service1.CancelAsync(System.Object)">
+	<remarks/>
+</member><member name="T:FracSiteService.localloggingservice.Service1">
+	<remarks/>
+</member><member name="T:FracSiteService.localloggingservice.writetanklogCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FracSiteService.localloggingservice.writetanklogCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FracSiteService.localloggingservice.writetanklogCompletedEventArgs">
+	<remarks/>
+</member><member name="M:FracSiteService.datasyncservice.Service1.#ctor">
+	<remarks/>
+</member><member name="E:FracSiteService.datasyncservice.Service1.UpdTableCompleted">
+	<remarks/>
+</member><member name="M:FracSiteService.datasyncservice.Service1.UpdTable(System.String)">
+	<remarks/>
+</member><member name="M:FracSiteService.datasyncservice.Service1.UpdTableAsync(System.String)">
+	<remarks/>
+</member><member name="M:FracSiteService.datasyncservice.Service1.UpdTableAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FracSiteService.datasyncservice.Service1.CancelAsync(System.Object)">
+	<remarks/>
+</member><member name="T:FracSiteService.datasyncservice.Service1">
+	<remarks/>
+</member><member name="T:FracSiteService.datasyncservice.UpdTableCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FracSiteService.datasyncservice.UpdTableCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FracSiteService.datasyncservice.UpdTableCompletedEventArgs">
+	<remarks/>
+</member>
+</members>
+</doc>

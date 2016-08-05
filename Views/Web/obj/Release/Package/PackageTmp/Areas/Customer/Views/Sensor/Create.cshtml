@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            @Html.Partial("_TankSpotGPS", new SpotGPSViewModel())
+            @Html.Partial("../Shared/_SpotGPS", new SpotGPSViewModel())
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center btn-submit">
@@ -104,6 +104,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/app/sensor.js"></script>
+    <script src="~/Scripts/app/spotGPS.js"></script>
 
     <script type="text/javascript">
 

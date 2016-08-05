@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
 {
@@ -16,7 +17,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
         #endregion Constructor
 
         #region Property
-
+        
         [Display(Name = "Name")]
         [Required]
         public String Name { get; set; }

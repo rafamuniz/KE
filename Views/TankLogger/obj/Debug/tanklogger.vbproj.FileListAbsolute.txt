@@ -1,0 +1,11 @@
+C:\Users\Fred\Documents\Clients\AccurIT\PFHose\tanklogger\tanklogger\bin\tanklogger.dll.config
+C:\Users\Fred\Documents\Clients\AccurIT\PFHose\tanklogger\tanklogger\bin\tanklogger.dll
+C:\Users\Fred\Documents\Clients\AccurIT\PFHose\tanklogger\tanklogger\bin\tanklogger.pdb
+C:\Users\Fred\Documents\Clients\AccurIT\PFHose\tanklogger\tanklogger\bin\tanklogger.xml
+C:\Users\Fred\Documents\Clients\AccurIT\PFHose\tanklogger\tanklogger\bin\MjcWeather.dll
+C:\Users\Fred\Documents\Clients\AccurIT\PFHose\tanklogger\tanklogger\obj\Debug\tanklogger.vbprojResolveAssemblyReference.cache
+C:\Users\Fred\Documents\Clients\AccurIT\PFHose\tanklogger\tanklogger\obj\Debug\tanklogger.Resources.resources
+C:\Users\Fred\Documents\Clients\AccurIT\PFHose\tanklogger\tanklogger\obj\Debug\tanklogger.vbproj.GenerateResource.Cache
+C:\Users\Fred\Documents\Clients\AccurIT\PFHose\tanklogger\tanklogger\obj\Debug\tanklogger.dll
+C:\Users\Fred\Documents\Clients\AccurIT\PFHose\tanklogger\tanklogger\obj\Debug\tanklogger.xml
+C:\Users\Fred\Documents\Clients\AccurIT\PFHose\tanklogger\tanklogger\obj\Debug\tanklogger.pdb

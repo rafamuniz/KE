@@ -1,0 +1,10 @@
+﻿/ format: 
+/ Z,<zone/site ID> (one record)
+/ C,<Local DB connection string> (one record)
+/ S,<Remote Log Server URL>,<Upload Frequency in Minutes>, <Number of logs per post>  (one record)
+/ R,<RF Cycle Secs>,<RF Baud>,<Parity>,<DataBits>,<StopBits>
+Z,65001
+C,Initial Catalog=PreFracSite;Data Source=FAD-YOGA2PRO\SQLEXPRESS12;UID=FracRemote; PWD=PFracUser1
+S,http://datalogger.theuplog.com/Service1.asmx,5,10
+D,http://datasync.theuplog.com/SyncTable.asmx,5
+R,15,COM5,9600,None,8,1

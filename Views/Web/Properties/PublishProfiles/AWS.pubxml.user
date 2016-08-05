@@ -167,10 +167,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/20/2016 14:07:03</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Sensor/Create.cshtml">
-      <publishTime>07/22/2016 15:46:59</publishTime>
+      <publishTime>08/05/2016 23:24:57</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Sensor/Edit.cshtml">
-      <publishTime>07/22/2016 15:48:04</publishTime>
+      <publishTime>08/05/2016 23:28:12</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Sensor/Index.cshtml">
       <publishTime>07/15/2016 11:31:58</publishTime>
@@ -189,6 +189,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Areas/Customer/Views/SensorGroup/Index.cshtml">
       <publishTime>06/20/2016 14:07:16</publishTime>
+    </File>
+    <File Include="Areas/Customer/Views/Shared/_SpotGPS.cshtml">
+      <publishTime>08/05/2016 23:24:23</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Shared/_TankSpotGPS.cshtml">
       <publishTime>06/01/2016 13:03:52</publishTime>
@@ -257,10 +260,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/24/2016 20:41:19</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/SensorCreate.cshtml">
-      <publishTime>07/22/2016 15:47:47</publishTime>
+      <publishTime>08/05/2016 23:34:41</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/SensorEdit.cshtml">
-      <publishTime>07/22/2016 15:47:51</publishTime>
+      <publishTime>08/05/2016 23:34:49</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Tank/SensorIndex.cshtml">
       <publishTime>06/27/2016 00:22:51</publishTime>
@@ -368,7 +371,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>08/05/2016 02:19:16</publishTime>
+      <publishTime>08/05/2016 23:36:36</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
@@ -377,7 +380,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/26/2016 14:49:04</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>08/05/2016 02:19:25</publishTime>
+      <publishTime>08/05/2016 23:36:45</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -881,7 +884,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:39:49</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>07/26/2016 22:31:04</publishTime>
+      <publishTime>08/05/2016 17:45:58</publishTime>
     </File>
     <File Include="Content/themes/base/accordion.css">
       <publishTime>07/22/2016 22:34:29</publishTime>
@@ -1221,6 +1224,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="images/default_user_image.png">
       <publishTime>03/13/2016 01:39:10</publishTime>
+    </File>
+    <File Include="images/extended-icons3.png">
+      <publishTime>08/03/2016 22:05:21</publishTime>
     </File>
     <File Include="images/fast_track.png">
       <publishTime>02/03/2016 11:28:10</publishTime>
@@ -3688,6 +3694,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="images/map_icon.png">
       <publishTime>04/20/2016 15:08:40</publishTime>
     </File>
+    <File Include="images/map_pond.png">
+      <publishTime>08/05/2016 18:49:29</publishTime>
+    </File>
+    <File Include="images/map_sensor.png">
+      <publishTime>08/05/2016 18:52:44</publishTime>
+    </File>
+    <File Include="images/map_tank.png">
+      <publishTime>08/05/2016 18:47:53</publishTime>
+    </File>
     <File Include="images/menu-highlight.png">
       <publishTime>02/21/2016 23:01:50</publishTime>
     </File>
@@ -5394,6 +5409,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/app/site.js">
       <publishTime>05/13/2016 22:30:19</publishTime>
+    </File>
+    <File Include="Scripts/app/spotGPS.js">
+      <publishTime>08/05/2016 23:24:19</publishTime>
     </File>
     <File Include="Scripts/app/tank-dashboard.js">
       <publishTime>05/05/2016 15:10:00</publishTime>
@@ -9353,7 +9371,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/18/2016 09:34:59</publishTime>
     </File>
     <File Include="Scripts/maps.js">
-      <publishTime>08/05/2016 02:10:09</publishTime>
+      <publishTime>08/05/2016 18:53:36</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.8.3.js">
       <publishTime>03/07/2016 00:47:21</publishTime>
@@ -9416,7 +9434,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/22/2016 13:46:54</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>08/02/2016 00:49:19</publishTime>
+      <publishTime>08/05/2016 19:05:21</publishTime>
     </File>
     <File Include="Views/Account/ChangePassword.cshtml">
       <publishTime>06/21/2016 20:31:53</publishTime>
@@ -9539,7 +9557,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 01:07:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/02/2016 01:41:25</publishTime>
+      <publishTime>08/05/2016 23:37:13</publishTime>
     </File>
   </ItemGroup>
 </Project>

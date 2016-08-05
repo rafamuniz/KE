@@ -1,0 +1,64 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+FracSiteViewer
+</name>
+</assembly>
+<members>
+<member name="M:FracSiteViewer.datasyncservice.Service1.#ctor">
+	<remarks/>
+</member><member name="E:FracSiteViewer.datasyncservice.Service1.UpdTableCompleted">
+	<remarks/>
+</member><member name="M:FracSiteViewer.datasyncservice.Service1.UpdTable(System.String)">
+	<remarks/>
+</member><member name="M:FracSiteViewer.datasyncservice.Service1.UpdTableAsync(System.String)">
+	<remarks/>
+</member><member name="M:FracSiteViewer.datasyncservice.Service1.UpdTableAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FracSiteViewer.datasyncservice.Service1.CancelAsync(System.Object)">
+	<remarks/>
+</member><member name="T:FracSiteViewer.datasyncservice.Service1">
+	<remarks/>
+</member><member name="T:FracSiteViewer.datasyncservice.UpdTableCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FracSiteViewer.datasyncservice.UpdTableCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FracSiteViewer.datasyncservice.UpdTableCompletedEventArgs">
+	<remarks/>
+</member><member name="P:FracSiteViewer.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:FracSiteViewer.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:FracSiteViewer.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:FracSiteViewer.localloggingservice.Service1.#ctor">
+	<remarks/>
+</member><member name="E:FracSiteViewer.localloggingservice.Service1.writetanklogCompleted">
+	<remarks/>
+</member><member name="M:FracSiteViewer.localloggingservice.Service1.writetanklog(System.String)">
+	<remarks/>
+</member><member name="M:FracSiteViewer.localloggingservice.Service1.writetanklogAsync(System.String)">
+	<remarks/>
+</member><member name="M:FracSiteViewer.localloggingservice.Service1.writetanklogAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FracSiteViewer.localloggingservice.Service1.CancelAsync(System.Object)">
+	<remarks/>
+</member><member name="T:FracSiteViewer.localloggingservice.Service1">
+	<remarks/>
+</member><member name="T:FracSiteViewer.localloggingservice.writetanklogCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FracSiteViewer.localloggingservice.writetanklogCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FracSiteViewer.localloggingservice.writetanklogCompletedEventArgs">
+	<remarks/>
+</member>
+</members>
+</doc>

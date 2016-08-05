@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\Fred\Documents\Clients\AccurIT\PFHose\tanklogger\tankloggerPublish</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="addTank.aspx">
+      <publishTime>10/14/2014 09:12:52</publishTime>
+    </File>
+    <File Include="bin/MjcWeather.dll">
+      <publishTime>10/14/2014 09:57:35</publishTime>
+    </File>
+    <File Include="bin/tanklogger.dll">
+      <publishTime>10/21/2014 00:06:27</publishTime>
+    </File>
+    <File Include="bin/tanklogger.xml">
+      <publishTime>10/21/2014 00:06:27</publishTime>
+    </File>
+    <File Include="bin/tanklogger.XmlSerializers.dll">
+      <publishTime>10/21/2014 00:06:27</publishTime>
+    </File>
+    <File Include="customer.aspx">
+      <publishTime>08/05/2014 13:15:47</publishTime>
+    </File>
+    <File Include="customers.aspx">
+      <publishTime>08/05/2014 13:04:38</publishTime>
+    </File>
+    <File Include="datascan.aspx">
+      <publishTime>08/20/2014 09:27:44</publishTime>
+    </File>
+    <File Include="images/CubeHoriz/CubeHoriz.png">
+      <publishTime>04/09/2014 22:16:21</publishTime>
+    </File>
+    <File Include="images/CubeHoriz/CubeHoriz_0.png">
+      <publishTime>04/09/2014 22:10:27</publishTime>
+    </File>
+    <File Include="images/CubeHoriz/CubeHoriz_10.png">
+      <publishTime>04/09/2014 22:09:51</publishTime>
+    </File>
+    <File Include="images/CubeHoriz/CubeHoriz_100.png">
+      <publishTime>04/09/2014 22:01:31</publishTime>
+    </File>
+    <File Include="images/CubeHoriz/CubeHoriz_20.png">
+      <publishTime>04/09/2014 22:09:08</publishTime>
+    </File>
+    <File Include="images/CubeHoriz/CubeHoriz_30.png">
+      <publishTime>04/09/2014 22:08:31</publishTime>
+    </File>
+    <File Include="images/CubeHoriz/CubeHoriz_40.png">
+      <publishTime>04/09/2014 22:07:41</publishTime>
+    </File>
+    <File Include="images/CubeHoriz/CubeHoriz_50.png">
+      <publishTime>04/09/2014 22:06:28</publishTime>
+    </File>
+    <File Include="images/CubeHoriz/CubeHoriz_60.png">
+      <publishTime>04/09/2014 22:05:52</publishTime>
+    </File>
+    <File Include="images/CubeHoriz/CubeHoriz_70.png">
+      <publishTime>04/09/2014 22:05:11</publishTime>
+    </File>
+    <File Include="images/CubeHoriz/CubeHoriz_80.png">
+      <publishTime>04/09/2014 22:04:23</publishTime>
+    </File>
+    <File Include="images/CubeHoriz/CubeHoriz_90.png">
+      <publishTime>04/09/2014 22:03:30</publishTime>
+    </File>
+    <File Include="images/CubeHoriz/CubeHoriz_NoData.png">
+      <publishTime>04/19/2014 16:25:43</publishTime>
+    </File>
+    <File Include="images/CylHoriz/CylHoriz.png">
+      <publishTime>04/07/2014 11:44:09</publishTime>
+    </File>
+    <File Include="images/CylHoriz/CylHoriz_0.png">
+      <publishTime>04/09/2014 11:23:08</publishTime>
+    </File>
+    <File Include="images/CylHoriz/CylHoriz_10.png">
+      <publishTime>04/09/2014 11:30:38</publishTime>
+    </File>
+    <File Include="images/CylHoriz/CylHoriz_100.png">
+      <publishTime>04/09/2014 11:49:25</publishTime>
+    </File>
+    <File Include="images/CylHoriz/CylHoriz_20.png">
+      <publishTime>04/09/2014 11:34:54</publishTime>
+    </File>
+    <File Include="images/CylHoriz/CylHoriz_30.png">
+      <publishTime>04/09/2014 11:35:57</publishTime>
+    </File>
+    <File Include="images/CylHoriz/CylHoriz_40.png">
+      <publishTime>04/09/2014 11:43:18</publishTime>
+    </File>
+    <File Include="images/CylHoriz/CylHoriz_50.png">
+      <publishTime>04/09/2014 11:43:51</publishTime>
+    </File>
+    <File Include="images/CylHoriz/CylHoriz_60.png">
+      <publishTime>04/09/2014 11:46:04</publishTime>
+    </File>
+    <File Include="images/CylHoriz/CylHoriz_70.png">
+      <publishTime>04/09/2014 11:46:36</publishTime>
+    </File>
+    <File Include="images/CylHoriz/CylHoriz_80.png">
+      <publishTime>04/09/2014 11:48:15</publishTime>
+    </File>
+    <File Include="images/CylHoriz/CylHoriz_90.png">
+      <publishTime>04/09/2014 11:48:53</publishTime>
+    </File>
+    <File Include="images/CylHoriz/CylHoriz_NoData.png">
+      <publishTime>04/19/2014 16:27:58</publishTime>
+    </File>
+    <File Include="images/CylVert/CylVert.png">
+      <publishTime>04/07/2014 12:08:33</publishTime>
+    </File>
+    <File Include="images/CylVert/CylVert_0.png">
+      <publishTime>04/09/2014 11:05:33</publishTime>
+    </File>
+    <File Include="images/CylVert/CylVert_10.png">
+      <publishTime>04/09/2014 11:06:37</publishTime>
+    </File>
+    <File Include="images/CylVert/CylVert_100.png">
+      <publishTime>04/09/2014 11:14:17</publishTime>
+    </File>
+    <File Include="images/CylVert/CylVert_20.png">
+      <publishTime>04/09/2014 11:08:33</publishTime>
+    </File>
+    <File Include="images/CylVert/CylVert_30.png">
+      <publishTime>04/09/2014 11:09:27</publishTime>
+    </File>
+    <File Include="images/CylVert/CylVert_40.png">
+      <publishTime>04/09/2014 11:10:00</publishTime>
+    </File>
+    <File Include="images/CylVert/CylVert_50.png">
+      <publishTime>04/09/2014 11:10:56</publishTime>
+    </File>
+    <File Include="images/CylVert/CylVert_60.png">
+      <publishTime>04/09/2014 11:11:49</publishTime>
+    </File>
+    <File Include="images/CylVert/CylVert_70.png">
+      <publishTime>04/09/2014 11:12:32</publishTime>
+    </File>
+    <File Include="images/CylVert/CylVert_80.png">
+      <publishTime>04/09/2014 11:13:00</publishTime>
+    </File>
+    <File Include="images/CylVert/CylVert_90.png">
+      <publishTime>04/09/2014 11:13:29</publishTime>
+    </File>
+    <File Include="images/CylVert/CylVert_NoData.png">
+      <publishTime>04/19/2014 16:30:11</publishTime>
+    </File>
+    <File Include="images/DelRec.jpg">
+      <publishTime>09/16/2014 14:15:00</publishTime>
+    </File>
+    <File Include="images/DelRec_tiny.png">
+      <publishTime>09/16/2014 14:26:39</publishTime>
+    </File>
+    <File Include="images/EllipseHoriz/EllipseHoriz.png">
+      <publishTime>04/07/2014 13:00:02</publishTime>
+    </File>
+    <File Include="images/EllipseHoriz/EllipseHoriz_0.png">
+      <publishTime>04/09/2014 10:56:37</publishTime>
+    </File>
+    <File Include="images/EllipseHoriz/EllipseHoriz_10.png">
+      <publishTime>04/09/2014 10:56:18</publishTime>
+    </File>
+    <File Include="images/EllipseHoriz/EllipseHoriz_100.png">
+      <publishTime>04/09/2014 10:50:45</publishTime>
+    </File>
+    <File Include="images/EllipseHoriz/EllipseHoriz_20.png">
+      <publishTime>04/09/2014 10:55:33</publishTime>
+    </File>
+    <File Include="images/EllipseHoriz/EllipseHoriz_30.png">
+      <publishTime>04/09/2014 10:54:58</publishTime>
+    </File>
+    <File Include="images/EllipseHoriz/EllipseHoriz_40.png">
+      <publishTime>04/09/2014 10:54:23</publishTime>
+    </File>
+    <File Include="images/EllipseHoriz/EllipseHoriz_50.png">
+      <publishTime>04/09/2014 10:53:34</publishTime>
+    </File>
+    <File Include="images/EllipseHoriz/EllipseHoriz_60.png">
+      <publishTime>04/09/2014 10:52:59</publishTime>
+    </File>
+    <File Include="images/EllipseHoriz/EllipseHoriz_70.png">
+      <publishTime>04/09/2014 10:52:21</publishTime>
+    </File>
+    <File Include="images/EllipseHoriz/EllipseHoriz_80.png">
+      <publishTime>04/09/2014 10:51:38</publishTime>
+    </File>
+    <File Include="images/EllipseHoriz/EllipseHoriz_90.png">
+      <publishTime>04/09/2014 10:49:45</publishTime>
+    </File>
+    <File Include="images/EllipseHoriz/EllipseHoriz_NoData.png">
+      <publishTime>04/19/2014 16:31:00</publishTime>
+    </File>
+    <File Include="images/FracFA1/FracFA1.png">
+      <publishTime>09/30/2014 09:41:28</publishTime>
+    </File>
+    <File Include="images/FracFA1/FracFA1_0.png">
+      <publishTime>09/30/2014 09:35:21</publishTime>
+    </File>
+    <File Include="images/FracFA1/FracFA1_10.png">
+      <publishTime>09/30/2014 09:36:01</publishTime>
+    </File>
+    <File Include="images/FracFA1/FracFA1_100.png">
+      <publishTime>09/30/2014 09:40:22</publishTime>
+    </File>
+    <File Include="images/FracFA1/FracFA1_20.png">
+      <publishTime>09/30/2014 09:36:33</publishTime>
+    </File>
+    <File Include="images/FracFA1/FracFA1_30.png">
+      <publishTime>09/30/2014 09:37:07</publishTime>
+    </File>
+    <File Include="images/FracFA1/FracFA1_40.png">
+      <publishTime>09/30/2014 09:37:31</publishTime>
+    </File>
+    <File Include="images/FracFA1/FracFA1_50.png">
+      <publishTime>09/30/2014 09:38:37</publishTime>
+    </File>
+    <File Include="images/FracFA1/FracFA1_60.png">
+      <publishTime>09/30/2014 09:39:01</publishTime>
+    </File>
+    <File Include="images/FracFA1/FracFA1_70.png">
+      <publishTime>09/30/2014 09:39:21</publishTime>
+    </File>
+    <File Include="images/FracFA1/FracFA1_80.png">
+      <publishTime>09/30/2014 09:39:40</publishTime>
+    </File>
+    <File Include="images/FracFA1/FracFA1_90.png">
+      <publishTime>09/30/2014 09:39:59</publishTime>
+    </File>
+    <File Include="images/FracFA1/FracFA1_NoData.png">
+      <publishTime>09/30/2014 09:34:40</publishTime>
+    </File>
+    <File Include="images/FracPO1/FracPO1.png">
+      <publishTime>10/06/2014 14:00:08</publishTime>
+    </File>
+    <File Include="images/FracPO1/FracPO1_0.png">
+      <publishTime>10/06/2014 14:01:41</publishTime>
+    </File>
+    <File Include="images/FracPO1/FracPO1_10.png">
+      <publishTime>10/06/2014 14:02:50</publishTime>
+    </File>
+    <File Include="images/FracPO1/FracPO1_100.png">
+      <publishTime>10/06/2014 14:05:40</publishTime>
+    </File>
+    <File Include="images/FracPO1/FracPO1_20.png">
+      <publishTime>10/06/2014 14:03:22</publishTime>
+    </File>
+    <File Include="images/FracPO1/FracPO1_30.png">
+      <publishTime>10/06/2014 14:03:39</publishTime>
+    </File>
+    <File Include="images/FracPO1/FracPO1_40.png">
+      <publishTime>10/06/2014 14:03:55</publishTime>
+    </File>
+    <File Include="images/FracPO1/FracPO1_50.png">
+      <publishTime>10/06/2014 14:04:14</publishTime>
+    </File>
+    <File Include="images/FracPO1/FracPO1_60.png">
+      <publishTime>10/06/2014 14:04:30</publishTime>
+    </File>
+    <File Include="images/FracPO1/FracPO1_70.png">
+      <publishTime>10/06/2014 14:04:47</publishTime>
+    </File>
+    <File Include="images/FracPO1/FracPO1_80.png">
+      <publishTime>10/06/2014 14:05:02</publishTime>
+    </File>
+    <File Include="images/FracPO1/FracPO1_90.png">
+      <publishTime>10/06/2014 14:05:22</publishTime>
+    </File>
+    <File Include="images/FracPO1/FracPO1_NoData.png">
+      <publishTime>10/06/2014 14:07:38</publishTime>
+    </File>
+    <File Include="images/logo1.png">
+      <publishTime>09/30/2014 13:19:42</publishTime>
+    </File>
+    <File Include="images/logoheader1.png">
+      <publishTime>09/30/2014 13:16:11</publishTime>
+    </File>
+    <File Include="images/MapSample.png">
+      <publishTime>04/11/2014 15:35:12</publishTime>
+    </File>
+    <File Include="images/settings.png">
+      <publishTime>06/27/2014 09:14:32</publishTime>
+    </File>
+    <File Include="images/StadiumHoriz/StadiumHoriz.png">
+      <publishTime>04/09/2014 13:36:52</publishTime>
+    </File>
+    <File Include="images/StadiumHoriz/StadiumHoriz_0.png">
+      <publishTime>04/09/2014 09:57:55</publishTime>
+    </File>
+    <File Include="images/StadiumHoriz/StadiumHoriz_10.png">
+      <publishTime>04/09/2014 09:57:26</publishTime>
+    </File>
+    <File Include="images/StadiumHoriz/StadiumHoriz_100.png">
+      <publishTime>04/09/2014 09:40:18</publishTime>
+    </File>
+    <File Include="images/StadiumHoriz/StadiumHoriz_20.png">
+      <publishTime>04/09/2014 09:56:12</publishTime>
+    </File>
+    <File Include="images/StadiumHoriz/StadiumHoriz_30.png">
+      <publishTime>04/09/2014 09:55:36</publishTime>
+    </File>
+    <File Include="images/StadiumHoriz/StadiumHoriz_40.png">
+      <publishTime>04/09/2014 09:53:50</publishTime>
+    </File>
+    <File Include="images/StadiumHoriz/StadiumHoriz_50.png">
+      <publishTime>04/09/2014 09:53:07</publishTime>
+    </File>
+    <File Include="images/StadiumHoriz/StadiumHoriz_60.png">
+      <publishTime>04/09/2014 09:52:12</publishTime>
+    </File>
+    <File Include="images/StadiumHoriz/StadiumHoriz_70.png">
+      <publishTime>04/09/2014 09:50:47</publishTime>
+    </File>
+    <File Include="images/StadiumHoriz/StadiumHoriz_80.png">
+      <publishTime>04/09/2014 09:50:00</publishTime>
+    </File>
+    <File Include="images/StadiumHoriz/StadiumHoriz_90.png">
+      <publishTime>04/09/2014 09:43:03</publishTime>
+    </File>
+    <File Include="images/StadiumHoriz/StadiumHoriz_NoData.png">
+      <publishTime>04/19/2014 16:31:41</publishTime>
+    </File>
+    <File Include="images/StadiumVert/StadiumVert.png">
+      <publishTime>04/07/2014 13:28:01</publishTime>
+    </File>
+    <File Include="images/StadiumVert/StadiumVert_0.png">
+      <publishTime>04/09/2014 10:15:15</publishTime>
+    </File>
+    <File Include="images/StadiumVert/StadiumVert_10.png">
+      <publishTime>04/09/2014 10:18:37</publishTime>
+    </File>
+    <File Include="images/StadiumVert/StadiumVert_100.png">
+      <publishTime>04/09/2014 10:26:47</publishTime>
+    </File>
+    <File Include="images/StadiumVert/StadiumVert_20.png">
+      <publishTime>04/09/2014 10:21:00</publishTime>
+    </File>
+    <File Include="images/StadiumVert/StadiumVert_30.png">
+      <publishTime>04/09/2014 10:22:10</publishTime>
+    </File>
+    <File Include="images/StadiumVert/StadiumVert_40.png">
+      <publishTime>04/09/2014 10:22:38</publishTime>
+    </File>
+    <File Include="images/StadiumVert/StadiumVert_50.png">
+      <publishTime>04/09/2014 10:23:13</publishTime>
+    </File>
+    <File Include="images/StadiumVert/StadiumVert_60.png">
+      <publishTime>04/09/2014 10:23:55</publishTime>
+    </File>
+    <File Include="images/StadiumVert/StadiumVert_70.png">
+      <publishTime>04/09/2014 10:24:28</publishTime>
+    </File>
+    <File Include="images/StadiumVert/StadiumVert_80.png">
+      <publishTime>04/09/2014 10:25:25</publishTime>
+    </File>
+    <File Include="images/StadiumVert/StadiumVert_90.png">
+      <publishTime>04/09/2014 10:26:00</publishTime>
+    </File>
+    <File Include="images/StadiumVert/StadiumVert_NoData.png">
+      <publishTime>04/19/2014 16:32:18</publishTime>
+    </File>
+    <File Include="images/TankloggerPro.png">
+      <publishTime>04/07/2014 14:23:38</publishTime>
+    </File>
+    <File Include="images/warning.png">
+      <publishTime>09/10/2014 10:50:12</publishTime>
+    </File>
+    <File Include="images/warning_tiny.png">
+      <publishTime>09/10/2014 19:03:58</publishTime>
+    </File>
+    <File Include="images/waterminder.png">
+      <publishTime>04/10/2014 13:09:19</publishTime>
+    </File>
+    <File Include="listtanks.aspx">
+      <publishTime>09/10/2014 12:41:24</publishTime>
+    </File>
+    <File Include="logon.aspx">
+      <publishTime>10/14/2014 09:12:53</publishTime>
+    </File>
+    <File Include="ModelPick.aspx">
+      <publishTime>04/08/2014 09:46:59</publishTime>
+    </File>
+    <File Include="myTank.aspx">
+      <publishTime>10/16/2014 09:57:33</publishTime>
+    </File>
+    <File Include="myTankGeo.aspx">
+      <publishTime>10/14/2014 09:12:53</publishTime>
+    </File>
+    <File Include="myTankWX.aspx">
+      <publishTime>09/24/2014 11:42:27</publishTime>
+    </File>
+    <File Include="notallowed.aspx">
+      <publishTime>06/17/2014 11:31:05</publishTime>
+    </File>
+    <File Include="site.aspx">
+      <publishTime>10/14/2014 09:12:53</publishTime>
+    </File>
+    <File Include="sitedashboard.aspx">
+      <publishTime>09/30/2014 13:17:40</publishTime>
+    </File>
+    <File Include="sites.aspx">
+      <publishTime>08/05/2014 10:53:40</publishTime>
+    </File>
+    <File Include="StyleSheet1.css">
+      <publishTime>10/14/2014 09:12:53</publishTime>
+    </File>
+    <File Include="tanklog.aspx">
+      <publishTime>04/07/2014 14:41:05</publishTime>
+    </File>
+    <File Include="tanklogger.Master">
+      <publishTime>10/09/2014 12:04:18</publishTime>
+    </File>
+    <File Include="tanklogi.aspx">
+      <publishTime>07/25/2014 08:40:28</publishTime>
+    </File>
+    <File Include="user.aspx">
+      <publishTime>08/05/2014 14:10:11</publishTime>
+    </File>
+    <File Include="users.aspx">
+      <publishTime>08/05/2014 13:38:27</publishTime>
+    </File>
+    <File Include="viewtanks.aspx">
+      <publishTime>10/06/2014 14:23:39</publishTime>
+    </File>
+    <File Include="Web References/localhost/Reference.map">
+      <publishTime>08/20/2014 09:23:55</publishTime>
+    </File>
+    <File Include="WebForm1.aspx">
+      <publishTime>09/24/2014 11:04:30</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

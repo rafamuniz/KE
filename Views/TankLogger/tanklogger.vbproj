@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{59E60627-514E-4414-8726-AC41E3585F80}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>tanklogger</RootNamespace>
+    <AssemblyName>tanklogger</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MyType>Custom</MyType>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>tanklogger.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>tanklogger.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MjcWeather, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\TheUpLog\Software\SEMS\SEMS\bin\MjcWeather.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="addTank.aspx" />
+    <Content Include="bin\MjcWeather.dll" />
+    <Content Include="customer.aspx" />
+    <Content Include="customers.aspx" />
+    <Content Include="datascan.aspx" />
+    <Content Include="DialIndicator.aspx" />
+    <Content Include="DialIndicator.html" />
+    <Content Include="images\CubeHoriz\CubeHoriz.png" />
+    <Content Include="images\CubeHoriz\CubeHoriz_0.png" />
+    <Content Include="images\CubeHoriz\CubeHoriz_10.png" />
+    <Content Include="images\CubeHoriz\CubeHoriz_100.png" />
+    <Content Include="images\CubeHoriz\CubeHoriz_20.png" />
+    <Content Include="images\CubeHoriz\CubeHoriz_30.png" />
+    <Content Include="images\CubeHoriz\CubeHoriz_40.png" />
+    <Content Include="images\CubeHoriz\CubeHoriz_50.png" />
+    <Content Include="images\CubeHoriz\CubeHoriz_60.png" />
+    <Content Include="images\CubeHoriz\CubeHoriz_70.png" />
+    <Content Include="images\CubeHoriz\CubeHoriz_80.png" />
+    <Content Include="images\CubeHoriz\CubeHoriz_90.png" />
+    <Content Include="images\CubeHoriz\CubeHoriz_NoData.png" />
+    <Content Include="images\CylHoriz\CylHoriz.png" />
+    <Content Include="images\CylHoriz\CylHoriz_0.png" />
+    <Content Include="images\CylHoriz\CylHoriz_10.png" />
+    <Content Include="images\CylHoriz\CylHoriz_100.png" />
+    <Content Include="images\CylHoriz\CylHoriz_20.png" />
+    <Content Include="images\CylHoriz\CylHoriz_30.png" />
+    <Content Include="images\CylHoriz\CylHoriz_40.png" />
+    <Content Include="images\CylHoriz\CylHoriz_50.png" />
+    <Content Include="images\CylHoriz\CylHoriz_60.png" />
+    <Content Include="images\CylHoriz\CylHoriz_70.png" />
+    <Content Include="images\CylHoriz\CylHoriz_80.png" />
+    <Content Include="images\CylHoriz\CylHoriz_90.png" />
+    <Content Include="images\CylHoriz\CylHoriz_NoData.png" />
+    <Content Include="images\CylVert\CylVert.png" />
+    <Content Include="images\CylVert\CylVert_0.png" />
+    <Content Include="images\CylVert\CylVert_10.png" />
+    <Content Include="images\CylVert\CylVert_100.png" />
+    <Content Include="images\CylVert\CylVert_20.png" />
+    <Content Include="images\CylVert\CylVert_30.png" />
+    <Content Include="images\CylVert\CylVert_40.png" />
+    <Content Include="images\CylVert\CylVert_50.png" />
+    <Content Include="images\CylVert\CylVert_60.png" />
+    <Content Include="images\CylVert\CylVert_70.png" />
+    <Content Include="images\CylVert\CylVert_80.png" />
+    <Content Include="images\CylVert\CylVert_90.png" />
+    <Content Include="images\CylVert\CylVert_NoData.png" />
+    <Content Include="images\DelRec.jpg" />
+    <Content Include="images\DelRec_tiny.png" />
+    <Content Include="images\EllipseHoriz\EllipseHoriz.png" />
+    <Content Include="images\EllipseHoriz\EllipseHoriz_0.png" />
+    <Content Include="images\EllipseHoriz\EllipseHoriz_10.png" />
+    <Content Include="images\EllipseHoriz\EllipseHoriz_100.png" />
+    <Content Include="images\EllipseHoriz\EllipseHoriz_20.png" />
+    <Content Include="images\EllipseHoriz\EllipseHoriz_30.png" />
+    <Content Include="images\EllipseHoriz\EllipseHoriz_40.png" />
+    <Content Include="images\EllipseHoriz\EllipseHoriz_50.png" />
+    <Content Include="images\EllipseHoriz\EllipseHoriz_60.png" />
+    <Content Include="images\EllipseHoriz\EllipseHoriz_70.png" />
+    <Content Include="images\EllipseHoriz\EllipseHoriz_80.png" />
+    <Content Include="images\EllipseHoriz\EllipseHoriz_90.png" />
+    <Content Include="images\EllipseHoriz\EllipseHoriz_NoData.png" />
+    <Content Include="images\FlowMeter\ANIM.gif" />
+    <Content Include="images\FlowMeter\dial-indicator.png" />
+    <Content Include="images\FlowMeter\Dial.png" />
+    <Content Include="images\FlowMeter\FlowMeter.png" />
+    <Content Include="images\FlowMeter\FlowMeter_0.png" />
+    <Content Include="images\FlowMeter\FlowMeter_NoData.png" />
+    <Content Include="images\FlowMeter\Red-Needle.png" />
+    <Content Include="images\FlowMeter\Red-Needle1.png" />
+    <Content Include="images\FracFA1\FracFA1.png" />
+    <Content Include="images\FracFA1\FracFA1_0.png" />
+    <Content Include="images\FracFA1\FracFA1_10.png" />
+    <Content Include="images\FracFA1\FracFA1_100.png" />
+    <Content Include="images\FracFA1\FracFA1_20.png" />
+    <Content Include="images\FracFA1\FracFA1_30.png" />
+    <Content Include="images\FracFA1\FracFA1_40.png" />
+    <Content Include="images\FracFA1\FracFA1_50.png" />
+    <Content Include="images\FracFA1\FracFA1_60.png" />
+    <Content Include="images\FracFA1\FracFA1_70.png" />
+    <Content Include="images\FracFA1\FracFA1_80.png" />
+    <Content Include="images\FracFA1\FracFA1_90.png" />
+    <Content Include="images\FracFA1\FracFA1_NoData.png" />
+    <Content Include="images\FracPO1\FracPO1.png" />
+    <Content Include="images\FracPO1\FracPO1_0.png" />
+    <Content Include="images\FracPO1\FracPO1_10.png" />
+    <Content Include="images\FracPO1\FracPO1_100.png" />
+    <Content Include="images\FracPO1\FracPO1_20.png" />
+    <Content Include="images\FracPO1\FracPO1_30.png" />
+    <Content Include="images\FracPO1\FracPO1_40.png" />
+    <Content Include="images\FracPO1\FracPO1_50.png" />
+    <Content Include="images\FracPO1\FracPO1_60.png" />
+    <Content Include="images\FracPO1\FracPO1_70.png" />
+    <Content Include="images\FracPO1\FracPO1_80.png" />
+    <Content Include="images\FracPO1\FracPO1_90.png" />
+    <Content Include="images\FracPO1\FracPO1_NoData.png" />
+    <Content Include="images\logo1.png" />
+    <Content Include="images\logoheader1.png" />
+    <Content Include="images\MapSample.png" />
+    <Content Include="images\settings.png" />
+    <Content Include="images\StadiumHoriz\StadiumHoriz.png" />
+    <Content Include="images\StadiumHoriz\StadiumHoriz_0.png" />
+    <Content Include="images\StadiumHoriz\StadiumHoriz_10.png" />
+    <Content Include="images\StadiumHoriz\StadiumHoriz_100.png" />
+    <Content Include="images\StadiumHoriz\StadiumHoriz_20.png" />
+    <Content Include="images\StadiumHoriz\StadiumHoriz_30.png" />
+    <Content Include="images\StadiumHoriz\StadiumHoriz_40.png" />
+    <Content Include="images\StadiumHoriz\StadiumHoriz_50.png" />
+    <Content Include="images\StadiumHoriz\StadiumHoriz_60.png" />
+    <Content Include="images\StadiumHoriz\StadiumHoriz_70.png" />
+    <Content Include="images\StadiumHoriz\StadiumHoriz_80.png" />
+    <Content Include="images\StadiumHoriz\StadiumHoriz_90.png" />
+    <Content Include="images\StadiumHoriz\StadiumHoriz_NoData.png" />
+    <Content Include="images\StadiumVert\StadiumVert.png" />
+    <Content Include="images\StadiumVert\StadiumVert_0.png" />
+    <Content Include="images\StadiumVert\StadiumVert_10.png" />
+    <Content Include="images\StadiumVert\StadiumVert_100.png" />
+    <Content Include="images\StadiumVert\StadiumVert_20.png" />
+    <Content Include="images\StadiumVert\StadiumVert_30.png" />
+    <Content Include="images\StadiumVert\StadiumVert_40.png" />
+    <Content Include="images\StadiumVert\StadiumVert_50.png" />
+    <Content Include="images\StadiumVert\StadiumVert_60.png" />
+    <Content Include="images\StadiumVert\StadiumVert_70.png" />
+    <Content Include="images\StadiumVert\StadiumVert_80.png" />
+    <Content Include="images\StadiumVert\StadiumVert_90.png" />
+    <Content Include="images\StadiumVert\StadiumVert_NoData.png" />
+    <Content Include="images\TankloggerPro.png" />
+    <Content Include="images\warning.png" />
+    <Content Include="images\warning_tiny.png" />
+    <Content Include="images\waterminder.png" />
+    <Content Include="listtanks.aspx" />
+    <Content Include="logon.aspx" />
+    <Content Include="ModelPick.aspx" />
+    <Content Include="MyMeter.aspx" />
+    <Content Include="myTank.aspx" />
+    <Content Include="myTankWX.aspx" />
+    <Content Include="notallowed.aspx" />
+    <Content Include="site.aspx" />
+    <Content Include="sitedashboard.aspx" />
+    <Content Include="sites.aspx" />
+    <Content Include="StyleSheet1.css" />
+    <Content Include="myTankGeo.aspx" />
+    <Content Include="tanklog.aspx" />
+    <Content Include="tanklogi.aspx" />
+    <Content Include="user.aspx" />
+    <Content Include="users.aspx" />
+    <Content Include="viewtanks.aspx" />
+    <Content Include="Web References\localhost\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </Content>
+    <Content Include="WebForm1.aspx" />
+    <None Include="My Project\PublishProfiles\192.168.1.84.pubxml" />
+    <None Include="My Project\PublishProfiles\LocalPublishFolder.pubxml" />
+    <None Include="My Project\PublishProfiles\siteminder.theuplog.com.pubxml" />
+    <None Include="Web References\localhost\SyncTable.disco" />
+    <None Include="My Project\PublishProfiles\71111_FileSystem.pubxml" />
+    <None Include="Web References\localhost\SyncTable.wsdl" />
+    <None Include="Web References\LocalLoggingService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <None Include="Web References\LocalLoggingService\Service1.disco" />
+    <None Include="Web References\LocalLoggingService\Service1.wsdl" />
+    <None Include="Web.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="addTank.aspx.designer.vb">
+      <DependentUpon>addTank.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="addTank.aspx.vb">
+      <DependentUpon>addTank.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="clsAddress.vb" />
+    <Compile Include="clsAlarm.vb" />
+    <Compile Include="clsCust.vb" />
+    <Compile Include="clsGeneral.vb" />
+    <Compile Include="clsLogdata.vb" />
+    <Compile Include="clsLogging.vb" />
+    <Compile Include="clsRelation.vb" />
+    <Compile Include="clsSite.vb" />
+    <Compile Include="clsSpot.vb" />
+    <Compile Include="clsTank.vb" />
+    <Compile Include="clsUser.vb" />
+    <Compile Include="clsVolFormula.vb" />
+    <Compile Include="customer.aspx.designer.vb">
+      <DependentUpon>customer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="customer.aspx.vb">
+      <DependentUpon>customer.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="customers.aspx.designer.vb">
+      <DependentUpon>customers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="customers.aspx.vb">
+      <DependentUpon>customers.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="datascan.aspx.designer.vb">
+      <DependentUpon>datascan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="datascan.aspx.vb">
+      <DependentUpon>datascan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DialIndicator.aspx.designer.vb">
+      <DependentUpon>DialIndicator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DialIndicator.aspx.vb">
+      <DependentUpon>DialIndicator.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="listtanks.aspx.designer.vb">
+      <DependentUpon>listtanks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="listtanks.aspx.vb">
+      <DependentUpon>listtanks.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="logon.aspx.designer.vb">
+      <DependentUpon>logon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logon.aspx.vb">
+      <DependentUpon>logon.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ModelPick.aspx.designer.vb">
+      <DependentUpon>ModelPick.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModelPick.aspx.vb">
+      <DependentUpon>ModelPick.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\MyExtensions\MyWebExtension.vb">
+      <VBMyExtensionTemplateID>Microsoft.VisualBasic.Web.MyExtension</VBMyExtensionTemplateID>
+      <VBMyExtensionTemplateVersion>1.0.0.0</VBMyExtensionTemplateVersion>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="MyMeter.aspx.designer.vb">
+      <DependentUpon>MyMeter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyMeter.aspx.vb">
+      <DependentUpon>MyMeter.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="myTank.aspx.designer.vb">
+      <DependentUpon>myTank.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="myTank.aspx.vb">
+      <DependentUpon>myTank.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="myTankWX.aspx.designer.vb">
+      <DependentUpon>myTankWX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="myTankWX.aspx.vb">
+      <DependentUpon>myTankWX.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="notallowed.aspx.designer.vb">
+      <DependentUpon>notallowed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="notallowed.aspx.vb">
+      <DependentUpon>notallowed.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="myTankGeo.aspx.designer.vb">
+      <DependentUpon>myTankGeo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="myTankGeo.aspx.vb">
+      <DependentUpon>myTankGeo.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="site.aspx.designer.vb">
+      <DependentUpon>site.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site.aspx.vb">
+      <DependentUpon>site.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="sitedashboard.aspx.designer.vb">
+      <DependentUpon>sitedashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sitedashboard.aspx.vb">
+      <DependentUpon>sitedashboard.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="sites.aspx.designer.vb">
+      <DependentUpon>sites.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sites.aspx.vb">
+      <DependentUpon>sites.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="tanklog.aspx.designer.vb">
+      <DependentUpon>tanklog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="tanklog.aspx.vb">
+      <DependentUpon>tanklog.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="tanklogger.Master.designer.vb">
+      <DependentUpon>tanklogger.Master</DependentUpon>
+    </Compile>
+    <Compile Include="tanklogger.Master.vb">
+      <DependentUpon>tanklogger.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tanklogi.aspx.designer.vb">
+      <DependentUpon>tanklogi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="tanklogi.aspx.vb">
+      <DependentUpon>tanklogi.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="user.aspx.designer.vb">
+      <DependentUpon>user.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user.aspx.vb">
+      <DependentUpon>user.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="users.aspx.designer.vb">
+      <DependentUpon>users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="users.aspx.vb">
+      <DependentUpon>users.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="viewtanks.aspx.designer.vb">
+      <DependentUpon>viewtanks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewtanks.aspx.vb">
+      <DependentUpon>viewtanks.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Web References\localhost\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\LocalLoggingService\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.vb">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.vb">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="tanklogger.Master" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logfiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:54480/Service1.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\LocalLoggingService\</RelPath>
+      <UpdateFromURL>http://localhost:54480/Service1.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>tanklogger_localhost_Service1</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:63609/SyncTable.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\localhost\</RelPath>
+      <UpdateFromURL>http://localhost:63609/SyncTable.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>tanklogger_localhost_Service1</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58288</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:58288/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

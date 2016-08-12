@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker
+namespace KarmicEnergy.Web.Areas.Customer.ViewModels
 {
     public class WaterVolumeViewModel
     {

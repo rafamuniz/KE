@@ -1,4 +1,5 @@
 ﻿using KarmicEnergy.Core.Entities;
+using KarmicEnergy.Web.Areas.Customer.ViewModels;
 using KarmicEnergy.Web.Areas.Customer.ViewModels.FastTracker;
 using KarmicEnergy.Web.Controllers;
 using System;

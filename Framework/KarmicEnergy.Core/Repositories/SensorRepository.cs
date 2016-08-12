@@ -35,7 +35,18 @@ namespace KarmicEnergy.Core.Repositories
         {
             return base.Find(x => x.Status == "A" && x.DeletedDate == null).ToList();
         }
-        
+
+
+        public List<Sensor> GetsByCustomer(Guid customerId)
+        {
+            return base.Find(x => x.Site.CustomerId == customerId && x.TankId == null && x.DeletedDate == null).ToList();
+        }
+
+        public List<Sensor> GetsBySite(Guid siteId)
+        {
+            return base.Find(x => x.SiteId == siteId && x.TankId == null && x.DeletedDate == null).ToList();
+        }
+
         /// <summary>
         /// Gets All Sensors that is installed in Site
         /// </summary>
@@ -86,7 +97,7 @@ namespace KarmicEnergy.Core.Repositories
             entities.AddRange(sites);
             entities.AddRange(ponds);
             entities.AddRange(tanks);
-            
+
             foreach (var entity in entities)
             {
                 Sensor sensor = new Sensor()

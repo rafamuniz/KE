@@ -8,6 +8,11 @@ namespace KarmicEnergy.Core.Services.Interface
     {
         Sensor Get(Guid id);
         IEnumerable<Sensor> Gets();
+
+        Boolean HasSensorSite(Guid siteId);
+        Boolean HasSensorTank(Guid tankId);
+        Boolean HasSensorPond(Guid pondId);
+
         IEnumerable<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId);
     }
 }

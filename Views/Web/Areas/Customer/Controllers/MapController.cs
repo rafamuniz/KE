@@ -32,7 +32,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult Index()
         {
             IndexViewModel viewModel = new IndexViewModel();
-            ISiteService siteService = new SiteService(KEUnitOfWork);
+            ISiteService siteService = new SiteService(KEUnitOfWork.Create(false));
 
             if (!IsSite)
             {
@@ -54,7 +54,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult SiteSelected(Guid siteId)
         {
             IndexViewModel viewModel = new IndexViewModel();
-            ISiteService siteService = new SiteService(KEUnitOfWork);
+            ISiteService siteService = new SiteService(KEUnitOfWork.Create(false));
             var site = siteService.Get(siteId);
             viewModel.Map(site);
 
@@ -71,21 +71,57 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetPonds(Guid siteId)
         {
-            using (var unitOfWork = KEUnitOfWork.Create(false))
-            {
-                var ponds = unitOfWork.PondRepository.GetsByCustomerAndSite(CustomerId, siteId);
-                return Json(ponds, JsonRequestBehavior.AllowGet);
-            }
+            IList<PondViewModel> viewModels = new List<PondViewModel>();
+            PondService pondService = new PondService(KEUnitOfWork.Create(false));
+            var ponds = pondService.GetsBySite(siteId);
+            viewModels = PondViewModel.Map(ponds);
+            return Json(viewModels, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetTanks(Guid siteId)
         {
-            using (var unitOfWork = KEUnitOfWork.Create(false))
+            IList<TankViewModel> viewModels = new List<TankViewModel>();
+            TankService tankService = new TankService(KEUnitOfWork.Create(false));
+            var tanks = tankService.GetsBySite(siteId);
+            viewModels = TankViewModel.Map(tanks);
+            return Json(viewModels, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
+        public ActionResult GetTanksWithInfo(Guid tankId)
+        {
+            TankViewModel viewModel = new TankViewModel();
+
+            try
             {
-                var tanks = unitOfWork.TankRepository.GetsByCustomerAndSite(CustomerId, siteId);
-                return Json(tanks, JsonRequestBehavior.AllowGet);
+                var unitOfWork = KEUnitOfWork.Create(false);
+                TankService tankService = new TankService(unitOfWork);
+                var tank = tankService.Get(tankId, "TankModel");
+                viewModel = TankViewModel.Map(tank);
+
+                SensorService sensorService = new SensorService(unitOfWork);
+                SensorItemService sensorItemService = new SensorItemService(unitOfWork);
+                SensorItemEventService sensorItemEventService = new SensorItemEventService(unitOfWork);
+
+                if (sensorService.HasSensorTank(viewModel.Id) &&
+                    sensorItemService.HasTankSensorItem(viewModel.Id, ItemEnum.WaterVolume))
+                {
+                    var waterVolumesLastEvent = sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.WaterVolume);
+
+                    if (waterVolumesLastEvent != null)
+                    {
+                        viewModel.WaterVolumeLastValue = Decimal.Parse(waterVolumesLastEvent.Value);
+                        viewModel.WaterVolumeLastEventDate = waterVolumesLastEvent.EventDate;
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]

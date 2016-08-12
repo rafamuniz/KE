@@ -1,4 +1,5 @@
 ﻿var icons = getUrlBase() + '/images/extended-icons3.png';
+var activeTankInfoWindows = new HashTable();
 
 function initMap(siteId, latitude, longitude) {
     if (siteId != 'undefined' && latitude != 'undefined' && longitude != 'undefined') {
@@ -10,49 +11,39 @@ function initMap(siteId, latitude, longitude) {
         };
         var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-        var location = new google.maps.LatLng(latitude, longitude);
-
-        var infowindow = new google.maps.InfoWindow({
-            content: ''
-        });
-
-        var marker = new google.maps.Marker({
-            position: location,
-            map: map,
-            title: 'Tate Gallery'
-        });
-
-        var circle = new google.maps.Circle({
-            map: map,
-            radius: 3000, // 10 miles in metres - 186411
-            fillColor: '#AA0000'
-        });
-        circle.bindTo('center', marker, 'position');
-        getPonds(siteId, map);
-        getTanks(siteId, map);
+        setSite(siteId, map, latitude, longitude);
+        //getPonds(siteId, map);
+        setTankMarkers(siteId, map);
     }
+}
 
+function setSite(siteId, map, latitude, longitude) {
+    var location = new google.maps.LatLng(latitude, longitude);
+
+    var infowindow = new google.maps.InfoWindow({
+        content: ''
+    });
+
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        title: 'Site'
+    });
+
+    //var circle = new google.maps.Circle({
+    //    map: map,
+    //    radius: 3000, // 10 miles in metres - 186411
+    //    fillColor: '#AA0000'
+    //});
+
+    //circle.bindTo('center', marker, 'position');
 }
 
 function setMakers(map) {
 
 }
 
-function getTanks(siteId, map) {
-    var shape = {
-        coords: [1, 1, 1, 20, 18, 20, 18, 1],
-        type: 'poly'
-    };
-
-    var tankImage = {
-        url: getUrlBase() + '/images/map_tank.png',
-        size: new google.maps.Size(25, 25),             
-    };
-
-    //background-position: px -px; 
-    //width: 25px;
-    //height: 22px;
-
+function setTankMarkers(siteId, map) {
     $.ajax({
         url: getUrlBase() + "/Customer/Map/GetTanks/",
         type: "GET",
@@ -60,21 +51,8 @@ function getTanks(siteId, map) {
         data: { siteId: siteId },
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
-                var tank = data[i];
-
-                if (tank.Latitude != null && tank.Longitude != null) {
-                    var marker = new google.maps.Marker({
-                        position: { lat: Number(tank.Latitude), lng: Number(tank.Longitude) },
-                        map: map,
-                        icon: tankImage,
-                        shape: shape,
-                        title: tank.Name,
-                        zIndex: i
-                    });
-
-                    marker.addListener('click', function () {
-                        createTankModal(tank).open(map, marker);
-                    });
+                if (data[i].Latitude != null && data[i].Longitude != null) {
+                    addTankMarker(map, data[i]);
                 }
             }
         },
@@ -84,18 +62,87 @@ function getTanks(siteId, map) {
     });
 }
 
-function createTankModal(tank) {
-    var contentString = '<div class="popup">' +
- '<h1 class="title">' + tank.Name + '</h1>' +
- '<div id="bodyContent" class="body">' +
- '<p><b>Water Capacity: ' + tank.WaterVolumeCapacity + '</b><br>' +
- '</div>' +
- '</div>';
+function addTankMarker(map, tank) {
 
-    var infowindow = new google.maps.InfoWindow({
-        content: contentString
+    var shape = {
+        coords: [1, 1, 1, 20, 18, 20, 18, 1],
+        type: 'poly'
+    };
+
+    var tankImage = {
+        url: getUrlBase() + '/images/map_tank.png',
+        size: new google.maps.Size(25, 25),
+    };
+
+    var marker = new google.maps.Marker({
+        position: { lat: Number(tank.Latitude), lng: Number(tank.Longitude) },
+        animation: google.maps.Animation.DROP,
+        map: map,
+        icon: tankImage,
+        shape: shape,
+        title: tank.Name,
+        zIndex: 1
     });
-    return infowindow;
+
+    marker.addListener('click', function () {
+        createTankModal(marker, map, tank);
+    });
+}
+
+function createTankModal(marker, map, tank) {
+    if (activeTankInfoWindows.hasItem(tank.Id))
+        activeTankInfoWindows.getItem(tank.Id).close();
+
+    $.ajax({
+        url: getUrlBase() + "/Customer/Map/GetTanksWithInfo/",
+        type: "GET",
+        dataType: "JSON",
+        data: { tankId: tank.Id },
+        success: function (tank) {
+            var contentString = '<div class="popup">' +
+                                 '<h1 class="title">' + tank.Name + '</h1>' +
+                                 '<div class="row">' +
+
+                                 '<div id="bodyContent" class="col-sm-12 col-xs-12 col-md-12 col-lg-12 body">' +
+                                 '<div class="row">' +
+                                     '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
+                                        '<b>Water Capacity</b>: ' + tank.WaterVolumeCapacity +
+                                     '</div>' +
+
+                                     '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
+                                         '<div class="row blinkStyle">' +
+                                            '<img src="' + tank.UrlImageTankModel + '" style="width: 100px; height: 100px; display: block; margin-left: auto; margin-right: auto;" />' +
+                                         '</div>' +
+                                     '</div>' +
+                                 '</div>' +
+                                 '</div>' +
+
+                                 '</div>' +
+                                 '</div>';
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            activeTankInfoWindows.setItem(tank.Id, infoWindow);
+
+            infoWindow.open(map, marker);
+        },
+        error: function (jqXHR, exception) {
+            var contentString = '<div class="popup">' +
+           '<h1 class="title">' + tank.Name + '</h1>' +
+           '<div id="bodyContent" class="body">' +
+           '<p><b>Error loading tank information</b><br>' +
+           '</div>' +
+           '</div>';
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+            activeTankInfoWindows.setItem(tank.Id, infoWindow);
+            infoWindow.open(map, marker);
+        }
+    });
 }
 
 function getPonds(siteId, map) {

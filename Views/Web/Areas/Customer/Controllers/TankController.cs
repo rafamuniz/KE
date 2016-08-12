@@ -20,7 +20,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             if (!IsSite)
             {
-                var tanks = KEUnitOfWork.TankRepository.GetsByCustomerId(CustomerId).ToList();
+                var tanks = KEUnitOfWork.TankRepository.GetsByCustomer(CustomerId).ToList();
                 viewModels = ViewModels.Tank.ListViewModel.Map(tanks);
             }
             else

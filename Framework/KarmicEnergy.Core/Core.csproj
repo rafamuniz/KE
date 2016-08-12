@@ -220,12 +220,18 @@
     <Compile Include="Repositories\Interface\ICustomerUserRepository.cs" />
     <Compile Include="Repositories\Interface\ICustomerRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Services\Interface\ISensorItemEventService.cs" />
+    <Compile Include="Services\Interface\ISensorItemService.cs" />
     <Compile Include="Services\Interface\ISensorService.cs" />
     <Compile Include="Services\Interface\IKEBaseService.cs" />
+    <Compile Include="Services\Interface\IPondService.cs" />
     <Compile Include="Services\Interface\ITankService.cs" />
     <Compile Include="Services\Interface\ISiteService.cs" />
     <Compile Include="Services\KEServiceBase.cs" />
+    <Compile Include="Services\SensorItemEventService.cs" />
+    <Compile Include="Services\SensorItemService.cs" />
     <Compile Include="Services\SensorService.cs" />
+    <Compile Include="Services\PondService.cs" />
     <Compile Include="Services\TankService.cs" />
     <Compile Include="Services\SiteService.cs" />
   </ItemGroup>

@@ -82,6 +82,5 @@ namespace KarmicEnergy.Web.ViewModels
         }
 
         #endregion Map      
-
     }
 }

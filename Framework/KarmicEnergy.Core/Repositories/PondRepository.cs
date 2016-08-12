@@ -21,6 +21,11 @@ namespace KarmicEnergy.Core.Repositories
             return base.Find(x => x.Site.CustomerId == customerId && x.DeletedDate == null).ToList();
         }
 
+        public List<Pond> GetsBySite(Guid siteId)
+        {
+            return base.Find(x => x.SiteId == siteId && x.DeletedDate == null).ToList();
+        }
+
         public List<Pond> GetsByCustomerAndSite(Guid customerId, Guid siteId)
         {
             return base.Find(x => x.Site.CustomerId == customerId && x.SiteId == siteId && x.DeletedDate == null).ToList();

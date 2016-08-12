@@ -32,6 +32,29 @@ namespace KarmicEnergy.Core.Services
             return this._UnitOfWork.SensorRepository.GetAll();
         }
 
+        public Boolean HasSensorSite(Guid siteId)
+        {
+            return this._UnitOfWork.SensorRepository.HasSensorSite(siteId);
+        }
+
+        public Boolean HasSensorTank(Guid tankId)
+        {
+            return this._UnitOfWork.SensorRepository.HasSensorTank(tankId);
+        }
+
+        public Boolean HasSensorPond(Guid pondId)
+        {
+            return this._UnitOfWork.SensorRepository.HasSensorPond(pondId);
+        }
+
+        public IEnumerable<Sensor> GetsBySite(Guid siteId)
+        {
+            if (siteId == default(Guid))
+                throw new ArgumentException("siteId is required");
+
+            return this._UnitOfWork.SensorRepository.GetsBySite(siteId);
+        }
+
         public IEnumerable<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId)
         {
             if (customerId == default(Guid))
@@ -42,7 +65,11 @@ namespace KarmicEnergy.Core.Services
 
             return this._UnitOfWork.SensorRepository.GetsByCustomerAndSite(customerId, siteId);
         }
-        
+
+
+
+
+
         #endregion Functions
     }
 }

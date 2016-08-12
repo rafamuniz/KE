@@ -434,7 +434,7 @@ namespace KarmicEnergy.Web.Controllers
 
         protected List<Tank> LoadTanks(Guid customerId)
         {
-            List<Tank> tanks = KEUnitOfWork.TankRepository.GetsByCustomerId(customerId);
+            List<Tank> tanks = KEUnitOfWork.TankRepository.GetsByCustomer(customerId);
             ViewBag.Tanks = tanks;
             return tanks;
         }

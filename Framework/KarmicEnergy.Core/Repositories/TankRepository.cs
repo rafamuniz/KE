@@ -16,9 +16,13 @@ namespace KarmicEnergy.Core.Repositories
         }
         #endregion Constructor        
 
-        public List<Tank> GetsByCustomerId(Guid customerId)
+        public List<Tank> GetsByCustomer(Guid customerId)
         {
             return base.Find(x => x.Site.CustomerId == customerId && x.DeletedDate == null).ToList();
+        }
+        public List<Tank> GetsBySite(Guid siteId)
+        {
+            return base.Find(x => x.SiteId == siteId && x.DeletedDate == null).ToList();
         }
 
         public List<Tank> GetsByCustomerAndSite(Guid customerId, Guid siteId)

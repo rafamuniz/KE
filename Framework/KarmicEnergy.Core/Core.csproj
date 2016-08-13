@@ -127,9 +127,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201607200402059_Dev.cs" />
-    <Compile Include="Migrations\201607200402059_Dev.Designer.cs">
-      <DependentUpon>201607200402059_Dev.cs</DependentUpon>
+    <Compile Include="Migrations\201608131243293_Dev1.cs" />
+    <Compile Include="Migrations\201608131243293_Dev1.Designer.cs">
+      <DependentUpon>201608131243293_Dev1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\DatabaseCreateIfNotExists.cs" />
@@ -247,8 +247,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607200402059_Dev.resx">
-      <DependentUpon>201607200402059_Dev.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608131243293_Dev1.resx">
+      <DependentUpon>201608131243293_Dev1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

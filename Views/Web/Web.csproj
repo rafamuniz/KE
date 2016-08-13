@@ -328,6 +328,12 @@
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TriggerViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\FlowMeterViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Map\PondViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Map\SensorViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Map\SiteViewModel.cs" />
+    <Compile Include="Migrations\201608131242016_Initial1.cs" />
+    <Compile Include="Migrations\201608131242016_Initial1.Designer.cs">
+      <DependentUpon>201608131242016_Initial1.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Log\ListViewModel.cs" />
@@ -1402,15 +1408,19 @@
     <Content Include="images\glyphicons\glyphicons-97-vector-path-polygon.png" />
     <Content Include="images\glyphicons\glyphicons-98-vector-path-line.png" />
     <Content Include="images\glyphicons\glyphicons-99-vector-path-curve.png" />
+    <Content Include="images\icon-close-round.png" />
     <Content Include="images\key_gray.png" />
     <Content Include="images\loga_sample.png" />
     <Content Include="images\logo_mini.ico" />
     <Content Include="images\logo_mini.png" />
     <Content Include="images\logo.png" />
     <Content Include="images\logo_sentence.png" />
+    <Content Include="images\mapcnt6.png" />
     <Content Include="images\map_icon.png" />
     <Content Include="images\map_pond.png" />
+    <Content Include="images\map_pond_purple.png" />
     <Content Include="images\map_sensor.png" />
+    <Content Include="images\map_sensor_green.png" />
     <Content Include="images\map_tank.png" />
     <Content Include="images\menu-highlight.png" />
     <Content Include="images\monitoring.png" />
@@ -2537,6 +2547,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607200400350_Initial.resx">
       <DependentUpon>201607200400350_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608131242016_Initial1.resx">
+      <DependentUpon>201608131242016_Initial1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

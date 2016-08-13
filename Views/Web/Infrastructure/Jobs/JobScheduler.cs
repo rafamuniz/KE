@@ -21,8 +21,7 @@ namespace KarmicEnergy.Web.Jobs
                 .WithIdentity("DataSyncJob")
                 .WithSimpleSchedule(x => x
                     .WithIntervalInMinutes(syncDataMin)
-                    .RepeatForever()
-                    .WithRepeatCount(1))
+                    .RepeatForever())
                 .Build();
 
             scheduler.ScheduleJob(dataSyncJob, dataSyncTrigger);
@@ -38,8 +37,7 @@ namespace KarmicEnergy.Web.Jobs
                 .WithIdentity("NotificationJob")
                 .WithSimpleSchedule(x => x
                     .WithIntervalInMinutes(syncNotificationMin)
-                    .RepeatForever()
-                    .WithRepeatCount(1))
+                    .RepeatForever())
                 .Build();
 
             scheduler.ScheduleJob(notificationJob, notificationTrigger);
@@ -53,20 +51,11 @@ namespace KarmicEnergy.Web.Jobs
                 .WithIdentity("NotificationTemplateJob")
                 .WithSimpleSchedule(x => x
                     .WithIntervalInHours(1)
-                    .RepeatForever()
-                    .WithRepeatCount(1))
+                    .RepeatForever())
                 .Build();
 
             scheduler.ScheduleJob(notificationTemplateJob, notificationTemplateTrigger);
             #endregion Notification Template Job
-
-            //.WithDailyTimeIntervalSchedule
-            //  (s =>
-            //     s.WithIntervalInHours(2)
-            //    .OnEveryDay()
-            //    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(0, 0))
-            //  )
-            //.Build();
 
             scheduler.Start();
         }

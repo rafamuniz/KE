@@ -42,6 +42,14 @@ namespace KarmicEnergy.Core.Entities
         [StringLength(128)]
         public String SpotGPS { get; set; }
 
+        [Column("Latitude", TypeName = "NVARCHAR")]
+        [StringLength(64)]
+        public String Latitude { get; set; }
+
+        [Column("Longitude", TypeName = "NVARCHAR")]
+        [StringLength(64)]
+        public String Longitude { get; set; }
+
         #endregion Property
 
         #region SensorType

@@ -2,6 +2,7 @@
 using KarmicEnergy.Core.Persistence;
 using KarmicEnergy.Core.Services.Interface;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Services
@@ -27,9 +28,9 @@ namespace KarmicEnergy.Core.Services
             return this._UnitOfWork.SensorRepository.Get(id);
         }
 
-        public IEnumerable<Sensor> Gets()
+        public List<Sensor> Gets()
         {
-            return this._UnitOfWork.SensorRepository.GetAll();
+            return this._UnitOfWork.SensorRepository.GetAll().ToList();
         }
 
         public Boolean HasSensorSite(Guid siteId)
@@ -47,7 +48,7 @@ namespace KarmicEnergy.Core.Services
             return this._UnitOfWork.SensorRepository.HasSensorPond(pondId);
         }
 
-        public IEnumerable<Sensor> GetsBySite(Guid siteId)
+        public List<Sensor> GetsBySite(Guid siteId)
         {
             if (siteId == default(Guid))
                 throw new ArgumentException("siteId is required");
@@ -55,7 +56,7 @@ namespace KarmicEnergy.Core.Services
             return this._UnitOfWork.SensorRepository.GetsBySite(siteId);
         }
 
-        public IEnumerable<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId)
+        public List<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId)
         {
             if (customerId == default(Guid))
                 throw new ArgumentException("customerId is required");
@@ -65,10 +66,6 @@ namespace KarmicEnergy.Core.Services
 
             return this._UnitOfWork.SensorRepository.GetsByCustomerAndSite(customerId, siteId);
         }
-
-
-
-
 
         #endregion Functions
     }

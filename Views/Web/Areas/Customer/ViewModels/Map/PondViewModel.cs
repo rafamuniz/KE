@@ -27,6 +27,9 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
 
         public String Name { get; set; }
 
+        public String Latitude { get; set; }
+        public String Longitude { get; set; }
+
         public String UrlImage
         {
             get
@@ -108,7 +111,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
 
         public Decimal WaterVolumeCapacity { get; set; }
 
-        #endregion Tank
+        #endregion Pond
 
         #region Last Water Volume
 

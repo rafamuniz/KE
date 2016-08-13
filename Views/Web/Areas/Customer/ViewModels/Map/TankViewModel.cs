@@ -118,6 +118,18 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
 
         public Decimal WaterVolumeCapacity { get; set; }
 
+        public Decimal? WaterVolumeRemaining
+        {
+            get
+            {
+                if (WaterVolumeLastValue.HasValue)
+                    return WaterVolumeCapacity - WaterVolumeLastValue.Value;
+                return null;
+            }
+            private set { }
+        }
+
+
         #endregion Tank
 
         #region Last Water Volume

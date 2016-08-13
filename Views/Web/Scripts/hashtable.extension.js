@@ -1,6 +1,4 @@
-﻿$.import_js('./hastable.js');
-
-HashTable.prototype.insert = function (key, value) {
+﻿HashTable.prototype.insert = function (key, value) {
     //create an index for our storage location by passing it through our hashing function
     var index = this.hashFunc(key, this._limit);
     //retrieve the bucket at this particular index in our storage, if one exists

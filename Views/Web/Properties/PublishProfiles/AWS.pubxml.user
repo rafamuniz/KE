@@ -116,7 +116,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/20/2016 14:06:55</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Map/Index.cshtml">
-      <publishTime>08/12/2016 16:44:42</publishTime>
+      <publishTime>08/13/2016 13:10:20</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Monitoring/AlarmClear.cshtml">
       <publishTime>07/22/2016 15:48:05</publishTime>
@@ -371,7 +371,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>08/12/2016 18:28:08</publishTime>
+      <publishTime>08/14/2016 00:38:24</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
@@ -380,7 +380,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/26/2016 14:49:04</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>08/12/2016 18:28:23</publishTime>
+      <publishTime>08/14/2016 00:38:37</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -884,7 +884,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/11/2016 21:39:49</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>08/12/2016 17:22:02</publishTime>
+      <publishTime>08/13/2016 15:06:43</publishTime>
     </File>
     <File Include="Content/themes/base/accordion.css">
       <publishTime>07/22/2016 22:34:29</publishTime>
@@ -3667,6 +3667,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="images/guage.png">
       <publishTime>02/25/2016 17:47:04</publishTime>
     </File>
+    <File Include="images/icon-close-round.png">
+      <publishTime>08/13/2016 15:12:35</publishTime>
+    </File>
     <File Include="images/key_gray.png">
       <publishTime>03/12/2016 02:04:14</publishTime>
     </File>
@@ -3691,13 +3694,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="images/logo_sentence.png">
       <publishTime>02/03/2016 11:28:08</publishTime>
     </File>
+    <File Include="images/mapcnt6.png">
+      <publishTime>08/13/2016 15:11:22</publishTime>
+    </File>
     <File Include="images/map_icon.png">
       <publishTime>04/20/2016 15:08:40</publishTime>
     </File>
     <File Include="images/map_pond.png">
+      <publishTime>08/13/2016 21:36:29</publishTime>
+    </File>
+    <File Include="images/map_pond_purple.png">
       <publishTime>08/05/2016 18:49:29</publishTime>
     </File>
     <File Include="images/map_sensor.png">
+      <publishTime>08/13/2016 21:34:09</publishTime>
+    </File>
+    <File Include="images/map_sensor_green.png">
       <publishTime>08/05/2016 18:52:44</publishTime>
     </File>
     <File Include="images/map_tank.png">
@@ -3725,7 +3737,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/20/2016 23:58:54</publishTime>
     </File>
     <File Include="images/pond.png">
-      <publishTime>06/28/2016 23:55:29</publishTime>
+      <publishTime>08/13/2016 21:35:42</publishTime>
     </File>
     <File Include="images/pond/FracPO1-blue-10.png">
       <publishTime>06/27/2016 16:40:07</publishTime>
@@ -5402,7 +5414,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/27/2016 19:04:12</publishTime>
     </File>
     <File Include="Scripts/app/maps.js">
-      <publishTime>08/12/2016 16:47:26</publishTime>
+      <publishTime>08/14/2016 00:38:03</publishTime>
     </File>
     <File Include="Scripts/app/sensor.js">
       <publishTime>06/26/2016 01:33:04</publishTime>
@@ -5603,7 +5615,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:45</publishTime>
     </File>
     <File Include="Scripts/hashtable.extension.js">
-      <publishTime>08/12/2016 16:38:44</publishTime>
+      <publishTime>08/13/2016 12:21:55</publishTime>
     </File>
     <File Include="Scripts/hashtable.js">
       <publishTime>08/12/2016 16:33:35</publishTime>

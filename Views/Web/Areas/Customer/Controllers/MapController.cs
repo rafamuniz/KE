@@ -167,15 +167,30 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             SensorItemService sensorItemService = new SensorItemService(unitOfWork);
             SensorItemEventService sensorItemEventService = new SensorItemEventService(unitOfWork);
 
-            if (sensorService.HasSensorTank(viewModel.Id) &&
-                sensorItemService.HasTankSensorItem(viewModel.Id, ItemEnum.WaterVolume))
+            if (sensorService.HasSensorTank(viewModel.Id))
             {
-                var waterVolumesLastEvent = sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.WaterVolume);
-
-                if (waterVolumesLastEvent != null)
+                if (sensorItemService.HasTankSensorItem(viewModel.Id, ItemEnum.WaterVolume))
                 {
-                    viewModel.WaterVolumeLastValue = Decimal.Parse(waterVolumesLastEvent.Value);
-                    viewModel.WaterVolumeLastEventDate = waterVolumesLastEvent.EventDate;
+                    var waterVolumesLastEvent = sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.WaterVolume);
+
+                    if (waterVolumesLastEvent != null)
+                    {
+                        viewModel.WaterVolumeLastEventId = waterVolumesLastEvent.Id;
+                        viewModel.WaterVolumeLastValue = Decimal.Parse(waterVolumesLastEvent.Value);
+                        viewModel.WaterVolumeLastEventDate = waterVolumesLastEvent.EventDate;
+                    }
+                }
+
+                if (sensorItemService.HasTankSensorItem(viewModel.Id, ItemEnum.WaterTemperature))
+                {
+                    var waterTemperatureLastEvent = sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.WaterTemperature);
+
+                    if (waterTemperatureLastEvent != null)
+                    {
+                        viewModel.WaterTemperatureLastEventId = waterTemperatureLastEvent.Id;
+                        viewModel.WaterTemperatureLastEventValue = Decimal.Parse(waterTemperatureLastEvent.Value);
+                        viewModel.WaterTemperatureLastEventDate = waterTemperatureLastEvent.EventDate;
+                    }
                 }
             }
 

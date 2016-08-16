@@ -330,10 +330,6 @@
     <Compile Include="Areas\Customer\ViewModels\Map\PondViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Map\SensorViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Map\SiteViewModel.cs" />
-    <Compile Include="Migrations\201608131242016_Initial1.cs" />
-    <Compile Include="Migrations\201608131242016_Initial1.Designer.cs">
-      <DependentUpon>201608131242016_Initial1.cs</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Log\ListViewModel.cs" />
@@ -2547,9 +2543,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607200400350_Initial.resx">
       <DependentUpon>201607200400350_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608131242016_Initial1.resx">
-      <DependentUpon>201608131242016_Initial1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -362,7 +362,6 @@ function generateWaterVolumeGraph(tankId) {
     });
 }
 
-
 function generateTemperatureGraph(elementId, waterTemperature) {
     if (waterTemperature != "" && waterTemperature != undefined) {
         var majorTicks = { size: '10%', interval: 10 },

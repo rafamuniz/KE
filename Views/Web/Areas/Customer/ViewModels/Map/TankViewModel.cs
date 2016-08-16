@@ -134,6 +134,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
 
         #region Last Water Volume
 
+        public Guid? WaterVolumeLastEventId { get; set; }
         public Decimal? WaterVolumeLastValue { get; set; }
         public DateTime? WaterVolumeLastEventDate { get; set; }
 
@@ -160,9 +161,11 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
         #endregion Last Water Volume
 
         #region Last Temperature
+        public Guid? WaterTemperatureLastEventId { get; set; }
         public Decimal? WaterTemperatureLastEventValue { get; set; }
         public DateTime? WaterTemperatureLastEventDate { get; set; }
 
+        public Guid? AmbientTemperatureLastEventId { get; set; }
         public Decimal? AmbientTemperatureLastEventValue { get; set; }
         public DateTime? AmbientTemperatureLastEventDate { get; set; }
 

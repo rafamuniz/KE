@@ -127,9 +127,9 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201608131243293_Dev1.cs" />
-    <Compile Include="Migrations\201608131243293_Dev1.Designer.cs">
-      <DependentUpon>201608131243293_Dev1.cs</DependentUpon>
+    <Compile Include="Migrations\201608161401423_AWS.cs" />
+    <Compile Include="Migrations\201608161401423_AWS.Designer.cs">
+      <DependentUpon>201608161401423_AWS.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\DatabaseCreateIfNotExists.cs" />
@@ -220,6 +220,7 @@
     <Compile Include="Repositories\Interface\ICustomerUserRepository.cs" />
     <Compile Include="Repositories\Interface\ICustomerRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Services\Interface\IAlarmService.cs" />
     <Compile Include="Services\Interface\ISensorItemEventService.cs" />
     <Compile Include="Services\Interface\ISensorItemService.cs" />
     <Compile Include="Services\Interface\ISensorService.cs" />
@@ -228,6 +229,7 @@
     <Compile Include="Services\Interface\ITankService.cs" />
     <Compile Include="Services\Interface\ISiteService.cs" />
     <Compile Include="Services\KEServiceBase.cs" />
+    <Compile Include="Services\AlarmService.cs" />
     <Compile Include="Services\SensorItemEventService.cs" />
     <Compile Include="Services\SensorItemService.cs" />
     <Compile Include="Services\SensorService.cs" />
@@ -245,10 +247,9 @@
       <Name>Util</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608131243293_Dev1.resx">
-      <DependentUpon>201608131243293_Dev1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608161401423_AWS.resx">
+      <DependentUpon>201608161401423_AWS.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

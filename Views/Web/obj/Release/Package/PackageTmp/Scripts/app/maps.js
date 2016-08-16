@@ -5,12 +5,13 @@ var shape = {
     type: 'poly'
 };
 
+var tankWaterTemperatures = {};
+
 //'http://www.googlemapsmarkers.com/v1/S/FF0000/',
 var siteImage = {
     url: 'http://chart.apis.google.com/chart?cht=d&chdp=mapsapi&chl=pin%27i%5c%27%5bS%27-2%27f%5chv%27a%5c%5dh%5c%5do%5cFF0000%27fC%5c000000%27tC%5c000000%27eC%5cLauto%27f%5c&ext=.png',
     size: new google.maps.Size(25, 25),
 };
-
 
 var tankImage = {
     url: getUrlBase() + '/images/map_tank.png',
@@ -278,6 +279,12 @@ function createTankModal(marker, map, tank) {
         data: { tankId: tank.Id },
         success: function (data) {
             openInfoWindow(map, marker, data.Id, tankInfoWindow(data));
+            for (var key in tankWaterTemperatures) {
+                var value = tankWaterTemperatures[key];
+                generateWaterTemperatureGraph(key, value);
+            }
+
+            //tankWaterTemperatures.clear();            
         },
         error: function (jqXHR, exception) {
             openInfoWindow(map, marker, tank.Id, infoWindowMessage('ERROR', 'Error loading tank information'));
@@ -292,33 +299,31 @@ function tankInfoWindow(tank) {
             '<div class="iw-content">' +
             '<div class="row">' +
                 '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
-                    '<div class="iw-subTitle">Details</div>' +
-                        '<b>Water Capacity</b>: ' + tank.WaterVolumeCapacity;
+                        '<b>Water Capacity</b>:<br/>' + tank.WaterVolumeCapacity;
 
     if (tank.WaterVolumeLastValue != null) {
-        content += '<br><b>Water Remaining</b>: ' + tank.WaterVolumeLastValue
-    } else {
-        content += '<br><b>Water Remaining</b>: ';
+        content += '<br><b>Water Remaining</b>:<br/>' + tank.WaterVolumeLastValue
     }
 
-    content += '<div class="iw-subTitle"></div>' +
-               '<p><br></p>' +
-                    '</div>' +
-                '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
+    if (tank.WaterTemperatureLastEventValue != null) {
+        content += '<br><b>Water Temperature</b>:<br/>' + tank.WaterTemperatureLastEventValue
+    }
+
+    content += '</div>';
+
+    content += '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
                     '<div class="row iw-image-center">' +
-                        '<img src="' + tank.UrlImageTankModel + '" alt="tank" height="115" width="100">' +
-                    '</div>' +
-                    '<div class="row text-center">';
+                        '<img src="' + tank.UrlImageTankModel + '" alt="tank" height="115" width="100"></div>';
 
-    if (tank.WaterVolumePercentage != null) {
-        content += '<b>' + tank.WaterVolumePercentage + ' %</b>';
-    } else {
-        content += '';
+    if (tank.WaterTemperatureLastEventValue != null) {
+        var waterTemperatureId = "divWaterTemperature_" + tank.WaterTemperatureLastEventId;
+        tankWaterTemperatures[waterTemperatureId] = tank.WaterTemperatureLastEventValue;
+        content += '<div class="row iw-image-center"><div id="' + waterTemperatureId + '"></div></div>';
     }
+
+    content += '</div>';
 
     content += '</div>' +
-                '</div>' +
-                '</div>' +
                 '</div>' +
             '</div>' +
             '<div class="iw-bottom-gradient">' +
@@ -328,6 +333,32 @@ function tankInfoWindow(tank) {
     return content;
 }
 
+function generateWaterTemperatureGraph(elementId, waterTemperature) {
+    if (waterTemperature != "" && waterTemperature != undefined) {
+        var majorTicks = { size: '10%', interval: 10 },
+            minorTicks = { size: '5%', interval: 2.5, style: { 'stroke-width': 1, stroke: '#AAAAAA' } },
+            labels = { interval: 10, position: 'far' };
+        var minTemp = waterTemperature > 0 ? 0 : 10;
+        var maxTemp = parseInt(waterTemperature * 1.2);
+
+        $('#' + elementId).jqxLinearGauge({
+            height: '200px',
+            orientation: 'vertical',
+            labels: labels,
+            ticksMajor: majorTicks,
+            ticksMinor: minorTicks,
+            min: minTemp,
+            max: maxTemp,
+            value: waterTemperature,
+            pointer: { size: '6%' },
+            colorScheme: 'scheme05',
+            ranges: [
+            { startValue: -10, endValue: 10, style: { fill: '#FFF157', stroke: '#FFF157' } },
+            { startValue: 10, endValue: 35, style: { fill: '#FFA200', stroke: '#FFA200' } },
+            { startValue: 35, endValue: maxTemp, style: { fill: '#FF4800', stroke: '#FF4800' } }]
+        });
+    }
+}
 /*********/
 /* TANK */
 /********/

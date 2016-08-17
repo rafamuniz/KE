@@ -327,6 +327,7 @@
     <Compile Include="Areas\Customer\ViewModels\FastTracker\WaterQualityViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TriggerViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\FlowMeterViewModel.cs" />
+    <Compile Include="Areas\Customer\ViewModels\Map\AlarmViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Map\PondViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Map\SensorViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Map\SiteViewModel.cs" />

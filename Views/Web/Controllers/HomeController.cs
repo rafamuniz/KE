@@ -25,11 +25,11 @@ namespace KarmicEnergy.Web.Controllers
 
             if (IsSite)
             {
-                alarms = KEUnitOfWork.AlarmRepository.GetsActiveBySite(SiteId);
+                alarms = KEUnitOfWork.AlarmRepository.GetsOpenBySite(SiteId).ToList();
             }
             else
             {
-                alarms = KEUnitOfWork.AlarmRepository.GetsActiveByCustomer(CustomerId);
+                alarms = KEUnitOfWork.AlarmRepository.GetsOpenByCustomer(CustomerId).ToList();
             }
 
             notificationViewModel.Alarms = AlarmViewModel.Map(alarms);

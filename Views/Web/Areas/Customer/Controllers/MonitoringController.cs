@@ -120,12 +120,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             if (!IsSite)
             {
-                var alarms = KEUnitOfWork.AlarmRepository.GetsActiveByCustomer(CustomerId).ToList();
+                var alarms = KEUnitOfWork.AlarmRepository.GetsOpenByCustomer(CustomerId).ToList();
                 viewModels = AlarmDetailViewModel.Map(alarms);
             }
             else
             {
-                var alarms = KEUnitOfWork.AlarmRepository.GetsBySite(SiteId).ToList();
+                var alarms = KEUnitOfWork.AlarmRepository.GetsOpenBySite(SiteId).ToList();
                 viewModels = AlarmDetailViewModel.Map(alarms);
             }
 
@@ -140,7 +140,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             ListAlarmViewModel viewModel = new ListAlarmViewModel();
             List<AlarmDetailViewModel> viewModels = new List<AlarmDetailViewModel>();
-            var alarms = KEUnitOfWork.AlarmRepository.GetsBySite(siteId);
+            var alarms = KEUnitOfWork.AlarmRepository.GetsOpenBySite(siteId);
             viewModels = AlarmDetailViewModel.Map(alarms.OrderByDescending(x => x.Trigger.SeverityId).ToList());
             viewModel.Alarms = viewModels;
             return View("Alarms", viewModel);
@@ -152,7 +152,19 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             ListAlarmViewModel viewModel = new ListAlarmViewModel();
             List<AlarmDetailViewModel> viewModels = new List<AlarmDetailViewModel>();
-            var alarms = KEUnitOfWork.AlarmRepository.GetsByTank(tankId).ToList();
+            var alarms = KEUnitOfWork.AlarmRepository.GetsOpenByTank(tankId).ToList();
+            viewModels = AlarmDetailViewModel.Map(alarms.OrderByDescending(x => x.Trigger.SeverityId).ToList());
+            viewModel.Alarms = viewModels;
+            return View("Alarms", viewModel);
+        }
+
+        [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
+        [Route("alarm/sensor/{sensorId?}")]
+        public async Task<ActionResult> AlarmBySensor(Guid sensorId)
+        {
+            ListAlarmViewModel viewModel = new ListAlarmViewModel();
+            List<AlarmDetailViewModel> viewModels = new List<AlarmDetailViewModel>();
+            var alarms = KEUnitOfWork.AlarmRepository.GetsOpenBySensor(sensorId).ToList();
             viewModels = AlarmDetailViewModel.Map(alarms.OrderByDescending(x => x.Trigger.SeverityId).ToList());
             viewModel.Alarms = viewModels;
             return View("Alarms", viewModel);
@@ -371,7 +383,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             List<AlarmHistoryViewModel> viewModels = new List<AlarmHistoryViewModel>();
             var histories = KEUnitOfWork.AlarmRepository.GetsCloseByTrigger(triggerId);
             var hs = histories.Any() ? histories.OrderByDescending(d => d.CreatedDate).ToList() : histories;
-            viewModels = AlarmHistoryViewModel.Map(histories);
+            viewModels = AlarmHistoryViewModel.Map(histories.ToList());
             return viewModels;
         }
 

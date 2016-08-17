@@ -117,6 +117,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
         }
 
         public Decimal WaterVolumeCapacity { get; set; }
+        public String WaterVolumeCapacityUnit { get; set; }
 
         public Decimal? WaterVolumeRemaining
         {
@@ -134,9 +135,10 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
 
         #region Last Water Volume
 
-        public Guid? WaterVolumeLastEventId { get; set; }
+        public Guid? WaterVolumeLastId { get; set; }
         public Decimal? WaterVolumeLastValue { get; set; }
-        public DateTime? WaterVolumeLastEventDate { get; set; }
+        public DateTime? WaterVolumeLastDate { get; set; }
+        public String WaterVolumeLastUnit { get; set; }
 
         public Int32? WaterVolumePercentage
         {
@@ -164,10 +166,12 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
         public Guid? WaterTemperatureLastEventId { get; set; }
         public Decimal? WaterTemperatureLastEventValue { get; set; }
         public DateTime? WaterTemperatureLastEventDate { get; set; }
+        public String WaterTemperatureLastEventUnit { get; set; }
 
         public Guid? AmbientTemperatureLastEventId { get; set; }
         public Decimal? AmbientTemperatureLastEventValue { get; set; }
         public DateTime? AmbientTemperatureLastEventDate { get; set; }
+        public String AmbientTemperatureLastEventUnit { get; set; }
 
         #endregion Last Temperature
 
@@ -265,6 +269,10 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
         public static TankViewModel Map(Core.Entities.Tank entity)
         {
             var viewModel = Mapper.Map<Core.Entities.Tank, TankViewModel>(entity);
+
+            //if (entity.WaterVolumeCapacityUnit != null)
+            //    viewModel.WaterVolumeCapacityUnit = entity.WaterVolumeCapacityUnit.Symbol;
+
             return viewModel;
         }
 

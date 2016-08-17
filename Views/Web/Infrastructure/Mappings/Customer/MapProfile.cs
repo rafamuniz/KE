@@ -26,6 +26,9 @@ namespace KarmicEnergy.Web.Infrastructure.Mappings.Customer
                 .ForMember(x => x.TankModelImage, opt => opt.MapFrom(src => src.TankModel.ImageFilename));
             this.CreateMap<Core.Entities.Sensor, Areas.Customer.ViewModels.Map.SensorViewModel>();
 
+            this.CreateMap<Core.Entities.Alarm, Areas.Customer.ViewModels.Map.AlarmViewModel>();
+
+
             #endregion Entity To ViewModel 
         }
     }

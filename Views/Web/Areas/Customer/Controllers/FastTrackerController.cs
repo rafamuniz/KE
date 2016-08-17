@@ -92,8 +92,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     }
 
                     // Alarms By Pond
-                    var alarms = KEUnitOfWork.AlarmRepository.GetsActiveByPond(pond.Id);
-                    pondViewModel.Alarms = AlarmViewModel.Map(alarms);
+                    var alarms = KEUnitOfWork.AlarmRepository.GetsOpenByPond(pond.Id);
+                    pondViewModel.Alarms = AlarmViewModel.Map(alarms.ToList());
                     viewModel.Ponds.Add(pondViewModel);
                 }
             }
@@ -132,8 +132,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     }
 
                     // Alarms By Tank
-                    var alarms = KEUnitOfWork.AlarmRepository.GetsActiveByTank(tank.Id);
-                    tankViewModel.Alarms = AlarmViewModel.Map(alarms);
+                    var alarms = KEUnitOfWork.AlarmRepository.GetsOpenByTank(tank.Id);
+                    tankViewModel.Alarms = AlarmViewModel.Map(alarms.ToList());
                     viewModel.Tanks.Add(tankViewModel);
                 }
             }
@@ -146,7 +146,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             foreach (var trigger in triggers)
             {
                 TriggerViewModel triggerViewModel = new TriggerViewModel();
-                var alarm = KEUnitOfWork.AlarmRepository.GetActiveByTrigger(trigger.Id);
+                var alarm = KEUnitOfWork.AlarmRepository.GetOpenByTrigger(trigger.Id);
                 triggerViewModel = TriggerViewModel.Map(trigger);
                 if (alarm != null)
                 {

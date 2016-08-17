@@ -59,18 +59,21 @@ namespace KarmicEnergy.Web.ViewModels
         {     
             var viewModel = Mapper.Map<Core.Entities.Alarm, AlarmViewModel>(entity);
 
-            viewModel.ItemId = entity.Trigger.SensorItem.Item.Id;
-            viewModel.ItemName = entity.Trigger.SensorItem.Item.Name;
-            viewModel.TriggerId = entity.TriggerId;
+            if (entity.Trigger != null)
+            {
+                viewModel.ItemId = entity.Trigger.SensorItem.Item.Id;
+                viewModel.ItemName = entity.Trigger.SensorItem.Item.Name;
+                viewModel.TriggerId = entity.TriggerId;
 
-            viewModel.SeverityId = entity.Trigger.Severity.Id;
-            viewModel.SeverityName = entity.Trigger.Severity.Name;
+                viewModel.SeverityId = entity.Trigger.Severity.Id;
+                viewModel.SeverityName = entity.Trigger.Severity.Name;
 
-            viewModel.SensorId = entity.Trigger.SensorItem.Sensor.Id;
-            viewModel.SensorName = entity.Trigger.SensorItem.Sensor.Name;
+                viewModel.SensorId = entity.Trigger.SensorItem.Sensor.Id;
+                viewModel.SensorName = entity.Trigger.SensorItem.Sensor.Name;
 
-            viewModel.SiteId = entity.Trigger.SensorItem.Sensor.Tank != null ? entity.Trigger.SensorItem.Sensor.Tank.Site.Id : entity.Trigger.SensorItem.Sensor.Site.Id;
-            viewModel.SiteName = entity.Trigger.SensorItem.Sensor.Tank != null ? entity.Trigger.SensorItem.Sensor.Tank.Site.Name : entity.Trigger.SensorItem.Sensor.Site.Name;
+                viewModel.SiteId = entity.Trigger.SensorItem.Sensor.Tank != null ? entity.Trigger.SensorItem.Sensor.Tank.Site.Id : entity.Trigger.SensorItem.Sensor.Site.Id;
+                viewModel.SiteName = entity.Trigger.SensorItem.Sensor.Tank != null ? entity.Trigger.SensorItem.Sensor.Tank.Site.Name : entity.Trigger.SensorItem.Sensor.Site.Name;
+            }
 
             if (entity.Trigger.SensorItem.Sensor.Tank != null)
             {

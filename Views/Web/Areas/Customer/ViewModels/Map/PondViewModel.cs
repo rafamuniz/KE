@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Munizoft.Extensions;
-using KarmicEnergy.Web.ViewModels;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
 {
@@ -14,7 +13,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
         public PondViewModel()
         {
             WaterVolumes = new List<WaterVolumeViewModel>();
-            //Alarms = new List<AlarmViewModel>();
+            Alarms = new List<AlarmViewModel>();
         }
         #endregion Constructor
 
@@ -110,14 +109,16 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
         }
 
         public Decimal WaterVolumeCapacity { get; set; }
+        public String WaterVolumeCapacityUnit { get; set; } = "BBL";
 
         #endregion Pond
 
         #region Last Water Volume
 
+        public Guid? WaterVolumeLastId { get; set; }
         public Decimal? WaterVolumeLastValue { get; set; }
-        public DateTime? WaterVolumeLastEventDate { get; set; }
-
+        public DateTime? WaterVolumeLastDate { get; set; }
+        public String WaterVolumeLastUnit { get; set; }        
         public Int32? WaterVolumePercentage
         {
             get
@@ -143,10 +144,12 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
         #region Last Temperature
         public Decimal? WaterTemperatureLastEventValue { get; set; }
         public DateTime? WaterTemperatureLastEventDate { get; set; }
-
+        public String WaterTemperatureLastEventUnit { get; set; }
+        
         public Decimal? AmbientTemperatureLastEventValue { get; set; }
         public DateTime? AmbientTemperatureLastEventDate { get; set; }
-
+        public String AmbientTemperatureLastEventUnit { get; set; }
+        
         #endregion Last Temperature
 
         #region Water Volumes
@@ -243,6 +246,10 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
         public static PondViewModel Map(Core.Entities.Pond entity)
         {
             var viewModel = Mapper.Map<Core.Entities.Pond, PondViewModel>(entity);
+
+            //if (entity.WaterVolumeCapacityUnit != null)
+            //    viewModel.WaterVolumeCapacityUnit = entity.WaterVolumeCapacityUnit.Symbol;
+
             return viewModel;
         }
 

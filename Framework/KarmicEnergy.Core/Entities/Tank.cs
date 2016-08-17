@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KarmicEnergy.Core.Entities.Interface;
+using Munizoft.Util.Converters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace KarmicEnergy.Core.Entities
 {
     [Table("Tanks", Schema = "dbo")]
-    public class Tank : BaseEntity
+    public class Tank : BaseEntity, IConvertUnit
     {
         #region Constructor
         public Tank()
@@ -33,6 +35,17 @@ namespace KarmicEnergy.Core.Entities
         [Column("WaterVolumeCapacity", TypeName = "DECIMAL")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public Decimal WaterVolumeCapacity { get; set; }
+
+        //#region Unit
+
+        //[Column("WaterVolumeCapacityUnitId", TypeName = "SMALLINT")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        //public Int16 WaterVolumeCapacityUnitId { get; set; } = (Int16)UnitEnum.Barrel;
+
+        //[ForeignKey("WaterVolumeCapacityUnitId")]
+        //public virtual Unit WaterVolumeCapacityUnit { get; set; }
+
+        //#endregion Unit
 
         [Column("Reference", TypeName = "NVARCHAR")]
         [StringLength(8)]
@@ -280,6 +293,36 @@ namespace KarmicEnergy.Core.Entities
             return Length.Value * Width.Value * range;
         }
 
+        public String Convert()
+        {
+            throw new Exception("Error convert");
+        }
+
+        /// <summary>
+        /// Tank Capacity Default Unit is GALLON
+        /// </summary>
+        /// <param name="unitId"></param>
+        /// <returns></returns>
+        public String Convert(Int16 unitId)
+        {
+            Double value;
+            if (Double.TryParse(this.WaterVolumeCapacity.ToString(), out value))
+            {
+                // From Fahrenheit To
+                switch (unitId)
+                {
+                    case (Int16)UnitEnum.Barrel:
+                        return ((Int32)VolumeUnit.GallonToBarrel(value)).ToString();
+                    //case (Int16)UnitEnum.Liter:
+                    //    return ((Int32)VolumeUnit.LiterToGallon(value)).ToString();
+                    default:
+                        return WaterVolumeCapacity.ToString();
+                }
+            }
+            else
+                throw new Exception("Error convert");
+        }
+
         public void Update(Tank entity)
         {
             this.Name = entity.Name;
@@ -288,8 +331,8 @@ namespace KarmicEnergy.Core.Entities
             this.Status = entity.Status;
             this.Longitude = entity.Longitude;
             this.Latitude = entity.Latitude;
-            
-            this.Height = entity.Height;            
+
+            this.Height = entity.Height;
             this.Length = entity.Length;
             this.Width = entity.Width;
 
@@ -304,7 +347,8 @@ namespace KarmicEnergy.Core.Entities
             this.MinimumDistance = entity.MinimumDistance;
             this.MaximumDistance = entity.MaximumDistance;
             this.WaterVolumeCapacity = entity.WaterVolumeCapacity;
-            
+            //this.WaterVolumeCapacityUnitId = entity.WaterVolumeCapacityUnitId;
+
             this.SiteId = entity.SiteId;
             this.TankModelId = entity.TankModelId;
             this.StickConversionId = entity.StickConversionId;

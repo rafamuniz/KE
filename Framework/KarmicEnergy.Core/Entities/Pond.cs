@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KarmicEnergy.Core.Entities.Interface;
+using Munizoft.Util.Converters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace KarmicEnergy.Core.Entities
 {
     [Table("Ponds", Schema = "dbo")]
-    public class Pond : BaseEntity
+    public class Pond : BaseEntity, IConvertUnit
     {
         #region Constructor
         public Pond()
@@ -38,6 +40,17 @@ namespace KarmicEnergy.Core.Entities
         [Column("WaterVolumeCapacity", TypeName = "DECIMAL")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public Decimal WaterVolumeCapacity { get; set; }
+
+        //#region Unit
+
+        //[Column("WaterVolumeCapacityUnitId", TypeName = "SMALLINT")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        //public Int16 WaterVolumeCapacityUnitId { get; set; } = (Int16)UnitEnum.Barrel;
+
+        //[ForeignKey("WaterVolumeCapacityUnitId")]
+        //public virtual Unit WaterVolumeCapacityUnit { get; set; }
+
+        //#endregion Unit
 
         [Column("Status", TypeName = "CHAR")]
         [StringLength(1)]
@@ -82,12 +95,38 @@ namespace KarmicEnergy.Core.Entities
             this.Latitude = entity.Latitude;
 
             this.WaterVolumeCapacity = entity.WaterVolumeCapacity;
+            //this.WaterVolumeCapacityUnitId = entity.WaterVolumeCapacityUnitId;
 
             this.SiteId = entity.SiteId;
 
             this.CreatedDate = entity.CreatedDate;
             this.LastModifiedDate = entity.LastModifiedDate;
             this.DeletedDate = entity.DeletedDate;
+        }
+
+        public String Convert()
+        {
+            throw new Exception("Error convert");
+        }
+
+        public String Convert(Int16 unitId)
+        {
+            Double value;
+            if (Double.TryParse(this.WaterVolumeCapacity.ToString(), out value))
+            {
+                // From Fahrenheit To
+                switch (unitId)
+                {
+                    case (Int16)UnitEnum.Barrel:
+                        return ((Int32)VolumeUnit.GallonToBarrel(value)).ToString();
+                    //case (Int16)UnitEnum.Liter:
+                    //    return ((Int32)VolumeUnit.LiterToGallon(value)).ToString();
+                    default:
+                        return WaterVolumeCapacity.ToString();
+                }
+            }
+            else
+                throw new Exception("Error convert");
         }
         #endregion Functions 
     }

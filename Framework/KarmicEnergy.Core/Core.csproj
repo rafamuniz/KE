@@ -88,6 +88,7 @@
     <Compile Include="Entities\AlarmHistory.cs" />
     <Compile Include="Entities\ActionType.cs" />
     <Compile Include="Entities\DataSync.cs" />
+    <Compile Include="Entities\Interface\IConvertUnit.cs" />
     <Compile Include="Entities\NotificationTemplate.cs" />
     <Compile Include="Entities\NotificationType.cs" />
     <Compile Include="Entities\Notification.cs" />
@@ -127,10 +128,6 @@
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Migrations\201608161401423_AWS.cs" />
-    <Compile Include="Migrations\201608161401423_AWS.Designer.cs">
-      <DependentUpon>201608161401423_AWS.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\DatabaseCreateIfNotExists.cs" />
     <Compile Include="Persistence\IKEUnitOfWork.cs" />
@@ -246,11 +243,6 @@
       <Project>{519E28A2-6B4D-4CE3-A05E-748E71C8B125}</Project>
       <Name>Util</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608161401423_AWS.resx">
-      <DependentUpon>201608161401423_AWS.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

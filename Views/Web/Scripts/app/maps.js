@@ -18,6 +18,21 @@ var tankImage = {
     size: new google.maps.Size(25, 25),
 };
 
+var alarmLowImage = {
+    url: getUrlBase() + '/images/marker_alarm_low.png',
+    size: new google.maps.Size(25, 25),
+};
+
+var alarmMendiumImage = {
+    url: getUrlBase() + '/images/marker_alarm_medium.png',
+    size: new google.maps.Size(25, 25),
+};
+
+var alarmHighImage = {
+    url: getUrlBase() + '/images/marker_alarm_high.png',
+    size: new google.maps.Size(25, 25),
+};
+
 var pondImage = {
     url: getUrlBase() + '/images/map_pond.png',
     size: new google.maps.Size(50, 50),
@@ -99,36 +114,21 @@ function createSiteModal(marker, map, site) {
             openInfoWindow(map, marker, data.Id, siteInfoWindow(data));
         },
         error: function (jqXHR, exception) {
-            openInfoWindow(map, marker, site.Id, infoWindowMessage('ERROR', 'Error loading site information'));
+            openInfoWindow(map, marker, site.Id, createInfoWindow('ERROR', '<p>Error loading site information</p>', ''));
         }
     });
 }
 
 function siteInfoWindow(site) {
-    return '<div id="iw-container">' +
-            '<div class="iw-title">' + site.Name + '</div>' +
-                '<div class="row">' +
-            '<div class="iw-content">' +
-            '<div class="row">' +
-                '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
-                    '<div class="iw-subTitle">Details</div>' +
-                        '<b>IP</b>: ' + site.IPAddress +
-                        '<div class="iw-subTitle"></div>' +
-                            '<p><br></p>' +
-                    '</div>' +
-                '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
-                    '<div class="row iw-image-center">' +
-                    '</div>' +
-                    '<div class="row text-center">' +
+    var content = '<div class="row">' +
+                        '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
+                            '<b>IP</b>:<br/>' + site.IPAddress +
+                        '</div>' +
+                        '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
+                        '</div>' +
+                    '</div>';
 
-                    '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-            '</div>' +
-            '<div class="iw-bottom-gradient">' +
-            '</div>' +
-        '</div>';
+    return createInfoWindow(site.Name, content, '')
 }
 /*********/
 /* SITE */
@@ -182,25 +182,33 @@ function createPondModal(marker, map, pond) {
             openInfoWindow(map, marker, data.Id, pondInfoWindow(data));
         },
         error: function (jqXHR, exception) {
-            openInfoWindow(map, marker, pond.Id, infoWindowMessage('ERROR', 'Error loading pond information'));
+            openInfoWindow(map, marker, pond.Id, createInfoWindow('ERROR', '<p>Error loading pond information</p>', ''));
         }
     });
 }
 
 function pondInfoWindow(pond) {
-    var content = '<div id="iw-container">' +
-            '<div class="iw-title">' + pond.Name + '</div>' +
-                '<div class="row">' +
-            '<div class="iw-content">' +
-            '<div class="row">' +
-                '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
-                    '<div class="iw-subTitle">Details</div>' +
-                        '<b>Water Capacity</b>: ';
+    var content = '<div class="row">' +
+                    '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">';
+
+    // Alarm
+    if (pond.Alarms.length == 0) {
+
+    } else if (pond.Alarms.length > 0 && (pond.HasAlarmHigh == true || pond.HasAlarmCritical == true)) {
+        content += '<a href="/Customer/Monitoring/AlarmByPond/?pondId=' + pond.Id + '"><i class="fa fa-warning text-red"><span id="totalAlarms" class="label label-primary">' + pond.Alarms.length + '</span></i></a><br/>';
+    } else {
+        content += '<a href="/Customer/Monitoring/AlarmByPond/?pondId=' + pond.Id + '"><i class="fa fa-warning text-white"><span id="totalAlarms" class="label label-primary">' + pond.Alarms.length + '</span></i></a><br/>';
+    }
+
+    content += '<b>Water Capacity</b>:<br/>' + pond.WaterVolumeCapacity;
+    if (pond.WaterVolumeCapacityUnit != null) {
+        content += ' ' + pond.WaterVolumeCapacityUnit;
+    } else {
+        content += ' gal';
+    }
 
     if (pond.WaterVolumeLastValue != null) {
-        content += '<br><b>Water Remaining</b>: ' + pond.WaterVolumeLastValue
-    } else {
-        content += '<br><b>Water Remaining</b>: ';
+        content += '<br><b>Water Remaining</b>:<br/>' + pond.WaterVolumeLastValue
     }
 
     content += '<div class="iw-subTitle"></div>' +
@@ -214,20 +222,15 @@ function pondInfoWindow(pond) {
 
     if (pond.WaterVolumePercentage != null) {
         content += '<b>' + pond.WaterVolumePercentage + ' %</b>';
-    } else {
-        content += '';
     }
 
     content += '</div>' +
                 '</div>' +
                 '</div>' +
                 '</div>' +
-                '</div>' +
-                '<div class="iw-bottom-gradient">' +
-                '</div>' +
                 '</div>';
 
-    return content;
+    return createInfoWindow(pond.Name, content, '');
 }
 /*********/
 /* POND  */
@@ -256,15 +259,37 @@ function setTanksMarkers(siteId, map) {
 }
 
 function addTankMarker(map, tank) {
+    var image;
+    var animation;
+
+    if (tank.Alarms.length == 0) {
+        image = tankImage;
+        animation = google.maps.Animation.DROP;
+    } else if (tank.Alarms.length > 0 && (tank.HasAlarmHigh == true || tank.HasAlarmCritical == true)) {
+        image = alarmHighImage;
+        animation = google.maps.Animation.BOUNCE;
+    } else {
+        image = alarmLowImage;
+        animation = google.maps.Animation.BOUNCE;
+    }
+
     var marker = new google.maps.Marker({
         position: { lat: Number(tank.Latitude), lng: Number(tank.Longitude) },
-        animation: google.maps.Animation.DROP,
+        animation: animation,
         map: map,
-        icon: tankImage,
+        icon: image,
         shape: shape,
         title: tank.Name,
         zIndex: 1
     });
+
+    //window.setTimeout(function () {
+    //    markers.push(new google.maps.Marker({
+    //        position: position,
+    //        map: map,
+    //        animation: google.maps.Animation.DROP
+    //    }));
+    //}, timeout);
 
     marker.addListener('click', function () {
         createTankModal(marker, map, tank);
@@ -283,11 +308,9 @@ function createTankModal(marker, map, tank) {
                 var value = tankWaterTemperatures[key];
                 generateWaterTemperatureGraph(key, value);
             }
-
-            //tankWaterTemperatures.clear();            
         },
         error: function (jqXHR, exception) {
-            openInfoWindow(map, marker, tank.Id, infoWindowMessage('ERROR', 'Error loading tank information'));
+            openInfoWindow(map, marker, tank.Id, createInfoWindow('ERROR', '<p>Error loading tank information</p>', ''));
         }
     });
 }
@@ -298,15 +321,30 @@ function tankInfoWindow(tank) {
             '<div class="row">' +
             '<div class="iw-content">' +
             '<div class="row">' +
-                '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
-                        '<b>Water Capacity</b>:<br/>' + tank.WaterVolumeCapacity;
+                '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">';
+
+    // Alarm
+    if (tank.Alarms.length == 0) {
+
+    } else if (tank.Alarms.length > 0 && (tank.HasAlarmHigh == true || tank.HasAlarmCritical == true)) {
+        content += '<a href="/Customer/Monitoring/AlarmByTank/?tankId=' + tank.Id + '"><i class="fa fa-warning text-red"><span id="totalAlarms" class="label label-primary">' + tank.Alarms.length + '</span></i></a><br/>';
+    } else {
+        content += '<a href="/Customer/Monitoring/AlarmByTank/?tankId=' + tank.Id + '"><i class="fa fa-warning text-white"><span id="totalAlarms" class="label label-primary">' + tank.Alarms.length + '</span></i></a><br/>';
+    }
+
+    content += '<b>Water Capacity</b>:<br/>' + tank.WaterVolumeCapacity;
+    if (tank.WaterVolumeCapacityUnit != null) {
+        content += ' ' + tank.WaterVolumeCapacityUnit;
+    } else {
+        content += ' gal';
+    }
 
     if (tank.WaterVolumeLastValue != null) {
-        content += '<br><b>Water Remaining</b>:<br/>' + tank.WaterVolumeLastValue
+        content += '<br><b>Water Remaining</b>:<br/>' + tank.WaterVolumeLastValue + ' ' + tank.WaterVolumeLastUnit;
     }
 
     if (tank.WaterTemperatureLastEventValue != null) {
-        content += '<br><b>Water Temperature</b>:<br/>' + tank.WaterTemperatureLastEventValue
+        content += '<br><b>Water Temperature</b>:<br/>' + tank.WaterTemperatureLastEventValue + ' ' + tank.WaterTemperatureLastEventUnit;
     }
 
     content += '</div>';
@@ -326,9 +364,10 @@ function tankInfoWindow(tank) {
     content += '</div>' +
                 '</div>' +
             '</div>' +
-            '<div class="iw-bottom-gradient">' +
-            '</div>' +
-        '</div>';
+            '<div class="iw-bottom-gradient">';
+
+    content += '</div>' +
+    '</div>';
 
     return content;
 }
@@ -411,36 +450,30 @@ function createSensorModal(marker, map, sensor) {
             openInfoWindow(map, marker, data.Id, sensorInfoWindow(data));
         },
         error: function (jqXHR, exception) {
-            openInfoWindow(map, marker, sensor.Id, infoWindowMessage('ERROR', 'Error loading sensor information'));
+            openInfoWindow(map, marker, sensor.Id, createInfoWindow('ERROR', '<p>Error loading sensor information</p>', ''));
         }
     });
 }
 
 function sensorInfoWindow(sensor) {
-    return '<div id="iw-container">' +
-            '<div class="iw-title">' + sensor.Name + '</div>' +
-            '<div class="row">' +
-            '<div class="iw-content">' +
-            '<div class="row">' +
-                '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
-                    '<div class="iw-subTitle">Details</div>' +
-                        '<b>Water Capacity</b>: ' +
-                        '<br><b>Water Remaining</b>: ' +
-                        '<div class="iw-subTitle"></div>' +
-                            '<p><br></p>' +
+    var content = '<div class="row">' +
+                    '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">';
+
+    // Alarm
+    if (sensor.Alarms.length == 0) {
+
+    } else if (sensor.Alarms.length > 0 && (sensor.HasAlarmHigh == true || sensor.HasAlarmCritical == true)) {
+        content += '<a href="/Customer/Monitoring/AlarmBySensor/?sensorId=' + sensor.Id + '"><i class="fa fa-warning text-red"><span id="totalAlarms" class="label label-primary">' + sensor.Alarms.length + '</span></i></a><br/>';
+    } else {
+        content += '<a href="/Customer/Monitoring/AlarmBySensor/?sensorId=' + sensor.Id + '"><i class="fa fa-warning text-white"><span id="totalAlarms" class="label label-primary">' + sensor.Alarms.length + '</span></i></a><br/>';
+    }
+
+    content += '</div>' +
+                    '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
                     '</div>' +
-                '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
-                    '<div class="row iw-image-center">' +
-                    '</div>' +
-                    '<div class="row text-center">' +
-                    '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-            '</div>' +
-            '<div class="iw-bottom-gradient">' +
-            '</div>' +
-        '</div>';
+                '</div>';
+
+    return createInfoWindow(sensor.Name, content, '')
 }
 /***********/
 /* SENSOR */
@@ -475,6 +508,16 @@ function infoWindowMessage(title, message) {
                 '<div class="iw-bottom-gradient">' +
                 '</div>' +
             '</div>';
+}
+
+function createInfoWindow(title, content, bottom) {
+    var window = '<div id="iw-container">' +
+                 '<div class="iw-title">' + title + '</div>' +
+                 '<div class="row">' +
+                 '<div class="iw-content">' + content + '</div>' +
+                 '<div class="iw-bottom-gradient">' + bottom + '</div></div></div>';
+
+    return window;
 }
 
 function infoWindowEvents(infoWindow) {

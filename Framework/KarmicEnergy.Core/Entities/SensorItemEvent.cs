@@ -106,16 +106,16 @@ namespace KarmicEnergy.Core.Entities
             // Temperature - Default Temperatrure - Farenheit
             if (this.SensorItem.Unit.UnitTypeId == (Int16)UnitTypeEnum.Temperature)
             {
-                Double tempVaue;
-                if (Double.TryParse(this.Value, out tempVaue))
+                Double tempValue;
+                if (Double.TryParse(this.Value, out tempValue))
                 {
                     // From Fahrenheit To
                     switch (this.SensorItem.Unit.Name.ToUpper())
                     {
                         case "KELVIN":
-                            return ((Int32)TemperatureUnit.FahrenheitToKelvin(tempVaue)).ToString();
+                            return ((Int32)TemperatureUnit.FahrenheitToKelvin(tempValue)).ToString();
                         case "CELSIUS":
-                            return ((Int32)TemperatureUnit.FahrenheitToCelsius(tempVaue)).ToString();
+                            return ((Int32)TemperatureUnit.FahrenheitToCelsius(tempValue)).ToString();
                         default:
                             return ((Int32)Double.Parse(this.Value)).ToString();
                     }
@@ -151,7 +151,7 @@ namespace KarmicEnergy.Core.Entities
         private String TankVolumeCapactiy()
         {
             var tank = this.SensorItem.Sensor.Tank;
-            if (tank.StickConversionId.HasValue)// STICK CONVERSION
+            if (tank.StickConversionId.HasValue) // STICK CONVERSION
             {
                 var values = this.SensorItem.Sensor.Tank.StickConversion.StickConversionValues;
 

@@ -371,7 +371,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>08/17/2016 00:07:48</publishTime>
+      <publishTime>08/18/2016 03:14:31</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
@@ -380,7 +380,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/26/2016 14:49:04</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>08/17/2016 00:07:58</publishTime>
+      <publishTime>08/18/2016 03:14:53</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -5414,7 +5414,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/16/2016 13:51:59</publishTime>
     </File>
     <File Include="Scripts/app/maps.js">
-      <publishTime>08/16/2016 15:18:51</publishTime>
+      <publishTime>08/18/2016 03:13:00</publishTime>
     </File>
     <File Include="Scripts/app/sensor.js">
       <publishTime>06/26/2016 01:33:04</publishTime>
@@ -9578,7 +9578,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 01:07:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/17/2016 00:08:27</publishTime>
+      <publishTime>08/18/2016 03:15:33</publishTime>
     </File>
   </ItemGroup>
 </Project>

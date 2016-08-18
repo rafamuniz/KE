@@ -62,19 +62,21 @@ function showItems(itemsSelected, items) {
 
         var checkbox = '<input type="checkbox" id="chk_' + v.Id + '" style="vertical-align: 3px;" name="Items[' + i + '].IsSelected" ' + checked + ' value="true" /><label for="chk_' + v.Id + '">' + v.Name + '</label>';
 
-        var dropdownlist = "<select class='form-control selectpicker' data-val='true' id='ddlUnit_" + v.Id + "' name='Items[" + i + "].UnitSelected'>";
+        var dropdownlist = "<select readonly class='form-control selectpicker' data-val='true' id='ddlUnit_" + v.Id + "' name='Items[" + i + "].UnitSelected'>";
         dropdownlist += '<option value="">-- Please select an Unit --</option>';
 
         $.each(v.Units, function (iu, vu) {
             var selected = "";
+            var disabled = "";
 
             var foundUnit = $.map(itemsSelected, function (val) {
                 if (val.UnitSelected != null && val.UnitSelected == vu.Id && val.Id == v.Id)
                     selected = "selected";
             })
 
-            if (v.Units.length == 1)
-                selected = "selected";
+            if (v.Units.length == 1) {
+                selected = "selected";               
+            }
 
             dropdownlist += '<option value="' + vu.Id + '"' + selected + '>' + vu.Name + '</option>';
         });

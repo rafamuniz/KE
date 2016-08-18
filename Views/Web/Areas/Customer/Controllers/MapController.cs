@@ -71,11 +71,11 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             ViewModels.Map.SiteViewModel viewModel = new ViewModels.Map.SiteViewModel();
             var unitOfWork = KEUnitOfWork.Create(false);
-            SiteService siteService = new SiteService(unitOfWork);
+            ISiteService siteService = new SiteService(unitOfWork);
             var site = siteService.Get(siteId);
             viewModel = ViewModels.Map.SiteViewModel.Map(site);
 
-            AlarmService alarmService = new AlarmService(unitOfWork);
+            IAlarmService alarmService = new AlarmService(unitOfWork);
             var siteAlarms = alarmService.GetsBySiteWithTrigger(viewModel.Id);
             viewModel.Alarms = AlarmViewModel.Map(siteAlarms);
 
@@ -87,28 +87,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             ViewModels.Map.SiteViewModel viewModel = new ViewModels.Map.SiteViewModel();
             var unitOfWork = KEUnitOfWork.Create(false);
-            SiteService siteService = new SiteService(unitOfWork);
+            ISiteService siteService = new SiteService(unitOfWork);
             var sensor = siteService.Get(siteId);
             viewModel = ViewModels.Map.SiteViewModel.Map(sensor);
-
-            SensorService sensorService = new SensorService(unitOfWork);
-            SensorItemService sensorItemService = new SensorItemService(unitOfWork);
-            SensorItemEventService sensorItemEventService = new SensorItemEventService(unitOfWork);
-
-            //if (sensorService.HasSensorTank(viewModel.Id) &&
-            //    sensorItemService.HasTankSensorItem(viewModel.Id, ItemEnum.WaterVolume))
-            //{
-            //    var waterVolumesLastEvent = sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.WaterVolume);
-
-            //    if (waterVolumesLastEvent != null)
-            //    {
-            //        viewModel.WaterVolumeLastValue = Decimal.Parse(waterVolumesLastEvent.Value);
-            //        viewModel.WaterVolumeLastEventDate = waterVolumesLastEvent.EventDate;
-            //    }
-            //}
-
+                     
             // Alarm
-            AlarmService alarmService = new AlarmService(unitOfWork);
+            IAlarmService alarmService = new AlarmService(unitOfWork);
             var siteAlarms = alarmService.GetsBySiteWithTrigger(siteId);
             viewModel.Alarms = AlarmViewModel.Map(siteAlarms);
 
@@ -120,13 +104,13 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             var unitOfWork = KEUnitOfWork.Create(false);
             IList<PondViewModel> viewModels = new List<PondViewModel>();
-            PondService pondService = new PondService(unitOfWork);
+            IPondService pondService = new PondService(unitOfWork);
             var ponds = pondService.GetsBySite(siteId);
             viewModels = PondViewModel.Map(ponds);
 
             if (viewModels.Any())
             {
-                AlarmService alarmService = new AlarmService(unitOfWork);
+                IAlarmService alarmService = new AlarmService(unitOfWork);
                 foreach (var pondViewModel in viewModels)
                 {
                     var pondAlarms = alarmService.GetsByPondWithTrigger(pondViewModel.Id);
@@ -142,15 +126,15 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             PondViewModel viewModel = new PondViewModel();
             var unitOfWork = KEUnitOfWork.Create(false);
-            PondService pondService = new PondService(unitOfWork);
+            IPondService pondService = new PondService(unitOfWork);
             var pond = pondService.Get(pondId);
             viewModel = PondViewModel.Map(pond);
 
-            SensorService sensorService = new SensorService(unitOfWork);
-            SensorItemService sensorItemService = new SensorItemService(unitOfWork);
+            ISensorService sensorService = new SensorService(unitOfWork);
+            ISensorItemService sensorItemService = new SensorItemService(unitOfWork);
 
             var unitOfWorkLazy = KEUnitOfWork.Create(true);
-            SensorItemEventService sensorItemEventService = new SensorItemEventService(unitOfWorkLazy);
+            ISensorItemEventService sensorItemEventService = new SensorItemEventService(unitOfWorkLazy);
 
             if (sensorService.HasSensorTank(viewModel.Id) &&
                 sensorItemService.HasTankSensorItem(viewModel.Id, ItemEnum.WaterVolume))
@@ -169,7 +153,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             // Alarm
-            AlarmService alarmService = new AlarmService(unitOfWork);
+            IAlarmService alarmService = new AlarmService(unitOfWork);
             var pondAlarms = alarmService.GetsByPondWithTrigger(pondId);
             viewModel.Alarms = AlarmViewModel.Map(pondAlarms);
 
@@ -181,14 +165,13 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             var unitOfWork = KEUnitOfWork.Create(false);
             IList<TankViewModel> viewModels = new List<TankViewModel>();
-            TankService tankService = new TankService(unitOfWork);
+            ITankService tankService = new TankService(unitOfWork);
             var tanks = tankService.GetsBySite(siteId);
             viewModels = TankViewModel.Map(tanks);
 
             if (viewModels.Any())
             {
-                AlarmService alarmService = new AlarmService(unitOfWork);
-
+                IAlarmService alarmService = new AlarmService(unitOfWork);
                 foreach (var tankViewModel in viewModels)
                 {
                     var tankAlarms = alarmService.GetsByTankWithTrigger(tankViewModel.Id);
@@ -205,14 +188,14 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             TankViewModel viewModel = new TankViewModel();
 
             var unitOfWork = KEUnitOfWork.Create(false);
-            TankService tankService = new TankService(unitOfWork);
+            ITankService tankService = new TankService(unitOfWork);
             var tank = tankService.Get(tankId, "TankModel");
             viewModel = TankViewModel.Map(tank);
 
             var unitOfWorkLazy = KEUnitOfWork.Create(true);
-            SensorService sensorService = new SensorService(unitOfWork);
-            SensorItemService sensorItemService = new SensorItemService(unitOfWork);
-            SensorItemEventService sensorItemEventService = new SensorItemEventService(unitOfWorkLazy);
+            ISensorService sensorService = new SensorService(unitOfWork);
+            ISensorItemService sensorItemService = new SensorItemService(unitOfWork);
+            ISensorItemEventService sensorItemEventService = new SensorItemEventService(unitOfWorkLazy);
 
             if (sensorService.HasSensorTank(viewModel.Id))
             {
@@ -223,7 +206,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     if (waterVolumesLastEvent != null)
                     {
                         viewModel.WaterVolumeLastId = waterVolumesLastEvent.Id;
-                        viewModel.WaterVolumeLastValue = Decimal.Parse(waterVolumesLastEvent.ConverterItemUnit()); //Decimal.Parse(waterVolumesLastEvent.Value);
+                        viewModel.WaterVolumeLastValue = Decimal.Parse(waterVolumesLastEvent.Value);
                         viewModel.WaterVolumeLastDate = waterVolumesLastEvent.EventDate;
                         viewModel.WaterVolumeLastUnit = waterVolumesLastEvent.SensorItem.Unit.Symbol;
                         viewModel.WaterVolumeCapacity = Decimal.Parse(tank.Convert(waterVolumesLastEvent.SensorItem.Unit.Id));
@@ -238,7 +221,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     if (waterTemperatureLastEvent != null)
                     {
                         viewModel.WaterTemperatureLastEventId = waterTemperatureLastEvent.Id;
-                        viewModel.WaterTemperatureLastEventValue = Decimal.Parse(waterTemperatureLastEvent.ConverterItemUnit()); //Decimal.Parse(waterTemperatureLastEvent.Value);
+                        viewModel.WaterTemperatureLastEventValue = Decimal.Parse(waterTemperatureLastEvent.Value);
                         viewModel.WaterTemperatureLastEventDate = waterTemperatureLastEvent.EventDate;
                         viewModel.WaterTemperatureLastEventUnit = waterTemperatureLastEvent.SensorItem.Unit.Symbol;
                     }
@@ -246,7 +229,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             // Alarm
-            AlarmService alarmService = new AlarmService(unitOfWork);
+            IAlarmService alarmService = new AlarmService(unitOfWork);
             var tankAlarms = alarmService.GetsByTankWithTrigger(tankId);
             viewModel.Alarms = AlarmViewModel.Map(tankAlarms);
 
@@ -257,9 +240,21 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult GetsSensor(Guid siteId)
         {
             IList<SensorViewModel> viewModels = new List<SensorViewModel>();
-            SensorService sensorService = new SensorService(KEUnitOfWork.Create(false));
+            ISensorService sensorService = new SensorService(KEUnitOfWork.Create(false));
             var sensors = sensorService.GetsBySite(siteId);
             viewModels = SensorViewModel.Map(sensors);
+
+            if (viewModels.Any())
+            {
+                var unitOfWorkLazy = KEUnitOfWork.Create(true);
+                IAlarmService alarmService = new AlarmService(unitOfWorkLazy);
+                foreach (var viewModel in viewModels)
+                {
+                    var sensorAlarms = alarmService.GetsBySensor(viewModel.Id);
+                    viewModel.Alarms = AlarmViewModel.Map(sensorAlarms);
+                }
+            }
+
             return Json(viewModels, JsonRequestBehavior.AllowGet);
         }
 
@@ -269,24 +264,47 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             SensorViewModel viewModel = new SensorViewModel();
 
             var unitOfWork = KEUnitOfWork.Create(false);
-            SensorService sensorService = new SensorService(unitOfWork);
+            ISensorService sensorService = new SensorService(unitOfWork);
             var sensor = sensorService.Get(sensorId);
             viewModel = SensorViewModel.Map(sensor);
 
-            SensorItemService sensorItemService = new SensorItemService(unitOfWork);
-            SensorItemEventService sensorItemEventService = new SensorItemEventService(unitOfWork);
+            var unitOfWorkLazy = KEUnitOfWork.Create(true);
+            ISensorItemService sensorItemService = new SensorItemService(unitOfWork);
+            ISensorItemEventService sensorItemEventService = new SensorItemEventService(unitOfWorkLazy);
 
-            //if (sensorService.HasSensorTank(viewModel.Id) &&
-            //    sensorItemService.HasTankSensorItem(viewModel.Id, ItemEnum.WaterVolume))
-            //{
-            //    var waterVolumesLastEvent = sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.WaterVolume);
+            if (sensorService.HasSensorTank(viewModel.Id))
+            {
+                if (sensorItemService.HasSiteSensorItem(viewModel.Id, ItemEnum.AmbientTemperature))
+                {
+                    var ambientTemperatureLastEvent = sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.AmbientTemperature);
 
-            //    if (waterVolumesLastEvent != null)
-            //    {
-            //        viewModel.WaterVolumeLastValue = Decimal.Parse(waterVolumesLastEvent.Value);
-            //        viewModel.WaterVolumeLastEventDate = waterVolumesLastEvent.EventDate;
-            //    }
-            //}
+                    if (ambientTemperatureLastEvent != null)
+                    {
+                        viewModel.AmbientTemperatureLastEventId = ambientTemperatureLastEvent.Id;
+                        viewModel.AmbientTemperatureLastEventValue = Decimal.Parse(ambientTemperatureLastEvent.Value);
+                        viewModel.AmbientTemperatureLastEventDate = ambientTemperatureLastEvent.EventDate;
+                        viewModel.AmbientTemperatureLastEventUnit = ambientTemperatureLastEvent.SensorItem.Unit.Symbol;
+                    }
+                }
+
+                if (sensorItemService.HasSiteSensorItem(viewModel.Id, ItemEnum.Voltage))
+                {
+                    var voltageLastEvent = sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.Voltage);
+
+                    if (voltageLastEvent != null)
+                    {
+                        viewModel.VoltageLastEventId = voltageLastEvent.Id;
+                        viewModel.VoltageLastEventValue = Decimal.Parse(voltageLastEvent.Value);
+                        viewModel.VoltageLastEventDate = voltageLastEvent.EventDate;
+                        viewModel.VoltageLastEventUnit = voltageLastEvent.SensorItem.Unit.Symbol;
+                    }
+                }
+            }
+
+            // Alarm
+            IAlarmService alarmService = new AlarmService(unitOfWork);
+            var tankAlarms = alarmService.GetsByTankWithTrigger(sensorId);
+            viewModel.Alarms = AlarmViewModel.Map(tankAlarms);
 
             return Json(viewModel, JsonRequestBehavior.AllowGet);
         }

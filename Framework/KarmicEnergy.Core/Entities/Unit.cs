@@ -54,18 +54,18 @@ namespace KarmicEnergy.Core.Entities
             List<Unit> entities = new List<Unit>()
             {
                 new Unit() { Id = 1, Name = "Gallon", NamePlural = "Gallons", Symbol = "gal", UnitTypeId = (int)UnitTypeEnum.Volume },
-                new Unit() { Id = 2, Name = "Barrel", NamePlural = "Barrels", Symbol = "BBL", UnitTypeId = (int)UnitTypeEnum.Volume },
-                new Unit() { Id = 3, Name = "Liter", NamePlural = "Liters", Symbol = "l", UnitTypeId = (int)UnitTypeEnum.Volume },
-                new Unit() { Id = 4, Name = "Celsius", NamePlural = "Celsius", Symbol = "°C", UnitTypeId = (int)UnitTypeEnum.Temperature },
-                new Unit() { Id = 5, Name = "Kelvin", NamePlural = "Kelvin", Symbol = "K", UnitTypeId = (int)UnitTypeEnum.Temperature },
+                new Unit() { Id = 2, Name = "Barrel", NamePlural = "Barrels", Symbol = "BBL", UnitTypeId = (int)UnitTypeEnum.Volume, DeletedDate = DateTime.UtcNow },
+                new Unit() { Id = 3, Name = "Liter", NamePlural = "Liters", Symbol = "l", UnitTypeId = (int)UnitTypeEnum.Volume, DeletedDate = DateTime.UtcNow },
+                new Unit() { Id = 4, Name = "Celsius", NamePlural = "Celsius", Symbol = "°C", UnitTypeId = (int)UnitTypeEnum.Temperature, DeletedDate = DateTime.UtcNow },
+                new Unit() { Id = 5, Name = "Kelvin", NamePlural = "Kelvin", Symbol = "K", UnitTypeId = (int)UnitTypeEnum.Temperature, DeletedDate = DateTime.UtcNow },
                 new Unit() { Id = 6, Name = "Fahrenheit", NamePlural = "Fahrenheit", Symbol = "°F", UnitTypeId = (int)UnitTypeEnum.Temperature },
                 new Unit() { Id = 7, Name = "Inch ", NamePlural = "Inches", Symbol = "in", UnitTypeId = (int)UnitTypeEnum.Length },
-                new Unit() { Id = 8, Name = "Centimeter", NamePlural = "Centimeters", Symbol = "cm", UnitTypeId = (int)UnitTypeEnum.Length },
-                new Unit() { Id = 9, Name = "Meter", NamePlural = "Meters", Symbol = "m", UnitTypeId = (int)UnitTypeEnum.Length },
-                new Unit() { Id = 10, Name = "Millimeter", NamePlural = "Millimeters", Symbol = "mm", UnitTypeId = (int)UnitTypeEnum.Length },
-                new Unit() { Id = 11, Name = "Yard", NamePlural = "Yards", Symbol = "yd", UnitTypeId = (int)UnitTypeEnum.Length },
+                new Unit() { Id = 8, Name = "Centimeter", NamePlural = "Centimeters", Symbol = "cm", UnitTypeId = (int)UnitTypeEnum.Length, DeletedDate = DateTime.UtcNow },
+                new Unit() { Id = 9, Name = "Meter", NamePlural = "Meters", Symbol = "m", UnitTypeId = (int)UnitTypeEnum.Length, DeletedDate = DateTime.UtcNow },
+                new Unit() { Id = 10, Name = "Millimeter", NamePlural = "Millimeters", Symbol = "mm", UnitTypeId = (int)UnitTypeEnum.Length, DeletedDate = DateTime.UtcNow },
+                new Unit() { Id = 11, Name = "Yard", NamePlural = "Yards", Symbol = "yd", UnitTypeId = (int)UnitTypeEnum.Length, DeletedDate = DateTime.UtcNow },
                 new Unit() { Id = 12, Name = "PPM", NamePlural = "PPM", Symbol = "ppm", UnitTypeId = (int)UnitTypeEnum.UnitConcentration },
-                new Unit() { Id = 13, Name = "mg/m3", NamePlural = "mg/m3", Symbol = "mg/m3", UnitTypeId = (int)UnitTypeEnum.UnitConcentration },
+                new Unit() { Id = 13, Name = "mg/m3", NamePlural = "mg/m3", Symbol = "mg/m3", UnitTypeId = (int)UnitTypeEnum.UnitConcentration, DeletedDate = DateTime.UtcNow },
                 new Unit() { Id = 14, Name = "PH", NamePlural = "PH", Symbol = "PH", UnitTypeId = (int)UnitTypeEnum.PH },
                 new Unit() { Id = 14, Name = "Volt", NamePlural = "Volts", Symbol = "Vm", UnitTypeId = (int)UnitTypeEnum.Energy }
 

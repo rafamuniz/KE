@@ -39,6 +39,12 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
         public String AlarmValue { get; set; }
         public DateTime AlarmDate { get; set; }
 
+        public DateTime AlarmDateLocal
+        {
+            get { return AlarmDate.ToLocalTime(); }
+            private set { }
+        }
+
         #endregion Property
 
         #region Map
@@ -58,6 +64,9 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
         public static AlarmViewModel Map(Core.Entities.Alarm entity)
         {
             var viewModel = Mapper.Map<Core.Entities.Alarm, AlarmViewModel>(entity);
+
+            viewModel.AlarmValue = entity.Value;
+            viewModel.AlarmDate = entity.StartDate;
 
             if (entity.Trigger != null)
             {
@@ -103,7 +112,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
                                 viewModel.SiteId = entity.Trigger.SensorItem.Sensor.Tank.Site.Id;
                                 viewModel.SiteName = entity.Trigger.SensorItem.Sensor.Tank.Site.Name;
                             }
-                            
+
                             viewModel.TankId = entity.Trigger.SensorItem.Sensor.Tank.Id;
                             viewModel.TankName = entity.Trigger.SensorItem.Sensor.Tank.Name;
                         }

@@ -231,7 +231,7 @@ namespace KarmicEnergy.Core.Repositories
         /// <returns></returns>
         public IEnumerable<Alarm> GetsBySensor(Guid sensorId)
         {
-            return this.GetsBySensor(sensorId);
+            return this.GetsBySensor(sensorId, null);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace KarmicEnergy.Core.Repositories
         /// <returns></returns>
         public IEnumerable<Alarm> GetsBySensor(Guid sensorId, params String[] includes)
         {
-            return base.Find(x => x.Trigger.SensorItem.Sensor.Id == sensorId, includes);
+            return base.Find(x => x.Trigger.SensorItem.Sensor.Id == sensorId, includes);            
         }
 
         public Int32 GetTotalOpenByTankId(Guid tankId)

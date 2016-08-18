@@ -10,8 +10,15 @@ namespace KarmicEnergy.Core.Services.Interface
         List<Alarm> Gets();
 
         List<Alarm> GetsBySite(Guid siteId);
+        List<Alarm> GetsBySiteWithTrigger(Guid siteId);
+
         List<Alarm> GetsByPond(Guid pondId);
+        List<Alarm> GetsByPondWithTrigger(Guid pondId);
+
         List<Alarm> GetsByTank(Guid tankId);
+        List<Alarm> GetsByTankWithTrigger(Guid tankId);
+
         List<Alarm> GetsBySensor(Guid sensorId);
+        List<Alarm> GetsBySensorWithTrigger(Guid sensorId);
     }
 }

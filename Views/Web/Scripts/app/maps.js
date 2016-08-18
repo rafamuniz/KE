@@ -6,10 +6,11 @@ var shape = {
 };
 
 var tankWaterTemperatures = {};
+var sensorAmbientTemperatures = {};
 
 //'http://www.googlemapsmarkers.com/v1/S/FF0000/',
 var siteImage = {
-    url: 'http://chart.apis.google.com/chart?cht=d&chdp=mapsapi&chl=pin%27i%5c%27%5bS%27-2%27f%5chv%27a%5c%5dh%5c%5do%5cFF0000%27fC%5c000000%27tC%5c000000%27eC%5cLauto%27f%5c&ext=.png',
+    url: getUrlBase() + '/images/map_site.png',   //'http://chart.apis.google.com/chart?cht=d&chdp=mapsapi&chl=pin%27i%5c%27%5bS%27-2%27f%5chv%27a%5c%5dh%5c%5do%5cFF0000%27fC%5c000000%27tC%5c000000%27eC%5cLauto%27f%5c&ext=.png',
     size: new google.maps.Size(25, 25),
 };
 
@@ -19,17 +20,17 @@ var tankImage = {
 };
 
 var alarmLowImage = {
-    url: getUrlBase() + '/images/marker_alarm_low.png',
+    url: getUrlBase() + '/images/warn_black_25x25.png',
     size: new google.maps.Size(25, 25),
 };
 
 var alarmMendiumImage = {
-    url: getUrlBase() + '/images/marker_alarm_medium.png',
+    url: getUrlBase() + '/images/warn_yellow_25x25.png',
     size: new google.maps.Size(25, 25),
 };
 
 var alarmHighImage = {
-    url: getUrlBase() + '/images/marker_alarm_high.png',
+    url: getUrlBase() + '/images/warn_red_25x25.png',
     size: new google.maps.Size(25, 25),
 };
 
@@ -91,13 +92,28 @@ function setSite(siteId, map) {
 }
 
 function addSiteMarker(map, site) {
+    var image;
+    var animation;
+
     var marker = new google.maps.Marker({
         position: { lat: Number(site.Latitude), lng: Number(site.Longitude) },
-        animation: google.maps.Animation.DROP,
+        animation: animation,
         map: map,
+        icon: siteImage,
         title: site.Name,
         zIndex: 1
     });
+
+    //if (site.Alarms.length == 0) {
+    //    image = siteImage;
+    //    animation = google.maps.Animation.DROP;
+    //} else if (site.Alarms.length > 0 && (site.HasAlarmHigh == true || site.HasAlarmCritical == true)) {
+    //    marker.setImage(alarmHighImage);
+    //    marker.setAnimation(google.maps.Animation.BOUNCE);
+    //} else {
+    //    marker.setImage(alarmLowImage);
+    //    marker.setAnimation(google.maps.Animation.BOUNCE);
+    //}
 
     marker.addListener('click', function () {
         createSiteModal(marker, map, site);
@@ -121,12 +137,23 @@ function createSiteModal(marker, map, site) {
 
 function siteInfoWindow(site) {
     var content = '<div class="row">' +
-                        '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
-                            '<b>IP</b>:<br/>' + site.IPAddress +
-                        '</div>' +
-                        '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
-                        '</div>' +
-                    '</div>';
+                        '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">';
+
+    //// Alarm
+    //if (site.Alarms.length == 0) {
+
+    //} else if (site.Alarms.length > 0 && (site.HasAlarmHigh == true || site.HasAlarmCritical == true)) {
+    //    content += '<a href="/Customer/Monitoring/AlarmBySite/?siteId=' + site.Id + '"><img src="/images/warn_red_25x25.png" /><span id="totalAlarms" style="color: #FFF !important; background-color: #D80027 !important;" class="label">' + site.Alarms.length + '</span></a><br/>';
+    //} else {
+    //    content += '<a href="/Customer/Monitoring/AlarmBySite/?siteId=' + site.Id + '"><img src="/images/warn_black_25x25.png" /><span id="totalAlarms" style="color: #fff !important; background-color: #000 !important;" class="label">' + site.Alarms.length + '</span></a><br/>';
+    //}
+
+    content += '<b>Reference</b>:<br/>' + site.Reference +
+                 '<br/><b>IP</b>:<br/>' + site.IPAddress +
+                    '</div>' +
+                '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
+                '</div>' +
+            '</div>';
 
     return createInfoWindow(site.Name, content, '')
 }
@@ -157,11 +184,25 @@ function setPondsMarkers(siteId, map) {
 }
 
 function addPondMarker(map, pond) {
+    var image;
+    var animation;
+
+    if (pond.Alarms.length == 0) {
+        image = pondImage;
+        animation = google.maps.Animation.DROP;
+    } else if (pond.Alarms.length > 0 && (pond.HasAlarmHigh == true || pond.HasAlarmCritical == true)) {
+        image = alarmHighImage;
+        animation = google.maps.Animation.BOUNCE;
+    } else {
+        image = alarmLowImage;
+        animation = google.maps.Animation.BOUNCE;
+    }
+
     var marker = new google.maps.Marker({
         position: { lat: Number(pond.Latitude), lng: Number(pond.Longitude) },
-        animation: google.maps.Animation.DROP,
+        animation: animation,
         map: map,
-        icon: pondImage,
+        icon: image,
         shape: shape,
         title: pond.Name,
         zIndex: 1
@@ -195,9 +236,9 @@ function pondInfoWindow(pond) {
     if (pond.Alarms.length == 0) {
 
     } else if (pond.Alarms.length > 0 && (pond.HasAlarmHigh == true || pond.HasAlarmCritical == true)) {
-        content += '<a href="/Customer/Monitoring/AlarmByPond/?pondId=' + pond.Id + '"><i class="fa fa-warning text-red"><span id="totalAlarms" class="label label-primary">' + pond.Alarms.length + '</span></i></a><br/>';
+        content += '<a href="/Customer/Monitoring/AlarmByPond/?pondId=' + pond.Id + '"><img src="/images/warn_red_25x25.png" /><span id="totalAlarms" style="color: #FFF !important; background-color: #D80027 !important;" class="label">' + pond.Alarms.length + '</span></a><br/>';
     } else {
-        content += '<a href="/Customer/Monitoring/AlarmByPond/?pondId=' + pond.Id + '"><i class="fa fa-warning text-white"><span id="totalAlarms" class="label label-primary">' + pond.Alarms.length + '</span></i></a><br/>';
+        content += '<a href="/Customer/Monitoring/AlarmByPond/?pondId=' + pond.Id + '"><img src="/images/warn_black_25x25.png" /><span id="totalAlarms" style="color: #fff !important; background-color: #000 !important;" class="label">' + pond.Alarms.length + '</span></a><br/>';
     }
 
     content += '<b>Water Capacity</b>:<br/>' + pond.WaterVolumeCapacity;
@@ -306,7 +347,7 @@ function createTankModal(marker, map, tank) {
             openInfoWindow(map, marker, data.Id, tankInfoWindow(data));
             for (var key in tankWaterTemperatures) {
                 var value = tankWaterTemperatures[key];
-                generateWaterTemperatureGraph(key, value);
+                generateTemperatureGraph(key, value);
             }
         },
         error: function (jqXHR, exception) {
@@ -327,9 +368,9 @@ function tankInfoWindow(tank) {
     if (tank.Alarms.length == 0) {
 
     } else if (tank.Alarms.length > 0 && (tank.HasAlarmHigh == true || tank.HasAlarmCritical == true)) {
-        content += '<a href="/Customer/Monitoring/AlarmByTank/?tankId=' + tank.Id + '"><i class="fa fa-warning text-red"><span id="totalAlarms" class="label label-primary">' + tank.Alarms.length + '</span></i></a><br/>';
+        content += '<a href="/Customer/Monitoring/AlarmByTank/?tankId=' + tank.Id + '"><img src="/images/warn_red_25x25.png" /><span id="totalAlarms" style="color: #FFF !important; background-color: #D80027 !important;" class="label">' + tank.Alarms.length + '</span></a><br/>';
     } else {
-        content += '<a href="/Customer/Monitoring/AlarmByTank/?tankId=' + tank.Id + '"><i class="fa fa-warning text-white"><span id="totalAlarms" class="label label-primary">' + tank.Alarms.length + '</span></i></a><br/>';
+        content += '<a href="/Customer/Monitoring/AlarmByTank/?tankId=' + tank.Id + '"><img src="/images/warn_black_25x25.png" /><span id="totalAlarms" style="color: #fff !important; background-color: #000 !important;" class="label">' + tank.Alarms.length + '</span></a><br/>';
     }
 
     content += '<b>Water Capacity</b>:<br/>' + tank.WaterVolumeCapacity;
@@ -371,33 +412,6 @@ function tankInfoWindow(tank) {
 
     return content;
 }
-
-function generateWaterTemperatureGraph(elementId, waterTemperature) {
-    if (waterTemperature != "" && waterTemperature != undefined) {
-        var majorTicks = { size: '10%', interval: 10 },
-            minorTicks = { size: '5%', interval: 2.5, style: { 'stroke-width': 1, stroke: '#AAAAAA' } },
-            labels = { interval: 10, position: 'far' };
-        var minTemp = waterTemperature > 0 ? 0 : 10;
-        var maxTemp = parseInt(waterTemperature * 1.2);
-
-        $('#' + elementId).jqxLinearGauge({
-            height: '200px',
-            orientation: 'vertical',
-            labels: labels,
-            ticksMajor: majorTicks,
-            ticksMinor: minorTicks,
-            min: minTemp,
-            max: maxTemp,
-            value: waterTemperature,
-            pointer: { size: '6%' },
-            colorScheme: 'scheme05',
-            ranges: [
-            { startValue: -10, endValue: 10, style: { fill: '#FFF157', stroke: '#FFF157' } },
-            { startValue: 10, endValue: 35, style: { fill: '#FFA200', stroke: '#FFA200' } },
-            { startValue: 35, endValue: maxTemp, style: { fill: '#FF4800', stroke: '#FF4800' } }]
-        });
-    }
-}
 /*********/
 /* TANK */
 /********/
@@ -425,11 +439,25 @@ function setSensorsMarkers(siteId, map) {
 }
 
 function addSensorMarker(map, sensor) {
+    var image;
+    var animation;
+
+    if (sensor.Alarms.length == 0) {
+        image = sensorImage;
+        animation = google.maps.Animation.DROP;
+    } else if (sensor.Alarms.length > 0 && (sensor.HasAlarmHigh == true || sensor.HasAlarmCritical == true)) {
+        image = alarmHighImage;
+        animation = google.maps.Animation.BOUNCE;
+    } else {
+        image = alarmLowImage;
+        animation = google.maps.Animation.BOUNCE;
+    }
+
     var marker = new google.maps.Marker({
         position: { lat: Number(sensor.Latitude), lng: Number(sensor.Longitude) },
-        animation: google.maps.Animation.DROP,
+        animation: animation,
         map: map,
-        icon: sensorImage,
+        icon: image,
         shape: shape,
         title: sensor.Name,
         zIndex: 1
@@ -448,6 +476,10 @@ function createSensorModal(marker, map, sensor) {
         data: { sensorId: sensor.Id },
         success: function (data) {
             openInfoWindow(map, marker, data.Id, sensorInfoWindow(data));
+            for (var key in sensorAmbientTemperatures) {
+                var value = sensorAmbientTemperatures[key];
+                generateTemperatureGraph(key, value);
+            }
         },
         error: function (jqXHR, exception) {
             openInfoWindow(map, marker, sensor.Id, createInfoWindow('ERROR', '<p>Error loading sensor information</p>', ''));
@@ -463,14 +495,23 @@ function sensorInfoWindow(sensor) {
     if (sensor.Alarms.length == 0) {
 
     } else if (sensor.Alarms.length > 0 && (sensor.HasAlarmHigh == true || sensor.HasAlarmCritical == true)) {
-        content += '<a href="/Customer/Monitoring/AlarmBySensor/?sensorId=' + sensor.Id + '"><i class="fa fa-warning text-red"><span id="totalAlarms" class="label label-primary">' + sensor.Alarms.length + '</span></i></a><br/>';
+        content += '<a href="/Customer/Monitoring/AlarmBySensor/?sensorId=' + sensor.Id + '"><img src="/images/warn_red_25x25.png" /><span id="totalAlarms" style="color: #FFF !important; background-color: #D80027 !important;" class="label">' + sensor.Alarms.length + '</span></a><br/>';
     } else {
-        content += '<a href="/Customer/Monitoring/AlarmBySensor/?sensorId=' + sensor.Id + '"><i class="fa fa-warning text-white"><span id="totalAlarms" class="label label-primary">' + sensor.Alarms.length + '</span></i></a><br/>';
+        content += '<a href="/Customer/Monitoring/AlarmBySensor/?sensorId=' + sensor.Id + '"><img src="/images/warn_black_25x25.png" /><span id="totalAlarms" style="color: #fff !important; background-color: #000 !important;" class="label">' + sensor.Alarms.length + '</span></a><br/>';
     }
 
     content += '</div>' +
-                    '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">' +
-                    '</div>' +
+                    '<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">';
+                    
+    if (sensor.AmbientTemperatureLastEventValue != null) {
+        var ambientTemperatureId = "divAmbientTemperature_" + sensor.AmbientTemperatureLastEventId;
+        sensorAmbientTemperatures[ambientTemperatureId] = sensor.AmbientTemperatureLastEventValue;
+        content += '<div class="row iw-image-center"><div id="' + ambientTemperatureId + '"></div></div>';
+    }
+
+    content += '</div>';
+    
+    content += '</div>' +
                 '</div>';
 
     return createInfoWindow(sensor.Name, content, '')
@@ -571,6 +612,33 @@ function infoWindowCustomize() {
 
     //var iwContainer = $('#iw-container');
     //iwContainer.parent().css({ 'overflow': 'hidden' });
+}
+
+function generateTemperatureGraph(elementId, temperatureValue) {
+    if (temperatureValue != "" && temperatureValue != undefined) {
+        var majorTicks = { size: '10%', interval: 10 },
+            minorTicks = { size: '5%', interval: 2.5, style: { 'stroke-width': 1, stroke: '#AAAAAA' } },
+            labels = { interval: 10, position: 'far' };
+        var minTemp = temperatureValue > 0 ? 0 : 10;
+        var maxTemp = parseInt(temperatureValue * 1.2);
+
+        $('#' + elementId).jqxLinearGauge({
+            height: '200px',
+            orientation: 'vertical',
+            labels: labels,
+            ticksMajor: majorTicks,
+            ticksMinor: minorTicks,
+            min: minTemp,
+            max: maxTemp,
+            value: temperatureValue,
+            pointer: { size: '6%' },
+            colorScheme: 'scheme05',
+            ranges: [
+            { startValue: -10, endValue: 10, style: { fill: '#FFF157', stroke: '#FFF157' } },
+            { startValue: 10, endValue: 35, style: { fill: '#FFA200', stroke: '#FFA200' } },
+            { startValue: 35, endValue: maxTemp, style: { fill: '#FF4800', stroke: '#FF4800' } }]
+        });
+    }
 }
 /*********/
 /* UTIL  */

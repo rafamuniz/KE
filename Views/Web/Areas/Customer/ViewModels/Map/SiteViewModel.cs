@@ -22,6 +22,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
         #region Site
         public Guid Id { get; set; }
         public String Name { get; set; }
+        public String Reference { get; set; }
         public String Latitude { get; set; }
         public String Longitude { get; set; }
         public String IPAddress { get; set; }

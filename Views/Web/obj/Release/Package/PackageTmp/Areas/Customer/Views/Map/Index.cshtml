@@ -35,6 +35,25 @@ else
     @Html.HiddenFor(m => m.SiteId)
 }
 
+<div id="legend" class="col-sm-12 col-xs-12 col-md-12 col-lg-12" style="justify-content: center; display: flex; height: 30px;">
+    <img src="~/images/map_site.png" style="margin-left: 10px; height: 30px; width: 20px;" />
+    <span style="margin-left: 5px;">Site</span>
+
+    <img src="~/images/map_pond.png" style="margin-left: 10px; height: 15px; width: 30px;" />
+    <span style="margin-left: 5px;">Pond</span>
+
+    <img src="~/images/map_tank.png" style="margin-left: 10px; height: 25px; width: 25px;" />
+    <span style="margin-left: 5px;">Tank</span>
+
+    <img src="~/images/map_sensor.png" style="margin-left: 10px; height: 25px; width: 25px;" />
+    <span style="margin-left: 5px;">Sensor</span>
+
+    <img src="~/images/warn_black_25x25.png" style="margin-left: 10px; height: 25px; width: 25px;" />
+    <span style="margin-left: 5px;">Low/Medium Alarm</span>
+
+    <img src="~/images/warn_red_25x25.png" style="margin-left: 10px; height: 25px; width: 25px;" />
+    <span style="margin-left: 5px;">High/Critical Alarm</span>
+</div>
 <div id="map" class="col-sm-12 col-xs-12 col-md-12 col-lg-12" style="height: 500px;">
 </div>
 
@@ -51,7 +70,7 @@ else
                 var form = $(event.target).parents('form');
                 form.submit();
             });
-
+            
             hideLoading();
         });
     </script>

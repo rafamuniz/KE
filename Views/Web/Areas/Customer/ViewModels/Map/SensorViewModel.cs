@@ -28,8 +28,26 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
 
         public String Latitude { get; set; }
         public String Longitude { get; set; }
-        
+
         #endregion Sensor
+
+        #region Last Temperature
+   
+        public Guid? AmbientTemperatureLastEventId { get; set; }
+        public Decimal? AmbientTemperatureLastEventValue { get; set; }
+        public DateTime? AmbientTemperatureLastEventDate { get; set; }
+        public String AmbientTemperatureLastEventUnit { get; set; }
+
+        #endregion Last Temperature
+
+        #region Last Voltage
+
+        public Guid? VoltageLastEventId { get; set; }
+        public Decimal? VoltageLastEventValue { get; set; }
+        public DateTime? VoltageLastEventDate { get; set; }
+        public String VoltageLastEventUnit { get; set; }
+
+        #endregion Last Voltage
 
         #region Alarms
         public List<AlarmViewModel> Alarms { get; set; }

@@ -68,6 +68,11 @@ namespace KarmicEnergy.Core.Services
             return this._UnitOfWork.AlarmRepository.GetsBySensor(sensorId).ToList();
         }
 
+        public List<Alarm> GetsBySensorWithTrigger(Guid sensorId)
+        {
+            return this._UnitOfWork.AlarmRepository.GetsBySensor(sensorId, "Trigger", "Trigger.SensorItem", "Trigger.Severity", "Trigger.SensorItem.Sensor", "Trigger.SensorItem.Unit", "Trigger.SensorItem.Sensor.Tank", "Trigger.SensorItem.Sensor.Tank.Site", "Trigger.SensorItem.Item").ToList();
+        }
+
         #endregion Functions
     }
 }

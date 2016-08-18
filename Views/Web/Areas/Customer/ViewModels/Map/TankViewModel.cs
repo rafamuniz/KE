@@ -175,6 +175,15 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
 
         #endregion Last Temperature
 
+        #region Last Voltage
+
+        public Guid? VoltageLastEventId { get; set; }
+        public Decimal? VoltageLastEventValue { get; set; }
+        public DateTime? VoltageLastEventDate { get; set; }
+        public String VoltageLastEventUnit { get; set; }
+
+        #endregion Last Voltage
+
         #region Water Volumes
 
         public List<WaterVolumeViewModel> WaterVolumes { get; set; }

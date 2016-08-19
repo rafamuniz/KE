@@ -22,11 +22,17 @@ namespace KarmicEnergy.Web.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
-        private KEUnitOfWork _KEUnitOfWork;
+        private IKEUnitOfWork _unitOfWork;
 
         public BaseController()
             : this(null, null, null)
         {
+        }
+
+        public BaseController(KEUnitOfWork unitOfWork)
+        : this(null, null, null)
+        {
+            this._unitOfWork = unitOfWork;
         }
 
         public BaseController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -106,15 +112,15 @@ namespace KarmicEnergy.Web.Controllers
             get { return UserManager.FindById(UserId); }
         }
 
-        protected KEUnitOfWork KEUnitOfWork
+        protected IKEUnitOfWork KEUnitOfWork
         {
             get
             {
-                return _KEUnitOfWork ?? HttpContext.GetOwinContext().Get<KEUnitOfWork>();
+                return _unitOfWork ?? HttpContext.GetOwinContext().Get<KEUnitOfWork>();
             }
             set
             {
-                _KEUnitOfWork = value;
+                _unitOfWork = value;
             }
         }
 
@@ -184,7 +190,7 @@ namespace KarmicEnergy.Web.Controllers
             KEUnitOfWork.LogRepository.Add(log);
             KEUnitOfWork.Complete();
         }
-        
+
         #endregion Log
 
         #region Errors
@@ -446,37 +452,37 @@ namespace KarmicEnergy.Web.Controllers
             return tanks;
         }
 
-        protected List<Pond> LoadPonds(Guid customerId, Guid siteId)
+        protected IEnumerable<Pond> LoadPonds(Guid customerId, Guid siteId)
         {
-            List<Pond> ponds = KEUnitOfWork.PondRepository.GetsByCustomerAndSite(customerId, siteId);
+            var ponds = KEUnitOfWork.PondRepository.GetsByCustomerAndSite(customerId, siteId);
             ViewBag.Ponds = ponds;
             return ponds;
         }
 
-        protected List<Sensor> LoadSiteSensors(Guid customerId, Guid siteId)
+        protected IEnumerable<Sensor> LoadSiteSensors(Guid customerId, Guid siteId)
         {
-            List<Sensor> sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndSite(customerId, siteId);
+            var sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndSite(customerId, siteId);
             ViewBag.Sensors = sensors;
             return sensors;
         }
 
-        protected List<Sensor> LoadPondSensors(Guid customerId, Guid pondId)
+        protected IEnumerable<Sensor> LoadPondSensors(Guid customerId, Guid pondId)
         {
-            List<Sensor> sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndPond(customerId, pondId);
+            var sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndPond(customerId, pondId);
             ViewBag.Sensors = sensors;
             return sensors;
         }
 
-        protected List<Sensor> LoadTankSensors(Guid customerId, Guid tankId)
+        protected IEnumerable<Sensor> LoadTankSensors(Guid customerId, Guid tankId)
         {
-            List<Sensor> sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndTank(customerId, tankId);
+            var sensors = KEUnitOfWork.SensorRepository.GetsByCustomerAndTank(customerId, tankId);
             ViewBag.Sensors = sensors;
             return sensors;
         }
 
-        protected List<SensorType> LoadSensorTypes()
+        protected IEnumerable<SensorType> LoadSensorTypes()
         {
-            List<SensorType> sensorTypes = KEUnitOfWork.SensorTypeRepository.GetAll().ToList();
+            var sensorTypes = KEUnitOfWork.SensorTypeRepository.GetAll().ToList();
             ViewBag.SensorTypes = sensorTypes;
             return sensorTypes;
         }

@@ -10,14 +10,17 @@ namespace KarmicEnergy.Core.Repositories
         Boolean HasSensorTank(Guid tankId);
         Boolean HasSensorPond(Guid pondId);
 
-        List<Sensor> GetsActive();
+        IEnumerable<Sensor> GetsActive();
 
-        List<Sensor> GetsByCustomer(Guid customerId);
-        List<Sensor> GetsBySite(Guid siteId);
-        List<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId);
-        List<Sensor> GetsByCustomerAndTank(Guid customerId, Guid tankId);
-        List<Sensor> GetsByCustomerAndPond(Guid customerId, Guid pondId);
+        IEnumerable<Sensor> GetsByCustomer(Guid customerId);
+        IEnumerable<Sensor> GetsBySite(Guid siteId);
+        IEnumerable<Sensor> GetsByPond(Guid pondId);
+        IEnumerable<Sensor> GetsByTank(Guid tankId);
 
-        List<Sensor> GetsBySiteAndSensorType(Guid siteId, SensorTypeEnum sensorType);
+        IEnumerable<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId);
+        IEnumerable<Sensor> GetsByCustomerAndTank(Guid customerId, Guid tankId);
+        IEnumerable<Sensor> GetsByCustomerAndPond(Guid customerId, Guid pondId);
+
+        IEnumerable<Sensor> GetsBySiteAndSensorType(Guid siteId, SensorTypeEnum sensorType);
     }
 }

@@ -31,20 +31,38 @@ namespace KarmicEnergy.Core.Repositories
             return base.Find(x => x.PondId == pondId && x.DeletedDate == null).Any();
         }
 
-        public List<Sensor> GetsActive()
+        public IEnumerable<Sensor> GetsActive()
         {
-            return base.Find(x => x.Status == "A" && x.DeletedDate == null).ToList();
+            return base.Find(x => x.Status == "A" && x.DeletedDate == null);
         }
 
-
-        public List<Sensor> GetsByCustomer(Guid customerId)
+        public IEnumerable<Sensor> GetsByCustomer(Guid customerId)
         {
-            return base.Find(x => x.Site.CustomerId == customerId && x.TankId == null && x.DeletedDate == null).ToList();
+            List<Sensor> sensors = new List<Sensor>();
+            var sensorsSite = base.Find(x => x.Site.CustomerId == customerId && x.DeletedDate == null);
+            var sensorsPond = base.Find(x => x.Pond.Site.CustomerId == customerId && x.DeletedDate == null);
+            var sensorsTank = base.Find(x => x.Tank.Site.CustomerId == customerId && x.DeletedDate == null);
+
+            sensors.AddRange(sensorsSite);
+            sensors.AddRange(sensorsPond);
+            sensors.AddRange(sensorsTank);
+
+            return sensors;
         }
 
-        public List<Sensor> GetsBySite(Guid siteId)
+        public IEnumerable<Sensor> GetsBySite(Guid siteId)
         {
-            return base.Find(x => x.SiteId == siteId && x.TankId == null && x.DeletedDate == null).ToList();
+            return base.Find(x => x.SiteId == siteId && x.DeletedDate == null);
+        }
+
+        public IEnumerable<Sensor> GetsByPond(Guid pondId)
+        {
+            return base.Find(x => x.PondId == pondId && x.DeletedDate == null);
+        }
+
+        public IEnumerable<Sensor> GetsByTank(Guid tankId)
+        {
+            return base.Find(x => x.TankId == tankId && x.DeletedDate == null);
         }
 
         /// <summary>
@@ -53,9 +71,9 @@ namespace KarmicEnergy.Core.Repositories
         /// <param name="customerId"></param>
         /// <param name="siteId"></param>
         /// <returns></returns>
-        public List<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId)
+        public IEnumerable<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId)
         {
-            return base.Find(x => x.Site.CustomerId == customerId && x.SiteId == siteId && x.TankId == null && x.DeletedDate == null).ToList();
+            return base.Find(x => x.Site.CustomerId == customerId && x.SiteId == siteId && x.TankId == null && x.DeletedDate == null);
         }
 
         /// <summary>
@@ -64,9 +82,9 @@ namespace KarmicEnergy.Core.Repositories
         /// <param name="customerId"></param>
         /// <param name="tankId"></param>
         /// <returns></returns>
-        public List<Sensor> GetsByCustomerAndTank(Guid customerId, Guid tankId)
+        public IEnumerable<Sensor> GetsByCustomerAndTank(Guid customerId, Guid tankId)
         {
-            return base.Find(x => x.Tank.Site.CustomerId == customerId && x.TankId == tankId && x.DeletedDate == null).ToList();
+            return base.Find(x => x.Tank.Site.CustomerId == customerId && x.TankId == tankId && x.DeletedDate == null);
         }
 
         /// <summary>
@@ -75,14 +93,14 @@ namespace KarmicEnergy.Core.Repositories
         /// <param name="customerId"></param>
         /// <param name="pondId"></param>
         /// <returns></returns>
-        public List<Sensor> GetsByCustomerAndPond(Guid customerId, Guid pondId)
+        public IEnumerable<Sensor> GetsByCustomerAndPond(Guid customerId, Guid pondId)
         {
-            return base.Find(x => x.Pond.Site.CustomerId == customerId && x.PondId == pondId && x.DeletedDate == null).ToList();
+            return base.Find(x => x.Pond.Site.CustomerId == customerId && x.PondId == pondId && x.DeletedDate == null);
         }
 
-        public List<Sensor> GetsBySiteAndSensorType(Guid siteId, SensorTypeEnum sensorType)
+        public IEnumerable<Sensor> GetsBySiteAndSensorType(Guid siteId, SensorTypeEnum sensorType)
         {
-            return base.Find(x => x.SensorTypeId == (Int16)sensorType && x.SiteId == siteId).ToList();
+            return base.Find(x => x.SensorTypeId == (Int16)sensorType && x.SiteId == siteId);
         }
 
         public override IEnumerable<Sensor> GetsBySiteToSync(Guid siteId, DateTime lastSyncDate)
@@ -90,9 +108,9 @@ namespace KarmicEnergy.Core.Repositories
             List<Sensor> entities = new List<Sensor>();
             List<Sensor> sensors = new List<Sensor>();
 
-            var sites = base.Find(x => x.SiteId == siteId && x.LastModifiedDate > lastSyncDate).ToList();
-            var ponds = base.Find(x => x.Pond.SiteId == siteId && x.LastModifiedDate > lastSyncDate).ToList();
-            var tanks = base.Find(x => x.Tank.SiteId == siteId && x.LastModifiedDate > lastSyncDate).ToList();
+            var sites = base.Find(x => x.SiteId == siteId && x.LastModifiedDate > lastSyncDate);
+            var ponds = base.Find(x => x.Pond.SiteId == siteId && x.LastModifiedDate > lastSyncDate);
+            var tanks = base.Find(x => x.Tank.SiteId == siteId && x.LastModifiedDate > lastSyncDate);
 
             entities.AddRange(sites);
             entities.AddRange(ponds);

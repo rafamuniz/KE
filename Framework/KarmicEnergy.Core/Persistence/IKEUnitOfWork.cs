@@ -5,6 +5,8 @@ namespace KarmicEnergy.Core.Persistence
 {
     public interface IKEUnitOfWork : IDisposable
     {
+        int Complete();
+
         IDataSyncRepository DataSyncRepository { get; }
 
         ILogRepository LogRepository { get; }

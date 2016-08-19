@@ -1,4 +1,6 @@
 ﻿using KarmicEnergy.Core.Entities;
+using KarmicEnergy.Core.Services;
+using KarmicEnergy.Core.Services.Interface;
 using KarmicEnergy.Web.Areas.Customer.ViewModels.Monitoring;
 using KarmicEnergy.Web.Controllers;
 using System;
@@ -12,6 +14,22 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     [Authorize]
     public class MonitoringController : BaseController
     {
+        #region Fields
+        private readonly ISensorItemEventService _sensorItemEventService;
+        private readonly IAlarmService _alarmService;
+        private readonly IAlarmHistoryService _alarmHistoryService;
+        #endregion Fields
+
+        #region Constructor
+        public MonitoringController(ISensorItemEventService sensorItemEventService, 
+            IAlarmService alarmService, IAlarmHistoryService alarmHistoryService)
+        {
+            this._sensorItemEventService = sensorItemEventService;
+            this._alarmService = alarmService;
+            this._alarmHistoryService = alarmHistoryService;
+        }
+        #endregion Constructor
+
         #region Event
 
         #region Index
@@ -188,24 +206,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             try
             {
-                var alarm = KEUnitOfWork.AlarmRepository.Get(id);
-
-                alarm.LastAckDate = DateTime.UtcNow;
-                alarm.LastAckUserId = Guid.Parse(UserId);
-                alarm.LastAckUserName = User.Identity.Name;
-
-                AlarmHistory alarmHistory = new AlarmHistory()
-                {
-                    UserId = Guid.Parse(UserId),
-                    UserName = alarm.LastAckUserName,
-                    ActionTypeId = (Int16)ActionTypeEnum.Ack,
-                    AlarmId = alarm.Id,
-                    Value = alarm.Value,
-                };
-
-                KEUnitOfWork.AlarmHistoryRepository.Add(alarmHistory);
-                KEUnitOfWork.AlarmRepository.Update(alarm);
-                KEUnitOfWork.Complete();
+                _alarmService.Acknowledge(id, Guid.Parse(UserId), User.Identity.Name);
 
                 return RedirectToAction("Alarms");
             }
@@ -218,31 +219,11 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
-        public async Task<ActionResult> AlarmACK(Guid id)
+        public ActionResult AlarmACK(Guid id)
         {
             try
             {
-                var alarm = KEUnitOfWork.AlarmRepository.Get(id);
-
-                alarm.LastAckDate = DateTime.UtcNow;
-                alarm.LastAckUserId = Guid.Parse(UserId);
-                alarm.LastAckUserName = User.Identity.Name;
-
-                AlarmHistory alarmHistory = new AlarmHistory()
-                {
-                    UserId = Guid.Parse(UserId),
-                    UserName = alarm.LastAckUserName,
-                    ActionTypeId = (Int16)ActionTypeEnum.Ack,
-                    AlarmId = alarm.Id,
-                    Value = alarm.Value
-                };
-
-                KEUnitOfWork.AlarmHistoryRepository.Add(alarmHistory);
-                KEUnitOfWork.AlarmRepository.Update(alarm);
-                KEUnitOfWork.Complete();
-
-                AlarmDetailViewModel viewModel = new AlarmDetailViewModel();
-                viewModel = AlarmDetailViewModel.Map(alarm);
+                _alarmService.Acknowledge(id, Guid.Parse(UserId), User.Identity.Name);
 
                 return RedirectToAction("AlarmInfo/" + id);
             }
@@ -272,22 +253,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             try
             {
-                var alarm = KEUnitOfWork.AlarmRepository.Get(viewModel.AlarmId);
-
-                alarm.EndDate = DateTime.UtcNow;
-
-                AlarmHistory alarmHistory = new AlarmHistory()
-                {
-                    UserId = Guid.Parse(UserId),
-                    ActionTypeId = (Int16)ActionTypeEnum.Clear,
-                    Message = viewModel.Message,
-                    AlarmId = alarm.Id,
-                    Value = alarm.Value
-                };
-
-                KEUnitOfWork.AlarmHistoryRepository.Add(alarmHistory);
-                KEUnitOfWork.AlarmRepository.Update(alarm);
-                KEUnitOfWork.Complete();
+                _alarmService.Clear(viewModel.AlarmId, Guid.Parse(UserId), viewModel.Message);
 
                 return RedirectToAction("Alarms");
             }
@@ -319,22 +285,17 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             try
             {
-                var alarm = KEUnitOfWork.AlarmRepository.Get(viewModel.AlarmId);
-
-                AlarmHistory alarmHistory = new AlarmHistory()
+                AlarmHistory history = new AlarmHistory()
                 {
                     UserId = Guid.Parse(UserId),
-                    UserName = User.Identity.Name,
-                    ActionTypeId = (Int16)ActionTypeEnum.Comment,
+                    UserName = User.Identity.Name,                    
                     Message = viewModel.Comment,
-                    AlarmId = alarm.Id,
-                    Value = alarm.Value
+                    AlarmId = viewModel.AlarmId,                    
                 };
 
-                KEUnitOfWork.AlarmHistoryRepository.Add(alarmHistory);
-                KEUnitOfWork.Complete();
+                this._alarmHistoryService.CreateComment(history);
 
-                return RedirectToAction("AlarmInfo/" + alarm.Id);
+                return RedirectToAction("AlarmInfo/" + viewModel.AlarmId);
             }
             catch (Exception ex)
             {

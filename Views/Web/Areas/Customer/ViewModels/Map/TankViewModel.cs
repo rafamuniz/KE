@@ -263,7 +263,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
 
         #region Map
 
-        public static List<TankViewModel> Map(IList<Core.Entities.Tank> entities)
+        public static List<TankViewModel> Map(IEnumerable<Core.Entities.Tank> entities)
         {
             List<TankViewModel> vms = new List<TankViewModel>();
 
@@ -279,8 +279,8 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
         {
             var viewModel = Mapper.Map<Core.Entities.Tank, TankViewModel>(entity);
 
-            //if (entity.WaterVolumeCapacityUnit != null)
-            //    viewModel.WaterVolumeCapacityUnit = entity.WaterVolumeCapacityUnit.Symbol;
+            if (entity.WaterVolumeCapacityUnit != null)
+                viewModel.WaterVolumeCapacityUnit = entity.WaterVolumeCapacityUnit.Symbol;
 
             return viewModel;
         }

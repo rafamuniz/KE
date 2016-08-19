@@ -1,9 +1,10 @@
 ﻿using KarmicEnergy.Core.Repositories;
+using Munizoft.Core.Persistence;
 using System;
 
 namespace KarmicEnergy.Core.Persistence
 {
-    public class KEUnitOfWork : KEUnitOfWorkBase<KEContext>, IKEUnitOfWork, IDisposable
+    public class KEUnitOfWork : UnitOfWork<KEContext>, IKEUnitOfWork, IDisposable
     {
         #region Fields     
         private IDataSyncRepository _DataSyncRepository;
@@ -101,6 +102,7 @@ namespace KarmicEnergy.Core.Persistence
             return new KEUnitOfWork(enablelazyLoading);
         }
 
+        #region Repositories
         public IActionTypeRepository ActionTypeRepository
         {
             get { return _ActionTypeRepository ?? (_ActionTypeRepository = new ActionTypeRepository(_context)); }
@@ -300,5 +302,7 @@ namespace KarmicEnergy.Core.Persistence
         {
             get { return _NotificationRepository ?? (_NotificationRepository = new NotificationRepository(_context)); }
         }
+
+        #endregion Repositories
     }
 }

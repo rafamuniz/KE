@@ -84,6 +84,14 @@
       <HintPath>..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Autofac, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="AutoMapper, Version=5.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
@@ -114,8 +122,8 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Munizoft.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Core\bin\Debug\Munizoft.Core.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Munizoft\Projects\Framework\Munizoft.Core\bin\Debug\Munizoft.Core.dll</HintPath>
     </Reference>
     <Reference Include="Munizoft.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -280,6 +288,7 @@
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\Bootstrapper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -331,6 +340,7 @@
     <Compile Include="Areas\Customer\ViewModels\Map\PondViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Map\SensorViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Map\SiteViewModel.cs" />
+    <Compile Include="Persistence\IApplicationContext.cs" />
     <Compile Include="ViewModels\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Log\ListViewModel.cs" />
@@ -2528,7 +2538,6 @@
     <Folder Include="App_Data\StickConversions\" />
     <Folder Include="Areas\Customer\ViewModels\Report\" />
     <Folder Include="Areas\Customer\ViewModels\Temp\" />
-    <Folder Include="Helpers\" />
     <Folder Include="images\geometries\" />
   </ItemGroup>
   <ItemGroup>

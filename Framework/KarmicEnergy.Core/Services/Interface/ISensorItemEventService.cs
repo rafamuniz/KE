@@ -4,11 +4,8 @@ using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Services.Interface
 {
-    public interface ISensorItemEventService : IKEBaseService
+    public interface ISensorItemEventService : IKEBaseService<Guid, SensorItemEvent>
     {
-        SensorItemEvent Get(Guid id);
-        IList<SensorItemEvent> Gets();
-
         SensorItemEvent GetLastEventByTankAndItem(Guid tankId, ItemEnum item);
     }
 }

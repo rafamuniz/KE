@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Linq;
+using Munizoft.Extensions;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -49,7 +50,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
 
         #region Map
 
-        public static List<AlarmViewModel> Map(List<Core.Entities.Alarm> entities)
+        public static List<AlarmViewModel> Map(IEnumerable<Core.Entities.Alarm> entities)
         {
             List<AlarmViewModel> vms = new List<AlarmViewModel>();
 

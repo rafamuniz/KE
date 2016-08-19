@@ -1,10 +1,11 @@
 ﻿using KarmicEnergy.Core.Entities;
 using System;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace KarmicEnergy.Core.Persistence
 {
-    public class KEContext : DbContext
+    public class KEContext : DbContext, IKEContext
     {
         #region Constructor
 
@@ -36,11 +37,16 @@ namespace KarmicEnergy.Core.Persistence
         #region Functions
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Tank>().Property(x => x.Description).HasColumnType("NVARCHAR(MAX)");
+            modelBuilder.Entity<Pond>().Property(x => x.Description).HasColumnType("NVARCHAR(MAX)");
+
             modelBuilder.Entity<TankModel>().Property(x => x.Image).HasColumnType("VARBINARY(MAX)");
             modelBuilder.Entity<CustomerSetting>().Property(x => x.Value).HasColumnType("NVARCHAR(MAX)");
             modelBuilder.Entity<CustomerUserSetting>().Property(x => x.Value).HasColumnType("NVARCHAR(MAX)");
             modelBuilder.Entity<Notification>().Property(p => p.Message).HasColumnType("NVARCHAR(MAX)");
             modelBuilder.Entity<NotificationTemplate>().Property(p => p.Message).HasColumnType("NVARCHAR(MAX)");
+
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
             base.OnModelCreating(modelBuilder);
         }

@@ -4,12 +4,8 @@ using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Services.Interface
 {
-    public interface ISensorItemService : IKEBaseService
+    public interface ISensorItemService : IKEBaseService<Guid, SensorItem>
     {
-        SensorItem Get(Guid id);
-        IList<SensorItem> Gets();
-
-
         Boolean HasSiteSensorItem(Guid siteId, ItemEnum item);
 
         Boolean HasPondSensorItem(Guid pondId, ItemEnum item);

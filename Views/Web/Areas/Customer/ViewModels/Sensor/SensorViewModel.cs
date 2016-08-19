@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Munizoft.Extensions;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
 {
@@ -48,7 +49,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor
 
         #region Map
 
-        public static List<SensorViewModel> Map(List<Core.Entities.Sensor> entities)
+        public static List<SensorViewModel> Map(IEnumerable<Core.Entities.Sensor> entities)
         {
             List<SensorViewModel> vms = new List<SensorViewModel>();
 

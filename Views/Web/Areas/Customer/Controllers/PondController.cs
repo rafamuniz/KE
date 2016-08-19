@@ -6,12 +6,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using KarmicEnergy.Core.Services.Interface;
 
 namespace KarmicEnergy.Web.Areas.Customer.Controllers
 {
     [Authorize]
     public class PondController : BaseController
     {
+        #region Fields
+        private readonly IPondService _pondService;
+        #endregion Fields
+
+        #region Constructor
+        public PondController(IPondService pondService)
+        {
+            this._pondService = pondService;
+        }
+        #endregion Constructor
+
         #region Index
 
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
@@ -21,12 +33,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             if (!IsSite)
             {
-                var ponds = KEUnitOfWork.PondRepository.GetsByCustomer(CustomerId).ToList();
+                var ponds = KEUnitOfWork.PondRepository.GetsByCustomer(CustomerId);
                 viewModels = ViewModels.Pond.ListViewModel.Map(ponds);
             }
             else
             {
-                var ponds = KEUnitOfWork.PondRepository.GetsByCustomerAndSite(CustomerId, SiteId).ToList();
+                var ponds = KEUnitOfWork.PondRepository.GetsBySite(SiteId);
                 viewModels = ViewModels.Pond.ListViewModel.Map(ponds);
             }
 
@@ -44,7 +56,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         //
-        // POST: /User/Create
+        // POST: /Pond/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
@@ -59,8 +71,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
                 var pond = viewModel.Map();
 
-                KEUnitOfWork.PondRepository.Add(pond);
-                KEUnitOfWork.Complete();
+                _pondService.Create(pond);
 
                 return RedirectToAction("Index", "Pond");
             }
@@ -96,7 +107,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Edit(Guid id)
         {
-            var pond = KEUnitOfWork.PondRepository.Get(id);
+            var pond = _pondService.Get(id);
 
             if (pond == null)
             {
@@ -106,12 +117,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
             ViewModels.Pond.EditViewModel viewModel = InitEdit();
             viewModel.Map(pond);
-
+                        
             return View(viewModel);
         }
 
         //
-        // POST: /User/Update
+        // POST: /Pond/Update
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
@@ -124,20 +135,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     InitEdit();
                     return View(viewModel);
                 }
-
-                var pond = KEUnitOfWork.PondRepository.Get(viewModel.Id);
-
-                if (pond == null)
-                {
-                    AddErrors("Pond does not exist");
-                    return View("Index");
-                }
-
-                viewModel.MapVMToEntity(pond);
-                //pond.WaterVolumeCapacity = pond.CalculateWaterCapacity();
-
-                KEUnitOfWork.PondRepository.Update(pond);
-                KEUnitOfWork.Complete();
+                
+                var pond = viewModel.Map();
+                _pondService.Update(pond);
 
                 return RedirectToAction("Index", "Pond");
             }
@@ -171,22 +171,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Delete
         //
-        // GET: /User/Delete
+        // GET: /Pond/Delete
         [HttpGet]
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Delete(Guid id)
         {
-            var tank = KEUnitOfWork.TankRepository.Get(id);
-
-            if (tank == null)
-            {
-                AddErrors("Tank does not exist");
-                return View("Index");
-            }
-
-            tank.DeletedDate = DateTime.UtcNow;
-            KEUnitOfWork.TankRepository.Update(tank);
-            KEUnitOfWork.Complete();
+            _pondService.Delete(id);
 
             return RedirectToAction("Index", "Tank");
         }

@@ -67,8 +67,7 @@ namespace KarmicEnergy.Core.Entities
                 new Unit() { Id = 12, Name = "PPM", NamePlural = "PPM", Symbol = "ppm", UnitTypeId = (int)UnitTypeEnum.UnitConcentration },
                 new Unit() { Id = 13, Name = "mg/m3", NamePlural = "mg/m3", Symbol = "mg/m3", UnitTypeId = (int)UnitTypeEnum.UnitConcentration, DeletedDate = DateTime.UtcNow },
                 new Unit() { Id = 14, Name = "PH", NamePlural = "PH", Symbol = "PH", UnitTypeId = (int)UnitTypeEnum.PH },
-                new Unit() { Id = 14, Name = "Volt", NamePlural = "Volts", Symbol = "Vm", UnitTypeId = (int)UnitTypeEnum.Energy }
-
+                new Unit() { Id = 15, Name = "Volt", NamePlural = "Volts", Symbol = "Vm", UnitTypeId = (int)UnitTypeEnum.Energy }
             };
 
             return entities;

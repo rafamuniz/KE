@@ -4,21 +4,21 @@ using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Services.Interface
 {
-    public interface IAlarmService : IKEBaseService
+    public interface IAlarmService : IKEBaseService<Guid, Alarm>
     {
-        Alarm Get(Guid id);
-        List<Alarm> Gets();
+        void Acknowledge(Guid alarmId, Guid userId, String username);
+        void Clear(Guid alarmId, Guid userId, String message);
 
-        List<Alarm> GetsBySite(Guid siteId);
-        List<Alarm> GetsBySiteWithTrigger(Guid siteId);
+        IEnumerable<Alarm> GetsBySite(Guid siteId);
+        IEnumerable<Alarm> GetsBySiteWithTrigger(Guid siteId);
 
-        List<Alarm> GetsByPond(Guid pondId);
-        List<Alarm> GetsByPondWithTrigger(Guid pondId);
+        IEnumerable<Alarm> GetsByPond(Guid pondId);
+        IEnumerable<Alarm> GetsByPondWithTrigger(Guid pondId);
 
-        List<Alarm> GetsByTank(Guid tankId);
-        List<Alarm> GetsByTankWithTrigger(Guid tankId);
+        IEnumerable<Alarm> GetsByTank(Guid tankId);
+        IEnumerable<Alarm> GetsByTankWithTrigger(Guid tankId);
 
-        List<Alarm> GetsBySensor(Guid sensorId);
-        List<Alarm> GetsBySensorWithTrigger(Guid sensorId);
+        IEnumerable<Alarm> GetsBySensor(Guid sensorId);
+        IEnumerable<Alarm> GetsBySensorWithTrigger(Guid sensorId);
     }
 }

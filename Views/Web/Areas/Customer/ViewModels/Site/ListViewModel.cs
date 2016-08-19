@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Munizoft.Extensions;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Site
 {
@@ -19,7 +20,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Site
 
         #region Map
 
-        public static List<ListViewModel> Map(List<Core.Entities.Site> entities)
+        public static List<ListViewModel> Map(IEnumerable<Core.Entities.Site> entities)
         {
             List<ListViewModel> vms = new List<ListViewModel>();
 

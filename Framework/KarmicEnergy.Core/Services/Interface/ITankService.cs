@@ -4,18 +4,13 @@ using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Services.Interface
 {
-    public interface ITankService
+    public interface ITankService : IKEBaseService<Guid, Tank>
     {
-        Tank Get(Guid id);
-        Tank Get(Guid id, params String[] includes);
+        IEnumerable<Tank> GetsByCustomer(Guid customerId);
+        IEnumerable<Tank> GetsBySite(Guid siteId);
+        IEnumerable<Tank> GetsByCustomerAndSite(Guid customerId, Guid siteId);
 
-        IList<Tank> Gets();
-
-        IList<Tank> GetsByCustomer(Guid customerId);
-        IList<Tank> GetsBySite(Guid siteId);
-        IList<Tank> GetsByCustomerAndSite(Guid customerId, Guid siteId);
-
-        IList<Tank> GetsBySiteWithTankModel(Guid siteId);
-        IList<Tank> GetsBySiteWithAlarms(Guid siteId);
+        IEnumerable<Tank> GetsBySiteWithTankModel(Guid siteId);
+        IEnumerable<Tank> GetsBySiteWithAlarms(Guid siteId);
     }
 }

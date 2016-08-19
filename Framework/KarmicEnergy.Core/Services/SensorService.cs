@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Services
 {
-    public class SensorService : KEServiceBase, ISensorService
+    public class SensorService : KEServiceBase<Guid, Sensor>, ISensorService
     {
         #region Constructor
 
@@ -20,43 +20,43 @@ namespace KarmicEnergy.Core.Services
 
         #region Functions
 
-        public Sensor Get(Guid id)
+        public override Sensor Get(Guid id)
         {
             if (id == default(Guid))
                 throw new ArgumentException("id is required");
 
-            return this._UnitOfWork.SensorRepository.Get(id);
+            return this._unitOfWork.SensorRepository.Get(id);
         }
 
-        public List<Sensor> Gets()
+        public override  IEnumerable<Sensor> GetAll()
         {
-            return this._UnitOfWork.SensorRepository.GetAll().ToList();
+            return this._unitOfWork.SensorRepository.GetAll();
         }
 
         public Boolean HasSensorSite(Guid siteId)
         {
-            return this._UnitOfWork.SensorRepository.HasSensorSite(siteId);
+            return this._unitOfWork.SensorRepository.HasSensorSite(siteId);
         }
 
         public Boolean HasSensorTank(Guid tankId)
         {
-            return this._UnitOfWork.SensorRepository.HasSensorTank(tankId);
+            return this._unitOfWork.SensorRepository.HasSensorTank(tankId);
         }
 
         public Boolean HasSensorPond(Guid pondId)
         {
-            return this._UnitOfWork.SensorRepository.HasSensorPond(pondId);
+            return this._unitOfWork.SensorRepository.HasSensorPond(pondId);
         }
 
-        public List<Sensor> GetsBySite(Guid siteId)
+        public IEnumerable<Sensor> GetsBySite(Guid siteId)
         {
             if (siteId == default(Guid))
                 throw new ArgumentException("siteId is required");
 
-            return this._UnitOfWork.SensorRepository.GetsBySite(siteId);
+            return this._unitOfWork.SensorRepository.GetsBySite(siteId);
         }
 
-        public List<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId)
+        public IEnumerable<Sensor> GetsByCustomerAndSite(Guid customerId, Guid siteId)
         {
             if (customerId == default(Guid))
                 throw new ArgumentException("customerId is required");
@@ -64,7 +64,7 @@ namespace KarmicEnergy.Core.Services
             if (siteId == default(Guid))
                 throw new ArgumentException("siteId is required");
 
-            return this._UnitOfWork.SensorRepository.GetsByCustomerAndSite(customerId, siteId);
+            return this._unitOfWork.SensorRepository.GetsByCustomerAndSite(customerId, siteId);
         }
 
         #endregion Functions

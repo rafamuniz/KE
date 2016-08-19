@@ -102,7 +102,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
 
         #region Map
 
-        public static List<SiteViewModel> Map(IList<Core.Entities.Site> entities)
+        public static List<SiteViewModel> Map(IEnumerable<Core.Entities.Site> entities)
         {
             List<SiteViewModel> vms = new List<SiteViewModel>();
 

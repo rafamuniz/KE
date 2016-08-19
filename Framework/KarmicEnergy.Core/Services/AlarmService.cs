@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Services
 {
-    public class AlarmService : KEServiceBase, IAlarmService
+    public class AlarmService : KEServiceBase<Guid, Alarm>, IAlarmService
     {
         #region Constructor
 
@@ -20,57 +20,109 @@ namespace KarmicEnergy.Core.Services
 
         #region Functions
 
-        public Alarm Get(Guid id)
+        public override Alarm Get(Guid id)
         {
             if (id == default(Guid))
                 throw new ArgumentException("id is required");
 
-            return this._UnitOfWork.AlarmRepository.Get(id);
+            return this._unitOfWork.AlarmRepository.Get(id);
         }
 
-        public List<Alarm> Gets()
+        public override IEnumerable<Alarm> GetAll()
         {
-            return this._UnitOfWork.AlarmRepository.GetAll().ToList();
+            return this._unitOfWork.AlarmRepository.GetAll();
         }
 
-        public List<Alarm> GetsBySite(Guid siteId)
+        public override void Delete(Guid id)
         {
-            return this._UnitOfWork.AlarmRepository.GetsBySite(siteId).ToList();
+            if (id == default(Guid))
+                throw new ArgumentException("id is required");
+
+            var alarm = this._unitOfWork.AlarmRepository.Get(id);
+            alarm.DeletedDate = DateTime.UtcNow;
+            this._unitOfWork.AlarmRepository.Update(alarm);            
         }
 
-        public List<Alarm> GetsBySiteWithTrigger(Guid siteId)
+        public void Acknowledge(Guid alarmId, Guid userId, String username)
         {
-            return this._UnitOfWork.AlarmRepository.GetsBySite(siteId, "Trigger", "Trigger.SensorItem", "Trigger.Severity", "Trigger.SensorItem.Sensor", "Trigger.SensorItem.Unit", "Trigger.SensorItem.Sensor.Tank", "Trigger.SensorItem.Sensor.Tank.Site", "Trigger.SensorItem.Item").ToList();
+            var alarm = this._unitOfWork.AlarmRepository.Get(alarmId);
+
+            alarm.LastAckDate = DateTime.UtcNow;
+            alarm.LastAckUserId = userId;
+            alarm.LastAckUserName = username;
+
+            AlarmHistory alarmHistory = new AlarmHistory()
+            {
+                UserId = userId,
+                UserName = alarm.LastAckUserName,
+                ActionTypeId = (Int16)ActionTypeEnum.Ack,
+                AlarmId = alarm.Id,
+                Value = alarm.Value,
+            };
+
+            this._unitOfWork.AlarmHistoryRepository.Add(alarmHistory);
+            this._unitOfWork.AlarmRepository.Update(alarm);
+            this._unitOfWork.Complete();
         }
 
-        public List<Alarm> GetsByPond(Guid pondId)
+        public void Clear(Guid alarmId, Guid userId, String message)
         {
-            return this._UnitOfWork.AlarmRepository.GetsByPond(pondId).ToList();
+            var alarm = this._unitOfWork.AlarmRepository.Get(alarmId);
+
+            alarm.EndDate = DateTime.UtcNow;
+
+            AlarmHistory alarmHistory = new AlarmHistory()
+            {
+                UserId = userId,
+                ActionTypeId = (Int16)ActionTypeEnum.Clear,
+                Message = message,
+                AlarmId = alarm.Id,
+                Value = alarm.Value
+            };
+
+            this._unitOfWork.AlarmHistoryRepository.Add(alarmHistory);
+            this._unitOfWork.AlarmRepository.Update(alarm);
+            this._unitOfWork.Complete();
         }
 
-        public List<Alarm> GetsByPondWithTrigger(Guid pondId)
+        public IEnumerable<Alarm> GetsBySite(Guid siteId)
         {
-            return this._UnitOfWork.AlarmRepository.GetsByPond(pondId, "Trigger", "Trigger.SensorItem", "Trigger.Severity", "Trigger.SensorItem.Sensor", "Trigger.SensorItem.Unit", "Trigger.SensorItem.Sensor.Tank", "Trigger.SensorItem.Sensor.Tank.Site", "Trigger.SensorItem.Item").ToList();
+            return this._unitOfWork.AlarmRepository.GetsBySite(siteId).ToList();
         }
 
-        public List<Alarm> GetsByTank(Guid tankId)
+        public IEnumerable<Alarm> GetsBySiteWithTrigger(Guid siteId)
         {
-            return this._UnitOfWork.AlarmRepository.GetsByTank(tankId).ToList();
+            return this._unitOfWork.AlarmRepository.GetsBySite(siteId, "Trigger", "Trigger.SensorItem", "Trigger.Severity", "Trigger.SensorItem.Sensor", "Trigger.SensorItem.Unit", "Trigger.SensorItem.Sensor.Tank", "Trigger.SensorItem.Sensor.Tank.Site", "Trigger.SensorItem.Item").ToList();
         }
 
-        public List<Alarm> GetsByTankWithTrigger(Guid tankId)
+        public IEnumerable<Alarm> GetsByPond(Guid pondId)
         {
-            return this._UnitOfWork.AlarmRepository.GetsByTank(tankId, "Trigger", "Trigger.SensorItem", "Trigger.Severity", "Trigger.SensorItem.Sensor", "Trigger.SensorItem.Unit", "Trigger.SensorItem.Sensor.Tank", "Trigger.SensorItem.Sensor.Tank.Site", "Trigger.SensorItem.Item").ToList();
+            return this._unitOfWork.AlarmRepository.GetsByPond(pondId).ToList();
         }
 
-        public List<Alarm> GetsBySensor(Guid sensorId)
+        public IEnumerable<Alarm> GetsByPondWithTrigger(Guid pondId)
         {
-            return this._UnitOfWork.AlarmRepository.GetsBySensor(sensorId).ToList();
+            return this._unitOfWork.AlarmRepository.GetsByPond(pondId, "Trigger", "Trigger.SensorItem", "Trigger.Severity", "Trigger.SensorItem.Sensor", "Trigger.SensorItem.Unit", "Trigger.SensorItem.Sensor.Tank", "Trigger.SensorItem.Sensor.Tank.Site", "Trigger.SensorItem.Item").ToList();
         }
 
-        public List<Alarm> GetsBySensorWithTrigger(Guid sensorId)
+        public IEnumerable<Alarm> GetsByTank(Guid tankId)
         {
-            return this._UnitOfWork.AlarmRepository.GetsBySensor(sensorId, "Trigger", "Trigger.SensorItem", "Trigger.Severity", "Trigger.SensorItem.Sensor", "Trigger.SensorItem.Unit", "Trigger.SensorItem.Sensor.Tank", "Trigger.SensorItem.Sensor.Tank.Site", "Trigger.SensorItem.Item").ToList();
+            return this._unitOfWork.AlarmRepository.GetsByTank(tankId).ToList();
+        }
+
+        public IEnumerable<Alarm> GetsByTankWithTrigger(Guid tankId)
+        {
+            return this._unitOfWork.AlarmRepository.GetsByTank(tankId, "Trigger", "Trigger.SensorItem", "Trigger.Severity", "Trigger.SensorItem.Sensor", "Trigger.SensorItem.Unit", "Trigger.SensorItem.Sensor.Tank", "Trigger.SensorItem.Sensor.Tank.Site", "Trigger.SensorItem.Item").ToList();
+        }
+
+        public IEnumerable<Alarm> GetsBySensor(Guid sensorId)
+        {
+            return this._unitOfWork.AlarmRepository.GetsBySensor(sensorId).ToList();
+        }
+
+        public IEnumerable<Alarm> GetsBySensorWithTrigger(Guid sensorId)
+        {
+            return this._unitOfWork.AlarmRepository.GetsBySensor(sensorId, "Trigger", "Trigger.SensorItem", "Trigger.Severity", "Trigger.SensorItem.Sensor", "Trigger.SensorItem.Unit", "Trigger.SensorItem.Sensor.Tank", "Trigger.SensorItem.Sensor.Tank.Site", "Trigger.SensorItem.Item").ToList();
         }
 
         #endregion Functions

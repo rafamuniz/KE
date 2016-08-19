@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace KarmicEnergy.Core.Repositories
 {
-    public abstract class KERepositoryBase<TEntity> : Repository<TEntity, KEContext>
+    public abstract class KERepositoryBase<TEntity> : Repository<TEntity, KEContext>, IKERepositoryBase<TEntity>
         where TEntity : BaseEntity
     {
         #region Constructor

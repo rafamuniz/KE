@@ -50,6 +50,13 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Pond
 
         #region Map
 
+        public Core.Entities.Pond Map()
+        {
+            Core.Entities.Pond entity = new Core.Entities.Pond();
+            Mapper.Map<EditViewModel, Core.Entities.Pond>(this, entity);
+            return entity;
+        }
+
         public void Map(Core.Entities.Pond entity)
         {
             Mapper.Map<Core.Entities.Pond, EditViewModel>(entity, this);

@@ -1,4 +1,5 @@
 ﻿using KarmicEnergy.Core.Entities;
+using KarmicEnergy.Core.Services.Interface;
 using KarmicEnergy.Web.Areas.Customer.ViewModels.Contact;
 using KarmicEnergy.Web.Controllers;
 using KarmicEnergy.Web.Models;
@@ -14,12 +15,23 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     [Authorize]
     public class ContactController : BaseController
     {
+        #region Fields
+        private readonly IContactService _contactService;
+        #endregion Fields
+
+        #region Constructor
+        public ContactController(IContactService contactService)
+        {
+            this._contactService = contactService;
+        }
+        #endregion Constructor
+
         #region Index
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public async Task<ActionResult> Index()
         {
-            List<Contact> entities = KEUnitOfWork.ContactRepository.GetsByCustomer(CustomerId).ToList();
-            var viewModels = ListViewModel.Map(entities);
+            var contacts = KEUnitOfWork.ContactRepository.GetsByCustomer(CustomerId).ToList();
+            var viewModels = ListViewModel.Map(contacts);
 
             AddLog("Navigated to Contact View", LogTypeEnum.Info);
             return View(viewModels);
@@ -59,9 +71,8 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 contact.Address = address;
                 contact.AddressId = address.Id;
 
-                KEUnitOfWork.ContactRepository.Add(contact);
-                KEUnitOfWork.Complete();
-
+                this._contactService.Create(contact);
+                
                 AddLog("Contact Created", LogTypeEnum.Info);
                 return RedirectToAction("Index", "Contact", new { area = "Customer" });
             }
@@ -152,17 +163,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         {
             try
             {
-                var contact = KEUnitOfWork.ContactRepository.Get(id);
-
-                if (contact == null)
-                {
-                    AddErrors("Contact does not exist");
-                    return View("Index");
-                }
-
-                contact.DeletedDate = DateTime.UtcNow;
-                KEUnitOfWork.ContactRepository.Update(contact);
-                KEUnitOfWork.Complete();
+                this._contactService.Delete(id);
 
                 AddLog("Contact Deleted", LogTypeEnum.Info);
                 return RedirectToAction("Index", "Contact", new { area = "Customer" });

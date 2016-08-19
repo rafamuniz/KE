@@ -1,4 +1,5 @@
 ﻿using KarmicEnergy.Core.Entities;
+using KarmicEnergy.Core.Services.Interface;
 using KarmicEnergy.Web.Areas.Customer.ViewModels.Trigger;
 using KarmicEnergy.Web.Controllers;
 using KarmicEnergy.Web.Entities;
@@ -13,6 +14,17 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     [Authorize]
     public class TriggerController : BaseController
     {
+        #region Fields
+        private readonly ITriggerService _triggerService;
+        #endregion Fields
+
+        #region Constructor
+        public TriggerController(ITriggerService triggerService)
+        {
+            this._triggerService = triggerService;
+        }
+        #endregion Constructor
+
         #region Index
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Index()

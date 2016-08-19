@@ -1,10 +1,7 @@
 ﻿using KarmicEnergy.Core.Entities;
-using KarmicEnergy.Core.Persistence;
-using KarmicEnergy.Core.Services;
 using KarmicEnergy.Core.Services.Interface;
 using KarmicEnergy.Web.Areas.Customer.ViewModels.Map;
 using KarmicEnergy.Web.Controllers;
-using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +12,29 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     [Authorize]
     public class MapController : BaseController
     {
+        #region Fields
+        private readonly ISiteService _siteService;
+        private readonly IPondService _pondService;
+        private readonly ITankService _tankService;
+        private readonly ISensorService _sensorService;
+        private readonly ISensorItemService _sensorItemService;
+        private readonly ISensorItemEventService _sensorItemEventService;
+        private readonly IAlarmService _alarmService;
+        #endregion Fields
+
         #region Constructor
 
-        public MapController()
+        public MapController(ISiteService siteService, IPondService pondService, ITankService tankService
+            , ISensorService sensorService, ISensorItemService sensorItemService, ISensorItemEventService sensorItemEventService
+            , IAlarmService alarmService)
         {
-
+            this._siteService = siteService;
+            this._pondService = pondService;
+            this._tankService = tankService;
+            this._sensorService = sensorService;
+            this._sensorItemService = sensorItemService;
+            this._sensorItemEventService = sensorItemEventService;
+            this._alarmService = alarmService;
         }
 
         #endregion Constructor
@@ -30,19 +45,27 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult Index()
         {
             IndexViewModel viewModel = new IndexViewModel();
-            ISiteService siteService = new SiteService(KEUnitOfWork.Create(false));
 
-            if (!IsSite)
+            IEnumerable<Site> sites;
+            if (User.IsInRole("General Manager") || User.IsInRole("Customer"))
             {
-                var sites = siteService.GetsByCustomer(CustomerId);
-                viewModel.Sites = SiteViewModel.Map(sites.ToList());
+                if (IsSite)
+                {
+                    viewModel.SiteId = SiteId;
+                    var site = _siteService.Get(SiteId);
+                    viewModel.Map(site);
+                }
+                else
+                {
+                    sites = this._siteService.GetsByCustomer(CustomerId);
+                    viewModel.Sites = SiteViewModel.Map(sites);
+                }
             }
-            else // It is a site
+            else if(!User.IsInRole("General Manager") && !User.IsInRole("Customer"))
             {
-                viewModel.SiteId = SiteId;
-                var site = siteService.Get(SiteId);
-                viewModel.Map(site);
-            }
+                sites = this._siteService.GetsSiteByUser(Guid.Parse(UserId));
+                viewModel.Sites = SiteViewModel.Map(sites);
+            }            
 
             AddLog("Navigated to Map View", LogTypeEnum.Info);
             return View(viewModel);
@@ -52,13 +75,13 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         public ActionResult SiteSelected(Guid siteId)
         {
             IndexViewModel viewModel = new IndexViewModel();
-            ISiteService siteService = new SiteService(KEUnitOfWork.Create(false));
-            var site = siteService.Get(siteId);
+            var site = this._siteService.Get(siteId);
             viewModel.Map(site);
 
-            var sites = siteService.GetsByCustomer(CustomerId);
-            viewModel.Sites = SiteViewModel.Map(sites.ToList());
+            var sites = this._siteService.GetsByCustomer(CustomerId);
+            viewModel.Sites = SiteViewModel.Map(sites);
             viewModel.SiteId = siteId;
+
             return View("Index", viewModel);
         }
 
@@ -69,14 +92,10 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetSite(Guid siteId)
         {
-            ViewModels.Map.SiteViewModel viewModel = new ViewModels.Map.SiteViewModel();
-            var unitOfWork = KEUnitOfWork.Create(false);
-            ISiteService siteService = new SiteService(unitOfWork);
-            var site = siteService.Get(siteId);
-            viewModel = ViewModels.Map.SiteViewModel.Map(site);
+            var site = _siteService.Get(siteId);
+            ViewModels.Map.SiteViewModel viewModel = ViewModels.Map.SiteViewModel.Map(site);
 
-            IAlarmService alarmService = new AlarmService(unitOfWork);
-            var siteAlarms = alarmService.GetsBySiteWithTrigger(viewModel.Id);
+            var siteAlarms = this._alarmService.GetsBySiteWithTrigger(viewModel.Id);
             viewModel.Alarms = AlarmViewModel.Map(siteAlarms);
 
             return Json(viewModel, JsonRequestBehavior.AllowGet);
@@ -85,15 +104,11 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetSiteWithInfo(Guid siteId)
         {
-            ViewModels.Map.SiteViewModel viewModel = new ViewModels.Map.SiteViewModel();
-            var unitOfWork = KEUnitOfWork.Create(false);
-            ISiteService siteService = new SiteService(unitOfWork);
-            var sensor = siteService.Get(siteId);
-            viewModel = ViewModels.Map.SiteViewModel.Map(sensor);
-                     
+            var sensor = this._siteService.Get(siteId);
+            ViewModels.Map.SiteViewModel viewModel = ViewModels.Map.SiteViewModel.Map(sensor);
+
             // Alarm
-            IAlarmService alarmService = new AlarmService(unitOfWork);
-            var siteAlarms = alarmService.GetsBySiteWithTrigger(siteId);
+            var siteAlarms = this._alarmService.GetsBySiteWithTrigger(siteId);
             viewModel.Alarms = AlarmViewModel.Map(siteAlarms);
 
             return Json(viewModel, JsonRequestBehavior.AllowGet);
@@ -102,18 +117,14 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsPond(Guid siteId)
         {
-            var unitOfWork = KEUnitOfWork.Create(false);
-            IList<PondViewModel> viewModels = new List<PondViewModel>();
-            IPondService pondService = new PondService(unitOfWork);
-            var ponds = pondService.GetsBySite(siteId);
-            viewModels = PondViewModel.Map(ponds);
+            var ponds = this._pondService.GetsBySite(siteId);
+            IList<PondViewModel> viewModels = PondViewModel.Map(ponds);
 
             if (viewModels.Any())
             {
-                IAlarmService alarmService = new AlarmService(unitOfWork);
                 foreach (var pondViewModel in viewModels)
                 {
-                    var pondAlarms = alarmService.GetsByPondWithTrigger(pondViewModel.Id);
+                    var pondAlarms = this._alarmService.GetsByPondWithTrigger(pondViewModel.Id);
                     pondViewModel.Alarms = AlarmViewModel.Map(pondAlarms);
                 }
             }
@@ -124,22 +135,13 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetPondWithInfo(Guid pondId)
         {
-            PondViewModel viewModel = new PondViewModel();
-            var unitOfWork = KEUnitOfWork.Create(false);
-            IPondService pondService = new PondService(unitOfWork);
-            var pond = pondService.Get(pondId);
-            viewModel = PondViewModel.Map(pond);
+            var pond = this._pondService.Get(pondId);
+            PondViewModel viewModel = PondViewModel.Map(pond);
 
-            ISensorService sensorService = new SensorService(unitOfWork);
-            ISensorItemService sensorItemService = new SensorItemService(unitOfWork);
-
-            var unitOfWorkLazy = KEUnitOfWork.Create(true);
-            ISensorItemEventService sensorItemEventService = new SensorItemEventService(unitOfWorkLazy);
-
-            if (sensorService.HasSensorTank(viewModel.Id) &&
-                sensorItemService.HasTankSensorItem(viewModel.Id, ItemEnum.WaterVolume))
+            if (this._sensorService.HasSensorTank(viewModel.Id) &&
+                this._sensorItemService.HasTankSensorItem(viewModel.Id, ItemEnum.WaterVolume))
             {
-                var waterVolumesLastEvent = sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.WaterVolume);
+                var waterVolumesLastEvent = this._sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.WaterVolume);
 
                 if (waterVolumesLastEvent != null)
                 {
@@ -153,8 +155,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             // Alarm
-            IAlarmService alarmService = new AlarmService(unitOfWork);
-            var pondAlarms = alarmService.GetsByPondWithTrigger(pondId);
+            var pondAlarms = this._alarmService.GetsByPondWithTrigger(pondId);
             viewModel.Alarms = AlarmViewModel.Map(pondAlarms);
 
             return Json(viewModel, JsonRequestBehavior.AllowGet);
@@ -163,18 +164,14 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsTank(Guid siteId)
         {
-            var unitOfWork = KEUnitOfWork.Create(false);
-            IList<TankViewModel> viewModels = new List<TankViewModel>();
-            ITankService tankService = new TankService(unitOfWork);
-            var tanks = tankService.GetsBySite(siteId);
-            viewModels = TankViewModel.Map(tanks);
+            var tanks = this._tankService.GetsBySite(siteId);
+            var viewModels = TankViewModel.Map(tanks);
 
             if (viewModels.Any())
             {
-                IAlarmService alarmService = new AlarmService(unitOfWork);
                 foreach (var tankViewModel in viewModels)
                 {
-                    var tankAlarms = alarmService.GetsByTankWithTrigger(tankViewModel.Id);
+                    var tankAlarms = this._alarmService.GetsByTankWithTrigger(tankViewModel.Id);
                     tankViewModel.Alarms = AlarmViewModel.Map(tankAlarms);
                 }
             }
@@ -185,23 +182,14 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetTankWithInfo(Guid tankId)
         {
-            TankViewModel viewModel = new TankViewModel();
+            var tank = this._tankService.Get(tankId);
+            TankViewModel viewModel = TankViewModel.Map(tank);
 
-            var unitOfWork = KEUnitOfWork.Create(false);
-            ITankService tankService = new TankService(unitOfWork);
-            var tank = tankService.Get(tankId, "TankModel");
-            viewModel = TankViewModel.Map(tank);
-
-            var unitOfWorkLazy = KEUnitOfWork.Create(true);
-            ISensorService sensorService = new SensorService(unitOfWork);
-            ISensorItemService sensorItemService = new SensorItemService(unitOfWork);
-            ISensorItemEventService sensorItemEventService = new SensorItemEventService(unitOfWorkLazy);
-
-            if (sensorService.HasSensorTank(viewModel.Id))
+            if (this._sensorService.HasSensorTank(viewModel.Id))
             {
-                if (sensorItemService.HasTankSensorItem(viewModel.Id, ItemEnum.WaterVolume))
+                if (this._sensorItemService.HasTankSensorItem(viewModel.Id, ItemEnum.WaterVolume))
                 {
-                    var waterVolumesLastEvent = sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.WaterVolume);
+                    var waterVolumesLastEvent = this._sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.WaterVolume);
 
                     if (waterVolumesLastEvent != null)
                     {
@@ -214,9 +202,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     }
                 }
 
-                if (sensorItemService.HasTankSensorItem(viewModel.Id, ItemEnum.WaterTemperature))
+                if (this._sensorItemService.HasTankSensorItem(viewModel.Id, ItemEnum.WaterTemperature))
                 {
-                    var waterTemperatureLastEvent = sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.WaterTemperature);
+                    var waterTemperatureLastEvent = this._sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.WaterTemperature);
 
                     if (waterTemperatureLastEvent != null)
                     {
@@ -229,8 +217,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             // Alarm
-            IAlarmService alarmService = new AlarmService(unitOfWork);
-            var tankAlarms = alarmService.GetsByTankWithTrigger(tankId);
+            var tankAlarms = this._alarmService.GetsByTankWithTrigger(tankId);
             viewModel.Alarms = AlarmViewModel.Map(tankAlarms);
 
             return Json(viewModel, JsonRequestBehavior.AllowGet);
@@ -239,18 +226,14 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetsSensor(Guid siteId)
         {
-            IList<SensorViewModel> viewModels = new List<SensorViewModel>();
-            ISensorService sensorService = new SensorService(KEUnitOfWork.Create(false));
-            var sensors = sensorService.GetsBySite(siteId);
-            viewModels = SensorViewModel.Map(sensors);
+            var sensors = this._sensorService.GetsBySite(siteId);
+            IList<SensorViewModel> viewModels = SensorViewModel.Map(sensors);
 
             if (viewModels.Any())
             {
-                var unitOfWorkLazy = KEUnitOfWork.Create(true);
-                IAlarmService alarmService = new AlarmService(unitOfWorkLazy);
                 foreach (var viewModel in viewModels)
                 {
-                    var sensorAlarms = alarmService.GetsBySensor(viewModel.Id);
+                    var sensorAlarms = this._alarmService.GetsBySensor(viewModel.Id);
                     viewModel.Alarms = AlarmViewModel.Map(sensorAlarms);
                 }
             }
@@ -261,22 +244,14 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult GetSensorWithInfo(Guid sensorId)
         {
-            SensorViewModel viewModel = new SensorViewModel();
+            var sensor = this._sensorService.Get(sensorId);
+            SensorViewModel viewModel = SensorViewModel.Map(sensor);
 
-            var unitOfWork = KEUnitOfWork.Create(false);
-            ISensorService sensorService = new SensorService(unitOfWork);
-            var sensor = sensorService.Get(sensorId);
-            viewModel = SensorViewModel.Map(sensor);
-
-            var unitOfWorkLazy = KEUnitOfWork.Create(true);
-            ISensorItemService sensorItemService = new SensorItemService(unitOfWork);
-            ISensorItemEventService sensorItemEventService = new SensorItemEventService(unitOfWorkLazy);
-
-            if (sensorService.HasSensorTank(viewModel.Id))
+            if (this._sensorService.HasSensorTank(viewModel.Id))
             {
-                if (sensorItemService.HasSiteSensorItem(viewModel.Id, ItemEnum.AmbientTemperature))
+                if (this._sensorItemService.HasSiteSensorItem(viewModel.Id, ItemEnum.AmbientTemperature))
                 {
-                    var ambientTemperatureLastEvent = sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.AmbientTemperature);
+                    var ambientTemperatureLastEvent = this._sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.AmbientTemperature);
 
                     if (ambientTemperatureLastEvent != null)
                     {
@@ -287,9 +262,9 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     }
                 }
 
-                if (sensorItemService.HasSiteSensorItem(viewModel.Id, ItemEnum.Voltage))
+                if (this._sensorItemService.HasSiteSensorItem(viewModel.Id, ItemEnum.Voltage))
                 {
-                    var voltageLastEvent = sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.Voltage);
+                    var voltageLastEvent = this._sensorItemEventService.GetLastEventByTankAndItem(viewModel.Id, ItemEnum.Voltage);
 
                     if (voltageLastEvent != null)
                     {
@@ -302,8 +277,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             }
 
             // Alarm
-            IAlarmService alarmService = new AlarmService(unitOfWork);
-            var tankAlarms = alarmService.GetsByTankWithTrigger(sensorId);
+            var tankAlarms = this._alarmService.GetsByTankWithTrigger(sensorId);
             viewModel.Alarms = AlarmViewModel.Map(tankAlarms);
 
             return Json(viewModel, JsonRequestBehavior.AllowGet);

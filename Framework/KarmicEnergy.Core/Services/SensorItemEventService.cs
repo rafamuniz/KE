@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Services
 {
-    public class SensorItemEventService : KEServiceBase, ISensorItemEventService
+    public class SensorItemEventService : KEServiceBase<Guid, SensorItemEvent>, ISensorItemEventService
     {
         #region Constructor
 
@@ -20,22 +20,22 @@ namespace KarmicEnergy.Core.Services
 
         #region Functions
 
-        public SensorItemEvent Get(Guid id)
+        public override SensorItemEvent Get(Guid id)
         {
             if (id == default(Guid))
                 throw new ArgumentException("id is required");
 
-            return this._UnitOfWork.SensorItemEventRepository.Get(id);
+            return this._unitOfWork.SensorItemEventRepository.Get(id);
         }
 
-        public IList<SensorItemEvent> Gets()
+        public override IEnumerable<SensorItemEvent> GetAll()
         {
-            return this._UnitOfWork.SensorItemEventRepository.GetAll().ToList();
+            return this._unitOfWork.SensorItemEventRepository.GetAll().ToList();
         }
 
         public SensorItemEvent GetLastEventByTankAndItem(Guid tankId, ItemEnum item)
         {
-            return this._UnitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tankId, item);
+            return this._unitOfWork.SensorItemEventRepository.GetLastEventByTankAndItem(tankId, item);
         }
 
         #endregion Functions

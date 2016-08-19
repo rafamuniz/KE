@@ -4,15 +4,12 @@ using System.Collections.Generic;
 
 namespace KarmicEnergy.Core.Services.Interface
 {
-    public interface IPondService
+    public interface IPondService : IKEBaseService<Guid, Pond>
     {
-        Pond Get(Guid id);
-        IList<Pond> Gets();
+        IEnumerable<Pond> GetsByCustomer(Guid customerId);
+        IEnumerable<Pond> GetsBySite(Guid siteId);
+        IEnumerable<Pond> GetsByCustomerAndSite(Guid customerId, Guid siteId);
 
-        IList<Pond> GetsByCustomer(Guid customerId);
-        IList<Pond> GetsBySite(Guid siteId);
-        IList<Pond> GetsByCustomerAndSite(Guid customerId, Guid siteId);
-
-        IList<Pond> GetsBySiteWithAlarms(Guid siteId);
+        IEnumerable<Pond> GetsBySiteWithAlarms(Guid siteId);
     }
 }

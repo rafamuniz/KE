@@ -36,16 +36,16 @@ namespace KarmicEnergy.Core.Entities
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
         public Decimal WaterVolumeCapacity { get; set; }
 
-        //#region Unit
+        #region Unit
 
-        //[Column("WaterVolumeCapacityUnitId", TypeName = "SMALLINT")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
-        //public Int16 WaterVolumeCapacityUnitId { get; set; } = (Int16)UnitEnum.Barrel;
+        [Column("WaterVolumeCapacityUnitId", TypeName = "SMALLINT")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        public Int16 WaterVolumeCapacityUnitId { get; set; } = (Int16)UnitEnum.Barrel;
 
-        //[ForeignKey("WaterVolumeCapacityUnitId")]
-        //public virtual Unit WaterVolumeCapacityUnit { get; set; }
+        [ForeignKey("WaterVolumeCapacityUnitId")]
+        public virtual Unit WaterVolumeCapacityUnit { get; set; }
 
-        //#endregion Unit
+        #endregion Unit
 
         [Column("Reference", TypeName = "NVARCHAR")]
         [StringLength(8)]

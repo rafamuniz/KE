@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using KarmicEnergy.Web.ViewModels;
+using Munizoft.Extensions;
 using AutoMapper;
 using Munizoft.Extensions;
 
@@ -122,7 +123,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Map
 
         #region Map
 
-        public static List<SensorViewModel> Map(IList<Core.Entities.Sensor> entities)
+        public static List<SensorViewModel> Map(IEnumerable<Core.Entities.Sensor> entities)
         {
             List<SensorViewModel> vms = new List<SensorViewModel>();
 

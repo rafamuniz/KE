@@ -4,10 +4,11 @@ using KarmicEnergy.Core.Services.Interface;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Munizoft.Extensions;
 
 namespace KarmicEnergy.Core.Services
 {
-    public class TankService : KEServiceBase, ITankService
+    public class TankService : KEServiceBase<Guid, Tank>, ITankService
     {
         #region Constructor
 
@@ -20,12 +21,54 @@ namespace KarmicEnergy.Core.Services
 
         #region Functions
 
-        public Tank Get(Guid id)
+        public override void Create(Tank tank)
+        {
+            if (tank == null)
+                throw new ArgumentNullException("tank cannot be null");
+
+            this._unitOfWork.TankRepository.Add(tank);
+            this._unitOfWork.Complete();
+        }
+
+        public override void Update(Tank tank)
+        {
+            if (tank == null)
+                throw new ArgumentNullException("tank cannot be null");
+
+            var entity = this._unitOfWork.TankRepository.Get(tank.Id);
+
+            entity.Update(tank);
+
+            var dateUpdated = DateTime.UtcNow;
+            entity.LastModifiedDate = dateUpdated;
+
+            this._unitOfWork.TankRepository.Update(entity);
+            this._unitOfWork.Complete();
+        }
+
+        public override void Delete(Guid id)
         {
             if (id == default(Guid))
                 throw new ArgumentException("id is required");
 
-            return this._UnitOfWork.TankRepository.Get(id);
+            var deletedDate = DateTime.UtcNow;
+            var tank = this._unitOfWork.TankRepository.Get(id);
+            tank.DeletedDate = deletedDate;
+
+            // Sensor
+            var sensors = this._unitOfWork.SensorRepository.GetsByTank(tank.Id);
+            sensors.ForEach(x => x.DeletedDate = deletedDate);
+            this._unitOfWork.SensorRepository.UpdateRange(sensors);
+
+            this._unitOfWork.TankRepository.Update(tank);
+        }
+
+        public override Tank Get(Guid id)
+        {
+            if (id == default(Guid))
+                throw new ArgumentException("id is required");
+
+            return this._unitOfWork.TankRepository.Get(id);
         }
 
         public Tank Get(Guid id, params String[] includes)
@@ -33,40 +76,41 @@ namespace KarmicEnergy.Core.Services
             if (id == default(Guid))
                 throw new ArgumentException("id is required");
 
-            var tanks = this._UnitOfWork.TankRepository.Find(x => x.Id == id, includes).ToList();
+            var tanks = this._unitOfWork.TankRepository.Find(x => x.Id == id, includes).ToList();
 
             return tanks.Single();
         }
 
-        public IList<Tank> Gets()
+        public override IEnumerable<Tank> GetAll()
         {
-            return this._UnitOfWork.TankRepository.GetAll().ToList();
+            return this._unitOfWork.TankRepository.GetAll();
         }
-        public IList<Tank> GetsByCustomer(Guid customerId)
+
+        public IEnumerable<Tank> GetsByCustomer(Guid customerId)
         {
             if (customerId == default(Guid))
                 throw new ArgumentException("customerId is required");
 
-            return this._UnitOfWork.TankRepository.GetsByCustomer(customerId);
+            return this._unitOfWork.TankRepository.GetsByCustomer(customerId);
         }
 
-        public IList<Tank> GetsBySite(Guid siteId)
+        public IEnumerable<Tank> GetsBySite(Guid siteId)
         {
             if (siteId == default(Guid))
                 throw new ArgumentException("siteId is required");
 
-            return this._UnitOfWork.TankRepository.GetsBySite(siteId);
+            return this._unitOfWork.TankRepository.GetsBySite(siteId);
         }
 
-        public IList<Tank> GetsBySiteWithTankModel(Guid siteId)
+        public IEnumerable<Tank> GetsBySiteWithTankModel(Guid siteId)
         {
             if (siteId == default(Guid))
                 throw new ArgumentException("siteId is required");
 
-            return this._UnitOfWork.TankRepository.Find(x => x.SiteId == siteId && x.DeletedDate == null, "TankModel").ToList();
+            return this._unitOfWork.TankRepository.Find(x => x.SiteId == siteId && x.DeletedDate == null, "TankModel").ToList();
         }
 
-        public IList<Tank> GetsByCustomerAndSite(Guid customerId, Guid siteId)
+        public IEnumerable<Tank> GetsByCustomerAndSite(Guid customerId, Guid siteId)
         {
             if (customerId == default(Guid))
                 throw new ArgumentException("customerId is required");
@@ -74,23 +118,23 @@ namespace KarmicEnergy.Core.Services
             if (siteId == default(Guid))
                 throw new ArgumentException("siteId is required");
 
-            return this._UnitOfWork.TankRepository.GetsByCustomerAndSite(customerId, siteId);
+            return this._unitOfWork.TankRepository.GetsByCustomerAndSite(customerId, siteId);
         }
 
-        public IList<Tank> GetsBySiteWithAlarms(Guid siteId)
+        public IEnumerable<Tank> GetsBySiteWithAlarms(Guid siteId)
         {
             if (siteId == default(Guid))
                 throw new ArgumentException("siteId is required");
 
-            return this._UnitOfWork.TankRepository.Find(x => x.SiteId == siteId, "Sensors").ToList();
+            return this._unitOfWork.TankRepository.Find(x => x.SiteId == siteId, "Sensors").ToList();
         }
 
-        public IList<Tank> GetsBySiteWithWaterVolume(Guid siteId)
+        public IEnumerable<Tank> GetsBySiteWithWaterVolume(Guid siteId)
         {
             if (siteId == default(Guid))
                 throw new ArgumentException("siteId is required");
 
-            return this._UnitOfWork.TankRepository.Find(x => x.SiteId == siteId, "Sensors").ToList();
+            return this._unitOfWork.TankRepository.Find(x => x.SiteId == siteId, "Sensors").ToList();
         }
 
         #endregion Functions

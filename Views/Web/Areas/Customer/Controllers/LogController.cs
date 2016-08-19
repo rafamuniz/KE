@@ -1,4 +1,5 @@
 ﻿using KarmicEnergy.Core.Entities;
+using KarmicEnergy.Core.Services.Interface;
 using KarmicEnergy.Web.Areas.Customer.ViewModels.Log;
 using KarmicEnergy.Web.Controllers;
 using Microsoft.AspNet.Identity;
@@ -12,6 +13,17 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     [Authorize]
     public class LogController : BaseController
     {
+        #region Fields
+        private readonly ILogService _logService;
+        #endregion Fields
+
+        #region Constructor
+        public LogController(ILogService logService)
+        {
+            this._logService = logService;
+        }
+        #endregion Constructor
+
         #region Index
 
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]

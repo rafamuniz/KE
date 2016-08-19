@@ -1,4 +1,6 @@
 ﻿using KarmicEnergy.Core.Entities;
+using KarmicEnergy.Core.Services;
+using KarmicEnergy.Core.Services.Interface;
 using KarmicEnergy.Web.Areas.Customer.ViewModels.Sensor;
 using KarmicEnergy.Web.Controllers;
 using System;
@@ -11,12 +13,33 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
     [Authorize]
     public class SiteController : BaseController
     {
+        #region Fields
+        private readonly ISiteService _siteService;
+        #endregion Fields
+
+        #region Constructor
+        public SiteController(ISiteService siteService)
+        {
+            this._siteService = siteService;
+        }
+        #endregion Constructor
+
         #region Index
+
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Index()
         {
-            List<Site> entities = LoadSites();
-            var viewModels = ViewModels.Site.ListViewModel.Map(entities);
+            IEnumerable<Site> sites;
+            if (User.IsInRole("General Manager") || User.IsInRole("Customer"))
+            {
+                sites = this._siteService.GetsByCustomer(CustomerId);
+            }
+            else
+            {
+                sites = this._siteService.GetsSiteByUser(Guid.Parse(UserId));
+            }
+
+            var viewModels = ViewModels.Site.ListViewModel.Map(sites);
             AddLog("Navigated to Site View", LogTypeEnum.Info);
             return View(viewModels);
         }
@@ -35,7 +58,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         //
-        // POST: /User/Create
+        // POST: /Site/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
@@ -57,8 +80,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 site.Address = address;
                 site.AddressId = address.Id;
 
-                KEUnitOfWork.SiteRepository.Add(site);
-                KEUnitOfWork.Complete();
+                _siteService.Create(site);
 
                 AddLog("Site Created", LogTypeEnum.Info);
                 return RedirectToAction("Index", "Site", new { area = "Customer" });
@@ -78,7 +100,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Edit(Guid id)
         {
-            var site = KEUnitOfWork.SiteRepository.Get(id);
+            var site = _siteService.Get(id);
 
             if (site == null)
             {
@@ -96,7 +118,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
         }
 
         //
-        // POST: /User/Update
+        // POST: /Site/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
@@ -110,7 +132,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     return View(viewModel);
                 }
 
-                var site = KEUnitOfWork.SiteRepository.Get(viewModel.Id);
+                var site = _siteService.Get(viewModel.Id);
 
                 if (site == null)
                 {
@@ -119,15 +141,11 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                     return View("Index");
                 }
 
-                //viewModel.MapVMToEntity(site);
-                //viewModel.MapVMToEntity(site.Address);
-
                 Core.Entities.Address address = viewModel.Address.Map(site.Address);
                 Core.Entities.Site s = viewModel.Map(site);
                 site.Address = address;
 
-                KEUnitOfWork.SiteRepository.Update(s);
-                KEUnitOfWork.Complete();
+                _siteService.Update(s);
 
                 AddLog("Site Updated", LogTypeEnum.Info);
                 return RedirectToAction("Index", "Site", new { area = "Customer" });
@@ -144,12 +162,12 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
 
         #region Delete
         //
-        // GET: /User/Delete
+        // GET: /Site/Delete
         [HttpGet]
         [Authorize(Roles = "Customer, General Manager, Supervisor")]
         public ActionResult Delete(Guid id)
         {
-            var site = KEUnitOfWork.SiteRepository.Get(id);
+            var site = _siteService.Get(id);
 
             if (site == null)
             {
@@ -157,9 +175,7 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 return View("Index");
             }
 
-            site.DeletedDate = DateTime.UtcNow;
-            KEUnitOfWork.SiteRepository.Update(site);
-            KEUnitOfWork.Complete();
+            _siteService.Delete(id);
 
             AddLog("Site Deleted", LogTypeEnum.Info);
             return RedirectToAction("Index", "Site");

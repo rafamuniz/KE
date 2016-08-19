@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Munizoft.Util.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -55,7 +56,7 @@ namespace KarmicEnergy.Core.Entities
         #region SensorType
 
         [Column("SensorTypeId", TypeName = "SMALLINT")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]        
         public Int16 SensorTypeId { get; set; }
 
         [ForeignKey("SensorTypeId")]

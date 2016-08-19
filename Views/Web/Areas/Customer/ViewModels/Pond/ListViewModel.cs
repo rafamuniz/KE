@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Munizoft.Extensions;
 
 namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Pond
 {
@@ -29,7 +30,7 @@ namespace KarmicEnergy.Web.Areas.Customer.ViewModels.Pond
 
         #region Map
 
-        public static List<ListViewModel> Map(List<Core.Entities.Pond> entities)
+        public static List<ListViewModel> Map(IEnumerable<Core.Entities.Pond> entities)
         {
             List<ListViewModel> vms = new List<ListViewModel>();
 

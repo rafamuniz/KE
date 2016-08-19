@@ -4,7 +4,7 @@ using System.Data.Entity;
 
 namespace KarmicEnergy.Web.Persistence
 {
-    public class ApplicationContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationContext : IdentityDbContext<ApplicationUser>, IApplicationContext
     {
         public ApplicationContext()
             : base("KEConnection", throwIfV1Schema: false)

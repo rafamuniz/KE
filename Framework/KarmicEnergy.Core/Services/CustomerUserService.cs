@@ -71,6 +71,14 @@ namespace KarmicEnergy.Core.Services
             return this._unitOfWork.CustomerUserRepository.GetAll();
         }
 
+
+        public IEnumerable<CustomerUser> GetsByCustomer(Guid customerId)
+        {
+            if (customerId == default(Guid))
+                throw new ArgumentException("customerId is required");
+
+            return this._unitOfWork.CustomerUserRepository.GetsByCustomer(customerId);
+        }
         #endregion Functions
     }
 }

@@ -54,8 +54,18 @@ namespace KarmicEnergy.Core.Services
             var deletedDate = DateTime.UtcNow;
             var entity = this._unitOfWork.TriggerRepository.Get(id);
             entity.DeletedDate = deletedDate;
-
+            
             this._unitOfWork.TriggerRepository.Update(entity);
+
+            // Trigger Contacts
+            var contacts = this._unitOfWork.TriggerContactRepository.Find(x => x.TriggerId == id && x.DeletedDate == null);
+            foreach (var contact in contacts)
+            {
+                contact.DeletedDate = deletedDate;
+                this._unitOfWork.TriggerContactRepository.Update(contact);
+            }
+
+            this._unitOfWork.Complete();
         }
 
         public override Trigger Get(Guid id)

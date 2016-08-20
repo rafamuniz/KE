@@ -55,11 +55,40 @@ namespace KarmicEnergy.Core.Services
             var pond = this._unitOfWork.PondRepository.Get(id);
             pond.DeletedDate = deletedDate;
 
-            // Sensor
-            var sensors = this._unitOfWork.SensorRepository.GetsByPond(pond.Id);
-            sensors.ForEach(x => x.DeletedDate = deletedDate);
-            this._unitOfWork.SensorRepository.UpdateRange(sensors);
+            // Sensors
+            foreach (var sensor in pond.Sensors)
+            {
+                sensor.DeletedDate = deletedDate;
 
+                // Sensor Items
+                foreach (var sensorItem in sensor.SensorItems)
+                {
+                    sensorItem.DeletedDate = deletedDate;
+
+                    // Triggers
+                    var triggers = this._unitOfWork.TriggerRepository.Find(x => x.SensorItemId == sensorItem.Id && x.DeletedDate == null);
+                    foreach (var trigger in triggers)
+                    {
+                        trigger.DeletedDate = deletedDate;
+
+                        // Trigger Contacts
+                        var contacts = this._unitOfWork.TriggerContactRepository.Find(x => x.TriggerId == trigger.Id && x.DeletedDate == null);
+                        foreach (var contact in contacts)
+                        {
+                            contact.DeletedDate = deletedDate;
+                            this._unitOfWork.TriggerContactRepository.Update(contact);
+                        }
+
+                        this._unitOfWork.TriggerRepository.Update(trigger);
+                    }
+
+                    this._unitOfWork.SensorItemRepository.Update(sensorItem);
+                }
+
+                this._unitOfWork.SensorRepository.Update(sensor);
+            }
+
+            this._unitOfWork.PondRepository.Update(pond);
             this._unitOfWork.Complete();
         }
 

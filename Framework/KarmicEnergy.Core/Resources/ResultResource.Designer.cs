@@ -68,5 +68,32 @@ namespace KarmicEnergy.Core.Resources {
                 return ResourceManager.GetString("DefaultError", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value cannot be null.\n\rParameter name: {0}.
+        /// </summary>
+        internal static string ParameterNull {
+            get {
+                return ResourceManager.GetString("ParameterNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value cannot be null or empty.\n\rParameter name: {0}.
+        /// </summary>
+        internal static string ParameterNullOrEmpty {
+            get {
+                return ResourceManager.GetString("ParameterNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter name: {0} is required.
+        /// </summary>
+        internal static string ParameterRequired {
+            get {
+                return ResourceManager.GetString("ParameterRequired", resourceCulture);
+            }
+        }
     }
 }

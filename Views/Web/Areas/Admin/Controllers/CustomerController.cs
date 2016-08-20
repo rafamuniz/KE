@@ -1,4 +1,5 @@
-﻿using KarmicEnergy.Web.Areas.Admin.ViewModels.Customer;
+﻿using KarmicEnergy.Core.Services.Interface;
+using KarmicEnergy.Web.Areas.Admin.ViewModels.Customer;
 using KarmicEnergy.Web.Controllers;
 using KarmicEnergy.Web.Entities;
 using KarmicEnergy.Web.Models;
@@ -6,12 +7,27 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Microsoft.Owin.Extensions;
+using Microsoft.AspNet.Identity;
 
 namespace KarmicEnergy.Web.Areas.Admin.Controllers
 {
     [Authorize]
     public class CustomerController : BaseController
     {
+        #region Fields
+        private readonly ICustomerService _customerService;
+        private readonly ICustomerUserService _customerUserService;
+        #endregion Fields
+
+        #region Constructor
+        public CustomerController(ICustomerService customerService, ICustomerUserService customerUserService)
+        {
+            this._customerService = customerService;
+            this._customerUserService = customerUserService;
+        }
+        #endregion Constructor
+
         #region Index
         [Authorize(Roles = "SuperAdmin, Admin")]
         public ActionResult Index()
@@ -165,12 +181,12 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         // GET: /Customer/Delete
         [HttpGet]
         [Authorize(Roles = "SuperAdmin, Admin")]
-        public async Task<ActionResult> Delete(Guid id)
+        public ActionResult Delete(Guid id)
         {
             try
             {
-                var customer = KEUnitOfWork.CustomerRepository.Get(id);
-                var user = await UserManager.FindByIdAsync(id.ToString());
+                var customer = _customerService.Get(id);
+                var user = UserManager.FindById(id.ToString());
 
                 if (customer == null || user == null)
                 {
@@ -178,21 +194,18 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
                     return View();
                 }
 
-                var result = await UserManager.DeleteAsync(user);
+                var result = UserManager.Delete(user);
 
                 if (result.Succeeded)
                 {
-                    customer.DeletedDate = DateTime.UtcNow;
-
-                    foreach (var u in customer.Users)
+                    var customerUsers = _customerUserService.GetsByCustomer(id);
+                    foreach (var customerUser in customerUsers)
                     {
-                        u.DeletedDate = DateTime.UtcNow;
-                        var userAccount = await UserManager.FindByIdAsync(u.Id.ToString());
-                        var resultUserAccount = await UserManager.DeleteAsync(userAccount);
+                        var applicationCustomerUser = UserManager.FindById(customerUser.Id.ToString());
+                        var resultCustomerUser = UserManager.Delete(applicationCustomerUser);
                     }
 
-                    KEUnitOfWork.CustomerRepository.Update(customer);
-                    KEUnitOfWork.Complete();
+                    _customerService.Delete(id);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

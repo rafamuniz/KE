@@ -57,31 +57,129 @@ namespace KarmicEnergy.Core.Services
             if (siteId == default(Guid))
                 throw new ArgumentException("siteId is required");
 
-            var dateDeleted = DateTime.UtcNow;
+            var deletedDate = DateTime.UtcNow;
             var site = this._unitOfWork.SiteRepository.Get(siteId);
 
             // Site
-            site.DeletedDate = dateDeleted;
+            site.DeletedDate = deletedDate;
             this._unitOfWork.SiteRepository.Update(site);
 
             // Address
-            site.Address.DeletedDate = dateDeleted;
+            site.Address.DeletedDate = deletedDate;
             this._unitOfWork.AddressRepository.Update(site.Address);
 
-            // Sensor
+            #region Sensor
             var sensors = this._unitOfWork.SensorRepository.GetsBySite(site.Id);
-            sensors.ForEach(x => x.DeletedDate = dateDeleted);
-            this._unitOfWork.SensorRepository.UpdateRange(sensors);
+            foreach (var sensor in sensors)
+            {
+                sensor.DeletedDate = deletedDate;
+                this._unitOfWork.SensorRepository.Update(sensor);
 
-            // Pond
+                // Sensor Items
+                foreach (var sensorItem in sensor.SensorItems)
+                {
+                    sensorItem.DeletedDate = deletedDate;
+                    this._unitOfWork.SensorItemRepository.Update(sensorItem);
+
+                    // Triggers
+                    var triggers = this._unitOfWork.TriggerRepository.Find(x => x.SensorItemId == sensorItem.Id && x.DeletedDate == null);
+                    foreach (var trigger in triggers)
+                    {
+                        trigger.DeletedDate = deletedDate;
+                        this._unitOfWork.TriggerRepository.Update(trigger);
+
+                        // Trigger Contacts
+                        var contacts = this._unitOfWork.TriggerContactRepository.Find(x => x.TriggerId == trigger.Id && x.DeletedDate == null);
+                        foreach (var contact in contacts)
+                        {
+                            contact.DeletedDate = deletedDate;
+                            this._unitOfWork.TriggerContactRepository.Update(contact);
+                        }
+                    }
+                }                
+            }
+            #endregion Sensor
+
+            #region Pond
             var ponds = this._unitOfWork.PondRepository.GetsBySite(site.Id);
-            ponds.ForEach(x => x.DeletedDate = dateDeleted);
-            this._unitOfWork.PondRepository.UpdateRange(ponds);
+            foreach (var pond in ponds)
+            {
+                pond.DeletedDate = deletedDate;
+                this._unitOfWork.PondRepository.Update(pond);
 
-            // Tank             
+                // Sensors
+                foreach (var sensor in pond.Sensors)
+                {
+                    sensor.DeletedDate = deletedDate;
+                    this._unitOfWork.SensorRepository.Update(sensor);
+
+                    // Sensor Items
+                    foreach (var sensorItem in sensor.SensorItems)
+                    {
+                        sensorItem.DeletedDate = deletedDate;
+                        this._unitOfWork.SensorItemRepository.Update(sensorItem);
+
+                        // Triggers
+                        var triggers = this._unitOfWork.TriggerRepository.Find(x => x.SensorItemId == sensorItem.Id && x.DeletedDate == null);
+                        foreach (var trigger in triggers)
+                        {
+                            trigger.DeletedDate = deletedDate;
+                            this._unitOfWork.TriggerRepository.Update(trigger);
+
+                            // Trigger Contacts
+                            var contacts = this._unitOfWork.TriggerContactRepository.Find(x => x.TriggerId == trigger.Id && x.DeletedDate == null);
+                            foreach (var contact in contacts)
+                            {
+                                contact.DeletedDate = deletedDate;
+                                this._unitOfWork.TriggerContactRepository.Update(contact);
+                            }
+                        }
+                    }
+                }
+            }
+
+            #endregion Pond
+
+            #region Tank
+
             var tanks = this._unitOfWork.TankRepository.GetsBySite(site.Id);
-            tanks.ForEach(x => x.DeletedDate = dateDeleted);
-            this._unitOfWork.TankRepository.UpdateRange(tanks);
+            foreach (var tank in tanks)
+            {
+                tank.DeletedDate = deletedDate;
+                this._unitOfWork.TankRepository.Update(tank);
+
+                // Sensors
+                foreach (var sensor in tank.Sensors)
+                {
+                    sensor.DeletedDate = deletedDate;
+                    this._unitOfWork.SensorRepository.Update(sensor);
+
+                    // Sensor Items
+                    foreach (var sensorItem in sensor.SensorItems)
+                    {
+                        sensorItem.DeletedDate = deletedDate;
+                        this._unitOfWork.SensorItemRepository.Update(sensorItem);
+
+                        // Triggers
+                        var triggers = this._unitOfWork.TriggerRepository.Find(x => x.SensorItemId == sensorItem.Id && x.DeletedDate == null);
+                        foreach (var trigger in triggers)
+                        {
+                            trigger.DeletedDate = deletedDate;
+                            this._unitOfWork.TriggerRepository.Update(trigger);
+
+                            // Trigger Contacts
+                            var contacts = this._unitOfWork.TriggerContactRepository.Find(x => x.TriggerId == trigger.Id && x.DeletedDate == null);
+                            foreach (var contact in contacts)
+                            {
+                                contact.DeletedDate = deletedDate;
+                                this._unitOfWork.TriggerContactRepository.Update(contact);
+                            }
+                        }
+                    }
+                }
+            }
+
+            #endregion Tank
 
             this._unitOfWork.Complete();
         }

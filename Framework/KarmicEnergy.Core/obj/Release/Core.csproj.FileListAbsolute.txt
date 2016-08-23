@@ -41,7 +41,6 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framewor
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\bin\Release\Munizoft.Util.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\bin\Release\Quartz.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\bin\Release\System.Net.Http.Formatting.dll
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\bin\Release\System.Web.Mvc.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\bin\Release\KarmicEnergy.Util.pdb
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\bin\Release\Common.Logging.pdb
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\bin\Release\Common.Logging.xml
@@ -55,7 +54,9 @@ M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framewor
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\bin\Release\Quartz.pdb
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\bin\Release\Quartz.xml
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\bin\Release\System.Net.Http.Formatting.xml
-M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\bin\Release\System.Web.Mvc.xml
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\Core.csprojResolveAssemblyReference.cache
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\KarmicEnergy.Core.dll
 M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\KarmicEnergy.Core.pdb
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\KarmicEnergy.Core.Migrations.AWS.resources
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\KarmicEnergy.Core.Resources.ResultResource.resources
+M:\OneDrive\Muniz\Clients\PrecisionFrac\Projects\KarmicEnergyApp\Source\Framework\KarmicEnergy.Core\obj\Release\Core.csproj.GenerateResource.Cache

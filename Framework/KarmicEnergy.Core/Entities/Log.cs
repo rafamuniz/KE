@@ -34,9 +34,6 @@ namespace KarmicEnergy.Core.Entities
         [Column("UserId", TypeName = "UNIQUEIDENTIFIER")]
         public Guid? UserId { get; set; }
 
-        //[ForeignKey("UserId")]
-        //public virtual User User { get; set; }
-
         [Column("SiteId", TypeName = "UNIQUEIDENTIFIER")]
         public Guid? SiteId { get; set; }
 

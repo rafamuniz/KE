@@ -16,6 +16,8 @@ namespace KarmicEnergy.Web.App_Start
             Mapper.Initialize(config =>
             {
                 config.AddProfile<SharedProfile>();
+                
+                config.AddProfile<HomeProfile>();
 
                 config.AddProfile<CustomerProfile>();
                 config.AddProfile<StickConversionProfile>();

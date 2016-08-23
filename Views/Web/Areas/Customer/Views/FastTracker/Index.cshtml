@@ -12,7 +12,7 @@
 @Scripts.Render("~/bundles/jqueryui")
 
 <script src="~/Scripts/app/utils.js"></script>
-
+<script src="~/Scripts/jquery/jquery.unobtrusive-ajax.min.js"></script>
 <link href="~/Scripts/jqwidgets/styles/jqx.base.css" rel="stylesheet" />
 <script src="~/Scripts/jqwidgets/jqx-all.js"></script>
 
@@ -22,12 +22,12 @@
 
 <script src="~/Scripts/app/fasttracker.js"></script>
 
-<div class="row">
+<div id="divFastTracker" class="row">
     @if (!this.IsSite())
     {
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-back">
-                @using (Html.BeginForm("SiteSiteSelected", "FastTracker", new { }, FormMethod.Post, new { }))
+                @using (Html.BeginForm("SiteSiteSelected", "FastTracker", new { }, FormMethod.Post, new { encType = "multipart/form-data", id = "form", name = "form" }))
                 {
                     @Html.DropDownListFor(m => m.SiteId, new SelectList(ViewBag.Sites, "Id", "Name"), "-- Please select a Site --", new { @class = "form-control selectpicker", @id = "ddlSite" })
                 }
@@ -193,40 +193,40 @@
                 {
                     foreach (var pond in Model.Ponds)
                     {
-                    <div class="row">
-                        <div id="pond_@pond.Id" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pond">
+                            <div class="row">
+                                <div id="pond_@pond.Id" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pond">
 
-                            @Html.Hidden("pondId", @pond.Id)
+                                    @Html.Hidden("pondId", @pond.Id)
 
-                            @{
+                                    @{
                                         var blinkStyle = @pond.TotalAlarms > 0 ? "blink" : "";
-                            }
+                                    }
 
-                            <div class="pull-right pond-waterVolume">
-                                @if (@pond.WaterVolumeLastValue.HasValue)
+                                    <div class="pull-right pond-waterVolume">
+                                        @if (@pond.WaterVolumeLastValue.HasValue)
                                         {
-                                        <span>@pond.WaterVolumeLastValue</span>
-                                        <label>Gallons Remaining</label>
+                                            <span>@pond.WaterVolumeLastValue</span>
+                                            <label>Gallons Remaining</label>
                                         }
-                            </div>
+                                    </div>
 
-                            <div class="@blinkStyle">
-                                <img src="@pond.UrlImage" class="img-pond" />
-                            </div>
+                                    <div class="@blinkStyle">
+                                        <img src="@pond.UrlImage" class="img-pond" />
+                                    </div>
 
-                            <div class="pond-name">
-                                <span>@pond.Name</span>
-                            </div>
+                                    <div class="pond-name">
+                                        <span>@pond.Name</span>
+                                    </div>
 
-                            @{
+                                    @{
                                         var waterVolumePercentage = @pond.WaterVolumePercentage.HasValue ? @pond.WaterVolumePercentage.ToString() + " %" : "0 %";
-                            }
+                                    }
 
-                            <div class="pond-watervolume-percentage">
-                                <span class="center-block box_watervolumepercentage blue">@waterVolumePercentage</span>
+                                    <div class="pond-watervolume-percentage">
+                                        <span class="center-block box_watervolumepercentage blue">@waterVolumePercentage</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
                                             }
                                         }
                 </div>
@@ -245,22 +245,22 @@
                                 String waterTemperatureLast = @Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue ? @Model.WaterQuality.TemperatureAmbientLastEventValue.Value.ToString() : String.Empty;
                                 String waterTemperatureLastJS = @Model.WaterQuality.TemperatureAmbientLastEventValue.HasValue ? @Model.WaterQuality.TemperatureAmbientLastEventValue.Value.ToString() : "undefined";
 
-                            <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center text-bold">
-                                <span>Temp Ambient</span>
-                            </div>
-
-                            <div id="graph-temperature-ambient-@Model.WaterQuality.TemperatureAmbientLastEventId" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            </div>
-
-                            <script type="text/javascript">
-                                    generateTemperatureGraph('graph-temperature-ambient-@Model.WaterQuality.TemperatureAmbientLastEventId', @waterTemperatureLastJS);
-                            </script>
-
-                            <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 20px;">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center text-bold">
-                                    <span>@Model.WaterQuality.TemperatureAmbientLastEventValue @Model.WaterQuality.TemperatureAmbientSymbol</span>
+                                <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center text-bold">
+                                    <span>Temp Ambient</span>
                                 </div>
-                            </div>
+
+                                <div id="graph-temperature-ambient-@Model.WaterQuality.TemperatureAmbientLastEventId" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                </div>
+
+                                <script type="text/javascript">
+                                    generateTemperatureGraph('graph-temperature-ambient-@Model.WaterQuality.TemperatureAmbientLastEventId', @waterTemperatureLastJS);
+                                </script>
+
+                                <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 20px;">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center text-bold">
+                                        <span>@Model.WaterQuality.TemperatureAmbientLastEventValue @Model.WaterQuality.TemperatureAmbientSymbol</span>
+                                    </div>
+                                </div>
                             }
                         </div>
 
@@ -307,20 +307,20 @@
                     {
                         if (fm.RateFlow.HasValue)
                         {
-                    @*if (count == 1)
-                        {
-                            @Html.Raw("<div class='row'>")
-                        }*@
+                                @*if (count == 1)
+                                    {
+                                        @Html.Raw("<div class='row'>")
+                                    }*@
 
-                    <div class='row'>
+                                <div class='row'>
 
-                        <div id="flowmeter_@fm.SensorId" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        </div>
-                        <script type="text/javascript">
+                                    <div id="flowmeter_@fm.SensorId" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    </div>
+                                    <script type="text/javascript">
                                         generateFlowMeter('@idx', @fm.RateFlow, @fm.Totalizer);
-                        </script>
+                                    </script>
 
-                    </div>
+                                </div>
                                 //    if (count == 2)
                                 //{
                                 //    count = 1;
@@ -339,9 +339,11 @@
             </div>
         </div>
     </div>
-                                }
+                                        }
 
 @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
     <script type="text/javascript">
         $(function () {
             $('#ddlSite').on('change', function (event) {

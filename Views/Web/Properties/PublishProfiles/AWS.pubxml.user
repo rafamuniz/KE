@@ -104,7 +104,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/10/2016 21:19:10</publishTime>
     </File>
     <File Include="Areas/Customer/Views/FastTracker/Index.cshtml">
-      <publishTime>07/22/2016 16:44:04</publishTime>
+      <publishTime>08/23/2016 21:35:15</publishTime>
     </File>
     <File Include="Areas/Customer/Views/FastTracker/Tank.cshtml">
       <publishTime>06/28/2016 00:35:59</publishTime>
@@ -346,6 +346,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Antlr3.Runtime.pdb">
       <publishTime>03/07/2016 00:47:16</publishTime>
     </File>
+    <File Include="bin/Autofac.dll">
+      <publishTime>08/09/2016 13:56:12</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.Mvc.dll">
+      <publishTime>08/10/2016 16:06:52</publishTime>
+    </File>
     <File Include="bin/AutoMapper.dll">
       <publishTime>07/07/2016 18:53:02</publishTime>
     </File>
@@ -371,7 +377,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:44</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.dll">
-      <publishTime>08/18/2016 22:38:58</publishTime>
+      <publishTime>08/23/2016 21:53:56</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Core.pdb">
       <publishTime>04/27/2016 02:07:30</publishTime>
@@ -380,7 +386,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/26/2016 14:49:04</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.dll">
-      <publishTime>08/18/2016 22:48:16</publishTime>
+      <publishTime>08/23/2016 21:54:05</publishTime>
     </File>
     <File Include="bin/KarmicEnergy.Web.pdb">
       <publishTime>04/27/2016 22:29:47</publishTime>
@@ -428,19 +434,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 00:39:35</publishTime>
     </File>
     <File Include="bin/Munizoft.Core.dll">
-      <publishTime>08/12/2016 17:18:43</publishTime>
+      <publishTime>08/20/2016 00:41:55</publishTime>
     </File>
     <File Include="bin/Munizoft.Core.pdb">
       <publishTime>04/18/2016 23:02:41</publishTime>
     </File>
     <File Include="bin/Munizoft.Extensions.dll">
-      <publishTime>07/28/2016 00:02:58</publishTime>
+      <publishTime>08/22/2016 12:02:56</publishTime>
     </File>
     <File Include="bin/Munizoft.Extensions.pdb">
       <publishTime>04/12/2016 15:49:14</publishTime>
     </File>
     <File Include="bin/Munizoft.MVC.dll">
-      <publishTime>07/08/2016 01:14:42</publishTime>
+      <publishTime>08/19/2016 22:34:47</publishTime>
     </File>
     <File Include="bin/Munizoft.MVC.Extensions.dll">
       <publishTime>02/25/2016 23:04:53</publishTime>
@@ -449,7 +455,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/28/2016 11:31:32</publishTime>
     </File>
     <File Include="bin/Munizoft.Util.dll">
-      <publishTime>07/07/2016 12:06:18</publishTime>
+      <publishTime>08/19/2016 22:34:46</publishTime>
     </File>
     <File Include="bin/MvcCheckBoxList.dll">
       <publishTime>04/12/2016 00:30:35</publishTime>
@@ -3679,6 +3685,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="images/login_logo.png">
       <publishTime>02/22/2016 22:16:58</publishTime>
     </File>
+    <File Include="images/logo-loader.gif">
+      <publishTime>08/23/2016 16:51:28</publishTime>
+    </File>
     <File Include="images/logo.png">
       <publishTime>02/22/2016 22:16:58</publishTime>
     </File>
@@ -5213,7 +5222,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/11/2016 22:26:55</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/22/2016 22:54:56</publishTime>
+      <publishTime>08/23/2016 20:51:56</publishTime>
     </File>
     <File Include="Scripts/angular-animate.js">
       <publishTime>04/22/2016 13:48:05</publishTime>
@@ -5449,11 +5458,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/app/fasttracker.js">
       <publishTime>08/16/2016 13:51:59</publishTime>
     </File>
+    <File Include="Scripts/app/loading.js">
+      <publishTime>08/23/2016 21:01:08</publishTime>
+    </File>
     <File Include="Scripts/app/maps.js">
       <publishTime>08/18/2016 23:11:04</publishTime>
     </File>
     <File Include="Scripts/app/sensor.js">
-      <publishTime>08/18/2016 21:30:12</publishTime>
+      <publishTime>08/20/2016 18:31:02</publishTime>
     </File>
     <File Include="Scripts/app/sensorgroup.js">
       <publishTime>05/08/2016 21:00:24</publishTime>
@@ -8131,6 +8143,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery/jquery.sparkline.min.js">
       <publishTime>03/23/2016 23:52:33</publishTime>
     </File>
+    <File Include="Scripts/jquery/jquery.unobtrusive-ajax.js">
+      <publishTime>08/23/2016 20:51:56</publishTime>
+    </File>
+    <File Include="Scripts/jquery/jquery.unobtrusive-ajax.min.js">
+      <publishTime>08/23/2016 20:51:49</publishTime>
+    </File>
     <File Include="Scripts/jquery/jquery.validate.js">
       <publishTime>04/22/2016 13:48:40</publishTime>
     </File>
@@ -9491,7 +9509,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/22/2016 13:46:54</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>08/12/2016 16:34:28</publishTime>
+      <publishTime>08/23/2016 20:52:34</publishTime>
     </File>
     <File Include="Views/Account/ChangePassword.cshtml">
       <publishTime>06/21/2016 20:31:53</publishTime>
@@ -9587,13 +9605,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2016 22:54:45</publishTime>
     </File>
     <File Include="Views/Shared/_Internal.cshtml">
-      <publishTime>07/22/2016 16:02:43</publishTime>
+      <publishTime>08/23/2016 17:16:27</publishTime>
     </File>
     <File Include="Views/Shared/_InternalNoLeftMenu.cshtml">
       <publishTime>07/22/2016 16:02:27</publishTime>
     </File>
     <File Include="Views/Shared/_Loading.cshtml">
-      <publishTime>03/23/2016 23:39:22</publishTime>
+      <publishTime>08/23/2016 21:00:50</publishTime>
     </File>
     <File Include="Views/Shared/_LoginMaster.cshtml">
       <publishTime>06/20/2016 19:04:36</publishTime>
@@ -9614,7 +9632,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2016 01:07:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/18/2016 03:15:33</publishTime>
+      <publishTime>08/23/2016 21:54:29</publishTime>
     </File>
   </ItemGroup>
 </Project>

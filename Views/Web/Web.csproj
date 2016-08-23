@@ -340,6 +340,7 @@
     <Compile Include="Areas\Customer\ViewModels\Map\PondViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Map\SensorViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\Map\SiteViewModel.cs" />
+    <Compile Include="Infrastructure\Mappings\Customer\HomeProfile.cs" />
     <Compile Include="Persistence\IApplicationContext.cs" />
     <Compile Include="ViewModels\WaterVolumeViewModel.cs" />
     <Compile Include="Areas\Customer\ViewModels\FastTracker\TankViewModel.cs" />
@@ -1418,6 +1419,7 @@
     <Content Include="images\icon-close-round.png" />
     <Content Include="images\key_gray.png" />
     <Content Include="images\loga_sample.png" />
+    <Content Include="images\logo-loader.gif" />
     <Content Include="images\logo_mini.ico" />
     <Content Include="images\logo_mini.png" />
     <Content Include="images\logo.png" />
@@ -1763,6 +1765,7 @@
     <Content Include="images\water-reverse-flow.gif" />
     <Content Include="favicon.ico" />
     <Content Include="Scripts\app\fasttracker.js" />
+    <Content Include="Scripts\app\loading.js" />
     <Content Include="Scripts\app\site.js" />
     <Content Include="Scripts\app\spotGPS.js" />
     <Content Include="Scripts\app\trigger.js" />
@@ -2000,6 +2003,8 @@
     <None Include="Scripts\jquery\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\jquery-ui-1.12.0.js" />
     <Content Include="Scripts\jquery-ui-1.12.0.min.js" />
+    <Content Include="Scripts\jquery\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery\jquery-2.2.4.js" />
     <Content Include="Scripts\jquery\jquery-2.2.4.min.js" />
     <Content Include="Scripts\jquery\jquery-2.2.4.min.map" />

@@ -54,35 +54,19 @@ namespace KarmicEnergy.Web.Areas.Admin.ViewModels.Log
         }
 
         public static ListViewModel Map(Core.Entities.Log entity)
-        {           
+        {
             var viewModel = Mapper.Map<Core.Entities.Log, ListViewModel>(entity);
 
             viewModel.CustomerId = entity.CustomerId.HasValue ? entity.CustomerId.Value : Guid.Empty;
-            //viewModel.Customer = entity.Customer != null ? entity.Customer : String.Empty;
-
             viewModel.SiteId = entity.SiteId.HasValue ? entity.SiteId.Value : Guid.Empty;
             viewModel.SiteName = entity.Site != null ? entity.Site.Name : String.Empty;
-
             viewModel.UserId = entity.UserId.HasValue ? entity.UserId.Value : Guid.Empty;
-            //viewModel.UserId = entity.UserId.HasValue ? entity..Value : String.Empty;
-
             viewModel.LogTypeName = entity.LogType.Name;
             viewModel.LogDate = entity.CreatedDate;
 
             return viewModel;
         }
-
-        //public ListViewModel Map(Core.Entities.Log entity)
-        //{
-        //    Mapper.CreateMap<Core.Entities.Site, ListViewModel>();
-        //    var viewModel = Mapper.Map<Core.Entities.Site, ListViewModel>(entity);
-
-        //    viewModel.Latitude = entity.Latitude;
-        //    viewModel.Longitude = entity.Longitude;
-
-        //    return viewModel;
-        //}
-
+        
         #endregion Map
     }
 }

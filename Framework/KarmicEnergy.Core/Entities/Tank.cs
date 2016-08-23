@@ -2,6 +2,7 @@
 using Munizoft.Util.Converters;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -40,6 +41,7 @@ namespace KarmicEnergy.Core.Entities
 
         [Column("WaterVolumeCapacityUnitId", TypeName = "SMALLINT")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} cannot be null or empty")]
+        [DefaultValue((Int16)UnitEnum.Barrel)]
         public Int16 WaterVolumeCapacityUnitId { get; set; } = (Int16)UnitEnum.Barrel;
 
         [ForeignKey("WaterVolumeCapacityUnitId")]

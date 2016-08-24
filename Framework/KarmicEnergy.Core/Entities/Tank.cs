@@ -349,7 +349,7 @@ namespace KarmicEnergy.Core.Entities
             this.MinimumDistance = entity.MinimumDistance;
             this.MaximumDistance = entity.MaximumDistance;
             this.WaterVolumeCapacity = entity.WaterVolumeCapacity;
-            //this.WaterVolumeCapacityUnitId = entity.WaterVolumeCapacityUnitId;
+            this.WaterVolumeCapacityUnitId = entity.WaterVolumeCapacityUnitId;
 
             this.SiteId = entity.SiteId;
             this.TankModelId = entity.TankModelId;

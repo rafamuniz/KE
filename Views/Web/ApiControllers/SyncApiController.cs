@@ -764,7 +764,7 @@ namespace KarmicEnergy.Web.ApiControllers
                             {
                                 ke.AddressRepository.Add(e);
                             }
-                            else
+                            else if (e.LastModifiedDate > entity.LastModifiedDate)
                             {
                                 entity.Update(e);
                                 ke.AddressRepository.UpdateWithoutDate(entity);
@@ -804,7 +804,7 @@ namespace KarmicEnergy.Web.ApiControllers
                             {
                                 ke.CustomerUserRepository.Add(e);
                             }
-                            else
+                            else if (e.LastModifiedDate > entity.LastModifiedDate)
                             {
                                 entity.Update(e);
                                 ke.CustomerUserRepository.UpdateWithoutDate(entity);
@@ -844,7 +844,7 @@ namespace KarmicEnergy.Web.ApiControllers
                             {
                                 ke.ContactRepository.Add(e);
                             }
-                            else
+                            else if (e.LastModifiedDate > entity.LastModifiedDate)
                             {
                                 entity.Update(e);
                                 ke.ContactRepository.UpdateWithoutDate(entity);
@@ -883,7 +883,7 @@ namespace KarmicEnergy.Web.ApiControllers
                             {
                                 ke.PondRepository.Add(e);
                             }
-                            else
+                            else if (e.LastModifiedDate > entity.LastModifiedDate)
                             {
                                 entity.Update(e);
                                 ke.PondRepository.UpdateWithoutDate(entity);
@@ -922,7 +922,7 @@ namespace KarmicEnergy.Web.ApiControllers
                             {
                                 ke.TankRepository.Add(e);
                             }
-                            else
+                            else if (e.LastModifiedDate > entity.LastModifiedDate)
                             {
                                 entity.Update(e);
                                 ke.TankRepository.UpdateWithoutDate(entity);
@@ -960,7 +960,7 @@ namespace KarmicEnergy.Web.ApiControllers
                             {
                                 ke.SensorRepository.Add(e);
                             }
-                            else
+                            else if (e.LastModifiedDate > entity.LastModifiedDate)
                             {
                                 entity.Update(e);
                                 ke.SensorRepository.UpdateWithoutDate(entity);
@@ -998,7 +998,7 @@ namespace KarmicEnergy.Web.ApiControllers
                             {
                                 ke.SensorItemRepository.Add(e);
                             }
-                            else
+                            else if (e.LastModifiedDate > entity.LastModifiedDate)
                             {
                                 entity.Update(e);
                                 ke.SensorItemRepository.UpdateWithoutDate(entity);
@@ -1036,7 +1036,7 @@ namespace KarmicEnergy.Web.ApiControllers
                             {
                                 ke.SensorItemEventRepository.Add(e);
                             }
-                            else
+                            else if (e.LastModifiedDate > entity.LastModifiedDate)
                             {
                                 entity.Update(e);
                                 ke.SensorItemEventRepository.UpdateWithoutDate(entity);
@@ -1074,7 +1074,7 @@ namespace KarmicEnergy.Web.ApiControllers
                             {
                                 ke.TriggerRepository.Add(e);
                             }
-                            else
+                            else if (e.LastModifiedDate > entity.LastModifiedDate)
                             {
                                 entity.Update(e);
                                 ke.TriggerRepository.UpdateWithoutDate(entity);
@@ -1112,7 +1112,7 @@ namespace KarmicEnergy.Web.ApiControllers
                             {
                                 ke.TriggerContactRepository.Add(e);
                             }
-                            else
+                            else if (e.LastModifiedDate > entity.LastModifiedDate)
                             {
                                 entity.Update(e);
                                 ke.TriggerContactRepository.UpdateWithoutDate(entity);
@@ -1150,7 +1150,7 @@ namespace KarmicEnergy.Web.ApiControllers
                             {
                                 ke.AlarmRepository.Add(e);
                             }
-                            else
+                            else if (e.LastModifiedDate > entity.LastModifiedDate)
                             {
                                 entity.Update(e);
                                 ke.AlarmRepository.UpdateWithoutDate(entity);
@@ -1188,7 +1188,7 @@ namespace KarmicEnergy.Web.ApiControllers
                             {
                                 ke.AlarmHistoryRepository.Add(e);
                             }
-                            else
+                            else if (e.LastModifiedDate > entity.LastModifiedDate)
                             {
                                 entity.Update(e);
                                 ke.AlarmHistoryRepository.UpdateWithoutDate(entity);

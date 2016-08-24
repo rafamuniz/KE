@@ -37,7 +37,9 @@ namespace KarmicEnergy.Core.Services
 
             var entity = this._unitOfWork.TankRepository.Get(tank.Id);
 
+            DateTime createdDate = entity.CreatedDate;
             entity.Update(tank);
+            entity.CreatedDate = createdDate;
 
             var dateUpdated = DateTime.UtcNow;
             entity.LastModifiedDate = dateUpdated;

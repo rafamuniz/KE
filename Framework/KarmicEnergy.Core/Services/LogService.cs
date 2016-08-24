@@ -20,6 +20,15 @@ namespace KarmicEnergy.Core.Services
 
         #region Functions
 
+        public override void Create(Log log)
+        {
+            if (log == null)
+                throw new ArgumentNullException("log is required");
+
+            this._unitOfWork.LogRepository.Add(log);
+            this._unitOfWork.Complete();
+        }
+
         public override Log Get(Guid id)
         {
             if (id == default(Guid))
@@ -40,7 +49,8 @@ namespace KarmicEnergy.Core.Services
 
             var log = this._unitOfWork.LogRepository.Get(id);
             log.DeletedDate = DateTime.UtcNow;
-            this._unitOfWork.LogRepository.Update(log);            
+            this._unitOfWork.LogRepository.Update(log);
+            this._unitOfWork.Complete();
         }
               
         #endregion Functions

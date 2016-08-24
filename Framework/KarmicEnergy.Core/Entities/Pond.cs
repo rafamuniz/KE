@@ -97,7 +97,7 @@ namespace KarmicEnergy.Core.Entities
             this.Latitude = entity.Latitude;
 
             this.WaterVolumeCapacity = entity.WaterVolumeCapacity;
-            //this.WaterVolumeCapacityUnitId = entity.WaterVolumeCapacityUnitId;
+            this.WaterVolumeCapacityUnitId = entity.WaterVolumeCapacityUnitId;
 
             this.SiteId = entity.SiteId;
 

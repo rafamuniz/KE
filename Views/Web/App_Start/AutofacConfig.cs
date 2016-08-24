@@ -3,6 +3,8 @@ using Autofac.Integration.Mvc;
 using KarmicEnergy.Core.Persistence;
 using KarmicEnergy.Core.Services;
 using KarmicEnergy.Web.Persistence;
+using Quartz;
+using Quartz.Impl;
 using System.Reflection;
 using System.Web.Mvc;
 
@@ -41,6 +43,18 @@ namespace KarmicEnergy.Web.App_Start
                                .Where(t => t.Name.EndsWith("Service"))
                                .AsImplementedInterfaces()
                                .InstancePerLifetimeScope();
+
+            // Schedule
+            builder.Register(c => new StdSchedulerFactory().GetScheduler())
+                             .As<IScheduler>()
+                             .InstancePerLifetimeScope(); // #1
+            //builder.Register(c => new SampleJobFactory(ContainerProvider.Instance.ApplicationContainer))
+            //       .As<IJobFactory>();          // #2
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                   .Where(p => typeof(IJob).IsAssignableFrom(p))
+                   .PropertiesAutowired();      // #3
+            //builder.Register(c => new SampleJobListener(ContainerProvider.Instance))
+            //       .As<IJobListener>();
 
             // Register our Data dependencies
             //builder.RegisterModule(new DataModule("MVCWithAutofacDB"));

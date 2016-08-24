@@ -1,5 +1,6 @@
 ﻿using KarmicEnergy.Core.Entities;
 using KarmicEnergy.Core.Persistence;
+using KarmicEnergy.Core.Services.Interface;
 using KarmicEnergy.Web.Entities;
 using KarmicEnergy.Web.Persistence;
 using Microsoft.AspNet.Identity;
@@ -17,12 +18,13 @@ namespace KarmicEnergy.Web.Jobs
     public class SyncData
     {
         #region Fields
-
+        private readonly ILogService _logService;
         #endregion Fields
 
         #region Constructor
-        public SyncData()
+        public SyncData(ILogService logService)
         {
+            this._logService = logService;
         }
         #endregion Constructor
 
@@ -65,9 +67,7 @@ namespace KarmicEnergy.Web.Jobs
                     Message = ex.Message
                 };
 
-                KEUnitOfWork keuw = new KEUnitOfWork(false);
-                keuw.LogRepository.Add(log);
-                keuw.Complete();
+                this._logService.Create(log);
             }
         }
 
@@ -163,7 +163,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.ActionTypeRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.ActionTypeRepository.UpdateWithoutDate(entity);
@@ -194,7 +194,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.SensorTypeRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.SensorTypeRepository.UpdateWithoutDate(entity);
@@ -225,7 +225,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.NotificationTypeRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.NotificationTypeRepository.UpdateWithoutDate(entity);
@@ -256,7 +256,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.OperatorTypeRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.OperatorTypeRepository.UpdateWithoutDate(entity);
@@ -287,7 +287,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.OperatorRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.OperatorRepository.UpdateWithoutDate(entity);
@@ -318,7 +318,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.UnitTypeRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.UnitTypeRepository.UpdateWithoutDate(entity);
@@ -349,7 +349,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.UnitRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.UnitRepository.UpdateWithoutDate(entity);
@@ -380,7 +380,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.StickConversionRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.StickConversionRepository.UpdateWithoutDate(entity);
@@ -411,7 +411,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.StickConversionValueRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.StickConversionValueRepository.UpdateWithoutDate(entity);
@@ -442,7 +442,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.GeometryRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.GeometryRepository.UpdateWithoutDate(entity);
@@ -473,7 +473,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.LogTypeRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.LogTypeRepository.UpdateWithoutDate(entity);
@@ -504,7 +504,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.LogRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.LogRepository.UpdateWithoutDate(entity);
@@ -535,7 +535,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.NotificationTemplateRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.NotificationTemplateRepository.UpdateWithoutDate(entity);
@@ -566,7 +566,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.SeverityRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.SeverityRepository.UpdateWithoutDate(entity);
@@ -597,7 +597,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.TankModelRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.TankModelRepository.UpdateWithoutDate(entity);
@@ -628,7 +628,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.CountryRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.CountryRepository.UpdateWithoutDate(entity);
@@ -659,7 +659,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.CityRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.CityRepository.UpdateWithoutDate(entity);
@@ -690,7 +690,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.AddressRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.AddressRepository.UpdateWithoutDate(entity);
@@ -721,7 +721,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.ItemRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.ItemRepository.UpdateWithoutDate(entity);
@@ -752,7 +752,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.NotificationRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.NotificationRepository.UpdateWithoutDate(entity);
@@ -839,7 +839,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.ContactRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.ContactRepository.UpdateWithoutDate(entity);
@@ -870,7 +870,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.CustomerRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.CustomerRepository.UpdateWithoutDate(entity);
@@ -901,7 +901,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.CustomerSettingRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.CustomerSettingRepository.UpdateWithoutDate(entity);
@@ -932,7 +932,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.CustomerUserRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.CustomerUserRepository.UpdateWithoutDate(entity);
@@ -963,7 +963,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.CustomerUserSiteRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.CustomerUserSiteRepository.UpdateWithoutDate(entity);
@@ -994,7 +994,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.CustomerUserSettingRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.CustomerUserSettingRepository.UpdateWithoutDate(entity);
@@ -1025,7 +1025,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.TriggerRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.TriggerRepository.UpdateWithoutDate(entity);
@@ -1056,7 +1056,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.TriggerContactRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.TriggerContactRepository.UpdateWithoutDate(entity);
@@ -1133,7 +1133,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.SiteRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.SiteRepository.UpdateWithoutDate(entity);
@@ -1164,7 +1164,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.TankRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.TankRepository.UpdateWithoutDate(entity);
@@ -1195,7 +1195,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.PondRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.PondRepository.UpdateWithoutDate(entity);
@@ -1226,7 +1226,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.SensorRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.SensorRepository.UpdateWithoutDate(entity);
@@ -1257,7 +1257,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.GroupRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.GroupRepository.UpdateWithoutDate(entity);
@@ -1288,7 +1288,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.SensorGroupRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.SensorGroupRepository.UpdateWithoutDate(entity);
@@ -1319,7 +1319,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.SensorItemRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.SensorItemRepository.UpdateWithoutDate(entity);
@@ -1350,7 +1350,7 @@ namespace KarmicEnergy.Web.Jobs
                         {
                             ke.SensorItemEventRepository.Add(e);
                         }
-                        else
+                        else if (e.LastModifiedDate > entity.LastModifiedDate)
                         {
                             entity.Update(e);
                             ke.SensorItemEventRepository.UpdateWithoutDate(entity);
@@ -1451,7 +1451,7 @@ namespace KarmicEnergy.Web.Jobs
                 foreach (var id in ids)
                 {
                     var user = userManager.FindById(id.ToString());
-                    if (user.LastModifiedDate > lastSync)
+                    if (user.LastModifiedDate >= lastSync)
                     {
                         user.RoleNames = userManager.GetRoles(id.ToString());
                         entities.Add(user);
@@ -1475,7 +1475,7 @@ namespace KarmicEnergy.Web.Jobs
 
             using (var ke = KEUnitOfWork.Create(false))
             {
-                entities = ke.AddressRepository.Find(x => x.LastModifiedDate > lastSync).ToList();
+                entities = ke.AddressRepository.Find(x => x.LastModifiedDate >= lastSync).ToList();
             }
 
             if (entities != null && entities.Any())
@@ -1494,7 +1494,7 @@ namespace KarmicEnergy.Web.Jobs
 
             using (var ke = KEUnitOfWork.Create(false))
             {
-                entities = ke.CustomerUserRepository.Find(x => x.LastModifiedDate > lastSync).ToList();
+                entities = ke.CustomerUserRepository.Find(x => x.LastModifiedDate >= lastSync).ToList();
             }
 
             if (entities != null && entities.Any())
@@ -1513,7 +1513,7 @@ namespace KarmicEnergy.Web.Jobs
 
             using (var ke = KEUnitOfWork.Create(false))
             {
-                entities = ke.ContactRepository.Find(x => x.LastModifiedDate > lastSync).ToList();
+                entities = ke.ContactRepository.Find(x => x.LastModifiedDate >= lastSync).ToList();
             }
 
             if (entities != null && entities.Any())
@@ -1531,7 +1531,7 @@ namespace KarmicEnergy.Web.Jobs
 
             using (var ke = KEUnitOfWork.Create(false))
             {
-                entities = ke.PondRepository.Find(x => x.LastModifiedDate > lastSync).ToList();
+                entities = ke.PondRepository.Find(x => x.LastModifiedDate >= lastSync).ToList();
             }
 
             if (entities != null && entities.Any())
@@ -1550,7 +1550,7 @@ namespace KarmicEnergy.Web.Jobs
 
             using (var ke = KEUnitOfWork.Create(false))
             {
-                entities = ke.TankRepository.Find(x => x.LastModifiedDate > lastSync).ToList();
+                entities = ke.TankRepository.Find(x => x.LastModifiedDate >= lastSync).ToList();
             }
 
             if (entities != null && entities.Any())
@@ -1569,7 +1569,7 @@ namespace KarmicEnergy.Web.Jobs
 
             using (var ke = KEUnitOfWork.Create(false))
             {
-                entities = ke.SensorRepository.Find(x => x.LastModifiedDate > lastSync).ToList();
+                entities = ke.SensorRepository.Find(x => x.LastModifiedDate >= lastSync).ToList();
             }
 
             if (entities != null && entities.Any())
@@ -1588,7 +1588,7 @@ namespace KarmicEnergy.Web.Jobs
 
             using (var ke = KEUnitOfWork.Create(false))
             {
-                entities = ke.SensorItemRepository.Find(x => x.LastModifiedDate > lastSync).ToList();
+                entities = ke.SensorItemRepository.Find(x => x.LastModifiedDate >= lastSync).ToList();
             }
 
             if (entities != null && entities.Any())
@@ -1607,7 +1607,7 @@ namespace KarmicEnergy.Web.Jobs
 
             using (var ke = KEUnitOfWork.Create(false))
             {
-                entities = ke.TriggerRepository.Find(x => x.LastModifiedDate > lastSync).ToList();
+                entities = ke.TriggerRepository.Find(x => x.LastModifiedDate >= lastSync).ToList();
             }
 
             if (entities != null && entities.Any())
@@ -1626,7 +1626,7 @@ namespace KarmicEnergy.Web.Jobs
 
             using (var ke = KEUnitOfWork.Create(false))
             {
-                entities = ke.TriggerContactRepository.Find(x => x.LastModifiedDate > lastSync).ToList();
+                entities = ke.TriggerContactRepository.Find(x => x.LastModifiedDate >= lastSync).ToList();
             }
 
             if (entities != null && entities.Any())
@@ -1645,7 +1645,7 @@ namespace KarmicEnergy.Web.Jobs
 
             using (var ke = KEUnitOfWork.Create(false))
             {
-                entities = ke.SensorItemEventRepository.Find(x => x.LastModifiedDate > lastSync).ToList();
+                entities = ke.SensorItemEventRepository.Find(x => x.LastModifiedDate >= lastSync).ToList();
             }
 
             if (entities != null && entities.Any())
@@ -1664,7 +1664,7 @@ namespace KarmicEnergy.Web.Jobs
 
             using (var ke = KEUnitOfWork.Create(false))
             {
-                entities = ke.AlarmRepository.Find(x => x.LastModifiedDate > lastSync).ToList();
+                entities = ke.AlarmRepository.Find(x => x.LastModifiedDate >= lastSync).ToList();
             }
 
             if (entities != null && entities.Any())
@@ -1683,7 +1683,7 @@ namespace KarmicEnergy.Web.Jobs
 
             using (var ke = KEUnitOfWork.Create(false))
             {
-                entities = ke.AlarmHistoryRepository.Find(x => x.LastModifiedDate > lastSync).ToList();
+                entities = ke.AlarmHistoryRepository.Find(x => x.LastModifiedDate >= lastSync).ToList();
             }
 
             if (entities != null && entities.Any())

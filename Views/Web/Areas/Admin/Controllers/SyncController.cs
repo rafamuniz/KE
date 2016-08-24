@@ -1,4 +1,5 @@
 ﻿using KarmicEnergy.Core.Entities;
+using KarmicEnergy.Core.Services.Interface;
 using KarmicEnergy.Web.Areas.Admin.ViewModels.Sync;
 using KarmicEnergy.Web.Controllers;
 using KarmicEnergy.Web.Jobs;
@@ -12,6 +13,17 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
     [Authorize]
     public class SyncController : BaseController
     {
+        #region Fields
+        private readonly ILogService _logService;
+        #endregion Fields
+
+        #region Constructor
+        public SyncController(ILogService logService)
+        {
+            this._logService = logService;
+        }
+        #endregion Constructor
+
         #region Index
 
         [Authorize(Roles = "SuperAdmin, Admin")]
@@ -36,7 +48,7 @@ namespace KarmicEnergy.Web.Areas.Admin.Controllers
         {
             try
             {
-                SyncData sync = new SyncData();
+                SyncData sync = new SyncData(this._logService);
                 sync.Execute();
             }
             catch (Exception ex)

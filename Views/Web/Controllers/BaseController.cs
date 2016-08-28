@@ -17,6 +17,7 @@ using System.Web.Mvc;
 
 namespace KarmicEnergy.Web.Controllers
 {
+    [HandleError]
     public abstract class BaseController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -172,6 +173,16 @@ namespace KarmicEnergy.Web.Controllers
                 return tankId;
             }
         }
+
+        //protected override void OnException(ExceptionContext filterContext)
+        //{
+        //    Exception e = filterContext.Exception;
+        //    filterContext.ExceptionHandled = true;
+        //    filterContext.Result = new ViewResult()
+        //    {
+        //        ViewName = "Error"
+        //    };
+        //}
 
         #region Log
         protected void AddLog(String message, LogTypeEnum type = LogTypeEnum.Error)

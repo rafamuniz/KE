@@ -37,22 +37,32 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
             return View(viewModel);
         }
 
+        [HandleError]
         [HttpPost]
         [Authorize(Roles = "Customer, General Manager, Supervisor, Operator")]
         public ActionResult SiteSiteSelected(ListViewModel viewModel)
         {
-            if (viewModel.SiteId.HasValue && viewModel.SiteId != default(Guid))
+            try
             {
-                LoadSite(viewModel);
-                LoadPonds(viewModel);
-                LoadTanks(viewModel);
-                LoadTriggersBySite(viewModel);
-                LoadWaterQualityBySite(viewModel);
-                LoadFlowMeters(viewModel);
+                if (viewModel.SiteId.HasValue && viewModel.SiteId != default(Guid))
+                {
+                    LoadSite(viewModel);
+                    LoadPonds(viewModel);
+                    LoadTanks(viewModel);
+                    LoadTriggersBySite(viewModel);
+                    LoadWaterQualityBySite(viewModel);
+                    LoadFlowMeters(viewModel);
+                }
+
+                LoadSites();
+                return View("Index", viewModel);
+            }
+            catch (Exception ex)
+            {
+                AddErrors(ex);
             }
 
-            LoadSites();
-            return View("Index", viewModel);
+            return View("Index");
         }
 
         private void LoadSite(ListViewModel viewModel)

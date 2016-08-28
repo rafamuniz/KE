@@ -30,7 +30,7 @@ namespace KarmicEnergy.Core.Services
         {
             if (site == null)
                 throw new ArgumentNullException("site cannot be null");
-            
+
             this._unitOfWork.SiteRepository.Add(site);
             this._unitOfWork.Complete();
         }
@@ -96,7 +96,7 @@ namespace KarmicEnergy.Core.Services
                             this._unitOfWork.TriggerContactRepository.Update(contact);
                         }
                     }
-                }                
+                }
             }
             #endregion Sensor
 
@@ -197,12 +197,25 @@ namespace KarmicEnergy.Core.Services
             return this._unitOfWork.SiteRepository.GetAll();
         }
 
+        public IEnumerable<Site> GetAllWithLocation()
+        {
+            return this._unitOfWork.SiteRepository.GetAll().Where(x => !String.IsNullOrEmpty(x.Latitude) && !String.IsNullOrEmpty(x.Longitude) && x.Status == "A" && x.DeletedDate == null);
+        }
+
         public IEnumerable<Site> GetsByCustomer(Guid customerId)
         {
             if (customerId == default(Guid))
                 throw new ArgumentException("customerId is required");
 
             return this._unitOfWork.SiteRepository.GetsByCustomer(customerId);
+        }
+
+        public IEnumerable<Site> GetsByCustomerWithLocation(Guid customerId)
+        {
+            if (customerId == default(Guid))
+                throw new ArgumentException("customerId is required");
+
+            return this._unitOfWork.SiteRepository.GetsByCustomer(customerId).Where(x => !String.IsNullOrEmpty(x.Latitude) && !String.IsNullOrEmpty(x.Longitude) && x.Status == "A" && x.DeletedDate == null);
         }
 
         public IEnumerable<Site> GetsSiteByUser(Guid userId)
@@ -212,6 +225,16 @@ namespace KarmicEnergy.Core.Services
 
             return this._unitOfWork.CustomerUserSiteRepository.GetsByUser(userId).Select(x => x.Site);
 
+        }
+
+        public IEnumerable<Site> GetsSiteByUserWithLocation(Guid userId)
+        {
+            if (userId == default(Guid))
+                throw new ArgumentException("userId is required");
+
+            return this._unitOfWork.CustomerUserSiteRepository.GetsByUser(userId)
+                .Where(x => !String.IsNullOrEmpty(x.Site.Latitude) && !String.IsNullOrEmpty(x.Site.Longitude) && x.Site.Status == "A" && x.DeletedDate == null)
+                .Select(x => x.Site);
         }
         #endregion Functions
     }

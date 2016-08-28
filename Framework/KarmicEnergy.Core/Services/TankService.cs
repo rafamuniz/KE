@@ -53,8 +53,6 @@ namespace KarmicEnergy.Core.Services
             if (id == default(Guid))
                 throw new ArgumentNullException(String.Format(Resources.ResultResource.ParameterRequired, "id"));
 
-            throw new ArgumentException("id is required");
-
             var deletedDate = DateTime.UtcNow;
             var tank = this._unitOfWork.TankRepository.Get(id);
             tank.DeletedDate = deletedDate;

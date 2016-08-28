@@ -57,15 +57,15 @@ namespace KarmicEnergy.Web.Areas.Customer.Controllers
                 }
                 else
                 {
-                    sites = this._siteService.GetsByCustomer(CustomerId);
+                    sites = this._siteService.GetsByCustomerWithLocation(CustomerId);
                     viewModel.Sites = SiteViewModel.Map(sites);
                 }
             }
-            else if(!User.IsInRole("General Manager") && !User.IsInRole("Customer"))
+            else if (!User.IsInRole("General Manager") && !User.IsInRole("Customer"))
             {
-                sites = this._siteService.GetsSiteByUser(Guid.Parse(UserId));
+                sites = this._siteService.GetsSiteByUserWithLocation(Guid.Parse(UserId));
                 viewModel.Sites = SiteViewModel.Map(sites);
-            }            
+            }
 
             AddLog("Navigated to Map View", LogTypeEnum.Info);
             return View(viewModel);
